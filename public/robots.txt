@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /solutions/
+Allow: /product/
+Allow: /pricing/
+Allow: /resources/
+Allow: /company/
+Allow: /signup
+Allow: /signin
+Allow: /demo
+
+# Sitemap location
+Sitemap: https://www.transbot.ai/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

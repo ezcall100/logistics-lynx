@@ -1,0 +1,291 @@
+{
+  "mcpAutoRunConfig": {
+    "enabled": true,
+    "version": "1.0.0",
+    "description": "MCP Auto-Run Configuration for Logistics Lynx TMS",
+    
+    "portals": {
+      "super-admin": {
+        "autoRun": {
+          "enabled": true,
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir",
+            "grep_search"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd",
+            "search_replace"
+          ],
+          "restricted": [
+            "deploy-production.cjs",
+            "deploy-production.ps1",
+            "deploy-production.sh"
+          ]
+        }
+      },
+      "admin": {
+        "autoRun": {
+          "enabled": true,
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd"
+          ]
+        }
+      },
+      "partner": {
+        "autoRun": {
+          "enabled": true,
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd"
+          ]
+        }
+      },
+      "customer": {
+        "autoRun": {
+          "enabled": true,
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd"
+          ]
+        }
+      },
+      "ops": {
+        "autoRun": {
+          "enabled": true,
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir",
+            "grep_search"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd"
+          ]
+        }
+      }
+    },
+    
+         "globalSettings": {
+       "fullAuthority": {
+         "enabled": true,
+         "description": "Full autonomous authority - 24/7 operation without human intervention",
+         "autoRunAllTools": true,
+         "requireConfirmation": false,
+         "autoApplyChanges": true,
+         "continuousOperation": true,
+         "autoFixErrors": true,
+         "autoFixWarnings": true,
+         "autoFixProblems": true,
+         "errorRecovery": true,
+         "problemResolution": true
+       },
+       "autoRunModes": {
+         "development": {
+           "enabled": true,
+           "description": "Full auto-run for development tasks",
+           "tools": [
+             "file_search",
+             "codebase_search",
+             "read_file",
+             "list_dir",
+             "grep_search",
+             "edit_file",
+             "delete_file",
+             "run_terminal_cmd",
+             "search_replace"
+           ],
+           "requireConfirmation": false,
+           "fullAuthority": true
+         },
+        "production": {
+          "enabled": false,
+          "description": "Restricted auto-run for production safety",
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd",
+            "grep_search"
+          ]
+        },
+        "testing": {
+          "enabled": true,
+          "description": "Auto-run for testing and validation",
+          "tools": [
+            "file_search",
+            "codebase_search",
+            "read_file",
+            "list_dir",
+            "grep_search"
+          ],
+          "requireConfirmation": [
+            "edit_file",
+            "delete_file",
+            "run_terminal_cmd"
+          ]
+        }
+      },
+      
+             "keepAllBehavior": {
+         "enabled": true,
+         "autoPreview": false,
+         "requireConfirmation": false,
+         "autoApply": true,
+         "maxFilesPerBatch": 50,
+         "excludedFileTypes": [
+           "*.lock",
+           "*.log",
+           "node_modules/**",
+           "dist/**",
+           "build/**"
+         ]
+       },
+      
+      "security": {
+        "requireConfirmationFor": [
+          "package.json",
+          "vite.config.ts",
+          "tailwind.config.ts",
+          "tsconfig.json",
+          "*.env*",
+          "mcp.portals.json"
+        ],
+        "blockedCommands": [
+          "rm -rf",
+          "format",
+          "dd",
+          "mkfs"
+        ],
+        "allowedDirectories": [
+          "src/**",
+          "apps/**",
+          "components/**",
+          "public/**"
+        ]
+      }
+    },
+    
+         "workflowIntegration": {
+       "autonomousAgents": {
+         "enabled": true,
+         "autoRunTools": [
+           "file_search",
+           "codebase_search",
+           "read_file",
+           "list_dir"
+         ],
+         "requireConfirmation": [
+           "edit_file",
+           "delete_file",
+           "run_terminal_cmd"
+         ]
+       },
+       
+       "deploymentScripts": {
+         "enabled": false,
+         "description": "Auto-run disabled for deployment safety",
+         "requireConfirmation": [
+           "run_terminal_cmd",
+           "edit_file"
+         ]
+       },
+       
+               "autoCommit": {
+          "enabled": true,
+          "description": "Automatic Git commit and sync functionality",
+          "autoRunTools": [
+            "run_terminal_cmd"
+          ],
+          "requireConfirmation": false,
+          "fullAuthority": true,
+          "settings": {
+           "commitMessageTemplate": "feat: {description} - {timestamp}",
+           "autoPush": true,
+           "autoPull": true,
+           "branchProtection": true,
+           "commitFrequency": "after_changes",
+           "maxCommitSize": 10,
+           "excludedFiles": [
+             "node_modules/**",
+             "dist/**",
+             "build/**",
+             "*.log",
+             "*.lock"
+           ],
+           "includedFileTypes": [
+             "*.ts",
+             "*.tsx",
+             "*.js",
+             "*.jsx",
+             "*.json",
+             "*.md",
+             "*.css",
+             "*.scss"
+           ]
+         }
+       },
+       
+               "autoSync": {
+          "enabled": true,
+          "description": "Automatic synchronization with remote repositories",
+          "autoRunTools": [
+            "run_terminal_cmd"
+          ],
+          "requireConfirmation": false,
+          "fullAuthority": true,
+          "settings": {
+           "syncMode": "bidirectional",
+           "autoPullBeforePush": true,
+           "conflictResolution": "manual",
+           "syncFrequency": "on_change",
+           "remoteTracking": true,
+           "backupBeforeSync": true,
+           "syncBranches": [
+             "main",
+             "develop",
+             "feature/*"
+           ],
+           "excludedBranches": [
+             "hotfix/*",
+             "release/*"
+           ]
+         }
+       }
+     }
+  }
+}
