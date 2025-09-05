@@ -131,7 +131,7 @@ export function WorldClassHeader() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 rounded-lg bg-transbot-neutral-light hover:bg-transbot-border transition-colors duration-200 mr-4"
+              className="hidden md:block p-2 rounded-lg bg-transbot-neutral-light hover:bg-transbot-border transition-colors duration-200 mr-4"
             >
               <Menu className="w-5 h-5 text-transbot-text-primary" />
             </motion.button>
@@ -173,7 +173,7 @@ export function WorldClassHeader() {
             </motion.div>
 
             {/* Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8">
                           {navigationItems.map((item) => (
               <motion.div
                 key={item.name}
@@ -250,7 +250,7 @@ export function WorldClassHeader() {
 
               {/* Mobile Menu Button */}
               <motion.button
-                className="lg:hidden p-2 rounded-xl bg-transbot-neutral-light hover:bg-transbot-border transition-colors duration-200"
+                className="md:hidden p-2 rounded-xl bg-transbot-neutral-light hover:bg-transbot-border transition-colors duration-200"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -269,7 +269,7 @@ export function WorldClassHeader() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden border-t border-transbot-border/20 bg-white/95 backdrop-blur-xl"
+              className="md:hidden border-t border-transbot-border/20 bg-white/95 backdrop-blur-xl"
             >
               <div className="px-6 py-4 space-y-4">
                 {navigationItems.map((item, index) => (

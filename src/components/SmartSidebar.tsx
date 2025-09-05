@@ -82,7 +82,7 @@ export function SmartSidebar() {
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed left-0 top-20 bottom-0 z-30 w-64"
+      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-64"
     >
       <div className="h-full bg-white/95 backdrop-blur-xl border-r border-transbot-border/20 shadow-transbot">
         
