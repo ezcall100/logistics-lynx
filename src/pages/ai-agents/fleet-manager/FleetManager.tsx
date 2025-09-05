@@ -1,105 +1,116 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { 
+  Truck, 
+  BarChart3, 
   Zap, 
-  Clock, 
-  DollarSign, 
-  TrendingUp, 
-  MapPin, 
   Play,
   RotateCcw,
   Download,
-  Brain,
-  CheckCircle
+  CheckCircle,
+  Target,
+  Wrench,
+  Fuel,
+  Users
 } from 'lucide-react'
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
-export default function RouteOptimizer() {
+export default function FleetManager() {
   const [isOptimizing, setIsOptimizing] = useState(false)
   const [optimizationResults, setOptimizationResults] = useState<any>(null)
-  const [agentStatus, setAgentStatus] = useState('Active')
-  const [efficiency, setEfficiency] = useState(98)
+  const [agentStatus, setAgentStatus] = useState('Monitoring')
+  const [efficiency, setEfficiency] = useState(92)
 
-  // Mock optimization process
   const startOptimization = async () => {
     setIsOptimizing(true)
     setAgentStatus('Processing')
     
     // Track user interaction
-    await trackUserInteraction('route_optimization_started', {
-      agent: 'RouteOptimizer',
+    await trackUserInteraction('fleet_optimization_started', {
+      agent: 'FleetManager',
       timestamp: new Date().toISOString()
     })
 
     // Track AI agent activity
-    await trackAIAgentActivity('RouteOptimizer', 'optimization_started', {
-      routes: 15,
-      vehicles: 8,
-      constraints: ['traffic', 'weather', 'delivery_windows']
+    await trackAIAgentActivity('FleetManager', 'optimization_started', {
+      fleetSize: 45,
+      vehicles: ['trucks', 'vans', 'trailers'],
+      metrics: ['fuel_efficiency', 'maintenance', 'driver_performance']
     })
 
     // Simulate optimization process
     setTimeout(() => {
       setOptimizationResults({
-        originalDistance: 245.7,
-        optimizedDistance: 198.3,
-        timeSaved: 47.4,
-        fuelSaved: 12.8,
-        costReduction: 18.5,
-        routes: [
-          { id: 1, vehicle: 'Truck-001', stops: 8, distance: 45.2, time: 2.5 },
-          { id: 2, vehicle: 'Truck-002', stops: 6, distance: 38.7, time: 2.1 },
-          { id: 3, vehicle: 'Truck-003', stops: 7, distance: 42.1, time: 2.3 },
+        fuelEfficiency: {
+          improvement: '+18%',
+          savings: '$12,500/month',
+          confidence: 95
+        },
+        maintenance: {
+          costReduction: '-25%',
+          uptime: '98.5%',
+          confidence: 93
+        },
+        driverPerformance: {
+          safetyScore: '96%',
+          efficiency: '+22%',
+          confidence: 91
+        },
+        recommendations: [
+          'Implement predictive maintenance on 12 vehicles',
+          'Optimize routes for 8 high-mileage trucks',
+          'Schedule driver training for 5 team members',
+          'Replace 3 aging vehicles in Q2 2024'
         ]
       })
       setIsOptimizing(false)
-      setAgentStatus('Completed')
-      setEfficiency(99)
-    }, 3000)
+      setAgentStatus('Optimized')
+      setEfficiency(95)
+    }, 3500)
   }
 
   const resetOptimization = () => {
     setOptimizationResults(null)
-    setAgentStatus('Active')
-    setEfficiency(98)
+    setAgentStatus('Monitoring')
+    setEfficiency(92)
   }
 
   const features = [
     {
-      icon: Brain,
-      title: 'AI-Powered Intelligence',
-      description: 'Advanced machine learning algorithms analyze traffic patterns, weather conditions, and historical data to optimize routes in real-time.',
-      benefits: ['Machine Learning', 'Real-time Analysis', 'Predictive Modeling']
+      icon: Truck,
+      title: 'Fleet Monitoring',
+      description: 'Real-time monitoring of vehicle location, performance, fuel consumption, and driver behavior across your entire fleet.',
+      benefits: ['GPS Tracking', 'Performance Metrics', 'Driver Analytics']
     },
     {
-      icon: MapPin,
-      title: 'Multi-Stop Optimization',
-      description: 'Intelligently sequence multiple delivery stops to minimize total distance and time while respecting delivery windows.',
-      benefits: ['Dynamic Sequencing', 'Time Windows', 'Capacity Constraints']
+      icon: Wrench,
+      title: 'Predictive Maintenance',
+      description: 'AI-powered maintenance scheduling that predicts vehicle issues before they occur, reducing downtime and costs.',
+      benefits: ['Predictive Alerts', 'Maintenance Scheduling', 'Cost Optimization']
     },
     {
-      icon: TrendingUp,
-      title: 'Performance Analytics',
-      description: 'Comprehensive analytics dashboard showing optimization results, cost savings, and performance improvements.',
-      benefits: ['Cost Tracking', 'Performance Metrics', 'ROI Analysis']
+      icon: Fuel,
+      title: 'Fuel Optimization',
+      description: 'Advanced fuel management system that optimizes consumption, tracks efficiency, and identifies cost-saving opportunities.',
+      benefits: ['Fuel Tracking', 'Efficiency Analysis', 'Cost Reduction']
     },
     {
-      icon: Brain,
-      title: 'Customizable Constraints',
-      description: 'Configure optimization parameters including vehicle capacity, driver hours, fuel costs, and delivery priorities.',
-      benefits: ['Flexible Parameters', 'Custom Rules', 'Business Logic']
+      icon: Users,
+      title: 'Driver Management',
+      description: 'Comprehensive driver performance tracking, safety monitoring, and training recommendations for optimal fleet operations.',
+      benefits: ['Performance Tracking', 'Safety Monitoring', 'Training Programs']
     }
   ]
 
   const stats = [
-    { label: 'Average Time Savings', value: '23%', icon: Clock, color: 'text-transbot-sky' },
-    { label: 'Fuel Cost Reduction', value: '18%', icon: DollarSign, color: 'text-transbot-teal' },
-    { label: 'Route Efficiency', value: '35%', icon: TrendingUp, color: 'text-transbot-purple' },
-    { label: 'Customer Satisfaction', value: '94%', icon: CheckCircle, color: 'text-transbot-warning' }
+    { label: 'Fleet Efficiency', value: '92%', icon: Target, color: 'text-transbot-sky' },
+    { label: 'Fuel Savings', value: '18%', icon: Fuel, color: 'text-transbot-teal' },
+    { label: 'Maintenance Cost', value: '-25%', icon: Wrench, color: 'text-transbot-purple' },
+    { label: 'Driver Safety', value: '96%', icon: Users, color: 'text-transbot-warning' }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-purple/5 via-white to-transbot-sky/5">
+    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -109,23 +120,23 @@ export default function RouteOptimizer() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-transbot-purple/10 text-transbot-purple px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Brain className="w-4 h-4" />
-              AI Agent: Route Optimizer
+            <div className="inline-flex items-center gap-2 bg-transbot-sky/10 text-transbot-sky px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Truck className="w-4 h-4" />
+              AI Agent: Fleet Manager
             </div>
             <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
               Intelligent
-              <span className="bg-gradient-primary bg-clip-text text-transparent"> Route Optimization</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent"> Fleet Management</span>
             </h1>
             <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8">
-              Our AI-powered Route Optimizer analyzes traffic patterns, weather conditions, 
-              and delivery constraints to create the most efficient routes for your fleet.
+              Our AI-powered Fleet Manager optimizes vehicle performance, reduces maintenance costs, 
+              and maximizes efficiency across your entire fleet operations.
             </p>
             
             {/* Agent Status */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
-                <div className={`w-2 h-2 rounded-full ${agentStatus === 'Active' ? 'bg-transbot-teal animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-warning animate-pulse' : 'bg-transbot-sky'}`}></div>
+                <div className={`w-2 h-2 rounded-full ${agentStatus === 'Monitoring' ? 'bg-transbot-sky animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-warning animate-pulse' : 'bg-transbot-teal'}`}></div>
                 <span className="text-sm font-medium text-transbot-text-primary">{agentStatus}</span>
               </div>
               <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
@@ -202,34 +213,43 @@ export default function RouteOptimizer() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <CheckCircle className="w-6 h-6 text-transbot-teal" />
-                <h2 className="text-2xl font-bold text-transbot-text-primary">Optimization Complete!</h2>
+                <h2 className="text-2xl font-bold text-transbot-text-primary">Fleet Optimization Complete!</h2>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-sky mb-1">
-                    {optimizationResults.optimizedDistance} mi
+                    {optimizationResults.fuelEfficiency.improvement}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Optimized Distance</div>
-                  <div className="text-xs text-transbot-teal">↓ {((optimizationResults.originalDistance - optimizationResults.optimizedDistance) / optimizationResults.originalDistance * 100).toFixed(1)}%</div>
+                  <div className="text-sm text-transbot-text-secondary">Fuel Efficiency</div>
+                  <div className="text-xs text-transbot-teal">{optimizationResults.fuelEfficiency.savings}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-teal mb-1">
-                    {optimizationResults.timeSaved} min
+                    {optimizationResults.maintenance.costReduction}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Time Saved</div>
+                  <div className="text-sm text-transbot-text-secondary">Maintenance Cost</div>
+                  <div className="text-xs text-transbot-teal">{optimizationResults.maintenance.uptime} uptime</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-purple mb-1">
-                    {optimizationResults.fuelSaved} gal
+                    {optimizationResults.driverPerformance.safetyScore}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Fuel Saved</div>
+                  <div className="text-sm text-transbot-text-secondary">Driver Safety</div>
+                  <div className="text-xs text-transbot-teal">{optimizationResults.driverPerformance.efficiency} efficiency</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-warning mb-1">
-                    ${optimizationResults.costReduction}
-                  </div>
-                  <div className="text-sm text-transbot-text-secondary">Cost Reduction</div>
+              </div>
+
+              {/* Recommendations */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4">Optimization Recommendations</h3>
+                <div className="space-y-3">
+                  {optimizationResults.recommendations.map((recommendation: string, index: number) => (
+                    <div key={index} className="flex items-center gap-3 p-3 bg-transbot-neutral-light rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-transbot-teal flex-shrink-0" />
+                      <span className="text-transbot-text-primary">{recommendation}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -237,20 +257,20 @@ export default function RouteOptimizer() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => trackUserInteraction('route_export_requested', { format: 'pdf' })}
+                  onClick={() => trackUserInteraction('fleet_report_exported', { format: 'pdf' })}
                   className="bg-transbot-sky text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  Export Routes
+                  Export Report
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => trackUserInteraction('route_visualization_requested', { type: 'map' })}
+                  onClick={() => trackUserInteraction('fleet_dashboard_viewed', { type: 'analytics' })}
                   className="border-2 border-transbot-sky text-transbot-sky px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300"
                 >
-                  <MapPin className="w-4 h-4" />
-                  View on Map
+                  <BarChart3 className="w-4 h-4" />
+                  View Dashboard
                 </motion.button>
               </div>
             </motion.div>
@@ -268,11 +288,11 @@ export default function RouteOptimizer() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
-              Advanced Route Optimization Features
+              Advanced Fleet Management Features
             </h2>
             <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto">
-              Powered by cutting-edge AI algorithms and real-time data analysis 
-              to deliver the most efficient routes for your fleet.
+              Comprehensive fleet management solution powered by AI to optimize performance, 
+              reduce costs, and ensure maximum efficiency across your entire fleet.
             </p>
           </motion.div>
 

@@ -1,22 +1,16 @@
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { 
   Network, 
   Zap, 
   Clock, 
   DollarSign, 
   TrendingUp, 
-  MapPin, 
   Truck, 
-  BarChart3,
   Play,
-  Pause,
   RotateCcw,
   Download,
-  Settings,
-  Brain,
   CheckCircle,
-  AlertCircle,
   Users,
   Target
 } from 'lucide-react'
@@ -24,7 +18,7 @@ import { trackUserInteraction, trackAIAgentActivity } from '../../../services/we
 
 export default function LoadMatcher() {
   const [isMatching, setIsMatching] = useState(false)
-  const [matchingResults, setMatchingResults] = useState(null)
+  const [matchingResults, setMatchingResults] = useState<any>(null)
   const [agentStatus, setAgentStatus] = useState('Learning')
   const [efficiency, setEfficiency] = useState(94)
 
@@ -245,7 +239,7 @@ export default function LoadMatcher() {
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-transbot-text-primary mb-4">Top Matches</h3>
                 <div className="space-y-3">
-                  {matchingResults.matches.map((match) => (
+                  {matchingResults.matches.map((match: any) => (
                     <div key={match.id} className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg">
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">

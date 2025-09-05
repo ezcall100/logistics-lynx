@@ -7,12 +7,10 @@ import {
   DollarSign, 
   TrendingUp, 
   Shield, 
-  Zap, 
   BarChart3,
   CheckCircle,
   ArrowRight,
-  Play,
-  Download
+  Play
 } from 'lucide-react'
 import { trackFormSubmission, trackUserInteraction } from '../../../services/webhookService'
 

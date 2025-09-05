@@ -21,7 +21,10 @@ import {
   FileText,
   Video,
   BookOpen,
-  HelpCircle
+  HelpCircle,
+  Users,
+  User,
+  Code
 } from 'lucide-react'
 
 export function SmartSidebar() {
@@ -64,8 +67,20 @@ export function SmartSidebar() {
       items: [
         { name: 'Route Optimizer', icon: Cpu, path: '/agents/route-optimizer' },
         { name: 'Load Matcher', icon: Network, path: '/agents/load-matcher' },
-        { name: 'Predictive Analytics', icon: Database, path: '/agents/analytics' },
+        { name: 'Predictive Analytics', icon: Database, path: '/agents/predictive-analytics' },
         { name: 'Fleet Manager', icon: Shield, path: '/agents/fleet-manager' }
+      ]
+    },
+    {
+      id: 'portals',
+      name: 'Portals',
+      icon: Users,
+      color: 'transbot-warning',
+      items: [
+        { name: 'Customer Portal', icon: User, path: '/portals/customer' },
+        { name: 'Partner Portal', icon: Users, path: '/portals/partner' },
+        { name: 'Developer Portal', icon: Code, path: '/portals/developer' },
+        { name: 'Admin Portal', icon: Shield, path: '/portals/admin' }
       ]
     },
     {

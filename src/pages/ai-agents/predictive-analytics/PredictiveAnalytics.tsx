@@ -1,105 +1,116 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { 
-  Zap, 
+  TrendingUp, 
+  BarChart3, 
   Clock, 
   DollarSign, 
-  TrendingUp, 
-  MapPin, 
+  Zap, 
+  Brain,
   Play,
   RotateCcw,
   Download,
-  Brain,
-  CheckCircle
+  CheckCircle,
+  Target
 } from 'lucide-react'
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
-export default function RouteOptimizer() {
-  const [isOptimizing, setIsOptimizing] = useState(false)
-  const [optimizationResults, setOptimizationResults] = useState<any>(null)
-  const [agentStatus, setAgentStatus] = useState('Active')
-  const [efficiency, setEfficiency] = useState(98)
+export default function PredictiveAnalytics() {
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [analysisResults, setAnalysisResults] = useState<any>(null)
+  const [agentStatus, setAgentStatus] = useState('Learning')
+  const [accuracy, setAccuracy] = useState(96)
 
-  // Mock optimization process
-  const startOptimization = async () => {
-    setIsOptimizing(true)
+  const startAnalysis = async () => {
+    setIsAnalyzing(true)
     setAgentStatus('Processing')
     
     // Track user interaction
-    await trackUserInteraction('route_optimization_started', {
-      agent: 'RouteOptimizer',
+    await trackUserInteraction('predictive_analysis_started', {
+      agent: 'PredictiveAnalytics',
       timestamp: new Date().toISOString()
     })
 
     // Track AI agent activity
-    await trackAIAgentActivity('RouteOptimizer', 'optimization_started', {
-      routes: 15,
-      vehicles: 8,
-      constraints: ['traffic', 'weather', 'delivery_windows']
+    await trackAIAgentActivity('PredictiveAnalytics', 'analysis_started', {
+      dataPoints: 50000,
+      timeRange: '6_months',
+      models: ['demand_forecasting', 'price_prediction', 'route_optimization']
     })
 
-    // Simulate optimization process
+    // Simulate analysis process
     setTimeout(() => {
-      setOptimizationResults({
-        originalDistance: 245.7,
-        optimizedDistance: 198.3,
-        timeSaved: 47.4,
-        fuelSaved: 12.8,
-        costReduction: 18.5,
-        routes: [
-          { id: 1, vehicle: 'Truck-001', stops: 8, distance: 45.2, time: 2.5 },
-          { id: 2, vehicle: 'Truck-002', stops: 6, distance: 38.7, time: 2.1 },
-          { id: 3, vehicle: 'Truck-003', stops: 7, distance: 42.1, time: 2.3 },
+      setAnalysisResults({
+        demandForecast: {
+          nextMonth: '+12%',
+          nextQuarter: '+8%',
+          confidence: 94
+        },
+        pricePredictions: {
+          fuelCosts: '+5%',
+          shippingRates: '+3%',
+          confidence: 91
+        },
+        routeOptimization: {
+          timeSavings: '18%',
+          costReduction: '15%',
+          confidence: 89
+        },
+        insights: [
+          'Peak demand expected in Q2 2024',
+          'Fuel costs likely to increase 5-8%',
+          'Route optimization can save 15-20% costs',
+          'Warehouse capacity needs 25% increase'
         ]
       })
-      setIsOptimizing(false)
+      setIsAnalyzing(false)
       setAgentStatus('Completed')
-      setEfficiency(99)
-    }, 3000)
+      setAccuracy(97)
+    }, 4000)
   }
 
-  const resetOptimization = () => {
-    setOptimizationResults(null)
-    setAgentStatus('Active')
-    setEfficiency(98)
+  const resetAnalysis = () => {
+    setAnalysisResults(null)
+    setAgentStatus('Learning')
+    setAccuracy(96)
   }
 
   const features = [
     {
       icon: Brain,
-      title: 'AI-Powered Intelligence',
-      description: 'Advanced machine learning algorithms analyze traffic patterns, weather conditions, and historical data to optimize routes in real-time.',
-      benefits: ['Machine Learning', 'Real-time Analysis', 'Predictive Modeling']
+      title: 'Machine Learning Models',
+      description: 'Advanced ML algorithms analyze historical data to predict future trends, demand patterns, and market conditions.',
+      benefits: ['Neural Networks', 'Time Series Analysis', 'Predictive Modeling']
     },
     {
-      icon: MapPin,
-      title: 'Multi-Stop Optimization',
-      description: 'Intelligently sequence multiple delivery stops to minimize total distance and time while respecting delivery windows.',
-      benefits: ['Dynamic Sequencing', 'Time Windows', 'Capacity Constraints']
+      icon: BarChart3,
+      title: 'Demand Forecasting',
+      description: 'Predict customer demand, seasonal patterns, and market fluctuations to optimize inventory and capacity planning.',
+      benefits: ['Seasonal Analysis', 'Trend Detection', 'Capacity Planning']
     },
     {
       icon: TrendingUp,
-      title: 'Performance Analytics',
-      description: 'Comprehensive analytics dashboard showing optimization results, cost savings, and performance improvements.',
-      benefits: ['Cost Tracking', 'Performance Metrics', 'ROI Analysis']
+      title: 'Price Optimization',
+      description: 'AI-powered pricing models that consider market conditions, competition, and demand elasticity for optimal pricing.',
+      benefits: ['Dynamic Pricing', 'Market Analysis', 'Competitive Intelligence']
     },
     {
-      icon: Brain,
-      title: 'Customizable Constraints',
-      description: 'Configure optimization parameters including vehicle capacity, driver hours, fuel costs, and delivery priorities.',
-      benefits: ['Flexible Parameters', 'Custom Rules', 'Business Logic']
+      icon: Target,
+      title: 'Risk Assessment',
+      description: 'Identify potential risks and opportunities through comprehensive analysis of market trends and operational data.',
+      benefits: ['Risk Modeling', 'Opportunity Detection', 'Scenario Planning']
     }
   ]
 
   const stats = [
-    { label: 'Average Time Savings', value: '23%', icon: Clock, color: 'text-transbot-sky' },
-    { label: 'Fuel Cost Reduction', value: '18%', icon: DollarSign, color: 'text-transbot-teal' },
-    { label: 'Route Efficiency', value: '35%', icon: TrendingUp, color: 'text-transbot-purple' },
-    { label: 'Customer Satisfaction', value: '94%', icon: CheckCircle, color: 'text-transbot-warning' }
+    { label: 'Prediction Accuracy', value: '96%', icon: Target, color: 'text-transbot-sky' },
+    { label: 'Cost Savings', value: '22%', icon: DollarSign, color: 'text-transbot-teal' },
+    { label: 'Demand Forecast', value: '94%', icon: TrendingUp, color: 'text-transbot-purple' },
+    { label: 'Processing Speed', value: '2.1s', icon: Clock, color: 'text-transbot-warning' }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-purple/5 via-white to-transbot-sky/5">
+    <div className="min-h-screen bg-gradient-to-br from-transbot-teal/5 via-white to-transbot-purple/5">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -109,28 +120,28 @@ export default function RouteOptimizer() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-transbot-purple/10 text-transbot-purple px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-transbot-teal/10 text-transbot-teal px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Brain className="w-4 h-4" />
-              AI Agent: Route Optimizer
+              AI Agent: Predictive Analytics
             </div>
             <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
               Intelligent
-              <span className="bg-gradient-primary bg-clip-text text-transparent"> Route Optimization</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent"> Predictive Analytics</span>
             </h1>
             <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8">
-              Our AI-powered Route Optimizer analyzes traffic patterns, weather conditions, 
-              and delivery constraints to create the most efficient routes for your fleet.
+              Our AI-powered Predictive Analytics engine analyzes market trends, demand patterns, 
+              and operational data to forecast future outcomes and optimize business decisions.
             </p>
             
             {/* Agent Status */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
-                <div className={`w-2 h-2 rounded-full ${agentStatus === 'Active' ? 'bg-transbot-teal animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-warning animate-pulse' : 'bg-transbot-sky'}`}></div>
+                <div className={`w-2 h-2 rounded-full ${agentStatus === 'Learning' ? 'bg-transbot-warning animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-sky animate-pulse' : 'bg-transbot-teal'}`}></div>
                 <span className="text-sm font-medium text-transbot-text-primary">{agentStatus}</span>
               </div>
               <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
-                <Zap className="w-4 h-4 text-transbot-sky" />
-                <span className="text-sm font-medium text-transbot-text-primary">{efficiency}% Efficiency</span>
+                <Zap className="w-4 h-4 text-transbot-teal" />
+                <span className="text-sm font-medium text-transbot-text-primary">{accuracy}% Accuracy</span>
               </div>
             </div>
 
@@ -138,27 +149,27 @@ export default function RouteOptimizer() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={startOptimization}
-                disabled={isOptimizing}
+                onClick={startAnalysis}
+                disabled={isAnalyzing}
                 className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isOptimizing ? (
+                {isAnalyzing ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Optimizing...
+                    Analyzing...
                   </>
                 ) : (
                   <>
                     <Play className="w-5 h-5" />
-                    Start Optimization
+                    Start Analysis
                   </>
                 )}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={resetOptimization}
-                className="border-2 border-transbot-sky text-transbot-sky px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300"
+                onClick={resetAnalysis}
+                className="border-2 border-transbot-teal text-transbot-teal px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300"
               >
                 <RotateCcw className="w-5 h-5" />
                 Reset
@@ -190,8 +201,8 @@ export default function RouteOptimizer() {
         </div>
       </section>
 
-      {/* Optimization Results */}
-      {optimizationResults && (
+      {/* Analysis Results */}
+      {analysisResults && (
         <section className="py-20 px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -202,34 +213,43 @@ export default function RouteOptimizer() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <CheckCircle className="w-6 h-6 text-transbot-teal" />
-                <h2 className="text-2xl font-bold text-transbot-text-primary">Optimization Complete!</h2>
+                <h2 className="text-2xl font-bold text-transbot-text-primary">Analysis Complete!</h2>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-sky mb-1">
-                    {optimizationResults.optimizedDistance} mi
+                    {analysisResults.demandForecast.nextMonth}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Optimized Distance</div>
-                  <div className="text-xs text-transbot-teal">↓ {((optimizationResults.originalDistance - optimizationResults.optimizedDistance) / optimizationResults.originalDistance * 100).toFixed(1)}%</div>
+                  <div className="text-sm text-transbot-text-secondary">Next Month Demand</div>
+                  <div className="text-xs text-transbot-teal">{analysisResults.demandForecast.confidence}% confidence</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-teal mb-1">
-                    {optimizationResults.timeSaved} min
+                    {analysisResults.pricePredictions.fuelCosts}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Time Saved</div>
+                  <div className="text-sm text-transbot-text-secondary">Fuel Cost Prediction</div>
+                  <div className="text-xs text-transbot-teal">{analysisResults.pricePredictions.confidence}% confidence</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-transbot-purple mb-1">
-                    {optimizationResults.fuelSaved} gal
+                    {analysisResults.routeOptimization.timeSavings}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Fuel Saved</div>
+                  <div className="text-sm text-transbot-text-secondary">Time Savings</div>
+                  <div className="text-xs text-transbot-teal">{analysisResults.routeOptimization.confidence}% confidence</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-warning mb-1">
-                    ${optimizationResults.costReduction}
-                  </div>
-                  <div className="text-sm text-transbot-text-secondary">Cost Reduction</div>
+              </div>
+
+              {/* Key Insights */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4">Key Insights</h3>
+                <div className="space-y-3">
+                  {analysisResults.insights.map((insight: string, index: number) => (
+                    <div key={index} className="flex items-center gap-3 p-3 bg-transbot-neutral-light rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-transbot-teal flex-shrink-0" />
+                      <span className="text-transbot-text-primary">{insight}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -237,20 +257,20 @@ export default function RouteOptimizer() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => trackUserInteraction('route_export_requested', { format: 'pdf' })}
-                  className="bg-transbot-sky text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+                  onClick={() => trackUserInteraction('analysis_export_requested', { format: 'pdf' })}
+                  className="bg-transbot-teal text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  Export Routes
+                  Export Report
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => trackUserInteraction('route_visualization_requested', { type: 'map' })}
-                  className="border-2 border-transbot-sky text-transbot-sky px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300"
+                  onClick={() => trackUserInteraction('analysis_visualization_requested', { type: 'dashboard' })}
+                  className="border-2 border-transbot-teal text-transbot-teal px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300"
                 >
-                  <MapPin className="w-4 h-4" />
-                  View on Map
+                  <BarChart3 className="w-4 h-4" />
+                  View Dashboard
                 </motion.button>
               </div>
             </motion.div>
@@ -268,11 +288,11 @@ export default function RouteOptimizer() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
-              Advanced Route Optimization Features
+              Advanced Predictive Analytics Features
             </h2>
             <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto">
-              Powered by cutting-edge AI algorithms and real-time data analysis 
-              to deliver the most efficient routes for your fleet.
+              Powered by cutting-edge machine learning algorithms and real-time data analysis 
+              to deliver accurate predictions and actionable insights.
             </p>
           </motion.div>
 

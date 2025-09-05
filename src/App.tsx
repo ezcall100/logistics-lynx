@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { WorldClassHeader } from './components/WorldClassHeader'
-import { SmartSidebar } from './components/SmartSidebar'
+import { SimplifiedHeader } from './components/SimplifiedHeader'
+import { ComprehensiveSidebar } from './components/ComprehensiveSidebar'
+import { AdvancedFAB } from './components/AdvancedFAB'
 import { NeuralBackground } from './components/NeuralBackground'
 import { ModernLandingPage } from './components/ModernLandingPage'
 import { HeroSection } from './components/HeroSection'
@@ -24,6 +25,25 @@ import AIAgentsPage from './pages/AIAgentsPage'
 import TransportationManagement from './pages/solutions/transportation/TransportationManagement'
 import RouteOptimizer from './pages/ai-agents/route-optimizer/RouteOptimizer'
 import LoadMatcher from './pages/ai-agents/load-matcher/LoadMatcher'
+import PredictiveAnalytics from './pages/ai-agents/predictive-analytics/PredictiveAnalytics'
+import FleetManager from './pages/ai-agents/fleet-manager/FleetManager'
+import CustomerPortal from './pages/portals/customer/CustomerPortal'
+import PartnerPortal from './pages/portals/partner/PartnerPortal'
+import DeveloperPortal from './pages/portals/developer/DeveloperPortal'
+import AdminPortal from './pages/portals/admin/AdminPortal'
+import BrokerPortal from './pages/portals/broker/BrokerPortal'
+import CarrierPortal from './pages/portals/carrier/CarrierPortal'
+import DriverPortal from './pages/portals/driver/DriverPortal'
+import ShipperPortal from './pages/portals/shipper/ShipperPortal'
+import AnalyticsPortal from './pages/portals/analytics/AnalyticsPortal'
+import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal'
+import YMSPortal from './pages/portals/yms/YMSPortal'
+import DirectoryPortal from './pages/portals/directory/DirectoryPortal'
+import RatesPortal from './pages/portals/rates/RatesPortal'
+import MarketplacePortal from './pages/portals/marketplace/MarketplacePortal'
+import FinancialsPortal from './pages/portals/financials/FinancialsPortal'
+import LoadBoardPortal from './pages/portals/load-board/LoadBoardPortal'
+import CRMPortal from './pages/portals/crm/CRMPortal'
 
 function App() {
   return (
@@ -31,9 +51,10 @@ function App() {
       <Router>
         <div className="min-h-screen relative">
           <NeuralBackground />
-          <WorldClassHeader />
-          <SmartSidebar />
-          <main className="pt-20 pl-0 md:pl-64 transition-all duration-500">
+          <SimplifiedHeader />
+          <ComprehensiveSidebar />
+          <AdvancedFAB />
+          <main className="pt-20 pl-0 md:pl-80 transition-all duration-500">
             <Routes>
               <Route path="/" element={
                 <>
@@ -87,6 +108,120 @@ function App() {
               <Route path="/agents/load-matcher" element={
                 <>
                   <LoadMatcher />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/customer" element={
+                <>
+                  <CustomerPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/partner" element={
+                <>
+                  <PartnerPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/developer" element={
+                <>
+                  <DeveloperPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/admin" element={
+                <>
+                  <AdminPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/broker" element={
+                <>
+                  <BrokerPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/carrier" element={
+                <>
+                  <CarrierPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/driver" element={
+                <>
+                  <DriverPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/shipper" element={
+                <>
+                  <ShipperPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/analytics" element={
+                <>
+                  <AnalyticsPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/autonomous" element={
+                <>
+                  <AutonomousPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/yms" element={
+                <>
+                  <YMSPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/directory" element={
+                <>
+                  <DirectoryPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/rates" element={
+                <>
+                  <RatesPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/marketplace" element={
+                <>
+                  <MarketplacePortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/financials" element={
+                <>
+                  <FinancialsPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/load-board" element={
+                <>
+                  <LoadBoardPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/crm" element={
+                <>
+                  <CRMPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/predictive-analytics" element={
+                <>
+                  <PredictiveAnalytics />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/fleet-manager" element={
+                <>
+                  <FleetManager />
                   <Footer />
                 </>
               } />
