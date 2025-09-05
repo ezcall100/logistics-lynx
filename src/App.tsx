@@ -15,6 +15,8 @@ import { SignupPage } from './pages/SignupPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { SuperAdminPortal } from './pages/super-admin/SuperAdminPortal'
 import { AuthProvider } from './contexts/AuthContext'
+import { SidebarProvider } from './contexts/SidebarContext'
+import { Layout } from './components/Layout'
 import SolutionsPage from './pages/SolutionsPage'
 import PricingPage from './pages/PricingPage'
 import ResourcesPage from './pages/ResourcesPage'
@@ -48,13 +50,14 @@ import CRMPortal from './pages/portals/crm/CRMPortal'
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div className="min-h-screen relative">
-          <NeuralBackground />
-          <SimplifiedHeader />
-          <ComprehensiveSidebar />
-          <AdvancedFAB />
-          <main className="pt-20 pl-0 md:pl-80 transition-all duration-500">
+      <SidebarProvider>
+        <Router>
+          <div className="min-h-screen relative">
+            <NeuralBackground />
+            <SimplifiedHeader />
+            <ComprehensiveSidebar />
+            <AdvancedFAB />
+            <Layout>
             <Routes>
               <Route path="/" element={
                 <>
@@ -262,9 +265,10 @@ function App() {
                 </>
               } />
             </Routes>
-          </main>
+            </Layout>
         </div>
       </Router>
+      </SidebarProvider>
     </AuthProvider>
   )
 }

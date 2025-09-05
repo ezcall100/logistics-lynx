@@ -24,7 +24,6 @@ import {
   Users,
   User,
   Code,
-  Search,
   Settings,
   DollarSign,
   Package,
@@ -41,13 +40,15 @@ import {
   ClipboardList,
   Lock,
   AlertTriangle,
-  Briefcase
+  Briefcase,
+  PanelLeft
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
+import { useSidebar } from '../contexts/SidebarContext'
 
 export function ComprehensiveSidebar() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')
+  const { isSidebarOpen, toggleSidebar } = useSidebar()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -56,11 +57,9 @@ export function ComprehensiveSidebar() {
     await trackUserInteraction('sidebar_navigation', { path })
   }
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query)
-    if (query.length > 2) {
-      await trackUserInteraction('sidebar_search', { query })
-    }
+  const handleSidebarToggle = async () => {
+    toggleSidebar()
+    await trackUserInteraction('sidebar_toggle', { isOpen: !isSidebarOpen })
   }
 
   const toggleSection = (sectionId: string) => {
@@ -69,10 +68,18 @@ export function ComprehensiveSidebar() {
 
   const navigationSections = [
     {
-      id: 'dashboard',
-      name: 'Dashboard',
+      id: 'home',
+      name: 'Home',
       icon: Home,
       color: 'text-transbot-sky',
+      path: '/',
+      items: []
+    },
+    {
+      id: 'dashboard',
+      name: 'Dashboard',
+      icon: BarChart3,
+      color: 'text-transbot-teal',
       path: '/dashboard',
       items: [
         { name: 'Overview', icon: BarChart3, path: '/dashboard/overview' },
@@ -85,7 +92,7 @@ export function ComprehensiveSidebar() {
       id: 'solutions',
       name: 'Solutions',
       icon: Target,
-      color: 'text-transbot-teal',
+      color: 'text-transbot-purple',
       items: [
         { name: 'Transportation Management', icon: Truck, path: '/solutions/transportation' },
         { name: 'Warehouse Management', icon: Building, path: '/solutions/warehouse' },
@@ -208,36 +215,60 @@ export function ComprehensiveSidebar() {
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-80"
+      className={`hidden md:block fixed left-0 top-0 bottom-0 z-40 w-80 transition-transform duration-300 ${
+        isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}
     >
       <div className="h-full bg-white/98 backdrop-blur-xl border-r border-slate-200/60 shadow-xl">
         
-        {/* Header */}
-        <div className="p-4 border-b border-slate-200/50">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h2 className="font-bold text-transbot-text-primary">Navigation</h2>
-              <p className="text-xs text-transbot-text-secondary">Complete Portal Access</p>
-            </div>
+        {/* Trans Bot AI Logo & Branding */}
+        <div className="px-6 pt-20 pb-5 border-b border-slate-200/50">
+          <div className="flex items-center justify-between">
+            <motion.div 
+              className="flex items-center gap-4 cursor-pointer flex-1"
+              whileHover={{ scale: 1.02 }}
+              onClick={() => navigate('/')}
+            >
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center shadow-transbot">
+                  <Brain className="w-8 h-8 text-white" />
+                </div>
+                <motion.div
+                  className="absolute -top-1 -right-1 w-4 h-4 bg-transbot-teal rounded-full"
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.7, 1, 0.7]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity 
+                  }}
+                />
+              </div>
+              
+              <div className="flex-1">
+                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Trans Bot AI
+                </h1>
+                <p className="text-xs text-transbot-text-secondary font-medium">
+                  Intelligent Logistics Platform
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Sidebar Toggle Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleSidebarToggle}
+              className="flex items-center justify-center w-10 h-10 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg hover:bg-blue-50 transition-all duration-200"
+              title="Hide Sidebar"
+            >
+              <PanelLeft className="w-5 h-5 text-transbot-text-primary" />
+            </motion.button>
           </div>
         </div>
 
-        {/* Search */}
-        <div className="p-4 border-b border-slate-200/50">
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
-            <input
-              type="text"
-              placeholder="Search portals, pages..."
-              value={searchQuery}
-              onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-sm"
-            />
-          </div>
-        </div>
 
         {/* Portal Status */}
         <div className="p-4 border-b border-slate-200/50">

@@ -28,7 +28,7 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen pt-20 pl-0 md:pl-80 bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {getDashboardContent()}
       </div>
@@ -44,8 +44,8 @@ function ShipperDashboard() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Shipper Dashboard</h1>
-        <p className="text-white/70">Manage your shipments and track deliveries</p>
+        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Shipper Dashboard</h1>
+        <p className="text-transbot-text-secondary">Manage your shipments and track deliveries</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -60,19 +60,19 @@ function ShipperDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="glass p-6 rounded-2xl"
+            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="glass p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-white mb-6">Recent Shipments</h2>
+      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
+        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Recent Shipments</h2>
         <div className="space-y-4">
           {[
             { id: 'SH-001', destination: 'Los Angeles, CA', status: 'In Transit', eta: '2 hours' },
@@ -87,12 +87,12 @@ function ShipperDashboard() {
               className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
             >
               <div>
-                <div className="text-white font-medium">{shipment.id}</div>
-                <div className="text-white/70 text-sm">{shipment.destination}</div>
+                <div className="text-transbot-text-primary font-medium">{shipment.id}</div>
+                <div className="text-transbot-text-secondary text-sm">{shipment.destination}</div>
               </div>
               <div className="text-right">
-                <div className="text-white/70 text-sm">{shipment.status}</div>
-                <div className="text-white/50 text-xs">{shipment.eta}</div>
+                <div className="text-transbot-text-secondary text-sm">{shipment.status}</div>
+                <div className="text-transbot-text-secondary text-xs">{shipment.eta}</div>
               </div>
             </motion.div>
           ))}
@@ -110,8 +110,8 @@ function BrokerDashboard() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Broker Dashboard</h1>
-        <p className="text-white/70">Manage loads, carriers, and optimize margins</p>
+        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Broker Dashboard</h1>
+        <p className="text-transbot-text-secondary">Manage loads, carriers, and optimize margins</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -126,19 +126,19 @@ function BrokerDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="glass p-6 rounded-2xl"
+            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="glass p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-white mb-6">Recent Loads</h2>
+      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
+        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Recent Loads</h2>
         <div className="space-y-4">
           {[
             { id: 'LD-001', route: 'LA → Chicago', rate: '$2,450', status: 'Posted' },
@@ -153,12 +153,12 @@ function BrokerDashboard() {
               className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
             >
               <div>
-                <div className="text-white font-medium">{load.id}</div>
-                <div className="text-white/70 text-sm">{load.route}</div>
+                <div className="text-transbot-text-primary font-medium">{load.id}</div>
+                <div className="text-transbot-text-secondary text-sm">{load.route}</div>
               </div>
               <div className="text-right">
-                <div className="text-white font-medium">{load.rate}</div>
-                <div className="text-white/70 text-sm">{load.status}</div>
+                <div className="text-transbot-text-primary font-medium">{load.rate}</div>
+                <div className="text-transbot-text-secondary text-sm">{load.status}</div>
               </div>
             </motion.div>
           ))}
@@ -176,8 +176,8 @@ function CarrierDashboard() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Carrier Dashboard</h1>
-        <p className="text-white/70">Manage your fleet and optimize routes</p>
+        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Carrier Dashboard</h1>
+        <p className="text-transbot-text-secondary">Manage your fleet and optimize routes</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -192,19 +192,19 @@ function CarrierDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="glass p-6 rounded-2xl"
+            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="glass p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-white mb-6">Fleet Status</h2>
+      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
+        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Fleet Status</h2>
         <div className="space-y-4">
           {[
             { id: 'TR-001', driver: 'John Smith', location: 'I-40, TN', status: 'In Transit' },
@@ -219,12 +219,12 @@ function CarrierDashboard() {
               className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
             >
               <div>
-                <div className="text-white font-medium">{truck.id}</div>
-                <div className="text-white/70 text-sm">{truck.driver}</div>
+                <div className="text-transbot-text-primary font-medium">{truck.id}</div>
+                <div className="text-transbot-text-secondary text-sm">{truck.driver}</div>
               </div>
               <div className="text-right">
-                <div className="text-white/70 text-sm">{truck.location}</div>
-                <div className="text-white/50 text-xs">{truck.status}</div>
+                <div className="text-transbot-text-secondary text-sm">{truck.location}</div>
+                <div className="text-transbot-text-secondary text-xs">{truck.status}</div>
               </div>
             </motion.div>
           ))}
@@ -242,8 +242,8 @@ function DriverDashboard() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Driver Dashboard</h1>
-        <p className="text-white/70">Track your loads and manage your schedule</p>
+        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Driver Dashboard</h1>
+        <p className="text-transbot-text-secondary">Track your loads and manage your schedule</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -258,19 +258,19 @@ function DriverDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="glass p-6 rounded-2xl"
+            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="glass p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-white mb-6">Current Assignment</h2>
+      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
+        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Current Assignment</h2>
         <div className="space-y-4">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -279,11 +279,11 @@ function DriverDashboard() {
             className="p-4 bg-white/5 rounded-xl"
           >
             <div className="flex items-center justify-between mb-2">
-              <div className="text-white font-medium">Load LD-001</div>
+              <div className="text-transbot-text-primary font-medium">Load LD-001</div>
               <div className="text-accent font-medium">In Transit</div>
             </div>
-            <div className="text-white/70 text-sm mb-2">Route: Los Angeles, CA → Chicago, IL</div>
-            <div className="text-white/70 text-sm">ETA: 2 hours 30 minutes</div>
+            <div className="text-transbot-text-secondary text-sm mb-2">Route: Los Angeles, CA → Chicago, IL</div>
+            <div className="text-transbot-text-secondary text-sm">ETA: 2 hours 30 minutes</div>
           </motion.div>
         </div>
       </div>
