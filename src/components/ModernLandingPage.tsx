@@ -16,27 +16,27 @@ import {
 
 export function ModernLandingPage() {
   const stats = [
-    { label: 'Active Users', value: '2,500+', icon: Users },
-    { label: 'Loads Processed', value: '50K+', icon: Truck },
-    { label: 'Routes Optimized', value: '15K+', icon: Target },
-    { label: 'AI Insights', value: '1.2M+', icon: Brain }
+    { label: 'Active Companies', value: '5,000+', icon: Users },
+    { label: 'Loads Optimized', value: '2M+', icon: Truck },
+    { label: 'Routes Enhanced', value: '500K+', icon: Target },
+    { label: 'AI Decisions', value: '50M+', icon: Brain }
   ]
 
   const features = [
     {
       icon: Zap,
-      title: 'Book more loads, optimize capacity',
-      description: 'AI-powered load matching and capacity optimization'
+      title: 'Revolutionary AI-Powered Logistics',
+      description: 'Transform your logistics operations with cutting-edge artificial intelligence that learns, adapts, and optimizes in real-time'
     },
     {
       icon: Brain,
-      title: 'Leverage AI & workflow automation',
-      description: 'Intelligent automation for maximum efficiency'
+      title: 'Intelligent Automation Suite',
+      description: 'Deploy 250+ specialized AI agents that handle everything from route optimization to predictive maintenance'
     },
     {
       icon: Shield,
-      title: 'No-risk, easy onboarding',
-      description: 'Seamless integration with existing systems'
+      title: 'Enterprise-Grade Security',
+      description: 'Bank-level security with 99.9% uptime guarantee and comprehensive compliance across all regulations'
     }
   ]
 

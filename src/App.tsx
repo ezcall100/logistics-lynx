@@ -3,7 +3,7 @@ import { SimplifiedHeader } from './components/SimplifiedHeader'
 import { ComprehensiveSidebar } from './components/ComprehensiveSidebar'
 import { AdvancedFAB } from './components/AdvancedFAB'
 import { NeuralBackground } from './components/NeuralBackground'
-import { ModernLandingPage } from './components/ModernLandingPage'
+import { EnhancedHomePage } from './components/EnhancedHomePage'
 import { HeroSection } from './components/HeroSection'
 import { TrustedBy } from './components/TrustedBy'
 import { FeaturesSection } from './components/FeaturesSection'
@@ -61,7 +61,7 @@ function App() {
             <Routes>
               <Route path="/" element={
                 <>
-                  <ModernLandingPage />
+                  <EnhancedHomePage />
                   <Footer />
                 </>
               } />

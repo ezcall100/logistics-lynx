@@ -68,16 +68,8 @@ export function ComprehensiveSidebar() {
       icon: Home,
       color: 'text-transbot-sky',
       path: '/',
-      items: []
-    },
-    {
-      id: 'dashboard',
-      name: 'Dashboard',
-      icon: BarChart3,
-      color: 'text-transbot-teal',
-      path: '/dashboard',
       items: [
-        { name: 'Overview', icon: BarChart3, path: '/dashboard/overview' },
+        { name: 'Dashboard Overview', icon: BarChart3, path: '/dashboard' },
         { name: 'Analytics', icon: TrendingUp, path: '/dashboard/analytics' },
         { name: 'Performance', icon: Activity, path: '/dashboard/performance' },
         { name: 'Reports', icon: FileText, path: '/dashboard/reports' }
