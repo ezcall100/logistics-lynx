@@ -5,32 +5,11 @@ import {
   TrendingUp, 
   BarChart3, 
   Target, 
-  Zap, 
-  Clock,
-  MapPin,
-  Truck,
-  Package,
-  CheckCircle,
-  AlertCircle,
-  Plus,
-  Edit,
-  Eye
+  Plus
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function RatesPortal() {
-  const [activeTab, setActiveTab] = useState('rates')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('rates_portal_tab_changed', { tab })
-    await trackAIAgentActivity('RatesAnalytics', 'tab_analytics', {
-      ratesId: 'RATES_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const ratesStats = {
     totalRates: 12500,

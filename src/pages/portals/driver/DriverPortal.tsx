@@ -1,33 +1,13 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
   User, 
   Truck, 
   MapPin, 
-  Clock, 
   DollarSign, 
-  BarChart3, 
-  Settings,
-  CheckCircle,
-  AlertCircle,
-  Navigation,
-  Fuel,
-  Wrench
+  Fuel
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function DriverPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('driver_portal_tab_changed', { tab })
-    await trackAIAgentActivity('DriverAnalytics', 'tab_analytics', {
-      driverId: 'DRIVER_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const driverStats = {
     totalMiles: 12500,

@@ -4,32 +4,12 @@ import {
   Users, 
   Building, 
   Search, 
-  Filter, 
-  MapPin, 
-  Phone, 
-  Mail,
-  Star,
   CheckCircle,
-  AlertCircle,
-  Plus,
-  Eye,
-  Edit
+  Plus
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function DirectoryPortal() {
-  const [activeTab, setActiveTab] = useState('directory')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('directory_portal_tab_changed', { tab })
-    await trackAIAgentActivity('DirectoryAnalytics', 'tab_analytics', {
-      directoryId: 'DIRECTORY_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const directoryStats = {
     totalCompanies: 1250,

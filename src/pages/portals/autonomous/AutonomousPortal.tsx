@@ -4,33 +4,15 @@ import {
   Cpu, 
   Brain, 
   Zap, 
-  Activity, 
-  Settings, 
   Play, 
   Pause, 
-  RotateCcw,
   CheckCircle,
-  AlertCircle,
-  Target,
-  BarChart3,
-  Clock,
   DollarSign
 } from 'lucide-react'
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function AutonomousPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard')
   const [isAutonomousMode, setIsAutonomousMode] = useState(false)
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('autonomous_portal_tab_changed', { tab })
-    await trackAIAgentActivity('AutonomousSystem', 'tab_analytics', {
-      autonomousId: 'AUTONOMOUS_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const handleAutonomousToggle = async () => {
     setIsAutonomousMode(!isAutonomousMode)

@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
   BarChart3, 
   TrendingUp, 
   Target,
   Zap
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function AnalyticsPortal() {
 

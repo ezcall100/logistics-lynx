@@ -1,33 +1,12 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
   Building, 
-  Package, 
-  BarChart3, 
-  Settings, 
   Truck,
-  Users,
   Clock,
-  CheckCircle,
-  AlertCircle,
-  Target,
-  Zap,
-  DollarSign
+  Target
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function YMSPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('yms_portal_tab_changed', { tab })
-    await trackAIAgentActivity('YMSAnalytics', 'tab_analytics', {
-      ymsId: 'YMS_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const ymsStats = {
     totalYards: 8,

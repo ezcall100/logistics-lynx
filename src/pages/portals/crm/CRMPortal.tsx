@@ -3,37 +3,14 @@ import { useState } from 'react'
 import { 
   Users, 
   User, 
-  Building, 
-  Phone, 
-  Mail, 
-  Calendar, 
-  MessageSquare,
   Search,
-  Filter,
   Plus,
-  Eye,
-  Edit,
-  Star,
   CheckCircle,
-  AlertCircle,
-  TrendingUp,
-  BarChart3
+  TrendingUp
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function CRMPortal() {
-  const [activeTab, setActiveTab] = useState('crm')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('crm_portal_tab_changed', { tab })
-    await trackAIAgentActivity('CRMAnalytics', 'tab_analytics', {
-      crmId: 'CRM_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const crmStats = {
     totalContacts: 2500,

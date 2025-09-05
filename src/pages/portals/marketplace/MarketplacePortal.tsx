@@ -3,34 +3,14 @@ import { useState } from 'react'
 import { 
   Store, 
   Package, 
-  Truck, 
-  Users, 
   Search, 
-  Filter, 
-  Star,
   CheckCircle,
-  AlertCircle,
   Plus,
-  Eye,
-  DollarSign,
-  MapPin,
-  Clock
+  DollarSign
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function MarketplacePortal() {
-  const [activeTab, setActiveTab] = useState('marketplace')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('marketplace_portal_tab_changed', { tab })
-    await trackAIAgentActivity('MarketplaceAnalytics', 'tab_analytics', {
-      marketplaceId: 'MARKETPLACE_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const marketplaceStats = {
     totalListings: 2500,

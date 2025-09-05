@@ -1,35 +1,12 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
   Truck, 
   Package, 
-  BarChart3, 
-  Settings, 
-  Search,
-  Eye,
   DollarSign,
-  TrendingUp,
-  Users,
-  Plus,
-  MapPin,
-  Clock,
-  CheckCircle,
-  AlertCircle
+  CheckCircle
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function CarrierPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('carrier_portal_tab_changed', { tab })
-    await trackAIAgentActivity('CarrierAnalytics', 'tab_analytics', {
-      carrierId: 'CARRIER_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const carrierStats = {
     totalTrucks: 45,

@@ -3,34 +3,14 @@ import { useState } from 'react'
 import { 
   ClipboardList, 
   Package, 
-  Truck, 
-  MapPin, 
-  Clock, 
-  DollarSign,
   Search,
-  Filter,
-  Eye,
   Plus,
   CheckCircle,
-  AlertCircle,
-  Star,
-  Users
+  Star
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function LoadBoardPortal() {
-  const [activeTab, setActiveTab] = useState('load-board')
   const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('load_board_portal_tab_changed', { tab })
-    await trackAIAgentActivity('LoadBoardAnalytics', 'tab_analytics', {
-      loadBoardId: 'LOADBOARD_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const loadBoardStats = {
     totalLoads: 3500,

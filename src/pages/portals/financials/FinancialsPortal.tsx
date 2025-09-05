@@ -1,37 +1,14 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
   DollarSign, 
-  CreditCard, 
   TrendingUp, 
-  BarChart3, 
-  PieChart, 
-  Calculator,
-  CheckCircle,
-  AlertCircle,
   Plus,
-  Eye,
-  Edit,
   Download,
-  Upload,
   Target,
   Zap
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function FinancialsPortal() {
-  const [activeTab, setActiveTab] = useState('financials')
-  const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('financials_portal_tab_changed', { tab })
-    await trackAIAgentActivity('FinancialsAnalytics', 'tab_analytics', {
-      financialsId: 'FINANCIALS_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
 
   const financialsStats = {
     totalRevenue: 2500000,
