@@ -41,7 +41,7 @@ export default function AutonomousPortal() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <section className="pt-32 pb-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -60,8 +60,8 @@ export default function AutonomousPortal() {
               onClick={handleAutonomousToggle}
               className={`px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all duration-300 ${
                 isAutonomousMode 
-                  ? 'bg-transbot-teal text-white shadow-transbot' 
-                  : 'bg-transbot-sky text-white shadow-transbot'
+                  ? 'bg-transbot-teal text-white shadow-lg' 
+                  : 'bg-transbot-sky text-white shadow-lg'
               }`}
             >
               {isAutonomousMode ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -81,7 +81,7 @@ export default function AutonomousPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -98,7 +98,7 @@ export default function AutonomousPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+            className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
           >
             <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Autonomous Operations</h2>
             <div className="text-center py-12">

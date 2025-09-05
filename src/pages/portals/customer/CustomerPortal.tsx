@@ -43,7 +43,7 @@ export default function CustomerPortal() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Header */}
       <section className="pt-32 pb-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -65,7 +65,7 @@ export default function CustomerPortal() {
                   placeholder="Search shipments..."
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
+                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
               <motion.button
@@ -93,7 +93,7 @@ export default function CustomerPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -111,7 +111,7 @@ export default function CustomerPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-transbot-border/20 shadow-transbot mb-8"
+            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
           >
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -127,8 +127,8 @@ export default function CustomerPortal() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-transbot'
-                    : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
+                    ? 'bg-gradient-primary text-white shadow-lg'
+                    : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -150,7 +150,7 @@ export default function CustomerPortal() {
               className="space-y-8"
             >
               {/* Recent Shipments */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-transbot-text-primary">Recent Shipments</h2>
                   <motion.button
@@ -168,7 +168,7 @@ export default function CustomerPortal() {
                     <motion.div
                       key={shipment.id}
                       whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg border border-transbot-border/10"
+                      className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200/30"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
@@ -211,7 +211,7 @@ export default function CustomerPortal() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => trackUserInteraction('track_shipment_clicked', { source: 'quick_actions' })}
                 >
                   <Truck className="w-8 h-8 text-transbot-sky mb-4" />
@@ -221,7 +221,7 @@ export default function CustomerPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => trackUserInteraction('get_quote_clicked', { source: 'quick_actions' })}
                 >
                   <DollarSign className="w-8 h-8 text-transbot-teal mb-4" />
@@ -231,7 +231,7 @@ export default function CustomerPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => trackUserInteraction('schedule_pickup_clicked', { source: 'quick_actions' })}
                 >
                   <Clock className="w-8 h-8 text-transbot-purple mb-4" />
@@ -247,7 +247,7 @@ export default function CustomerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">All Shipments</h2>
               <div className="text-center py-12">
@@ -263,7 +263,7 @@ export default function CustomerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Real-Time Tracking</h2>
               <div className="text-center py-12">
@@ -279,7 +279,7 @@ export default function CustomerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Analytics & Reports</h2>
               <div className="text-center py-12">
@@ -295,7 +295,7 @@ export default function CustomerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Account Settings</h2>
               <div className="text-center py-12">

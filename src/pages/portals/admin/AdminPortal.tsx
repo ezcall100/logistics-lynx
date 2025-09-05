@@ -79,7 +79,7 @@ export default function AdminPortal() {
                   placeholder="Search system..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
+                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
               <motion.button
@@ -107,7 +107,7 @@ export default function AdminPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -125,7 +125,7 @@ export default function AdminPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-transbot-border/20 shadow-transbot mb-8"
+            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
           >
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -142,8 +142,8 @@ export default function AdminPortal() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-transbot'
-                    : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
+                    ? 'bg-gradient-primary text-white shadow-lg'
+                    : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -165,7 +165,7 @@ export default function AdminPortal() {
               className="space-y-8"
             >
               {/* System Overview */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Overview</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="text-center">
@@ -184,7 +184,7 @@ export default function AdminPortal() {
               </div>
 
               {/* Recent Activity */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-transbot-text-primary">Recent Activity</h2>
                   <motion.button
@@ -202,7 +202,7 @@ export default function AdminPortal() {
                     <motion.div
                       key={activity.id}
                       whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg border border-transbot-border/10"
+                      className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200/30"
                     >
                       <div className="flex items-center gap-4">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
@@ -242,7 +242,7 @@ export default function AdminPortal() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('users')}
                 >
                   <Users className="w-8 h-8 text-transbot-sky mb-4" />
@@ -252,7 +252,7 @@ export default function AdminPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('system')}
                 >
                   <Activity className="w-8 h-8 text-transbot-teal mb-4" />
@@ -262,7 +262,7 @@ export default function AdminPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('security')}
                 >
                   <Shield className="w-8 h-8 text-transbot-purple mb-4" />
@@ -278,7 +278,7 @@ export default function AdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">User Management</h2>
               <div className="text-center py-12">
@@ -294,7 +294,7 @@ export default function AdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Monitor</h2>
               <div className="text-center py-12">
@@ -310,7 +310,7 @@ export default function AdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Analytics Dashboard</h2>
               <div className="text-center py-12">
@@ -326,7 +326,7 @@ export default function AdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Security Center</h2>
               <div className="text-center py-12">
@@ -342,7 +342,7 @@ export default function AdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Settings</h2>
               <div className="text-center py-12">

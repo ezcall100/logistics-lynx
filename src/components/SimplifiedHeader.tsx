@@ -50,7 +50,7 @@ export function SimplifiedHeader() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl border-b border-transbot-border/20 shadow-transbot' 
+          ? 'bg-white/98 backdrop-blur-xl border-b border-slate-200/60 shadow-xl' 
           : 'bg-transparent'
       }`}
     >
@@ -146,7 +146,7 @@ export function SimplifiedHeader() {
           height: isMenuOpen ? 'auto' : 0 
         }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-white/95 backdrop-blur-xl border-t border-transbot-border/20 overflow-hidden"
+        className="md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/60 overflow-hidden"
       >
         <div className="px-6 py-4 space-y-4">
           <motion.button
@@ -163,7 +163,7 @@ export function SimplifiedHeader() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleSignIn}
-            className="w-full flex items-center gap-3 p-3 text-transbot-text-primary hover:bg-transbot-sky/5 rounded-lg font-semibold transition-colors"
+            className="w-full flex items-center gap-3 p-3 text-transbot-text-primary hover:bg-blue-50 rounded-lg font-semibold transition-colors"
           >
             <LogIn className="w-5 h-5" />
             Sign In

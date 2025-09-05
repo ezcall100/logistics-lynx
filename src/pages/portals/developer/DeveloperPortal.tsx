@@ -115,7 +115,7 @@ export default function DeveloperPortal() {
                   placeholder="Search API docs..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
+                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
               <motion.button
@@ -143,7 +143,7 @@ export default function DeveloperPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -161,7 +161,7 @@ export default function DeveloperPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-transbot-border/20 shadow-transbot mb-8"
+            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
           >
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -178,8 +178,8 @@ export default function DeveloperPortal() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-transbot'
-                    : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
+                    ? 'bg-gradient-primary text-white shadow-lg'
+                    : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -201,7 +201,7 @@ export default function DeveloperPortal() {
               className="space-y-8"
             >
               {/* API Key Management */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-transbot-text-primary">API Key Management</h2>
                   <motion.button
@@ -214,7 +214,7 @@ export default function DeveloperPortal() {
                     Generate New Key
                   </motion.button>
                 </div>
-                <div className="bg-transbot-neutral-light rounded-lg p-4">
+                <div className="bg-slate-50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <Key className="w-4 h-4 text-transbot-sky" />
                     <span className="text-sm font-medium text-transbot-text-primary">Live API Key</span>
@@ -229,7 +229,7 @@ export default function DeveloperPortal() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('api-docs')}
                 >
                   <BookOpen className="w-8 h-8 text-transbot-sky mb-4" />
@@ -239,7 +239,7 @@ export default function DeveloperPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('webhooks')}
                 >
                   <Webhook className="w-8 h-8 text-transbot-teal mb-4" />
@@ -249,7 +249,7 @@ export default function DeveloperPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('testing')}
                 >
                   <Terminal className="w-8 h-8 text-transbot-purple mb-4" />
@@ -267,7 +267,7 @@ export default function DeveloperPortal() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">API Endpoints</h2>
                 
                 <div className="space-y-4">
@@ -275,7 +275,7 @@ export default function DeveloperPortal() {
                     <motion.div
                       key={index}
                       whileHover={{ scale: 1.02 }}
-                      className="p-6 bg-transbot-neutral-light rounded-lg border border-transbot-border/10"
+                      className="p-6 bg-slate-50 rounded-lg border border-slate-200/30"
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-4">
@@ -317,7 +317,7 @@ export default function DeveloperPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Webhook Configuration</h2>
               
@@ -331,7 +331,7 @@ export default function DeveloperPortal() {
                       type="url"
                       value={webhookUrl}
                       onChange={(e) => setWebhookUrl(e.target.value)}
-                      className="flex-1 px-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
+                      className="flex-1 px-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                       placeholder="https://your-app.com/webhook"
                     />
                     <motion.button
@@ -346,7 +346,7 @@ export default function DeveloperPortal() {
                   </div>
                 </div>
 
-                <div className="bg-transbot-neutral-light rounded-lg p-4">
+                <div className="bg-slate-50 rounded-lg p-4">
                   <h3 className="font-semibold text-transbot-text-primary mb-2">Webhook Events</h3>
                   <div className="space-y-2">
                     {['shipment.created', 'shipment.updated', 'shipment.delivered', 'quote.generated'].map((event) => (
@@ -366,7 +366,7 @@ export default function DeveloperPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">SDK & Libraries</h2>
               <div className="text-center py-12">
@@ -382,7 +382,7 @@ export default function DeveloperPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">API Testing</h2>
               <div className="text-center py-12">
@@ -398,7 +398,7 @@ export default function DeveloperPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Developer Settings</h2>
               <div className="text-center py-12">

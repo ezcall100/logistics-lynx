@@ -99,7 +99,7 @@ export default function BrokerPortal() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Header */}
       <section className="pt-32 pb-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -149,7 +149,7 @@ export default function BrokerPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -167,7 +167,7 @@ export default function BrokerPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-transbot-border/20 shadow-transbot mb-8"
+            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
           >
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -207,7 +207,7 @@ export default function BrokerPortal() {
               className="space-y-8"
             >
               {/* Recent Loads */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-transbot-text-primary">Recent Loads</h2>
                   <motion.button

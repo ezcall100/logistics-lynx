@@ -30,7 +30,9 @@ export default {
           'neutral-dark': '#1E293B',    // Dark sections
           'border': '#CBD5E1',          // Borders & dividers
           'text-primary': '#0F172A',    // Primary text
-          'text-secondary': '#475569',  // Secondary text
+          'text-secondary': '#334155',  // Secondary text (darker for better contrast)
+          'text-muted': '#64748B',      // Muted text for less important content
+          'text-light': '#F1F5F9',      // Light text for dark backgrounds
           'highlight': '#0EA5E9',       // Highlight accent
           
           // Status Colors

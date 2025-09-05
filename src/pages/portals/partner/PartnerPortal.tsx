@@ -120,7 +120,7 @@ export default function PartnerPortal() {
                   placeholder="Search loads..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
+                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
               <motion.button
@@ -148,7 +148,7 @@ export default function PartnerPortal() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
                 <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
@@ -166,7 +166,7 @@ export default function PartnerPortal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-transbot-border/20 shadow-transbot mb-8"
+            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
           >
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -183,8 +183,8 @@ export default function PartnerPortal() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-transbot'
-                    : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
+                    ? 'bg-gradient-primary text-white shadow-lg'
+                    : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -206,7 +206,7 @@ export default function PartnerPortal() {
               className="space-y-8"
             >
               {/* Performance Overview */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Performance Overview</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="text-center">
@@ -228,7 +228,7 @@ export default function PartnerPortal() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => handleTabChange('loads')}
                 >
                   <Package className="w-8 h-8 text-transbot-sky mb-4" />
@@ -238,7 +238,7 @@ export default function PartnerPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => trackUserInteraction('route_optimization_requested', { source: 'partner_dashboard' })}
                 >
                   <Target className="w-8 h-8 text-transbot-teal mb-4" />
@@ -248,7 +248,7 @@ export default function PartnerPortal() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
                   onClick={() => trackUserInteraction('earnings_report_requested', { source: 'partner_dashboard' })}
                 >
                   <DollarSign className="w-8 h-8 text-transbot-purple mb-4" />
@@ -266,7 +266,7 @@ export default function PartnerPortal() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-transbot-text-primary">Available Loads</h2>
                   <div className="flex items-center gap-2">
@@ -280,7 +280,7 @@ export default function PartnerPortal() {
                     <motion.div
                       key={load.id}
                       whileHover={{ scale: 1.02 }}
-                      className="p-6 bg-transbot-neutral-light rounded-lg border border-transbot-border/10"
+                      className="p-6 bg-slate-50 rounded-lg border border-slate-200/30"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
@@ -330,7 +330,7 @@ export default function PartnerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">My Active Loads</h2>
               <div className="text-center py-12">
@@ -346,7 +346,7 @@ export default function PartnerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Earnings & Payments</h2>
               <div className="text-center py-12">
@@ -362,7 +362,7 @@ export default function PartnerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Performance Analytics</h2>
               <div className="text-center py-12">
@@ -378,7 +378,7 @@ export default function PartnerPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
             >
               <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Partner Settings</h2>
               <div className="text-center py-12">
