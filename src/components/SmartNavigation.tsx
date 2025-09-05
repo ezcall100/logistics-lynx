@@ -28,8 +28,16 @@ export function SmartNavigation() {
     return () => clearInterval(interval)
   }, [])
 
+  const getMainMenu = () => {
+    // Always show the 8 main pages
+    return [
+      'Home', 'Solutions', 'Pricing', 'Resources', 
+      'Company', 'Industries', 'Portals', 'AI Agents'
+    ]
+  }
+
   const getRoleBasedMenu = () => {
-    const baseMenu = ['Solutions', 'Pricing', 'Resources']
+    const baseMenu = getMainMenu()
     
     switch (userRole) {
       case 'broker':
@@ -75,16 +83,33 @@ export function SmartNavigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {getRoleBasedMenu().map((item) => (
-              <motion.button
-                key={item}
-                whileHover={{ y: -2 }}
-                className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-              >
-                <span>{item}</span>
-                <ChevronDown className="w-4 h-4" />
-              </motion.button>
-            ))}
+            {getRoleBasedMenu().map((item) => {
+              const getPagePath = (pageName: string) => {
+                switch (pageName) {
+                  case 'Home': return '/'
+                  case 'Solutions': return '/solutions'
+                  case 'Pricing': return '/pricing'
+                  case 'Resources': return '/resources'
+                  case 'Company': return '/company'
+                  case 'Industries': return '/industries'
+                  case 'Portals': return '/portals'
+                  case 'AI Agents': return '/ai-agents'
+                  default: return '#'
+                }
+              }
+
+              return (
+                <Link key={item} to={getPagePath(item)}>
+                  <motion.button
+                    whileHover={{ y: -2 }}
+                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <span>{item}</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </motion.button>
+                </Link>
+              )
+            })}
           </div>
 
           {/* Action Buttons */}

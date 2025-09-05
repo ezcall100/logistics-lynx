@@ -12,6 +12,13 @@ import { SignupPage } from './pages/SignupPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { SuperAdminPortal } from './pages/super-admin/SuperAdminPortal'
 import { AuthProvider } from './contexts/AuthContext'
+import SolutionsPage from './pages/SolutionsPage'
+import PricingPage from './pages/PricingPage'
+import ResourcesPage from './pages/ResourcesPage'
+import CompanyPage from './pages/CompanyPage'
+import IndustriesPage from './pages/IndustriesPage'
+import PortalsPage from './pages/PortalsPage'
+import AIAgentsPage from './pages/AIAgentsPage'
 
 function App() {
   return (
@@ -41,6 +48,13 @@ function App() {
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard/*" element={<DashboardPage />} />
               <Route path="/super-admin/*" element={<SuperAdminPortal />} />
+              <Route path="/solutions" element={<SolutionsPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/company" element={<CompanyPage />} />
+              <Route path="/industries" element={<IndustriesPage />} />
+              <Route path="/portals" element={<PortalsPage />} />
+              <Route path="/ai-agents" element={<AIAgentsPage />} />
             </Routes>
           </main>
         </div>
