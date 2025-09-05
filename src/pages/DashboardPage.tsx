@@ -21,7 +21,7 @@ export function DashboardPage() {
       case 'driver':
         return <DriverDashboard />
       case 'superadmin':
-        return <SuperAdminDashboard />
+        return <Navigate to="/super-admin" replace />
       default:
         return <ShipperDashboard />
     }

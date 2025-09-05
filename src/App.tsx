@@ -10,6 +10,7 @@ import { TestDesign } from './components/TestDesign'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { SuperAdminPortal } from './pages/super-admin/SuperAdminPortal'
 import { AuthProvider } from './contexts/AuthContext'
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard/*" element={<DashboardPage />} />
+              <Route path="/super-admin/*" element={<SuperAdminPortal />} />
             </Routes>
           </main>
         </div>

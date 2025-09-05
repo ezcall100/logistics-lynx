@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion'
-import { ChevronDown, Brain, User, Settings, LogOut } from 'lucide-react'
+import { ChevronDown, Brain, User, Settings, LogOut, Shield } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileNavigation } from './MobileNavigation'
+import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom'
 
 export function SmartNavigation() {
-  const [userRole] = useState('guest')
+  const { user } = useAuth()
   const [aiInsights, setAiInsights] = useState('')
+  const userRole = user?.role || 'guest'
 
   useEffect(() => {
     // Simulate AI analyzing user behavior and providing insights
@@ -35,8 +38,8 @@ export function SmartNavigation() {
         return [...baseMenu, 'Fleet Management', 'Driver Portal', 'Maintenance']
       case 'shipper':
         return [...baseMenu, 'Shipment Tracking', 'Rate Management', 'Compliance']
-      case 'admin':
-        return [...baseMenu, 'User Management', 'System Settings', 'Reports']
+      case 'superadmin':
+        return [...baseMenu, 'Super Admin', 'System Control', 'AI Management']
       default:
         return baseMenu
     }
@@ -106,6 +109,17 @@ export function SmartNavigation() {
               </>
             ) : (
               <>
+                {userRole === 'superadmin' && (
+                  <Link to="/super-admin">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors"
+                    >
+                      <Shield className="w-4 h-4" />
+                      <span>Super Admin</span>
+                    </motion.button>
+                  </Link>
+                )}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
