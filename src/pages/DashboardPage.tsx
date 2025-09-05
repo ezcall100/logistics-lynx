@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { motion } from 'framer-motion'
-import { BarChart3, Users, Truck, Package, DollarSign, Settings } from 'lucide-react'
+import { BarChart3, Users, Truck, Package, DollarSign } from 'lucide-react'
 
 export function DashboardPage() {
   const { user } = useAuth()
@@ -291,100 +291,3 @@ function DriverDashboard() {
   )
 }
 
-function SuperAdminDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Super Admin Dashboard</h1>
-        <p className="text-white/70">System overview and enterprise management</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: 'Total Users', value: '2,847', icon: Users, color: 'text-blue-400' },
-          { title: 'Active Portals', value: '25', icon: Settings, color: 'text-green-400' },
-          { title: 'AI Agents', value: '250', icon: BarChart3, color: 'text-yellow-400' },
-          { title: 'System Health', value: '99.9%', icon: Package, color: 'text-purple-400' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="glass p-6 rounded-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
-            </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="glass p-8 rounded-2xl">
-          <h2 className="text-xl font-bold text-white mb-6">System Overview</h2>
-          <div className="space-y-4">
-            {[
-              { metric: 'CPU Usage', value: '45%', status: 'Normal' },
-              { metric: 'Memory Usage', value: '67%', status: 'Normal' },
-              { metric: 'Storage', value: '78%', status: 'Warning' },
-              { metric: 'Network', value: '23%', status: 'Normal' }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center justify-between p-3 bg-white/5 rounded-xl"
-              >
-                <div className="text-white font-medium">{item.metric}</div>
-                <div className="flex items-center space-x-3">
-                  <div className="text-white/70">{item.value}</div>
-                  <div className={`px-2 py-1 rounded-full text-xs ${
-                    item.status === 'Normal' ? 'bg-green-500/20 text-green-300' :
-                    item.status === 'Warning' ? 'bg-yellow-500/20 text-yellow-300' :
-                    'bg-red-500/20 text-red-300'
-                  }`}>
-                    {item.status}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="glass p-8 rounded-2xl">
-          <h2 className="text-xl font-bold text-white mb-6">Recent Activity</h2>
-          <div className="space-y-4">
-            {[
-              { action: 'New user registered', time: '2 minutes ago', type: 'User' },
-              { action: 'Portal accessed', time: '5 minutes ago', type: 'System' },
-              { action: 'AI agent optimized', time: '8 minutes ago', type: 'AI' },
-              { action: 'Backup completed', time: '15 minutes ago', type: 'System' }
-            ].map((activity, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center justify-between p-3 bg-white/5 rounded-xl"
-              >
-                <div>
-                  <div className="text-white font-medium">{activity.action}</div>
-                  <div className="text-white/70 text-sm">{activity.type}</div>
-                </div>
-                <div className="text-white/50 text-sm">{activity.time}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
