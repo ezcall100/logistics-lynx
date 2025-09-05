@@ -1,144 +1,343 @@
-import React from 'react'
-import { Check, Star, Zap, Crown, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { 
+  CheckCircle, 
+  Star, 
+  Zap, 
+  Users, 
+  Building, 
+  ArrowRight,
+  Shield,
+  Clock,
+  Globe,
+  BarChart3,
+  Brain,
+  Target,
+  TrendingUp
+} from 'lucide-react'
 
-const PricingPage: React.FC = () => {
+export default function PricingPage() {
   const plans = [
     {
-      name: "Starter",
-      price: "$99",
-      period: "/month",
-      icon: Users,
-      color: "from-blue-500 to-indigo-500",
+      name: 'Starter',
+      price: '$99',
+      period: '/month',
+      description: 'Perfect for small businesses getting started',
+      icon: Zap,
       features: [
-        "5 Portal Access",
-        "50 AI Agents",
-        "2 Languages",
-        "Basic Support",
-        "Standard Security"
+        'Up to 10 vehicles',
+        'Basic route optimization',
+        'Real-time tracking',
+        'Email support',
+        'Mobile app access',
+        'Basic reporting'
       ],
+      cta: 'Start Free Trial',
       popular: false
     },
     {
-      name: "Professional",
-      price: "$299",
-      period: "/month",
-      icon: Zap,
-      color: "from-cyan-500 to-blue-500",
+      name: 'Professional',
+      price: '$299',
+      period: '/month',
+      description: 'Advanced features for growing companies',
+      icon: Users,
       features: [
-        "15 Portal Access",
-        "150 AI Agents",
-        "4 Languages",
-        "Priority Support",
-        "Advanced Security",
-        "Custom Integrations"
+        'Up to 50 vehicles',
+        'Advanced AI optimization',
+        'Predictive analytics',
+        'Priority support',
+        'API access',
+        'Custom reporting',
+        'Multi-user accounts',
+        'Integration support'
       ],
+      cta: 'Start Free Trial',
       popular: true
     },
     {
-      name: "Enterprise",
-      price: "$999",
-      period: "/month",
-      icon: Crown,
-      color: "from-purple-500 to-violet-500",
+      name: 'Enterprise',
+      price: 'Custom',
+      period: '',
+      description: 'Full-scale solution for large operations',
+      icon: Building,
       features: [
-        "All 25 Portals",
-        "250 AI Agents",
-        "6 Languages",
-        "24/7 Support",
-        "Enterprise Security",
-        "Custom Development",
-        "Dedicated Manager"
+        'Unlimited vehicles',
+        'Custom AI models',
+        'Dedicated support',
+        'White-label options',
+        'Custom integrations',
+        'Advanced security',
+        'SLA guarantees',
+        'Training & onboarding'
       ],
+      cta: 'Contact Sales',
       popular: false
     }
   ]
 
+  const features = [
+    {
+      icon: Brain,
+      title: 'AI-Powered Optimization',
+      description: 'Advanced machine learning algorithms optimize your routes and operations'
+    },
+    {
+      icon: Shield,
+      title: 'Enterprise Security',
+      description: 'Bank-level security with SOC 2 compliance and data encryption'
+    },
+    {
+      icon: Globe,
+      title: 'Global Coverage',
+      description: 'Operate seamlessly across borders with international compliance'
+    },
+    {
+      icon: BarChart3,
+      title: 'Advanced Analytics',
+      description: 'Comprehensive insights and reporting to drive better decisions'
+    }
+  ]
+
+  const faqs = [
+    {
+      question: 'Can I change plans anytime?',
+      answer: 'Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.'
+    },
+    {
+      question: 'Is there a free trial?',
+      answer: 'Yes, we offer a 30-day free trial for all plans with no credit card required.'
+    },
+    {
+      question: 'What support is included?',
+      answer: 'All plans include email support. Professional and Enterprise plans include priority support.'
+    },
+    {
+      question: 'Do you offer custom pricing?',
+      answer: 'Yes, we offer custom pricing for Enterprise customers with specific requirements.'
+    }
+  ]
+
   return (
-    <div className="pt-16 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-white mb-6">Pricing Plans</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Choose the perfect plan for your logistics operations
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+              Simple, Transparent{' '}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Pricing
+              </span>
+            </h1>
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Choose the plan that fits your business needs. All plans include our core AI-powered features.
+            </p>
+          </motion.div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`relative bg-white/10 backdrop-blur-xl border rounded-2xl p-8 hover:bg-white/20 transition-all duration-500 hover:scale-105 ${
-                plan.popular 
-                  ? 'border-cyan-500 shadow-2xl shadow-cyan-500/25' 
-                  : 'border-white/20'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
-                    <Star className="w-4 h-4" />
-                    <span>Most Popular</span>
-                  </div>
-                </div>
-              )}
-
-              <div className="text-center mb-8">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                  <plan.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <div className="flex items-baseline justify-center">
-                  <span className="text-5xl font-bold text-white">{plan.price}</span>
-                  <span className="text-gray-300 ml-2">{plan.period}</span>
-                </div>
-              </div>
-
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center space-x-3">
-                    <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:shadow-2xl hover:shadow-cyan-500/25'
-                    : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
+      {/* Pricing Cards */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {plans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`relative p-8 rounded-2xl shadow-transbot border transition-all duration-300 ${
+                  plan.popular 
+                    ? 'bg-gradient-primary text-white border-transparent scale-105' 
+                    : 'bg-white border-transbot-border/20 hover:shadow-transbot-lg'
                 }`}
               >
-                {plan.popular ? 'Get Started' : 'Choose Plan'}
-              </button>
-            </div>
-          ))}
-        </div>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <div className="bg-transbot-teal text-white px-4 py-2 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </div>
+                  </div>
+                )}
 
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-bold text-white mb-6">Custom Solutions</h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Need something specific? We can create a custom plan for your business
-          </p>
-          <button className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300">
-            Contact Sales
-          </button>
-        </div>
+                <div className="text-center mb-8">
+                  <div className={`p-4 rounded-xl w-fit mx-auto mb-4 ${
+                    plan.popular ? 'bg-white/20' : 'bg-transbot-sky/10'
+                  }`}>
+                    <plan.icon className={`w-8 h-8 ${
+                      plan.popular ? 'text-white' : 'text-transbot-sky'
+                    }`} />
+                  </div>
+                  
+                  <h3 className={`text-2xl font-bold mb-2 ${
+                    plan.popular ? 'text-white' : 'text-transbot-text-primary'
+                  }`}>
+                    {plan.name}
+                  </h3>
+                  
+                  <p className={`mb-4 ${
+                    plan.popular ? 'text-white/90' : 'text-transbot-text-secondary'
+                  }`}>
+                    {plan.description}
+                  </p>
 
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Free Trial Available</h3>
-            <p className="text-gray-300 mb-6">
-              Try any plan for 14 days with full access to all features
-            </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300">
-              Start Free Trial
-            </button>
+                  <div className="flex items-baseline justify-center">
+                    <span className={`text-5xl font-bold ${
+                      plan.popular ? 'text-white' : 'text-transbot-text-primary'
+                    }`}>
+                      {plan.price}
+                    </span>
+                    <span className={`text-lg ml-1 ${
+                      plan.popular ? 'text-white/80' : 'text-transbot-text-secondary'
+                    }`}>
+                      {plan.period}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  {plan.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <CheckCircle className={`w-5 h-5 ${
+                        plan.popular ? 'text-white' : 'text-transbot-teal'
+                      }`} />
+                      <span className={`${
+                        plan.popular ? 'text-white/90' : 'text-transbot-text-secondary'
+                      }`}>
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <button className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-200 ${
+                  plan.popular
+                    ? 'bg-white text-transbot-sky hover:bg-transbot-neutral-light'
+                    : 'bg-gradient-primary text-white hover:opacity-90'
+                }`}>
+                  {plan.cta}
+                </button>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              All Plans Include
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              Core features available across all pricing tiers
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center p-6"
+              >
+                <div className="p-4 rounded-full bg-transbot-sky/10 w-fit mx-auto mb-4">
+                  <feature.icon className="w-8 h-8 text-transbot-sky" />
+                </div>
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-transbot-text-secondary">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              Everything you need to know about our pricing
+            </p>
+          </motion.div>
+
+          <div className="space-y-6">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={faq.question}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 bg-white rounded-xl shadow-transbot border border-transbot-border/20"
+              >
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-3">
+                  {faq.question}
+                </h3>
+                <p className="text-transbot-text-secondary">
+                  {faq.answer}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-primary">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <h2 className="text-4xl font-bold text-white">
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-white/90">
+              Join thousands of companies already using Trans Bot AI
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
+                Start Free Trial
+              </button>
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
+                Contact Sales
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }
-
-export default PricingPage

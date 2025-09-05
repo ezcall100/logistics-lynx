@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ModernHeader } from './components/ModernHeader'
-import { SmartLandingPage } from './components/SmartLandingPage'
+import { WorldClassHeader } from './components/WorldClassHeader'
+import { SmartSidebar } from './components/SmartSidebar'
+import { NeuralBackground } from './components/NeuralBackground'
+import { ModernLandingPage } from './components/ModernLandingPage'
 import { HeroSection } from './components/HeroSection'
 import { TrustedBy } from './components/TrustedBy'
 import { FeaturesSection } from './components/FeaturesSection'
@@ -26,13 +28,15 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen">
-          <ModernHeader />
-          <main className="pt-16">
+        <div className="min-h-screen relative">
+          <NeuralBackground />
+          <WorldClassHeader />
+          <SmartSidebar />
+          <main className="pt-20 pl-0 xl:pl-80 transition-all duration-500">
             <Routes>
               <Route path="/" element={
                 <>
-                  <SmartLandingPage />
+                  <ModernLandingPage />
                   <Footer />
                 </>
               } />

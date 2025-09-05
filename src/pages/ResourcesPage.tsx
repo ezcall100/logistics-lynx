@@ -1,134 +1,453 @@
-import React from 'react'
-import { ResponsiveContainer } from '../components/ResponsiveContainer'
+import { motion } from 'framer-motion'
+import { 
+  FileText, 
+  BookOpen, 
+  Video, 
+  BarChart3, 
+  Cpu, 
+  MessageSquare,
+  ArrowRight,
+  Calendar,
+  User,
+  Clock,
+  Star,
+  Download,
+  ExternalLink,
+  Play,
+  Book,
+  Code,
+  Lightbulb
+} from 'lucide-react'
 
-const ResourcesPage: React.FC = () => {
-  const resources = [
+export default function ResourcesPage() {
+  const resourceCategories = [
     {
-      category: 'Documentation',
-      items: [
-        { title: 'Getting Started Guide', description: 'Complete setup and configuration guide', type: 'PDF' },
-        { title: 'API Documentation', description: 'Comprehensive API reference and examples', type: 'Web' },
-        { title: 'Integration Guide', description: 'Step-by-step integration instructions', type: 'PDF' },
-        { title: 'Best Practices', description: 'Industry best practices and recommendations', type: 'Web' }
+      icon: BookOpen,
+      title: 'Documentation',
+      description: 'Comprehensive guides and API references',
+      resources: [
+        {
+          title: 'Getting Started Guide',
+          description: 'Learn the basics of Trans Bot AI platform',
+          type: 'Guide',
+          readTime: '15 min read',
+          icon: Book
+        },
+        {
+          title: 'API Reference',
+          description: 'Complete API documentation and examples',
+          type: 'Technical',
+          readTime: '30 min read',
+          icon: Code
+        },
+        {
+          title: 'Integration Guide',
+          description: 'Step-by-step integration instructions',
+          type: 'Guide',
+          readTime: '20 min read',
+          icon: Cpu
+        }
       ]
     },
     {
-      category: 'Case Studies',
-      items: [
-        { title: 'E-commerce Success Story', description: 'How we reduced delivery times by 40%', type: 'PDF' },
-        { title: 'Manufacturing Optimization', description: 'Streamlined supply chain operations', type: 'Video' },
-        { title: 'Healthcare Compliance', description: 'Ensured regulatory compliance and safety', type: 'PDF' },
-        { title: 'Global Expansion', description: 'Scaled operations across 50+ countries', type: 'Web' }
+      icon: Video,
+      title: 'Tutorials',
+      description: 'Video tutorials and step-by-step guides',
+      resources: [
+        {
+          title: 'Platform Overview',
+          description: 'Complete platform walkthrough',
+          type: 'Video',
+          duration: '12 min',
+          icon: Play
+        },
+        {
+          title: 'Route Optimization',
+          description: 'How to optimize your routes with AI',
+          type: 'Video',
+          duration: '8 min',
+          icon: Play
+        },
+        {
+          title: 'Analytics Dashboard',
+          description: 'Understanding your data and insights',
+          type: 'Video',
+          duration: '10 min',
+          icon: Play
+        }
       ]
     },
     {
-      category: 'Webinars & Training',
-      items: [
-        { title: 'AI in Logistics Webinar', description: 'Understanding AI applications in logistics', type: 'Video' },
-        { title: 'Platform Training', description: 'Comprehensive platform training course', type: 'Video' },
-        { title: 'Advanced Analytics', description: 'Mastering analytics and reporting features', type: 'Web' },
-        { title: 'Integration Workshop', description: 'Hands-on integration workshop', type: 'Video' }
+      icon: BarChart3,
+      title: 'Case Studies',
+      description: 'Real-world success stories and results',
+      resources: [
+        {
+          title: 'FleetMax Logistics',
+          description: 'How they increased efficiency by 40%',
+          type: 'Case Study',
+          readTime: '8 min read',
+          icon: BarChart3
+        },
+        {
+          title: 'Swift Transport',
+          description: 'Route optimization success story',
+          type: 'Case Study',
+          readTime: '6 min read',
+          icon: BarChart3
+        },
+        {
+          title: 'Global Freight',
+          description: 'Scaling operations with AI',
+          type: 'Case Study',
+          readTime: '10 min read',
+          icon: BarChart3
+        }
       ]
     },
     {
-      category: 'Support',
-      items: [
-        { title: 'Knowledge Base', description: 'Searchable database of articles and FAQs', type: 'Web' },
-        { title: 'Community Forum', description: 'Connect with other users and experts', type: 'Web' },
-        { title: 'Technical Support', description: '24/7 technical support and assistance', type: 'Web' },
-        { title: 'Feature Requests', description: 'Submit and vote on feature requests', type: 'Web' }
+      icon: FileText,
+      title: 'White Papers',
+      description: 'Industry insights and research',
+      resources: [
+        {
+          title: 'AI in Logistics',
+          description: 'The future of AI-powered supply chains',
+          type: 'White Paper',
+          readTime: '25 min read',
+          icon: FileText
+        },
+        {
+          title: 'Route Optimization',
+          description: 'Advanced algorithms and best practices',
+          type: 'White Paper',
+          readTime: '20 min read',
+          icon: FileText
+        },
+        {
+          title: 'Sustainability',
+          description: 'Green logistics and carbon reduction',
+          type: 'White Paper',
+          readTime: '18 min read',
+          icon: FileText
+        }
       ]
     }
   ]
 
-  return (
-    <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900">
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-white mb-6">
-              Resources & Support
-            </h1>
-            <p className="text-xl text-green-200 max-w-3xl mx-auto">
-              Everything you need to succeed with our AI-powered logistics platform
-            </p>
-          </div>
+  const webinars = [
+    {
+      title: 'AI-Powered Logistics: The Future is Now',
+      date: 'Dec 15, 2024',
+      time: '2:00 PM EST',
+      speaker: 'Dr. Sarah Johnson',
+      role: 'Chief AI Officer',
+      attendees: '1,200+',
+      status: 'Upcoming'
+    },
+    {
+      title: 'Route Optimization Best Practices',
+      date: 'Dec 8, 2024',
+      time: '1:00 PM EST',
+      speaker: 'Mike Chen',
+      role: 'Solutions Architect',
+      attendees: '850+',
+      status: 'Upcoming'
+    },
+    {
+      title: 'Scaling Your Fleet Operations',
+      date: 'Nov 30, 2024',
+      time: '3:00 PM EST',
+      speaker: 'Emily Rodriguez',
+      role: 'Customer Success Manager',
+      attendees: '1,100+',
+      status: 'Recorded'
+    }
+  ]
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {resources.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                <h2 className="text-2xl font-bold text-white mb-6">{category.category}</h2>
-                <div className="space-y-4">
-                  {category.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-300 transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-green-200 text-sm">{item.description}</p>
+  const blogPosts = [
+    {
+      title: '5 Ways AI is Transforming Logistics in 2024',
+      excerpt: 'Discover how artificial intelligence is revolutionizing the logistics industry...',
+      author: 'David Martinez',
+      date: 'Dec 10, 2024',
+      readTime: '5 min read',
+      category: 'AI & Technology',
+      image: '/api/placeholder/400/200'
+    },
+    {
+      title: 'The Complete Guide to Fleet Management',
+      excerpt: 'Everything you need to know about managing a modern fleet...',
+      author: 'Lisa Chen',
+      date: 'Dec 5, 2024',
+      readTime: '8 min read',
+      category: 'Fleet Management',
+      image: '/api/placeholder/400/200'
+    },
+    {
+      title: 'Sustainability in Logistics: A Practical Approach',
+      excerpt: 'How to reduce your carbon footprint while improving efficiency...',
+      author: 'John Smith',
+      date: 'Nov 28, 2024',
+      readTime: '6 min read',
+      category: 'Sustainability',
+      image: '/api/placeholder/400/200'
+    }
+  ]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+              Learning{' '}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Resources
+              </span>
+            </h1>
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Everything you need to master Trans Bot AI and optimize your logistics operations
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Resource Categories */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="space-y-16">
+            {resourceCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: categoryIndex * 0.1 }}
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 rounded-xl bg-transbot-sky/10">
+                    <category.icon className="w-8 h-8 text-transbot-sky" />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-transbot-text-primary">{category.title}</h2>
+                    <p className="text-transbot-text-secondary">{category.description}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.resources.map((resource, resourceIndex) => (
+                    <motion.div
+                      key={resource.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: (categoryIndex * 0.1) + (resourceIndex * 0.05) }}
+                      className="group p-6 bg-white rounded-xl shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 rounded-lg bg-transbot-sky/10 group-hover:bg-transbot-sky/20 transition-colors duration-300">
+                          <resource.icon className="w-5 h-5 text-transbot-sky" />
                         </div>
-                        <div className="ml-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            item.type === 'PDF' ? 'bg-red-500/20 text-red-300' :
-                            item.type === 'Video' ? 'bg-blue-500/20 text-blue-300' :
-                            'bg-green-500/20 text-green-300'
-                          }`}>
-                            {item.type}
-                          </span>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-semibold text-transbot-sky bg-transbot-sky/10 px-2 py-1 rounded">
+                              {resource.type}
+                            </span>
+                            <span className="text-xs text-transbot-text-secondary">
+                              {resource.readTime || resource.duration}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-transbot-text-primary mb-2 group-hover:text-transbot-sky transition-colors duration-300">
+                            {resource.title}
+                          </h3>
+                          <p className="text-transbot-text-secondary text-sm mb-4">
+                            {resource.description}
+                          </p>
+                          <div className="flex items-center gap-2 text-transbot-sky font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                            {resource.type === 'Video' ? 'Watch Now' : 'Read More'}
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-16 grid md:grid-cols-3 gap-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Documentation</h3>
-              <p className="text-green-200 mb-6">Comprehensive guides and references to help you get the most out of our platform.</p>
-              <button className="bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300">
-                Browse Docs
+      {/* Webinars Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Upcoming Webinars
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              Join our experts for live sessions and Q&A
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {webinars.map((webinar, index) => (
+              <motion.div
+                key={webinar.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 bg-white rounded-xl shadow-transbot border border-transbot-border/20"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Calendar className="w-4 h-4 text-transbot-sky" />
+                  <span className="text-sm text-transbot-text-secondary">{webinar.date}</span>
+                  <span className="text-sm text-transbot-text-secondary">•</span>
+                  <Clock className="w-4 h-4 text-transbot-sky" />
+                  <span className="text-sm text-transbot-text-secondary">{webinar.time}</span>
+                </div>
+
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                  {webinar.title}
+                </h3>
+
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 bg-transbot-sky/10 rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-transbot-sky" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-transbot-text-primary">{webinar.speaker}</div>
+                    <div className="text-sm text-transbot-text-secondary">{webinar.role}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1">
+                    <Users className="w-4 h-4 text-transbot-text-secondary" />
+                    <span className="text-sm text-transbot-text-secondary">{webinar.attendees} registered</span>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded ${
+                    webinar.status === 'Upcoming' 
+                      ? 'bg-transbot-teal/10 text-transbot-teal' 
+                      : 'bg-transbot-sky/10 text-transbot-sky'
+                  }`}>
+                    {webinar.status}
+                  </span>
+                </div>
+
+                <button className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                  webinar.status === 'Upcoming'
+                    ? 'bg-gradient-primary text-white hover:opacity-90'
+                    : 'bg-transbot-neutral-light text-transbot-text-primary hover:bg-transbot-border'
+                }`}>
+                  {webinar.status === 'Upcoming' ? 'Register Now' : 'Watch Recording'}
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Latest from Our Blog
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              Industry insights, tips, and best practices
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => (
+              <motion.div
+                key={post.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-transbot border border-transbot-border/20 overflow-hidden hover:shadow-transbot-lg transition-all duration-300"
+              >
+                <div className="h-48 bg-gradient-to-br from-transbot-sky/20 to-transbot-teal/20"></div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xs font-semibold text-transbot-sky bg-transbot-sky/10 px-2 py-1 rounded">
+                      {post.category}
+                    </span>
+                    <span className="text-xs text-transbot-text-secondary">{post.readTime}</span>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-transbot-text-primary mb-3 hover:text-transbot-sky transition-colors duration-300">
+                    {post.title}
+                  </h3>
+                  
+                  <p className="text-transbot-text-secondary mb-4">
+                    {post.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4 text-transbot-text-secondary" />
+                      <span className="text-sm text-transbot-text-secondary">{post.author}</span>
+                    </div>
+                    <span className="text-sm text-transbot-text-secondary">{post.date}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-primary">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <h2 className="text-4xl font-bold text-white">
+              Need More Help?
+            </h2>
+            <p className="text-xl text-white/90">
+              Our support team is here to help you succeed
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
+                Contact Support
               </button>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Video Tutorials</h3>
-              <p className="text-green-200 mb-6">Step-by-step video tutorials covering all aspects of the platform.</p>
-              <button className="bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all duration-300">
-                Watch Videos
-              </button>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Community</h3>
-              <p className="text-green-200 mb-6">Connect with other users, share experiences, and get help from the community.</p>
-              <button className="bg-purple-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-600 transition-all duration-300">
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
                 Join Community
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </ResponsiveContainer>
+      </section>
+    </div>
   )
 }
-
-export default ResourcesPage
