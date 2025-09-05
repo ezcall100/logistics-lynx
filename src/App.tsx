@@ -21,8 +21,9 @@ import CompanyPage from './pages/CompanyPage'
 import IndustriesPage from './pages/IndustriesPage'
 import PortalsPage from './pages/PortalsPage'
 import AIAgentsPage from './pages/AIAgentsPage'
-import TransportationManagement from './pages/solutions/TransportationManagement'
-import WarehouseManagement from './pages/solutions/WarehouseManagement'
+import TransportationManagement from './pages/solutions/transportation/TransportationManagement'
+import RouteOptimizer from './pages/ai-agents/route-optimizer/RouteOptimizer'
+import LoadMatcher from './pages/ai-agents/load-matcher/LoadMatcher'
 
 function App() {
   return (
@@ -68,7 +69,24 @@ function App() {
               } />
               <Route path="/solutions/warehouse" element={
                 <>
-                  <WarehouseManagement />
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Warehouse Management</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Advanced warehouse optimization features</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/route-optimizer" element={
+                <>
+                  <RouteOptimizer />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/load-matcher" element={
+                <>
+                  <LoadMatcher />
                   <Footer />
                 </>
               } />

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
   Brain, 
   Home, 
@@ -25,6 +26,11 @@ import {
 
 export function SmartSidebar() {
   const [activeSection, setActiveSection] = useState('dashboard')
+  const navigate = useNavigate()
+
+  const handleNavigation = (path: string) => {
+    navigate(path)
+  }
 
   const mainSections = [
     {
@@ -139,19 +145,20 @@ export function SmartSidebar() {
                     transition={{ duration: 0.3 }}
                     className="mt-2 ml-4 space-y-1"
                   >
-                    {section.items.map((item, itemIndex) => (
-                      <motion.button
-                        key={item.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: itemIndex * 0.05 }}
-                        whileHover={{ scale: 1.02 }}
-                        className="w-full flex items-center gap-3 p-2 rounded-lg text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5 transition-all duration-200"
-                      >
-                        <item.icon className="w-4 h-4" />
-                        <span className="text-sm">{item.name}</span>
-                      </motion.button>
-                    ))}
+                                         {section.items.map((item, itemIndex) => (
+                       <motion.button
+                         key={item.name}
+                         initial={{ opacity: 0, x: -20 }}
+                         animate={{ opacity: 1, x: 0 }}
+                         transition={{ delay: itemIndex * 0.05 }}
+                         whileHover={{ scale: 1.02 }}
+                         onClick={() => handleNavigation(item.path)}
+                         className="w-full flex items-center gap-3 p-2 rounded-lg text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5 transition-all duration-200"
+                       >
+                         <item.icon className="w-4 h-4" />
+                         <span className="text-sm">{item.name}</span>
+                       </motion.button>
+                     ))}
                   </motion.div>
                 )}
               </AnimatePresence>
