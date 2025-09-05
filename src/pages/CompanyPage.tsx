@@ -1,163 +1,398 @@
-import React from 'react'
-import { ResponsiveContainer } from '../components/ResponsiveContainer'
+import { motion } from 'framer-motion'
+import { 
+  Users, 
+  Target, 
+  Award, 
+  Globe, 
+  Lightbulb,
+  Shield,
+  Brain,
+  Building,
+  Cpu
+} from 'lucide-react'
 
-const CompanyPage: React.FC = () => {
-  const team = [
+export default function CompanyPage() {
+  const values = [
     {
-      name: 'Sarah Chen',
-      role: 'CEO & Co-Founder',
-      image: '👩‍💼',
-      bio: 'Former VP of Operations at Amazon, 15+ years in logistics and supply chain management.'
+      icon: Brain,
+      title: 'AI Innovation',
+      description: 'We push the boundaries of artificial intelligence to solve complex logistics challenges.'
     },
     {
-      name: 'Marcus Rodriguez',
-      role: 'CTO & Co-Founder',
-      image: '👨‍💻',
-      bio: 'AI researcher and former Google engineer, specializing in machine learning and automation.'
+      icon: Users,
+      title: 'Customer Success',
+      description: 'Our clients\' success is our success. We\'re committed to delivering exceptional value.'
     },
     {
-      name: 'Dr. Emily Watson',
-      role: 'Head of AI Research',
-      image: '👩‍🔬',
-      bio: 'PhD in Computer Science from MIT, leading our AI research and development initiatives.'
+      icon: Shield,
+      title: 'Trust & Security',
+      description: 'Enterprise-grade security and reliability you can count on for your critical operations.'
     },
     {
-      name: 'James Thompson',
-      role: 'VP of Engineering',
-      image: '👨‍🔧',
-      bio: 'Former Microsoft architect, building scalable systems for enterprise logistics.'
+      icon: Lightbulb,
+      title: 'Continuous Innovation',
+      description: 'We never stop improving, evolving our platform to meet tomorrow\'s challenges.'
     }
   ]
 
+  const leadership = [
+    {
+      name: 'Sarah Chen',
+      role: 'CEO & Co-Founder',
+      bio: 'Former VP of Engineering at Amazon Logistics, 15+ years in supply chain optimization.',
+      image: '/api/placeholder/300/300'
+    },
+    {
+      name: 'Michael Rodriguez',
+      role: 'CTO & Co-Founder',
+      bio: 'AI researcher with 20+ years experience, former Google DeepMind engineer.',
+      image: '/api/placeholder/300/300'
+    },
+    {
+      name: 'Emily Johnson',
+      role: 'VP of Product',
+      bio: 'Product leader with deep logistics expertise, former Uber Freight executive.',
+      image: '/api/placeholder/300/300'
+    },
+    {
+      name: 'David Kim',
+      role: 'VP of Engineering',
+      bio: 'Full-stack engineering leader, former Microsoft Azure architect.',
+      image: '/api/placeholder/300/300'
+    }
+  ]
+
+  const stats = [
+    { label: 'Years of Innovation', value: '5+', icon: Award },
+    { label: 'Enterprise Clients', value: '500+', icon: Building },
+    { label: 'Countries Served', value: '25+', icon: Globe },
+    { label: 'AI Models Deployed', value: '50+', icon: Cpu }
+  ]
+
   const milestones = [
-    { year: '2020', event: 'Company Founded', description: 'Started with a vision to revolutionize logistics through AI' },
-    { year: '2021', event: 'First AI Agent Deployed', description: 'Successfully deployed our first autonomous logistics agent' },
-    { year: '2022', event: 'Series A Funding', description: 'Raised $25M to accelerate product development' },
-    { year: '2023', event: 'Global Expansion', description: 'Expanded operations to 15 countries worldwide' },
-    { year: '2024', event: '250 AI Agents Active', description: 'Reached milestone of 250 active AI agents managing logistics' }
+    {
+      year: '2019',
+      title: 'Company Founded',
+      description: 'Trans Bot AI was founded with a vision to revolutionize logistics through AI.'
+    },
+    {
+      year: '2020',
+      title: 'First AI Model',
+      description: 'Launched our first route optimization AI model, achieving 15% efficiency gains.'
+    },
+    {
+      year: '2021',
+      title: 'Series A Funding',
+      description: 'Raised $25M to accelerate AI development and expand our platform.'
+    },
+    {
+      year: '2022',
+      title: 'Enterprise Launch',
+      description: 'Launched enterprise-grade platform serving Fortune 500 companies.'
+    },
+    {
+      year: '2023',
+      title: 'Global Expansion',
+      description: 'Expanded to 25+ countries with localized AI models and support.'
+    },
+    {
+      year: '2024',
+      title: 'AI Revolution',
+      description: 'Deployed 50+ AI models, processing over 1M logistics decisions daily.'
+    }
   ]
 
   return (
-    <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
-        <div className="container mx-auto px-4 py-16">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-white mb-6">
-              About Our Company
+    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+              About{' '}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Trans Bot AI
+              </span>
             </h1>
-            <p className="text-xl text-indigo-200 max-w-3xl mx-auto">
-              We're revolutionizing logistics through AI-powered automation, making supply chains smarter, faster, and more efficient.
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
+              We're the AI software company powering the future of logistics. Our intelligent platform 
+              helps logistics companies optimize operations, reduce costs, and scale efficiently.
             </p>
-          </div>
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Mission & Vision */}
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-              <div className="w-16 h-16 bg-indigo-500 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
-              <p className="text-indigo-200">
-                To transform global logistics through intelligent automation, making supply chains more efficient, 
-                sustainable, and responsive to the needs of businesses and consumers worldwide.
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-              <div className="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-4">Our Vision</h2>
-              <p className="text-indigo-200">
-                A world where logistics operations are fully autonomous, intelligent, and seamlessly integrated, 
-                enabling businesses to focus on what they do best while we handle the complexity of supply chain management.
-              </p>
-            </div>
-          </div>
-
-          {/* Team Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white text-center mb-12">Meet Our Team</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {team.map((member, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 text-center hover:bg-white/20 transition-all duration-300">
-                  <div className="text-6xl mb-4">{member.image}</div>
-                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-                  <p className="text-indigo-300 font-semibold mb-4">{member.role}</p>
-                  <p className="text-indigo-200 text-sm">{member.bio}</p>
+      {/* Stats Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center p-6"
+              >
+                <div className="p-4 rounded-full bg-transbot-sky/10 w-fit mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-transbot-sky" />
                 </div>
-              ))}
-            </div>
+                <div className="text-4xl font-bold text-transbot-sky mb-2">{stat.value}</div>
+                <div className="text-transbot-text-secondary">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Company Timeline */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white text-center mb-12">Our Journey</h2>
-            <div className="space-y-8">
+      {/* Mission Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
+                Our Mission
+              </h2>
+              <p className="text-lg text-transbot-text-secondary mb-6 leading-relaxed">
+                To revolutionize logistics through artificial intelligence, empowering companies 
+                to operate more efficiently, sustainably, and profitably in an increasingly 
+                complex global supply chain.
+              </p>
+              <p className="text-lg text-transbot-text-secondary leading-relaxed">
+                We believe that AI should augment human decision-making, not replace it. 
+                Our platform provides intelligent insights that help logistics professionals 
+                make better, faster decisions.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-transbot-sky/10 to-transbot-teal/10 rounded-3xl p-8">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Brain className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-bold text-transbot-text-primary mb-2">AI-First</h3>
+                    <p className="text-sm text-transbot-text-secondary">Every solution powered by advanced AI</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Target className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-bold text-transbot-text-primary mb-2">Results-Driven</h3>
+                    <p className="text-sm text-transbot-text-secondary">Measurable impact on your operations</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Shield className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-bold text-transbot-text-primary mb-2">Enterprise-Grade</h3>
+                    <p className="text-sm text-transbot-text-secondary">Security and reliability you can trust</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Globe className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-bold text-transbot-text-primary mb-2">Global Scale</h3>
+                    <p className="text-sm text-transbot-text-secondary">Serving logistics companies worldwide</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Our Values
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              The principles that guide everything we do
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300"
+              >
+                <div className="p-3 rounded-xl bg-transbot-sky/10 w-fit mb-6">
+                  <value.icon className="w-8 h-8 text-transbot-sky" />
+                </div>
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                  {value.title}
+                </h3>
+                <p className="text-transbot-text-secondary">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Leadership Team
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              The visionaries behind Trans Bot AI
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {leadership.map((leader, index) => (
+              <motion.div
+                key={leader.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-48 h-48 bg-gradient-to-br from-transbot-sky/20 to-transbot-teal/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                  <Users className="w-16 h-16 text-transbot-sky" />
+                </div>
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-2">
+                  {leader.name}
+                </h3>
+                <div className="text-transbot-sky font-semibold mb-3">
+                  {leader.role}
+                </div>
+                <p className="text-transbot-text-secondary text-sm">
+                  {leader.bio}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+              Our Journey
+            </h2>
+            <p className="text-xl text-transbot-text-secondary">
+              Key milestones in our mission to revolutionize logistics
+            </p>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-primary"></div>
+            
+            <div className="space-y-12">
               {milestones.map((milestone, index) => (
-                <div key={index} className="flex items-center space-x-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold">{milestone.year}</span>
+                <motion.div
+                  key={milestone.year}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                >
+                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                    <div className="bg-white p-6 rounded-xl shadow-transbot border border-transbot-border/20">
+                      <div className="text-2xl font-bold text-transbot-sky mb-2">
+                        {milestone.year}
+                      </div>
+                      <h3 className="text-xl font-bold text-transbot-text-primary mb-2">
+                        {milestone.title}
+                      </h3>
+                      <p className="text-transbot-text-secondary">
+                        {milestone.description}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex-1 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                    <h3 className="text-xl font-bold text-white mb-2">{milestone.event}</h3>
-                    <p className="text-indigo-200">{milestone.description}</p>
-                  </div>
-                </div>
+                  
+                  {/* Timeline Dot */}
+                  <div className="w-4 h-4 bg-gradient-primary rounded-full border-4 border-white shadow-transbot z-10"></div>
+                  
+                  <div className="w-1/2"></div>
+                </motion.div>
               ))}
-            </div>
-          </div>
-
-          {/* Values Section */}
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
-              <p className="text-indigo-200">
-                We constantly push the boundaries of what's possible with AI and automation in logistics.
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Collaboration</h3>
-              <p className="text-indigo-200">
-                We work closely with our clients to understand their unique challenges and deliver tailored solutions.
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Excellence</h3>
-              <p className="text-indigo-200">
-                We strive for excellence in everything we do, from product development to customer service.
-              </p>
             </div>
           </div>
         </div>
-      </div>
-    </ResponsiveContainer>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-primary">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <h2 className="text-4xl font-bold text-white">
+              Ready to Transform Your Logistics?
+            </h2>
+            <p className="text-xl text-white/90">
+              Join the logistics leaders who trust Trans Bot AI to power their operations
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
+                Start Free Trial
+              </button>
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
+                Contact Sales
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
   )
 }
-
-export default CompanyPage

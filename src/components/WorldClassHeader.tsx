@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { FloatingActionButton } from './FloatingActionButton'
 import { 
   Brain, 
   Menu, 
@@ -12,9 +13,7 @@ import {
   Truck,
   Target,
   Building,
-  Sparkles,
   Cpu,
-  Network,
   Activity,
   Shield,
   ChevronDown
@@ -25,6 +24,7 @@ export function WorldClassHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeAgent, setActiveAgent] = useState(0)
   const [aiStatus, setAiStatus] = useState('Processing...')
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const agents = [
     { id: 0, name: 'Route Optimizer', status: 'Active', efficiency: 98 },
@@ -126,6 +126,16 @@ export function WorldClassHeader() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
+            {/* Sidebar Toggle Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-lg bg-transbot-neutral-light hover:bg-transbot-border transition-colors duration-200 mr-4"
+            >
+              <Menu className="w-5 h-5 text-transbot-text-primary" />
+            </motion.button>
+
             {/* Logo Section with AI Status */}
             <motion.div 
               className="flex items-center gap-4"
@@ -339,29 +349,8 @@ export function WorldClassHeader() {
         </div>
       </motion.div>
 
-      {/* Floating Action Buttons */}
-      <motion.div
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0.7, duration: 0.8 }}
-        className="fixed bottom-6 right-6 z-40 flex flex-col gap-3"
-      >
-        <motion.button
-          className="p-4 bg-gradient-primary text-white rounded-full shadow-transbot-lg hover:shadow-transbot-xl transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Sparkles className="w-6 h-6" />
-        </motion.button>
-        
-        <motion.button
-          className="p-4 bg-white text-transbot-sky rounded-full shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Network className="w-6 h-6" />
-        </motion.button>
-      </motion.div>
+      {/* Enhanced FAB (Floating Action Button) */}
+      <FloatingActionButton />
     </>
   )
 }

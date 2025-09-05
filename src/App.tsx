@@ -32,7 +32,7 @@ function App() {
           <NeuralBackground />
           <WorldClassHeader />
           <SmartSidebar />
-          <main className="pt-20 pl-0 xl:pl-80 transition-all duration-500">
+          <main className="pt-20 pl-64 transition-all duration-500">
             <Routes>
               <Route path="/" element={
                 <>

@@ -5,18 +5,13 @@ import {
   Video, 
   BarChart3, 
   Cpu, 
-  MessageSquare,
   ArrowRight,
   Calendar,
   User,
   Clock,
-  Star,
-  Download,
-  ExternalLink,
   Play,
   Book,
-  Code,
-  Lightbulb
+  Code
 } from 'lucide-react'
 
 export default function ResourcesPage() {
@@ -261,7 +256,7 @@ export default function ResourcesPage() {
                               {resource.type}
                             </span>
                             <span className="text-xs text-transbot-text-secondary">
-                              {resource.readTime || resource.duration}
+                              {'readTime' in resource ? resource.readTime : resource.duration}
                             </span>
                           </div>
                           <h3 className="text-lg font-bold text-transbot-text-primary mb-2 group-hover:text-transbot-sky transition-colors duration-300">
@@ -337,7 +332,7 @@ export default function ResourcesPage() {
 
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-1">
-                    <Users className="w-4 h-4 text-transbot-text-secondary" />
+                    <User className="w-4 h-4 text-transbot-text-secondary" />
                     <span className="text-sm text-transbot-text-secondary">{webinar.attendees} registered</span>
                   </div>
                   <span className={`text-xs font-semibold px-2 py-1 rounded ${

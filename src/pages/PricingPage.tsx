@@ -1,18 +1,13 @@
 import { motion } from 'framer-motion'
 import { 
   CheckCircle, 
-  Star, 
   Zap, 
   Users, 
   Building, 
-  ArrowRight,
   Shield,
-  Clock,
   Globe,
   BarChart3,
-  Brain,
-  Target,
-  TrendingUp
+  Brain
 } from 'lucide-react'
 
 export default function PricingPage() {
