@@ -19,6 +19,8 @@ import CompanyPage from './pages/CompanyPage'
 import IndustriesPage from './pages/IndustriesPage'
 import PortalsPage from './pages/PortalsPage'
 import AIAgentsPage from './pages/AIAgentsPage'
+import TransportationManagement from './pages/solutions/TransportationManagement'
+import WarehouseManagement from './pages/solutions/WarehouseManagement'
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
               <Route path="/dashboard/*" element={<DashboardPage />} />
               <Route path="/super-admin/*" element={<SuperAdminPortal />} />
               <Route path="/solutions" element={<SolutionsPage />} />
+              <Route path="/solutions/transportation" element={<TransportationManagement />} />
+              <Route path="/solutions/warehouse" element={<WarehouseManagement />} />
               <Route path="/pricing" element={<PricingPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/company" element={<CompanyPage />} />

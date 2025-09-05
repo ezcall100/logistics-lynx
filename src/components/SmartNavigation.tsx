@@ -1,14 +1,27 @@
-import { motion } from 'framer-motion'
-import { ChevronDown, Brain, User, Settings, LogOut, Shield } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, Brain, User, Settings, LogOut, Shield, ArrowRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileNavigation } from './MobileNavigation'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
+interface SubPage {
+  name: string
+  path: string
+}
+
+interface MenuItem {
+  name: string
+  path: string
+  hasSubmenu: boolean
+  subpages?: SubPage[]
+}
+
 export function SmartNavigation() {
   const { user } = useAuth()
   const [aiInsights, setAiInsights] = useState('')
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const userRole = user?.role || 'guest'
 
   useEffect(() => {
@@ -28,29 +41,109 @@ export function SmartNavigation() {
     return () => clearInterval(interval)
   }, [])
 
-  const getMainMenu = () => {
-    // Always show the 8 main pages
+  const getMainMenu = (): MenuItem[] => {
+    // Always show the 8 main pages with their sub-pages
     return [
-      'Home', 'Solutions', 'Pricing', 'Resources', 
-      'Company', 'Industries', 'Portals', 'AI Agents'
+      { name: 'Home', path: '/', hasSubmenu: false },
+      { 
+        name: 'Solutions', 
+        path: '/solutions', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'Transportation Management', path: '/solutions/transportation' },
+          { name: 'Warehouse Management', path: '/solutions/warehouse' },
+          { name: 'Fleet Management', path: '/solutions/fleet' },
+          { name: 'Load Optimization', path: '/solutions/load-optimization' },
+          { name: 'Route Planning', path: '/solutions/route-planning' },
+          { name: 'Real-time Tracking', path: '/solutions/tracking' }
+        ]
+      },
+      { 
+        name: 'Pricing', 
+        path: '/pricing', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'Starter Plan', path: '/pricing/starter' },
+          { name: 'Professional Plan', path: '/pricing/professional' },
+          { name: 'Enterprise Plan', path: '/pricing/enterprise' },
+          { name: 'Custom Solutions', path: '/pricing/custom' },
+          { name: 'Compare Plans', path: '/pricing/compare' }
+        ]
+      },
+      { 
+        name: 'Resources', 
+        path: '/resources', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'Documentation', path: '/resources/documentation' },
+          { name: 'Case Studies', path: '/resources/case-studies' },
+          { name: 'API Reference', path: '/resources/api' },
+          { name: 'Tutorials', path: '/resources/tutorials' },
+          { name: 'Blog', path: '/resources/blog' },
+          { name: 'Support Center', path: '/resources/support' }
+        ]
+      },
+      { 
+        name: 'Company', 
+        path: '/company', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'About Us', path: '/company/about' },
+          { name: 'Leadership', path: '/company/leadership' },
+          { name: 'Careers', path: '/company/careers' },
+          { name: 'Press', path: '/company/press' },
+          { name: 'Partners', path: '/company/partners' },
+          { name: 'Contact', path: '/company/contact' }
+        ]
+      },
+      { 
+        name: 'Industries', 
+        path: '/industries', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'E-commerce', path: '/industries/ecommerce' },
+          { name: 'Manufacturing', path: '/industries/manufacturing' },
+          { name: 'Retail', path: '/industries/retail' },
+          { name: 'Healthcare', path: '/industries/healthcare' },
+          { name: 'Food & Beverage', path: '/industries/food-beverage' },
+          { name: 'Automotive', path: '/industries/automotive' }
+        ]
+      },
+      { 
+        name: 'Portals', 
+        path: '/portals', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'Shipper Portal', path: '/portals/shipper' },
+          { name: 'Broker Portal', path: '/portals/broker' },
+          { name: 'Carrier Portal', path: '/portals/carrier' },
+          { name: 'Driver Portal', path: '/portals/driver' },
+          { name: 'Admin Portal', path: '/portals/admin' },
+          { name: 'Super Admin', path: '/super-admin' }
+        ]
+      },
+      { 
+        name: 'AI Agents', 
+        path: '/ai-agents', 
+        hasSubmenu: true,
+        subpages: [
+          { name: 'MCP Agents', path: '/ai-agents/mcp' },
+          { name: 'Automation Tools', path: '/ai-agents/automation' },
+          { name: 'AI Analytics', path: '/ai-agents/analytics' },
+          { name: 'Machine Learning', path: '/ai-agents/ml' },
+          { name: 'Agent Marketplace', path: '/ai-agents/marketplace' },
+          { name: 'Custom Agents', path: '/ai-agents/custom' }
+        ]
+      }
     ]
   }
 
-  const getRoleBasedMenu = () => {
+  const getRoleBasedMenu = (): MenuItem[] => {
     const baseMenu = getMainMenu()
     
-    switch (userRole) {
-      case 'broker':
-        return [...baseMenu, 'Load Board', 'Carrier Network', 'Analytics']
-      case 'carrier':
-        return [...baseMenu, 'Fleet Management', 'Driver Portal', 'Maintenance']
-      case 'shipper':
-        return [...baseMenu, 'Shipment Tracking', 'Rate Management', 'Compliance']
-      case 'superadmin':
-        return [...baseMenu, 'Super Admin', 'System Control', 'AI Management']
-      default:
-        return baseMenu
-    }
+    // For now, return the base menu for all roles
+    // Role-specific items can be added later
+    return baseMenu
   }
 
   return (
@@ -83,33 +176,58 @@ export function SmartNavigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {getRoleBasedMenu().map((item) => {
-              const getPagePath = (pageName: string) => {
-                switch (pageName) {
-                  case 'Home': return '/'
-                  case 'Solutions': return '/solutions'
-                  case 'Pricing': return '/pricing'
-                  case 'Resources': return '/resources'
-                  case 'Company': return '/company'
-                  case 'Industries': return '/industries'
-                  case 'Portals': return '/portals'
-                  case 'AI Agents': return '/ai-agents'
-                  default: return '#'
-                }
-              }
-
-              return (
-                <Link key={item} to={getPagePath(item)}>
+            {getRoleBasedMenu().map((item) => (
+              <div
+                key={item.name}
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link to={item.path}>
                   <motion.button
                     whileHover={{ y: -2 }}
                     className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                   >
-                    <span>{item}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <span>{item.name}</span>
+                    {item.hasSubmenu && <ChevronDown className="w-4 h-4" />}
                   </motion.button>
                 </Link>
-              )
-            })}
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {activeDropdown === item.name && item.hasSubmenu && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-64 glass-dark rounded-xl shadow-2xl border border-white/10 z-50"
+                    >
+                      <div className="p-2">
+                        {item.subpages?.map((subpage: SubPage, index: number) => (
+                          <motion.div
+                            key={subpage.name}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={subpage.path}
+                              className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors group"
+                            >
+                              <span className="text-white/90 group-hover:text-white">
+                                {subpage.name}
+                              </span>
+                              <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors" />
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
 
           {/* Action Buttons */}

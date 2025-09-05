@@ -83,5 +83,5 @@ const WarehouseManagement: React.FC = () => {
     </ResponsiveContainer>
   )
 }
-
 export default WarehouseManagement
+
