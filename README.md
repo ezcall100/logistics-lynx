@@ -75,7 +75,7 @@ Experience the complete freight lifecycle:
 ### Installation
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone https://github.com/your-username/trans-bot-ai.git
    cd trans-bot-ai
    ```
