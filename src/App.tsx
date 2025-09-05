@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { SmartNavigation } from './components/SmartNavigation'
+import { ModernHeader } from './components/ModernHeader'
 import { SmartLandingPage } from './components/SmartLandingPage'
 import { HeroSection } from './components/HeroSection'
 import { TrustedBy } from './components/TrustedBy'
@@ -26,9 +26,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen dark">
-          <SmartNavigation />
-          <main>
+        <div className="min-h-screen">
+          <ModernHeader />
+          <main className="pt-16">
             <Routes>
               <Route path="/" element={
                 <>
@@ -50,15 +50,60 @@ function App() {
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard/*" element={<DashboardPage />} />
               <Route path="/super-admin/*" element={<SuperAdminPortal />} />
-              <Route path="/solutions" element={<SolutionsPage />} />
-              <Route path="/solutions/transportation" element={<TransportationManagement />} />
-              <Route path="/solutions/warehouse" element={<WarehouseManagement />} />
-              <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/resources" element={<ResourcesPage />} />
-              <Route path="/company" element={<CompanyPage />} />
-              <Route path="/industries" element={<IndustriesPage />} />
-              <Route path="/portals" element={<PortalsPage />} />
-              <Route path="/ai-agents" element={<AIAgentsPage />} />
+              <Route path="/solutions" element={
+                <>
+                  <SolutionsPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/transportation" element={
+                <>
+                  <TransportationManagement />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/warehouse" element={
+                <>
+                  <WarehouseManagement />
+                  <Footer />
+                </>
+              } />
+              <Route path="/pricing" element={
+                <>
+                  <PricingPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources" element={
+                <>
+                  <ResourcesPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/company" element={
+                <>
+                  <CompanyPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/industries" element={
+                <>
+                  <IndustriesPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals" element={
+                <>
+                  <PortalsPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/ai-agents" element={
+                <>
+                  <AIAgentsPage />
+                  <Footer />
+                </>
+              } />
             </Routes>
           </main>
         </div>

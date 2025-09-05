@@ -3,9 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Brain } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
 
+
+
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
+
 
   // Close menu on escape key
   useEffect(() => {

@@ -1,6 +1,5 @@
-import React from 'react'
 import { motion } from 'framer-motion'
-import { Truck, Route, Clock, Shield, BarChart3, Users, Zap, Globe } from 'lucide-react'
+import { Truck, Route, Clock, Shield, BarChart3, Users } from 'lucide-react'
 
 export default function TransportationManagement() {
   const features = [

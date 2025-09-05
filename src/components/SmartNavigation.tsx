@@ -154,28 +154,45 @@ export function SmartNavigation() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold gradient-text flex items-center gap-2"
+            className="text-2xl font-bold gradient-text flex items-center gap-2 flex-shrink-0"
           >
             <Brain className="w-6 h-6 text-emerald-400" />
             Trans Bot AI
           </motion.div>
 
-          {/* AI Insights Bar */}
-          {aiInsights && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
-            >
-              <Brain className="w-4 h-4 text-emerald-400" />
-              <span className="text-sm text-emerald-600 dark:text-emerald-400">
-                {aiInsights}
-              </span>
-            </motion.div>
-          )}
+          {/* Center Content Area */}
+          <div className="flex-1 flex items-center justify-center">
+            {/* AI Insights Bar - Desktop */}
+            {aiInsights && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+              >
+                <Brain className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm text-emerald-600 dark:text-emerald-400">
+                  {aiInsights}
+                </span>
+              </motion.div>
+            )}
+
+            {/* AI Insights Bar - Tablet */}
+            {aiInsights && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="hidden lg:flex xl:hidden items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+              >
+                <Brain className="w-3 h-3 text-emerald-400" />
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 truncate max-w-32">
+                  {aiInsights}
+                </span>
+              </motion.div>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 flex-shrink-0">
             {getRoleBasedMenu().map((item) => (
               <div
                 key={item.name}
@@ -186,10 +203,66 @@ export function SmartNavigation() {
                 <Link to={item.path}>
                   <motion.button
                     whileHover={{ y: -2 }}
-                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
                   >
-                    <span>{item.name}</span>
-                    {item.hasSubmenu && <ChevronDown className="w-4 h-4" />}
+                    <span className="text-sm font-medium">{item.name}</span>
+                    {item.hasSubmenu && <ChevronDown className="w-3 h-3" />}
+                  </motion.button>
+                </Link>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {activeDropdown === item.name && item.hasSubmenu && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-72 glass-dark rounded-xl shadow-2xl border border-white/10 z-50"
+                    >
+                      <div className="p-3">
+                        {item.subpages?.map((subpage: SubPage, index: number) => (
+                          <motion.div
+                            key={subpage.name}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={subpage.path}
+                              className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors group"
+                            >
+                              <span className="text-white/90 group-hover:text-white text-sm">
+                                {subpage.name}
+                              </span>
+                              <ArrowRight className="w-3 h-3 text-white/50 group-hover:text-white/80 transition-colors" />
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+
+          {/* Tablet Navigation */}
+          <div className="hidden md:flex lg:hidden items-center space-x-4 flex-shrink-0">
+            {getRoleBasedMenu().slice(0, 4).map((item) => (
+              <div
+                key={item.name}
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link to={item.path}>
+                  <motion.button
+                    whileHover={{ y: -2 }}
+                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-white/5"
+                  >
+                    <span className="text-xs font-medium">{item.name}</span>
+                    {item.hasSubmenu && <ChevronDown className="w-3 h-3" />}
                   </motion.button>
                 </Link>
 
@@ -204,7 +277,7 @@ export function SmartNavigation() {
                       className="absolute top-full left-0 mt-2 w-64 glass-dark rounded-xl shadow-2xl border border-white/10 z-50"
                     >
                       <div className="p-2">
-                        {item.subpages?.map((subpage: SubPage, index: number) => (
+                        {item.subpages?.slice(0, 4).map((subpage: SubPage, index: number) => (
                           <motion.div
                             key={subpage.name}
                             initial={{ opacity: 0, x: -10 }}
@@ -213,12 +286,12 @@ export function SmartNavigation() {
                           >
                             <Link
                               to={subpage.path}
-                              className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors group"
+                              className="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-colors group"
                             >
-                              <span className="text-white/90 group-hover:text-white">
+                              <span className="text-white/90 group-hover:text-white text-xs">
                                 {subpage.name}
                               </span>
-                              <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors" />
+                              <ArrowRight className="w-3 h-3 text-white/50 group-hover:text-white/80 transition-colors" />
                             </Link>
                           </motion.div>
                         ))}
@@ -230,22 +303,22 @@ export function SmartNavigation() {
             ))}
           </div>
 
-          {/* Action Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Action Buttons - Desktop */}
+          <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
             <ThemeToggle />
             
             {userRole === 'guest' ? (
               <>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   Login
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-primary"
+                  className="btn-primary px-4 py-2 text-sm"
                 >
                   Get Demo
                 </motion.button>
@@ -256,7 +329,7 @@ export function SmartNavigation() {
                   <Link to="/super-admin">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-sm"
                     >
                       <Shield className="w-4 h-4" />
                       <span>Super Admin</span>
@@ -265,10 +338,10 @@ export function SmartNavigation() {
                 )}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   <User className="w-4 h-4" />
-                  <span className="capitalize">{userRole}</span>
+                  <span className="capitalize text-sm">{userRole}</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -281,6 +354,98 @@ export function SmartNavigation() {
                   className="p-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors"
                 >
                   <LogOut className="w-4 h-4 text-red-600 dark:text-red-400" />
+                </motion.button>
+              </>
+            )}
+          </div>
+
+          {/* Action Buttons - Tablet */}
+          <div className="hidden md:flex lg:hidden items-center space-x-2 flex-shrink-0">
+            <ThemeToggle />
+            
+            {userRole === 'guest' ? (
+              <>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors px-2 py-2 rounded-lg hover:bg-white/5 text-xs"
+                >
+                  Login
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary px-3 py-2 text-xs"
+                >
+                  Demo
+                </motion.button>
+              </>
+            ) : (
+              <>
+                {userRole === 'superadmin' && (
+                  <Link to="/super-admin">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs"
+                    >
+                      <Shield className="w-3 h-3" />
+                      <span>Admin</span>
+                    </motion.button>
+                  </Link>
+                )}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-white/5"
+                >
+                  <User className="w-3 h-3" />
+                  <span className="capitalize text-xs">{userRole}</span>
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <Settings className="w-3 h-3 text-slate-600 dark:text-slate-300" />
+                </motion.button>
+              </>
+            )}
+          </div>
+
+          {/* Action Buttons - Mobile */}
+          <div className="flex md:hidden items-center space-x-2 flex-shrink-0">
+            <ThemeToggle />
+            
+            {userRole === 'guest' ? (
+              <>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors px-2 py-2 rounded-lg hover:bg-white/5 text-xs"
+                >
+                  Login
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary px-3 py-2 text-xs"
+                >
+                  Demo
+                </motion.button>
+              </>
+            ) : (
+              <>
+                {userRole === 'superadmin' && (
+                  <Link to="/super-admin">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs"
+                    >
+                      <Shield className="w-3 h-3" />
+                    </motion.button>
+                  </Link>
+                )}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <User className="w-4 h-4 text-slate-600 dark:text-slate-300" />
                 </motion.button>
               </>
             )}
