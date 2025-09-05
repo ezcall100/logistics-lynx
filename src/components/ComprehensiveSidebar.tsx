@@ -40,15 +40,14 @@ import {
   ClipboardList,
   Lock,
   AlertTriangle,
-  Briefcase,
-  PanelLeft
+  Briefcase
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 import { useSidebar } from '../contexts/SidebarContext'
 
 export function ComprehensiveSidebar() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
-  const { isSidebarOpen, toggleSidebar } = useSidebar()
+  const { isSidebarOpen } = useSidebar()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -57,10 +56,6 @@ export function ComprehensiveSidebar() {
     await trackUserInteraction('sidebar_navigation', { path })
   }
 
-  const handleSidebarToggle = async () => {
-    toggleSidebar()
-    await trackUserInteraction('sidebar_toggle', { isOpen: !isSidebarOpen })
-  }
 
   const toggleSection = (sectionId: string) => {
     setActiveSection(activeSection === sectionId ? null : sectionId)
@@ -256,16 +251,6 @@ export function ComprehensiveSidebar() {
               </div>
             </motion.div>
 
-            {/* Sidebar Toggle Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleSidebarToggle}
-              className="flex items-center justify-center w-10 h-10 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg hover:bg-blue-50 transition-all duration-200"
-              title="Hide Sidebar"
-            >
-              <PanelLeft className="w-5 h-5 text-transbot-text-primary" />
-            </motion.button>
           </div>
         </div>
 
