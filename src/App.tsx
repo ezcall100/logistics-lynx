@@ -70,6 +70,11 @@ import YardManagementSolution from './pages/solutions/YardManagementSolution'
 import FinancialManagementSolution from './pages/solutions/FinancialManagementSolution'
 import LoadBoardSolution from './pages/solutions/LoadBoardSolution'
 import CRMSolution from './pages/solutions/CRMSolution'
+import ShipperSolutions from './pages/solutions/ShipperSolutions'
+import CarrierSolutions from './pages/solutions/CarrierSolutions'
+import BrokerSolutions from './pages/solutions/BrokerSolutions'
+import OwnerOperatorSolutions from './pages/solutions/OwnerOperatorSolutions'
+import DriverSolutions from './pages/solutions/DriverSolutions'
 
 function App() {
   return (
@@ -184,6 +189,36 @@ function App() {
               <Route path="/solutions/crm" element={
                 <>
                   <CRMSolution />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/shipper" element={
+                <>
+                  <ShipperSolutions />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/carrier" element={
+                <>
+                  <CarrierSolutions />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/broker" element={
+                <>
+                  <BrokerSolutions />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/owner-operator" element={
+                <>
+                  <OwnerOperatorSolutions />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/driver" element={
+                <>
+                  <DriverSolutions />
                   <Footer />
                 </>
               } />

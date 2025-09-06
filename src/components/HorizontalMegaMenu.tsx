@@ -91,7 +91,12 @@ export function HorizontalMegaMenu() {
         { id: 'yard-management', label: 'Yard Management', href: '/solutions/yard-management', icon: MapPin, description: 'Optimize yard operations' },
         { id: 'financial-management', label: 'Financial Management', href: '/solutions/financial-management', icon: DollarSign, description: 'Streamline financial operations' },
         { id: 'load-board', label: 'Load Board', href: '/solutions/load-board', icon: Package, description: 'Connect shippers with carriers' },
-        { id: 'crm', label: 'CRM Solution', href: '/solutions/crm', icon: Users, description: 'Customer relationship management' }
+        { id: 'crm', label: 'CRM Solution', href: '/solutions/crm', icon: Users, description: 'Customer relationship management' },
+        { id: 'shipper-solutions', label: 'Shipper Solutions', href: '/solutions/shipper', icon: Package, description: 'Solutions for shippers' },
+        { id: 'carrier-solutions', label: 'Carrier Solutions', href: '/solutions/carrier', icon: Truck, description: 'Solutions for carriers' },
+        { id: 'broker-solutions', label: 'Broker Solutions', href: '/solutions/broker', icon: Briefcase, description: 'Solutions for brokers' },
+        { id: 'owner-operator-solutions', label: 'Owner Operator Solutions', href: '/solutions/owner-operator', icon: Truck, description: 'Solutions for owner operators' },
+        { id: 'driver-solutions', label: 'Driver Solutions', href: '/solutions/driver', icon: User, description: 'Solutions for drivers' }
       ],
       featured: [
         { id: 'tms-featured', label: 'Transportation Management', href: '/solutions/transportation', icon: Globe, featured: true, description: 'Complete TMS solution with AI integration' }
