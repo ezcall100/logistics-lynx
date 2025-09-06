@@ -17,7 +17,7 @@ export function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-slate-200/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -25,21 +25,21 @@ export function Header() {
             <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
               <span className="text-primary font-bold text-sm">TB</span>
             </div>
-            <span className="text-xl font-bold text-white">Trans Bot AI</span>
+            <span className="text-xl font-bold text-transbot-text-primary">Trans Bot AI</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-white/80 hover:text-white transition-colors">
+            <Link to="/" className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors">
               Home
             </Link>
-            <Link to="/#ecosystem" className="text-white/80 hover:text-white transition-colors">
+            <Link to="/#ecosystem" className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors">
               Ecosystem
             </Link>
-            <Link to="/#ai-agents" className="text-white/80 hover:text-white transition-colors">
+            <Link to="/#ai-agents" className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors">
               AI Agents
             </Link>
-            <Link to="/#demo" className="text-white/80 hover:text-white transition-colors">
+            <Link to="/#demo" className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors">
               Demo
             </Link>
           </nav>
@@ -65,14 +65,14 @@ export function Header() {
                     <div className="py-2">
                       <Link
                         to={`/dashboard/${user.role}`}
-                        className="block px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors"
+                        className="block px-4 py-2 text-sm text-transbot-text-primary hover:bg-white/80 transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         Dashboard
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="flex items-center w-full px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors"
+                        className="flex items-center w-full px-4 py-2 text-sm text-transbot-text-primary hover:bg-white/80 transition-colors"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Logout
@@ -85,13 +85,13 @@ export function Header() {
               <div className="flex items-center space-x-3">
                 <Link
                   to="/login"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="btn-primary"
+                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
                 >
                   Get Started
                 </Link>
@@ -113,33 +113,33 @@ export function Header() {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="md:hidden py-4 border-t border-white/10"
+            className="md:hidden py-4 border-t border-slate-200/50"
           >
             <nav className="flex flex-col space-y-4">
               <Link
                 to="/"
-                className="text-white/80 hover:text-white transition-colors"
+                className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/#ecosystem"
-                className="text-white/80 hover:text-white transition-colors"
+                className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Ecosystem
               </Link>
               <Link
                 to="/#ai-agents"
-                className="text-white/80 hover:text-white transition-colors"
+                className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 AI Agents
               </Link>
               <Link
                 to="/#demo"
-                className="text-white/80 hover:text-white transition-colors"
+                className="text-transbot-text-primary/80 hover:text-transbot-text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Demo

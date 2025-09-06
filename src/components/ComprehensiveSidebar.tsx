@@ -51,6 +51,7 @@ export function ComprehensiveSidebar() {
   const navigate = useNavigate()
   const location = useLocation()
 
+
   const handleNavigation = async (path: string) => {
     navigate(path)
     await trackUserInteraction('sidebar_navigation', { path })
@@ -202,11 +203,11 @@ export function ComprehensiveSidebar() {
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`hidden md:block fixed left-0 top-0 bottom-0 z-40 w-80 transition-transform duration-300 ${
+      className={`fixed left-0 top-0 bottom-0 z-40 w-80 transition-transform duration-300 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
-      <div className="h-full bg-white/98 backdrop-blur-xl border-r border-slate-200/60 shadow-xl">
+      <div className="h-full bg-white/90 backdrop-blur-md border-r border-slate-200/50 shadow-lg">
         
         {/* Trans Bot AI Logo & Branding */}
         <div className="px-6 pt-20 pb-5 border-b border-slate-200/50">

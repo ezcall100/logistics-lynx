@@ -15,7 +15,7 @@ import {
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
 export default function BrokerPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [activeTab, setActiveTab] = useState('overview')
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleTabChange = async (tab: string) => {

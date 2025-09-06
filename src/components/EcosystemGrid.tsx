@@ -133,7 +133,7 @@ export function EcosystemGrid() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary"
+              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
             >
               <span>Explore All Portals</span>
               <ArrowRight className="w-4 h-4" />

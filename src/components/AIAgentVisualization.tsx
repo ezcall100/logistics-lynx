@@ -138,10 +138,10 @@ export function AIAgentVisualization() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold text-transbot-text-primary mb-6">
             Powered by <span className="text-accent">250 AI Agents</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto">
             Autonomous intelligence working 24/7 to optimize every aspect of your logistics operations. 
             From real-time monitoring to predictive analytics, our AI agents never sleep.
           </p>
@@ -167,12 +167,12 @@ export function AIAgentVisualization() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
               viewport={{ once: true }}
-              className="glass p-6 rounded-2xl text-center"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl text-center"
             >
               <div className={`text-3xl sm:text-4xl font-bold ${stat.color} mb-2`}>
                 {stat.value}{stat.suffix}
               </div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
+              <div className="text-transbot-text-primary/70 text-sm">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -192,18 +192,18 @@ export function AIAgentVisualization() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
               viewport={{ once: true }}
-              className="glass p-6 rounded-2xl hover:scale-105 transition-transform group cursor-pointer"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl hover:scale-105 transition-transform group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className={`p-3 rounded-xl bg-gradient-to-r ${agent.color}`}>
-                  <agent.icon className="w-6 h-6 text-white" />
+                  <agent.icon className="w-6 h-6 text-transbot-text-primary" />
                 </div>
                 <div className="text-2xl font-bold text-accent">{agent.count}</div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-accent transition-colors">
+              <h3 className="text-lg font-semibold text-transbot-text-primary mb-2 group-hover:text-accent transition-colors">
                 {agent.name}
               </h3>
-              <p className="text-white/70 text-sm">{agent.description}</p>
+              <p className="text-transbot-text-primary/70 text-sm">{agent.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -214,13 +214,13 @@ export function AIAgentVisualization() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
           viewport={{ once: true }}
-          className="glass p-8 rounded-2xl"
+          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-white">Real-time Agent Activity</h3>
+            <h3 className="text-2xl font-bold text-transbot-text-primary">Real-time Agent Activity</h3>
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-sm text-white/70">Live</span>
+              <span className="text-sm text-transbot-text-primary/70">Live</span>
             </div>
           </div>
           
@@ -238,16 +238,16 @@ export function AIAgentVisualization() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
+                className="flex items-center justify-between p-4 bg-slate-50 rounded-xl"
               >
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
                   <div>
-                    <div className="text-white font-medium">{activity.agent}</div>
-                    <div className="text-white/70 text-sm">{activity.action}</div>
+                    <div className="text-transbot-text-primary font-medium">{activity.agent}</div>
+                    <div className="text-transbot-text-primary/70 text-sm">{activity.action}</div>
                   </div>
                 </div>
-                <div className="text-white/50 text-sm">{activity.time}</div>
+                <div className="text-transbot-text-primary/50 text-sm">{activity.time}</div>
               </motion.div>
             ))}
           </div>
@@ -261,18 +261,18 @@ export function AIAgentVisualization() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <div className="glass p-8 rounded-2xl max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-transbot-text-primary mb-4">
               Experience AI-Powered Logistics
             </h3>
-            <p className="text-white/70 mb-6">
+            <p className="text-transbot-text-primary/70 mb-6">
               See how our 250 AI agents work together to optimize your operations, 
               predict issues before they happen, and deliver unprecedented efficiency.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary"
+              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
             >
               See AI Agents in Action
             </motion.button>

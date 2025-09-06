@@ -53,7 +53,7 @@ export function MobileNavigation() {
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden p-2 rounded-lg glass-dark dark:glass-light hover:scale-105 transition-all duration-200"
+        className="lg:hidden p-2 rounded-lg bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg hover:scale-105 transition-all duration-200"
         aria-label="Toggle mobile menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -78,7 +78,7 @@ export function MobileNavigation() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] glass-dark dark:glass-light z-50 lg:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg z-50 lg:hidden"
             >
               <div className="flex flex-col h-full">
                 {/* Header */}
@@ -142,10 +142,10 @@ export function MobileNavigation() {
 
                 {/* Footer Actions */}
                 <div className="p-6 border-t border-slate-300/20 dark:border-slate-600/20 space-y-3">
-                  <button className="w-full btn-secondary">
+                  <button className="w-full bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300">
                     Login
                   </button>
-                  <button className="w-full btn-primary">
+                  <button className="w-full bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300">
                     Get Demo
                   </button>
                 </div>

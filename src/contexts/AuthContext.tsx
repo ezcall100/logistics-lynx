@@ -1,11 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-
-interface User {
-  id: string
-  email: string
-  role: 'shipper' | 'broker' | 'carrier' | 'driver' | 'superadmin'
-  name: string
-}
+import { authService, User } from '../services/authService'
 
 interface AuthContextType {
   user: User | null
@@ -23,32 +17,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check for existing session
-    const savedUser = localStorage.getItem('transbot-user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
-    }
+    const currentUser = authService.getCurrentUser()
+    setUser(currentUser)
     setLoading(false)
   }, [])
 
-  const login = async (email: string, _password: string) => {
+  const login = async (email: string, password: string) => {
     setLoading(true)
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Demo user data
-      const demoUser: User = {
-        id: '1',
-        email,
-        role: email.includes('admin') ? 'superadmin' : 
-              email.includes('broker') ? 'broker' :
-              email.includes('carrier') ? 'carrier' :
-              email.includes('driver') ? 'driver' : 'shipper',
-        name: email.split('@')[0]
-      }
-      
-      setUser(demoUser)
-      localStorage.setItem('transbot-user', JSON.stringify(demoUser))
+      const user = await authService.signIn(email, password)
+      setUser(user)
     } catch (error) {
       throw new Error('Login failed')
     } finally {
@@ -56,21 +34,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const signup = async (email: string, _password: string, name: string, role: string) => {
+  const signup = async (email: string, password: string, name: string, role: string) => {
     setLoading(true)
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      const newUser: User = {
-        id: Date.now().toString(),
-        email,
-        role: role as User['role'],
-        name
-      }
-      
-      setUser(newUser)
-      localStorage.setItem('transbot-user', JSON.stringify(newUser))
+      const validRole = role as 'shipper' | 'broker' | 'carrier' | 'driver'
+      const user = await authService.signUp(email, password, name, validRole)
+      setUser(user)
     } catch (error) {
       throw new Error('Signup failed')
     } finally {

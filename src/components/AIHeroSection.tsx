@@ -105,7 +105,7 @@ export function AIHeroSection() {
             >
               <Brain className="w-4 h-4 text-transbot-cyan" />
               <span className="gradient-text-cyan font-semibold">250 AI AGENTS</span>
-              <span className="text-white">WORKING 24/7</span>
+              <span className="text-transbot-text-primary">WORKING 24/7</span>
             </motion.div>
 
             {/* Main Headline */}
@@ -117,7 +117,7 @@ export function AIHeroSection() {
             >
               <span className="gradient-text">Trans Bot AI</span>
               <br />
-              <span className="text-white">Powered by</span>
+              <span className="text-transbot-text-primary">Powered by</span>
               <br />
               <span className="gradient-text-cyan">{agentCount} AI Agents</span>
             </motion.h1>
@@ -127,7 +127,7 @@ export function AIHeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xl text-white/80 mb-8 max-w-2xl"
+              className="text-xl text-transbot-text-primary/80 mb-8 max-w-2xl"
             >
               Our neural network of 250 specialized AI agents works continuously to optimize your trucking operations, predict market trends, and automate complex logistics decisions.
             </motion.p>
@@ -141,7 +141,7 @@ export function AIHeroSection() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <Activity className="w-5 h-5 text-transbot-cyan" />
-                <span className="text-white font-semibold">Live AI Activity:</span>
+                <span className="text-transbot-text-primary font-semibold">Live AI Activity:</span>
               </div>
               {activeTasks.map((task, index) => (
                 <motion.div
@@ -152,7 +152,7 @@ export function AIHeroSection() {
                   className="flex items-center gap-3 p-3 rounded-lg holographic-glass hover:scale-105 transition-transform"
                 >
                   <div className="w-2 h-2 bg-transbot-cyan rounded-full animate-pulse"></div>
-                  <span className="text-white/90 text-sm">{task}</span>
+                  <span className="text-transbot-text-primary/90 text-sm">{task}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -167,7 +167,7 @@ export function AIHeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-primary flex items-center gap-2"
+                className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center gap-2"
               >
                 <Brain className="w-4 h-4" />
                 <span>Experience AI Power</span>
@@ -176,7 +176,7 @@ export function AIHeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-secondary flex items-center gap-2"
+                className="bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300 flex items-center gap-2"
               >
                 <Play className="w-4 h-4" />
                 <span>Watch AI Demo</span>
@@ -192,15 +192,15 @@ export function AIHeroSection() {
             >
               <div className="text-center p-3 rounded-lg holographic-glass">
                 <div className="text-2xl font-bold gradient-text-cyan">250</div>
-                <div className="text-xs text-white/60">AI Agents</div>
+                <div className="text-xs text-transbot-text-primary/60">AI Agents</div>
               </div>
               <div className="text-center p-3 rounded-lg holographic-glass">
                 <div className="text-2xl font-bold gradient-text-blue">99.9%</div>
-                <div className="text-xs text-white/60">Uptime</div>
+                <div className="text-xs text-transbot-text-primary/60">Uptime</div>
               </div>
               <div className="text-center p-3 rounded-lg holographic-glass">
                 <div className="text-2xl font-bold gradient-text-cyan">24/7</div>
-                <div className="text-xs text-white/60">Active</div>
+                <div className="text-xs text-transbot-text-primary/60">Active</div>
               </div>
             </motion.div>
           </motion.div>

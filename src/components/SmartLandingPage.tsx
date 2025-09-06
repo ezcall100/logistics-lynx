@@ -147,7 +147,7 @@ export function SmartLandingPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-primary flex items-center gap-2"
+                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center gap-2"
                 >
                   <Brain className="w-4 h-4" />
                   <span>Experience AI Power</span>
@@ -156,7 +156,7 @@ export function SmartLandingPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-secondary flex items-center gap-2"
+                  className="bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300 flex items-center gap-2"
                 >
                   <Play className="w-4 h-4" />
                   <span>Watch AI Demo</span>

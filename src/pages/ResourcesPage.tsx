@@ -194,7 +194,7 @@ export default function ResourcesPage() {
     <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
       {/* Hero Section */}
       <section className="pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -216,7 +216,7 @@ export default function ResourcesPage() {
 
       {/* Resource Categories */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
             {resourceCategories.map((category, categoryIndex) => (
               <motion.div
@@ -236,7 +236,7 @@ export default function ResourcesPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
                   {category.resources.map((resource, resourceIndex) => (
                     <motion.div
                       key={resource.title}
@@ -282,7 +282,7 @@ export default function ResourcesPage() {
 
       {/* Webinars Section */}
       <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -298,7 +298,7 @@ export default function ResourcesPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
             {webinars.map((webinar, index) => (
               <motion.div
                 key={webinar.title}
@@ -359,7 +359,7 @@ export default function ResourcesPage() {
 
       {/* Blog Section */}
       <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -375,7 +375,7 @@ export default function ResourcesPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.title}
@@ -418,7 +418,7 @@ export default function ResourcesPage() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-primary">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

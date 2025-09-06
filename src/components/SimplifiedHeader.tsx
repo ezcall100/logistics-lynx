@@ -6,7 +6,6 @@ import {
   X, 
   User, 
   LogIn,
-  Play,
   Search,
   PanelLeft
 } from 'lucide-react'
@@ -42,10 +41,6 @@ export function SimplifiedHeader() {
     handleNavigation('/signup')
   }
 
-  const handleDemo = async () => {
-    await trackUserInteraction('demo_requested', { source: 'header' })
-    handleNavigation('/demo')
-  }
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query)
@@ -55,7 +50,9 @@ export function SimplifiedHeader() {
   }
 
   const handleSidebarToggle = async () => {
+    console.log('Toggle clicked! Current state:', isSidebarOpen)
     toggleSidebar()
+    console.log('After toggle, new state should be:', !isSidebarOpen)
     await trackUserInteraction('sidebar_toggle', { isOpen: !isSidebarOpen })
   }
 
@@ -66,7 +63,7 @@ export function SimplifiedHeader() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/98 backdrop-blur-xl border-b border-slate-200/60 shadow-xl' 
+          ? 'bg-white/90 backdrop-blur-md border-b border-slate-200/50 shadow-lg' 
           : 'bg-transparent'
       }`}
     >
@@ -78,7 +75,7 @@ export function SimplifiedHeader() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSidebarToggle}
-            className="flex items-center justify-center w-10 h-10 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg hover:bg-blue-50 transition-all duration-200"
+            className="flex items-center justify-center w-10 h-10 bg-white/70 backdrop-blur-sm border border-slate-200/50 rounded-lg hover:bg-blue-50 transition-all duration-200"
             title={isSidebarOpen ? 'Hide Sidebar' : 'Show Sidebar'}
           >
             <PanelLeft className={`w-5 h-5 text-transbot-text-primary transition-transform duration-200 ${
@@ -95,24 +92,13 @@ export function SimplifiedHeader() {
                 placeholder="Search portals, pages..."
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-sm"
+                className="w-full pl-10 pr-4 py-2 bg-white/70 backdrop-blur-sm border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-sm"
               />
             </div>
           </div>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Demo Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleDemo}
-              className="flex items-center gap-2 px-6 py-2 bg-transbot-sky text-white rounded-lg font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
-            >
-              <Play className="w-4 h-4" />
-              Demo
-            </motion.button>
-
             {/* Sign In */}
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -156,7 +142,7 @@ export function SimplifiedHeader() {
           height: isMenuOpen ? 'auto' : 0 
         }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/60 overflow-hidden"
+        className="md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200/50 overflow-hidden"
       >
         <div className="px-6 py-4 space-y-4">
           {/* Mobile Sidebar Toggle */}
@@ -180,19 +166,9 @@ export function SimplifiedHeader() {
               placeholder="Search portals, pages..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-sm"
+              className="w-full pl-10 pr-4 py-2 bg-white/70 backdrop-blur-sm border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-sm"
             />
           </div>
-          
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleDemo}
-            className="w-full flex items-center gap-3 p-3 bg-transbot-sky text-white rounded-lg font-semibold"
-          >
-            <Play className="w-5 h-5" />
-            Request Demo
-          </motion.button>
           
           <motion.button
             whileHover={{ scale: 1.02 }}

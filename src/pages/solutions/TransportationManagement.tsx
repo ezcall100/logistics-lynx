@@ -58,10 +58,10 @@ export default function TransportationManagement() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold text-white mb-6">
+          <h1 className="text-5xl font-bold text-transbot-text-primary mb-6">
             Transportation Management
           </h1>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto mb-8">
             Revolutionize your transportation operations with AI-powered fleet management, 
             route optimization, and real-time tracking capabilities.
           </p>
@@ -72,12 +72,12 @@ export default function TransportationManagement() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass p-4 rounded-xl text-center"
+                className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-4 rounded-xl text-center"
               >
                 <div className="text-3xl font-bold text-emerald-400 mb-2">
                   {benefit.metric}
                 </div>
-                <div className="text-white/70 text-sm">
+                <div className="text-transbot-text-primary/70 text-sm">
                   {benefit.label}
                 </div>
               </motion.div>
@@ -93,17 +93,17 @@ export default function TransportationManagement() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 group"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl hover:bg-white/80 transition-all duration-300 group"
             >
               <div className="flex items-center mb-6">
-                <div className="p-3 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
+                <div className="p-3 rounded-xl bg-white/80 group-hover:bg-white/20 transition-colors">
                   <feature.icon className={`w-8 h-8 ${feature.color}`} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">
+              <h3 className="text-xl font-bold text-transbot-text-primary mb-4">
                 {feature.title}
               </h3>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-transbot-text-primary/70 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
@@ -117,10 +117,10 @@ export default function TransportationManagement() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center glass p-12 rounded-2xl"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">
+          <h2 className="text-3xl font-bold text-transbot-text-primary mb-6">
             Ready to Transform Your Transportation Operations?
           </h2>
-          <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-transbot-text-primary/70 mb-8 max-w-2xl mx-auto">
             Join thousands of companies already using TransBot AI to optimize their 
             transportation management and reduce costs.
           </p>
@@ -128,14 +128,14 @@ export default function TransportationManagement() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary px-8 py-4 text-lg"
+              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-8 py-4 text-lg"
             >
               Start Free Trial
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-secondary px-8 py-4 text-lg"
+              className="bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300 px-8 py-4 text-lg"
             >
               Schedule Demo
             </motion.button>

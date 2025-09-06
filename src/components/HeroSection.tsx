@@ -66,7 +66,7 @@ export function HeroSection() {
                    >
                      <Brain className="w-4 h-4 text-cyan-400" />
                      <span className="gradient-text-cyan font-semibold">#1 AI-POWERED</span>
-                     <span className="text-white">TRUCKING TMS SOFTWARE</span>
+                     <span className="text-transbot-text-primary">TRUCKING TMS SOFTWARE</span>
                    </motion.div>
 
                    {/* Main Headline */}
@@ -78,7 +78,7 @@ export function HeroSection() {
                    >
                      <span className="gradient-text">Trans Bot AI</span>
                      <br />
-                     <span className="text-white">Supercharges Your</span>
+                     <span className="text-transbot-text-primary">Supercharges Your</span>
                      <br />
                      <span className="gradient-text-blue">Trucking Company</span>
                    </motion.h1>
@@ -88,7 +88,7 @@ export function HeroSection() {
                      initial={{ opacity: 0, y: 30 }}
                      animate={{ opacity: 1, y: 0 }}
                      transition={{ delay: 0.6, duration: 0.8 }}
-                     className="text-xl text-white/80 mb-8 max-w-2xl"
+                     className="text-xl text-transbot-text-primary/80 mb-8 max-w-2xl"
                    >
                      {isVisible && (
                        <span className="gradient-text-cyan font-semibold">{agentCount} AI agents</span>
@@ -115,7 +115,7 @@ export function HeroSection() {
                          className="flex items-center gap-3 p-3 rounded-lg holographic-glass hover:scale-105 transition-transform"
                        >
                          <div className="text-cyan-400 flex-shrink-0">{benefit.icon}</div>
-                         <span className="text-white font-medium">{benefit.text}</span>
+                         <span className="text-transbot-text-primary font-medium">{benefit.text}</span>
                        </motion.div>
                      ))}
                    </motion.div>
@@ -130,7 +130,7 @@ export function HeroSection() {
                      <motion.button
                        whileHover={{ scale: 1.05 }}
                        whileTap={{ scale: 0.95 }}
-                       className="btn-primary flex items-center gap-2"
+                       className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center gap-2"
                      >
                        <span>Get Free Demo</span>
                        <ArrowRight className="w-4 h-4" />
@@ -138,7 +138,7 @@ export function HeroSection() {
                      <motion.button
                        whileHover={{ scale: 1.05 }}
                        whileTap={{ scale: 0.95 }}
-                       className="btn-secondary flex items-center gap-2"
+                       className="bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300 flex items-center gap-2"
                      >
                        <Play className="w-4 h-4" />
                        <span>Watch Demo</span>
@@ -158,12 +158,12 @@ export function HeroSection() {
                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                          ))}
                        </div>
-                       <span className="text-white font-semibold">4.9</span>
-                       <span className="text-white/60">70 reviews</span>
+                       <span className="text-transbot-text-primary font-semibold">4.9</span>
+                       <span className="text-transbot-text-primary/60">70 reviews</span>
                      </div>
                      <div className="flex items-center gap-2">
-                       <div className="text-white/60 text-sm">Capterra</div>
-                       <div className="text-white/60 text-sm">Google</div>
+                       <div className="text-transbot-text-primary/60 text-sm">Capterra</div>
+                       <div className="text-transbot-text-primary/60 text-sm">Google</div>
                      </div>
                    </motion.div>
           </motion.div>

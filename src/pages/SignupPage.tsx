@@ -53,13 +53,13 @@ export function SignupPage() {
           className="text-center mb-8"
         >
           <Link to="/" className="inline-flex items-center space-x-2 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-primary font-bold">TB</span>
+            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold">TB</span>
             </div>
-            <span className="text-2xl font-bold text-white">Trans Bot AI</span>
+            <span className="text-2xl font-bold text-transbot-text-primary">Trans Bot AI</span>
           </Link>
-          <h1 className="text-3xl font-bold text-white mb-2">Join the Revolution</h1>
-          <p className="text-white/70">Create your account and transform your logistics</p>
+          <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Join the Revolution</h1>
+          <p className="text-transbot-text-secondary">Create your account and transform your logistics</p>
         </motion.div>
 
         {/* Signup Form */}
@@ -67,23 +67,23 @@ export function SignupPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="glass p-8 rounded-2xl"
+          className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-slate-200/50"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-transbot-text-primary mb-2">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary" />
                 <input
                   id="name"
                   name="name"
                   type="text"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
                   placeholder="Enter your full name"
                   required
                 />
@@ -92,18 +92,18 @@ export function SignupPage() {
 
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-transbot-text-primary mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary" />
                 <input
                   id="email"
                   name="email"
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
                   placeholder="Enter your email"
                   required
                 />
@@ -112,7 +112,7 @@ export function SignupPage() {
 
             {/* Role Selection */}
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="role" className="block text-sm font-medium text-transbot-text-primary mb-2">
                 Role
               </label>
               <select
@@ -120,38 +120,37 @@ export function SignupPage() {
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                className="w-full px-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
                 required
               >
                 <option value="shipper">Shipper</option>
                 <option value="broker">Broker</option>
                 <option value="carrier">Carrier</option>
                 <option value="driver">Driver</option>
-                <option value="superadmin">Super Admin</option>
               </select>
             </div>
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-transbot-text-primary mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary" />
                 <input
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                  className="w-full pl-10 pr-12 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
                   placeholder="Create a password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary hover:text-transbot-text-primary transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -160,25 +159,25 @@ export function SignupPage() {
 
             {/* Confirm Password Field */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-transbot-text-primary mb-2">
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary" />
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                  className="w-full pl-10 pr-12 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
                   placeholder="Confirm your password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary hover:text-transbot-text-primary transition-colors"
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -202,10 +201,10 @@ export function SignupPage() {
               disabled={loading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full btn-primary flex items-center justify-center space-x-2 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-primary text-white flex items-center justify-center space-x-2 py-3 rounded-xl font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>Create Account</span>
@@ -217,9 +216,9 @@ export function SignupPage() {
 
           {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <p className="text-white/70">
+            <p className="text-transbot-text-secondary">
               Already have an account?{' '}
-              <Link to="/login" className="text-accent hover:text-accent/80 transition-colors font-medium">
+              <Link to="/login" className="text-transbot-sky hover:text-transbot-sky/80 transition-colors font-medium">
                 Sign in here
               </Link>
             </p>

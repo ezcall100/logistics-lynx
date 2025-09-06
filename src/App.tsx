@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { SimplifiedHeader } from './components/SimplifiedHeader'
-import { ComprehensiveSidebar } from './components/ComprehensiveSidebar'
+import { HorizontalMegaMenu } from './components/HorizontalMegaMenu'
 import { AdvancedFAB } from './components/AdvancedFAB'
+import { ResponsiveTest } from './components/ResponsiveTest'
 import { NeuralBackground } from './components/NeuralBackground'
 import { EnhancedHomePage } from './components/EnhancedHomePage'
 import { HeroSection } from './components/HeroSection'
@@ -14,9 +14,11 @@ import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { SuperAdminPortal } from './pages/super-admin/SuperAdminPortal'
+import { GetStartedPage } from './pages/GetStartedPage'
+import { SubdomainManagement } from './pages/admin/SubdomainManagement'
+import { MCPAgentAdmin } from './pages/portals/admin/MCPAgentAdmin'
+import { HumanDeveloperAdmin } from './pages/portals/admin/HumanDeveloperAdmin'
 import { AuthProvider } from './contexts/AuthContext'
-import { SidebarProvider } from './contexts/SidebarContext'
-import { Layout } from './components/Layout'
 import SolutionsPage from './pages/SolutionsPage'
 import PricingPage from './pages/PricingPage'
 import ResourcesPage from './pages/ResourcesPage'
@@ -50,15 +52,13 @@ import CRMPortal from './pages/portals/crm/CRMPortal'
 function App() {
   return (
     <AuthProvider>
-      <SidebarProvider>
-        <Router>
-          <div className="min-h-screen relative">
-            <NeuralBackground />
-            <SimplifiedHeader />
-            <ComprehensiveSidebar />
-            <AdvancedFAB />
-            <Layout>
-            <Routes>
+      <Router>
+        <div className="min-h-screen relative">
+          <NeuralBackground />
+          <HorizontalMegaMenu />
+          <ResponsiveTest />
+          <AdvancedFAB />
+          <Routes>
               <Route path="/" element={
                 <>
                   <EnhancedHomePage />
@@ -79,6 +79,10 @@ function App() {
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard/*" element={<DashboardPage />} />
               <Route path="/super-admin/*" element={<SuperAdminPortal />} />
+              <Route path="/get-started" element={<GetStartedPage />} />
+              <Route path="/admin/subdomains" element={<SubdomainManagement />} />
+              <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />
+              <Route path="/admin/human-developers" element={<HumanDeveloperAdmin />} />
               <Route path="/solutions" element={
                 <>
                   <SolutionsPage />
@@ -265,10 +269,8 @@ function App() {
                 </>
               } />
             </Routes>
-            </Layout>
         </div>
       </Router>
-      </SidebarProvider>
     </AuthProvider>
   )
 }

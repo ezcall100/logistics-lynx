@@ -9,7 +9,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <main className={`pt-20 transition-all duration-500 ${
-      isSidebarOpen ? 'pl-0 md:pl-80' : 'pl-0'
+      isSidebarOpen ? 'pl-80' : 'pl-0'
     }`}>
       <div className="min-h-screen">
         {children}

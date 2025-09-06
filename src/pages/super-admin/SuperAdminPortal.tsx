@@ -108,10 +108,10 @@ export function SuperAdminPortal() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-white mb-2">
+          <h1 className="text-4xl font-bold text-transbot-text-primary mb-2">
             Super Admin Portal
           </h1>
-          <p className="text-white/70 text-lg">
+          <p className="text-transbot-text-primary/70 text-lg">
             Complete system management and control center
           </p>
         </motion.div>
@@ -119,8 +119,8 @@ export function SuperAdminPortal() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar Menu */}
           <div className="lg:col-span-1">
-            <div className="glass p-6 rounded-2xl sticky top-24">
-              <h2 className="text-xl font-bold text-white mb-6">Navigation</h2>
+            <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl sticky top-24">
+              <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Navigation</h2>
               <div className="space-y-2">
                 {menuItems.map((item, index) => (
                   <motion.button
@@ -131,16 +131,16 @@ export function SuperAdminPortal() {
                     onClick={() => setActiveSection(item.id)}
                     className={`w-full flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 ${
                       activeSection === item.id
-                        ? 'bg-white/10 border border-white/20'
-                        : 'hover:bg-white/5'
+                        ? 'bg-white/80 border border-slate-200/50'
+                        : 'hover:bg-slate-50'
                     }`}
                   >
                     <div className={`p-2 rounded-lg ${item.bgColor}`}>
                       <item.icon className={`w-5 h-5 ${item.color}`} />
                     </div>
                     <div className="text-left">
-                      <div className="text-white font-medium">{item.title}</div>
-                      <div className="text-white/60 text-sm">{item.description}</div>
+                      <div className="text-transbot-text-primary font-medium">{item.title}</div>
+                      <div className="text-transbot-text-primary/60 text-sm">{item.description}</div>
                     </div>
                   </motion.button>
                 ))}
@@ -155,7 +155,7 @@ export function SuperAdminPortal() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="glass p-8 rounded-2xl"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl"
             >
               {getSectionContent()}
             </motion.div>
@@ -170,7 +170,7 @@ export function SuperAdminPortal() {
 function DashboardSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">System Dashboard</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
           { title: 'Total Users', value: '2,847', change: '+12%', icon: Users, color: 'text-blue-400' },
@@ -183,21 +183,21 @@ function DashboardSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl"
+            className="bg-slate-50 p-6 rounded-xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
               <div className="text-green-400 text-sm font-medium">{stat.change}</div>
             </div>
-            <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
+            <div className="text-transbot-text-primary/70 text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white/5 p-6 rounded-xl">
-          <h3 className="text-lg font-bold text-white mb-4">System Performance</h3>
+        <div className="bg-slate-50 p-6 rounded-xl">
+          <h3 className="text-lg font-bold text-transbot-text-primary mb-4">System Performance</h3>
           <div className="space-y-4">
             {[
               { metric: 'CPU Usage', value: '45%', status: 'normal' },
@@ -206,9 +206,9 @@ function DashboardSection() {
               { metric: 'Network', value: '23%', status: 'normal' }
             ].map((item, index) => (
               <div key={index} className="flex items-center justify-between">
-                <div className="text-white font-medium">{item.metric}</div>
+                <div className="text-transbot-text-primary font-medium">{item.metric}</div>
                 <div className="flex items-center space-x-3">
-                  <div className="text-white/70">{item.value}</div>
+                  <div className="text-transbot-text-primary/70">{item.value}</div>
                   <div className={`w-3 h-3 rounded-full ${
                     item.status === 'normal' ? 'bg-green-400' :
                     item.status === 'warning' ? 'bg-yellow-400' : 'bg-red-400'
@@ -219,8 +219,8 @@ function DashboardSection() {
           </div>
         </div>
 
-        <div className="bg-white/5 p-6 rounded-xl">
-          <h3 className="text-lg font-bold text-white mb-4">Recent Activity</h3>
+        <div className="bg-slate-50 p-6 rounded-xl">
+          <h3 className="text-lg font-bold text-transbot-text-primary mb-4">Recent Activity</h3>
           <div className="space-y-4">
             {[
               { action: 'New user registered', time: '2 minutes ago', type: 'user' },
@@ -230,10 +230,10 @@ function DashboardSection() {
             ].map((activity, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div>
-                  <div className="text-white font-medium">{activity.action}</div>
-                  <div className="text-white/60 text-sm">{activity.type}</div>
+                  <div className="text-transbot-text-primary font-medium">{activity.action}</div>
+                  <div className="text-transbot-text-primary/60 text-sm">{activity.type}</div>
                 </div>
-                <div className="text-white/50 text-sm">{activity.time}</div>
+                <div className="text-transbot-text-primary/50 text-sm">{activity.time}</div>
               </div>
             ))}
           </div>
@@ -247,7 +247,7 @@ function DashboardSection() {
 function UserManagementSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">User Management</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">User Management</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[
           { title: 'All Users', count: '2,847', icon: Users, color: 'text-blue-400' },
@@ -259,21 +259,21 @@ function UserManagementSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl"
+            className="bg-slate-50 p-6 rounded-xl"
           >
             <div className="flex items-center space-x-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
               <div>
-                <div className="text-2xl font-bold text-white">{stat.count}</div>
-                <div className="text-white/70 text-sm">{stat.title}</div>
+                <div className="text-2xl font-bold text-transbot-text-primary">{stat.count}</div>
+                <div className="text-transbot-text-primary/70 text-sm">{stat.title}</div>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-white/5 p-6 rounded-xl">
-        <h3 className="text-lg font-bold text-white mb-4">User Management Tools</h3>
+      <div className="bg-slate-50 p-6 rounded-xl">
+        <h3 className="text-lg font-bold text-transbot-text-primary mb-4">User Management Tools</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             'All Users', 'User Roles', 'User Groups', 'Access Control',
@@ -284,7 +284,7 @@ function UserManagementSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors text-white text-left"
+              className="p-4 bg-slate-50 rounded-xl hover:bg-white/80 transition-colors text-transbot-text-primary text-left"
             >
               {tool}
             </motion.button>
@@ -299,7 +299,7 @@ function UserManagementSection() {
 function SystemAdminSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">System Administration</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Administration</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           { title: 'Database Management', icon: Database, color: 'text-blue-400' },
@@ -318,11 +318,11 @@ function SystemAdminSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+            className="bg-slate-50 p-6 rounded-xl hover:bg-white/80 transition-colors cursor-pointer"
           >
             <div className="flex items-center space-x-4">
               <item.icon className={`w-8 h-8 ${item.color}`} />
-              <div className="text-white font-medium">{item.title}</div>
+              <div className="text-transbot-text-primary font-medium">{item.title}</div>
             </div>
           </motion.div>
         ))}
@@ -335,7 +335,7 @@ function SystemAdminSection() {
 function SecuritySection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">Security Center</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Security Center</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
           { title: 'Security Score', value: '98%', icon: Shield, color: 'text-green-400' },
@@ -348,19 +348,19 @@ function SecuritySection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl"
+            className="bg-slate-50 p-6 rounded-xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-primary/70 text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-white/5 p-6 rounded-xl">
-        <h3 className="text-lg font-bold text-white mb-4">Security Tools</h3>
+      <div className="bg-slate-50 p-6 rounded-xl">
+        <h3 className="text-lg font-bold text-transbot-text-primary mb-4">Security Tools</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             'Security Audit', 'Vulnerability Scan', 'Penetration Testing', 'Compliance Check',
@@ -371,7 +371,7 @@ function SecuritySection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors text-white text-left"
+              className="p-4 bg-slate-50 rounded-xl hover:bg-white/80 transition-colors text-transbot-text-primary text-left"
             >
               {tool}
             </motion.button>
@@ -386,7 +386,7 @@ function SecuritySection() {
 function AnalyticsSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">Analytics & Reports</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Analytics & Reports</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           { title: 'Business Intelligence', icon: TrendingUp, color: 'text-blue-400' },
@@ -401,11 +401,11 @@ function AnalyticsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+            className="bg-slate-50 p-6 rounded-xl hover:bg-white/80 transition-colors cursor-pointer"
           >
             <div className="flex items-center space-x-4">
               <item.icon className={`w-8 h-8 ${item.color}`} />
-              <div className="text-white font-medium">{item.title}</div>
+              <div className="text-transbot-text-primary font-medium">{item.title}</div>
             </div>
           </motion.div>
         ))}
@@ -418,7 +418,7 @@ function AnalyticsSection() {
 function IntegrationsSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">Integrations</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Integrations</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           { title: 'API Management', icon: Zap, color: 'text-blue-400' },
@@ -433,11 +433,11 @@ function IntegrationsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+            className="bg-slate-50 p-6 rounded-xl hover:bg-white/80 transition-colors cursor-pointer"
           >
             <div className="flex items-center space-x-4">
               <item.icon className={`w-8 h-8 ${item.color}`} />
-              <div className="text-white font-medium">{item.title}</div>
+              <div className="text-transbot-text-primary font-medium">{item.title}</div>
             </div>
           </motion.div>
         ))}
@@ -450,7 +450,7 @@ function IntegrationsSection() {
 function AIAgentsSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">AI Agents & MCP</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">AI Agents & MCP</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
           { title: 'Active Agents', value: '250', icon: Bot, color: 'text-blue-400' },
@@ -463,19 +463,19 @@ function AIAgentsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl"
+            className="bg-slate-50 p-6 rounded-xl"
           >
             <div className="flex items-center justify-between mb-4">
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
             </div>
-            <div className="text-white/70 text-sm">{stat.title}</div>
+            <div className="text-transbot-text-primary/70 text-sm">{stat.title}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-white/5 p-6 rounded-xl">
-        <h3 className="text-lg font-bold text-white mb-4">AI Agent Management</h3>
+      <div className="bg-slate-50 p-6 rounded-xl">
+        <h3 className="text-lg font-bold text-transbot-text-primary mb-4">AI Agent Management</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             'Agent Control', 'Task Management', 'Performance Monitoring', 'Agent Training',
@@ -486,7 +486,7 @@ function AIAgentsSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors text-white text-left"
+              className="p-4 bg-slate-50 rounded-xl hover:bg-white/80 transition-colors text-transbot-text-primary text-left"
             >
               {tool}
             </motion.button>
@@ -501,7 +501,7 @@ function AIAgentsSection() {
 function SettingsSection() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-6">System Settings</h2>
+      <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">System Settings</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           { title: 'General Settings', icon: Settings, color: 'text-blue-400' },
@@ -516,11 +516,11 @@ function SettingsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+            className="bg-slate-50 p-6 rounded-xl hover:bg-white/80 transition-colors cursor-pointer"
           >
             <div className="flex items-center space-x-4">
               <item.icon className={`w-8 h-8 ${item.color}`} />
-              <div className="text-white font-medium">{item.title}</div>
+              <div className="text-transbot-text-primary font-medium">{item.title}</div>
             </div>
           </motion.div>
         ))}

@@ -129,14 +129,14 @@ export function NeuralNetwork() {
         <div className="text-2xl font-bold gradient-text-cyan">
           {activeAgents}/250
         </div>
-        <div className="text-sm text-white/80">
+        <div className="text-sm text-transbot-text-primary/80">
           AI Agents Active
         </div>
       </div>
 
       {/* Task Display */}
       <div className="absolute bottom-4 right-4 bg-holographic-glass p-4 rounded-xl max-w-xs">
-        <div className="text-sm text-white/80 mb-2">Current Tasks:</div>
+        <div className="text-sm text-transbot-text-primary/80 mb-2">Current Tasks:</div>
         {agents
           .filter(agent => agent.status === 'processing')
           .slice(0, 3)

@@ -13,23 +13,23 @@ export function TestDesign() {
             <h2 className="text-2xl font-semibold gradient-text-cyan mb-4">
               Holographic Glass Effect
             </h2>
-            <p className="text-white/80 mb-4">
+            <p className="text-transbot-text-primary/80 mb-4">
               This card should have a beautiful glassmorphism effect with cyan/blue gradients.
             </p>
-            <button className="btn-primary">
+            <button className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300">
               Test Button
             </button>
           </div>
           
           {/* Test Card 2 */}
-          <div className="glass p-6 rounded-2xl">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl">
             <h2 className="text-2xl font-semibold gradient-text-blue mb-4">
               Standard Glass Effect
             </h2>
-            <p className="text-white/80 mb-4">
+            <p className="text-transbot-text-primary/80 mb-4">
               This card should have a standard glass effect with backdrop blur.
             </p>
-            <button className="btn-secondary">
+            <button className="bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300">
               Secondary Button
             </button>
           </div>
@@ -37,10 +37,10 @@ export function TestDesign() {
         
         {/* Background Test */}
         <div className="mt-8 p-8 rounded-2xl bg-transbot-neural">
-          <h2 className="text-2xl font-semibold text-white mb-4">
+          <h2 className="text-2xl font-semibold text-transbot-text-primary mb-4">
             Neural Background Test
           </h2>
-          <p className="text-white/80">
+          <p className="text-transbot-text-primary/80">
             This should show the neural network background pattern.
           </p>
         </div>
