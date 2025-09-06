@@ -19,7 +19,10 @@ import {
   Brain,
   Target,
   Rocket,
-  Star
+  Star,
+  Package,
+  Truck,
+  Shield
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 
@@ -75,7 +78,10 @@ export function HorizontalMegaMenu() {
         { id: 'route-optimizer', label: 'Route Optimization', href: '/ai-agents/route-optimizer', icon: Target, description: 'AI-powered route planning' },
         { id: 'load-matching', label: 'Load Matching', href: '/ai-agents/load-matcher', icon: Zap, description: 'Smart load-carrier matching' },
         { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/ai-agents/predictive-analytics', icon: BarChart3, description: 'Forecast and optimize' },
-        { id: 'fleet-management', label: 'Fleet Management', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Comprehensive fleet control' }
+        { id: 'fleet-management', label: 'Fleet Management', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Comprehensive fleet control' },
+        { id: 'freight-brokerage', label: 'Freight Brokerage', href: '/solutions/brokerage', icon: Briefcase, description: 'End-to-end brokerage solutions' },
+        { id: 'warehouse-management', label: 'Warehouse Management', href: '/solutions/warehouse', icon: Package, description: 'Smart warehouse operations' },
+        { id: 'last-mile-delivery', label: 'Last Mile Delivery', href: '/solutions/last-mile', icon: Truck, description: 'Optimized final delivery' }
       ],
       featured: [
         { id: 'tms-featured', label: 'Transportation Management', href: '/solutions/transportation', icon: Globe, featured: true, description: 'Complete TMS solution with AI integration' }
@@ -87,18 +93,37 @@ export function HorizontalMegaMenu() {
         { id: 'route-optimizer', label: 'Route Optimizer', href: '/ai-agents/route-optimizer', icon: Target, description: 'Optimize delivery routes' },
         { id: 'load-matcher', label: 'Load Matcher', href: '/ai-agents/load-matcher', icon: Zap, description: 'Match loads with carriers' },
         { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/ai-agents/predictive-analytics', icon: BarChart3, description: 'Predict trends and optimize' },
-        { id: 'fleet-manager', label: 'Fleet Manager', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Manage fleet operations' }
+        { id: 'fleet-manager', label: 'Fleet Manager', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Manage fleet operations' },
+        { id: 'fuel-optimizer', label: 'Fuel Optimizer', href: '/ai-agents/fuel-optimizer', icon: Zap, description: 'Minimize fuel consumption' },
+        { id: 'demand-forecaster', label: 'Demand Forecaster', href: '/ai-agents/demand-forecaster', icon: BarChart3, description: 'Predict shipping demand' },
+        { id: 'price-optimizer', label: 'Price Optimizer', href: '/ai-agents/price-optimizer', icon: TrendingUp, description: 'Dynamic pricing strategies' },
+        { id: 'maintenance-predictor', label: 'Maintenance Predictor', href: '/ai-agents/maintenance-predictor', icon: Target, description: 'Predictive maintenance alerts' }
       ]
     },
     {
       title: 'Portals',
       items: [
+        // Core TMS Portals (10)
         { id: 'customer-portal', label: 'Customer Portal', href: '/portals/customer', icon: Users, description: 'Customer self-service' },
-        { id: 'broker-portal', label: 'Broker Portal', href: '/portals/broker', icon: Briefcase, description: 'Freight brokerage management' },
-        { id: 'carrier-portal', label: 'Carrier Portal', href: '/portals/carrier', icon: Rocket, description: 'Carrier operations' },
-        { id: 'driver-portal', label: 'Driver Portal', href: '/portals/driver', icon: User, description: 'Mobile driver interface' },
-        { id: 'analytics-portal', label: 'Analytics Portal', href: '/portals/analytics', icon: BarChart3, description: 'Business intelligence' },
-        { id: 'marketplace-portal', label: 'Marketplace Portal', href: '/portals/marketplace', icon: Globe, description: 'Trading marketplace' }
+        { id: 'broker-portal', label: 'Broker Portal', href: '/broker', icon: Briefcase, description: 'Freight brokerage management' },
+        { id: 'carrier-portal', label: 'Carrier Portal', href: '/carrier', icon: Rocket, description: 'Carrier operations' },
+        { id: 'driver-portal', label: 'Driver Portal', href: '/driver', icon: User, description: 'Mobile driver interface' },
+        { id: 'shipper-portal', label: 'Shipper Portal', href: '/shipper', icon: Package, description: 'Shipment management' },
+        { id: 'analytics-portal', label: 'Analytics Portal', href: '/analytics', icon: BarChart3, description: 'Business intelligence' },
+        { id: 'autonomous-portal', label: 'Autonomous Portal', href: '/autonomous', icon: Rocket, description: 'Autonomous vehicle management' },
+        { id: 'yms-portal', label: 'Yard Management Portal', href: '/yms', icon: Globe, description: 'Yard management system' },
+        { id: 'directory-portal', label: 'Directory Portal', href: '/directory', icon: Users, description: 'Industry directory' },
+        { id: 'rates-portal', label: 'Rates Portal', href: '/rates', icon: TrendingUp, description: 'Rate management' },
+        
+        // Business Operations Portals (15)
+        { id: 'marketplace-portal', label: 'Marketplace Portal', href: '/marketplace', icon: Globe, description: 'Trading marketplace' },
+        { id: 'financial-portal', label: 'Financial Portal', href: '/financials', icon: TrendingUp, description: 'Financial management' },
+        { id: 'load-board-portal', label: 'Load Board Portal', href: '/load-board', icon: Package, description: 'Load board management' },
+        { id: 'crm-portal', label: 'CRM Portal', href: '/crm', icon: Users, description: 'Customer relationship management' },
+        { id: 'partner-portal', label: 'Partner Portal', href: '/portals/partner', icon: Users, description: 'Partner management' },
+        { id: 'developer-portal', label: 'Developer Portal', href: '/portals/developer', icon: Target, description: 'API and integration tools' },
+        { id: 'admin-portal', label: 'Admin Portal', href: '/portals/admin', icon: Users, description: 'System administration' },
+        { id: 'super-admin-portal', label: 'Super Admin Portal', href: '/portals/super-admin', icon: Shield, description: 'Master system control' }
       ]
     },
     {
@@ -107,7 +132,11 @@ export function HorizontalMegaMenu() {
         { id: 'about', label: 'About Us', href: '/company', icon: Users, description: 'Learn about Trans Bot AI' },
         { id: 'careers', label: 'Careers', href: '/careers', icon: Briefcase, description: 'Join our team' },
         { id: 'contact', label: 'Contact', href: '/contact', icon: User, description: 'Get in touch' },
-        { id: 'press', label: 'Press', href: '/press', icon: Star, description: 'News and updates' }
+        { id: 'press', label: 'Press', href: '/press', icon: Star, description: 'News and updates' },
+        { id: 'leadership', label: 'Leadership', href: '/leadership', icon: Users, description: 'Meet our leadership team' },
+        { id: 'investors', label: 'Investors', href: '/investors', icon: TrendingUp, description: 'Investor information' },
+        { id: 'partners', label: 'Partners', href: '/partners', icon: Globe, description: 'Strategic partnerships' },
+        { id: 'security', label: 'Security', href: '/security', icon: Shield, description: 'Security and compliance' }
       ]
     }
   ]
@@ -225,63 +254,149 @@ export function HorizontalMegaMenu() {
               className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl"
             >
               <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-                  {megaMenuSections.map((section, index) => (
-                    <motion.div
-                      key={section.title}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="space-y-4"
-                    >
-                      <h3 className="text-lg font-semibold text-slate-900 mb-4">{section.title}</h3>
-                      
-                      {section.featured && (
-                        <div className="mb-6">
-                          {section.featured.map((item) => (
-                            <motion.div
-                              key={item.id}
-                              whileHover={{ scale: 1.02 }}
-                              className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200 cursor-pointer"
-                              onClick={() => handleNavigation(item.href)}
-                            >
-                              <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                                  <item.icon className="w-5 h-5 text-white" />
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold text-slate-900">{item.label}</h4>
-                                  <p className="text-sm text-slate-600">{item.description}</p>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-blue-600 ml-auto" />
-                              </div>
-                            </motion.div>
-                          ))}
+                <div className="max-w-6xl mx-auto">
+                  {megaMenuSections
+                    .filter(section => {
+                      // Map activeMenu to section titles
+                      const menuToSection: { [key: string]: string } = {
+                        'solutions': 'Solutions',
+                        'ai-agents': 'AI Agents',
+                        'portals': 'Portals',
+                        'company': 'Company'
+                      }
+                      return section.title === menuToSection[activeMenu]
+                    })
+                    .map((section, index) => (
+                      <motion.div
+                        key={section.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="space-y-8"
+                      >
+                        {/* Section Header */}
+                        <div className="text-center mb-8">
+                          <h2 className="text-3xl font-bold text-slate-900 mb-2">{section.title}</h2>
+                          <p className="text-slate-600 max-w-2xl mx-auto">
+                            {section.title === 'Solutions' && 'Complete transportation and logistics solutions powered by AI'}
+                            {section.title === 'AI Agents' && 'Intelligent AI agents that automate and optimize your operations'}
+                            {section.title === 'Portals' && 'Comprehensive portal ecosystem for all stakeholders'}
+                            {section.title === 'Company' && 'Learn more about Trans Bot AI and our mission'}
+                          </p>
                         </div>
-                      )}
 
-                      <div className="space-y-2">
-                        {section.items.map((item) => (
-                          <motion.button
-                            key={item.id}
-                            whileHover={{ x: 4 }}
-                            onClick={() => handleNavigation(item.href)}
-                            className="w-full text-left p-3 rounded-lg hover:bg-slate-50 transition-colors group"
-                          >
-                            <div className="flex items-center space-x-3">
-                              <item.icon className="w-5 h-5 text-slate-400 group-hover:text-blue-600 transition-colors" />
-                              <div>
-                                <p className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">
-                                  {item.label}
+                        {/* Featured Item */}
+                        {section.featured && (
+                          <div className="mb-12">
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">Featured Solution</h3>
+                            {section.featured.map((item) => (
+                              <motion.div
+                                key={item.id}
+                                whileHover={{ scale: 1.02, y: -2 }}
+                                className="relative p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 rounded-2xl border-2 border-blue-200 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300"
+                                onClick={() => handleNavigation(item.href)}
+                              >
+                                <div className="flex items-center space-x-6">
+                                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                    <item.icon className="w-8 h-8 text-white" />
+                                  </div>
+                                  <div className="flex-1">
+                                    <h4 className="text-2xl font-bold text-slate-900 mb-2">{item.label}</h4>
+                                    <p className="text-lg text-slate-700 mb-4">{item.description}</p>
+                                    <div className="flex items-center text-blue-600 font-semibold">
+                                      <span>Explore Solution</span>
+                                      <ArrowRight className="w-5 h-5 ml-2" />
+                                    </div>
+                                  </div>
+                                  <div className="absolute top-4 right-4">
+                                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                  </div>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Regular Items */}
+                        <div>
+                          <h3 className="text-xl font-semibold text-slate-800 mb-6">
+                            {section.title === 'Solutions' && 'All Solutions'}
+                            {section.title === 'AI Agents' && 'All AI Agents'}
+                            {section.title === 'Portals' && 'All Portals'}
+                            {section.title === 'Company' && 'Company Information'}
+                          </h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {section.items.map((item, itemIndex) => (
+                              <motion.button
+                                key={item.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                                whileHover={{ y: -4, scale: 1.02 }}
+                                onClick={() => handleNavigation(item.href)}
+                                className="group p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-left"
+                              >
+                                <div className="flex flex-col items-center text-center space-y-4">
+                                  <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 rounded-xl flex items-center justify-center transition-all duration-300">
+                                    <item.icon className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors" />
+                                  </div>
+                                  <div>
+                                    <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
+                                      {item.label}
+                                    </h4>
+                                    <p className="text-sm text-slate-500 leading-relaxed">
+                                      {item.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </motion.button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Special handling for Portals with categories */}
+                        {section.title === 'Portals' && (
+                          <div className="mt-12 pt-8 border-t border-slate-200">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+                                <h4 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+                                  <Rocket className="w-5 h-5 mr-2" />
+                                  Core TMS Portals
+                                </h4>
+                                <p className="text-blue-700 text-sm mb-4">
+                                  Essential transportation management system portals for core operations
                                 </p>
-                                <p className="text-sm text-slate-500">{item.description}</p>
+                                <div className="space-y-2">
+                                  {section.items.slice(0, 10).map((item) => (
+                                    <div key={item.id} className="flex items-center text-sm text-blue-800">
+                                      <item.icon className="w-4 h-4 mr-2" />
+                                      {item.label}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
+                                <h4 className="text-lg font-semibold text-purple-900 mb-4 flex items-center">
+                                  <Briefcase className="w-5 h-5 mr-2" />
+                                  Business Operations
+                                </h4>
+                                <p className="text-purple-700 text-sm mb-4">
+                                  Business and administrative portals for comprehensive operations
+                                </p>
+                                <div className="space-y-2">
+                                  {section.items.slice(10).map((item) => (
+                                    <div key={item.id} className="flex items-center text-sm text-purple-800">
+                                      <item.icon className="w-4 h-4 mr-2" />
+                                      {item.label}
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
                             </div>
-                          </motion.button>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
                 </div>
 
                 {/* Bottom CTA */}

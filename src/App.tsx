@@ -3,7 +3,7 @@ import { HorizontalMegaMenu } from './components/HorizontalMegaMenu'
 import { AdvancedFAB } from './components/AdvancedFAB'
 import { ResponsiveTest } from './components/ResponsiveTest'
 import { NeuralBackground } from './components/NeuralBackground'
-import { EnhancedHomePage } from './components/EnhancedHomePage'
+import OutstandingHomePage from './components/OutstandingHomePage'
 import { HeroSection } from './components/HeroSection'
 import { TrustedBy } from './components/TrustedBy'
 import { FeaturesSection } from './components/FeaturesSection'
@@ -61,7 +61,7 @@ function App() {
           <Routes>
               <Route path="/" element={
                 <>
-                  <EnhancedHomePage />
+                  <OutstandingHomePage />
                   <Footer />
                 </>
               } />
