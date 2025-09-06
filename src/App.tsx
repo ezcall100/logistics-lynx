@@ -48,6 +48,10 @@ import MarketplacePortal from './pages/portals/marketplace/MarketplacePortal'
 import FinancialsPortal from './pages/portals/financials/FinancialsPortal'
 import LoadBoardPortal from './pages/portals/load-board/LoadBoardPortal'
 import CRMPortal from './pages/portals/crm/CRMPortal'
+import EDIPortal from './pages/portals/edi/EDIPortal'
+import OwnerOperatorPortal from './pages/portals/owner-operator/OwnerOperatorPortal'
+import WorkersPortal from './pages/portals/workers/WorkersPortal'
+import FactoringPortal from './pages/portals/factoring/FactoringPortal'
 
 function App() {
   return (
@@ -217,6 +221,30 @@ function App() {
               <Route path="/crm" element={
                 <>
                   <CRMPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/edi" element={
+                <>
+                  <EDIPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/owner-operator" element={
+                <>
+                  <OwnerOperatorPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/workers" element={
+                <>
+                  <WorkersPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/factoring" element={
+                <>
+                  <FactoringPortal />
                   <Footer />
                 </>
               } />
