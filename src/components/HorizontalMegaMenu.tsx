@@ -262,10 +262,10 @@ export function HorizontalMegaMenu() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl"
+              className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl max-h-[80vh] overflow-y-auto"
             >
               <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-7xl mx-auto">
                   {megaMenuSections
                     .filter(section => {
                       // Map activeMenu to section titles
@@ -328,81 +328,164 @@ export function HorizontalMegaMenu() {
                           </div>
                         )}
 
-                        {/* Regular Items */}
-                        <div>
-                          <h3 className="text-xl font-semibold text-slate-800 mb-6">
-                            {section.title === 'Solutions' && 'All Solutions'}
-                            {section.title === 'AI Agents' && 'All AI Agents'}
-                            {section.title === 'Portals' && 'All Portals'}
-                            {section.title === 'Company' && 'Company Information'}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                            {section.items.map((item, itemIndex) => (
-                              <motion.button
-                                key={item.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
-                                whileHover={{ y: -4, scale: 1.02 }}
-                                onClick={() => handleNavigation(item.href)}
-                                className="group p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-left"
-                              >
-                                <div className="flex flex-col items-center text-center space-y-4">
-                                  <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 rounded-xl flex items-center justify-center transition-all duration-300">
-                                    <item.icon className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors" />
-                                  </div>
-                                  <div>
-                                    <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
-                                      {item.label}
-                                    </h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed">
-                                      {item.description}
-                                    </p>
-                                  </div>
+                        {/* Special handling for Portals with organized categories */}
+                        {section.title === 'Portals' ? (
+                          <div className="space-y-8">
+                            {/* Core TMS Portals */}
+                            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6 rounded-2xl border border-blue-200">
+                              <div className="flex items-center mb-6">
+                                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
+                                  <Rocket className="w-6 h-6 text-white" />
                                 </div>
-                              </motion.button>
-                            ))}
-                          </div>
-                        </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-blue-900">Core TMS Portals</h3>
+                                  <p className="text-blue-700 text-sm">Essential transportation management portals</p>
+                                </div>
+                              </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {section.items.slice(0, 11).map((item, itemIndex) => (
+                                  <motion.button
+                                    key={item.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                                    whileHover={{ y: -2, scale: 1.02 }}
+                                    onClick={() => handleNavigation(item.href)}
+                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 text-left"
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 rounded-lg flex items-center justify-center transition-all duration-300">
+                                        <item.icon className="w-5 h-5 text-blue-600" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-blue-900 group-hover:text-blue-700 transition-colors text-sm">
+                                          {item.label}
+                                        </h4>
+                                        <p className="text-xs text-blue-600 leading-relaxed">
+                                          {item.description}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </motion.button>
+                                ))}
+                              </div>
+                            </div>
 
-                        {/* Special handling for Portals with categories */}
-                        {section.title === 'Portals' && (
-                          <div className="mt-12 pt-8 border-t border-slate-200">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
-                                <h4 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
-                                  <Rocket className="w-5 h-5 mr-2" />
-                                  Core TMS Portals
-                                </h4>
-                                <p className="text-blue-700 text-sm mb-4">
-                                  Essential transportation management system portals for core operations
-                                </p>
-                                <div className="space-y-2">
-                                  {section.items.slice(0, 10).map((item) => (
-                                    <div key={item.id} className="flex items-center text-sm text-blue-800">
-                                      <item.icon className="w-4 h-4 mr-2" />
-                                      {item.label}
-                                    </div>
-                                  ))}
+                            {/* Business Operations Portals */}
+                            <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
+                              <div className="flex items-center mb-6">
+                                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mr-4">
+                                  <Briefcase className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-purple-900">Business Operations</h3>
+                                  <p className="text-purple-700 text-sm">Business and administrative portals</p>
                                 </div>
                               </div>
-                              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
-                                <h4 className="text-lg font-semibold text-purple-900 mb-4 flex items-center">
-                                  <Briefcase className="w-5 h-5 mr-2" />
-                                  Business Operations
-                                </h4>
-                                <p className="text-purple-700 text-sm mb-4">
-                                  Business and administrative portals for comprehensive operations
-                                </p>
-                                <div className="space-y-2">
-                                  {section.items.slice(10).map((item) => (
-                                    <div key={item.id} className="flex items-center text-sm text-purple-800">
-                                      <item.icon className="w-4 h-4 mr-2" />
-                                      {item.label}
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {section.items.slice(11, 17).map((item, itemIndex) => (
+                                  <motion.button
+                                    key={item.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                                    whileHover={{ y: -2, scale: 1.02 }}
+                                    onClick={() => handleNavigation(item.href)}
+                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all duration-300 text-left"
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 group-hover:from-purple-200 group-hover:to-purple-300 rounded-lg flex items-center justify-center transition-all duration-300">
+                                        <item.icon className="w-5 h-5 text-purple-600" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-purple-900 group-hover:text-purple-700 transition-colors text-sm">
+                                          {item.label}
+                                        </h4>
+                                        <p className="text-xs text-purple-600 leading-relaxed">
+                                          {item.description}
+                                        </p>
+                                      </div>
                                     </div>
-                                  ))}
+                                  </motion.button>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Admin & Specialized Portals */}
+                            <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 p-6 rounded-2xl border border-emerald-200">
+                              <div className="flex items-center mb-6">
+                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
+                                  <Shield className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-emerald-900">Admin & Specialized</h3>
+                                  <p className="text-emerald-700 text-sm">Administrative and specialized portals</p>
                                 </div>
                               </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {section.items.slice(17).map((item, itemIndex) => (
+                                  <motion.button
+                                    key={item.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                                    whileHover={{ y: -2, scale: 1.02 }}
+                                    onClick={() => handleNavigation(item.href)}
+                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all duration-300 text-left"
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 rounded-lg flex items-center justify-center transition-all duration-300">
+                                        <item.icon className="w-5 h-5 text-emerald-600" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-emerald-900 group-hover:text-emerald-700 transition-colors text-sm">
+                                          {item.label}
+                                        </h4>
+                                        <p className="text-xs text-emerald-600 leading-relaxed">
+                                          {item.description}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </motion.button>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          /* Regular Items for other sections */
+                          <div>
+                            <h3 className="text-xl font-semibold text-slate-800 mb-6">
+                              {section.title === 'Solutions' && 'All Solutions'}
+                              {section.title === 'AI Agents' && 'All AI Agents'}
+                              {section.title === 'Portals' && 'All Portals'}
+                              {section.title === 'Company' && 'Company Information'}
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {section.items.map((item, itemIndex) => (
+                                <motion.button
+                                  key={item.id}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                                  whileHover={{ y: -4, scale: 1.02 }}
+                                  onClick={() => handleNavigation(item.href)}
+                                  className="group p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-left"
+                                >
+                                  <div className="flex flex-col items-center text-center space-y-4">
+                                    <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 rounded-xl flex items-center justify-center transition-all duration-300">
+                                      <item.icon className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors" />
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
+                                        {item.label}
+                                      </h4>
+                                      <p className="text-sm text-slate-500 leading-relaxed">
+                                        {item.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </motion.button>
+                              ))}
                             </div>
                           </div>
                         )}
