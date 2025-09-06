@@ -22,7 +22,10 @@ import {
   Star,
   Package,
   Truck,
-  Shield
+  Shield,
+  Layers,
+  Database,
+  Banknote
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 
@@ -123,7 +126,15 @@ export function HorizontalMegaMenu() {
         { id: 'partner-portal', label: 'Partner Portal', href: '/portals/partner', icon: Users, description: 'Partner management' },
         { id: 'developer-portal', label: 'Developer Portal', href: '/portals/developer', icon: Target, description: 'API and integration tools' },
         { id: 'admin-portal', label: 'Admin Portal', href: '/portals/admin', icon: Users, description: 'System administration' },
-        { id: 'super-admin-portal', label: 'Super Admin Portal', href: '/portals/super-admin', icon: Shield, description: 'Master system control' }
+        { id: 'super-admin-portal', label: 'Super Admin Portal', href: '/super-admin', icon: Shield, description: 'Master system control' },
+        { id: 'mcp-agent-admin', label: 'MCP Agent Admin', href: '/admin/mcp-agents', icon: Bot, description: 'Manage AI agents' },
+        { id: 'human-developer-admin', label: 'Human Developer Admin', href: '/admin/human-developers', icon: Users, description: 'Manage human developers' },
+        { id: 'enhanced-broker-portal', label: 'Enhanced Broker Portal', href: '/portals/broker/enhanced', icon: Briefcase, description: 'Advanced brokerage features' },
+        { id: 'portals-overview', label: 'Portals Overview', href: '/portals', icon: Layers, description: 'Overview of all portals' },
+        { id: 'workers-portal', label: 'Workers Portal', href: '/workers', icon: Users, description: 'Workforce management' },
+        { id: 'edi-portal', label: 'EDI Portal', href: '/edi', icon: Database, description: 'Electronic data interchange' },
+        { id: 'owner-operator-portal', label: 'Owner-Operator Portal', href: '/owner-operator', icon: Truck, description: 'Independent trucking business' },
+        { id: 'factoring-portal', label: 'Factoring Portal', href: '/factoring', icon: Banknote, description: 'Invoice factoring and cash flow' }
       ]
     },
     {

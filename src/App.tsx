@@ -52,6 +52,7 @@ import EDIPortal from './pages/portals/edi/EDIPortal'
 import OwnerOperatorPortal from './pages/portals/owner-operator/OwnerOperatorPortal'
 import WorkersPortal from './pages/portals/workers/WorkersPortal'
 import FactoringPortal from './pages/portals/factoring/FactoringPortal'
+import EnhancedBrokerPortal from './pages/portals/broker/EnhancedBrokerPortal'
 
 function App() {
   return (
@@ -149,6 +150,12 @@ function App() {
               <Route path="/broker" element={
                 <>
                   <BrokerPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/broker/enhanced" element={
+                <>
+                  <EnhancedBrokerPortal />
                   <Footer />
                 </>
               } />
