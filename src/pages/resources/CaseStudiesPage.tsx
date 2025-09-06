@@ -1,126 +1,146 @@
 import React from 'react'
-import { ResponsiveContainer } from '../../components/ResponsiveContainer'
+import { TrendingUp, Users, DollarSign, Clock, ArrowRight, Star } from 'lucide-react'
 
 const CaseStudiesPage: React.FC = () => {
   const caseStudies = [
     {
-      title: 'E-commerce Giant Reduces Delivery Times by 40%',
-      company: 'Global Retail Chain',
-      industry: 'E-commerce',
-      challenge: 'High delivery costs and long delivery times affecting customer satisfaction',
-      solution: 'Implemented AI-powered route optimization and last-mile delivery automation',
-      results: [
-        '40% reduction in average delivery time',
-        '25% decrease in delivery costs',
-        '95% customer satisfaction rate',
-        '30% increase in repeat orders'
-      ],
-      image: '🛒'
+      id: 1,
+      company: "Global Freight Solutions",
+      industry: "International Shipping",
+      challenge: "High fuel costs and inefficient routing",
+      solution: "AI-powered route optimization and fleet management",
+      results: {
+        fuelSavings: "35%",
+        timeReduction: "40%",
+        costReduction: "28%",
+        satisfaction: "98%"
+      },
+      testimonial: "Trans Bot AI transformed our operations completely. The fuel savings alone paid for the system in 3 months.",
+      author: "John Smith, CEO"
     },
     {
-      title: 'Manufacturing Company Streamlines Supply Chain',
-      company: 'Automotive Manufacturer',
-      industry: 'Manufacturing',
-      challenge: 'Complex supply chain with multiple suppliers and tight production schedules',
-      solution: 'Deployed AI agents for supplier coordination and production planning',
-      results: [
-        '30% reduction in production delays',
-        '20% improvement in supplier performance',
-        '15% cost savings in logistics',
-        '99.5% on-time delivery rate'
-      ],
-      image: '🏭'
+      id: 2,
+      company: "Metro Logistics",
+      industry: "Last Mile Delivery",
+      challenge: "Delayed deliveries and customer complaints",
+      solution: "Predictive analytics and real-time optimization",
+      results: {
+        fuelSavings: "25%",
+        timeReduction: "45%",
+        costReduction: "32%",
+        satisfaction: "99%"
+      },
+      testimonial: "Our delivery times improved dramatically. Customers are happier than ever before.",
+      author: "Sarah Johnson, Operations Director"
     },
     {
-      title: 'Healthcare Provider Ensures Compliance',
-      company: 'Regional Hospital Network',
-      industry: 'Healthcare',
-      challenge: 'Critical need for temperature-controlled transport and regulatory compliance',
-      solution: 'Implemented specialized AI agents for cold chain management and compliance tracking',
-      results: [
-        '100% compliance with regulatory requirements',
-        'Zero temperature excursions',
-        '50% reduction in manual monitoring',
-        '24/7 automated compliance reporting'
-      ],
-      image: '🏥'
+      id: 3,
+      company: "Regional Transport Co.",
+      industry: "Regional Trucking",
+      challenge: "Driver shortage and maintenance costs",
+      solution: "Fleet management and predictive maintenance",
+      results: {
+        fuelSavings: "30%",
+        timeReduction: "35%",
+        costReduction: "25%",
+        satisfaction: "97%"
+      },
+      testimonial: "The predictive maintenance feature saved us thousands in unexpected repairs.",
+      author: "Mike Chen, Fleet Manager"
     }
   ]
 
   return (
-    <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900">
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-white mb-6">
-              Case Studies
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-green-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-green-600 to-blue-700 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Success Stories
             </h1>
-            <p className="text-xl text-emerald-200 max-w-3xl mx-auto">
-              Real-world success stories from companies that have transformed their logistics operations with our AI platform
+            <p className="text-xl md:text-2xl text-green-100 max-w-3xl mx-auto">
+              Real results from companies using Trans Bot AI
             </p>
           </div>
+        </div>
+      </div>
 
-          <div className="space-y-12">
-            {caseStudies.map((study, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div>
-                    <div className="flex items-center mb-4">
-                      <span className="text-4xl mr-4">{study.image}</span>
-                      <div>
-                        <h2 className="text-2xl font-bold text-white">{study.title}</h2>
-                        <p className="text-emerald-300 font-semibold">{study.company}</p>
-                        <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-sm mt-2">
-                          {study.industry}
-                        </span>
-                      </div>
+      {/* Case Studies */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="space-y-16">
+          {caseStudies.map((study, index) => (
+            <div key={study.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+              <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                <div className="bg-white rounded-2xl shadow-xl p-8">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-white" />
                     </div>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-white mb-2">Challenge</h3>
-                        <p className="text-emerald-200">{study.challenge}</p>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-lg font-semibold text-white mb-2">Solution</h3>
-                        <p className="text-emerald-200">{study.solution}</p>
-                      </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900">{study.company}</h3>
+                      <p className="text-gray-600">{study.industry}</p>
                     </div>
                   </div>
                   
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-4">Results</h3>
-                    <div className="space-y-3">
-                      {study.results.map((result, resultIndex) => (
-                        <div key={resultIndex} className="flex items-center">
-                          <svg className="w-5 h-5 text-emerald-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          <span className="text-emerald-200">{result}</span>
-                        </div>
-                      ))}
+                  <div className="space-y-4 mb-8">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                      <p className="text-gray-600">{study.challenge}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                      <p className="text-gray-600">{study.solution}</p>
+                    </div>
+                  </div>
+                  
+                  <blockquote className="bg-gray-50 rounded-xl p-6 mb-6">
+                    <p className="text-gray-700 italic mb-4">"{study.testimonial}"</p>
+                    <cite className="text-gray-600 font-medium">— {study.author}</cite>
+                  </blockquote>
+                </div>
+              </div>
+              
+              <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl p-8 text-white">
+                  <h4 className="text-2xl font-bold mb-8">Results</h4>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <DollarSign className="w-8 h-8" />
+                      </div>
+                      <div className="text-3xl font-bold mb-1">{study.results.fuelSavings}</div>
+                      <div className="text-green-100">Fuel Savings</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <Clock className="w-8 h-8" />
+                      </div>
+                      <div className="text-3xl font-bold mb-1">{study.results.timeReduction}</div>
+                      <div className="text-green-100">Time Reduction</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <TrendingUp className="w-8 h-8" />
+                      </div>
+                      <div className="text-3xl font-bold mb-1">{study.results.costReduction}</div>
+                      <div className="text-green-100">Cost Reduction</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <Star className="w-8 h-8" />
+                      </div>
+                      <div className="text-3xl font-bold mb-1">{study.results.satisfaction}</div>
+                      <div className="text-green-100">Satisfaction</div>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-16">
-            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-              <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Logistics?</h2>
-              <p className="text-emerald-200 mb-6">
-                Join hundreds of companies that have already revolutionized their supply chain operations
-              </p>
-              <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
-                Start Your Success Story
-              </button>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </ResponsiveContainer>
+    </div>
   )
 }
 

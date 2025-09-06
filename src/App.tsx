@@ -54,9 +54,22 @@ import FactoringPortal from './pages/portals/factoring/FactoringPortal'
 import EnhancedBrokerPortal from './pages/portals/broker/EnhancedBrokerPortal'
 import WarehouseManagement from './pages/solutions/WarehouseManagement'
 import RouteOptimization from './pages/solutions/RouteOptimization'
+import LoadMatching from './pages/solutions/LoadMatching'
+import PredictiveAnalyticsSolution from './pages/solutions/PredictiveAnalytics'
+import FleetManagement from './pages/solutions/FleetManagement'
+import LastMileDelivery from './pages/solutions/LastMileDelivery'
 import CareersPage from './pages/company/CareersPage'
 import LeadershipPage from './pages/company/LeadershipPage'
 import ContactPage from './pages/ContactPage'
+import BlogPage from './pages/resources/BlogPage'
+import CaseStudiesPage from './pages/resources/CaseStudiesPage'
+import APIDocumentationPage from './pages/resources/APIDocumentationPage'
+import WebinarsPage from './pages/resources/WebinarsPage'
+import HelpCenterPage from './pages/resources/HelpCenterPage'
+import YardManagementSolution from './pages/solutions/YardManagementSolution'
+import FinancialManagementSolution from './pages/solutions/FinancialManagementSolution'
+import LoadBoardSolution from './pages/solutions/LoadBoardSolution'
+import CRMSolution from './pages/solutions/CRMSolution'
 
 function App() {
   return (
@@ -115,6 +128,24 @@ function App() {
                   <Footer />
                 </>
               } />
+              <Route path="/solutions/load-matching" element={
+                <>
+                  <LoadMatching />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/predictive-analytics" element={
+                <>
+                  <PredictiveAnalyticsSolution />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/fleet-management" element={
+                <>
+                  <FleetManagement />
+                  <Footer />
+                </>
+              } />
               <Route path="/solutions/brokerage" element={
                 <>
                   <div className="min-h-screen flex items-center justify-center">
@@ -128,12 +159,31 @@ function App() {
               } />
               <Route path="/solutions/last-mile" element={
                 <>
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Last Mile Delivery</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - Optimized final delivery solutions</p>
-                    </div>
-                  </div>
+                  <LastMileDelivery />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/yard-management" element={
+                <>
+                  <YardManagementSolution />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/financial-management" element={
+                <>
+                  <FinancialManagementSolution />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/load-board" element={
+                <>
+                  <LoadBoardSolution />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/crm" element={
+                <>
+                  <CRMSolution />
                   <Footer />
                 </>
               } />
@@ -432,6 +482,36 @@ function App() {
               <Route path="/ai-agents" element={
                 <>
                   <AIAgentsPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources/blog" element={
+                <>
+                  <BlogPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources/case-studies" element={
+                <>
+                  <CaseStudiesPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources/api-docs" element={
+                <>
+                  <APIDocumentationPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources/webinars" element={
+                <>
+                  <WebinarsPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/resources/help-center" element={
+                <>
+                  <HelpCenterPage />
                   <Footer />
                 </>
               } />

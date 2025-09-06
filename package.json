@@ -7,7 +7,18 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npm run dev -- --port 3000",
+    "start:backup": "node backup-server-restart.js",
+    "start:fallback": "node emergency-fallback.js",
+    "start:quick": "node quick-start.js",
+    "start:master": "node master-control.js",
+    "test:all": "node test-all-pages.js",
+    "agents:start": "npm run start:quick",
+    "agents:backup": "npm run start:backup",
+    "agents:fallback": "npm run start:fallback",
+    "agents:master": "npm run start:master",
+    "agents:test": "npm run test:all"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -25,7 +25,10 @@ import {
   Shield,
   Layers,
   Database,
-  Banknote
+  Banknote,
+  Code,
+  HelpCircle,
+  DollarSign
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 
@@ -79,12 +82,16 @@ export function HorizontalMegaMenu() {
       items: [
         { id: 'tms', label: 'Transportation Management', href: '/solutions/transportation', icon: Globe, description: 'Complete TMS solution' },
         { id: 'route-optimizer', label: 'Route Optimization', href: '/solutions/route-optimization', icon: Target, description: 'AI-powered route planning' },
-        { id: 'load-matching', label: 'Load Matching', href: '/ai-agents/load-matcher', icon: Zap, description: 'Smart load-carrier matching' },
-        { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/ai-agents/predictive-analytics', icon: BarChart3, description: 'Forecast and optimize' },
-        { id: 'fleet-management', label: 'Fleet Management', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Comprehensive fleet control' },
+        { id: 'load-matching', label: 'Load Matching', href: '/solutions/load-matching', icon: Zap, description: 'Smart load-carrier matching' },
+        { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/solutions/predictive-analytics', icon: BarChart3, description: 'Forecast and optimize' },
+        { id: 'fleet-management', label: 'Fleet Management', href: '/solutions/fleet-management', icon: Rocket, description: 'Comprehensive fleet control' },
         { id: 'freight-brokerage', label: 'Freight Brokerage', href: '/solutions/brokerage', icon: Briefcase, description: 'End-to-end brokerage solutions' },
         { id: 'warehouse-management', label: 'Warehouse Management', href: '/solutions/warehouse', icon: Package, description: 'Smart warehouse operations' },
-        { id: 'last-mile-delivery', label: 'Last Mile Delivery', href: '/solutions/last-mile', icon: Truck, description: 'Optimized final delivery' }
+        { id: 'last-mile-delivery', label: 'Last Mile Delivery', href: '/solutions/last-mile', icon: Truck, description: 'Optimized final delivery' },
+        { id: 'yard-management', label: 'Yard Management', href: '/solutions/yard-management', icon: MapPin, description: 'Optimize yard operations' },
+        { id: 'financial-management', label: 'Financial Management', href: '/solutions/financial-management', icon: DollarSign, description: 'Streamline financial operations' },
+        { id: 'load-board', label: 'Load Board', href: '/solutions/load-board', icon: Package, description: 'Connect shippers with carriers' },
+        { id: 'crm', label: 'CRM Solution', href: '/solutions/crm', icon: Users, description: 'Customer relationship management' }
       ],
       featured: [
         { id: 'tms-featured', label: 'Transportation Management', href: '/solutions/transportation', icon: Globe, featured: true, description: 'Complete TMS solution with AI integration' }
@@ -149,6 +156,17 @@ export function HorizontalMegaMenu() {
         { id: 'partners', label: 'Partners', href: '/partners', icon: Globe, description: 'Strategic partnerships' },
         { id: 'security', label: 'Security', href: '/security', icon: Shield, description: 'Security and compliance' }
       ]
+    },
+    {
+      title: 'Resources',
+      items: [
+        { id: 'blog', label: 'Blog', href: '/resources/blog', icon: Star, description: 'Latest insights and trends' },
+        { id: 'case-studies', label: 'Case Studies', href: '/resources/case-studies', icon: TrendingUp, description: 'Success stories and results' },
+        { id: 'api-docs', label: 'API Documentation', href: '/resources/api-docs', icon: Code, description: 'Developer resources and guides' },
+        { id: 'webinars', label: 'Webinars', href: '/resources/webinars', icon: Users, description: 'Live events and recordings' },
+        { id: 'help-center', label: 'Help Center', href: '/resources/help-center', icon: HelpCircle, description: 'Support and documentation' },
+        { id: 'resources-overview', label: 'Resources Overview', href: '/resources', icon: BarChart3, description: 'All resources in one place' }
+      ]
     }
   ]
 
@@ -157,8 +175,8 @@ export function HorizontalMegaMenu() {
     { id: 'ai-agents', label: 'AI Agents', icon: Bot },
     { id: 'portals', label: 'Portals', icon: Globe },
     { id: 'company', label: 'Company', icon: Users },
-    { id: 'pricing', label: 'Pricing', href: '/pricing', icon: TrendingUp },
-    { id: 'resources', label: 'Resources', href: '/resources', icon: BarChart3 }
+    { id: 'resources', label: 'Resources', icon: BarChart3 },
+    { id: 'pricing', label: 'Pricing', href: '/pricing', icon: TrendingUp }
   ]
 
   return (
@@ -273,7 +291,8 @@ export function HorizontalMegaMenu() {
                         'solutions': 'Solutions',
                         'ai-agents': 'AI Agents',
                         'portals': 'Portals',
-                        'company': 'Company'
+                        'company': 'Company',
+                        'resources': 'Resources'
                       }
                       return section.title === menuToSection[activeMenu]
                     })
@@ -293,6 +312,7 @@ export function HorizontalMegaMenu() {
                             {section.title === 'AI Agents' && 'Intelligent AI agents that automate and optimize your operations'}
                             {section.title === 'Portals' && 'Comprehensive portal ecosystem for all stakeholders'}
                             {section.title === 'Company' && 'Learn more about Trans Bot AI and our mission'}
+                            {section.title === 'Resources' && 'Knowledge base, support, and learning resources'}
                           </p>
                         </div>
 
