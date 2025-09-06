@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HorizontalMegaMenu } from './components/HorizontalMegaMenu'
 import { AdvancedFAB } from './components/AdvancedFAB'
-import { ResponsiveTest } from './components/ResponsiveTest'
 import { NeuralBackground } from './components/NeuralBackground'
 import OutstandingHomePage from './components/OutstandingHomePage'
 import { HeroSection } from './components/HeroSection'
@@ -61,7 +60,6 @@ function App() {
         <div className="min-h-screen relative">
           <NeuralBackground />
           <HorizontalMegaMenu />
-          <ResponsiveTest />
           <AdvancedFAB />
           <Routes>
               <Route path="/" element={
