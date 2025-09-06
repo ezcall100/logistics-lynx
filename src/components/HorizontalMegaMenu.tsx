@@ -78,7 +78,7 @@ export function HorizontalMegaMenu() {
       title: 'Solutions',
       items: [
         { id: 'tms', label: 'Transportation Management', href: '/solutions/transportation', icon: Globe, description: 'Complete TMS solution' },
-        { id: 'route-optimizer', label: 'Route Optimization', href: '/ai-agents/route-optimizer', icon: Target, description: 'AI-powered route planning' },
+        { id: 'route-optimizer', label: 'Route Optimization', href: '/solutions/route-optimization', icon: Target, description: 'AI-powered route planning' },
         { id: 'load-matching', label: 'Load Matching', href: '/ai-agents/load-matcher', icon: Zap, description: 'Smart load-carrier matching' },
         { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/ai-agents/predictive-analytics', icon: BarChart3, description: 'Forecast and optimize' },
         { id: 'fleet-management', label: 'Fleet Management', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Comprehensive fleet control' },

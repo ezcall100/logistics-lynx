@@ -52,6 +52,11 @@ import OwnerOperatorPortal from './pages/portals/owner-operator/OwnerOperatorPor
 import WorkersPortal from './pages/portals/workers/WorkersPortal'
 import FactoringPortal from './pages/portals/factoring/FactoringPortal'
 import EnhancedBrokerPortal from './pages/portals/broker/EnhancedBrokerPortal'
+import WarehouseManagement from './pages/solutions/WarehouseManagement'
+import RouteOptimization from './pages/solutions/RouteOptimization'
+import CareersPage from './pages/company/CareersPage'
+import LeadershipPage from './pages/company/LeadershipPage'
+import ContactPage from './pages/ContactPage'
 
 function App() {
   return (
@@ -100,10 +105,33 @@ function App() {
               } />
               <Route path="/solutions/warehouse" element={
                 <>
+                  <WarehouseManagement />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/route-optimization" element={
+                <>
+                  <RouteOptimization />
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/brokerage" element={
+                <>
                   <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Warehouse Management</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - Advanced warehouse optimization features</p>
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Freight Brokerage</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - End-to-end brokerage solutions</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/solutions/last-mile" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Last Mile Delivery</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Optimized final delivery solutions</p>
                     </div>
                   </div>
                   <Footer />
@@ -265,6 +293,50 @@ function App() {
                   <Footer />
                 </>
               } />
+              <Route path="/agents/fuel-optimizer" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Fuel Optimizer</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Minimize fuel consumption with AI</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/demand-forecaster" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Demand Forecaster</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Predict shipping demand with AI</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/price-optimizer" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Price Optimizer</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Dynamic pricing strategies with AI</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/maintenance-predictor" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Maintenance Predictor</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Predictive maintenance alerts with AI</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
               <Route path="/pricing" element={
                 <>
                   <PricingPage />
@@ -280,6 +352,68 @@ function App() {
               <Route path="/company" element={
                 <>
                   <CompanyPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/careers" element={
+                <>
+                  <CareersPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/contact" element={
+                <>
+                  <ContactPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/leadership" element={
+                <>
+                  <LeadershipPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/press" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Press & News</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Latest news and updates</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/investors" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Investor Information</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Investor relations and financial information</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/partners" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Strategic Partners</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Our strategic partnerships</p>
+                    </div>
+                  </div>
+                  <Footer />
+                </>
+              } />
+              <Route path="/security" element={
+                <>
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Security & Compliance</h1>
+                      <p className="text-transbot-text-secondary">Coming Soon - Security and compliance information</p>
+                    </div>
+                  </div>
                   <Footer />
                 </>
               } />
@@ -302,7 +436,7 @@ function App() {
                 </>
               } />
             </Routes>
-        </div>
+    </div>
       </Router>
     </AuthProvider>
   )

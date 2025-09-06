@@ -1,398 +1,573 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { 
   Users, 
   Target, 
   Award, 
   Globe, 
-  Lightbulb,
-  Shield,
+  Shield, 
+  ArrowRight,
+  Play,
+  Building2,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
   Brain,
-  Building,
-  Cpu
+  Briefcase,
+  MessageCircle
 } from 'lucide-react'
 
 export default function CompanyPage() {
-  const values = [
-    {
-      icon: Brain,
-      title: 'AI Innovation',
-      description: 'We push the boundaries of artificial intelligence to solve complex logistics challenges.'
-    },
-    {
-      icon: Users,
-      title: 'Customer Success',
-      description: 'Our clients\' success is our success. We\'re committed to delivering exceptional value.'
-    },
-    {
-      icon: Shield,
-      title: 'Trust & Security',
-      description: 'Enterprise-grade security and reliability you can count on for your critical operations.'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Continuous Innovation',
-      description: 'We never stop improving, evolving our platform to meet tomorrow\'s challenges.'
-    }
+  const navigate = useNavigate()
+  const [activeSection, setActiveSection] = useState('about')
+
+  const sections = [
+    { id: 'about', label: 'About Us', icon: Users },
+    { id: 'mission', label: 'Mission', icon: Target },
+    { id: 'leadership', label: 'Leadership', icon: Award },
+    { id: 'careers', label: 'Careers', icon: Briefcase },
+    { id: 'contact', label: 'Contact', icon: MessageCircle }
   ]
 
   const leadership = [
     {
       name: 'Sarah Chen',
-      role: 'CEO & Co-Founder',
-      bio: 'Former VP of Engineering at Amazon Logistics, 15+ years in supply chain optimization.',
-      image: '/api/placeholder/300/300'
+      position: 'Chief Executive Officer',
+      bio: 'Former VP of Engineering at Amazon, leading Trans Bot AI\'s vision for AI-powered logistics transformation.',
+      image: '/api/placeholder/300/300',
+      linkedin: '#',
+      achievements: ['15+ years in logistics', 'Led 3 successful exits', 'AI innovation expert']
     },
     {
-      name: 'Michael Rodriguez',
-      role: 'CTO & Co-Founder',
-      bio: 'AI researcher with 20+ years experience, former Google DeepMind engineer.',
-      image: '/api/placeholder/300/300'
+      name: 'Marcus Rodriguez',
+      position: 'Chief Technology Officer',
+      bio: 'Ex-Google AI researcher with expertise in machine learning and autonomous systems for transportation.',
+      image: '/api/placeholder/300/300',
+      linkedin: '#',
+      achievements: ['PhD in AI', '50+ patents', 'ML systems architect']
     },
     {
-      name: 'Emily Johnson',
-      role: 'VP of Product',
-      bio: 'Product leader with deep logistics expertise, former Uber Freight executive.',
-      image: '/api/placeholder/300/300'
+      name: 'Dr. Emily Watson',
+      position: 'Chief Data Officer',
+      bio: 'Former McKinsey partner specializing in data-driven logistics optimization and predictive analytics.',
+      image: '/api/placeholder/300/300',
+      linkedin: '#',
+      achievements: ['PhD in Statistics', 'Data science pioneer', 'Industry thought leader']
     },
     {
-      name: 'David Kim',
-      role: 'VP of Engineering',
-      bio: 'Full-stack engineering leader, former Microsoft Azure architect.',
-      image: '/api/placeholder/300/300'
+      name: 'James Park',
+      position: 'Chief Operating Officer',
+      bio: 'Former COO at FedEx, bringing 20+ years of operational excellence in global logistics.',
+      image: '/api/placeholder/300/300',
+      linkedin: '#',
+      achievements: ['Global operations expert', 'Supply chain optimization', 'Team leadership']
     }
   ]
 
-  const stats = [
-    { label: 'Years of Innovation', value: '5+', icon: Award },
-    { label: 'Enterprise Clients', value: '500+', icon: Building },
-    { label: 'Countries Served', value: '25+', icon: Globe },
-    { label: 'AI Models Deployed', value: '50+', icon: Cpu }
-  ]
-
-  const milestones = [
+  const values = [
     {
-      year: '2019',
-      title: 'Company Founded',
-      description: 'Trans Bot AI was founded with a vision to revolutionize logistics through AI.'
+      icon: Brain,
+      title: 'Innovation First',
+      description: 'We push the boundaries of what\'s possible with AI and machine learning in logistics.',
+      color: 'from-blue-500 to-indigo-600'
     },
     {
-      year: '2020',
-      title: 'First AI Model',
-      description: 'Launched our first route optimization AI model, achieving 15% efficiency gains.'
+      icon: Users,
+      title: 'Customer Success',
+      description: 'Our customers\' success is our success. We build solutions that deliver real value.',
+      color: 'from-green-500 to-emerald-600'
     },
     {
-      year: '2021',
-      title: 'Series A Funding',
-      description: 'Raised $25M to accelerate AI development and expand our platform.'
+      icon: Shield,
+      title: 'Trust & Security',
+      description: 'We maintain the highest standards of security and data protection for our clients.',
+      color: 'from-purple-500 to-pink-600'
     },
     {
-      year: '2022',
-      title: 'Enterprise Launch',
-      description: 'Launched enterprise-grade platform serving Fortune 500 companies.'
-    },
-    {
-      year: '2023',
-      title: 'Global Expansion',
-      description: 'Expanded to 25+ countries with localized AI models and support.'
-    },
-    {
-      year: '2024',
-      title: 'AI Revolution',
-      description: 'Deployed 50+ AI models, processing over 1M logistics decisions daily.'
+      icon: Globe,
+      title: 'Global Impact',
+      description: 'We\'re building solutions that make logistics more efficient and sustainable worldwide.',
+      color: 'from-orange-500 to-red-600'
     }
   ]
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
-      {/* Hero Section */}
-      <section className="pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
-              About{' '}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Trans Bot AI
-              </span>
-            </h1>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
-              We're the AI software company powering the future of logistics. Our intelligent platform 
-              helps logistics companies optimize operations, reduce costs, and scale efficiently.
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-6"
-              >
-                <div className="p-4 rounded-full bg-transbot-sky/10 w-fit mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-transbot-sky" />
-                </div>
-                <div className="text-4xl font-bold text-transbot-sky mb-2">{stat.value}</div>
-                <div className="text-transbot-text-secondary">{stat.label}</div>
-              </motion.div>
-            ))}
+  const careers = [
+    {
+      title: 'Senior AI Engineer',
+      location: 'San Francisco, CA',
+      type: 'Full-time',
+      department: 'Engineering',
+      description: 'Lead development of next-generation AI agents for logistics optimization.',
+      requirements: ['5+ years ML experience', 'Python, TensorFlow', 'Logistics domain knowledge']
+    },
+    {
+      title: 'Product Manager',
+      location: 'Remote',
+      type: 'Full-time',
+      department: 'Product',
+      description: 'Drive product strategy and roadmap for our AI-powered logistics platform.',
+      requirements: ['3+ years PM experience', 'B2B SaaS background', 'Technical understanding']
+    },
+    {
+      title: 'Customer Success Manager',
+      location: 'New York, NY',
+      type: 'Full-time',
+      department: 'Customer Success',
+      description: 'Help customers maximize value from our AI solutions and drive adoption.',
+      requirements: ['2+ years CS experience', 'Logistics industry knowledge', 'Strong communication']
+    }
+  ]
+
+  const renderHeroSection = () => (
+    <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%239C92AC%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-600/20 to-indigo-600/20"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-8">
+            <Building2 className="w-4 h-4 mr-2" />
+            About Trans Bot AI
           </div>
-        </div>
-      </section>
+          
+          <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            Pioneering the Future of
+            <span className="block bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              AI-Powered Logistics
+            </span>
+          </h1>
+          
+          <p className="text-xl lg:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
+            We're building the world's most intelligent logistics platform, powered by advanced AI agents 
+            that optimize, automate, and revolutionize how goods move around the globe.
+          </p>
 
-      {/* Mission Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/careers')}
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300"
             >
-              <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
-                Our Mission
-              </h2>
-              <p className="text-lg text-transbot-text-secondary mb-6 leading-relaxed">
-                To revolutionize logistics through artificial intelligence, empowering companies 
-                to operate more efficiently, sustainably, and profitably in an increasingly 
-                complex global supply chain.
-              </p>
-              <p className="text-lg text-transbot-text-secondary leading-relaxed">
-                We believe that AI should augment human decision-making, not replace it. 
-                Our platform provides intelligent insights that help logistics professionals 
-                make better, faster decisions.
-              </p>
-            </motion.div>
+              <Briefcase className="w-5 h-5 mr-2" />
+              Join Our Team
+            </motion.button>
             
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/contact')}
+              className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
-              <div className="bg-gradient-to-br from-transbot-sky/10 to-transbot-teal/10 rounded-3xl p-8">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Brain className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-bold text-transbot-text-primary mb-2">AI-First</h3>
-                    <p className="text-sm text-transbot-text-secondary">Every solution powered by advanced AI</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Target className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-bold text-transbot-text-primary mb-2">Results-Driven</h3>
-                    <p className="text-sm text-transbot-text-secondary">Measurable impact on your operations</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Shield className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-bold text-transbot-text-primary mb-2">Enterprise-Grade</h3>
-                    <p className="text-sm text-transbot-text-secondary">Security and reliability you can trust</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Globe className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-bold text-transbot-text-primary mb-2">Global Scale</h3>
-                    <p className="text-sm text-transbot-text-secondary">Serving logistics companies worldwide</p>
-                  </div>
-                </div>
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Get in Touch
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* Company Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-8"
+        >
+          {[
+            { label: 'Team Members', value: '150+', icon: Users },
+            { label: 'Countries', value: '15', icon: Globe },
+            { label: 'AI Agents', value: '12', icon: Brain },
+            { label: 'Years Experience', value: '20+', icon: Award }
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <stat.icon className="w-8 h-8 text-white" />
               </div>
+              <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
+              <div className="text-white/70">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  )
+
+  const renderNavigation = () => (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex flex-wrap justify-center gap-4">
+        {sections.map((section) => (
+          <motion.button
+            key={section.id}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveSection(section.id)}
+            className={`flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              activeSection === section.id
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
+                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
+            }`}
+          >
+            <section.icon className="w-5 h-5 mr-2" />
+            {section.label}
+          </motion.button>
+        ))}
+      </div>
+    </div>
+  )
+
+  const renderAboutSection = () => (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">Our Story</h2>
+          <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+            Founded in 2020 by a team of AI researchers and logistics experts, Trans Bot AI emerged from a simple 
+            observation: the logistics industry was ripe for disruption through artificial intelligence.
+          </p>
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            Today, we're proud to serve over 2,500 customers worldwide, helping them optimize their operations, 
+            reduce costs, and deliver better service through our suite of intelligent AI agents.
+          </p>
+          <div className="flex items-center space-x-6">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/solutions')}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+            >
+              Explore Solutions
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/demo')}
+              className="inline-flex items-center px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition-all duration-300"
+            >
+              <Play className="w-4 h-4 mr-2" />
+              Watch Demo
+            </motion.button>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+            <p className="text-lg leading-relaxed mb-6">
+              To revolutionize global logistics through intelligent AI agents that optimize, automate, 
+              and transform how goods move around the world.
+            </p>
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <Target className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-semibold">Making Logistics Smarter</div>
+                <div className="text-sm opacity-80">One AI agent at a time</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
+
+  const renderValuesSection = () => (
+    <div className="bg-slate-50 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">Our Values</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            These core values guide everything we do and shape how we build products, serve customers, and grow as a team.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {values.map((value, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className={`w-16 h-16 bg-gradient-to-br ${value.color} rounded-2xl flex items-center justify-center mb-6`}>
+                <value.icon className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">{value.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{value.description}</p>
             </motion.div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  )
 
-      {/* Values Section */}
-      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+  const renderLeadershipSection = () => (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl font-bold text-slate-900 mb-6">Leadership Team</h2>
+        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          Meet the visionary leaders driving innovation and growth at Trans Bot AI.
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {leadership.map((leader, index) => (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            whileHover={{ y: -8, scale: 1.02 }}
+            className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 text-center"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
-              Our Values
-            </h2>
-            <p className="text-xl text-transbot-text-secondary">
-              The principles that guide everything we do
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300"
-              >
-                <div className="p-3 rounded-xl bg-transbot-sky/10 w-fit mb-6">
-                  <value.icon className="w-8 h-8 text-transbot-sky" />
+            <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <Users className="w-12 h-12 text-white" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">{leader.name}</h3>
+            <p className="text-blue-600 font-semibold mb-4">{leader.position}</p>
+            <p className="text-slate-600 text-sm leading-relaxed mb-4">{leader.bio}</p>
+            <div className="space-y-2">
+              {leader.achievements.map((achievement, idx) => (
+                <div key={idx} className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">
+                  {achievement}
                 </div>
-                <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-transbot-text-secondary">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
-              Leadership Team
-            </h2>
-            <p className="text-xl text-transbot-text-secondary">
-              The visionaries behind Trans Bot AI
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {leadership.map((leader, index) => (
-              <motion.div
-                key={leader.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-48 h-48 bg-gradient-to-br from-transbot-sky/20 to-transbot-teal/20 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Users className="w-16 h-16 text-transbot-sky" />
-                </div>
-                <h3 className="text-xl font-bold text-transbot-text-primary mb-2">
-                  {leader.name}
-                </h3>
-                <div className="text-transbot-sky font-semibold mb-3">
-                  {leader.role}
-                </div>
-                <p className="text-transbot-text-secondary text-sm">
-                  {leader.bio}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
-              Our Journey
-            </h2>
-            <p className="text-xl text-transbot-text-secondary">
-              Key milestones in our mission to revolutionize logistics
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-primary"></div>
-            
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={milestone.year}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                >
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                    <div className="bg-white p-6 rounded-xl shadow-transbot border border-transbot-border/20">
-                      <div className="text-2xl font-bold text-transbot-sky mb-2">
-                        {milestone.year}
-                      </div>
-                      <h3 className="text-xl font-bold text-transbot-text-primary mb-2">
-                        {milestone.title}
-                      </h3>
-                      <p className="text-transbot-text-secondary">
-                        {milestone.description}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Timeline Dot */}
-                  <div className="w-4 h-4 bg-gradient-primary rounded-full border-4 border-white shadow-transbot z-10"></div>
-                  
-                  <div className="w-1/2"></div>
-                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <h2 className="text-4xl font-bold text-white">
-              Ready to Transform Your Logistics?
-            </h2>
-            <p className="text-xl text-white/90">
-              Join the logistics leaders who trust Trans Bot AI to power their operations
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
-                Start Free Trial
-              </button>
-              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
-                Contact Sales
-              </button>
-            </div>
           </motion.div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const renderCareersSection = () => (
+    <div className="bg-slate-50 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">Join Our Team</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            We're looking for passionate individuals who want to shape the future of AI-powered logistics.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {careers.map((job, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -4, scale: 1.01 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{job.title}</h3>
+                  <div className="flex items-center space-x-4 text-sm text-slate-600">
+                    <span className="flex items-center">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {job.location}
+                    </span>
+                    <span className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {job.type}
+                    </span>
+                  </div>
+                </div>
+                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                  {job.department}
+                </span>
+              </div>
+              <p className="text-slate-600 mb-6 leading-relaxed">{job.description}</p>
+              <div className="mb-6">
+                <h4 className="font-semibold text-slate-900 mb-3">Requirements:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {job.requirements.map((req, idx) => (
+                    <span key={idx} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                      {req}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+              >
+                Apply Now
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </motion.button>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  )
+
+  const renderContactSection = () => (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">Get in Touch</h2>
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            Ready to transform your logistics operations? We'd love to hear from you and discuss how our AI solutions can help your business.
+          </p>
+          
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900">Headquarters</div>
+                <div className="text-slate-600">San Francisco, CA</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                <Phone className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900">Phone</div>
+                <div className="text-slate-600">+1 (555) 123-4567</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                <Mail className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900">Email</div>
+                <div className="text-slate-600">hello@transbotai.com</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl p-8 shadow-lg"
+        >
+          <h3 className="text-2xl font-bold text-slate-900 mb-6">Send us a message</h3>
+          <form className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">First Name</label>
+                <input type="text" className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Last Name</label>
+                <input type="text" className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
+              <input type="email" className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Company</label>
+              <input type="text" className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
+              <textarea rows={4} className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit"
+              className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+            >
+              Send Message
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
+    </div>
+  )
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'about':
+        return (
+          <>
+            {renderAboutSection()}
+            {renderValuesSection()}
+          </>
+        )
+      case 'mission':
+        return renderAboutSection()
+      case 'leadership':
+        return renderLeadershipSection()
+      case 'careers':
+        return renderCareersSection()
+      case 'contact':
+        return renderContactSection()
+      default:
+        return renderAboutSection()
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      {renderHeroSection()}
+      {renderNavigation()}
+      {renderContent()}
     </div>
   )
 }
