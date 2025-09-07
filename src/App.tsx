@@ -12,7 +12,6 @@ import { TestDesign } from './components/TestDesign'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
 import { DashboardPage } from './pages/DashboardPage'
-import { SuperAdminPortal } from './pages/super-admin/SuperAdminPortal'
 import { GetStartedPage } from './pages/GetStartedPage'
 import { SubdomainManagement } from './pages/admin/SubdomainManagement'
 import { MCPAgentAdmin } from './pages/portals/admin/MCPAgentAdmin'
@@ -45,12 +44,13 @@ import CustomerPortal from './pages/portals/customer/CustomerPortal'
 import PartnerPortal from './pages/portals/partner/PartnerPortal'
 import DeveloperPortal from './pages/portals/developer/DeveloperPortal'
 import AdminPortal from './pages/portals/admin/AdminPortal'
+import SuperAdminPortal from './pages/portals/super-admin/SuperAdminPortal'
+import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal'
 import BrokerPortal from './pages/portals/broker/BrokerPortal'
 import CarrierPortal from './pages/portals/carrier/CarrierPortal'
 import DriverPortal from './pages/portals/driver/DriverPortal'
 import ShipperPortal from './pages/portals/shipper/ShipperPortal'
 import AnalyticsPortal from './pages/portals/analytics/AnalyticsPortal'
-import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal'
 import YMSPortal from './pages/portals/yms/YMSPortal'
 import DirectoryPortal from './pages/portals/directory/DirectoryPortal'
 import RatesPortal from './pages/portals/rates/RatesPortal'
@@ -252,6 +252,18 @@ function App() {
               <Route path="/portals/admin" element={
                 <>
                   <AdminPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/super-admin" element={
+                <>
+                  <SuperAdminPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/autonomous" element={
+                <>
+                  <AutonomousPortal />
                   <Footer />
                 </>
               } />

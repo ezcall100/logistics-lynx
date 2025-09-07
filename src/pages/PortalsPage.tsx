@@ -44,10 +44,26 @@ const PortalsPage: React.FC = () => {
         {
           title: "Driver Portal",
           description: "Mobile-first driver experience and tools",
-          path: "/portals/driver",
+          path: "/driver",
           icon: Truck,
           features: ["Load Details", "Route Navigation", "Documentation", "Earnings Tracking"],
           color: "from-orange-500 to-red-500"
+        },
+        {
+          title: "Owner Operator Portal",
+          description: "Independent owner-operator management tools",
+          path: "/owner-operator",
+          icon: Truck,
+          features: ["Load Management", "Expense Tracking", "Tax Tools", "Business Analytics"],
+          color: "from-amber-500 to-orange-500"
+        },
+        {
+          title: "Workers Portal",
+          description: "Workforce management and scheduling",
+          path: "/workers",
+          icon: Users,
+          features: ["Schedule Management", "Time Tracking", "Payroll Integration", "Performance Metrics"],
+          color: "from-teal-500 to-cyan-500"
         }
       ]
     },
@@ -88,6 +104,78 @@ const PortalsPage: React.FC = () => {
           icon: Settings,
           features: ["API Documentation", "SDKs", "Sandbox Environment", "Integration Guides"],
           color: "from-gray-500 to-slate-500"
+        },
+        {
+          title: "YMS Portal",
+          description: "Yard management system for efficient operations",
+          path: "/yms",
+          icon: Truck,
+          features: ["Yard Planning", "Gate Management", "Trailer Tracking", "Dock Scheduling"],
+          color: "from-emerald-500 to-green-500"
+        },
+        {
+          title: "Directory Portal",
+          description: "Comprehensive business directory and networking",
+          path: "/directory",
+          icon: Globe,
+          features: ["Business Listings", "Contact Management", "Network Building", "Industry Connections"],
+          color: "from-blue-500 to-indigo-500"
+        },
+        {
+          title: "Rates Portal",
+          description: "Dynamic pricing and rate management",
+          path: "/rates",
+          icon: TrendingUp,
+          features: ["Rate Optimization", "Market Analysis", "Pricing Strategies", "Competitive Intelligence"],
+          color: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Marketplace Portal",
+          description: "Load and capacity marketplace platform",
+          path: "/marketplace",
+          icon: Globe,
+          features: ["Load Posting", "Capacity Matching", "Bidding System", "Transaction Management"],
+          color: "from-purple-500 to-violet-500"
+        },
+        {
+          title: "Financials Portal",
+          description: "Financial management and accounting tools",
+          path: "/financials",
+          icon: TrendingUp,
+          features: ["Invoice Management", "Payment Processing", "Financial Reporting", "Cost Analysis"],
+          color: "from-emerald-500 to-teal-500"
+        },
+        {
+          title: "Load Board Portal",
+          description: "Comprehensive load board and matching platform",
+          path: "/load-board",
+          icon: Package,
+          features: ["Load Posting", "Carrier Matching", "Real-time Updates", "Rate Negotiation"],
+          color: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "CRM Portal",
+          description: "Customer relationship management system",
+          path: "/crm",
+          icon: Users,
+          features: ["Lead Management", "Customer Profiles", "Sales Pipeline", "Communication Tracking"],
+          color: "from-pink-500 to-rose-500"
+        },
+        {
+          title: "EDI Portal",
+          description: "Electronic data interchange management",
+          path: "/edi",
+          icon: Settings,
+          features: ["Data Mapping", "Transaction Processing", "Integration Management", "Error Handling"],
+          color: "from-gray-500 to-slate-500"
+        },
+        {
+          title: "Factoring Portal",
+          description: "Invoice factoring and cash flow management",
+          path: "/factoring",
+          icon: TrendingUp,
+          features: ["Invoice Factoring", "Cash Flow Management", "Credit Analysis", "Payment Processing"],
+          color: "from-green-500 to-emerald-500"
         }
       ]
     },
@@ -108,7 +196,7 @@ const PortalsPage: React.FC = () => {
         {
           title: "Super Admin Portal",
           description: "Enterprise-level administration and control",
-          path: "/super-admin",
+          path: "/portals/super-admin",
           icon: Shield,
           features: ["Multi-tenant Management", "Global Settings", "Advanced Security", "System Monitoring"],
           color: "from-red-500 to-orange-500"
@@ -120,13 +208,21 @@ const PortalsPage: React.FC = () => {
           icon: Brain,
           features: ["AI Agents", "Automated Decisions", "Machine Learning", "Predictive Operations"],
           color: "from-violet-500 to-purple-500"
+        },
+        {
+          title: "Enhanced Broker Portal",
+          description: "Advanced brokerage management with AI features",
+          path: "/portals/broker/enhanced",
+          icon: Users,
+          features: ["AI Load Matching", "Advanced Analytics", "Automated Negotiations", "Predictive Pricing"],
+          color: "from-purple-500 to-indigo-500"
         }
       ]
     }
   ]
 
   const stats = [
-    { number: "27", label: "Portal Types", icon: Globe },
+    { number: "20", label: "Portal Types", icon: Globe },
     { number: "500+", label: "Active Users", icon: Users },
     { number: "99.9%", label: "Uptime", icon: CheckCircle },
     { number: "24/7", label: "Support", icon: Clock }
