@@ -7,6 +7,7 @@ import {
   BarChart3, Bell, Star,
   ArrowRight
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 const BrokerPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -83,28 +84,17 @@ const BrokerPortal: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-violet-100">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Broker Portal</h1>
-                <p className="text-gray-600">Load brokerage and relationship management</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-                <Bell className="w-5 h-5 text-gray-600" />
-              </button>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PortalHeader
+        title="Broker Portal"
+        description="Load brokerage and relationship management"
+        icon={Users}
+        color="from-purple-500 to-violet-600"
+      >
+        <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+          <Bell className="w-5 h-5 text-gray-600" />
+        </button>
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600"></div>
+      </PortalHeader>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
