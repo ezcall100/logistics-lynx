@@ -9,6 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "npm run dev -- --port 3000",
+    "test": "echo \"No tests specified\" && exit 0",
+    "deploy": "npm run build && echo \"Build completed\"",
     "start:backup": "node backup-server-restart.js",
     "start:fallback": "node emergency-fallback.js",
     "start:quick": "node quick-start.js",
