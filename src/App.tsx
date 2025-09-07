@@ -22,6 +22,10 @@ import SolutionsPage from './pages/SolutionsPage'
 import PricingPage from './pages/PricingPage'
 import ResourcesPage from './pages/ResourcesPage'
 import CompanyPage from './pages/CompanyPage'
+import AboutPage from './pages/company/AboutPage'
+import CareersPage from './pages/company/CareersPage'
+import ContactPage from './pages/company/ContactPage'
+import LeadershipPage from './pages/company/LeadershipPage'
 import IndustriesPage from './pages/IndustriesPage'
 import PortalsPage from './pages/PortalsPage'
 import AIAgentsPage from './pages/AIAgentsPage'
@@ -32,7 +36,6 @@ import PredictiveAnalytics from './pages/ai-agents/predictive-analytics/Predicti
 import FleetManager from './pages/ai-agents/fleet-manager/FleetManager'
 import FuelOptimizer from './pages/ai-agents/fuel-optimizer/FuelOptimizer'
 import DemandForecaster from './pages/ai-agents/demand-forecaster/DemandForecaster'
-import PriceOptimizer from './pages/ai-agents/price-optimizer/PriceOptimizer'
 import MaintenancePredictor from './pages/ai-agents/maintenance-predictor/MaintenancePredictor'
 import CarbonOptimizer from './pages/ai-agents/carbon-optimizer/CarbonOptimizer'
 import SmartWarehouse from './pages/ai-agents/smart-warehouse/SmartWarehouse'
@@ -66,9 +69,6 @@ import LoadMatching from './pages/solutions/LoadMatching'
 import PredictiveAnalyticsSolution from './pages/solutions/PredictiveAnalytics'
 import FleetManagement from './pages/solutions/FleetManagement'
 import LastMileDelivery from './pages/solutions/LastMileDelivery'
-import CareersPage from './pages/company/CareersPage'
-import LeadershipPage from './pages/company/LeadershipPage'
-import ContactPage from './pages/ContactPage'
 import BlogPage from './pages/resources/BlogPage'
 import CaseStudiesPage from './pages/resources/CaseStudiesPage'
 import APIDocumentationPage from './pages/resources/APIDocumentationPage'
@@ -446,19 +446,25 @@ function App() {
                   <Footer />
                 </>
               } />
-              <Route path="/careers" element={
+              <Route path="/company/about" element={
+                <>
+                  <AboutPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/company/careers" element={
                 <>
                   <CareersPage />
                   <Footer />
                 </>
               } />
-              <Route path="/contact" element={
+              <Route path="/company/contact" element={
                 <>
                   <ContactPage />
                   <Footer />
                 </>
               } />
-              <Route path="/leadership" element={
+              <Route path="/company/leadership" element={
                 <>
                   <LeadershipPage />
                   <Footer />

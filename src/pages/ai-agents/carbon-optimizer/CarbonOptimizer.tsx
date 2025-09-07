@@ -6,8 +6,6 @@ import {
   Globe, 
   Play,
   RotateCcw,
-  Target,
-  BarChart3,
   Zap
 } from 'lucide-react'
 import { trackUserInteraction } from '../../../services/webhookService'

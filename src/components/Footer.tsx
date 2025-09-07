@@ -9,19 +9,33 @@ import {
   Github, 
   Facebook,
   ArrowRight,
-  ExternalLink
+  Truck,
+  Zap,
+  Shield,
+  Globe,
+  Award,
+  Users,
+  TrendingUp,
+  Clock,
+  CheckCircle,
+  MessageSquare,
+  Download,
+  Play
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 interface SubPage {
   name: string
   path: string
+  icon?: any
+  description?: string
 }
 
 interface MenuSection {
   title: string
   path: string
   subpages: SubPage[]
+  icon?: any
 }
 
 export function Footer() {
@@ -29,116 +43,102 @@ export function Footer() {
     {
       title: 'Solutions',
       path: '/solutions',
+      icon: Truck,
       subpages: [
-        { name: 'Transportation Management', path: '/solutions/transportation' },
-        { name: 'Warehouse Management', path: '/solutions/warehouse' },
-        { name: 'Fleet Management', path: '/solutions/fleet' },
-        { name: 'Load Optimization', path: '/solutions/load-optimization' },
-        { name: 'Route Planning', path: '/solutions/route-planning' },
-        { name: 'Real-time Tracking', path: '/solutions/tracking' },
-        { name: 'Supply Chain Analytics', path: '/solutions/analytics' },
-        { name: 'Inventory Management', path: '/solutions/inventory' }
-      ]
-    },
-    {
-      title: 'Pricing',
-      path: '/pricing',
-      subpages: [
-        { name: 'Starter Plan', path: '/pricing/starter' },
-        { name: 'Professional Plan', path: '/pricing/professional' },
-        { name: 'Enterprise Plan', path: '/pricing/enterprise' },
-        { name: 'Custom Solutions', path: '/pricing/custom' },
-        { name: 'Compare Plans', path: '/pricing/compare' },
-        { name: 'ROI Calculator', path: '/pricing/calculator' },
-        { name: 'Free Trial', path: '/pricing/trial' },
-        { name: 'Volume Discounts', path: '/pricing/volume' }
-      ]
-    },
-    {
-      title: 'Resources',
-      path: '/resources',
-      subpages: [
-        { name: 'Documentation', path: '/resources/documentation' },
-        { name: 'API Reference', path: '/resources/api' },
-        { name: 'Tutorials', path: '/resources/tutorials' },
-        { name: 'Case Studies', path: '/resources/case-studies' },
-        { name: 'White Papers', path: '/resources/whitepapers' },
-        { name: 'Webinars', path: '/resources/webinars' },
-        { name: 'Blog', path: '/resources/blog' },
-        { name: 'Support Center', path: '/resources/support' }
-      ]
-    },
-    {
-      title: 'Company',
-      path: '/company',
-      subpages: [
-        { name: 'About Us', path: '/company/about' },
-        { name: 'Leadership', path: '/company/leadership' },
-        { name: 'Careers', path: '/company/careers' },
-        { name: 'Press', path: '/company/press' },
-        { name: 'Partners', path: '/company/partners' },
-        { name: 'Contact', path: '/company/contact' },
-        { name: 'Investor Relations', path: '/company/investors' },
-        { name: 'News & Updates', path: '/company/news' }
-      ]
-    },
-    {
-      title: 'Industries',
-      path: '/industries',
-      subpages: [
-        { name: 'E-commerce', path: '/industries/ecommerce' },
-        { name: 'Manufacturing', path: '/industries/manufacturing' },
-        { name: 'Retail', path: '/industries/retail' },
-        { name: 'Healthcare', path: '/industries/healthcare' },
-        { name: 'Food & Beverage', path: '/industries/food-beverage' },
-        { name: 'Automotive', path: '/industries/automotive' },
-        { name: 'Construction', path: '/industries/construction' },
-        { name: 'Pharmaceuticals', path: '/industries/pharma' }
-      ]
-    },
-    {
-      title: 'Portals',
-      path: '/portals',
-      subpages: [
-        { name: 'Shipper Portal', path: '/portals/shipper' },
-        { name: 'Broker Portal', path: '/portals/broker' },
-        { name: 'Carrier Portal', path: '/portals/carrier' },
-        { name: 'Driver Portal', path: '/portals/driver' },
-        { name: 'Admin Portal', path: '/portals/admin' },
-        { name: 'Super Admin', path: '/super-admin' },
-        { name: 'Partner Portal', path: '/portals/partner' },
-        { name: 'Developer Portal', path: '/portals/developer' }
+        { name: 'Transportation Management', path: '/solutions/transportation', icon: Truck, description: 'Complete TMS solution' },
+        { name: 'Route Optimization', path: '/solutions/route-optimization', icon: Zap, description: 'AI-powered route planning' },
+        { name: 'Load Matching', path: '/solutions/load-matching', icon: TrendingUp, description: 'Smart load-carrier matching' },
+        { name: 'Predictive Analytics', path: '/solutions/predictive-analytics', icon: TrendingUp, description: 'Forecast and optimize' },
+        { name: 'Fleet Management', path: '/solutions/fleet-management', icon: Truck, description: 'Comprehensive fleet control' },
+        { name: 'Warehouse Management', path: '/solutions/warehouse-management', icon: MapPin, description: 'Smart warehouse operations' },
+        { name: 'Last Mile Delivery', path: '/solutions/last-mile-delivery', icon: Clock, description: 'Optimized final delivery' },
+        { name: 'Yard Management', path: '/solutions/yard-management', icon: MapPin, description: 'Optimize yard operations' },
+        { name: 'Financial Management', path: '/solutions/financial-management', icon: TrendingUp, description: 'Streamline financial operations' },
+        { name: 'Load Board', path: '/solutions/load-board', icon: TrendingUp, description: 'Connect shippers with carriers' },
+        { name: 'CRM Solution', path: '/solutions/crm-solution', icon: Users, description: 'Customer relationship management' },
+        { name: 'Shipper Solutions', path: '/solutions/shipper-solutions', icon: Users, description: 'Solutions for shippers' },
+        { name: 'Carrier Solutions', path: '/solutions/carrier-solutions', icon: Truck, description: 'Solutions for carriers' },
+        { name: 'Broker Solutions', path: '/solutions/broker-solutions', icon: Users, description: 'Solutions for brokers' },
+        { name: 'Owner Operator Solutions', path: '/solutions/owner-operator-solutions', icon: Users, description: 'Solutions for owner operators' },
+        { name: 'Driver Solutions', path: '/solutions/driver-solutions', icon: Users, description: 'Solutions for drivers' }
       ]
     },
     {
       title: 'AI Agents',
       path: '/ai-agents',
+      icon: Brain,
       subpages: [
-        { name: 'MCP Agents', path: '/ai-agents/mcp' },
-        { name: 'Automation Tools', path: '/ai-agents/automation' },
-        { name: 'AI Analytics', path: '/ai-agents/analytics' },
-        { name: 'Machine Learning', path: '/ai-agents/ml' },
-        { name: 'Agent Marketplace', path: '/ai-agents/marketplace' },
-        { name: 'Custom Agents', path: '/ai-agents/custom' },
-        { name: 'Predictive Analytics', path: '/ai-agents/predictive' },
-        { name: 'Smart Routing', path: '/ai-agents/routing' }
+        { name: 'Route Optimizer', path: '/agents/route-optimizer', icon: Zap, description: 'Optimize delivery routes' },
+        { name: 'Load Matcher', path: '/agents/load-matcher', icon: TrendingUp, description: 'Match loads with carriers' },
+        { name: 'Predictive Analytics', path: '/agents/predictive-analytics', icon: TrendingUp, description: 'Predict trends and optimize' },
+        { name: 'Fleet Manager', path: '/agents/fleet-manager', icon: Truck, description: 'Manage fleet operations' },
+        { name: 'Fuel Optimizer', path: '/agents/fuel-optimizer', icon: Zap, description: 'Minimize fuel consumption' },
+        { name: 'Demand Forecaster', path: '/agents/demand-forecaster', icon: TrendingUp, description: 'Predict shipping demand' },
+        { name: 'Price Optimizer', path: '/agents/price-optimizer', icon: TrendingUp, description: 'Dynamic pricing strategies' },
+        { name: 'Maintenance Predictor', path: '/agents/maintenance-predictor', icon: Clock, description: 'Predictive maintenance alerts' },
+        { name: 'Carbon Optimizer', path: '/agents/carbon-optimizer', icon: Globe, description: 'Reduce carbon footprint' },
+        { name: 'Smart Warehouse', path: '/agents/smart-warehouse', icon: MapPin, description: 'Intelligent warehouse operations' },
+        { name: 'Customer Experience', path: '/agents/customer-experience', icon: Users, description: 'Enhance customer satisfaction' },
+        { name: 'Risk Assessment', path: '/agents/risk-assessment', icon: Shield, description: 'Assess and mitigate risks' }
+      ]
+    },
+    {
+      title: 'Resources',
+      path: '/resources',
+      icon: Download,
+      subpages: [
+        { name: 'Blog', path: '/resources/blog', icon: MessageSquare, description: 'Latest insights & news' },
+        { name: 'Case Studies', path: '/resources/case-studies', icon: Award, description: 'Success stories' },
+        { name: 'API Documentation', path: '/resources/api-documentation', icon: Globe, description: 'Developer resources' },
+        { name: 'Webinars', path: '/resources/webinars', icon: Play, description: 'Educational content' },
+        { name: 'Help Center', path: '/resources/help-center', icon: MessageSquare, description: 'Support & guides' },
+        { name: 'Resources Overview', path: '/resources', icon: Download, description: 'All resources in one place' }
+      ]
+    },
+    {
+      title: 'Company',
+      path: '/company',
+      icon: Users,
+      subpages: [
+        { name: 'About Us', path: '/company/about', icon: Users, description: 'Learn about Trans Bot AI' },
+        { name: 'Leadership', path: '/company/leadership', icon: Award, description: 'Meet our leadership team' },
+        { name: 'Careers', path: '/company/careers', icon: Users, description: 'Join our team' },
+        { name: 'Contact', path: '/company/contact', icon: MessageSquare, description: 'Get in touch' },
+        { name: 'Press', path: '/company/press', icon: MessageSquare, description: 'News and updates' },
+        { name: 'Investors', path: '/company/investors', icon: TrendingUp, description: 'Investor information' },
+        { name: 'Partners', path: '/company/partners', icon: Users, description: 'Strategic partnerships' },
+        { name: 'Security', path: '/company/security', icon: Shield, description: 'Security and compliance' }
       ]
     }
   ]
 
   const socialLinks = [
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/transbotai' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/transbotai' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com/transbotai' },
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/transbotai' }
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/transbotai', color: 'hover:text-blue-400' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/transbotai', color: 'hover:text-blue-600' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/transbotai', color: 'hover:text-gray-300' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/transbotai', color: 'hover:text-blue-500' }
+  ]
+
+  const stats = [
+    { number: '500+', label: 'Companies Served', icon: Users },
+    { number: '$2.5B+', label: 'Cost Savings Generated', icon: TrendingUp },
+    { number: '99.9%', label: 'Uptime Guarantee', icon: Shield },
+    { number: '24/7', label: 'AI Monitoring', icon: Clock }
   ]
 
   return (
-    <footer className="bg-gradient-to-br from-transbot-bg-dark via-transbot-navy to-transbot-bg-dark border-t border-transbot-border">
-      <div className="container-pro">
+    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Brand Section */}
             <div className="lg:col-span-4">
               <motion.div
@@ -146,63 +146,99 @@ export function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="space-y-6"
+                className="space-y-8"
               >
                 {/* Logo */}
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-gradient-primary">
-                    <Brain className="w-8 h-8 text-white" />
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg">
+                    <Brain className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">Trans Bot AI</h3>
-                    <p className="text-transbot-text-light text-sm">Intelligent Logistics Platform</p>
+                    <h3 className="text-3xl font-bold text-white">Trans Bot AI</h3>
+                    <p className="text-blue-200 text-sm font-medium">Intelligent Logistics Platform</p>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-transbot-text-light leading-relaxed">
-                  Revolutionizing logistics with AI-powered solutions. Streamline your supply chain, 
-                  optimize routes, and enhance visibility with our comprehensive platform.
+                <p className="text-gray-300 leading-relaxed text-lg">
+                  Revolutionizing logistics through artificial intelligence. Streamline your supply chain, 
+                  optimize routes, and enhance visibility with our comprehensive AI-powered platform.
                 </p>
 
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg bg-blue-500/20">
+                          <stat.icon className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-white">{stat.number}</div>
+                          <div className="text-xs text-gray-400">{stat.label}</div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
                 {/* Contact Info */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-transbot-text-light">
-                    <Mail className="w-4 h-4 text-transbot-teal" />
-                    <span>contact@transbotai.com</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-transbot-text-light">
-                    <Phone className="w-4 h-4 text-transbot-teal" />
-                    <span>+1 (555) 123-4567</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-transbot-text-light">
-                    <MapPin className="w-4 h-4 text-transbot-teal" />
-                    <span>San Francisco, CA</span>
+                <div className="space-y-4">
+                  <h4 className="text-white font-semibold text-lg">Get in Touch</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                      <div className="p-2 rounded-lg bg-green-500/20">
+                        <Mail className="w-4 h-4 text-green-400" />
+                      </div>
+                      <span>contact@transbotai.com</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                      <div className="p-2 rounded-lg bg-blue-500/20">
+                        <Phone className="w-4 h-4 text-blue-400" />
+                      </div>
+                      <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                      <div className="p-2 rounded-lg bg-purple-500/20">
+                        <MapPin className="w-4 h-4 text-purple-400" />
+                      </div>
+                      <span>San Francisco, CA</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Social Links */}
-                <div className="flex items-center gap-4">
-                  {socialLinks.map((social) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-2 rounded-lg bg-transbot-neutral-dark hover:bg-transbot-teal transition-colors duration-200"
-                    >
-                      <social.icon className="w-5 h-5 text-transbot-text-light hover:text-white" />
-                    </motion.a>
-                  ))}
+                <div className="space-y-4">
+                  <h4 className="text-white font-semibold text-lg">Follow Us</h4>
+                  <div className="flex items-center gap-4">
+                    {socialLinks.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 ${social.color} transition-all duration-200 hover:bg-white/10`}
+                      >
+                        <social.icon className="w-6 h-6" />
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </div>
 
             {/* Navigation Sections */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {menuSections.map((section, index) => (
                   <motion.div
                     key={section.title}
@@ -210,25 +246,39 @@ export function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="space-y-4"
+                    className="space-y-6"
                   >
                     <Link
                       to={section.path}
-                      className="text-white font-semibold text-lg hover:text-transbot-teal transition-colors duration-200 flex items-center gap-2 group"
+                      className="group flex items-center gap-3 text-white font-bold text-xl hover:text-blue-400 transition-colors duration-200"
                     >
+                      <div className="p-2 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
+                        <section.icon className="w-6 h-6 text-blue-400" />
+                      </div>
                       {section.title}
                       <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     </Link>
                     
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {section.subpages.map((subpage) => (
                         <li key={subpage.name}>
                           <Link
                             to={subpage.path}
-                            className="text-transbot-text-light hover:text-transbot-teal transition-colors duration-200 text-sm flex items-center gap-2 group"
+                            className="group flex items-start gap-3 text-gray-300 hover:text-white transition-colors duration-200"
                           >
-                            {subpage.name}
-                            <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                            <div className="p-1 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors mt-0.5">
+                              {subpage.icon && <subpage.icon className="w-4 h-4 text-blue-400" />}
+                            </div>
+                            <div>
+                              <div className="font-medium text-sm group-hover:text-white transition-colors">
+                                {subpage.name}
+                              </div>
+                              {subpage.description && (
+                                <div className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                                  {subpage.description}
+                                </div>
+                              )}
+                            </div>
                           </Link>
                         </li>
                       ))}
@@ -246,28 +296,39 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="py-8 border-t border-transbot-border"
+          className="border-t border-white/10 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
         >
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Stay Updated with Trans Bot AI
-            </h3>
-            <p className="text-transbot-text-light mb-6">
-              Get the latest insights, product updates, and industry news delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-transbot-neutral-dark border border-transbot-border text-white placeholder-transbot-text-light focus:outline-none focus:ring-2 focus:ring-transbot-teal focus:border-transparent"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-accent text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200"
-              >
-                Subscribe
-              </motion.button>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-blue-500/20">
+                  <Mail className="w-6 h-6 text-blue-400" />
+                </div>
+                <h3 className="text-3xl font-bold text-white">
+                  Stay Ahead of the Curve
+                </h3>
+              </div>
+              <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                Get the latest AI insights, product updates, and industry trends delivered to your inbox. 
+                Join 10,000+ logistics professionals who trust Trans Bot AI.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                >
+                  Subscribe Now
+                </motion.button>
+              </div>
+              <p className="text-gray-400 text-sm mt-4">
+                No spam, unsubscribe at any time. We respect your privacy.
+              </p>
             </div>
           </div>
         </motion.div>
@@ -278,26 +339,41 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="py-6 border-t border-transbot-border"
+          className="border-t border-white/10 bg-black/20 backdrop-blur-sm"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-transbot-text-light text-sm">
-              © 2024 Trans Bot AI. All rights reserved.
-            </div>
-            
-            <div className="flex items-center gap-6 text-sm">
-              <Link to="/privacy" className="text-transbot-text-light hover:text-transbot-teal transition-colors duration-200">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-transbot-text-light hover:text-transbot-teal transition-colors duration-200">
-                Terms of Service
-              </Link>
-              <Link to="/cookies" className="text-transbot-text-light hover:text-transbot-teal transition-colors duration-200">
-                Cookie Policy
-              </Link>
-              <Link to="/security" className="text-transbot-text-light hover:text-transbot-teal transition-colors duration-200">
-                Security
-              </Link>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-6">
+                <div className="text-gray-400 text-sm">
+                  © 2024 Trans Bot AI. All rights reserved.
+                </div>
+                <div className="flex items-center gap-2 text-gray-400 text-sm">
+                  <Shield className="w-4 h-4" />
+                  <span>SOC 2 Compliant</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-400 text-sm">
+                  <CheckCircle className="w-4 h-4" />
+                  <span>GDPR Ready</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-8 text-sm">
+                <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Privacy Policy
+                </Link>
+                <Link to="/terms" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Terms of Service
+                </Link>
+                <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Cookie Policy
+                </Link>
+                <Link to="/security" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Security
+                </Link>
+                <Link to="/sitemap" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Sitemap
+                </Link>
+              </div>
             </div>
           </div>
         </motion.div>

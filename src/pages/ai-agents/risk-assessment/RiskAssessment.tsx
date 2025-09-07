@@ -7,7 +7,6 @@ import {
   Play,
   RotateCcw,
   Target,
-  BarChart3,
   Brain,
   Eye
 } from 'lucide-react'

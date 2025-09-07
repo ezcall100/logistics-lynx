@@ -1,312 +1,364 @@
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
-  Truck, 
-  Package, 
-  BarChart3, 
-  Settings, 
-  Search,
-  Eye,
-  Plus,
-  CheckCircle,
+  Users, Package, MessageSquare,
+  DollarSign, FileText, Star,
+  Plus, Search, Filter, Download,
   Clock,
-  DollarSign,
-  TrendingUp
+  CreditCard, Bell
 } from 'lucide-react'
-import { trackUserInteraction } from '../../../services/webhookService'
 
-export default function CustomerPortal() {
+const CustomerPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
-  const [searchQuery, setSearchQuery] = useState('')
 
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('customer_portal_tab_changed', { tab })
-  }
-
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query)
-    await trackUserInteraction('customer_portal_search', { query })
-  }
-
-  const shipments = [
-    { id: 'SH001', origin: 'Los Angeles, CA', destination: 'New York, NY', status: 'In Transit', eta: '2 days', value: '$15,000' },
-    { id: 'SH002', origin: 'Chicago, IL', destination: 'Miami, FL', status: 'Delivered', eta: 'Completed', value: '$8,500' },
-    { id: 'SH003', origin: 'Dallas, TX', destination: 'Seattle, WA', status: 'Pending', eta: '1 day', value: '$12,000' }
+  const accountStats = [
+    { label: 'Total Shipments', value: '1,247', change: '+23', icon: Package, color: 'text-blue-500' },
+    { label: 'Active Shipments', value: '8', change: '+2', icon: Clock, color: 'text-yellow-500' },
+    { label: 'Total Spent', value: '$89,450', change: '+$12K', icon: DollarSign, color: 'text-green-500' },
+    { label: 'Account Rating', value: '4.8', change: '+0.2', icon: Star, color: 'text-purple-500' }
   ]
 
-  const stats = [
-    { label: 'Active Shipments', value: '12', icon: Truck, color: 'text-transbot-sky' },
-    { label: 'Total Value', value: '$125K', icon: DollarSign, color: 'text-transbot-teal' },
-    { label: 'On-Time Rate', value: '94%', icon: CheckCircle, color: 'text-transbot-purple' },
-    { label: 'Cost Savings', value: '18%', icon: TrendingUp, color: 'text-transbot-warning' }
+  const activeShipments = [
+    {
+      id: 'CS-001',
+      origin: 'Los Angeles, CA',
+      destination: 'New York, NY',
+      carrier: 'Swift Logistics',
+      status: 'In Transit',
+      progress: 75,
+      eta: '2 days',
+      cost: '$1,450'
+    },
+    {
+      id: 'CS-002',
+      origin: 'Chicago, IL',
+      destination: 'Miami, FL',
+      carrier: 'Prime Transport',
+      status: 'Loading',
+      progress: 25,
+      eta: '3 days',
+      cost: '$980'
+    },
+    {
+      id: 'CS-003',
+      origin: 'Seattle, WA',
+      destination: 'Denver, CO',
+      carrier: 'Western Freight',
+      status: 'Scheduled',
+      progress: 0,
+      eta: 'Tomorrow',
+      cost: '$1,200'
+    }
   ]
+
+  const recentInvoices = [
+    { id: 'INV-001', date: '2024-01-15', amount: '$2,450', status: 'Paid', shipments: 2 },
+    { id: 'INV-002', date: '2024-01-10', amount: '$1,850', status: 'Paid', shipments: 1 },
+    { id: 'INV-003', date: '2024-01-05', amount: '$3,200', status: 'Pending', shipments: 3 },
+    { id: 'INV-004', date: '2023-12-28', amount: '$1,980', status: 'Paid', shipments: 2 }
+  ]
+
+  const supportTickets = [
+    {
+      id: 'TKT-001',
+      subject: 'Delivery Delay Inquiry',
+      status: 'Open',
+      priority: 'Medium',
+      created: '2 hours ago',
+      assigned: 'Sarah Johnson'
+    },
+    {
+      id: 'TKT-002',
+      subject: 'Billing Question',
+      status: 'Resolved',
+      priority: 'Low',
+      created: '1 day ago',
+      assigned: 'Mike Wilson'
+    },
+    {
+      id: 'TKT-003',
+      subject: 'New Service Request',
+      status: 'In Progress',
+      priority: 'High',
+      created: '3 days ago',
+      assigned: 'Lisa Chen'
+    }
+  ]
+
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100">
       {/* Header */}
-      <section className="pt-32 pb-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <div>
-              <h1 className="text-4xl font-bold text-transbot-text-primary mb-2">Customer Portal</h1>
-              <p className="text-transbot-text-secondary">Manage your shipments and track deliveries in real-time</p>
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Customer Portal</h1>
+                <p className="text-gray-600">Customer relationship and service management</p>
+              </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="relative">
-                <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
-                <input
-                  type="text"
-                  placeholder="Search shipments..."
-                  value={searchQuery}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => trackUserInteraction('new_shipment_requested', { source: 'header' })}
-                className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" />
-                New Shipment
-              </motion.button>
+              <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                <Bell className="w-5 h-5 text-gray-600" />
+              </button>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-600"></div>
             </div>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
-              >
-                <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
-                <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-transbot-text-secondary">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Navigation Tabs */}
-      <section className="px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
-          >
-            {[
-              { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-              { id: 'shipments', label: 'Shipments', icon: Package },
-              { id: 'tracking', label: 'Tracking', icon: Truck },
-              { id: 'reports', label: 'Reports', icon: TrendingUp },
-              { id: 'settings', label: 'Settings', icon: Settings }
-            ].map((tab) => (
-              <motion.button
-                key={tab.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleTabChange(tab.id)}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-lg'
-                    : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
-              </motion.button>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Content Area */}
-      <section className="px-6 lg:px-8 pb-20">
-        <div className="max-w-7xl mx-auto">
-          {activeTab === 'dashboard' && (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Account Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {accountStats.map((stat, index) => (
             <motion.div
+              key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100"
             >
-              {/* Recent Shipments */}
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-transbot-text-primary">Recent Shipments</h2>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => trackUserInteraction('view_all_shipments', { source: 'dashboard' })}
-                    className="text-transbot-sky hover:text-transbot-teal font-medium flex items-center gap-2"
-                  >
-                    View All
-                    <Eye className="w-4 h-4" />
-                  </motion.button>
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-xl bg-gray-50">
+                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
-                <div className="space-y-4">
-                  {shipments.map((shipment) => (
-                    <motion.div
-                      key={shipment.id}
-                      whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200/30"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                          <Package className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-transbot-text-primary">{shipment.id}</div>
-                          <div className="text-sm text-transbot-text-secondary">
-                            {shipment.origin} → {shipment.destination}
+                <span className="text-sm text-green-600 font-medium">{stat.change}</span>
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="bg-white rounded-2xl shadow-lg mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-8 px-6">
+              {[
+                { id: 'dashboard', label: 'Dashboard', icon: Package },
+                { id: 'shipments', label: 'My Shipments', icon: Package },
+                { id: 'billing', label: 'Billing', icon: CreditCard },
+                { id: 'support', label: 'Support', icon: MessageSquare }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-pink-500 text-pink-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="p-6">
+            {activeTab === 'dashboard' && (
+              <div className="space-y-8">
+                {/* Quick Actions */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-xl hover:from-pink-600 hover:to-rose-700 transition-all duration-200">
+                      <Plus className="w-5 h-5" />
+                      <span className="font-medium">New Shipment</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200">
+                      <Search className="w-5 h-5" />
+                      <span className="font-medium">Track Shipment</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
+                      <MessageSquare className="w-5 h-5" />
+                      <span className="font-medium">Contact Support</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
+                      <FileText className="w-5 h-5" />
+                      <span className="font-medium">View Invoices</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Active Shipments */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Active Shipments</h3>
+                    <button className="text-pink-600 hover:text-pink-700 font-medium">
+                      View All
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    {activeShipments.map((shipment, index) => (
+                      <motion.div
+                        key={shipment.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                              <Package className="w-6 h-6 text-gray-600" />
+                            </div>
+                            <div>
+                              <div className="font-semibold text-gray-900">{shipment.id}</div>
+                              <div className="text-sm text-gray-600">
+                                {shipment.origin} → {shipment.destination}
+                              </div>
+                              <div className="text-xs text-gray-500">{shipment.carrier}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-right">
+                              <div className="font-semibold text-gray-900">{shipment.cost}</div>
+                              <div className="text-sm text-gray-600">ETA: {shipment.eta}</div>
+                            </div>
+                            <div className="text-right">
+                              <div className={`text-sm font-medium ${
+                                shipment.status === 'In Transit' ? 'text-blue-600' :
+                                shipment.status === 'Loading' ? 'text-yellow-600' :
+                                'text-green-600'
+                              }`}>
+                                {shipment.status}
+                              </div>
+                            </div>
+                            <div className="w-16">
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-pink-500 h-2 rounded-full transition-all duration-300"
+                                  style={{ width: `${shipment.progress}%` }}
+                                ></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-6">
-                        <div className="text-right">
-                          <div className="font-semibold text-transbot-text-primary">{shipment.value}</div>
-                          <div className="text-sm text-transbot-text-secondary">{shipment.eta}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'billing' && (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">Billing & Invoices</h3>
+                  <div className="flex items-center gap-3">
+                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                      <Filter className="w-4 h-4 text-gray-600" />
+                    </button>
+                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                      <Download className="w-4 h-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  {recentInvoices.map((invoice, index) => (
+                    <motion.div
+                      key={invoice.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                            <FileText className="w-6 h-6 text-gray-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">{invoice.id}</div>
+                            <div className="text-sm text-gray-600">{invoice.date}</div>
+                            <div className="text-xs text-gray-500">{invoice.shipments} shipments</div>
+                          </div>
                         </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          shipment.status === 'Delivered' ? 'bg-transbot-teal/10 text-transbot-teal' :
-                          shipment.status === 'In Transit' ? 'bg-transbot-sky/10 text-transbot-sky' :
-                          'bg-transbot-warning/10 text-transbot-warning'
-                        }`}>
-                          {shipment.status}
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <div className="font-semibold text-gray-900">{invoice.amount}</div>
+                            <div className={`text-sm font-medium ${
+                              invoice.status === 'Paid' ? 'text-green-600' : 'text-yellow-600'
+                            }`}>
+                              {invoice.status}
+                            </div>
+                          </div>
+                          <button className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors font-medium">
+                            {invoice.status === 'Paid' ? 'Download' : 'Pay Now'}
+                          </button>
                         </div>
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          onClick={() => trackUserInteraction('shipment_details_viewed', { shipmentId: shipment.id })}
-                          className="p-2 hover:bg-transbot-sky/10 rounded-lg transition-colors"
-                        >
-                          <Eye className="w-4 h-4 text-transbot-text-secondary" />
-                        </motion.button>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
+            )}
 
-              {/* Quick Actions */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
-                  onClick={() => trackUserInteraction('track_shipment_clicked', { source: 'quick_actions' })}
-                >
-                  <Truck className="w-8 h-8 text-transbot-sky mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Track Shipment</h3>
-                  <p className="text-transbot-text-secondary text-sm">Enter tracking number to get real-time updates</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
-                  onClick={() => trackUserInteraction('get_quote_clicked', { source: 'quick_actions' })}
-                >
-                  <DollarSign className="w-8 h-8 text-transbot-teal mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Get Quote</h3>
-                  <p className="text-transbot-text-secondary text-sm">Get instant pricing for your shipment</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg cursor-pointer"
-                  onClick={() => trackUserInteraction('schedule_pickup_clicked', { source: 'quick_actions' })}
-                >
-                  <Clock className="w-8 h-8 text-transbot-purple mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Schedule Pickup</h3>
-                  <p className="text-transbot-text-secondary text-sm">Schedule a pickup for your shipment</p>
-                </motion.div>
+            {activeTab === 'support' && (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">Support Tickets</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
+                    <Plus className="w-4 h-4" />
+                    New Ticket
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {supportTickets.map((ticket, index) => (
+                    <motion.div
+                      key={ticket.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                            <MessageSquare className="w-6 h-6 text-gray-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">{ticket.subject}</div>
+                            <div className="text-sm text-gray-600">Ticket #{ticket.id}</div>
+                            <div className="text-xs text-gray-500">Created {ticket.created}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <div className={`text-sm font-medium ${
+                              ticket.status === 'Resolved' ? 'text-green-600' :
+                              ticket.status === 'In Progress' ? 'text-blue-600' :
+                              'text-yellow-600'
+                            }`}>
+                              {ticket.status}
+                            </div>
+                            <div className="text-xs text-gray-500">Assigned to {ticket.assigned}</div>
+                          </div>
+                          <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            ticket.priority === 'High' ? 'bg-red-100 text-red-700' :
+                            ticket.priority === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+                            'bg-green-100 text-green-700'
+                          }`}>
+                            {ticket.priority}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'shipments' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">All Shipments</h2>
-              <div className="text-center py-12">
-                <Package className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Shipments Management</h3>
-                <p className="text-transbot-text-secondary">Full shipment management interface coming soon</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'tracking' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Real-Time Tracking</h2>
-              <div className="text-center py-12">
-                <Truck className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Live Tracking</h3>
-                <p className="text-transbot-text-secondary">Real-time shipment tracking interface coming soon</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'reports' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Analytics & Reports</h2>
-              <div className="text-center py-12">
-                <BarChart3 className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Performance Analytics</h3>
-                <p className="text-transbot-text-secondary">Comprehensive reporting dashboard coming soon</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'settings' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Account Settings</h2>
-              <div className="text-center py-12">
-                <Settings className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Settings Panel</h3>
-                <p className="text-transbot-text-secondary">Account and preference settings coming soon</p>
-              </div>
-            </motion.div>
-          )}
+            )}
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
+
+export default CustomerPortal

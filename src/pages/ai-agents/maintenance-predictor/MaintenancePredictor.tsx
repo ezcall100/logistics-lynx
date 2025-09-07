@@ -6,7 +6,6 @@ import {
   CheckCircle, 
   Play,
   RotateCcw,
-  Target,
   BarChart3,
   Brain,
   Clock

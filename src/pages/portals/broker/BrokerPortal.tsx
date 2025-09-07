@@ -1,391 +1,332 @@
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { 
-  Truck, 
-  Package, 
-  BarChart3, 
-  Settings, 
-  Search,
-  Eye,
-  DollarSign,
-  TrendingUp,
-  Users,
-  Plus
+  Users, Package, 
+  DollarSign, 
+  Plus, Search, Filter,
+  BarChart3, Bell, Star,
+  ArrowRight
 } from 'lucide-react'
-import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
-export default function BrokerPortal() {
-  const [activeTab, setActiveTab] = useState('overview')
-  const [searchQuery, setSearchQuery] = useState('')
-
-  const handleTabChange = async (tab: string) => {
-    setActiveTab(tab)
-    await trackUserInteraction('broker_portal_tab_changed', { tab })
-    
-    // Send to N8N for broker analytics
-    await trackAIAgentActivity('BrokerAnalytics', 'tab_analytics', {
-      brokerId: 'BROKER_001',
-      tab: tab,
-      timestamp: new Date().toISOString()
-    })
-  }
-
-  const handleLoadPost = async () => {
-    await trackUserInteraction('load_posted', { source: 'broker_portal' })
-    await trackAIAgentActivity('LoadManagement', 'load_posted', {
-      brokerId: 'BROKER_001',
-      action: 'post_load',
-      timestamp: new Date().toISOString()
-    })
-  }
-
-  const brokerStats = {
-    totalLoads: 156,
-    activeLoads: 23,
-    completedLoads: 133,
-    totalRevenue: 245000,
-    averageRate: 2.45,
-    carrierCount: 45,
-    onTimeRate: 94
-  }
+const BrokerPortal: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('dashboard')
 
   const stats = [
-    { label: 'Total Loads', value: brokerStats.totalLoads.toLocaleString(), icon: Package, color: 'text-transbot-sky' },
-    { label: 'Active Loads', value: brokerStats.activeLoads.toString(), icon: Truck, color: 'text-transbot-teal' },
-    { label: 'Total Revenue', value: `$${brokerStats.totalRevenue.toLocaleString()}`, icon: DollarSign, color: 'text-transbot-purple' },
-    { label: 'Carrier Network', value: brokerStats.carrierCount.toString(), icon: Users, color: 'text-transbot-warning' }
+    { label: 'Active Loads', value: '18', change: '+5', icon: Package, color: 'text-blue-500' },
+    { label: 'Carrier Network', value: '45', change: '+3', icon: Users, color: 'text-green-500' },
+    { label: 'Revenue Today', value: '$8,750', change: '+22%', icon: DollarSign, color: 'text-purple-500' },
+    { label: 'Customer Rating', value: '4.9', change: '+0.1', icon: Star, color: 'text-yellow-500' }
   ]
 
-  const recentLoads = [
-    { 
-      id: 'LOAD001', 
-      origin: 'Los Angeles, CA', 
-      destination: 'New York, NY', 
-      distance: 2800, 
-      rate: 2.50, 
-      pickupTime: '2024-01-15 08:00',
-      deliveryTime: '2024-01-17 18:00',
-      equipment: 'Dry Van',
-      weight: '45,000 lbs',
-      status: 'Posted',
-      carrier: null
-    },
-    { 
-      id: 'LOAD002', 
-      origin: 'Chicago, IL', 
-      destination: 'Miami, FL', 
-      distance: 1350, 
-      rate: 2.80, 
-      pickupTime: '2024-01-16 10:00',
-      deliveryTime: '2024-01-18 16:00',
-      equipment: 'Refrigerated',
-      weight: '40,000 lbs',
-      status: 'Assigned',
-      carrier: 'Swift Transport'
-    },
-    { 
-      id: 'LOAD003', 
-      origin: 'Dallas, TX', 
-      destination: 'Seattle, WA', 
-      distance: 2100, 
-      rate: 2.35, 
-      pickupTime: '2024-01-17 06:00',
-      deliveryTime: '2024-01-19 20:00',
-      equipment: 'Flatbed',
-      weight: '48,000 lbs',
+  const activeLoads = [
+    {
+      id: 'BL-001',
+      shipper: 'TechCorp Inc.',
+      origin: 'Los Angeles, CA',
+      destination: 'New York, NY',
+      carrier: 'Swift Logistics',
+      rate: '$2,450',
+      margin: '$245',
       status: 'In Transit',
-      carrier: 'Prime Inc'
+      progress: 65
+    },
+    {
+      id: 'BL-002',
+      shipper: 'RetailMax',
+      origin: 'Chicago, IL',
+      destination: 'Miami, FL',
+      carrier: 'Prime Transport',
+      rate: '$1,850',
+      margin: '$185',
+      status: 'Loading',
+      progress: 25
+    },
+    {
+      id: 'BL-003',
+      shipper: 'Manufacturing Co.',
+      origin: 'Seattle, WA',
+      destination: 'Denver, CO',
+      carrier: 'Western Freight',
+      rate: '$1,200',
+      margin: '$120',
+      status: 'Scheduled',
+      progress: 0
+    }
+  ]
+
+  const topCarriers = [
+    {
+      name: 'Swift Logistics',
+      rating: 4.8,
+      loadsCompleted: 156,
+      onTimeRate: 98,
+      lastUsed: '2 hours ago',
+      specialties: ['Dry Van', 'Refrigerated']
+    },
+    {
+      name: 'Prime Transport',
+      rating: 4.9,
+      loadsCompleted: 203,
+      onTimeRate: 99,
+      lastUsed: '1 day ago',
+      specialties: ['Flatbed', 'Heavy Haul']
+    },
+    {
+      name: 'Western Freight',
+      rating: 4.7,
+      loadsCompleted: 89,
+      onTimeRate: 96,
+      lastUsed: '3 days ago',
+      specialties: ['Dry Van', 'LTL']
     }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-violet-100">
       {/* Header */}
-      <section className="pt-32 pb-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <div>
-              <h1 className="text-4xl font-bold text-transbot-text-primary mb-2">Broker Portal</h1>
-              <p className="text-transbot-text-secondary">Manage your freight brokerage operations with AI-powered efficiency</p>
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Broker Portal</h1>
+                <p className="text-gray-600">Load brokerage and relationship management</p>
+              </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="relative">
-                <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
-                <input
-                  type="text"
-                  placeholder="Search loads, carriers..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20"
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleLoadPost}
-                className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" />
-                Post Load
-              </motion.button>
+              <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                <Bell className="w-5 h-5 text-gray-600" />
+              </button>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600"></div>
             </div>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg"
-              >
-                <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
-                <div className="text-2xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-transbot-text-secondary">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Navigation Tabs */}
-      <section className="px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex space-x-1 bg-white/95 backdrop-blur-sm rounded-xl p-1 border border-slate-200/50 shadow-lg mb-8"
-          >
-            {[
-              { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-              { id: 'loads', label: 'Load Management', icon: Package },
-              { id: 'carriers', label: 'Carrier Network', icon: Users },
-              { id: 'rates', label: 'Rate Management', icon: DollarSign },
-              { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-              { id: 'settings', label: 'Settings', icon: Settings }
-            ].map((tab) => (
-              <motion.button
-                key={tab.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleTabChange(tab.id)}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? 'bg-gradient-primary text-white shadow-transbot'
-                    : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
-              </motion.button>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Content Area */}
-      <section className="px-6 lg:px-8 pb-20">
-        <div className="max-w-7xl mx-auto">
-          {activeTab === 'dashboard' && (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => (
             <motion.div
+              key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100"
             >
-              {/* Recent Loads */}
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-transbot-text-primary">Recent Loads</h2>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleTabChange('loads')}
-                    className="text-transbot-sky hover:text-transbot-teal font-medium flex items-center gap-2"
-                  >
-                    View All
-                    <Eye className="w-4 h-4" />
-                  </motion.button>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-xl bg-gray-50`}>
+                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
-                <div className="space-y-4">
-                  {recentLoads.map((load) => (
-                    <motion.div
-                      key={load.id}
-                      whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg border border-transbot-border/10"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                          <Package className="w-6 h-6 text-white" />
+                <span className="text-sm text-green-600 font-medium">{stat.change}</span>
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="bg-white rounded-2xl shadow-lg mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-8 px-6">
+              {[
+                { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+                { id: 'loads', label: 'Load Board', icon: Package },
+                { id: 'carriers', label: 'Carrier Network', icon: Users },
+                { id: 'customers', label: 'Customer Relations', icon: Users }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-purple-500 text-purple-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="p-6">
+            {activeTab === 'dashboard' && (
+              <div className="space-y-8">
+                {/* Quick Actions */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
+                      <Plus className="w-5 h-5" />
+                      <span className="font-medium">Post Load</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200">
+                      <Search className="w-5 h-5" />
+                      <span className="font-medium">Find Carriers</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
+                      <Users className="w-5 h-5" />
+                      <span className="font-medium">Add Carrier</span>
+                    </button>
+                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200">
+                      <BarChart3 className="w-5 h-5" />
+                      <span className="font-medium">View Reports</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Active Loads */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Active Loads</h3>
+                    <button className="text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1">
+                      View All
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    {activeLoads.map((load, index) => (
+                      <motion.div
+                        key={load.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                              <Package className="w-6 h-6 text-gray-600" />
+                            </div>
+                            <div>
+                              <div className="font-semibold text-gray-900">{load.id}</div>
+                              <div className="text-sm text-gray-600">
+                                {load.origin} → {load.destination}
+                              </div>
+                              <div className="text-xs text-gray-500">{load.shipper}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-right">
+                              <div className="font-semibold text-gray-900">{load.rate}</div>
+                              <div className="text-sm text-green-600">Margin: {load.margin}</div>
+                            </div>
+                            <div className="text-right">
+                              <div className={`text-sm font-medium ${
+                                load.status === 'In Transit' ? 'text-blue-600' :
+                                load.status === 'Loading' ? 'text-yellow-600' :
+                                'text-green-600'
+                              }`}>
+                                {load.status}
+                              </div>
+                              <div className="text-xs text-gray-500">{load.carrier}</div>
+                            </div>
+                            <div className="w-16">
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-purple-500 h-2 rounded-full transition-all duration-300"
+                                  style={{ width: `${load.progress}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-semibold text-transbot-text-primary">{load.id}</div>
-                          <div className="text-sm text-transbot-text-secondary">
-                            {load.origin} → {load.destination}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'carriers' && (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">Top Carriers</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Search carriers..."
+                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                    </div>
+                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                      <Filter className="w-4 h-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {topCarriers.map((carrier, index) => (
+                    <motion.div
+                      key={carrier.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                            <Users className="w-6 h-6 text-gray-600" />
                           </div>
-                          <div className="text-xs text-transbot-text-secondary mt-1">
-                            {load.equipment} • {load.weight} • {load.distance} miles
+                          <div>
+                            <div className="font-semibold text-gray-900">{carrier.name}</div>
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                              <span className="text-sm text-gray-600">{carrier.rating}</span>
+                            </div>
                           </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-gray-900">{carrier.loadsCompleted}</div>
+                          <div className="text-xs text-gray-500">Loads</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-6">
-                        <div className="text-right">
-                          <div className="font-semibold text-transbot-text-primary">${load.rate}/mile</div>
-                          <div className="text-sm text-transbot-text-secondary">
-                            ${(load.rate * load.distance).toLocaleString()} total
-                          </div>
-                          <div className="text-xs text-transbot-text-secondary">
-                            Pickup: {load.pickupTime}
-                          </div>
+                      <div className="space-y-2 mb-4">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-600">On-time Rate:</span>
+                          <span className="font-medium text-gray-900">{carrier.onTimeRate}%</span>
                         </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          load.status === 'Posted' ? 'bg-transbot-warning/10 text-transbot-warning' :
-                          load.status === 'Assigned' ? 'bg-transbot-sky/10 text-transbot-sky' :
-                          'bg-transbot-teal/10 text-transbot-teal'
-                        }`}>
-                          {load.status}
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-600">Last Used:</span>
+                          <span className="font-medium text-gray-900">{carrier.lastUsed}</span>
                         </div>
-                        {load.carrier && (
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-transbot-text-primary">{load.carrier}</div>
-                            <div className="text-xs text-transbot-text-secondary">Carrier</div>
-                          </div>
-                        )}
+                      </div>
+                      <div className="mb-4">
+                        <div className="text-sm text-gray-600 mb-2">Specialties:</div>
+                        <div className="flex flex-wrap gap-2">
+                          {carrier.specialties.map((specialty, idx) => (
+                            <span key={idx} className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">
+                              {specialty}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button className="flex-1 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors font-medium">
+                          Contact
+                        </button>
+                        <button className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                          View Profile
+                        </button>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
-
-              {/* Quick Actions */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
-                  onClick={() => handleTabChange('loads')}
-                >
-                  <Package className="w-8 h-8 text-transbot-sky mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Post New Load</h3>
-                  <p className="text-transbot-text-secondary text-sm">Create and post a new load to the marketplace</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
-                  onClick={() => handleTabChange('carriers')}
-                >
-                  <Users className="w-8 h-8 text-transbot-teal mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Manage Carriers</h3>
-                  <p className="text-transbot-text-secondary text-sm">View and manage your carrier network</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-transbot-border/20 shadow-transbot cursor-pointer"
-                  onClick={() => handleTabChange('analytics')}
-                >
-                  <BarChart3 className="w-8 h-8 text-transbot-purple mb-4" />
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">View Analytics</h3>
-                  <p className="text-transbot-text-secondary text-sm">Analyze your brokerage performance</p>
-                </motion.div>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'loads' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Load Management</h2>
-              <div className="text-center py-12">
-                <Package className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Load Management System</h3>
-                <p className="text-transbot-text-secondary">Comprehensive load management interface</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'carriers' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Carrier Network</h2>
-              <div className="text-center py-12">
-                <Users className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Carrier Management</h3>
-                <p className="text-transbot-text-secondary">Manage your carrier network and relationships</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'rates' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Rate Management</h2>
-              <div className="text-center py-12">
-                <DollarSign className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Rate Optimization</h3>
-                <p className="text-transbot-text-secondary">AI-powered rate management and optimization</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'analytics' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Analytics Dashboard</h2>
-              <div className="text-center py-12">
-                <BarChart3 className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Performance Analytics</h3>
-                <p className="text-transbot-text-secondary">Comprehensive brokerage analytics and insights</p>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'settings' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot"
-            >
-              <h2 className="text-2xl font-bold text-transbot-text-primary mb-6">Broker Settings</h2>
-              <div className="text-center py-12">
-                <Settings className="w-16 h-16 text-transbot-text-secondary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-2">Account Settings</h3>
-                <p className="text-transbot-text-secondary">Manage your broker account and preferences</p>
-              </div>
-            </motion.div>
-          )}
+            )}
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
+
+export default BrokerPortal
