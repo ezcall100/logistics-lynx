@@ -29,7 +29,9 @@ import {
   Code,
   HelpCircle,
   DollarSign,
-  MapPin
+  MapPin,
+  Leaf,
+  Heart
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 
@@ -113,9 +115,9 @@ export function HorizontalMegaMenu() {
         { id: 'demand-forecaster', label: 'Demand Forecaster', href: '/agents/demand-forecaster', icon: BarChart3, description: 'Predict shipping demand' },
         { id: 'price-optimizer', label: 'Price Optimizer', href: '/agents/price-optimizer', icon: TrendingUp, description: 'Dynamic pricing strategies' },
         { id: 'maintenance-predictor', label: 'Maintenance Predictor', href: '/agents/maintenance-predictor', icon: Target, description: 'Predictive maintenance alerts' },
-        { id: 'carbon-optimizer', label: 'Carbon Optimizer', href: '/agents/carbon-optimizer', icon: Shield, description: 'Reduce carbon footprint' },
+        { id: 'carbon-optimizer', label: 'Carbon Optimizer', href: '/agents/carbon-optimizer', icon: Leaf, description: 'Reduce carbon footprint' },
         { id: 'smart-warehouse', label: 'Smart Warehouse', href: '/agents/smart-warehouse', icon: Package, description: 'Autonomous warehouse operations' },
-        { id: 'customer-experience', label: 'Customer Experience', href: '/agents/customer-experience', icon: Users, description: 'Enhance customer satisfaction' },
+        { id: 'customer-experience', label: 'Customer Experience', href: '/agents/customer-experience', icon: Heart, description: 'Enhance customer satisfaction' },
         { id: 'risk-assessment', label: 'Risk Assessment', href: '/agents/risk-assessment', icon: Shield, description: 'Proactive risk identification' }
       ]
     },
