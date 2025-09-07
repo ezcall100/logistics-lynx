@@ -105,14 +105,18 @@ export function HorizontalMegaMenu() {
     {
       title: 'AI Agents',
       items: [
-        { id: 'route-optimizer', label: 'Route Optimizer', href: '/ai-agents/route-optimizer', icon: Target, description: 'Optimize delivery routes' },
-        { id: 'load-matcher', label: 'Load Matcher', href: '/ai-agents/load-matcher', icon: Zap, description: 'Match loads with carriers' },
-        { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/ai-agents/predictive-analytics', icon: BarChart3, description: 'Predict trends and optimize' },
-        { id: 'fleet-manager', label: 'Fleet Manager', href: '/ai-agents/fleet-manager', icon: Rocket, description: 'Manage fleet operations' },
-        { id: 'fuel-optimizer', label: 'Fuel Optimizer', href: '/ai-agents/fuel-optimizer', icon: Zap, description: 'Minimize fuel consumption' },
-        { id: 'demand-forecaster', label: 'Demand Forecaster', href: '/ai-agents/demand-forecaster', icon: BarChart3, description: 'Predict shipping demand' },
-        { id: 'price-optimizer', label: 'Price Optimizer', href: '/ai-agents/price-optimizer', icon: TrendingUp, description: 'Dynamic pricing strategies' },
-        { id: 'maintenance-predictor', label: 'Maintenance Predictor', href: '/ai-agents/maintenance-predictor', icon: Target, description: 'Predictive maintenance alerts' }
+        { id: 'route-optimizer', label: 'Route Optimizer', href: '/agents/route-optimizer', icon: Target, description: 'Optimize delivery routes' },
+        { id: 'load-matcher', label: 'Load Matcher', href: '/agents/load-matcher', icon: Zap, description: 'Match loads with carriers' },
+        { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/agents/predictive-analytics', icon: BarChart3, description: 'Predict trends and optimize' },
+        { id: 'fleet-manager', label: 'Fleet Manager', href: '/agents/fleet-manager', icon: Rocket, description: 'Manage fleet operations' },
+        { id: 'fuel-optimizer', label: 'Fuel Optimizer', href: '/agents/fuel-optimizer', icon: Zap, description: 'Minimize fuel consumption' },
+        { id: 'demand-forecaster', label: 'Demand Forecaster', href: '/agents/demand-forecaster', icon: BarChart3, description: 'Predict shipping demand' },
+        { id: 'price-optimizer', label: 'Price Optimizer', href: '/agents/price-optimizer', icon: TrendingUp, description: 'Dynamic pricing strategies' },
+        { id: 'maintenance-predictor', label: 'Maintenance Predictor', href: '/agents/maintenance-predictor', icon: Target, description: 'Predictive maintenance alerts' },
+        { id: 'carbon-optimizer', label: 'Carbon Optimizer', href: '/agents/carbon-optimizer', icon: Shield, description: 'Reduce carbon footprint' },
+        { id: 'smart-warehouse', label: 'Smart Warehouse', href: '/agents/smart-warehouse', icon: Package, description: 'Autonomous warehouse operations' },
+        { id: 'customer-experience', label: 'Customer Experience', href: '/agents/customer-experience', icon: Users, description: 'Enhance customer satisfaction' },
+        { id: 'risk-assessment', label: 'Risk Assessment', href: '/agents/risk-assessment', icon: Shield, description: 'Proactive risk identification' }
       ]
     },
     {

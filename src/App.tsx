@@ -30,6 +30,14 @@ import RouteOptimizer from './pages/ai-agents/route-optimizer/RouteOptimizer'
 import LoadMatcher from './pages/ai-agents/load-matcher/LoadMatcher'
 import PredictiveAnalytics from './pages/ai-agents/predictive-analytics/PredictiveAnalytics'
 import FleetManager from './pages/ai-agents/fleet-manager/FleetManager'
+import FuelOptimizer from './pages/ai-agents/fuel-optimizer/FuelOptimizer'
+import DemandForecaster from './pages/ai-agents/demand-forecaster/DemandForecaster'
+import PriceOptimizer from './pages/ai-agents/price-optimizer/PriceOptimizer'
+import MaintenancePredictor from './pages/ai-agents/maintenance-predictor/MaintenancePredictor'
+import CarbonOptimizer from './pages/ai-agents/carbon-optimizer/CarbonOptimizer'
+import SmartWarehouse from './pages/ai-agents/smart-warehouse/SmartWarehouse'
+import CustomerExperience from './pages/ai-agents/customer-experience/CustomerExperience'
+import RiskAssessment from './pages/ai-agents/risk-assessment/RiskAssessment'
 import CustomerPortal from './pages/portals/customer/CustomerPortal'
 import PartnerPortal from './pages/portals/partner/PartnerPortal'
 import DeveloperPortal from './pages/portals/developer/DeveloperPortal'
@@ -369,23 +377,13 @@ function App() {
               } />
               <Route path="/agents/fuel-optimizer" element={
                 <>
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Fuel Optimizer</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - Minimize fuel consumption with AI</p>
-                    </div>
-                  </div>
+                  <FuelOptimizer />
                   <Footer />
                 </>
               } />
               <Route path="/agents/demand-forecaster" element={
                 <>
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Demand Forecaster</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - Predict shipping demand with AI</p>
-                    </div>
-                  </div>
+                  <DemandForecaster />
                   <Footer />
                 </>
               } />
@@ -402,12 +400,31 @@ function App() {
               } />
               <Route path="/agents/maintenance-predictor" element={
                 <>
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Maintenance Predictor</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - Predictive maintenance alerts with AI</p>
-                    </div>
-                  </div>
+                  <MaintenancePredictor />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/carbon-optimizer" element={
+                <>
+                  <CarbonOptimizer />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/smart-warehouse" element={
+                <>
+                  <SmartWarehouse />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/customer-experience" element={
+                <>
+                  <CustomerExperience />
+                  <Footer />
+                </>
+              } />
+              <Route path="/agents/risk-assessment" element={
+                <>
+                  <RiskAssessment />
                   <Footer />
                 </>
               } />
