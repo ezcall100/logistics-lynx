@@ -267,6 +267,102 @@ function App() {
                   <Footer />
                 </>
               } />
+              <Route path="/portals/broker" element={
+                <>
+                  <BrokerPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/carrier" element={
+                <>
+                  <CarrierPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/driver" element={
+                <>
+                  <DriverPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/shipper" element={
+                <>
+                  <ShipperPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/analytics" element={
+                <>
+                  <AnalyticsPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/yms" element={
+                <>
+                  <YMSPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/directory" element={
+                <>
+                  <DirectoryPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/rates" element={
+                <>
+                  <RatesPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/marketplace" element={
+                <>
+                  <MarketplacePortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/financials" element={
+                <>
+                  <FinancialsPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/load-board" element={
+                <>
+                  <LoadBoardPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/crm" element={
+                <>
+                  <CRMPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/edi" element={
+                <>
+                  <EDIPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/owner-operator" element={
+                <>
+                  <OwnerOperatorPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/workers" element={
+                <>
+                  <WorkersPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/factoring" element={
+                <>
+                  <FactoringPortal />
+                  <Footer />
+                </>
+              } />
               <Route path="/broker" element={
                 <>
                   <BrokerPortal />

@@ -17,6 +17,7 @@ import {
   UserCheck,
   Award
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 const WorkersPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -369,23 +370,13 @@ const WorkersPortal: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <PortalHeader
+        title="Workers Portal"
+        description="Manage your workforce with AI-powered scheduling and optimization"
+        icon={Users}
+        color="from-blue-500 to-purple-600"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-              <Users className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Workers Portal</h1>
-              <p className="text-slate-600">Manage your workforce with AI-powered scheduling and optimization</p>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Navigation Tabs */}
         <motion.div

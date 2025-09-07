@@ -8,6 +8,7 @@ import {
   CheckCircle,
   Star
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 export default function LoadBoardPortal() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -30,39 +31,35 @@ export default function LoadBoardPortal() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <section className="pt-32 pb-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-between mb-8"
+      <PortalHeader
+        title="Load Board Portal"
+        description="AI-powered load matching and carrier connection platform"
+        icon={ClipboardList}
+        color="from-indigo-500 to-purple-600"
+      >
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
+            <input
+              type="text"
+              placeholder="Search loads..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            />
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
           >
-            <div>
-              <h1 className="text-4xl font-bold text-transbot-text-primary mb-2">Load Board Portal</h1>
-              <p className="text-transbot-text-secondary">AI-powered load matching and carrier connection platform</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
-                <input
-                  type="text"
-                  placeholder="Search loads..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" />
-                Post Load
-              </motion.button>
-            </div>
-          </motion.div>
+            <Plus className="w-4 h-4" />
+            Post Load
+          </motion.button>
+        </div>
+      </PortalHeader>
+      <section className="pt-8 pb-8 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

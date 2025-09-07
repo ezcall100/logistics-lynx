@@ -7,6 +7,7 @@ import {
   Target, 
   Plus
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 export default function RatesPortal() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -29,38 +30,34 @@ export default function RatesPortal() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <section className="pt-32 pb-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-between mb-8"
+      <PortalHeader
+        title="Rates Portal"
+        description="Dynamic rate management and market intelligence"
+        icon={DollarSign}
+        color="from-yellow-500 to-orange-600"
+      >
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search rates..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-4 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            />
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
           >
-            <div>
-              <h1 className="text-4xl font-bold text-transbot-text-primary mb-2">Rates Portal</h1>
-              <p className="text-transbot-text-secondary">Dynamic rate management and market intelligence</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search rates..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-4 pr-4 py-2 border border-slate-200/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-primary text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" />
-                Add Rate
-              </motion.button>
-            </div>
-          </motion.div>
+            <Plus className="w-4 h-4" />
+            Add Rate
+          </motion.button>
+        </div>
+      </PortalHeader>
+      <section className="pt-8 pb-8 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

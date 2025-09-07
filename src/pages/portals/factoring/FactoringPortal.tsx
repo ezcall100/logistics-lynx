@@ -16,6 +16,7 @@ import {
   Banknote,
   PieChart
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 const FactoringPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -385,23 +386,13 @@ const FactoringPortal: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <PortalHeader
+        title="Factoring Portal"
+        description="Invoice factoring and cash flow management for trucking businesses"
+        icon={Banknote}
+        color="from-green-500 to-emerald-600"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-emerald-600 rounded-xl flex items-center justify-center">
-              <Banknote className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Factoring Portal</h1>
-              <p className="text-slate-600">Invoice factoring and cash flow management for trucking businesses</p>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Navigation Tabs */}
         <motion.div

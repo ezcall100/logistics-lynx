@@ -23,6 +23,7 @@ import {
   Target,
   Calendar
 } from 'lucide-react'
+import PortalHeader from '../../../components/portals/PortalHeader'
 
 interface MCPAgent {
   id: string
@@ -613,37 +614,23 @@ export function MCPAgentAdmin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* Header */}
-      <section className="pt-20 pb-8 px-6 lg:px-8">
+      <PortalHeader
+        title="MCP Agent Admin"
+        description="Manage and monitor AI development agents"
+        icon={Bot}
+        color="from-green-500 to-blue-600"
+      >
+        <div className="flex items-center space-x-4">
+          <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-medium">
+            System Status: Healthy
+          </div>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+            Deploy New Agent
+          </button>
+        </div>
+      </PortalHeader>
+      <section className="pt-8 pb-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-blue-600 rounded-xl flex items-center justify-center">
-                <Bot className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-transbot-text-primary">
-                  MCP Agent Admin
-                </h1>
-                <p className="text-transbot-text-secondary">
-                  Manage and monitor AI development agents
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-medium">
-                System Status: Healthy
-              </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                Deploy New Agent
-              </button>
-            </div>
-          </motion.div>
 
           {/* Navigation Tabs */}
           <motion.div
