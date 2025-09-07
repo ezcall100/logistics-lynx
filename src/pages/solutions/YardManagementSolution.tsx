@@ -1,5 +1,5 @@
 import React from 'react'
-import { MapPin, Clock, Users, Truck, CheckCircle, TrendingUp, BarChart3, Shield } from 'lucide-react'
+import { MapPin, Clock, Users, Truck, CheckCircle, BarChart3, Shield } from 'lucide-react'
 
 const YardManagementSolution: React.FC = () => {
   const features = [

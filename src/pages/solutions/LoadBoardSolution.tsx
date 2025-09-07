@@ -1,5 +1,5 @@
 import React from 'react'
-import { Package, Users, Zap, Target, Clock, TrendingUp, BarChart3, CheckCircle } from 'lucide-react'
+import { Package, Users, Zap, Target, Clock, BarChart3, CheckCircle } from 'lucide-react'
 
 const LoadBoardSolution: React.FC = () => {
   const features = [

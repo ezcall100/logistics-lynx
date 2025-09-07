@@ -1,5 +1,5 @@
 import React from 'react'
-import { TrendingUp, Users, DollarSign, Clock, ArrowRight, Star } from 'lucide-react'
+import { TrendingUp, DollarSign, Clock, Star } from 'lucide-react'
 
 const CaseStudiesPage: React.FC = () => {
   const caseStudies = [

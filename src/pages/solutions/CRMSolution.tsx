@@ -1,5 +1,5 @@
 import React from 'react'
-import { Users, Phone, Mail, Calendar, Target, TrendingUp, BarChart3, CheckCircle } from 'lucide-react'
+import { Users, Phone, Calendar, Target, TrendingUp, BarChart3, CheckCircle } from 'lucide-react'
 
 const CRMSolution: React.FC = () => {
   const features = [

@@ -151,17 +151,6 @@ function App() {
                   <Footer />
                 </>
               } />
-              <Route path="/solutions/brokerage" element={
-                <>
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">Freight Brokerage</h1>
-                      <p className="text-transbot-text-secondary">Coming Soon - End-to-end brokerage solutions</p>
-                    </div>
-                  </div>
-                  <Footer />
-                </>
-              } />
               <Route path="/solutions/last-mile" element={
                 <>
                   <LastMileDelivery />

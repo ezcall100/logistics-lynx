@@ -11,7 +11,7 @@ const { spawn, exec } = require('child_process');
 
 class EmergencyFallback {
   constructor() {
-    this.fallbackPorts = [3001, 3002, 3003, 3004, 3005];
+    this.fallbackPorts = [3002, 3003, 3004, 3005, 3006];
     this.currentPort = 3000;
     this.fallbackIndex = 0;
     this.maxAttempts = 5;

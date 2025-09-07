@@ -5,6 +5,9 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lucide-react']
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -25,11 +28,16 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    host: true,
-    open: false
+    host: 'localhost',
+    open: false,
+    strictPort: true,
+    watch: {
+      usePolling: false,
+      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**']
+    }
   },
   preview: {
     port: 3000,
-    host: true
+    host: '0.0.0.0'
   }
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DollarSign, TrendingUp, CreditCard, Calculator, Shield, BarChart3, CheckCircle, Users } from 'lucide-react'
+import { DollarSign, TrendingUp, CreditCard, Calculator, Shield, BarChart3, CheckCircle } from 'lucide-react'
 
 const FinancialManagementSolution: React.FC = () => {
   const features = [

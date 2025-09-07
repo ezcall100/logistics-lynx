@@ -90,7 +90,7 @@ class ServerBackupManager {
     console.log('🛡️ Switching to backup strategy...');
     
     // Strategy 1: Try different port
-    this.port = 3001;
+    this.port = 3000;
     console.log(`🔄 Trying port ${this.port}...`);
     await this.startServer();
     

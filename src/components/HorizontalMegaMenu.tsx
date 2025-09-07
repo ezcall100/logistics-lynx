@@ -28,7 +28,8 @@ import {
   Banknote,
   Code,
   HelpCircle,
-  DollarSign
+  DollarSign,
+  MapPin
 } from 'lucide-react'
 import { trackUserInteraction } from '../services/webhookService'
 
@@ -85,7 +86,6 @@ export function HorizontalMegaMenu() {
         { id: 'load-matching', label: 'Load Matching', href: '/solutions/load-matching', icon: Zap, description: 'Smart load-carrier matching' },
         { id: 'predictive-analytics', label: 'Predictive Analytics', href: '/solutions/predictive-analytics', icon: BarChart3, description: 'Forecast and optimize' },
         { id: 'fleet-management', label: 'Fleet Management', href: '/solutions/fleet-management', icon: Rocket, description: 'Comprehensive fleet control' },
-        { id: 'freight-brokerage', label: 'Freight Brokerage', href: '/solutions/brokerage', icon: Briefcase, description: 'End-to-end brokerage solutions' },
         { id: 'warehouse-management', label: 'Warehouse Management', href: '/solutions/warehouse', icon: Package, description: 'Smart warehouse operations' },
         { id: 'last-mile-delivery', label: 'Last Mile Delivery', href: '/solutions/last-mile', icon: Truck, description: 'Optimized final delivery' },
         { id: 'yard-management', label: 'Yard Management', href: '/solutions/yard-management', icon: MapPin, description: 'Optimize yard operations' },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Code, Copy, Check, Globe, Key, Database, Zap } from 'lucide-react'
+import { Copy, Check, Key, Database, Zap } from 'lucide-react'
 
 const APIDocumentationPage: React.FC = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null)

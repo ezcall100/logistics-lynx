@@ -1,5 +1,5 @@
 import React from 'react'
-import { Calendar, Clock, Users, Play, ArrowRight, Star } from 'lucide-react'
+import { Calendar, Clock, Users, Play, ArrowRight } from 'lucide-react'
 
 const WebinarsPage: React.FC = () => {
   const webinars = [

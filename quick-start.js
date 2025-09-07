@@ -9,7 +9,7 @@ const { spawn, exec } = require('child_process');
 
 class QuickStart {
   constructor() {
-    this.ports = [3000, 3001, 3002, 3003, 3004];
+    this.ports = [3000, 3002, 3003, 3004, 3005];
     this.currentPort = 0;
   }
 
