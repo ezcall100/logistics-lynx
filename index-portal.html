@@ -11,12 +11,33 @@
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+        background: #f8fafc !important;
       }
       
       /* Hide any potential website elements */
-      header, nav, .fab, .floating-action-button, .horizontal-mega-menu {
+      header, nav, .fab, .floating-action-button, .horizontal-mega-menu,
+      .website-header, .website-footer, .mega-menu, .fab-container,
+      .website-nav, .main-header, .navigation, .top-bar, .header-container,
+      .navbar, .nav-container, .neural-background, .background-animation {
         display: none !important;
         visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+      }
+      
+      /* Ensure portal root takes full control */
+      #portal-root {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 999999 !important;
+        background: #f8fafc !important;
       }
     </style>
   </head>
