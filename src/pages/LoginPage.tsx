@@ -9,17 +9,17 @@ export function LoginPage() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
-  const { login, loading } = useAuth()
+  const { login, isLoading } = useAuth()
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     
-    try {
-      await login(email, password)
+    const success = await login(email, password)
+    if (success) {
       navigate('/dashboard')
-    } catch (err) {
+    } else {
       setError('Invalid email or password')
     }
   }
@@ -111,12 +111,12 @@ export function LoginPage() {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-gradient-primary text-white flex items-center justify-center space-x-2 py-3 rounded-xl font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? (
+              {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>

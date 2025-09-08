@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:portal": "vite --config vite.portal.config.ts",
+    "dev:mcp": "node server/mcp-server.js",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -23,12 +25,16 @@
     "agents:test": "npm run test:all"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "framer-motion": "^10.16.5",
+    "lucide-react": "^0.294.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
-    "framer-motion": "^10.16.5",
-    "lucide-react": "^0.294.0",
-    "@supabase/supabase-js": "^2.38.4"
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

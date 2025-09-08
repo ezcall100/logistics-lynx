@@ -9,14 +9,17 @@ import { FeaturesSection } from './components/FeaturesSection'
 import { EcosystemGrid } from './components/EcosystemGrid'
 import { Footer } from './components/Footer'
 import { TestDesign } from './components/TestDesign'
-import { LoginPage } from './pages/LoginPage'
-import { SignupPage } from './pages/SignupPage'
-import { DashboardPage } from './pages/DashboardPage'
+import DashboardPage from './pages/DashboardPage'
+import TestAuth from './pages/TestAuth'
+import PortalEntry from './pages/PortalEntry'
 import { GetStartedPage } from './pages/GetStartedPage'
 import { SubdomainManagement } from './pages/admin/SubdomainManagement'
 import { MCPAgentAdmin } from './pages/portals/admin/MCPAgentAdmin'
 import { HumanDeveloperAdmin } from './pages/portals/admin/HumanDeveloperAdmin'
 import { AuthProvider } from './contexts/AuthContext'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import LoginPage from './pages/auth/LoginPage'
+import SignupPage from './pages/auth/SignupPage'
 import SolutionsPage from './pages/SolutionsPage'
 import PricingPage from './pages/PricingPage'
 import ResourcesPage from './pages/ResourcesPage'
@@ -115,9 +118,14 @@ function App() {
                 </>
               } />
               <Route path="/test" element={<TestDesign />} />
+              <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
-              <Route path="/dashboard/*" element={<DashboardPage />} />
+              <Route path="/portal/*" element={
+                <ProtectedRoute>
+                  <PortalEntry />
+                </ProtectedRoute>
+              } />
               <Route path="/super-admin/*" element={<SuperAdminPortal />} />
               <Route path="/get-started" element={<GetStartedPage />} />
               <Route path="/admin/subdomains" element={<SubdomainManagement />} />

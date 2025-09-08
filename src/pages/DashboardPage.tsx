@@ -1,293 +1,336 @@
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
-import { motion } from 'framer-motion'
-import { BarChart3, Users, Truck, Package, DollarSign } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Truck, 
+  Package, 
+  Users, 
+  DollarSign, 
+  AlertTriangle,
+  BarChart3,
+  Calendar,
+  ArrowRight,
+  Plus,
+  Filter,
+  Download,
+  Settings
+} from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import UnifiedPortalLayout from '../components/portals/UnifiedPortalLayout';
 
-export function DashboardPage() {
-  const { user } = useAuth()
+const DashboardPage: React.FC = () => {
+  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (!user) {
-    return <Navigate to="/login" replace />
-  }
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const getDashboardContent = () => {
-    switch (user.role) {
-      case 'shipper':
-        return <ShipperDashboard />
-      case 'broker':
-        return <BrokerDashboard />
-      case 'carrier':
-        return <CarrierDashboard />
-      case 'driver':
-        return <DriverDashboard />
-      case 'superadmin':
-        return <Navigate to="/super-admin" replace />
-      default:
-        return <ShipperDashboard />
+  const kpiData = [
+    {
+      title: 'Active Loads',
+      value: '247',
+      change: '+12%',
+      changeType: 'positive',
+      icon: Package,
+      color: 'from-blue-500 to-indigo-500'
+    },
+    {
+      title: 'Fleet Vehicles',
+      value: '89',
+      change: '+3%',
+      changeType: 'positive',
+      icon: Truck,
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      title: 'Active Drivers',
+      value: '156',
+      change: '+8%',
+      changeType: 'positive',
+      icon: Users,
+      color: 'from-purple-500 to-violet-500'
+    },
+    {
+      title: 'Revenue (MTD)',
+      value: '$2.4M',
+      change: '+15%',
+      changeType: 'positive',
+      icon: DollarSign,
+      color: 'from-yellow-500 to-orange-500'
     }
+  ];
+
+  const recentActivities = [
+    {
+      id: 1,
+      type: 'load',
+      title: 'New load posted',
+      description: 'Load #LD-2024-001 from DEMO / PLACEHOLDER City A to DEMO / PLACEHOLDER City B',
+      time: '2 minutes ago',
+      icon: Package,
+      color: 'text-blue-600 bg-blue-100'
+    },
+    {
+      id: 2,
+      type: 'driver',
+      title: 'Driver check-in',
+      description: 'DEMO / PLACEHOLDER Driver completed delivery at DEMO / PLACEHOLDER City C',
+      time: '15 minutes ago',
+      icon: Users,
+      color: 'text-green-600 bg-green-100'
+    },
+    {
+      id: 3,
+      type: 'alert',
+      title: 'Maintenance due',
+      description: 'Vehicle DEMO-001 requires scheduled maintenance in 500 miles',
+      time: '1 hour ago',
+      icon: AlertTriangle,
+      color: 'text-yellow-600 bg-yellow-100'
+    },
+    {
+      id: 4,
+      type: 'payment',
+      title: 'Payment received',
+      description: 'Payment of $2,450 received for Load #LD-2024-089',
+      time: '2 hours ago',
+      icon: DollarSign,
+      color: 'text-green-600 bg-green-100'
+    }
+  ];
+
+  const upcomingTasks = [
+    {
+      id: 1,
+      title: 'Weekly fleet inspection',
+      dueDate: 'Today, 2:00 PM',
+      priority: 'high',
+      assignedTo: 'DEMO / PLACEHOLDER Technician'
+    },
+    {
+      id: 2,
+      title: 'Driver safety training',
+      dueDate: 'Tomorrow, 9:00 AM',
+      priority: 'medium',
+      assignedTo: 'DEMO / PLACEHOLDER Safety Manager'
+    },
+    {
+      id: 3,
+      title: 'Monthly financial report',
+      dueDate: 'Jan 31, 2024',
+      priority: 'low',
+      assignedTo: 'DEMO / PLACEHOLDER Accountant'
+    }
+  ];
+
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case 'high': return 'text-red-600 bg-red-100';
+      case 'medium': return 'text-yellow-600 bg-yellow-100';
+      case 'low': return 'text-green-600 bg-green-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <UnifiedPortalLayout>
+        <div className="flex items-center justify-center h-64">
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-gray-600">Loading dashboard...</span>
+          </div>
+        </div>
+      </UnifiedPortalLayout>
+    );
   }
 
   return (
-    <div className="min-h-screen pt-20 pl-0 md:pl-80 bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {getDashboardContent()}
-      </div>
-    </div>
-  )
-}
-
-function ShipperDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Shipper Dashboard</h1>
-        <p className="text-transbot-text-secondary">Manage your shipments and track deliveries</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: 'Active Shipments', value: '24', icon: Package, color: 'text-blue-400' },
-          { title: 'Delivered Today', value: '12', icon: Truck, color: 'text-green-400' },
-          { title: 'Total Cost', value: '$45,230', icon: DollarSign, color: 'text-yellow-400' },
-          { title: 'On-Time Rate', value: '96%', icon: BarChart3, color: 'text-purple-400' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
+    <UnifiedPortalLayout>
+      <div className="space-y-6">
+        {/* Welcome Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">
+                Welcome back, {user?.name?.split(' ')[0]}!
+              </h1>
+              <p className="text-blue-100 text-lg">
+                Here's what's happening with your logistics operations today.
+              </p>
             </div>
-            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Recent Shipments</h2>
-        <div className="space-y-4">
-          {[
-            { id: 'SH-001', destination: 'Los Angeles, CA', status: 'In Transit', eta: '2 hours' },
-            { id: 'SH-002', destination: 'Chicago, IL', status: 'Delivered', eta: 'Completed' },
-            { id: 'SH-003', destination: 'Miami, FL', status: 'Scheduled', eta: 'Tomorrow' }
-          ].map((shipment, index) => (
-            <motion.div
-              key={shipment.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
-            >
-              <div>
-                <div className="text-transbot-text-primary font-medium">{shipment.id}</div>
-                <div className="text-transbot-text-secondary text-sm">{shipment.destination}</div>
+            <div className="hidden md:block">
+              <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center">
+                <Truck className="w-12 h-12 text-white" />
               </div>
-              <div className="text-right">
-                <div className="text-transbot-text-secondary text-sm">{shipment.status}</div>
-                <div className="text-transbot-text-secondary text-xs">{shipment.eta}</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* KPI Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {kpiData.map((kpi, index) => (
+            <motion.div
+              key={kpi.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600 mb-1">{kpi.title}</p>
+                  <p className="text-2xl font-bold text-gray-900">{kpi.value}</p>
+                  <div className="flex items-center mt-2">
+                    <span className={`text-sm font-medium ${
+                      kpi.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {kpi.change}
+                    </span>
+                    <span className="text-sm text-gray-500 ml-1">vs last month</span>
+                  </div>
+                </div>
+                <div className={`w-12 h-12 bg-gradient-to-br ${kpi.color} rounded-lg flex items-center justify-center`}>
+                  <kpi.icon className="w-6 h-6 text-white" />
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
-    </motion.div>
-  )
-}
 
-function BrokerDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Broker Dashboard</h1>
-        <p className="text-transbot-text-secondary">Manage loads, carriers, and optimize margins</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: 'Active Loads', value: '18', icon: Package, color: 'text-blue-400' },
-          { title: 'Carriers', value: '156', icon: Users, color: 'text-green-400' },
-          { title: 'Margin', value: '14.2%', icon: DollarSign, color: 'text-yellow-400' },
-          { title: 'Loads Today', value: '8', icon: BarChart3, color: 'text-purple-400' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
-            </div>
-            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Recent Loads</h2>
-        <div className="space-y-4">
-          {[
-            { id: 'LD-001', route: 'LA → Chicago', rate: '$2,450', status: 'Posted' },
-            { id: 'LD-002', route: 'Miami → NYC', rate: '$3,200', status: 'Booked' },
-            { id: 'LD-003', route: 'Dallas → Seattle', rate: '$2,800', status: 'In Transit' }
-          ].map((load, index) => (
-            <motion.div
-              key={load.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
-            >
-              <div>
-                <div className="text-transbot-text-primary font-medium">{load.id}</div>
-                <div className="text-transbot-text-secondary text-sm">{load.route}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-transbot-text-primary font-medium">{load.rate}</div>
-                <div className="text-transbot-text-secondary text-sm">{load.status}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function CarrierDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Carrier Dashboard</h1>
-        <p className="text-transbot-text-secondary">Manage your fleet and optimize routes</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: 'Active Trucks', value: '12', icon: Truck, color: 'text-blue-400' },
-          { title: 'Drivers', value: '15', icon: Users, color: 'text-green-400' },
-          { title: 'Revenue', value: '$89,450', icon: DollarSign, color: 'text-yellow-400' },
-          { title: 'Utilization', value: '87%', icon: BarChart3, color: 'text-purple-400' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
-            </div>
-            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Fleet Status</h2>
-        <div className="space-y-4">
-          {[
-            { id: 'TR-001', driver: 'John Smith', location: 'I-40, TN', status: 'In Transit' },
-            { id: 'TR-002', driver: 'Sarah Johnson', location: 'I-95, FL', status: 'Loading' },
-            { id: 'TR-003', driver: 'Mike Davis', location: 'I-80, CA', status: 'Available' }
-          ].map((truck, index) => (
-            <motion.div
-              key={truck.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
-            >
-              <div>
-                <div className="text-transbot-text-primary font-medium">{truck.id}</div>
-                <div className="text-transbot-text-secondary text-sm">{truck.driver}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-transbot-text-secondary text-sm">{truck.location}</div>
-                <div className="text-transbot-text-secondary text-xs">{truck.status}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function DriverDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">Driver Dashboard</h1>
-        <p className="text-transbot-text-secondary">Track your loads and manage your schedule</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: 'Current Load', value: 'LD-001', icon: Package, color: 'text-blue-400' },
-          { title: 'HOS Remaining', value: '6.5 hrs', icon: BarChart3, color: 'text-green-400' },
-          { title: 'Miles Today', value: '342', icon: Truck, color: 'text-yellow-400' },
-          { title: 'Next Stop', value: '2.5 hrs', icon: Users, color: 'text-purple-400' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-6 rounded-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-              <div className="text-2xl font-bold text-transbot-text-primary">{stat.value}</div>
-            </div>
-            <div className="text-transbot-text-secondary text-sm">{stat.title}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 shadow-lg p-8 rounded-2xl">
-        <h2 className="text-xl font-bold text-transbot-text-primary mb-6">Current Assignment</h2>
-        <div className="space-y-4">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Recent Activities */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="p-4 bg-white/5 rounded-xl"
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-200"
           >
-            <div className="flex items-center justify-between mb-2">
-              <div className="text-transbot-text-primary font-medium">Load LD-001</div>
-              <div className="text-accent font-medium">In Transit</div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-semibold text-gray-900">Recent Activities</h2>
+              <button className="flex items-center space-x-2 text-sm text-blue-600 hover:text-blue-700 transition-colors">
+                <span>View All</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
-            <div className="text-transbot-text-secondary text-sm mb-2">Route: Los Angeles, CA → Chicago, IL</div>
-            <div className="text-transbot-text-secondary text-sm">ETA: 2 hours 30 minutes</div>
+            <div className="space-y-4">
+              {recentActivities.map((activity) => (
+                <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className={`w-10 h-10 ${activity.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                    <activity.icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                    <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                    <p className="text-xs text-gray-500 mt-2">{activity.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Upcoming Tasks */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-semibold text-gray-900">Upcoming Tasks</h2>
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <Plus className="w-4 h-4 text-gray-500" />
+              </button>
+            </div>
+            <div className="space-y-4">
+              {upcomingTasks.map((task) => (
+                <div key={task.id} className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">{task.title}</p>
+                      <p className="text-xs text-gray-500 mt-1">{task.assignedTo}</p>
+                      <p className="text-xs text-gray-500 mt-1">{task.dueDate}</p>
+                    </div>
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getPriorityColor(task.priority)}`}>
+                      {task.priority}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
-      </div>
-    </motion.div>
-  )
-}
 
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+        >
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              { icon: Plus, label: 'Create Load', color: 'from-blue-500 to-indigo-500' },
+              { icon: Users, label: 'Add Driver', color: 'from-green-500 to-emerald-500' },
+              { icon: Truck, label: 'Add Vehicle', color: 'from-purple-500 to-violet-500' },
+              { icon: BarChart3, label: 'View Reports', color: 'from-yellow-500 to-orange-500' },
+              { icon: Calendar, label: 'Schedule', color: 'from-pink-500 to-rose-500' },
+              { icon: Settings, label: 'Settings', color: 'from-gray-500 to-slate-500' }
+            ].map((action) => (
+              <motion.button
+                key={action.label}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${action.color} rounded-lg flex items-center justify-center mb-3`}>
+                  <action.icon className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-sm font-medium text-gray-700 text-center">{action.label}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Performance Chart Placeholder */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-gray-900">Performance Overview</h2>
+            <div className="flex items-center space-x-2">
+              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors">
+                <Filter className="w-4 h-4" />
+                <span>Filter</span>
+              </button>
+              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors">
+                <Download className="w-4 h-4" />
+                <span>Export</span>
+              </button>
+            </div>
+          </div>
+          <div className="h-64 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center">
+            <div className="text-center">
+              <BarChart3 className="w-16 h-16 text-blue-400 mx-auto mb-4" />
+              <p className="text-gray-600">Performance charts will be displayed here</p>
+              <p className="text-sm text-gray-500 mt-2">Real-time data visualization coming soon</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </UnifiedPortalLayout>
+  );
+};
+
+export default DashboardPage;

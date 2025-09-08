@@ -15,7 +15,7 @@ export function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [error, setError] = useState('')
-  const { signup, loading } = useAuth()
+  const { signup, isLoading } = useAuth()
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -35,7 +35,13 @@ export function SignupPage() {
     }
     
     try {
-      await signup(formData.email, formData.password, formData.name, formData.role)
+      await signup({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        role: formData.role as 'shipper' | 'carrier' | 'broker' | 'driver' | 'owner-operator' | 'admin' | 'viewer' | 'superadmin',
+        company: 'DEMO / PLACEHOLDER Company'
+      })
       navigate('/dashboard')
     } catch (err) {
       setError('Signup failed. Please try again.')
@@ -198,12 +204,12 @@ export function SignupPage() {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-gradient-primary text-white flex items-center justify-center space-x-2 py-3 rounded-xl font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? (
+              {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
