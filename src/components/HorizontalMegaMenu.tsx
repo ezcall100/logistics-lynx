@@ -147,12 +147,18 @@ export function HorizontalMegaMenu() {
         { id: 'super-admin-portal', label: 'Super Admin Portal', href: '/portals/super-admin', icon: Shield, description: 'Master system control' },
         { id: 'mcp-agent-admin', label: 'MCP Agent Admin', href: '/admin/mcp-agents', icon: Bot, description: 'Manage AI agents' },
         { id: 'human-developer-admin', label: 'Human Developer Admin', href: '/admin/human-developers', icon: Users, description: 'Manage human developers' },
-        { id: 'enhanced-broker-portal', label: 'Enhanced Broker Portal', href: '/portals/broker/enhanced', icon: Briefcase, description: 'Advanced brokerage features' },
         { id: 'portals-overview', label: 'Portals Overview', href: '/portals', icon: Layers, description: 'Overview of all portals' },
         { id: 'workers-portal', label: 'Workers Portal', href: '/portals/workers', icon: Users, description: 'Workforce management' },
         { id: 'edi-portal', label: 'EDI Portal', href: '/portals/edi', icon: Database, description: 'Electronic data interchange' },
         { id: 'owner-operator-portal', label: 'Owner-Operator Portal', href: '/portals/owner-operator', icon: Truck, description: 'Independent trucking business' },
-        { id: 'factoring-portal', label: 'Factoring Portal', href: '/portals/factoring', icon: Banknote, description: 'Invoice factoring and cash flow' }
+        { id: 'factoring-portal', label: 'Factoring Portal', href: '/portals/factoring', icon: Banknote, description: 'Invoice factoring and cash flow' },
+        { id: 'warehouse-portal', label: 'Warehouse Portal', href: '/portals/warehouse', icon: Package, description: 'Warehouse management and inventory control' },
+        { id: 'fleet-portal', label: 'Fleet Portal', href: '/portals/fleet', icon: Truck, description: 'Fleet management and vehicle tracking' },
+        { id: 'dispatch-portal', label: 'Dispatch Portal', href: '/portals/dispatch', icon: Truck, description: 'Load dispatch and driver coordination' },
+        { id: 'maintenance-portal', label: 'Maintenance Portal', href: '/portals/maintenance', icon: Shield, description: 'Vehicle maintenance and service management' },
+        { id: 'fuel-portal', label: 'Fuel Portal', href: '/portals/fuel', icon: TrendingUp, description: 'Fuel management and efficiency optimization' },
+        { id: 'insurance-portal', label: 'Insurance Portal', href: '/portals/insurance', icon: Shield, description: 'Insurance management and claims processing' },
+        { id: 'compliance-portal', label: 'Compliance Portal', href: '/portals/compliance', icon: Shield, description: 'Regulatory compliance monitoring' }
       ]
     },
     {

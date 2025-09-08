@@ -769,7 +769,7 @@ export function HumanDeveloperAdmin() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16">
       <PortalHeader
         title="Human Developer Admin"
         description="Manage and coordinate human development teams"

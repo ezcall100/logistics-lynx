@@ -28,7 +28,7 @@ export default function FinancialsPortal() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16">
       <PortalHeader
         title="Financials Portal"
         description="Comprehensive financial management and analytics"

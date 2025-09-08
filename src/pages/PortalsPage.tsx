@@ -7,16 +7,35 @@ import {
   Clock, CheckCircle,
   ArrowRight, Star,
   Search, Grid, List,
-  Play
+  Play, Bot
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const PortalsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('core')
+  const [activeTab, setActiveTab] = useState('overview')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [searchTerm, setSearchTerm] = useState('')
 
   const portalCategories = {
+    overview: {
+      title: "Portals Overview",
+      description: "Complete overview of all transportation management portals",
+      icon: Globe,
+      color: "from-blue-500 to-purple-500",
+      bgColor: "from-blue-50 to-purple-50",
+      portals: [
+        {
+          title: "Portals Overview",
+          description: "Complete overview of all transportation management portals",
+          path: "/portals",
+          icon: Globe,
+          features: ["Portal Directory", "Quick Access", "Navigation", "Overview"],
+          color: "from-blue-500 to-purple-500",
+          badge: "Overview",
+          stats: { users: "All", rating: "5.0" }
+        }
+      ]
+    },
     core: {
       title: "Core TMS Portals",
       description: "Essential transportation management solutions for daily operations",
@@ -73,16 +92,6 @@ const PortalsPage: React.FC = () => {
           color: "from-amber-500 to-orange-500",
           badge: "New",
           stats: { users: "850+", rating: "4.6" }
-        },
-        {
-          title: "Workers Portal",
-          description: "Comprehensive workforce management and scheduling system",
-          path: "/portals/workers",
-          icon: Users,
-          features: ["Schedule Management", "Time Tracking", "Payroll Integration", "Performance Metrics"],
-          color: "from-teal-500 to-cyan-500",
-          badge: "HR Focused",
-          stats: { users: "1.1K+", rating: "4.5" }
         }
       ]
     },
@@ -222,6 +231,86 @@ const PortalsPage: React.FC = () => {
           color: "from-green-500 to-emerald-500",
           badge: "Cash Flow",
           stats: { users: "450+", rating: "4.4" }
+        },
+        {
+          title: "Workers Portal",
+          description: "Comprehensive workforce management and scheduling system",
+          path: "/portals/workers",
+          icon: Users,
+          features: ["Schedule Management", "Time Tracking", "Payroll Integration", "Performance Metrics"],
+          color: "from-teal-500 to-cyan-500",
+          badge: "HR Focused",
+          stats: { users: "1.1K+", rating: "4.5" }
+        },
+        {
+          title: "Warehouse Portal",
+          description: "Comprehensive warehouse management and inventory control",
+          path: "/portals/warehouse",
+          icon: Package,
+          features: ["Inventory Management", "Order Processing", "Shipping Coordination", "Stock Optimization"],
+          color: "from-blue-500 to-indigo-500",
+          badge: "Inventory",
+          stats: { users: "680+", rating: "4.6" }
+        },
+        {
+          title: "Fleet Portal",
+          description: "Complete fleet management and vehicle tracking system",
+          path: "/portals/fleet",
+          icon: Truck,
+          features: ["Vehicle Tracking", "Driver Management", "Route Optimization", "Maintenance Scheduling"],
+          color: "from-green-500 to-emerald-500",
+          badge: "Fleet Focus",
+          stats: { users: "1.4K+", rating: "4.7" }
+        },
+        {
+          title: "Dispatch Portal",
+          description: "Real-time load dispatch and driver coordination system",
+          path: "/portals/dispatch",
+          icon: Truck,
+          features: ["Load Assignment", "Driver Coordination", "Real-time Tracking", "Route Optimization"],
+          color: "from-purple-500 to-violet-500",
+          badge: "Real-time",
+          stats: { users: "920+", rating: "4.8" }
+        },
+        {
+          title: "Maintenance Portal",
+          description: "Comprehensive vehicle maintenance and service management",
+          path: "/portals/maintenance",
+          icon: Settings,
+          features: ["Service Scheduling", "Parts Management", "Technician Coordination", "Cost Tracking"],
+          color: "from-orange-500 to-red-500",
+          badge: "Maintenance",
+          stats: { users: "560+", rating: "4.5" }
+        },
+        {
+          title: "Fuel Portal",
+          description: "Fuel management and efficiency optimization system",
+          path: "/portals/fuel",
+          icon: TrendingUp,
+          features: ["Fuel Tracking", "Efficiency Analytics", "Cost Management", "Station Locator"],
+          color: "from-yellow-500 to-orange-500",
+          badge: "Efficiency",
+          stats: { users: "780+", rating: "4.6" }
+        },
+        {
+          title: "Insurance Portal",
+          description: "Comprehensive insurance management and claims processing",
+          path: "/portals/insurance",
+          icon: Shield,
+          features: ["Policy Management", "Claims Processing", "Coverage Tracking", "Risk Assessment"],
+          color: "from-blue-500 to-indigo-500",
+          badge: "Insurance",
+          stats: { users: "420+", rating: "4.4" }
+        },
+        {
+          title: "Compliance Portal",
+          description: "Regulatory compliance monitoring and management system",
+          path: "/portals/compliance",
+          icon: Shield,
+          features: ["Regulatory Tracking", "Audit Management", "Violation Monitoring", "Documentation"],
+          color: "from-green-500 to-emerald-500",
+          badge: "Compliance",
+          stats: { users: "340+", rating: "4.7" }
         }
       ]
     },
@@ -253,6 +342,26 @@ const PortalsPage: React.FC = () => {
           stats: { users: "25+", rating: "5.0" }
         },
         {
+          title: "MCP Agent Admin",
+          description: "Manage and monitor AI development agents",
+          path: "/admin/mcp-agents",
+          icon: Bot,
+          features: ["Agent Management", "AI Monitoring", "Performance Analytics", "Deployment Control"],
+          color: "from-green-500 to-blue-500",
+          badge: "AI Admin",
+          stats: { users: "85+", rating: "4.9" }
+        },
+        {
+          title: "Human Developer Admin",
+          description: "Manage and coordinate human development teams",
+          path: "/admin/human-developers",
+          icon: Users,
+          features: ["Team Management", "Project Coordination", "Performance Tracking", "Resource Allocation"],
+          color: "from-blue-500 to-purple-500",
+          badge: "Team Admin",
+          stats: { users: "120+", rating: "4.7" }
+        },
+        {
           title: "Autonomous Portal",
           description: "AI-powered autonomous operations and decision making",
           path: "/portals/autonomous",
@@ -262,16 +371,6 @@ const PortalsPage: React.FC = () => {
           badge: "AI Powered",
           stats: { users: "180+", rating: "4.8" }
         },
-        {
-          title: "Enhanced Broker Portal",
-          description: "Advanced brokerage management with AI and automation",
-          path: "/portals/broker/enhanced",
-          icon: Users,
-          features: ["AI Load Matching", "Advanced Analytics", "Automated Negotiations", "Predictive Pricing"],
-          color: "from-purple-500 to-indigo-500",
-          badge: "AI Enhanced",
-          stats: { users: "95+", rating: "4.7" }
-        }
       ]
     }
   }

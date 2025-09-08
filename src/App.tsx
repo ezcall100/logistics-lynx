@@ -62,7 +62,13 @@ import EDIPortal from './pages/portals/edi/EDIPortal'
 import OwnerOperatorPortal from './pages/portals/owner-operator/OwnerOperatorPortal'
 import WorkersPortal from './pages/portals/workers/WorkersPortal'
 import FactoringPortal from './pages/portals/factoring/FactoringPortal'
-import EnhancedBrokerPortal from './pages/portals/broker/EnhancedBrokerPortal'
+import WarehousePortal from './pages/portals/warehouse/WarehousePortal'
+import FleetPortal from './pages/portals/fleet/FleetPortal'
+import DispatchPortal from './pages/portals/dispatch/DispatchPortal'
+import MaintenancePortal from './pages/portals/maintenance/MaintenancePortal'
+import FuelPortal from './pages/portals/fuel/FuelPortal'
+import InsurancePortal from './pages/portals/insurance/InsurancePortal'
+import CompliancePortal from './pages/portals/compliance/CompliancePortal'
 import WarehouseManagement from './pages/solutions/WarehouseManagement'
 import RouteOptimization from './pages/solutions/RouteOptimization'
 import LoadMatching from './pages/solutions/LoadMatching'
@@ -363,15 +369,51 @@ function App() {
                   <Footer />
                 </>
               } />
-              <Route path="/broker" element={
+              <Route path="/portals/warehouse" element={
                 <>
-                  <BrokerPortal />
+                  <WarehousePortal />
                   <Footer />
                 </>
               } />
-              <Route path="/portals/broker/enhanced" element={
+              <Route path="/portals/fleet" element={
                 <>
-                  <EnhancedBrokerPortal />
+                  <FleetPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/dispatch" element={
+                <>
+                  <DispatchPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/maintenance" element={
+                <>
+                  <MaintenancePortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/fuel" element={
+                <>
+                  <FuelPortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/insurance" element={
+                <>
+                  <InsurancePortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/portals/compliance" element={
+                <>
+                  <CompliancePortal />
+                  <Footer />
+                </>
+              } />
+              <Route path="/broker" element={
+                <>
+                  <BrokerPortal />
                   <Footer />
                 </>
               } />
