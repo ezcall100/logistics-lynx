@@ -9,7 +9,7 @@ import { FeaturesSection } from './components/FeaturesSection'
 import { EcosystemGrid } from './components/EcosystemGrid'
 import { Footer } from './components/Footer'
 import { TestDesign } from './components/TestDesign'
-import DashboardPage from './pages/DashboardPage'
+// import DashboardPage from './pages/DashboardPage' // Removed - not needed for main website
 import TestAuth from './pages/TestAuth'
 import PortalEntry from './pages/PortalEntry'
 import { GetStartedPage } from './pages/GetStartedPage'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Truck, Shield, AlertCircle, User, LogOut, Package, Users, DollarSign, BarChart3, Calendar, Plus, Settings, Bell, MessageSquare, HelpCircle, Bot, Zap } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Truck, Shield, AlertCircle, User, LogOut, Package, Users, DollarSign, BarChart3, Calendar, Settings, Bot, Zap } from 'lucide-react';
 
 interface User {
   id: string;
