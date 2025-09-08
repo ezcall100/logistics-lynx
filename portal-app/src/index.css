@@ -30,12 +30,10 @@ html, body {
 }
 
 /* Completely hide ALL website components */
-header,
-nav,
-.horizontal-mega-menu,
-.floating-action-button,
 .website-header,
 .website-footer,
+.horizontal-mega-menu,
+.floating-action-button,
 .fab,
 .mega-menu,
 .fab-container,
