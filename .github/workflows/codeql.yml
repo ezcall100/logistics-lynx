@@ -57,7 +57,7 @@ jobs:
 
       - name: Setup Node (for better analysis)
         if: ${{ steps.langs.outputs.has_lang == 'true' }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
           cache: 'npm'
