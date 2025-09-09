@@ -16,6 +16,8 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
   user,
   onLogout
 }) => {
+  // Debug: Log that new design is loading
+  console.log('🎨 Loading Enhanced Super Admin Portal Design v2.0');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [currentPath, setCurrentPath] = useState('/dashboard');

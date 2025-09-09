@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Portal Login - Trans Bot AI</title>
     <style>
       /* Ensure no website elements are visible */
@@ -17,11 +20,11 @@
           sans-serif;
       }
       
-      /* Hide any potential website elements */
-      header, nav, .fab, .floating-action-button, .horizontal-mega-menu,
-      .website-header, .website-footer, .mega-menu, .fab-container,
-      .website-nav, .main-header, .navigation, .top-bar, .header-container,
-      .navbar, .nav-container, .neural-background, .background-animation {
+      /* Hide any potential website elements - but NOT our portal components */
+      .website-header, .website-footer, .website-fab, .website-floating-action-button, .horizontal-mega-menu,
+      .website-mega-menu, .website-fab-container, .website-nav, .website-main-header, 
+      .website-navigation, .website-top-bar, .website-header-container, .website-navbar, 
+      .website-nav-container, .neural-background, .background-animation {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -30,6 +33,14 @@
         position: absolute !important;
         left: -9999px !important;
         top: -9999px !important;
+      }
+      
+      /* Ensure our portal components are visible */
+      .portal-header, .portal-sidebar, .portal-fab, header, aside, nav {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
       }
       
       /* Ensure portal root takes full control */
@@ -46,6 +57,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx?v=2.0"></script>
   </body>
 </html>

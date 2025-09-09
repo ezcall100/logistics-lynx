@@ -1,4 +1,4 @@
-/* Portal-specific styles - completely separate from main website */
+/* Portal-specific styles - completely separate from main website - v2.0 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -81,10 +81,10 @@ nav,
   left: 0 !important;
   right: 0 !important;
   z-index: 50 !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(229, 231, 235, 0.5) !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.3) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .portal-sidebar {
@@ -94,9 +94,9 @@ nav,
   bottom: 0 !important;
   width: 20rem !important;
   z-index: 40 !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(12px) !important;
-  border-right: 1px solid rgba(229, 231, 235, 0.5) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-right: 1px solid rgba(229, 231, 235, 0.3) !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
 }
 
@@ -159,4 +159,53 @@ nav,
   background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 50%, #f3e8ff 100%);
   position: relative;
   z-index: 10000;
+}
+
+/* Force new design styles */
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important;
+}
+
+.rounded-2xl {
+  border-radius: 1rem !important;
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px) !important;
+}
+
+.shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Force gradient backgrounds */
+.from-blue-600 {
+  --tw-gradient-from: #2563eb !important;
+}
+
+.via-purple-600 {
+  --tw-gradient-via: #9333ea !important;
+}
+
+.to-indigo-700 {
+  --tw-gradient-to: #4338ca !important;
+}
+
+/* Force new button styles */
+.hover\:scale-105:hover {
+  transform: scale(1.05) !important;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1) !important;
+}
+
+.transition-all {
+  transition-property: all !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 300ms !important;
 }
