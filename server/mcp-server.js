@@ -3,6 +3,10 @@
 /**
  * MCP (Master Control Program) API Server - MCP-V2 Enhanced
  * 
+ * 🔒 PORT LOCK WARNING: DO NOT MODIFY PORT 3001
+ * MCP AGENTS: This port is locked and must not be changed
+ * See PORT_LOCK_SYSTEM.md for details
+ * 
  * This server provides the API endpoints that the Super Admin portal expects.
  * It handles metrics, user management, system operations, and more.
  * Enhanced with MCP-V2 features: autonomous agents, system health, metrics overview,

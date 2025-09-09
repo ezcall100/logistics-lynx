@@ -1,6 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+// 🔒 PORT LOCK WARNING: DO NOT MODIFY PORT 3006
+// MCP AGENTS: This port is locked and must not be changed
+// See PORT_LOCK_SYSTEM.md for details
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -51,4 +55,4 @@ export default defineConfig({
     loader: 'tsx',
   },
   logLevel: 'info',
-})
+});
