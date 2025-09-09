@@ -36,6 +36,11 @@
     --color-text-secondary: 148 163 184; /* slate-400 */
     --color-border: 51 65 85; /* slate-700 */
   }
+
+  /* Force dark mode classes to work */
+  .dark * {
+    color-scheme: dark;
+  }
 }
 
 /* Reset all styles to ensure no website interference */

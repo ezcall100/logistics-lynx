@@ -33,6 +33,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const toggleDarkMode = () => {
     setDarkMode(prev => {
       const newMode = !prev;
+      console.log('🎨 Theme toggle:', prev, '->', newMode);
       localStorage.setItem('portal-theme', newMode ? 'dark' : 'light');
       return newMode;
     });
@@ -40,11 +41,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // Apply theme to document
+    console.log('🎨 Applying theme to document:', darkMode ? 'dark' : 'light');
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+    console.log('🎨 Document classes:', document.documentElement.classList.toString());
   }, [darkMode]);
 
   const value = {

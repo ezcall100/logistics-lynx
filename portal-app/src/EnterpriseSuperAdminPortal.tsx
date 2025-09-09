@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Header from './components/layout/Header';
-import Sidebar from './components/layout/Sidebar';
+import EnhancedHeader from './components/layout/EnhancedHeader';
+import EnhancedSidebar from './components/layout/EnhancedSidebar';
 import FloatingActionButton from './components/layout/FloatingActionButton';
 import DashboardPage from './pages/DashboardPage';
 import { User, Notification } from './types';
@@ -124,8 +124,8 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-blue-900/30 dark:to-purple-900/30 transition-all duration-300">
-      {/* Header */}
-      <Header
+      {/* Enhanced Header */}
+      <EnhancedHeader
         user={user}
         onLogout={onLogout}
         onToggleSidebar={handleToggleSidebar}
@@ -135,8 +135,8 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
         onToggleDarkMode={toggleDarkMode}
       />
 
-      {/* Sidebar */}
-      <Sidebar
+      {/* Enhanced Sidebar */}
+      <EnhancedSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         currentPath={currentPath}
@@ -164,6 +164,7 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
         onRunSystemCheck={handleRunSystemCheck}
         onCreatePortalPlan={handleCreatePortalPlan}
       />
+
     </div>
   );
 };
