@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Shield, AlertCircle, User, Bot, Zap } from 'lucide-react';
-import SuperAdminPortal from './SuperAdminPortal';
+import EnterpriseSuperAdminPortal from './EnterpriseSuperAdminPortal';
 
 interface User {
   id: string;
   name: string;
   email: string;
-  role: string;
+  role: 'superadmin' | 'admin' | 'user';
   company?: string;
   avatar?: string;
   permissions?: string[];
@@ -61,7 +61,7 @@ const App: React.FC = () => {
         id: '1',
         name: 'System Administrator',
         email: 'admin@transbotai.com',
-        role: 'admin',
+        role: 'superadmin',
         company: 'Trans Bot AI',
         avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
         permissions: ['*'],
@@ -88,7 +88,7 @@ const App: React.FC = () => {
     const foundUser = mockUsers.find(u => u.email === email && password === 'password123');
     
     if (foundUser) {
-      setUser(foundUser);
+      setUser(foundUser as User);
       setIsLoggedIn(true);
       localStorage.setItem('portalUser', JSON.stringify(foundUser));
     } else {
@@ -114,7 +114,7 @@ const App: React.FC = () => {
       id: Date.now().toString(),
       name: `${signupFirstName} ${signupLastName}`.trim(),
       email: signupEmail,
-      role: signupRole,
+      role: signupRole as 'superadmin' | 'admin' | 'user',
       company: signupCompany || 'Trans Bot AI',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
       permissions: ['read'],
@@ -554,7 +554,7 @@ const App: React.FC = () => {
   }
 
   // If logged in, show dashboard
-  return <SuperAdminPortal user={user!} onLogout={handleLogout} />;
+  return <EnterpriseSuperAdminPortal user={user!} onLogout={handleLogout} />;
 };
 
 export default App;

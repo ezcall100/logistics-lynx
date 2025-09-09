@@ -6,7 +6,9 @@ import {
   Shield, Activity, ChevronDown, Menu, X, Home, FileText, Database,
   Globe, Building, UserPlus, CreditCard, AlertTriangle, CheckCircle,
   Eye, Edit, Download, Filter, MoreHorizontal,
-  Grid3X3, List, Palette, Moon, Sun
+  Grid3X3, List, Palette, Moon, Sun, TrendingUp, TrendingDown,
+  Zap, Target, Award, Star, Clock, MapPin, Phone, Mail,
+  ArrowUpRight, ArrowDownRight, RefreshCw, Play, Pause
 } from 'lucide-react';
 
 interface User {
@@ -37,14 +39,16 @@ interface Company {
   logo?: string;
   industry?: string;
   location?: string;
+  growth?: number;
+  health?: 'excellent' | 'good' | 'warning' | 'critical';
 }
 
-interface SuperAdminPortalProps {
+interface EnhancedSuperAdminPortalProps {
   user: User;
   onLogout: () => void;
 }
 
-const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) => {
+const EnhancedSuperAdminPortal: React.FC<EnhancedSuperAdminPortalProps> = ({ user, onLogout }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeMenu, setActiveMenu] = useState('overview');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -52,8 +56,9 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
   const [darkMode, setDarkMode] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTimeRange, setSelectedTimeRange] = useState('1Y');
 
-  // Mock data for companies
+  // Enhanced mock data
   const companies: Company[] = [
     {
       id: '1',
@@ -67,7 +72,9 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       createdAt: '2024-01-15',
       lastActivity: '2 hours ago',
       industry: 'Logistics',
-      location: 'New York, NY'
+      location: 'New York, NY',
+      growth: 12.5,
+      health: 'excellent'
     },
     {
       id: '2',
@@ -81,7 +88,9 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       createdAt: '2024-02-20',
       lastActivity: '1 day ago',
       industry: 'Transportation',
-      location: 'Los Angeles, CA'
+      location: 'Los Angeles, CA',
+      growth: 8.2,
+      health: 'good'
     },
     {
       id: '3',
@@ -95,7 +104,9 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       createdAt: '2024-03-10',
       lastActivity: '3 days ago',
       industry: 'Freight',
-      location: 'Chicago, IL'
+      location: 'Chicago, IL',
+      growth: 0,
+      health: 'warning'
     },
     {
       id: '4',
@@ -109,18 +120,20 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       createdAt: '2024-01-05',
       lastActivity: '30 min ago',
       industry: 'Shipping',
-      location: 'Miami, FL'
+      location: 'Miami, FL',
+      growth: 15.8,
+      health: 'excellent'
     }
   ];
 
   const menuItems = [
     { 
       id: 'overview', 
-      label: 'Platform Overview', 
+      label: 'Dashboard', 
       icon: Home, 
       color: 'text-blue-600',
       gradient: 'from-blue-500 to-cyan-500',
-      description: 'System-wide metrics and analytics'
+      description: 'Platform overview & analytics'
     },
     { 
       id: 'companies', 
@@ -132,31 +145,31 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
     },
     { 
       id: 'portals', 
-      label: 'Portal Management', 
+      label: 'Portals', 
       icon: Globe, 
       color: 'text-purple-600',
       gradient: 'from-purple-500 to-pink-500',
-      description: 'Configure portal access'
+      description: 'Portal configuration'
     },
     { 
       id: 'users', 
-      label: 'User Management', 
+      label: 'Users', 
       icon: Users, 
       color: 'text-orange-600',
       gradient: 'from-orange-500 to-red-500',
-      description: 'Cross-company user admin'
+      description: 'User management'
     },
     { 
       id: 'billing', 
-      label: 'Billing & Plans', 
+      label: 'Billing', 
       icon: CreditCard, 
       color: 'text-emerald-600',
       gradient: 'from-emerald-500 to-teal-500',
-      description: 'Subscription management'
+      description: 'Revenue & subscriptions'
     },
     { 
       id: 'analytics', 
-      label: 'Platform Analytics', 
+      label: 'Analytics', 
       icon: BarChart3, 
       color: 'text-indigo-600',
       gradient: 'from-indigo-500 to-purple-500',
@@ -168,15 +181,15 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       icon: FileText, 
       color: 'text-cyan-600',
       gradient: 'from-cyan-500 to-blue-500',
-      description: 'Generate system reports'
+      description: 'Generate reports'
     },
     { 
       id: 'settings', 
-      label: 'System Settings', 
+      label: 'Settings', 
       icon: Settings, 
       color: 'text-gray-600',
       gradient: 'from-gray-500 to-slate-500',
-      description: 'Global configuration'
+      description: 'System configuration'
     },
   ];
 
@@ -250,6 +263,25 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
 
   const renderOverview = () => (
     <div className="space-y-8">
+      {/* Welcome Section */}
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl p-8 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">Good Morning, {user.name}!</h2>
+            <p className="text-blue-100 text-lg">Here's what's happening with your platform today.</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="text-right">
+              <p className="text-sm text-blue-100">Current Date</p>
+              <p className="text-lg font-semibold">{new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+              <Bot className="w-8 h-8" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Enhanced KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
@@ -260,7 +292,8 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
             changeType: 'positive',
             icon: Building2,
             gradient: 'from-blue-500 to-cyan-500',
-            bgGradient: 'from-blue-50 to-cyan-50'
+            bgGradient: 'from-blue-50 to-cyan-50',
+            link: 'View all companies'
           },
           {
             title: 'Total Users',
@@ -269,7 +302,8 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
             changeType: 'positive',
             icon: Users,
             gradient: 'from-green-500 to-emerald-500',
-            bgGradient: 'from-green-50 to-emerald-50'
+            bgGradient: 'from-green-50 to-emerald-50',
+            link: 'See details'
           },
           {
             title: 'Monthly Revenue',
@@ -278,7 +312,8 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
             changeType: 'positive',
             icon: DollarSign,
             gradient: 'from-purple-500 to-pink-500',
-            bgGradient: 'from-purple-50 to-pink-50'
+            bgGradient: 'from-purple-50 to-pink-50',
+            link: 'View net earnings'
           },
           {
             title: 'Active Portals',
@@ -287,7 +322,8 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
             changeType: 'neutral',
             icon: Globe,
             gradient: 'from-orange-500 to-red-500',
-            bgGradient: 'from-orange-50 to-red-50'
+            bgGradient: 'from-orange-50 to-red-50',
+            link: 'Monitor status'
           }
         ].map((metric, index) => (
           <motion.div
@@ -295,9 +331,9 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`bg-gradient-to-br ${metric.bgGradient} p-6 rounded-2xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:scale-105`}
+            className={`bg-gradient-to-br ${metric.bgGradient} p-6 rounded-2xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer`}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-600 mb-1">{metric.title}</p>
                 <p className="text-3xl font-bold text-gray-900 mb-2">{metric.value}</p>
@@ -312,20 +348,83 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
                 <metric.icon className="w-8 h-8 text-white" />
               </div>
             </div>
+            <div className="pt-4 border-t border-white/20">
+              <a href="#" className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+                {metric.link} →
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Recent Activity with Enhanced Design */}
+      {/* Revenue Chart Section */}
+      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-2xl font-bold text-white">Platform Revenue</h3>
+              <p className="text-blue-100 mt-1">Monthly revenue breakdown and trends</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              {['ALL', '1M', '6M', '1Y'].map((period) => (
+                <button
+                  key={period}
+                  onClick={() => setSelectedTimeRange(period)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    selectedTimeRange === period
+                      ? 'bg-white text-blue-600'
+                      : 'text-blue-100 hover:bg-white/20'
+                  }`}
+                >
+                  {period}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className="p-6">
+          {/* Mock Chart Data */}
+          <div className="grid grid-cols-4 gap-6 mb-8">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-gray-900">7,585</p>
+              <p className="text-sm text-gray-600">Orders</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-gray-900">$22.89k</p>
+              <p className="text-sm text-gray-600">Earnings</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-gray-900">367</p>
+              <p className="text-sm text-gray-600">Refunds</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-gray-900">18.92%</p>
+              <p className="text-sm text-gray-600">Conversion</p>
+            </div>
+          </div>
+
+          {/* Mock Chart */}
+          <div className="h-64 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl flex items-center justify-center">
+            <div className="text-center">
+              <BarChart3 className="w-16 h-16 text-blue-400 mx-auto mb-4" />
+              <p className="text-gray-600">Interactive Revenue Chart</p>
+              <p className="text-sm text-gray-500">Chart visualization would be here</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Activity */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden"
+        className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
       >
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
-          <h3 className="text-xl font-bold text-white">Recent Platform Activity</h3>
-          <p className="text-blue-100 mt-1">Latest updates across all companies</p>
+        <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-6">
+          <h3 className="text-2xl font-bold text-white">Recent Platform Activity</h3>
+          <p className="text-green-100 mt-1">Latest updates across all companies</p>
         </div>
         <div className="p-6">
           <div className="space-y-4">
@@ -407,7 +506,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
       </div>
 
       {/* Enhanced Search and Filters */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
         <div className="flex items-center space-x-4">
           <div className="flex-1 relative">
             <input
@@ -415,7 +514,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
               placeholder="Search companies, subdomains, industries..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
           </div>
@@ -428,123 +527,126 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
         </div>
       </div>
 
-      {/* Companies Grid/List View */}
-      {viewMode === 'grid' ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCompanies.map((company, index) => (
-            <motion.div
-              key={company.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+      {/* Companies Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredCompanies.map((company, index) => (
+          <motion.div
+            key={company.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Building2 className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">{company.name}</h3>
+                    <p className="text-blue-100 text-sm">{company.subdomain}.transbotai.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className={`px-3 py-1 text-xs rounded-full ${
+                    company.status === 'active' ? 'bg-green-500 text-white' :
+                    company.status === 'trial' ? 'bg-yellow-500 text-white' :
+                    'bg-red-500 text-white'
+                  }`}>
+                    {company.status}
+                  </span>
+                  <div className={`w-3 h-3 rounded-full ${
+                    company.health === 'excellent' ? 'bg-green-400' :
+                    company.health === 'good' ? 'bg-blue-400' :
+                    company.health === 'warning' ? 'bg-yellow-400' : 'bg-red-400'
+                  }`}></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                      <Building2 className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-white">{company.name}</h3>
-                      <p className="text-blue-100 text-sm">{company.subdomain}.transbotai.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className={`px-3 py-1 text-xs rounded-full ${
-                      company.status === 'active' ? 'bg-green-500 text-white' :
-                      company.status === 'trial' ? 'bg-yellow-500 text-white' :
-                      'bg-red-500 text-white'
-                    }`}>
-                      {company.status}
-                    </span>
-                  </div>
+                  <span className="text-sm text-gray-600">Plan</span>
+                  <span className={`px-2 py-1 text-xs rounded-full ${
+                    company.plan === 'enterprise' ? 'bg-purple-100 text-purple-800' :
+                    company.plan === 'professional' ? 'bg-blue-100 text-blue-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {company.plan}
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Users</span>
+                  <span className="font-semibold text-gray-900">{company.users}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Revenue</span>
+                  <span className="font-semibold text-gray-900">${company.revenue.toLocaleString()}/mo</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Growth</span>
+                  <span className={`font-semibold ${company.growth > 0 ? 'text-green-600' : 'text-gray-600'}`}>
+                    {company.growth > 0 ? '+' : ''}{company.growth}%
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Industry</span>
+                  <span className="text-sm text-gray-900">{company.industry}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Location</span>
+                  <span className="text-sm text-gray-900">{company.location}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Last Activity</span>
+                  <span className="text-sm text-gray-500">{company.lastActivity}</span>
                 </div>
               </div>
               
-              <div className="p-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Plan</span>
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      company.plan === 'enterprise' ? 'bg-purple-100 text-purple-800' :
-                      company.plan === 'professional' ? 'bg-blue-100 text-blue-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
-                      {company.plan}
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Active Portals</span>
+                  <span className="text-sm font-medium text-gray-900">{company.portals.length}</span>
+                </div>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {company.portals.slice(0, 3).map((portal) => (
+                    <span key={portal} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
+                      {portal}
                     </span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Users</span>
-                    <span className="font-semibold text-gray-900">{company.users}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Revenue</span>
-                    <span className="font-semibold text-gray-900">${company.revenue.toLocaleString()}/mo</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Industry</span>
-                    <span className="text-sm text-gray-900">{company.industry}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Location</span>
-                    <span className="text-sm text-gray-900">{company.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Last Activity</span>
-                    <span className="text-sm text-gray-500">{company.lastActivity}</span>
-                  </div>
-                </div>
-                
-                <div className="mt-6 pt-4 border-t border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Active Portals</span>
-                    <span className="text-sm font-medium text-gray-900">{company.portals.length}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {company.portals.slice(0, 3).map((portal) => (
-                      <span key={portal} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
-                        {portal}
-                      </span>
-                    ))}
-                    {company.portals.length > 3 && (
-                      <span className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
-                        +{company.portals.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="mt-6 flex items-center space-x-2">
-                  <button className="flex-1 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center space-x-2">
-                    <Eye className="w-4 h-4" />
-                    <span>View</span>
-                  </button>
-                  <button className="flex-1 bg-green-50 text-green-600 px-4 py-2 rounded-lg hover:bg-green-100 transition-colors flex items-center justify-center space-x-2">
-                    <Edit className="w-4 h-4" />
-                    <span>Edit</span>
-                  </button>
-                  <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                    <MoreHorizontal className="w-4 h-4" />
-                  </button>
+                  ))}
+                  {company.portals.length > 3 && (
+                    <span className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
+                      +{company.portals.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      ) : (
-        // List view implementation would go here
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden">
-          <div className="p-6">
-            <p className="text-gray-600">List view implementation coming soon...</p>
-          </div>
-        </div>
-      )}
+              
+              <div className="mt-6 flex items-center space-x-2">
+                <button className="flex-1 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center space-x-2">
+                  <Eye className="w-4 h-4" />
+                  <span>View</span>
+                </button>
+                <button className="flex-1 bg-green-50 text-green-600 px-4 py-2 rounded-lg hover:bg-green-100 transition-colors flex items-center justify-center space-x-2">
+                  <Edit className="w-4 h-4" />
+                  <span>Edit</span>
+                </button>
+                <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                  <MoreHorizontal className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 
@@ -572,7 +674,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`} style={{ position: 'relative' }}>
+    <div className={`min-h-screen transition-all duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
       {/* Enhanced Top Header */}
       <header className="bg-white shadow-xl border-b border-gray-200 fixed top-0 left-0 right-0 z-50 h-20" style={{ display: 'block', visibility: 'visible', opacity: 1, backgroundColor: '#ffffff' }}>
         <div className="flex items-center justify-between px-6 py-4">
@@ -603,7 +705,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
               <input
                 type="text"
                 placeholder="Search companies, users, portals, analytics..."
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/50 backdrop-blur-sm shadow-lg"
+                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 shadow-lg"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
@@ -765,7 +867,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
         <motion.aside
           initial={false}
           animate={{ width: sidebarOpen ? 280 : 0 }}
-          className={`${darkMode ? 'bg-gray-800' : 'bg-white/80 backdrop-blur-md'} shadow-2xl min-h-screen fixed left-0 top-20 z-40 overflow-hidden border-r border-white/20`}
+          className={`${darkMode ? 'bg-gray-800' : 'bg-white/90 backdrop-blur-md'} shadow-2xl min-h-screen fixed left-0 top-20 z-40 overflow-hidden border-r border-white/20`}
         >
           <div className="p-6">
             {/* Enhanced Main Navigation */}
@@ -848,7 +950,7 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
         </motion.aside>
 
         {/* Enhanced Main Content */}
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-80' : 'ml-0'}`}>
+        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-70' : 'ml-0'}`}>
           <div className="p-8">
             {renderContent()}
           </div>
@@ -874,4 +976,4 @@ const SuperAdminPortal: React.FC<SuperAdminPortalProps> = ({ user, onLogout }) =
   );
 };
 
-export default SuperAdminPortal;
+export default EnhancedSuperAdminPortal;
