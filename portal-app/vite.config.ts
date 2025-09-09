@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  clearScreen: false,
   plugins: [react()],
   resolve: {
     alias: {
@@ -11,12 +12,37 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3006,
-    host: '0.0.0.0',
+    host: '127.0.0.1',
+    port: 3006, // Portal app on 3006
     strictPort: true,
+    hmr: {
+      host: '127.0.0.1',
+      port: 3006,
+      clientPort: 3006,
+      overlay: true,
+    },
+    watch: {
+      ignored: [
+        '**/node_modules/**',
+        '**/.git/**',
+        '**/dist/**',
+        '**/build/**',
+        '**/.cache/**',
+        '**/*.log',
+        '**/tmp/**',
+        '**/.turbo/**',
+        '**/coverage/**',
+        '**/.husky/**',
+      ],
+      awaitWriteFinish: {
+        stabilityThreshold: 200,
+        pollInterval: 50,
+      },
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
+    exclude: [],
   },
   build: {
     outDir: 'dist',
@@ -24,4 +50,5 @@ export default defineConfig({
   esbuild: {
     loader: 'tsx',
   },
+  logLevel: 'info',
 })

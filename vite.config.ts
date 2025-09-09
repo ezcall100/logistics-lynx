@@ -4,40 +4,51 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  clearScreen: false,
   plugins: [react()],
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lucide-react']
-  },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
+  },
+  server: {
+    host: '127.0.0.1',
+    port: 3000, // Main website on 3000
+    strictPort: true,
+    hmr: {
+      host: '127.0.0.1',
+      port: 3000,
+      clientPort: 3000,
+      overlay: true,
+    },
+    watch: {
+      ignored: [
+        '**/node_modules/**',
+        '**/.git/**',
+        '**/dist/**',
+        '**/build/**',
+        '**/.cache/**',
+        '**/*.log',
+        '**/tmp/**',
+        '**/.turbo/**',
+        '**/coverage/**',
+        '**/.husky/**',
+      ],
+      awaitWriteFinish: {
+        stabilityThreshold: 200,
+        pollInterval: 50,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
+    exclude: [],
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          motion: ['framer-motion']
-        }
-      }
-    }
   },
-  server: {
-    port: 3000,
-    host: 'localhost',
-    open: false,
-    strictPort: true,
-    watch: {
-      usePolling: false,
-      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**']
-    }
+  esbuild: {
+    loader: 'tsx',
   },
-  preview: {
-    port: 3000,
-    host: '0.0.0.0'
-  }
+  logLevel: 'info',
 })
