@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Bot, Bell, User, LogOut, Settings, Search, HelpCircle, 
-  Moon, Sun, ChevronDown, Menu, X 
+  Bot, Bell, User, LogOut, Settings, HelpCircle, 
+  Moon, Sun, ChevronDown, Menu, X, Activity
 } from 'lucide-react';
 import { User as UserType, Notification } from '../../types';
+import EnhancedSearch from './EnhancedSearch';
+import SystemStatusModal from './SystemStatusModal';
 
 interface HeaderProps {
   user: UserType;
@@ -27,18 +29,18 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [notificationDropdownOpen, setNotificationDropdownOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [systemStatusOpen, setSystemStatusOpen] = useState(false);
 
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="portal-header fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/30 shadow-lg">
+    <header className="portal-header fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-b border-gray-200/30 dark:border-slate-700/30 shadow-lg transition-all duration-300">
       <div className="flex items-center justify-between px-6 py-4">
         {/* Left Section */}
         <div className="flex items-center space-x-4">
           <button
             onClick={onToggleSidebar}
-            className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"
+            className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors lg:hidden"
           >
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -48,51 +50,72 @@ const Header: React.FC<HeaderProps> = ({
               <Bot className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Trans Bot AI</h1>
-              <p className="text-sm text-gray-600 font-medium">Super Admin Portal</p>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">Trans Bot AI</h1>
+              <p className="text-sm text-gray-600 dark:text-slate-400 font-medium">Super Admin Portal</p>
             </div>
           </div>
         </div>
 
-        {/* Center Section - Search */}
+        {/* Center Section - Enhanced Search */}
         <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <input
-              type="text"
-              placeholder="Search companies, users, portals..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200"
-            />
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-          </div>
+          <EnhancedSearch onResultClick={(result) => console.log('Search result:', result)} />
         </div>
 
         {/* Right Section */}
         <div className="flex items-center space-x-2">
+          {/* System Status */}
+          <button
+            onClick={() => setSystemStatusOpen(true)}
+            className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105 relative group"
+            title="System Status"
+          >
+            <Activity className="w-5 h-5" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              System Status
+            </div>
+          </button>
+
           {/* Theme Toggle */}
           <button
             onClick={onToggleDarkMode}
-            className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105"
+            className="p-2.5 text-gray-600 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 hover:scale-105 relative group"
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              {darkMode ? "Light Mode" : "Dark Mode"}
+            </div>
           </button>
 
           {/* Help */}
-          <button className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105">
+          <button 
+            className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105 relative group"
+            title="Help & Documentation"
+          >
             <HelpCircle className="w-5 h-5" />
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              Help & Docs
+            </div>
           </button>
 
           {/* Settings */}
-          <button className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105">
+          <button 
+            className="p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105 relative group"
+            title="Settings"
+          >
             <Settings className="w-5 h-5" />
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              Settings
+            </div>
           </button>
 
           {/* Notifications */}
           <div className="relative">
             <button
               onClick={() => setNotificationDropdownOpen(!notificationDropdownOpen)}
-              className="relative p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105"
+              className="relative p-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-105 group"
+              title="Notifications"
             >
               <Bell className="w-5 h-5" />
               {unreadNotifications > 0 && (
@@ -100,6 +123,9 @@ const Header: React.FC<HeaderProps> = ({
                   {unreadNotifications}
                 </span>
               )}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Notifications
+              </div>
             </button>
 
             <AnimatePresence>
@@ -201,6 +227,12 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
       </div>
+
+      {/* System Status Modal */}
+      <SystemStatusModal 
+        isOpen={systemStatusOpen} 
+        onClose={() => setSystemStatusOpen(false)} 
+      />
     </header>
   );
 };

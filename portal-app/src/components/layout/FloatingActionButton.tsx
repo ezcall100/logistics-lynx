@@ -38,35 +38,35 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       label: 'Add Company',
       icon: 'Building2',
       action: onAddCompany,
-      color: 'bg-blue-500 hover:bg-blue-600'
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700'
     },
     {
       id: 'add-user',
       label: 'Add User',
       icon: 'UserPlus',
       action: onAddUser,
-      color: 'bg-green-500 hover:bg-green-600'
-    },
-    {
-      id: 'open-settings',
-      label: 'Open Settings',
-      icon: 'Settings',
-      action: onOpenSettings,
-      color: 'bg-purple-500 hover:bg-purple-600'
-    },
-    {
-      id: 'run-system-check',
-      label: 'Run System Check',
-      icon: 'TestTube',
-      action: onRunSystemCheck,
-      color: 'bg-orange-500 hover:bg-orange-600'
+      color: 'bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
     },
     {
       id: 'create-portal-plan',
       label: 'Create Portal Plan',
       icon: 'FileText',
       action: onCreatePortalPlan,
-      color: 'bg-indigo-500 hover:bg-indigo-600'
+      color: 'bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700'
+    },
+    {
+      id: 'run-system-check',
+      label: 'Run System Check',
+      icon: 'TestTube',
+      action: onRunSystemCheck,
+      color: 'bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700'
+    },
+    {
+      id: 'open-settings',
+      label: 'Open Settings',
+      icon: 'Settings',
+      action: onOpenSettings,
+      color: 'bg-gradient-to-br from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700'
     }
   ];
 
@@ -103,7 +103,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                   onClick={() => handleActionClick(action)}
                   className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
-                  <div className={`p-3 rounded-xl shadow-lg ${action.color} text-white`}>
+                  <div className={`p-3 rounded-xl shadow-lg ${action.color} text-white hover:shadow-xl transition-all duration-200`}>
                     {getIcon(action.icon)}
                   </div>
                   <span className="text-sm font-medium text-gray-900">{action.label}</span>

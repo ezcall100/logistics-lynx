@@ -103,18 +103,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
           opacity: isOpen ? 1 : 0
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="portal-sidebar fixed left-0 top-16 bottom-0 w-80 bg-white/90 backdrop-blur-xl border-r border-gray-200/30 shadow-2xl z-50 lg:translate-x-0 lg:opacity-100"
+        className="portal-sidebar fixed left-0 top-16 bottom-0 w-80 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-r border-gray-200/30 dark:border-slate-700/30 shadow-2xl z-50 lg:translate-x-0 lg:opacity-100 transition-all duration-300"
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
-          <div className="p-6 border-b border-gray-200/30">
+          <div className="p-6 border-b border-gray-200/30 dark:border-slate-700/30">
             <div className="flex items-center space-x-3">
               <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 p-3 rounded-2xl shadow-lg">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-gray-900">Navigation</h2>
-                <p className="text-sm text-gray-600 font-medium">Platform Management</p>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100">Navigation</h2>
+                <p className="text-sm text-gray-600 dark:text-slate-400 font-medium">Platform Management</p>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
                   <div>
                     <button
                       onClick={() => toggleMenu(item.id)}
-                      className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 group hover:scale-[1.02]"
+                      className="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 group hover:scale-[1.02]"
                     >
                       <div className="flex items-center space-x-3">
                         {getIcon(item.icon)}

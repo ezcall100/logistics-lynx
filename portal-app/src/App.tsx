@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Shield, AlertCircle, User, Bot, Zap } from 'lucide-react';
 import EnterpriseSuperAdminPortal from './EnterpriseSuperAdminPortal';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 interface User {
   id: string;
@@ -17,7 +18,7 @@ interface User {
   createdAt?: string;
 }
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
@@ -555,6 +556,14 @@ const App: React.FC = () => {
 
   // If logged in, show dashboard
   return <EnterpriseSuperAdminPortal user={user!} onLogout={handleLogout} />;
+};
+
+const App: React.FC = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
 };
 
 export default App;

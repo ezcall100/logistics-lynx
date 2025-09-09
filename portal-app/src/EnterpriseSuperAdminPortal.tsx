@@ -6,6 +6,7 @@ import FloatingActionButton from './components/layout/FloatingActionButton';
 import DashboardPage from './pages/DashboardPage';
 import { User, Notification } from './types';
 import { mockNotifications } from './data/mockData';
+import { useTheme } from './contexts/ThemeContext';
 
 interface EnterpriseSuperAdminPortalProps {
   user: User;
@@ -18,8 +19,8 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
 }) => {
   // Debug: Log that new design is loading
   console.log('🎨 Loading Enhanced Super Admin Portal Design v2.0');
+  const { darkMode, toggleDarkMode } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
   const [currentPath, setCurrentPath] = useState('/dashboard');
   const [notifications] = useState<Notification[]>(mockNotifications);
 
@@ -27,9 +28,6 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
     setSidebarOpen(!sidebarOpen);
   };
 
-  const handleToggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   const handleNavigate = (path: string) => {
     setCurrentPath(path);
@@ -125,7 +123,7 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 ${darkMode ? 'dark' : ''}`}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-blue-900/30 dark:to-purple-900/30 transition-all duration-300">
       {/* Header */}
       <Header
         user={user}
@@ -134,7 +132,7 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
         sidebarOpen={sidebarOpen}
         notifications={notifications}
         darkMode={darkMode}
-        onToggleDarkMode={handleToggleDarkMode}
+        onToggleDarkMode={toggleDarkMode}
       />
 
       {/* Sidebar */}

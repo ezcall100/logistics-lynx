@@ -93,11 +93,11 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/30 overflow-hidden hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/30 dark:border-slate-700/30 overflow-hidden hover:shadow-xl transition-all duration-300">
       {/* Table Header */}
-      <div className="px-6 py-4 border-b border-gray-200/30">
+      <div className="px-6 py-4 border-b border-gray-200/30 dark:border-slate-700/30">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">Companies</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">Companies</h3>
           <div className="flex items-center space-x-3">
             <select
               value={filterStatus}

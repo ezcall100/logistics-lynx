@@ -64,11 +64,11 @@ const KPICard: React.FC<KPICardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
-      className={`${bgColor} rounded-2xl p-6 shadow-lg border border-gray-200/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]`}
+      className={`${bgColor} rounded-2xl p-6 shadow-lg border border-gray-200/30 dark:border-slate-700/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]`}
     >
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-slate-400 mb-1">{title}</p>
           <p className={`text-3xl font-bold ${color} mb-2`}>
             {formatValue(value)}
           </p>

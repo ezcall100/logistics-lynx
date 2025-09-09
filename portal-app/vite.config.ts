@@ -14,21 +14,14 @@ export default defineConfig({
     port: 3006,
     host: '0.0.0.0',
     strictPort: true,
-    watch: {
-      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**'],
-      usePolling: false,
-    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
   },
   build: {
     outDir: 'dist',
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
-    },
   },
-  root: './',
+  esbuild: {
+    loader: 'tsx',
+  },
 })

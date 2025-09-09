@@ -38,7 +38,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-2xl p-8 text-white shadow-2xl"
+        className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 dark:from-blue-700 dark:via-purple-700 dark:to-indigo-800 rounded-2xl p-8 text-white shadow-2xl"
       >
         <div className="flex items-center justify-between">
           <div>
