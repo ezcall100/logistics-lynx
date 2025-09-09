@@ -1,5 +1,5 @@
-# Production Dockerfile for TransBot AI MCP System
-FROM node:18-alpine
+# Multi-stage build for production optimization
+FROM node:18-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -16,16 +16,38 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Create production environment
-ENV NODE_ENV=production
-ENV PORT=3000
+# Production stage
+FROM nginx:alpine AS production
 
-# Expose port
-EXPOSE 3000
+# Install Node.js for API server
+RUN apk add --no-cache nodejs npm
+
+# Copy built application
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy API server
+COPY --from=builder /app/server /app/server
+COPY --from=builder /app/package*.json /app/
+
+# Install API dependencies
+WORKDIR /app
+RUN npm ci --only=production
+
+# Create startup script
+RUN echo '#!/bin/sh' > /start.sh && \
+    echo 'cd /app && node server/index.js &' >> /start.sh && \
+    echo 'nginx -g "daemon off;"' >> /start.sh && \
+    chmod +x /start.sh
+
+# Expose ports
+EXPOSE 80 3001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/health || exit 1
+  CMD curl -f http://localhost/health || exit 1
 
-# Start the application
-CMD ["npm", "run", "start"]
+# Start services
+CMD ["/start.sh"]

@@ -1,5 +1,7 @@
-/* Portal-specific styles - v2.0 (lint-safe, no @tailwind here)
-   NOTE: Keep Tailwind imports (@tailwind base/components/utilities) in your global stylesheet. */
+/* Portal-specific styles - v2.0 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Dark mode + tokens */
 @layer base {

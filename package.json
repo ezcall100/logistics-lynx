@@ -1,56 +1,104 @@
 {
-  "name": "trans-bot-ai-website",
-  "private": true,
+  "name": "transbot-super-admin-portal",
   "version": "1.0.0",
+  "description": "Enterprise-grade Super Admin portal for Trans Bot AI platform",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:portal": "vite --config vite.portal.config.ts",
-    "predev:mcp": "node scripts/ensure-single-dev.js",
-    "dev:mcp": "node server/mcp-server.js",
-    "dev:clean": "npx kill-port 3001 && npm run dev:mcp",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "npm run dev -- --port 3000",
-    "test": "echo \"No tests specified\" && exit 0",
-    "deploy": "npm run build && echo \"Build completed\"",
-    "start:backup": "node backup-server-restart.js",
-    "start:fallback": "node emergency-fallback.js",
-    "start:quick": "node quick-start.js",
-    "start:master": "node master-control.js",
-    "test:all": "node test-all-pages.js",
-    "agents:start": "npm run start:quick",
-    "agents:backup": "npm run start:backup",
-    "agents:fallback": "npm run start:fallback",
-    "agents:master": "npm run start:master",
-    "agents:test": "npm run test:all"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:reset": "supabase db reset",
+    "supabase:generate-types": "supabase gen types typescript --local > src/types/supabase.ts",
+    "db:setup": "supabase db reset && supabase gen types typescript --local > src/types/supabase.ts",
+    "deploy:staging": "npm run build && npm run deploy:staging:upload",
+    "deploy:production": "npm run build && npm run deploy:production:upload",
+    "deploy:staging:upload": "echo 'Deploying to staging...'",
+    "deploy:production:upload": "echo 'Deploying to production...'",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
+    "@tanstack/react-query": "^5.8.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
     "react-router-dom": "^6.20.1",
-    "ws": "^8.18.3"
+    "recharts": "^2.8.0",
+    "tailwind-merge": "^2.0.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@supabase/cli": "^1.123.4",
+    "@types/node": "^20.9.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.1.1",
+    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/ui": "^0.34.6",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.53.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
-    "vite": "^4.5.0"
-  }
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "super-admin",
+    "enterprise",
+    "dashboard",
+    "react",
+    "typescript",
+    "supabase",
+    "transbot",
+    "logistics",
+    "tms"
+  ],
+  "author": "Trans Bot AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/transbot/super-admin-portal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/transbot/super-admin-portal/issues"
+  },
+  "homepage": "https://transbot.ai"
 }

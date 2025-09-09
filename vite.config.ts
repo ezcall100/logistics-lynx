@@ -4,51 +4,51 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  clearScreen: false,
   plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@/components': path.resolve(__dirname, './src/components'),
+      '@/pages': path.resolve(__dirname, './src/pages'),
+      '@/services': path.resolve(__dirname, './src/services'),
+      '@/lib': path.resolve(__dirname, './src/lib'),
+      '@/design-system': path.resolve(__dirname, './src/design-system'),
+      '@/types': path.resolve(__dirname, './src/types'),
     },
   },
   server: {
-    host: '127.0.0.1',
-    port: 3000, // Main website (Trans Bot AI) on 3000
-    strictPort: true,
-    hmr: {
-      host: '127.0.0.1',
-      port: 3000,
-      clientPort: 3000,
-      overlay: true,
-    },
-    watch: {
-      ignored: [
-        '**/node_modules/**',
-        '**/.git/**',
-        '**/dist/**',
-        '**/build/**',
-        '**/.cache/**',
-        '**/*.log',
-        '**/tmp/**',
-        '**/.turbo/**',
-        '**/coverage/**',
-        '**/.husky/**',
-      ],
-      awaitWriteFinish: {
-        stabilityThreshold: 200,
-        pollInterval: 50,
+    port: 3000,
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
       },
     },
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
-    exclude: [],
+  preview: {
+    port: 3000,
+    host: true,
   },
   build: {
     outDir: 'dist',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          supabase: ['@supabase/supabase-js'],
+          ui: ['framer-motion', 'lucide-react'],
+          charts: ['recharts'],
+        },
+      },
+    },
   },
-  esbuild: {
-    loader: 'tsx',
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
-  logLevel: 'info',
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@supabase/supabase-js'],
+  },
 })

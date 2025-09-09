@@ -1,0 +1,14 @@
+# GitHub Actions Linter Configuration
+# This file helps suppress false positive warnings for GitHub Actions workflows
+
+# Ignore context access warnings for secrets (these are valid GitHub Actions syntax)
+ignore_patterns:
+  - "Context access might be invalid"
+  - "Unknown at rule @tailwind"
+
+# Valid GitHub Actions context patterns
+valid_contexts:
+  - secrets.*
+  - vars.*
+  - github.*
+  - env.*
