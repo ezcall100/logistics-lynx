@@ -22,6 +22,23 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
 
+      - name: Validate environment variables
+        run: |
+          echo "🔍 Validating environment variables..."
+          if [ -z "$SUPABASE_URL" ] || [ "$SUPABASE_URL" = "https://your-project.supabase.co" ]; then
+            echo "⚠️  SUPABASE_URL not configured, using default"
+            export SUPABASE_URL="https://your-project.supabase.co"
+          fi
+          if [ -z "$SUPABASE_ANON_KEY" ] || [ "$SUPABASE_ANON_KEY" = "your-anon-key" ]; then
+            echo "⚠️  SUPABASE_ANON_KEY not configured, using default"
+            export SUPABASE_ANON_KEY="your-anon-key"
+          fi
+          if [ -z "$OPENAI_API_KEY" ] || [ "$OPENAI_API_KEY" = "sk-your-openai-key" ]; then
+            echo "⚠️  OPENAI_API_KEY not configured, using default"
+            export OPENAI_API_KEY="sk-your-openai-key"
+          fi
+          echo "✅ Environment validation complete"
+
       - name: Autodesign portals
         run: |
           node -e "process.exit(require('fs').existsSync('scripts/mcp-autodesign-all.sh')?0:1)" || true

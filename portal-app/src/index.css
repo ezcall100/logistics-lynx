@@ -1,9 +1,7 @@
-/* Portal-specific styles - completely separate from main website - v2.0 */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Portal-specific styles - v2.0 (lint-safe, no @tailwind here)
+   NOTE: Keep Tailwind imports (@tailwind base/components/utilities) in your global stylesheet. */
 
-/* Dark mode support */
+/* Dark mode + tokens */
 @layer base {
   :root {
     --color-primary: 59 130 246; /* blue-500 */
@@ -37,23 +35,16 @@
     --color-border: 51 65 85; /* slate-700 */
   }
 
-  /* Force dark mode classes to work */
-  .dark * {
-    color-scheme: dark;
-  }
+  /* Ensure dark theme components use dark UA styles */
+  .dark * { color-scheme: dark; }
 }
 
-/* Reset all styles to ensure no website interference */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Scoped reset for portal */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: rgb(var(--color-background));
@@ -71,7 +62,7 @@ html, body {
   z-index: 9999;
 }
 
-/* Completely hide ALL website components - but NOT our portal components */
+/* Hide host website chrome (not portal components) */
 .website-header,
 .website-footer,
 .horizontal-mega-menu,
@@ -96,13 +87,10 @@ html, body {
   top: -9999px !important;
 }
 
-/* Ensure portal takes full screen */
-#root > * {
-  position: relative;
-  z-index: 10000;
-}
+/* Portal z-index isolation */
+#root > * { position: relative; z-index: 10000; }
 
-/* Ensure our portal components are always visible */
+/* Keep portal UI visible */
 header,
 aside,
 nav,
@@ -116,7 +104,7 @@ nav,
   z-index: 10000 !important;
 }
 
-/* Specific portal component visibility */
+/* Header */
 .portal-header {
   position: fixed !important;
   top: 0 !important;
@@ -126,10 +114,12 @@ nav,
   background: rgba(var(--color-surface), 0.8) !important;
   backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid rgba(var(--color-border), 0.3) !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   transition: background-color 0.3s ease, border-color 0.3s ease !important;
 }
 
+/* Sidebar */
 .portal-sidebar {
   position: fixed !important;
   left: 0 !important;
@@ -144,6 +134,7 @@ nav,
   transition: background-color 0.3s ease, border-color 0.3s ease !important;
 }
 
+/* FAB */
 .portal-fab {
   position: fixed !important;
   bottom: 1.5rem !important;
@@ -151,50 +142,34 @@ nav,
   z-index: 50 !important;
 }
 
-/* Portal-specific animations */
+/* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
+  0%   { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
 }
-
-.portal-fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
+.portal-fade-in { animation: fadeIn 0.6s ease-out; }
 .shimmer {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* Enhanced shadows */
-.shadow-3xl {
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-}
+/* Shadows */
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important; }
+.shadow-3xl { box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25) !important; }
 
-/* Glassmorphism effects */
+/* Glass */
 .glass {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* Ensure clean portal layout */
+/* Container */
 .portal-container {
   min-height: 100vh;
   width: 100%;
@@ -205,49 +180,21 @@ nav,
   z-index: 10000;
 }
 
-/* Force new design styles */
+/* Utility overrides (keep if you truly need to force) */
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important;
 }
+.rounded-2xl { border-radius: 1rem !important; }
+.backdrop-blur-xl { backdrop-filter: blur(24px) !important; }
 
-.rounded-2xl {
-  border-radius: 1rem !important;
-}
+/* Gradient tokens */
+.from-blue-600 { --tw-gradient-from: #2563eb !important; }
+.via-purple-600 { --tw-gradient-via: #9333ea !important; }
+.to-indigo-700 { --tw-gradient-to: #4338ca !important; }
 
-.backdrop-blur-xl {
-  backdrop-filter: blur(24px) !important;
-}
-
-.shadow-2xl {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-}
-
-.shadow-3xl {
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25) !important;
-}
-
-/* Force gradient backgrounds */
-.from-blue-600 {
-  --tw-gradient-from: #2563eb !important;
-}
-
-.via-purple-600 {
-  --tw-gradient-via: #9333ea !important;
-}
-
-.to-indigo-700 {
-  --tw-gradient-to: #4338ca !important;
-}
-
-/* Force new button styles */
-.hover\:scale-105:hover {
-  transform: scale(1.05) !important;
-}
-
-.hover\:scale-110:hover {
-  transform: scale(1.1) !important;
-}
-
+/* Button motion */
+.hover\:scale-105:hover { transform: scale(1.05) !important; }
+.hover\:scale-110:hover { transform: scale(1.1) !important; }
 .transition-all {
   transition-property: all !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
