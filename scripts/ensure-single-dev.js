@@ -14,5 +14,5 @@ try {
   }
 } catch {
   // Port 3001 is free — proceed
-  console.log('[guard] Port 3001 is free. Proceeding with MCP API server.')
+  console.log('[guard] Port 3001 is free. Proceeding with MCP API (dedicated) server.')
 }

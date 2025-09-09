@@ -13,7 +13,7 @@ export default defineConfig({
   },
   server: {
     host: '127.0.0.1',
-    port: 3006, // Portal app on 3006
+    port: 3006, // Portal app (Login) on 3006
     strictPort: true,
     hmr: {
       host: '127.0.0.1',
