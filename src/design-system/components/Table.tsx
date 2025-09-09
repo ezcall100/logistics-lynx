@@ -1,12 +1,11 @@
 /**
- * MCP Agents - Redesigned Table Component
+ * MCP Agents - Clean Table Component
  * Modern, accessible table with sorting, filtering, and comprehensive features
  */
 
 import React, { forwardRef, useState } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronUp,
   ChevronDown,
@@ -128,53 +127,27 @@ const Table = forwardRef<HTMLTableElement, TableProps>(
         <div className="relative overflow-hidden rounded-lg border border-gray-200">
           {loading && (
             <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10">
-              <motion.div
-                className="animate-spin"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-              >
+              <div className="animate-spin">
                 <div className="w-8 h-8 border-4 border-gray-300 border-t-primary-500 rounded-full" />
-              </motion.div>
+              </div>
             </div>
           )}
 
-          <motion.table
-            ref={ref}
-            className={cn(tableVariants({ variant, size }), className)}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            {...(() => {
-              const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-                props as React.HTMLAttributes<HTMLTableElement> & {
-                  onAnimationStart?: (definition: unknown) => void;
-                  onAnimationComplete?: (definition: unknown) => void;
-                };
-              return htmlProps;
-            })()}
-          >
+          <table ref={ref} className={cn(tableVariants({ variant, size }), className)} {...props}>
             {children}
-          </motion.table>
+          </table>
 
           {/* Empty State */}
-          <AnimatePresence>
-            {empty && !loading && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center bg-white"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                    <div className="w-8 h-8 bg-gray-300 rounded"></div>
-                  </div>
-                  <p className="text-gray-500">{emptyMessage}</p>
+          {empty && !loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gray-300 rounded"></div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <p className="text-gray-500">{emptyMessage}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -184,91 +157,49 @@ const Table = forwardRef<HTMLTableElement, TableProps>(
 Table.displayName = 'Table';
 
 // ===== TABLE HEADER =====
-export const TableHeader = forwardRef<
+const TableHeader = forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, children, ...props }, ref) => {
   return (
-    <motion.thead
-      ref={ref}
-      className={cn('bg-gray-50', className)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
-    >
+    <thead ref={ref} className={cn('bg-gray-50', className)} {...props}>
       {children}
-    </motion.thead>
+    </thead>
   );
 });
 
 TableHeader.displayName = 'TableHeader';
 
 // ===== TABLE BODY =====
-export const TableBody = forwardRef<
+const TableBody = forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, children, ...props }, ref) => {
   return (
-    <motion.tbody
-      ref={ref}
-      className={cn('divide-y divide-gray-200', className)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, delay: 0.1 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
-    >
+    <tbody ref={ref} className={cn('divide-y divide-gray-200', className)} {...props}>
       {children}
-    </motion.tbody>
+    </tbody>
   );
 });
 
 TableBody.displayName = 'TableBody';
 
 // ===== TABLE FOOTER =====
-export const TableFooter = forwardRef<
+const TableFooter = forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, children, ...props }, ref) => {
   return (
-    <motion.tfoot
-      ref={ref}
-      className={cn('bg-gray-50 font-medium', className)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, delay: 0.2 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
-    >
+    <tfoot ref={ref} className={cn('bg-gray-50 font-medium', className)} {...props}>
       {children}
-    </motion.tfoot>
+    </tfoot>
   );
 });
 
 TableFooter.displayName = 'TableFooter';
 
 // ===== TABLE ROW =====
-export const TableRow = forwardRef<
+const TableRow = forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement> & {
     hover?: boolean;
@@ -277,7 +208,7 @@ export const TableRow = forwardRef<
   }
 >(({ className, hover = true, selected, onClick, children, ...props }, ref) => {
   return (
-    <motion.tr
+    <tr
       ref={ref}
       className={cn(
         'transition-colors duration-150',
@@ -289,26 +220,17 @@ export const TableRow = forwardRef<
         className
       )}
       onClick={onClick}
-      whileHover={hover ? { backgroundColor: 'rgba(249, 250, 251, 0.8)' } : undefined}
-      transition={{ duration: 0.15 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
+      {...props}
     >
       {children}
-    </motion.tr>
+    </tr>
   );
 });
 
 TableRow.displayName = 'TableRow';
 
 // ===== TABLE HEAD =====
-export const TableHead = forwardRef<
+const TableHead = forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement> & {
     sortable?: boolean;
@@ -317,7 +239,7 @@ export const TableHead = forwardRef<
   }
 >(({ className, sortable, sortDirection, onSort, children, ...props }, ref) => {
   return (
-    <motion.th
+    <th
       ref={ref}
       className={cn(
         'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
@@ -327,16 +249,7 @@ export const TableHead = forwardRef<
         className
       )}
       onClick={sortable ? onSort : undefined}
-      whileHover={sortable ? { backgroundColor: 'rgba(249, 250, 251, 0.8)' } : undefined}
-      transition={{ duration: 0.15 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
+      {...props}
     >
       <div className="flex items-center gap-2">
         <span>{children}</span>
@@ -357,21 +270,21 @@ export const TableHead = forwardRef<
           </div>
         )}
       </div>
-    </motion.th>
+    </th>
   );
 });
 
 TableHead.displayName = 'TableHead';
 
 // ===== TABLE CELL =====
-export const TableCell = forwardRef<
+const TableCell = forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement> & {
     variant?: 'default' | 'numeric' | 'actions';
   }
 >(({ className, variant = 'default', children, ...props }, ref) => {
   return (
-    <motion.td
+    <td
       ref={ref}
       className={cn(
         'px-6 py-4 whitespace-nowrap text-sm text-gray-900',
@@ -381,27 +294,17 @@ export const TableCell = forwardRef<
         },
         className
       )}
-      initial={{ opacity: 0, x: -10 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.2 }}
-      {...(() => {
-        const { onAnimationStart, onAnimationComplete, ...htmlProps } =
-          props as React.HTMLAttributes<HTMLTableElement> & {
-            onAnimationStart?: (definition: unknown) => void;
-            onAnimationComplete?: (definition: unknown) => void;
-          };
-        return htmlProps;
-      })()}
+      {...props}
     >
       {children}
-    </motion.td>
+    </td>
   );
 });
 
 TableCell.displayName = 'TableCell';
 
 // ===== ACTION BUTTONS =====
-export const ActionButtons: React.FC<{
+const ActionButtons: React.FC<{
   onView?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -496,7 +399,7 @@ export const ActionButtons: React.FC<{
 };
 
 // ===== STATUS BADGE =====
-export const StatusBadge: React.FC<{
+const StatusBadge: React.FC<{
   status:
     | 'active'
     | 'inactive'
@@ -540,7 +443,7 @@ export const StatusBadge: React.FC<{
 };
 
 // ===== PAGINATION =====
-export const TablePagination: React.FC<{
+const TablePagination: React.FC<{
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
@@ -641,4 +544,16 @@ export const TablePagination: React.FC<{
   );
 };
 
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+  ActionButtons,
+  StatusBadge,
+  TablePagination,
+};
 export default Table;
