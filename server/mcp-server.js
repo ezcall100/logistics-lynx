@@ -31,7 +31,15 @@ app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:8084'],
   credentials: true
 }));
-app.use(express.json());
+
+// UTF-8 encoding middleware
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.charset = 'utf-8';
+  next();
+});
+
+app.use(express.json({ type: 'application/json', limit: '10mb' }));
 
 // WebSocket connection handling for real-time updates
 wss.on('connection', (ws) => {
@@ -200,6 +208,26 @@ function generateTrends(timeframe = '24h') {
 }
 
 // API Routes
+
+// Test encoding endpoint
+app.post('/api/test', (req, res) => {
+  try {
+    const testPayload = req.body;
+    res.json({
+      success: true,
+      data: testPayload,
+      message: 'Encoding test successful',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Encoding test failed',
+      message: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
 
 // Health check - MCP-V2 system health feature
 app.get('/api/mcp/system/health', (req, res) => {
