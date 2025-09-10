@@ -1,178 +1,250 @@
 import React from 'react';
 
 function MCPProgressDashboard() {
+  console.log('MCP Dashboard component is rendering...');
+  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            MCP Agent Progress Dashboard
-          </h1>
-          <p className="text-gray-300 text-lg mb-8">
-            Real-time monitoring of 250 autonomous agents building 35+ portals
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold text-white mb-4">Mission Timeline</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Started:</span>
-                  <span className="text-white">December 19, 2024</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Deadline:</span>
-                  <span className="text-white">October 28, 2025</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Status:</span>
-                  <span className="text-green-400">Active</span>
-                </div>
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#1e293b', 
+      padding: '24px',
+      color: 'white',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          MCP Agent Progress Dashboard
+        </h1>
+        <p style={{ color: '#94a3b8', marginBottom: '2rem' }}>
+          Real-time monitoring of 250 autonomous agents building 35+ portals
+        </p>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '24px',
+          marginBottom: '32px'
+        }}>
+          <div style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+            borderRadius: '12px', 
+            padding: '24px',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              Mission Timeline
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Started:</span>
+                <span>December 19, 2024</span>
               </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold text-white mb-4">Overall Progress</h3>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">15.2%</div>
-                <div className="w-full bg-gray-700 rounded-full h-3">
-                  <div
-                    className="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full"
-                    style={{ width: '15.2%' }}
-                  ></div>
-                </div>
-                <div className="text-sm text-gray-400 mt-2">Phase 1: Foundation & Infrastructure</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Deadline:</span>
+                <span>October 28, 2025</span>
               </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold text-white mb-4">Agent Status</h3>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    <span className="text-gray-400">Active</span>
-                  </div>
-                  <span className="text-white font-semibold">238</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <span className="text-gray-400">Maintenance</span>
-                  </div>
-                  <span className="text-white font-semibold">7</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <span className="text-gray-400">Error Recovery</span>
-                  </div>
-                  <span className="text-white font-semibold">5</span>
-                </div>
-                <div className="pt-2 border-t border-white/20">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Total Agents</span>
-                    <span className="text-white font-semibold">250</span>
-                  </div>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Status:</span>
+                <span style={{ color: '#10b981' }}>Active</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-6">Portal Development Progress</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 className="text-white font-semibold">Super Admin Portal</h4>
-                    <p className="text-gray-400 text-sm">Admin</p>
-                  </div>
-                  <div className="px-3 py-1 rounded-full text-sm bg-green-500/20 text-green-400">
-                    complete
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Progress</span>
-                    <span className="text-white font-medium">100.0%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-green-500 h-2 rounded-full" style={{ width: '100%' }}></div>
-                  </div>
-                </div>
+          <div style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+            borderRadius: '12px', 
+            padding: '24px',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              Overall Progress
+            </h3>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '8px' }}>
+                15.2%
               </div>
-
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 className="text-white font-semibold">Broker Portal</h4>
-                    <p className="text-gray-400 text-sm">Core TMS</p>
-                  </div>
-                  <div className="px-3 py-1 rounded-full text-sm bg-yellow-500/20 text-yellow-400">
-                    development
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Progress</span>
-                    <span className="text-white font-medium">20.2%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '20.2%' }}></div>
-                  </div>
-                </div>
+              <div style={{ 
+                width: '100%', 
+                backgroundColor: '#374151', 
+                borderRadius: '9999px', 
+                height: '12px',
+                marginBottom: '8px'
+              }}>
+                <div
+                  style={{ 
+                    background: 'linear-gradient(to right, #3b82f6, #10b981)',
+                    height: '12px',
+                    borderRadius: '9999px',
+                    width: '15.2%'
+                  }}
+                ></div>
               </div>
-
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 className="text-white font-semibold">Carrier Portal</h4>
-                    <p className="text-gray-400 text-sm">Core TMS</p>
-                  </div>
-                  <div className="px-3 py-1 rounded-full text-sm bg-yellow-500/20 text-yellow-400">
-                    development
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Progress</span>
-                    <span className="text-white font-medium">18.2%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '18.2%' }}></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 className="text-white font-semibold">Driver Portal</h4>
-                    <p className="text-gray-400 text-sm">Core TMS</p>
-                  </div>
-                  <div className="px-3 py-1 rounded-full text-sm bg-blue-500/20 text-blue-400">
-                    testing
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Progress</span>
-                    <span className="text-white font-medium">23.2%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-blue-500 h-2 rounded-full" style={{ width: '23.2%' }}></div>
-                  </div>
-                </div>
+              <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                Phase 1: Foundation & Infrastructure
               </div>
             </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center space-x-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-lg">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span>All 250 agents are actively working</span>
+          <div style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+            borderRadius: '12px', 
+            padding: '24px',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              Agent Status
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '12px', height: '12px', backgroundColor: '#10b981', borderRadius: '50%' }}></div>
+                  <span style={{ color: '#94a3b8' }}>Active</span>
+                </div>
+                <span style={{ fontWeight: '600' }}>238</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '12px', height: '12px', backgroundColor: '#f59e0b', borderRadius: '50%' }}></div>
+                  <span style={{ color: '#94a3b8' }}>Maintenance</span>
+                </div>
+                <span style={{ fontWeight: '600' }}>7</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '12px', height: '12px', backgroundColor: '#ef4444', borderRadius: '50%' }}></div>
+                  <span style={{ color: '#94a3b8' }}>Error Recovery</span>
+                </div>
+                <span style={{ fontWeight: '600' }}>5</span>
+              </div>
+              <div style={{ paddingTop: '8px', borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Total Agents</span>
+                  <span style={{ fontWeight: '600' }}>250</span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div style={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+          borderRadius: '12px', 
+          padding: '24px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          marginBottom: '32px'
+        }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '24px' }}>
+            Portal Development Progress
+          </h3>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '16px'
+          }}>
+            <div style={{ 
+              backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+              borderRadius: '8px', 
+              padding: '16px',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                <div>
+                  <h4 style={{ fontWeight: '600' }}>Super Admin Portal</h4>
+                  <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>Admin</p>
+                </div>
+                <div style={{ 
+                  padding: '4px 12px', 
+                  borderRadius: '9999px', 
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                  color: '#10b981'
+                }}>
+                  complete
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
+                  <span style={{ color: '#94a3b8' }}>Progress</span>
+                  <span style={{ fontWeight: '500' }}>100.0%</span>
+                </div>
+                <div style={{ 
+                  width: '100%', 
+                  backgroundColor: '#374151', 
+                  borderRadius: '9999px', 
+                  height: '8px'
+                }}>
+                  <div style={{ 
+                    backgroundColor: '#10b981',
+                    height: '8px',
+                    borderRadius: '9999px',
+                    width: '100%'
+                  }}></div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ 
+              backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+              borderRadius: '8px', 
+              padding: '16px',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                <div>
+                  <h4 style={{ fontWeight: '600' }}>Broker Portal</h4>
+                  <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>Core TMS</p>
+                </div>
+                <div style={{ 
+                  padding: '4px 12px', 
+                  borderRadius: '9999px', 
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                  color: '#f59e0b'
+                }}>
+                  development
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
+                  <span style={{ color: '#94a3b8' }}>Progress</span>
+                  <span style={{ fontWeight: '500' }}>20.2%</span>
+                </div>
+                <div style={{ 
+                  width: '100%', 
+                  backgroundColor: '#374151', 
+                  borderRadius: '9999px', 
+                  height: '8px'
+                }}>
+                  <div style={{ 
+                    backgroundColor: '#f59e0b',
+                    height: '8px',
+                    borderRadius: '9999px',
+                    width: '20.2%'
+                  }}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '8px',
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            color: '#10b981',
+            padding: '8px 16px',
+            borderRadius: '8px'
+          }}>
+            <div style={{ 
+              width: '8px', 
+              height: '8px', 
+              backgroundColor: '#10b981', 
+              borderRadius: '50%',
+              animation: 'pulse 2s infinite'
+            }}></div>
+            <span>All 250 agents are actively working</span>
           </div>
         </div>
       </div>
