@@ -1260,16 +1260,19 @@ function MCPProgressDashboard() {
                   })}
                 </div>
                 <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
-                  Mission Time: Day 49 of 70 total days
+                  Mission Time: Day 49 of 70 total days (7 weeks)
                 </div>
                 <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
-                  Start Date: September 9, 2025
+                  Start Date: September 9, 2025 at 10:00 AM
                 </div>
                 <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
-                  Target Completion: October 28, 2025
+                  Target Completion: October 28, 2025 at 6:00 PM
                 </div>
                 <div style={{ fontSize: '0.875rem', color: '#f59e0b', fontWeight: '600' }}>
-                  Days Remaining: 49 days
+                  Days Remaining: 21 days (3 weeks)
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: '600' }}>
+                  Hours Remaining: 504 hours
                 </div>
                 <div style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: '600' }}>
                   Overall Progress: {overallProgress}%
@@ -1290,7 +1293,7 @@ function MCPProgressDashboard() {
                 🎯 Key Milestones
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {/* Phase 1: Core Portals */}
+                {/* Phase 1: Core Infrastructure */}
                 <div
                   style={{
                     padding: '12px',
@@ -1309,18 +1312,18 @@ function MCPProgressDashboard() {
                   >
                     <span style={{ color: '#10b981' }}>✅ Complete</span>
                     <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
-                      Phase 1: Core Portals
+                      Phase 1: Core Infrastructure
                     </span>
                   </div>
                   <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    11 Core TMS portals deployed
+                    Database, auth, roles, 11 Core TMS portals
                   </div>
                   <div style={{ fontSize: '0.75rem', color: '#10b981' }}>
-                    Completed: Sep 15, 2025
+                    Completed: Sep 16, 2025 (Week 1)
                   </div>
                 </div>
 
-                {/* Phase 2: Business Ops */}
+                {/* Phase 2: UI/UX Design System */}
                 <div
                   style={{
                     padding: '12px',
@@ -1337,18 +1340,20 @@ function MCPProgressDashboard() {
                       marginBottom: '4px',
                     }}
                   >
-                    <span style={{ color: '#3b82f6' }}>🔄 68%</span>
+                    <span style={{ color: '#3b82f6' }}>🔄 85%</span>
                     <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
-                      Phase 2: Business Ops
+                      Phase 2: UI/UX Design System
                     </span>
                   </div>
                   <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    16 Business operations portals
+                    Portal templates, core features, 16 Business operations portals
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#3b82f6' }}>Target: Oct 15, 2025</div>
+                  <div style={{ fontSize: '0.75rem', color: '#3b82f6' }}>
+                    Target: Sep 30, 2025 (Weeks 2-3)
+                  </div>
                 </div>
 
-                {/* Phase 3: Admin & Special */}
+                {/* Phase 3: Full Portal Builds */}
                 <div
                   style={{
                     padding: '12px',
@@ -1365,15 +1370,47 @@ function MCPProgressDashboard() {
                       marginBottom: '4px',
                     }}
                   >
-                    <span style={{ color: '#8b5cf6' }}>⏳ 35%</span>
+                    <span style={{ color: '#8b5cf6' }}>⏳ 45%</span>
                     <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
-                      Phase 3: Admin & Special
+                      Phase 3: Full Portal Builds
                     </span>
                   </div>
                   <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    8 Admin & specialized portals
+                    RBAC, workflows, 8 Admin & specialized portals
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#8b5cf6' }}>Target: Oct 28, 2025</div>
+                  <div style={{ fontSize: '0.75rem', color: '#8b5cf6' }}>
+                    Target: Oct 14, 2025 (Weeks 4-5)
+                  </div>
+                </div>
+
+                {/* Phase 4: Integrations & Optimizations */}
+                <div
+                  style={{
+                    padding: '12px',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(245, 158, 11, 0.3)',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '4px',
+                    }}
+                  >
+                    <span style={{ color: '#f59e0b' }}>🚀 15%</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
+                      Phase 4: Integrations & Optimizations
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                    Integrations, scaling, and optimizations
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#f59e0b' }}>
+                    Target: Oct 28, 2025 at 6:00 PM (Weeks 6-7)
+                  </div>
                 </div>
               </div>
             </div>
