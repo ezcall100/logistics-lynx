@@ -92,7 +92,7 @@ import CarrierSolutions from './pages/solutions/CarrierSolutions';
 import BrokerSolutions from './pages/solutions/BrokerSolutions';
 import OwnerOperatorSolutions from './pages/solutions/OwnerOperatorSolutions';
 import DriverSolutions from './pages/solutions/DriverSolutions';
-import MCPProgressDashboard from './pages/MCPProgressDashboard';
+// import MCPProgressDashboard from './pages/MCPProgressDashboard'; // Using port 3002 instead
 
 function App() {
   return (
@@ -141,7 +141,8 @@ function App() {
             <Route path="/admin/subdomains" element={<SubdomainManagement />} />
             <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />
             <Route path="/admin/human-developers" element={<HumanDeveloperAdmin />} />
-            <Route path="/mcp-dashboard" element={<MCPProgressDashboard />} />
+            {/* <Route path="/mcp-dashboard" element={<MCPProgressDashboard />} /> */}{' '}
+            {/* Using port 3002 instead */}
             <Route
               path="/solutions"
               element={

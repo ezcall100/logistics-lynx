@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Portal {
   id: string;
@@ -21,7 +21,7 @@ interface AgentStatus {
 
 function MCPProgressDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [overallProgress, setOverallProgress] = useState(68.2);
+  const [overallProgress, setOverallProgress] = useState(68.6); // 24/35 = 68.6%
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
     total: 250,
     active: 238,
@@ -154,150 +154,152 @@ function MCPProgressDashboard() {
       lastUpdate: '11 hours ago',
     },
 
-    // Business Operations Portals (16) - In Progress
+    // Business Operations Portals (13) - 13 Completed, 3 In Progress
     {
       id: 'financial',
       name: 'Financial Portal',
       category: 'Business Operations',
-      progress: 85,
-      status: 'development',
-      agentsAssigned: 12,
-      estimatedCompletion: '3 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '2 minutes ago',
+      lastUpdate: '12 hours ago',
     },
     {
       id: 'load-board',
       name: 'Load Board Portal',
       category: 'Business Operations',
-      progress: 90,
-      status: 'testing',
-      agentsAssigned: 8,
-      estimatedCompletion: '2 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '1 minute ago',
+      lastUpdate: '13 hours ago',
     },
     {
       id: 'crm',
       name: 'CRM Portal',
       category: 'Business Operations',
-      progress: 75,
-      status: 'development',
-      agentsAssigned: 15,
-      estimatedCompletion: '5 days',
-      blockers: ['API integration'],
-      lastUpdate: '3 minutes ago',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '14 hours ago',
     },
     {
       id: 'fleet',
       name: 'Fleet Portal',
       category: 'Business Operations',
-      progress: 90,
-      status: 'testing',
-      agentsAssigned: 10,
-      estimatedCompletion: '2 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '4 minutes ago',
+      lastUpdate: '15 hours ago',
     },
     {
       id: 'dispatch',
       name: 'Dispatch Portal',
       category: 'Business Operations',
-      progress: 85,
-      status: 'development',
-      agentsAssigned: 14,
-      estimatedCompletion: '3 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '5 minutes ago',
+      lastUpdate: '16 hours ago',
     },
     {
       id: 'warehouse',
       name: 'Warehouse Portal',
       category: 'Business Operations',
-      progress: 71,
-      status: 'development',
-      agentsAssigned: 9,
-      estimatedCompletion: '4 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '6 minutes ago',
+      lastUpdate: '17 hours ago',
     },
     {
       id: 'maintenance',
       name: 'Maintenance Portal',
       category: 'Business Operations',
-      progress: 68,
-      status: 'development',
-      agentsAssigned: 11,
-      estimatedCompletion: '6 days',
-      blockers: ['Parts inventory'],
-      lastUpdate: '7 minutes ago',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '18 hours ago',
     },
     {
       id: 'fuel',
       name: 'Fuel Portal',
       category: 'Business Operations',
-      progress: 72,
-      status: 'development',
-      agentsAssigned: 7,
-      estimatedCompletion: '5 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '8 minutes ago',
+      lastUpdate: '19 hours ago',
     },
     {
       id: 'insurance',
       name: 'Insurance Portal',
       category: 'Business Operations',
-      progress: 65,
-      status: 'development',
-      agentsAssigned: 6,
-      estimatedCompletion: '7 days',
-      blockers: ['Policy integration'],
-      lastUpdate: '9 minutes ago',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '20 hours ago',
     },
     {
       id: 'compliance',
       name: 'Compliance Portal',
       category: 'Business Operations',
-      progress: 58,
-      status: 'development',
-      agentsAssigned: 8,
-      estimatedCompletion: '8 days',
-      blockers: ['Regulatory updates'],
-      lastUpdate: '10 minutes ago',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '21 hours ago',
     },
     {
       id: 'partner',
       name: 'Partner Portal',
       category: 'Business Operations',
-      progress: 80,
-      status: 'development',
-      agentsAssigned: 13,
-      estimatedCompletion: '4 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '11 minutes ago',
+      lastUpdate: '22 hours ago',
     },
     {
       id: 'developer',
       name: 'Developer Portal',
       category: 'Business Operations',
-      progress: 77,
-      status: 'development',
-      agentsAssigned: 16,
-      estimatedCompletion: '5 days',
-      blockers: ['API documentation'],
-      lastUpdate: '12 minutes ago',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '23 hours ago',
     },
     {
       id: 'track-trace',
       name: 'Track & Trace Portal',
       category: 'Business Operations',
-      progress: 82,
-      status: 'development',
-      agentsAssigned: 10,
-      estimatedCompletion: '3 days',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
       blockers: [],
-      lastUpdate: '13 minutes ago',
+      lastUpdate: '24 hours ago',
     },
+
+    // Business Operations Portals (3) - In Progress
     {
       id: 'document',
       name: 'Document Portal',
@@ -307,7 +309,7 @@ function MCPProgressDashboard() {
       agentsAssigned: 5,
       estimatedCompletion: '6 days',
       blockers: ['File storage'],
-      lastUpdate: '14 minutes ago',
+      lastUpdate: '2 minutes ago',
     },
     {
       id: 'communication',
@@ -318,7 +320,7 @@ function MCPProgressDashboard() {
       agentsAssigned: 7,
       estimatedCompletion: '5 days',
       blockers: [],
-      lastUpdate: '15 minutes ago',
+      lastUpdate: '1 minute ago',
     },
     {
       id: 'reporting',
@@ -329,7 +331,7 @@ function MCPProgressDashboard() {
       agentsAssigned: 9,
       estimatedCompletion: '7 days',
       blockers: ['Data visualization'],
-      lastUpdate: '16 minutes ago',
+      lastUpdate: '3 minutes ago',
     },
 
     // Admin & Specialized Portals (4) - In Progress
@@ -377,6 +379,39 @@ function MCPProgressDashboard() {
       blockers: [],
       lastUpdate: '20 minutes ago',
     },
+    {
+      id: 'security-admin',
+      name: 'Security Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 38,
+      status: 'development',
+      agentsAssigned: 14,
+      estimatedCompletion: '11 days',
+      blockers: ['Security protocols'],
+      lastUpdate: '21 minutes ago',
+    },
+    {
+      id: 'integration-admin',
+      name: 'Integration Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 42,
+      status: 'development',
+      agentsAssigned: 16,
+      estimatedCompletion: '9 days',
+      blockers: [],
+      lastUpdate: '22 minutes ago',
+    },
+    {
+      id: 'monitoring-admin',
+      name: 'Monitoring Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 35,
+      status: 'development',
+      agentsAssigned: 13,
+      estimatedCompletion: '12 days',
+      blockers: ['Alert system'],
+      lastUpdate: '23 minutes ago',
+    },
   ]);
 
   // Real-time updates simulation
@@ -385,16 +420,17 @@ function MCPProgressDashboard() {
       setCurrentTime(new Date());
 
       // Simulate progress updates
-      setPortals(prevPortals =>
-        prevPortals.map(portal => {
+      setPortals(prevPortals => {
+        const updatedPortals = prevPortals.map(portal => {
           if (portal.status === 'complete') return portal;
 
           // Random progress increase for active portals
-          const progressIncrease = Math.random() * 0.5;
+          const progressIncrease = Math.random() * 0.3;
           const newProgress = Math.min(100, portal.progress + progressIncrease);
 
           // Update status based on progress
-          let newStatus = portal.status;
+          let newStatus: 'planning' | 'development' | 'testing' | 'deployment' | 'complete' =
+            portal.status;
           if (newProgress >= 100) {
             newStatus = 'complete';
           } else if (newProgress >= 90) {
@@ -409,17 +445,30 @@ function MCPProgressDashboard() {
             status: newStatus,
             lastUpdate: 'Just now',
           };
-        })
-      );
+        });
 
-      // Update overall progress
-      const completedPortals = portals.filter(p => p.status === 'complete').length;
-      const newOverallProgress = (completedPortals / portals.length) * 100;
-      setOverallProgress(Math.round(newOverallProgress * 10) / 10);
-    }, 5000); // Update every 5 seconds
+        // Update overall progress based on updated portals
+        const completedCount = updatedPortals.filter(p => p.status === 'complete').length;
+        const newOverallProgress = (completedCount / updatedPortals.length) * 100;
+        setOverallProgress(Math.round(newOverallProgress * 10) / 10);
+
+        return updatedPortals;
+      });
+
+      // Simulate agent status changes
+      setAgentStatus(prevStatus => ({
+        ...prevStatus,
+        active: Math.max(230, Math.min(250, prevStatus.active + Math.floor(Math.random() * 6) - 3)),
+        maintenance: Math.max(
+          3,
+          Math.min(12, prevStatus.maintenance + Math.floor(Math.random() * 4) - 2)
+        ),
+        error: Math.max(2, Math.min(8, prevStatus.error + Math.floor(Math.random() * 3) - 1)),
+      }));
+    }, 3000); // Update every 3 seconds for more responsive updates
 
     return () => clearInterval(interval);
-  }, [portals]);
+  }, []); // Empty dependency array to prevent infinite loops
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -695,10 +744,27 @@ function MCPProgressDashboard() {
             }}
           >
             <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>
-              Individual Portal Details & Real-Time Status
+              Individual Portal Details & Real-Time Status ({portals.length} Total Portals)
             </h3>
-            <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
-              Auto-refresh every 5 seconds
+            <div
+              style={{
+                fontSize: '0.875rem',
+                color: '#94a3b8',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: '#10b981',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s infinite',
+                }}
+              ></div>
+              Auto-refresh every 3 seconds
             </div>
           </div>
 
@@ -707,6 +773,9 @@ function MCPProgressDashboard() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '16px',
+              maxHeight: '800px',
+              overflowY: 'auto',
+              paddingRight: '8px',
             }}
           >
             {portals.map(portal => {
@@ -808,7 +877,27 @@ function MCPProgressDashboard() {
                       </>
                     )}
 
-                    <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>
+                    <div
+                      style={{
+                        fontSize: '0.75rem',
+                        color: '#6b7280',
+                        marginTop: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      {portal.lastUpdate === 'Just now' && (
+                        <div
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            backgroundColor: '#10b981',
+                            borderRadius: '50%',
+                            animation: 'pulse 1s infinite',
+                          }}
+                        ></div>
+                      )}
                       Last update: {portal.lastUpdate}
                     </div>
                   </div>
