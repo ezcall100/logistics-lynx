@@ -16,6 +16,7 @@ import {
   ChevronDown,
   LogOut,
   Shield,
+  RefreshCw,
 } from 'lucide-react';
 import { Button } from './Button';
 import { Input } from './Input';
@@ -77,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        'sticky top-0 z-50 w-full border-b border-gray-200/80 bg-white/95 backdrop-blur-md',
+        'sticky top-0 z-50 w-full border-b border-gray-200/80 bg-white/95 backdrop-blur-md shadow-sm',
         'px-6 py-4 flex items-center justify-between',
         className
       )}
@@ -95,54 +96,82 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Center Section - Search */}
-      <div className="flex-1 max-w-md mx-8">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+      {/* Center Section - Search (Improved Layout) */}
+      <div className="flex-1 flex justify-center">
+        <div className="relative w-full max-w-lg">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
           <Input
             placeholder="Search companies, users, portals..."
             value={searchQuery}
             onChange={e => handleSearch(e.target.value)}
-            className="pl-10 bg-gray-50/50 border-gray-200 focus:bg-white"
+            className="pl-12 pr-4 py-3 bg-white/80 border-gray-200 focus:bg-white focus:border-blue-300 focus:ring-2 focus:ring-blue-100 rounded-xl shadow-sm"
           />
+          {searchQuery && (
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => handleSearch('')}
+                className="text-gray-400 hover:text-gray-600 p-1"
+              >
+                ×
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Right Section - Actions & User */}
-      <div className="flex items-center gap-3">
-        {/* System Status */}
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full">
+      {/* Right Section - Actions & User (Reorganized) */}
+      <div className="flex items-center gap-2">
+        {/* System Status Badge */}
+        <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-full shadow-sm">
           <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
           <span className="text-xs font-medium text-emerald-700">All Systems Operational</span>
         </div>
 
-        {/* Theme Toggle */}
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onToggleDarkMode}
-          className="text-gray-500 hover:text-gray-700"
-        >
-          {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-        </Button>
+        {/* Action Icons Group */}
+        <div className="flex items-center gap-1 ml-2">
+          {/* Refresh */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </Button>
 
-        {/* Help */}
-        <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
-          <HelpCircle className="w-4 h-4" />
-        </Button>
+          {/* Theme Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleDarkMode}
+            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </Button>
 
-        {/* Settings */}
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onSettingsClick}
-          className="text-gray-500 hover:text-gray-700"
-        >
-          <Settings className="w-4 h-4" />
-        </Button>
+          {/* Help */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            <HelpCircle className="w-4 h-4" />
+          </Button>
+
+          {/* Settings */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onSettingsClick}
+            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            <Settings className="w-4 h-4" />
+          </Button>
+        </div>
 
         {/* Notifications */}
-        <div className="relative">
+        <div className="relative ml-2">
           <Button
             variant="ghost"
             size="icon"
@@ -204,14 +233,14 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* User Profile */}
-        <div className="relative">
+        <div className="relative ml-2">
           <Button
             variant="ghost"
             onClick={() => setShowProfile(!showProfile)}
-            className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-50"
+            className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg border border-gray-200"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-medium">
+            <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-sm">
+              <span className="text-white text-sm font-semibold">
                 {user.name
                   .split(' ')
                   .map(n => n[0])
@@ -219,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({
               </span>
             </div>
             <div className="text-left">
-              <p className="text-sm font-medium text-gray-900">{user.name}</p>
+              <p className="text-sm font-semibold text-gray-900">{user.name}</p>
               <p className="text-xs text-gray-500">{user.role}</p>
             </div>
             <ChevronDown className="w-4 h-4 text-gray-400" />

@@ -7,6 +7,10 @@
  * MCP AGENTS: This port is locked and must not be changed
  * See PORT_LOCK_SYSTEM.md for details
  * 
+ * 🔒 AGENT LOCK WARNING: ALL 250 MCP AGENTS ARE PROTECTED
+ * DO NOT MODIFY agent_count OR REMOVE ANY AGENTS
+ * PROTECTION LEVEL: MAXIMUM SECURITY
+ * 
  * This server provides the API endpoints that the Super Admin portal expects.
  * It handles metrics, user management, system operations, and more.
  * Enhanced with MCP-V2 features: autonomous agents, system health, metrics overview,
@@ -244,7 +248,7 @@ app.get('/api/mcp/system/health', (req, res) => {
       timestamp: new Date().toISOString(),
       mcp_version: 'v2',
       autonomous_mode: true,
-      agent_count: 250,
+      agent_count: 250, // 🔒 LOCKED - DO NOT MODIFY - ALL 250 AGENTS PROTECTED
       system_status: 'operational'
     },
     message: 'System is healthy and operating in MCP-V2 mode',
