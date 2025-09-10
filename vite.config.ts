@@ -28,11 +28,70 @@ export default defineConfig({
     port: 3000, // Main website on port 3000
     strictPort: false, // Allow port changes for flexibility
     host: true,
+    // Enable HTTPS for local development with custom domain
+    https: false, // Set to true if you want HTTPS locally
+    // Allow all transbotai.com subdomains for local development
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'transbotai.com',
+      'www.transbotai.com',
+      'customer.transbotai.com',
+      'broker.transbotai.com',
+      'carrier.transbotai.com',
+      'driver.transbotai.com',
+      'shipper.transbotai.com',
+      'analytics.transbotai.com',
+      'marketplace.transbotai.com',
+      'financial.transbotai.com',
+      'fleet.transbotai.com',
+      'crm.transbotai.com',
+      'loadboard.transbotai.com',
+      'admin.transbotai.com',
+      'mcp.transbotai.com',
+      'superadmin.transbotai.com',
+    ],
     proxy: {
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
         secure: false,
+      },
+      // Proxy for subdomains
+      '/customer': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/customer/, ''),
+      },
+      '/broker': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/broker/, ''),
+      },
+      '/carrier': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/carrier/, ''),
+      },
+      '/driver': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/driver/, ''),
+      },
+      '/shipper': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/shipper/, ''),
+      },
+      '/admin': {
+        target: 'http://localhost:3005',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/admin/, ''),
+      },
+      '/mcp': {
+        target: 'http://localhost:3002',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/mcp/, ''),
       },
     },
   },

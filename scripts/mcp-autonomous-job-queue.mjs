@@ -24,8 +24,8 @@ class MCPAutonomousJobQueue {
     };
     this.portalProgress = {
       core: { completed: 11, total: 11, progress: 100 },
-      business: { completed: 11, total: 16, progress: 68 },
-      admin: { completed: 1, total: 4, progress: 35 }
+      business: { completed: 0, total: 16, progress: 68 },
+      admin: { completed: 0, total: 8, progress: 35 }
     };
     this.startTime = new Date();
     this.isRunning = true;
@@ -44,31 +44,35 @@ class MCPAutonomousJobQueue {
 
     // Business Operations Portals (16 portals) - IN PROGRESS
     const businessPortals = [
-      { name: 'Financial Portal', progress: 85, eta: '3 days' },
-      { name: 'Load Board Portal', progress: 90, eta: '2 days' },
-      { name: 'CRM Portal', progress: 75, eta: '5 days' },
-      { name: 'Partner Portal', progress: 80, eta: '4 days' },
-      { name: 'Developer Portal', progress: 95, eta: '1 day' },
-      { name: 'Workers Portal', progress: 70, eta: '6 days' },
-      { name: 'EDI Portal', progress: 65, eta: '7 days' },
-      { name: 'Owner Operator Portal', progress: 85, eta: '3 days' },
-      { name: 'Factoring Portal', progress: 60, eta: '8 days' },
-      { name: 'Warehouse Portal', progress: 75, eta: '5 days' },
-      { name: 'Fleet Portal', progress: 90, eta: '2 days' },
-      { name: 'Dispatch Portal', progress: 85, eta: '3 days' },
-      { name: 'Maintenance Portal', progress: 70, eta: '6 days' },
-      { name: 'Fuel Portal', progress: 75, eta: '5 days' },
-      { name: 'Insurance Portal', progress: 65, eta: '7 days' },
-      { name: 'Compliance Portal', progress: 80, eta: '4 days' },
-      { name: 'Track & Trace Portal', progress: 70, eta: '6 days' }
+      { name: 'Financial Portal - Payment Processing', progress: 85, eta: '3 days' },
+      { name: 'Load Board Portal - Smart Matching', progress: 90, eta: '2 days' },
+      { name: 'CRM Portal - Customer Analytics', progress: 75, eta: '5 days' },
+      { name: 'Partner Portal - Collaboration Tools', progress: 80, eta: '4 days' },
+      { name: 'Developer Portal - API Documentation', progress: 95, eta: '1 day' },
+      { name: 'Workers Portal - Workforce Management', progress: 70, eta: '6 days' },
+      { name: 'EDI Portal - Data Interchange', progress: 65, eta: '7 days' },
+      { name: 'Owner Operator Portal - Business Management', progress: 85, eta: '3 days' },
+      { name: 'Factoring Portal - Invoice Processing', progress: 60, eta: '8 days' },
+      { name: 'Warehouse Portal - Inventory Management', progress: 75, eta: '5 days' },
+      { name: 'Fleet Portal - Predictive Maintenance', progress: 90, eta: '2 days' },
+      { name: 'Dispatch Portal - Real-time Coordination', progress: 85, eta: '3 days' },
+      { name: 'Maintenance Portal - Service Scheduling', progress: 70, eta: '6 days' },
+      { name: 'Fuel Portal - Efficiency Optimization', progress: 75, eta: '5 days' },
+      { name: 'Insurance Portal - Claims Processing', progress: 65, eta: '7 days' },
+      { name: 'Compliance Portal - Regulatory Tracking', progress: 80, eta: '4 days' },
+      { name: 'Track & Trace Portal - Equipment Tracking', progress: 70, eta: '6 days' }
     ];
 
-    // Admin & Specialized Portals (4 portals) - EARLY STAGE
+    // Admin & Specialized Portals (8 portals) - EARLY STAGE
     const adminPortals = [
-      { name: 'Admin Portal', progress: 50, eta: '10 days' },
-      { name: 'Super Admin Portal', progress: 30, eta: '15 days' },
-      { name: 'MCP Agent Admin', progress: 40, eta: '12 days' },
-      { name: 'Human Developer Admin', progress: 35, eta: '13 days' }
+      { name: 'Admin Portal - User Management', progress: 50, eta: '10 days' },
+      { name: 'Super Admin Portal - System Control', progress: 30, eta: '15 days' },
+      { name: 'MCP Agent Admin - Agent Management', progress: 40, eta: '12 days' },
+      { name: 'Human Developer Admin - Team Coordination', progress: 35, eta: '13 days' },
+      { name: 'System Admin Portal - Infrastructure', progress: 45, eta: '10 days' },
+      { name: 'Security Admin Portal - Security Management', progress: 38, eta: '11 days' },
+      { name: 'Integration Admin Portal - API Management', progress: 42, eta: '9 days' },
+      { name: 'Monitoring Admin Portal - System Monitoring', progress: 35, eta: '12 days' }
     ];
 
     // Create job queue with priority levels
@@ -278,6 +282,7 @@ class MCPAutonomousJobQueue {
   async run() {
     console.log('🚀 Starting MCP Autonomous Job Queue System...');
     console.log('🎯 Mission: Complete all 35 portals ASAP with 250 agents');
+    console.log('📊 Status: 11 Core TMS (100%), 16 Business Operations (68%), 8 Admin & Specialized (35%)');
     console.log('⚡ Auto-assignment: Agents move to next job immediately when finished');
     console.log('🔄 Efficiency: Maximum parallel processing');
     

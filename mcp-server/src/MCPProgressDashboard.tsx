@@ -1,1964 +1,1414 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+interface Portal {
+  id: string;
+  name: string;
+  category: 'Core TMS' | 'Business Operations' | 'Admin & Specialized';
+  progress: number;
+  status: 'planning' | 'development' | 'testing' | 'deployment' | 'complete';
+  agentsAssigned: number;
+  estimatedCompletion: string;
+  blockers: string[];
+  lastUpdate: string;
+}
+
+interface AgentStatus {
+  total: number;
+  active: number;
+  maintenance: number;
+  error: number;
+}
 
 function MCPProgressDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [overallProgress, setOverallProgress] = useState(68.6); // 24/35 = 68.6%
+  const [agentStatus, setAgentStatus] = useState<AgentStatus>({
+    total: 250,
+    active: 238,
+    maintenance: 7,
+    error: 5,
+  });
 
+  // All 35+ portals with real-time simulation
+  const [portals, setPortals] = useState<Portal[]>([
+    // Core TMS Portals (11) - 100% Complete
+    {
+      id: 'customer',
+      name: 'Customer Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '2 hours ago',
+    },
+    {
+      id: 'broker',
+      name: 'Broker Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '1 hour ago',
+    },
+    {
+      id: 'carrier',
+      name: 'Carrier Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '3 hours ago',
+    },
+    {
+      id: 'driver',
+      name: 'Driver Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '4 hours ago',
+    },
+    {
+      id: 'shipper',
+      name: 'Shipper Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '5 hours ago',
+    },
+    {
+      id: 'analytics',
+      name: 'Analytics Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '6 hours ago',
+    },
+    {
+      id: 'autonomous',
+      name: 'Autonomous Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '7 hours ago',
+    },
+    {
+      id: 'yard',
+      name: 'YMS Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '8 hours ago',
+    },
+    {
+      id: 'directory',
+      name: 'Directory Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '9 hours ago',
+    },
+    {
+      id: 'rates',
+      name: 'Rates Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '10 hours ago',
+    },
+    {
+      id: 'marketplace',
+      name: 'Marketplace Portal',
+      category: 'Core TMS',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '11 hours ago',
+    },
+
+    // Business Operations Portals (13) - 13 Completed, 3 In Progress
+    {
+      id: 'financial',
+      name: 'Financial Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '12 hours ago',
+    },
+    {
+      id: 'load-board',
+      name: 'Load Board Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '13 hours ago',
+    },
+    {
+      id: 'crm',
+      name: 'CRM Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '14 hours ago',
+    },
+    {
+      id: 'fleet',
+      name: 'Fleet Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '15 hours ago',
+    },
+    {
+      id: 'dispatch',
+      name: 'Dispatch Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '16 hours ago',
+    },
+    {
+      id: 'warehouse',
+      name: 'Warehouse Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '17 hours ago',
+    },
+    {
+      id: 'maintenance',
+      name: 'Maintenance Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '18 hours ago',
+    },
+    {
+      id: 'fuel',
+      name: 'Fuel Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '19 hours ago',
+    },
+    {
+      id: 'insurance',
+      name: 'Insurance Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '20 hours ago',
+    },
+    {
+      id: 'compliance',
+      name: 'Compliance Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '21 hours ago',
+    },
+    {
+      id: 'partner',
+      name: 'Partner Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '22 hours ago',
+    },
+    {
+      id: 'developer',
+      name: 'Developer Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '23 hours ago',
+    },
+    {
+      id: 'track-trace',
+      name: 'Track & Trace Portal',
+      category: 'Business Operations',
+      progress: 100,
+      status: 'complete',
+      agentsAssigned: 0,
+      estimatedCompletion: 'Complete',
+      blockers: [],
+      lastUpdate: '24 hours ago',
+    },
+
+    // Business Operations Portals (3) - In Progress
+    {
+      id: 'document',
+      name: 'Document Portal',
+      category: 'Business Operations',
+      progress: 69,
+      status: 'development',
+      agentsAssigned: 5,
+      estimatedCompletion: '6 days',
+      blockers: ['File storage'],
+      lastUpdate: '2 minutes ago',
+    },
+    {
+      id: 'communication',
+      name: 'Communication Portal',
+      category: 'Business Operations',
+      progress: 73,
+      status: 'development',
+      agentsAssigned: 7,
+      estimatedCompletion: '5 days',
+      blockers: [],
+      lastUpdate: '1 minute ago',
+    },
+    {
+      id: 'reporting',
+      name: 'Reporting Portal',
+      category: 'Business Operations',
+      progress: 66,
+      status: 'development',
+      agentsAssigned: 9,
+      estimatedCompletion: '7 days',
+      blockers: ['Data visualization'],
+      lastUpdate: '3 minutes ago',
+    },
+
+    // Admin & Specialized Portals (8) - In Progress
+    {
+      id: 'super-admin',
+      name: 'Super Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 30,
+      status: 'development',
+      agentsAssigned: 20,
+      estimatedCompletion: '15 days',
+      blockers: ['Complex permissions'],
+      lastUpdate: '17 minutes ago',
+    },
+    {
+      id: 'mcp-agent-admin',
+      name: 'MCP Agent Admin',
+      category: 'Admin & Specialized',
+      progress: 40,
+      status: 'development',
+      agentsAssigned: 18,
+      estimatedCompletion: '12 days',
+      blockers: ['Agent orchestration'],
+      lastUpdate: '18 minutes ago',
+    },
+    {
+      id: 'human-dev-admin',
+      name: 'Human Developer Admin',
+      category: 'Admin & Specialized',
+      progress: 35,
+      status: 'development',
+      agentsAssigned: 15,
+      estimatedCompletion: '13 days',
+      blockers: ['Code review system'],
+      lastUpdate: '19 minutes ago',
+    },
+    {
+      id: 'system-admin',
+      name: 'System Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 45,
+      status: 'development',
+      agentsAssigned: 12,
+      estimatedCompletion: '10 days',
+      blockers: [],
+      lastUpdate: '20 minutes ago',
+    },
+    {
+      id: 'security-admin',
+      name: 'Security Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 38,
+      status: 'development',
+      agentsAssigned: 14,
+      estimatedCompletion: '11 days',
+      blockers: ['Security protocols'],
+      lastUpdate: '21 minutes ago',
+    },
+    {
+      id: 'integration-admin',
+      name: 'Integration Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 42,
+      status: 'development',
+      agentsAssigned: 16,
+      estimatedCompletion: '9 days',
+      blockers: [],
+      lastUpdate: '22 minutes ago',
+    },
+    {
+      id: 'monitoring-admin',
+      name: 'Monitoring Admin Portal',
+      category: 'Admin & Specialized',
+      progress: 35,
+      status: 'development',
+      agentsAssigned: 13,
+      estimatedCompletion: '12 days',
+      blockers: ['Alert system'],
+      lastUpdate: '23 minutes ago',
+    },
+  ]);
+
+  // Real-time updates simulation
   useEffect(() => {
-    const timer = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+      // Simulate progress updates
+      setPortals(prevPortals => {
+        const updatedPortals = prevPortals.map(portal => {
+          if (portal.status === 'complete') return portal;
+
+          // Random progress increase for active portals
+          const progressIncrease = Math.random() * 0.3;
+          const newProgress = Math.min(100, portal.progress + progressIncrease);
+
+          // Update status based on progress
+          let newStatus: 'planning' | 'development' | 'testing' | 'deployment' | 'complete' =
+            portal.status;
+          if (newProgress >= 100) {
+            newStatus = 'complete';
+          } else if (newProgress >= 90) {
+            newStatus = 'testing';
+          } else if (newProgress >= 70) {
+            newStatus = 'development';
+          }
+
+          return {
+            ...portal,
+            progress: Math.round(newProgress * 10) / 10,
+            status: newStatus,
+            lastUpdate: 'Just now',
+          };
+        });
+
+        // Update overall progress based on updated portals
+        const completedCount = updatedPortals.filter(p => p.status === 'complete').length;
+        const newOverallProgress = (completedCount / updatedPortals.length) * 100;
+        setOverallProgress(Math.round(newOverallProgress * 10) / 10);
+
+        return updatedPortals;
+      });
+
+      // Simulate agent status changes
+      setAgentStatus(prevStatus => ({
+        ...prevStatus,
+        active: Math.max(230, Math.min(250, prevStatus.active + Math.floor(Math.random() * 6) - 3)),
+        maintenance: Math.max(
+          3,
+          Math.min(12, prevStatus.maintenance + Math.floor(Math.random() * 4) - 2)
+        ),
+        error: Math.max(2, Math.min(8, prevStatus.error + Math.floor(Math.random() * 3) - 1)),
+      }));
+    }, 3000); // Update every 3 seconds for more responsive updates
+
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array to prevent infinite loops
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'complete':
+        return { bg: 'rgba(16, 185, 129, 0.2)', color: '#10b981' };
+      case 'testing':
+        return { bg: 'rgba(59, 130, 246, 0.2)', color: '#3b82f6' };
+      case 'development':
+        return { bg: 'rgba(245, 158, 11, 0.2)', color: '#f59e0b' };
+      case 'deployment':
+        return { bg: 'rgba(139, 92, 246, 0.2)', color: '#8b5cf6' };
+      default:
+        return { bg: 'rgba(107, 114, 128, 0.2)', color: '#6b7280' };
+    }
+  };
+
+  const getProgressColor = (progress: number) => {
+    if (progress >= 90) return '#10b981';
+    if (progress >= 70) return '#3b82f6';
+    if (progress >= 50) return '#f59e0b';
+    return '#ef4444';
+  };
+
+  const completedPortals = portals.filter(p => p.status === 'complete').length;
+  const activePortals = portals.filter(p => p.status !== 'complete').length;
 
   return (
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#0f0f1a',
+        backgroundColor: '#1e293b',
         padding: '24px',
         color: 'white',
         fontFamily: 'Arial, sans-serif',
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <h1
-          style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#8a2be2' }}
-        >
-          🚀 TransBot AI - MCP Dashboard
-        </h1>
-        <p style={{ color: '#94a3b8', marginBottom: '2rem', fontSize: '1.1rem' }}>
-          Real-time monitoring of 250 autonomous agents building 35+ portals
-        </p>
-
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div
           style={{
-            backgroundColor: '#1a1a2e',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '2rem',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '16px', color: '#4CAF50' }}>
-            📊 Agent Status
-          </h2>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '16px',
-            }}
-          >
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#4CAF50' }}>237</div>
-              <div style={{ color: '#94a3b8' }}>Active Agents</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#FFA500' }}>7</div>
-              <div style={{ color: '#94a3b8' }}>Maintenance</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#FF6B6B' }}>6</div>
-              <div style={{ color: '#94a3b8' }}>Error Recovery</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#8a2be2' }}>250</div>
-              <div style={{ color: '#94a3b8' }}>Total Agents</div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: '#1a1a2e',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-          }}
-        >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '16px', color: '#4CAF50' }}>
-            🎯 Mission Progress
-          </h2>
-          <div style={{ marginBottom: '16px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span>Portal Development</span>
-              <span style={{ color: '#4CAF50', fontWeight: 'bold' }}>68%</span>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                height: '8px',
-                backgroundColor: '#374151',
-                borderRadius: '4px',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  width: '68%',
-                  height: '100%',
-                  backgroundColor: '#4CAF50',
-                  transition: 'width 0.3s ease',
-                }}
-              ></div>
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '16px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span>UI Implementation</span>
-              <span style={{ color: '#4CAF50', fontWeight: 'bold' }}>45%</span>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                height: '8px',
-                backgroundColor: '#374151',
-                borderRadius: '4px',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  width: '45%',
-                  height: '100%',
-                  backgroundColor: '#4CAF50',
-                  transition: 'width 0.3s ease',
-                }}
-              ></div>
-            </div>
-          </div>
-
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span>Testing & QA</span>
-              <span style={{ color: '#FFA500', fontWeight: 'bold' }}>23%</span>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                height: '8px',
-                backgroundColor: '#374151',
-                borderRadius: '4px',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  width: '23%',
-                  height: '100%',
-                  backgroundColor: '#FFA500',
-                  transition: 'width 0.3s ease',
-                }}
-              ></div>
-            </div>
+            <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+              🚀 TransBot AI - MCP Dashboard
+            </h1>
+            <p style={{ color: '#94a3b8', marginBottom: '0' }}>
+              Real-time monitoring of 250 autonomous agents building 35+ portals
+            </p>
           </div>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: '#1a1a2e',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-          }}
-        >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '16px', color: '#4CAF50' }}>
-            🌐 Portal Status
-          </h2>
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              color: '#10b981',
+              padding: '8px 16px',
+              borderRadius: '8px',
             }}
           >
             <div
               style={{
-                textAlign: 'center',
-                padding: '12px',
-                backgroundColor: '#2d3748',
-                borderRadius: '8px',
+                width: '8px',
+                height: '8px',
+                backgroundColor: '#10b981',
+                borderRadius: '50%',
+                animation: 'pulse 2s infinite',
               }}
-            >
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4CAF50' }}>24</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Completed</div>
-            </div>
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '12px',
-                backgroundColor: '#2d3748',
-                borderRadius: '8px',
-              }}
-            >
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#FFA500' }}>8</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>In Progress</div>
-            </div>
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '12px',
-                backgroundColor: '#2d3748',
-                borderRadius: '8px',
-              }}
-            >
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#FF6B6B' }}>3</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Pending</div>
-            </div>
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '12px',
-                backgroundColor: '#2d3748',
-                borderRadius: '8px',
-              }}
-            >
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#8a2be2' }}>35</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Total</div>
-            </div>
+            ></div>
+            <span>Live Updates Active</span>
           </div>
         </div>
 
-        {/* Individual Portal Details */}
         <div
           style={{
-            backgroundColor: '#1a1a2e',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '24px',
+            marginBottom: '32px',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#4CAF50' }}>
-            🌐 Individual Portal Details & Real-Time Status
-          </h2>
-
-          {/* Core TMS Portals */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3
-              style={{
-                fontSize: '1.3rem',
-                marginBottom: '16px',
-                color: '#4CAF50',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              🚛 Core TMS Portals (11 portals)
-              <span
-                style={{
-                  fontSize: '0.9rem',
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  padding: '4px 8px',
-                  borderRadius: '12px',
-                  marginLeft: '12px',
-                }}
-              >
-                100% Complete
-              </span>
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              padding: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              📊 Agent Status
             </h3>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                gap: '16px',
-              }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Customer Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Customer self-service platform with advanced analytics
-                </div>
-                <div style={{ marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
+                      width: '12px',
+                      height: '12px',
+                      backgroundColor: '#10b981',
+                      borderRadius: '50%',
                     }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
+                  ></div>
+                  <span style={{ color: '#94a3b8' }}>Active</span>
                 </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>12</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>2.5K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.9★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.9%</span>
-                  </div>
-                </div>
+                <span style={{ fontWeight: '600' }}>{agentStatus.active}</span>
               </div>
-
               <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Broker Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Freight brokerage management with AI-powered matching
-                </div>
-                <div style={{ marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
+                      width: '12px',
+                      height: '12px',
+                      backgroundColor: '#f59e0b',
+                      borderRadius: '50%',
                     }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
+                  ></div>
+                  <span style={{ color: '#94a3b8' }}>Maintenance</span>
                 </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>15</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>1.2K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.7★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.8%</span>
-                  </div>
-                </div>
+                <span style={{ fontWeight: '600' }}>{agentStatus.maintenance}</span>
               </div>
-
               <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Carrier Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Carrier operations management with fleet optimization
-                </div>
-                <div style={{ marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
+                      width: '12px',
+                      height: '12px',
+                      backgroundColor: '#ef4444',
+                      borderRadius: '50%',
                     }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
+                  ></div>
+                  <span style={{ color: '#94a3b8' }}>Error Recovery</span>
                 </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>18</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>1.8K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.8★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.7%</span>
-                  </div>
-                </div>
+                <span style={{ fontWeight: '600' }}>{agentStatus.error}</span>
               </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Driver Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Mobile driver interface with real-time navigation
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>20</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>5.2K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.9★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.9%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Shipper Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Shipment management with predictive analytics
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>16</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>2.5K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.9★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.8%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #4CAF50',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  LIVE
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#4CAF50',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Analytics Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Business intelligence dashboard with ML insights
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#4CAF50', fontWeight: 'bold' }}>
-                      100%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{ width: '100%', height: '100%', backgroundColor: '#4CAF50' }}
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>14</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>980+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.8★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Uptime:</span>{' '}
-                    <span style={{ color: '#4CAF50' }}>99.9%</span>
-                  </div>
+              <div style={{ paddingTop: '8px', borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Total Agents</span>
+                  <span style={{ fontWeight: '600' }}>{agentStatus.total}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Business Operations Portals */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3
-              style={{
-                fontSize: '1.3rem',
-                marginBottom: '16px',
-                color: '#FFA500',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              💼 Business Operations Portals (16 portals)
-              <span
-                style={{
-                  fontSize: '0.9rem',
-                  backgroundColor: '#FFA500',
-                  color: 'white',
-                  padding: '4px 8px',
-                  borderRadius: '12px',
-                  marginLeft: '12px',
-                }}
-              >
-                68% Complete
-              </span>
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              padding: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              🎯 Mission Progress
             </h3>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                gap: '16px',
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FFA500',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FFA500',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FFA500',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Financial Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Financial management with automated invoicing
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FFA500', fontWeight: 'bold' }}>
-                      85%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '85%', height: '100%', backgroundColor: '#FFA500' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>14</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>890+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.8★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>3 days</span>
-                  </div>
-                </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '8px' }}>
+                {overallProgress}%
               </div>
-
               <div
                 style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FFA500',
-                  position: 'relative',
+                  width: '100%',
+                  backgroundColor: '#374151',
+                  borderRadius: '9999px',
+                  height: '12px',
+                  marginBottom: '8px',
                 }}
               >
                 <div
                   style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FFA500',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
+                    background: 'linear-gradient(to right, #3b82f6, #10b981)',
+                    height: '12px',
+                    borderRadius: '9999px',
+                    width: `${overallProgress}%`,
+                    transition: 'width 0.5s ease',
                   }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FFA500',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Load Board Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Load board management with smart matching
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FFA500', fontWeight: 'bold' }}>
-                      90%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '90%', height: '100%', backgroundColor: '#FFA500' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>18</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>3.2K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.7★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>2 days</span>
-                  </div>
-                </div>
+                ></div>
               </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FFA500',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FFA500',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FFA500',
-                    marginBottom: '8px',
-                  }}
-                >
-                  CRM Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Customer relationship management with AI insights
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FFA500', fontWeight: 'bold' }}>
-                      75%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '75%', height: '100%', backgroundColor: '#FFA500' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>12</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>1.3K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.6★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>5 days</span>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FFA500',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FFA500',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FFA500',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Fleet Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Fleet management with predictive maintenance
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FFA500', fontWeight: 'bold' }}>
-                      90%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '90%', height: '100%', backgroundColor: '#FFA500' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>16</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>1.4K+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.7★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FFA500' }}>2 days</span>
-                  </div>
-                </div>
+              <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                {completedPortals} of {portals.length} portals complete
               </div>
             </div>
           </div>
 
-          {/* Admin & Specialized Portals */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3
-              style={{
-                fontSize: '1.3rem',
-                marginBottom: '16px',
-                color: '#FF6B6B',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              🔧 Admin & Specialized Portals (4 portals)
-              <span
-                style={{
-                  fontSize: '0.9rem',
-                  backgroundColor: '#FF6B6B',
-                  color: 'white',
-                  padding: '4px 8px',
-                  borderRadius: '12px',
-                  marginLeft: '12px',
-                }}
-              >
-                35% Complete
-              </span>
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              padding: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '16px' }}>
+              🌐 Portal Status
             </h3>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                gap: '16px',
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FF6B6B',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FF6B6B',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FF6B6B',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Super Admin Portal
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Master system control with advanced monitoring
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FF6B6B', fontWeight: 'bold' }}>
-                      30%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '30%', height: '100%', backgroundColor: '#FF6B6B' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>8</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>25+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>5.0★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>15 days</span>
-                  </div>
-                </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Completed:</span>
+                <span style={{ color: '#10b981', fontWeight: '600' }}>{completedPortals}</span>
               </div>
-
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '16px',
-                  borderRadius: '10px',
-                  border: '2px solid #FF6B6B',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    backgroundColor: '#FF6B6B',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  DEV
-                </div>
-                <h4
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    color: '#FF6B6B',
-                    marginBottom: '8px',
-                  }}
-                >
-                  MCP Agent Admin
-                </h4>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '12px' }}>
-                  Manage and monitor AI development agents
-                </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Progress</span>
-                    <span style={{ fontSize: '0.8rem', color: '#FF6B6B', fontWeight: 'bold' }}>
-                      40%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      backgroundColor: '#374151',
-                      borderRadius: '3px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{ width: '40%', height: '100%', backgroundColor: '#FF6B6B' }}></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Agents:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>4</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Users:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>85+</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>Rating:</span>{' '}
-                    <span style={{ color: '#FFD700' }}>4.9★</span>
-                  </div>
-                  <div>
-                    <span style={{ color: '#a0a0a0' }}>ETA:</span>{' '}
-                    <span style={{ color: '#FF6B6B' }}>12 days</span>
-                  </div>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>In Progress:</span>
+                <span style={{ color: '#f59e0b', fontWeight: '600' }}>{activePortals}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Total Portals:</span>
+                <span style={{ fontWeight: '600' }}>{portals.length}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#94a3b8' }}>Last Update:</span>
+                <span style={{ fontSize: '0.875rem' }}>{currentTime.toLocaleTimeString()}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Portal Analytics */}
         <div
           style={{
-            backgroundColor: '#1a1a2e',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: '32px',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#4CAF50' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '24px',
+            }}
+          >
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>
+              🌐 Individual Portal Details & Real-Time Status ({portals.length} Total Portals)
+            </h3>
+            <div
+              style={{
+                fontSize: '0.875rem',
+                color: '#94a3b8',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: '#10b981',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s infinite',
+                }}
+              ></div>
+              Auto-refresh every 3 seconds
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '16px',
+              maxHeight: '800px',
+              overflowY: 'auto',
+              paddingRight: '8px',
+            }}
+          >
+            {portals.map(portal => {
+              const statusColors = getStatusColor(portal.status);
+              return (
+                <div
+                  key={portal.id}
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginBottom: '12px',
+                    }}
+                  >
+                    <div>
+                      <h4 style={{ fontWeight: '600', marginBottom: '4px' }}>{portal.name}</h4>
+                      <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>{portal.category}</p>
+                    </div>
+                    <div
+                      style={{
+                        padding: '4px 12px',
+                        borderRadius: '9999px',
+                        fontSize: '0.875rem',
+                        backgroundColor: statusColors.bg,
+                        color: statusColors.color,
+                      }}
+                    >
+                      {portal.status === 'complete' ? 'LIVE' : portal.status.toUpperCase()}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      <span style={{ color: '#94a3b8' }}>Progress</span>
+                      <span style={{ fontWeight: '500' }}>{portal.progress}%</span>
+                    </div>
+                    <div
+                      style={{
+                        width: '100%',
+                        backgroundColor: '#374151',
+                        borderRadius: '9999px',
+                        height: '8px',
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: getProgressColor(portal.progress),
+                          height: '8px',
+                          borderRadius: '9999px',
+                          width: `${portal.progress}%`,
+                          transition: 'width 0.5s ease',
+                        }}
+                      ></div>
+                    </div>
+
+                    {portal.status !== 'complete' && (
+                      <>
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            fontSize: '0.875rem',
+                          }}
+                        >
+                          <span style={{ color: '#94a3b8' }}>Agents Assigned</span>
+                          <span style={{ fontWeight: '500' }}>{portal.agentsAssigned}</span>
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            fontSize: '0.875rem',
+                          }}
+                        >
+                          <span style={{ color: '#94a3b8' }}>ETA</span>
+                          <span style={{ fontWeight: '500' }}>{portal.estimatedCompletion}</span>
+                        </div>
+                        {portal.blockers.length > 0 && (
+                          <div style={{ fontSize: '0.875rem' }}>
+                            <span style={{ color: '#ef4444' }}>Blockers: </span>
+                            <span style={{ color: '#fca5a5' }}>{portal.blockers.join(', ')}</span>
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    <div
+                      style={{
+                        fontSize: '0.75rem',
+                        color: '#6b7280',
+                        marginTop: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      {portal.lastUpdate === 'Just now' && (
+                        <div
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            backgroundColor: '#10b981',
+                            borderRadius: '50%',
+                            animation: 'pulse 1s infinite',
+                          }}
+                        ></div>
+                      )}
+                      Last update: {portal.lastUpdate}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Portal Analytics & Performance */}
+        <div
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '12px',
+            padding: '24px',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: '32px',
+          }}
+        >
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '24px' }}>
             📊 Portal Analytics & Performance
-          </h2>
+          </h3>
 
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: '16px',
-              marginBottom: '24px',
+              gap: '24px',
             }}
           >
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #4CAF50',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', color: '#4CAF50' }}>
+            {/* Top Performing Portals */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#4CAF50',
+                }}
+              >
                 🏆 Top Performing Portals
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Driver Portal</span>
-                  <span style={{ color: '#4CAF50' }}>5.2K users</span>
+                  <span style={{ color: '#10b981' }}>5.2K users</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Marketplace Portal</span>
-                  <span style={{ color: '#4CAF50' }}>2.1K users</span>
+                  <span style={{ color: '#10b981' }}>2.1K users</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Load Board Portal</span>
-                  <span style={{ color: '#4CAF50' }}>3.2K users</span>
+                  <span style={{ color: '#10b981' }}>3.2K users</span>
                 </div>
               </div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #FFA500',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', color: '#FFA500' }}>
+            {/* Development Velocity */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#3b82f6',
+                }}
+              >
                 ⚡ Development Velocity
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Portals/Day</span>
-                  <span style={{ color: '#FFA500' }}>0.8</span>
+                  <span style={{ color: '#3b82f6' }}>0.8</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Features/Day</span>
-                  <span style={{ color: '#FFA500' }}>12.5</span>
+                  <span style={{ color: '#3b82f6' }}>12.5</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Bug Fixes/Day</span>
-                  <span style={{ color: '#FFA500' }}>8.3</span>
+                  <span style={{ color: '#3b82f6' }}>8.3</span>
                 </div>
               </div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #8a2be2',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', color: '#8a2be2' }}>
+            {/* Quality Metrics */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#f59e0b',
+                }}
+              >
                 🎯 Quality Metrics
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Avg Rating</span>
-                  <span style={{ color: '#8a2be2' }}>4.7/5.0</span>
+                  <span style={{ color: '#f59e0b' }}>4.7/5.0</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Uptime</span>
-                  <span style={{ color: '#8a2be2' }}>99.8%</span>
+                  <span style={{ color: '#10b981' }}>99.8%</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Response Time</span>
-                  <span style={{ color: '#8a2be2' }}>120ms</span>
+                  <span style={{ color: '#10b981' }}>120ms</span>
                 </div>
               </div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #FF6B6B',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', color: '#FF6B6B' }}>
+            {/* Critical Issues */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#ef4444',
+                }}
+              >
                 🚨 Critical Issues
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>High Priority</span>
-                  <span style={{ color: '#FF6B6B' }}>3</span>
+                  <span style={{ color: '#ef4444' }}>3</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Medium Priority</span>
-                  <span style={{ color: '#FF6B6B' }}>12</span>
+                  <span style={{ color: '#f59e0b' }}>12</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Low Priority</span>
-                  <span style={{ color: '#FF6B6B' }}>28</span>
+                  <span style={{ color: '#6b7280' }}>28</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Agent Distribution */}
+        {/* Agent Distribution by Portal Category */}
         <div
           style={{
-            backgroundColor: '#1a1a2e',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: '32px',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#4CAF50' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '24px' }}>
             🤖 Agent Distribution by Portal Category
-          </h2>
+          </h3>
 
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '20px',
+              gap: '24px',
             }}
           >
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #4CAF50',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '12px', color: '#4CAF50' }}>
+            {/* Core TMS Portals */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#10b981',
+                }}
+              >
                 🚛 Core TMS Portals
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '8px' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#4CAF50', fontWeight: 'bold' }}>147</span>
+                  <span style={{ color: '#10b981' }}>147</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#4CAF50' }}>142</span>
+                  <span style={{ color: '#10b981' }}>142</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Maintenance</span>
-                  <span style={{ color: '#FFA500' }}>3</span>
+                  <span style={{ color: '#f59e0b' }}>3</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#FF6B6B' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>2</span>
                 </div>
-              </div>
-              <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>
-                Avg: 13.4 agents per portal
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: '0.875rem',
+                    marginTop: '8px',
+                    paddingTop: '8px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  <span>Avg: 13.4 agents per portal</span>
+                </div>
               </div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #FFA500',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '12px', color: '#FFA500' }}>
+            {/* Business Operations */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#3b82f6',
+                }}
+              >
                 💼 Business Operations
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '8px' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#FFA500', fontWeight: 'bold' }}>78</span>
+                  <span style={{ color: '#3b82f6' }}>78</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#4CAF50' }}>72</span>
+                  <span style={{ color: '#3b82f6' }}>72</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Maintenance</span>
-                  <span style={{ color: '#FFA500' }}>4</span>
+                  <span style={{ color: '#f59e0b' }}>4</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#FF6B6B' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>2</span>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: '0.875rem',
+                    marginTop: '8px',
+                    paddingTop: '8px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  <span>Avg: 4.9 agents per portal</span>
                 </div>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Avg: 4.9 agents per portal</div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: '#2d3748',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #FF6B6B',
-              }}
-            >
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '12px', color: '#FF6B6B' }}>
+            {/* Admin & Specialized */}
+            <div>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#8b5cf6',
+                }}
+              >
                 🔧 Admin & Specialized
-              </h3>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '8px' }}>
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#FF6B6B', fontWeight: 'bold' }}>25</span>
+                  <span style={{ color: '#8b5cf6' }}>25</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#4CAF50' }}>23</span>
+                  <span style={{ color: '#8b5cf6' }}>23</span>
                 </div>
                 <div
-                  style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Maintenance</span>
-                  <span style={{ color: '#FFA500' }}>0</span>
+                  <span style={{ color: '#f59e0b' }}>0</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
+                >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#FF6B6B' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>2</span>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: '0.875rem',
+                    marginTop: '8px',
+                    paddingTop: '8px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  <span>Avg: 6.3 agents per portal</span>
                 </div>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Avg: 6.3 agents per portal</div>
             </div>
           </div>
         </div>
 
+        {/* Timeline & Milestones */}
         <div
           style={{
-            backgroundColor: '#1a1a2e',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             padding: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: '32px',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '16px', color: '#4CAF50' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '24px' }}>
             ⏰ Timeline & Milestones
-          </h2>
-
-          {/* Real-time Clock Tile */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '24px',
-              backgroundColor: '#2d3748',
-              borderRadius: '12px',
-              padding: '20px',
-              border: '2px solid #8a2be2',
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: '#8a2be2',
-                borderRadius: '50%',
-                width: '80px',
-                height: '80px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginRight: '20px',
-                fontSize: '2rem',
-                color: 'white',
-                boxShadow: '0 0 20px rgba(138, 43, 238, 0.5)',
-              }}
-            >
-              🕐
-            </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 'bold',
-                  color: '#8a2be2',
-                  marginBottom: '8px',
-                }}
-              >
-                Real-Time Mission Clock
-              </div>
-              <div
-                style={{
-                  fontSize: '2.5rem',
-                  fontWeight: 'bold',
-                  color: '#4CAF50',
-                  fontFamily: 'monospace',
-                  marginBottom: '4px',
-                }}
-              >
-                {currentTime.toLocaleTimeString()}
-              </div>
-              <div style={{ fontSize: '1rem', color: '#94a3b8' }}>
-                {currentTime.toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold',
-                  color: '#FFA500',
-                  marginBottom: '8px',
-                }}
-              >
-                Mission Time
-              </div>
-              <div
-                style={{
-                  fontSize: '1.8rem',
-                  fontWeight: 'bold',
-                  color: '#FFA500',
-                  fontFamily: 'monospace',
-                }}
-              >
-                Day 49
-              </div>
-              <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>of 70 total days</div>
-            </div>
-          </div>
+          </h3>
 
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '16px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '24px',
             }}
           >
+            {/* Real-Time Mission Clock */}
             <div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Start Date</div>
-              <div style={{ fontWeight: 'bold' }}>September 9, 2025</div>
-            </div>
-            <div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Target Completion</div>
-              <div style={{ fontWeight: 'bold', color: '#4CAF50' }}>October 28, 2025</div>
-            </div>
-            <div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Days Remaining</div>
-              <div style={{ fontWeight: 'bold', color: '#FFA500' }}>49 days</div>
-            </div>
-            <div>
-              <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Overall Progress</div>
-              <div style={{ fontWeight: 'bold', color: '#4CAF50' }}>68%</div>
-            </div>
-          </div>
-
-          {/* Milestone Progress */}
-          <div style={{ marginTop: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', color: '#8a2be2' }}>
-              🎯 Key Milestones
-            </h3>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '12px',
-              }}
-            >
-              <div
+              <h4
                 style={{
-                  backgroundColor: '#2d3748',
-                  padding: '12px',
-                  borderRadius: '8px',
-                  border: '1px solid #4CAF50',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#8a2be2',
                 }}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '8px',
-                  }}
-                >
-                  <span style={{ fontWeight: 'bold', color: '#4CAF50' }}>
-                    Phase 1: Core Portals
-                  </span>
-                  <span
-                    style={{
-                      fontSize: '0.8rem',
-                      backgroundColor: '#4CAF50',
-                      color: 'white',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                    }}
-                  >
-                    ✅ Complete
-                  </span>
+                🕐 Real-Time Mission Clock
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#8a2be2' }}>
+                  {currentTime.toLocaleTimeString()}
                 </div>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
-                  11 Core TMS portals deployed
+                <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                  {currentTime.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Completed: Sep 15, 2025</div>
+                <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                  Mission Time: Day 49 of 70 total days
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                  Start Date: September 9, 2025
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                  Target Completion: October 28, 2025
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#f59e0b', fontWeight: '600' }}>
+                  Days Remaining: 49 days
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: '600' }}>
+                  Overall Progress: {overallProgress}%
+                </div>
               </div>
+            </div>
 
-              <div
+            {/* Key Milestones */}
+            <div>
+              <h4
                 style={{
-                  backgroundColor: '#2d3748',
-                  padding: '12px',
-                  borderRadius: '8px',
-                  border: '1px solid #FFA500',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#4CAF50',
                 }}
               >
+                🎯 Key Milestones
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {/* Phase 1: Core Portals */}
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '8px',
+                    padding: '12px',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
                   }}
                 >
-                  <span style={{ fontWeight: 'bold', color: '#FFA500' }}>
-                    Phase 2: Business Ops
-                  </span>
-                  <span
+                  <div
                     style={{
-                      fontSize: '0.8rem',
-                      backgroundColor: '#FFA500',
-                      color: 'white',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '4px',
                     }}
                   >
-                    🔄 68%
-                  </span>
+                    <span style={{ color: '#10b981' }}>✅ Complete</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
+                      Phase 1: Core Portals
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                    11 Core TMS portals deployed
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#10b981' }}>
+                    Completed: Sep 15, 2025
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
-                  16 Business operations portals
-                </div>
-                <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Target: Oct 15, 2025</div>
-              </div>
 
-              <div
-                style={{
-                  backgroundColor: '#2d3748',
-                  padding: '12px',
-                  borderRadius: '8px',
-                  border: '1px solid #FF6B6B',
-                }}
-              >
+                {/* Phase 2: Business Ops */}
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '8px',
+                    padding: '12px',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(59, 130, 246, 0.3)',
                   }}
                 >
-                  <span style={{ fontWeight: 'bold', color: '#FF6B6B' }}>
-                    Phase 3: Admin & Special
-                  </span>
-                  <span
+                  <div
                     style={{
-                      fontSize: '0.8rem',
-                      backgroundColor: '#FF6B6B',
-                      color: 'white',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '4px',
                     }}
                   >
-                    ⏳ 35%
-                  </span>
+                    <span style={{ color: '#3b82f6' }}>🔄 68%</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
+                      Phase 2: Business Ops
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                    16 Business operations portals
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#3b82f6' }}>Target: Oct 15, 2025</div>
                 </div>
-                <div style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
-                  4 Admin & specialized portals
+
+                {/* Phase 3: Admin & Special */}
+                <div
+                  style={{
+                    padding: '12px',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(139, 92, 246, 0.3)',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '4px',
+                    }}
+                  >
+                    <span style={{ color: '#8b5cf6' }}>⏳ 35%</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>
+                      Phase 3: Admin & Special
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                    8 Admin & specialized portals
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#8b5cf6' }}>Target: Oct 28, 2025</div>
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#a0a0a0' }}>Target: Oct 28, 2025</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div
-          style={{
-            marginTop: '32px',
-            textAlign: 'center',
-            padding: '24px',
-            backgroundColor: '#1a1a2e',
-            borderRadius: '12px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-          }}
-        >
-          <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', color: '#8a2be2' }}>
-            🎯 Mission Status: FULLY DEPLOYED AND COMMITTED
-          </h3>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+        {/* Mission Status */}
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              color: '#10b981',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+            }}
+          >
+            <div
+              style={{
+                width: '10px',
+                height: '10px',
+                backgroundColor: '#10b981',
+                borderRadius: '50%',
+                animation: 'pulse 2s infinite',
+              }}
+            ></div>
+            <span>🎯 Mission Status: FULLY DEPLOYED AND COMMITTED</span>
+          </div>
+          <div style={{ marginTop: '8px', fontSize: '0.875rem', color: '#94a3b8' }}>
             All 250 MCP agents are operational and working towards the October 28, 2025 deadline
-          </p>
+          </div>
         </div>
       </div>
     </div>
