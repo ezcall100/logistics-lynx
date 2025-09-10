@@ -92,7 +92,7 @@ import CarrierSolutions from './pages/solutions/CarrierSolutions'
 import BrokerSolutions from './pages/solutions/BrokerSolutions'
 import OwnerOperatorSolutions from './pages/solutions/OwnerOperatorSolutions'
 import DriverSolutions from './pages/solutions/DriverSolutions'
-import MCPProgressDashboard from './pages/MCPProgressDashboard'
+import { MCPProgressDashboard } from './pages/MCPProgressDashboard'
 
 function App() {
   return (

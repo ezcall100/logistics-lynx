@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Brain, 
-  Zap, 
   Activity, 
-  CheckCircle, 
-  AlertTriangle, 
   Clock, 
   Users, 
   Globe, 
   BarChart3,
   Play,
-  Pause,
   RefreshCw
 } from 'lucide-react';
 
-export function MCPProgressDashboard() {
+function MCPProgressDashboard() {
   const [isMonitoring, setIsMonitoring] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
@@ -67,9 +62,9 @@ export function MCPProgressDashboard() {
 
   // Agent status simulation
   const totalAgents = 250;
-  const activeAgents = Math.floor(totalAgents * 0.95);
-  const maintenanceAgents = Math.floor(totalAgents * 0.03);
-  const errorAgents = Math.floor(totalAgents * 0.02);
+  const activeAgents = 238; // 95.2% of agents active
+  const maintenanceAgents = 7; // 2.8% in maintenance
+  const errorAgents = 5; // 2% in error recovery
 
   // Format duration
   const formatDuration = (milliseconds: number) => {
@@ -341,3 +336,5 @@ export function MCPProgressDashboard() {
     </div>
   );
 }
+
+export default MCPProgressDashboard;
