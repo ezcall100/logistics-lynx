@@ -74,7 +74,7 @@ interface SuperAdminModule {
   id: string;
   name: string;
   description: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   component: React.ComponentType;
   status: 'active' | 'maintenance' | 'development';

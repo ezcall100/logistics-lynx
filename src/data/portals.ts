@@ -101,7 +101,7 @@ export const portals: Portal[] = [
     features: ['Multi-tenant Management', 'Enterprise Settings', 'Global Analytics', 'System Health']
   },
 
-  // Business Operations Portals (11)
+  // Business Operations Portals (12)
   {
     id: 'crm',
     name: 'CRM Portal',
@@ -200,6 +200,15 @@ export const portals: Portal[] = [
     icon: '🔧',
     color: 'from-stone-500 to-neutral-500',
     features: ['System Configuration', 'Workflow Management', 'Integration Setup', 'Performance Tuning']
+  },
+  {
+    id: 'track-trace',
+    name: 'Track & Trace Portal',
+    description: 'Comprehensive tracking system for trucks, trailers, containers, chassis and equipment',
+    category: 'Business Operations',
+    icon: '📍',
+    color: 'from-emerald-500 to-green-500',
+    features: ['Real-time Tracking', 'Equipment Monitoring', 'Location History', 'Status Alerts']
   },
 
   // Admin Sub-Ports (4)

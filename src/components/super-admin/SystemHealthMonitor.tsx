@@ -403,7 +403,7 @@ const SystemHealthMonitor: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() => setViewMode(id as any)}
+              onClick={() => setViewMode(id as 'overview' | 'components' | 'healing' | 'metrics')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id 
                   ? 'bg-cyan-600 text-white' 

@@ -4,40 +4,25 @@ import {
   Command, 
   Brain, 
   Zap, 
-  Activity, 
   Shield, 
   AlertTriangle, 
-  CheckCircle, 
   Clock, 
   TrendingUp,
-  Users,
-  Database,
-  Globe,
-  Lock,
   Eye,
   Terminal,
   BarChart3,
-  PieChart,
   LineChart,
   Play,
   Pause,
   RotateCcw,
-  Settings,
   Target,
   Cpu,
-  MemoryStick,
-  Network,
-  Server,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Wifi,
   WifiOff,
   Signal,
   SignalZero,
   SignalLow,
-  SignalMedium,
-  SignalHigh
+  SignalHigh,
+  X
 } from 'lucide-react';
 
 interface AIAgent {
@@ -100,8 +85,8 @@ const AICommandCenter: React.FC = () => {
     agents: Array.from({ length: 50 }, (_, i) => ({
       id: `ai-agent-${i + 1}`,
       name: `AI Agent ${i + 1}`,
-      type: ['autonomous', 'monitoring', 'optimization', 'security', 'analytics', 'automation'][Math.floor(Math.random() * 6)] as any,
-      status: ['online', 'offline', 'maintenance', 'error'][Math.floor(Math.random() * 4)] as any,
+      type: ['autonomous', 'monitoring', 'optimization', 'security', 'analytics', 'automation'][Math.floor(Math.random() * 6)] as 'autonomous' | 'monitoring' | 'optimization' | 'security' | 'analytics' | 'automation',
+      status: ['online', 'offline', 'maintenance', 'error'][Math.floor(Math.random() * 4)] as 'online' | 'offline' | 'maintenance' | 'error',
       performance: Math.floor(Math.random() * 100),
       tasksActive: Math.floor(Math.random() * 20),
       tasksCompleted: Math.floor(Math.random() * 1000),
@@ -276,7 +261,7 @@ const AICommandCenter: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() => setViewMode(id as any)}
+              onClick={() => setViewMode(id as 'overview' | 'agents' | 'performance' | 'alerts')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id 
                   ? 'bg-blue-600 text-white' 

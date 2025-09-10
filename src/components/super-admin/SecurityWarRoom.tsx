@@ -302,7 +302,7 @@ const SecurityWarRoom: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() => setViewMode(id as any)}
+              onClick={() => setViewMode(id as 'threats' | 'events' | 'metrics' | 'response')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id 
                   ? 'bg-red-600 text-white' 

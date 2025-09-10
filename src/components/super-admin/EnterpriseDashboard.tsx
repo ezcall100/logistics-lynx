@@ -330,7 +330,7 @@ const EnterpriseDashboard: React.FC = () => {
             
             <select
               value={viewMode}
-              onChange={(e) => setViewMode(e.target.value as any)}
+              onChange={(e) => setViewMode(e.target.value as 'overview' | 'detailed' | 'minimal')}
               className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="overview">Overview</option>
