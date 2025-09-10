@@ -25,8 +25,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3005, // 🔒 LOCKED: Super Admin Portal on port 3005
-    strictPort: true, // Prevent port changes
+    port: 3000, // Main website on port 3000
+    strictPort: false, // Allow port changes for flexibility
     host: true,
     proxy: {
       '/api': {
