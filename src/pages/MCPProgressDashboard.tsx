@@ -14,18 +14,17 @@ function MCPProgressDashboard() {
   const [isMonitoring, setIsMonitoring] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
-  // Mission timeline
-  const startDate = new Date('2025-09-09T22:00:00'); // September 9, 2025 10:00 PM
+  // Mission timeline - using current date for realistic progress
+  const startDate = new Date('2024-12-19T00:00:00'); // December 19, 2024 (today)
   const deadline = new Date('2025-10-28T23:59:59'); // October 28, 2025
   const now = new Date();
 
   // Calculate progress
   const totalTime = deadline.getTime() - startDate.getTime();
-  const elapsedTime = now.getTime() - startDate.getTime();
-  const remainingTime = deadline.getTime() - now.getTime();
+  const elapsedTime = Math.max(0, now.getTime() - startDate.getTime());
+  const remainingTime = Math.max(0, deadline.getTime() - now.getTime());
   
-  const timeElapsedPercent = (elapsedTime / totalTime) * 100;
-  const timeRemainingPercent = (remainingTime / totalTime) * 100;
+  const timeElapsedPercent = Math.max(0, Math.min(100, (elapsedTime / totalTime) * 100));
 
   // Simulate realistic progress
   const getRealisticProgress = () => {
@@ -58,7 +57,6 @@ function MCPProgressDashboard() {
 
   const completedPortals = portals.filter(p => p.progress >= 100).length;
   const inProgressPortals = portals.filter(p => p.progress < 100 && p.progress > 0).length;
-  const plannedPortals = portals.filter(p => p.progress <= 0).length;
 
   // Agent status simulation
   const totalAgents = 250;
@@ -91,8 +89,10 @@ function MCPProgressDashboard() {
     }, 2000);
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+  // Add error boundary
+  try {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -334,7 +334,19 @@ function MCPProgressDashboard() {
         </motion.div>
       </div>
     </div>
-  );
+    );
+  } catch (error) {
+    console.error('MCP Dashboard Error:', error);
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 flex items-center justify-center">
+        <div className="text-center text-white">
+          <h1 className="text-4xl font-bold mb-4">MCP Progress Dashboard</h1>
+          <p className="text-gray-300 mb-4">Loading dashboard...</p>
+          <p className="text-sm text-gray-400">If this persists, please refresh the page</p>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default MCPProgressDashboard;
