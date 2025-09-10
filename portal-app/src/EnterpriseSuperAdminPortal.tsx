@@ -1,6 +1,6 @@
 /**
- * MCP Agents - Modern Enterprise Super Admin Portal
- * Clean, professional design with sophisticated color palette
+ * MCP Agents - Enhanced Enterprise Super Admin Portal
+ * Complete rebuild with modern design, glassmorphism, and advanced features
  */
 
 import React, { useState, useEffect } from 'react';
@@ -406,11 +406,11 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
     <div
       className={`min-h-screen bg-gray-50 transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : ''}`}
     >
-      {/* Header */}
+      {/* Header - Improved Design */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="sticky top-0 z-50 w-full border-b border-gray-200/80 bg-white/95 backdrop-blur-md px-6 py-4 flex items-center justify-between"
+        className="sticky top-0 z-50 w-full border-b border-gray-200/80 bg-white/95 backdrop-blur-md shadow-sm px-6 py-4 flex items-center justify-between"
       >
         {/* Left Section - Logo & Brand */}
         <div className="flex items-center gap-4">
@@ -425,48 +425,61 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
           </div>
         </div>
 
-        {/* Center Section - Search */}
-        <div className="flex-1 max-w-md mx-8">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+        {/* Center Section - Search (Improved Layout) */}
+        <div className="flex-1 flex justify-center">
+          <div className="relative w-full max-w-lg">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
               placeholder="Search companies, users, portals..."
               value={searchQuery}
               onChange={e => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-gray-50/50"
+              className="w-full pl-12 pr-4 py-3 bg-white/80 border border-gray-200 focus:bg-white focus:border-blue-300 focus:ring-2 focus:ring-blue-100 rounded-xl shadow-sm"
             />
+            {searchQuery && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <button
+                  onClick={() => handleSearch('')}
+                  className="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100"
+                >
+                  ×
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Right Section - Actions & User */}
-        <div className="flex items-center gap-3">
-          {/* System Status */}
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full">
+        {/* Right Section - Actions & User (Reorganized) */}
+        <div className="flex items-center gap-2">
+          {/* System Status Badge */}
+          <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-full shadow-sm">
             <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
             <span className="text-xs font-medium text-emerald-700">All Systems Operational</span>
           </div>
 
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-          >
-            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+          {/* Action Icons Group */}
+          <div className="flex items-center gap-1 ml-2">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+            >
+              {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
 
-          {/* Help */}
-          <button className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100">
-            <HelpCircle className="w-4 h-4" />
-          </button>
+            {/* Help */}
+            <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg">
+              <HelpCircle className="w-4 h-4" />
+            </button>
 
-          {/* Settings */}
-          <button
-            onClick={handleSettingsClick}
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-          >
-            <Settings className="w-4 h-4" />
-          </button>
+            {/* Settings */}
+            <button
+              onClick={handleSettingsClick}
+              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+            >
+              <Settings className="w-4 h-4" />
+            </button>
+          </div>
 
           {/* Notifications */}
           <div className="relative">
@@ -523,13 +536,13 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
           </div>
 
           {/* User Profile */}
-          <div className="relative">
+          <div className="relative ml-2">
             <button
               onClick={() => setShowProfile(!showProfile)}
-              className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg"
+              className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg border border-gray-200"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-medium">
+              <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-sm">
+                <span className="text-white text-sm font-semibold">
                   {user.name
                     .split(' ')
                     .map(n => n[0])
@@ -537,7 +550,7 @@ const EnterpriseSuperAdminPortal: React.FC<EnterpriseSuperAdminPortalProps> = ({
                 </span>
               </div>
               <div className="text-left">
-                <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                <p className="text-sm font-semibold text-gray-900">{user.name}</p>
                 <p className="text-xs text-gray-500">{user.role}</p>
               </div>
               <ChevronDown className="w-4 h-4 text-gray-400" />
