@@ -27,12 +27,12 @@ import {
   Activity,
   Plus,
 } from 'lucide-react';
-import { User as UserType, Notification } from './types';
+import { User as PortalUser, Notification } from './types';
 import { mockNotifications } from './data/mockData';
 import { useTheme } from './contexts/ThemeContext';
 
 interface EnterpriseSuperAdminPortalProps {
-  user: UserType;
+  user: PortalUser;
   onLogout: () => void;
 }
 

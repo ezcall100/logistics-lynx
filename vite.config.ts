@@ -2,8 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-// 🔒 PORT LOCK WARNING: DO NOT MODIFY PORT 3000
-// MCP AGENTS: This port is locked and must not be changed
+// 🔒 PORT LOCK WARNING: DO NOT MODIFY PORTS
+// MCP AGENTS: These ports are locked and must not be changed
+// Port 3000: Main Website
+// Port 3001: MCP API
+// Port 3005: Super Admin Portal
+// Port 3006: Login Portal
 // See PORT_LOCK_SYSTEM.md for details
 
 // https://vitejs.dev/config/
@@ -21,7 +25,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 3005, // 🔒 LOCKED: Super Admin Portal on port 3005
+    strictPort: true, // Prevent port changes
     host: true,
     proxy: {
       '/api': {
@@ -32,7 +37,7 @@ export default defineConfig({
     },
   },
   preview: {
-    port: 3000,
+    port: 3005, // 🔒 LOCKED: Super Admin Portal preview on port 3005
     host: true,
   },
   build: {
