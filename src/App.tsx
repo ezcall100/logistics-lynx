@@ -92,6 +92,7 @@ import CarrierSolutions from './pages/solutions/CarrierSolutions'
 import BrokerSolutions from './pages/solutions/BrokerSolutions'
 import OwnerOperatorSolutions from './pages/solutions/OwnerOperatorSolutions'
 import DriverSolutions from './pages/solutions/DriverSolutions'
+import MCPProgressDashboard from './pages/MCPProgressDashboard'
 
 function App() {
   return (
@@ -717,6 +718,18 @@ function App() {
               <Route path="/resources/help-center" element={
                 <>
                   <HelpCenterPage />
+                  <Footer />
+                </>
+              } />
+              <Route path="/mcp-progress" element={
+                <>
+                  <MCPProgressDashboard />
+                  <Footer />
+                </>
+              } />
+              <Route path="/mcp-dashboard" element={
+                <>
+                  <MCPProgressDashboard />
                   <Footer />
                 </>
               } />
