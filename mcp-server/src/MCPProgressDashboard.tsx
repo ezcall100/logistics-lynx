@@ -902,20 +902,20 @@ function MCPProgressDashboard() {
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
-                  <span>Driver Portal</span>
-                  <span style={{ color: '#10b981' }}>5.2K users</span>
+                  <span>All Portals</span>
+                  <span style={{ color: '#10b981' }}>Starting from 0</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
-                  <span>Marketplace Portal</span>
-                  <span style={{ color: '#10b981' }}>2.1K users</span>
+                  <span>Enterprise Build</span>
+                  <span style={{ color: '#10b981' }}>In Progress</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
-                  <span>Load Board Portal</span>
-                  <span style={{ color: '#10b981' }}>3.2K users</span>
+                  <span>Real-time Updates</span>
+                  <span style={{ color: '#10b981' }}>Active</span>
                 </div>
               </div>
             </div>
@@ -937,19 +937,19 @@ function MCPProgressDashboard() {
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Portals/Day</span>
-                  <span style={{ color: '#3b82f6' }}>0.8</span>
+                  <span style={{ color: '#3b82f6' }}>0.0</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Features/Day</span>
-                  <span style={{ color: '#3b82f6' }}>12.5</span>
+                  <span style={{ color: '#3b82f6' }}>0.0</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Bug Fixes/Day</span>
-                  <span style={{ color: '#3b82f6' }}>8.3</span>
+                  <span style={{ color: '#3b82f6' }}>0.0</span>
                 </div>
               </div>
             </div>
@@ -1062,25 +1062,33 @@ function MCPProgressDashboard() {
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#10b981' }}>147</span>
+                  <span style={{ color: '#10b981' }}>
+                    {portals
+                      .filter(p => p.category === 'Core TMS')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#10b981' }}>142</span>
+                  <span style={{ color: '#10b981' }}>
+                    {portals
+                      .filter(p => p.category === 'Core TMS')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Maintenance</span>
-                  <span style={{ color: '#f59e0b' }}>3</span>
+                  <span style={{ color: '#f59e0b' }}>0</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#ef4444' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>0</span>
                 </div>
                 <div
                   style={{
@@ -1114,25 +1122,33 @@ function MCPProgressDashboard() {
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#3b82f6' }}>78</span>
+                  <span style={{ color: '#3b82f6' }}>
+                    {portals
+                      .filter(p => p.category === 'Business Operations')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#3b82f6' }}>72</span>
+                  <span style={{ color: '#3b82f6' }}>
+                    {portals
+                      .filter(p => p.category === 'Business Operations')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Maintenance</span>
-                  <span style={{ color: '#f59e0b' }}>4</span>
+                  <span style={{ color: '#f59e0b' }}>0</span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#ef4444' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>0</span>
                 </div>
                 <div
                   style={{
@@ -1166,13 +1182,21 @@ function MCPProgressDashboard() {
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Total Agents</span>
-                  <span style={{ color: '#8b5cf6' }}>25</span>
+                  <span style={{ color: '#8b5cf6' }}>
+                    {portals
+                      .filter(p => p.category === 'Admin & Specialized')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Active Agents</span>
-                  <span style={{ color: '#8b5cf6' }}>23</span>
+                  <span style={{ color: '#8b5cf6' }}>
+                    {portals
+                      .filter(p => p.category === 'Admin & Specialized')
+                      .reduce((sum, p) => sum + p.agentsAssigned, 0)}
+                  </span>
                 </div>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
@@ -1184,7 +1208,7 @@ function MCPProgressDashboard() {
                   style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}
                 >
                   <span>Error Recovery</span>
-                  <span style={{ color: '#ef4444' }}>2</span>
+                  <span style={{ color: '#ef4444' }}>0</span>
                 </div>
                 <div
                   style={{
