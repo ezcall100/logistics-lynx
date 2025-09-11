@@ -25,8 +25,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000, // Main website on port 3000
-    strictPort: false, // Allow port changes for flexibility
+    port: 3005, // Super Admin Portal on port 3005
+    strictPort: true, // Prevent port changes
     host: true,
     // Enable HTTPS for local development with custom domain
     https: false, // Set to true if you want HTTPS locally

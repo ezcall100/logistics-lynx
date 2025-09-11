@@ -1,0 +1,66 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+
+# TransBot AI Local Development Domains - ALL 35+ PORTALS
+127.0.0.1 transbotai.com
+127.0.0.1 www.transbotai.com
+
+# Core TMS Portals (Completed - Live)
+127.0.0.1 customer.transbotai.com
+127.0.0.1 broker.transbotai.com
+127.0.0.1 carrier.transbotai.com
+127.0.0.1 driver.transbotai.com
+127.0.0.1 shipper.transbotai.com
+127.0.0.1 analytics.transbotai.com
+127.0.0.1 dispatch.transbotai.com
+127.0.0.1 documentation.transbotai.com
+127.0.0.1 compliance.transbotai.com
+127.0.0.1 reporting.transbotai.com
+127.0.0.1 integration.transbotai.com
+127.0.0.1 marketplace.transbotai.com
+
+# Business Operations Portals
+127.0.0.1 financial.transbotai.com
+127.0.0.1 fleet.transbotai.com
+127.0.0.1 crm.transbotai.com
+127.0.0.1 loadboard.transbotai.com
+127.0.0.1 warehouse.transbotai.com
+127.0.0.1 route.transbotai.com
+127.0.0.1 fuel.transbotai.com
+127.0.0.1 maintenance.transbotai.com
+127.0.0.1 insurance.transbotai.com
+127.0.0.1 billing.transbotai.com
+127.0.0.1 contract.transbotai.com
+127.0.0.1 communication.transbotai.com
+127.0.0.1 edi.transbotai.com
+127.0.0.1 factoring.transbotai.com
+127.0.0.1 rates.transbotai.com
+
+# Admin & Specialized Portals
+127.0.0.1 admin.transbotai.com
+127.0.0.1 mcp.transbotai.com
+127.0.0.1 superadmin.transbotai.com
+127.0.0.1 mcp-agent.transbotai.com
+127.0.0.1 dev-admin.transbotai.com
+127.0.0.1 autonomous.transbotai.com
+127.0.0.1 yms.transbotai.com
+127.0.0.1 workers.transbotai.com

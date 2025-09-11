@@ -12,6 +12,19 @@ import CRMPortal from '../pages/portals/crm/CRMPortal';
 import LoadBoardPortal from '../pages/portals/load-board/LoadBoardPortal';
 import AdminPortal from '../pages/portals/admin/AdminPortal';
 import SuperAdminPortal from '../pages/portals/super-admin/SuperAdminPortal';
+import DispatchPortal from '../pages/portals/dispatch/DispatchPortal';
+import CompliancePortal from '../pages/portals/compliance/CompliancePortal';
+import WarehousePortal from '../pages/portals/warehouse/WarehousePortal';
+import RouteOptimizer from '../pages/ai-agents/route-optimizer/RouteOptimizer';
+import FuelPortal from '../pages/portals/fuel/FuelPortal';
+import MaintenancePortal from '../pages/portals/maintenance/MaintenancePortal';
+import InsurancePortal from '../pages/portals/insurance/InsurancePortal';
+import EDIPortal from '../pages/portals/edi/EDIPortal';
+import FactoringPortal from '../pages/portals/factoring/FactoringPortal';
+import RatesPortal from '../pages/portals/rates/RatesPortal';
+import YMSPortal from '../pages/portals/yms/YMSPortal';
+import WorkersPortal from '../pages/portals/workers/WorkersPortal';
+import AutonomousPortal from '../pages/portals/autonomous/AutonomousPortal';
 
 interface SubdomainRouterProps {
   children: React.ReactNode;
@@ -58,6 +71,7 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
 
   // Route to specific portal based on subdomain
   switch (currentSubdomain) {
+    // Core TMS Portals (Completed - Live)
     case 'customer':
       return <CustomerPortal />;
     case 'broker':
@@ -72,6 +86,8 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
       return <AnalyticsPortal />;
     case 'marketplace':
       return <MarketplacePortal />;
+
+    // Business Operations Portals
     case 'financial':
       return <FinancialPortal />;
     case 'fleet':
@@ -80,10 +96,57 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
       return <CRMPortal />;
     case 'loadboard':
       return <LoadBoardPortal />;
+    case 'dispatch':
+      return <DispatchPortal />;
+    case 'compliance':
+      return <CompliancePortal />;
+    case 'warehouse':
+      return <WarehousePortal />;
+    case 'route':
+      return <RouteOptimizer />;
+    case 'fuel':
+      return <FuelPortal />;
+    case 'maintenance':
+      return <MaintenancePortal />;
+    case 'insurance':
+      return <InsurancePortal />;
+    case 'billing':
+      return <FinancialPortal />; // Using FinancialPortal for billing
+    case 'contract':
+      return <CRMPortal />; // Using CRMPortal for contracts
+    case 'communication':
+      return <CRMPortal />; // Using CRMPortal for communication
+    case 'edi':
+      return <EDIPortal />;
+    case 'factoring':
+      return <FactoringPortal />;
+    case 'rates':
+      return <RatesPortal />;
+
+    // Admin & Specialized Portals
     case 'admin':
       return <AdminPortal />;
     case 'superadmin':
       return <SuperAdminPortal />;
+    case 'mcp-agent':
+      return <SuperAdminPortal />; // Using SuperAdminPortal for MCP agents
+    case 'dev-admin':
+      return <AdminPortal />; // Using AdminPortal for dev admin
+    case 'autonomous':
+      return <AutonomousPortal />;
+    case 'yms':
+      return <YMSPortal />;
+    case 'workers':
+      return <WorkersPortal />;
+
+    // Documentation and Reporting
+    case 'documentation':
+      return <AnalyticsPortal />; // Using AnalyticsPortal for documentation
+    case 'reporting':
+      return <AnalyticsPortal />; // Using AnalyticsPortal for reporting
+    case 'integration':
+      return <EDIPortal />; // Using EDIPortal for integration
+
     case 'main':
     default:
       // Show main website for transbotai.com or unknown subdomains

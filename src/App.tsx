@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HorizontalMegaMenu } from './components/HorizontalMegaMenu';
 import { AdvancedFAB } from './components/AdvancedFAB';
 import { NeuralBackground } from './components/NeuralBackground';
-import OutstandingHomePage from './components/OutstandingHomePage';
 import { HeroSection } from './components/HeroSection';
 import { TrustedBy } from './components/TrustedBy';
 import { FeaturesSection } from './components/FeaturesSection';
@@ -109,7 +108,10 @@ function App() {
                 path="/"
                 element={
                   <>
-                    <OutstandingHomePage />
+                    <HeroSection />
+                    <TrustedBy />
+                    <FeaturesSection />
+                    <EcosystemGrid />
                     <Footer />
                   </>
                 }
