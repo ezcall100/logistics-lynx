@@ -28,7 +28,7 @@ import { createServer } from 'http';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.MCP_PORT || 3001;
+const PORT = process.env.MCP_PORT || 3001; // 🔒 LOCKED: Do not change this port
 
 // Create HTTP server for WebSocket support
 const server = createServer(app);

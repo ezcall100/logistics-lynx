@@ -26,7 +26,7 @@ export default defineConfig({
   },
   server: {
     port: 3000, // Main Website with SubdomainRouter on port 3000
-    strictPort: false, // Allow port changes if 3000 is busy
+    strictPort: true, // 🔒 LOCKED: Do not allow port changes if 3000 is busy
     host: true,
     // Enable HTTPS for local development with custom domain
     https: false, // Set to true if you want HTTPS locally
@@ -98,6 +98,7 @@ export default defineConfig({
   preview: {
     port: 3000, // Main Website preview on port 3000
     host: true,
+    strictPort: true, // 🔒 LOCKED: Do not allow port changes
   },
   build: {
     outDir: 'dist',
