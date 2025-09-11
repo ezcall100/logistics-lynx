@@ -54,8 +54,8 @@ function MCPProgressDashboard() {
   const [recentUpdates, setRecentUpdates] = useState<string[]>([]);
   const [integration360Active, setIntegration360Active] = useState(false);
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
-    total: 251, // 250 MCP agents + 1 Watchdog Agent
-    active: 251,
+    total: 250, // 250 MCP agents (Watchdog Agent not counted in total)
+    active: 250,
     maintenance: 0,
     error: 0,
     efficiency: 91.2, // AGENTS ARE WORKING ON ENTERPRISE STARTER KIT
@@ -644,8 +644,8 @@ function MCPProgressDashboard() {
       const errorChance = Math.random() < 0.01; // 1% chance of error
 
       setAgentStatus({
-        total: 251, // 250 MCP agents + 1 Watchdog Agent
-        active: 251 - (maintenanceChance ? 1 : 0) - (errorChance ? 1 : 0),
+        total: 250, // 250 MCP agents (Watchdog Agent not counted in total)
+        active: 250 - (maintenanceChance ? 1 : 0) - (errorChance ? 1 : 0),
         maintenance: maintenanceChance ? 1 : 0,
         error: errorChance ? 1 : 0,
         efficiency: Math.min(99.9, baseEfficiency), // High efficiency - agents are working!
