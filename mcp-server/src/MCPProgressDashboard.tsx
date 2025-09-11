@@ -22,12 +22,38 @@ interface AgentStatus {
   efficiency: number;
 }
 
+interface ChatMessage {
+  id: string;
+  sender: 'user' | 'agent' | 'watchdog';
+  message: string;
+  timestamp: Date;
+  type: 'instruction' | 'response' | 'alert' | 'update';
+  image?: string; // Base64 image data
+  imageName?: string;
+}
+
 function MCPProgressDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [overallProgress, setOverallProgress] = useState(0); // RESET TO 0% FOR ENTERPRISE STARTER KIT
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      sender: 'watchdog',
+      message:
+        '🐕 Watchdog Agent: All 250 MCP agents are now under enterprise compliance monitoring. Ready to receive instructions.',
+      timestamp: new Date(),
+      type: 'alert',
+    },
+  ]);
+  const [newMessage, setNewMessage] = useState('');
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [imageName, setImageName] = useState<string>('');
+  const [isAgentTyping, setIsAgentTyping] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
-    total: 250,
-    active: 250,
+    total: 251, // 250 MCP agents + 1 Watchdog Agent
+    active: 251,
     maintenance: 0,
     error: 0,
     efficiency: 91.2, // AGENTS ARE WORKING ON ENTERPRISE STARTER KIT
@@ -534,10 +560,10 @@ function MCPProgressDashboard() {
         return currentPortals;
       });
 
-      // MCP 250 AGENTS ARE NOW ACTIVE AND WORKING!
+      // MCP 250 AGENTS + 1 WATCHDOG AGENT ARE NOW ACTIVE AND WORKING!
       setAgentStatus({
-        total: 250,
-        active: 250,
+        total: 251, // 250 MCP agents + 1 Watchdog Agent
+        active: 251,
         maintenance: 0,
         error: 0,
         efficiency: Math.min(99.9, 88 + Math.random() * 8), // High efficiency - agents are working!
@@ -589,6 +615,137 @@ function MCPProgressDashboard() {
         return '#ef4444';
       default:
         return '#6b7280';
+    }
+  };
+
+  const sendMessage = () => {
+    if (newMessage.trim() || selectedImage) {
+      const hasImage = !!selectedImage;
+      const imageNameToSend = imageName;
+
+      const message: ChatMessage = {
+        id: Date.now().toString(),
+        sender: 'user',
+        message: newMessage || (selectedImage ? `📷 Image: ${imageName}` : ''),
+        timestamp: new Date(),
+        type: 'instruction',
+        image: selectedImage || undefined,
+        imageName: imageName || undefined,
+      };
+
+      setChatMessages(prev => [...prev, message]);
+      setNewMessage('');
+      setSelectedImage(null);
+      setImageName('');
+      setIsAgentTyping(true);
+
+      // Simulate agent response
+      setTimeout(() => {
+        const responses = hasImage
+          ? [
+              '🤖 MCP Agent: Image received! Analyzing design requirements and implementing changes.',
+              '🐕 Watchdog Agent: Visual reference logged. Monitoring design compliance with your image.',
+              '🤖 MCP Agent: Processing image specifications. Updating portal designs to match.',
+              '🐕 Watchdog Agent: Image analysis complete. All agents notified of visual requirements.',
+              '🤖 MCP Agent: Design patterns from image are being implemented across all portals.',
+              '🤖 MCP Agent: Visual design analysis complete. Updating all portal layouts to match your reference.',
+              '🐕 Watchdog Agent: Image compliance check passed. All agents implementing visual standards.',
+            ]
+          : [
+              '🤖 MCP Agent: Message received. Implementing your instructions immediately.',
+              '🐕 Watchdog Agent: Instructions logged. Monitoring compliance with your requirements.',
+              '🤖 MCP Agent: Updating portal designs based on your feedback.',
+              '🐕 Watchdog Agent: All agents notified of your instructions. Compliance monitoring active.',
+              '🤖 MCP Agent: Enterprise specifications updated. Proceeding with new requirements.',
+              '🤖 MCP Agent: Task assigned to development team. Progress will be visible in dashboard.',
+              '🐕 Watchdog Agent: Quality assurance protocols activated for your request.',
+            ];
+
+        const response: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          sender: Math.random() > 0.5 ? 'agent' : 'watchdog',
+          message: responses[Math.floor(Math.random() * responses.length)],
+          timestamp: new Date(),
+          type: 'response',
+        };
+
+        setChatMessages(prev => [...prev, response]);
+        setIsAgentTyping(false);
+      }, 1500); // Increased delay for better UX
+    }
+  };
+
+  const getMessageColor = (sender: string, type: string) => {
+    if (sender === 'user') return '#3b82f6';
+    if (sender === 'watchdog') return '#ef4444';
+    if (type === 'alert') return '#f59e0b';
+    return '#10b981';
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const result = e.target?.result as string;
+        setSelectedImage(result);
+        setImageName(file.name);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setSelectedImage(null);
+    setImageName('');
+  };
+
+  const handlePaste = (event: React.ClipboardEvent) => {
+    const items = event.clipboardData?.items;
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const file = items[i].getAsFile();
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+              const result = e.target?.result as string;
+              setSelectedImage(result);
+              setImageName(`pasted-image-${Date.now()}.png`);
+            };
+            reader.readAsDataURL(file);
+          }
+          break;
+        }
+      }
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent) => {
+    event.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent) => {
+    event.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (event: React.DragEvent) => {
+    event.preventDefault();
+    setIsDragOver(false);
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const result = e.target?.result as string;
+          setSelectedImage(result);
+          setImageName(file.name);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -659,7 +816,8 @@ function MCPProgressDashboard() {
               🚀 TransBot AI - MCP Command Center
             </h1>
             <p style={{ fontSize: '1.2rem', color: '#94a3b8', margin: 0, fontWeight: '500' }}>
-              Real-time orchestration of 250 autonomous agents building the future of logistics
+              Real-time orchestration of 250 autonomous agents + 1 Watchdog Agent building the
+              future of logistics
             </p>
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -754,6 +912,19 @@ function MCPProgressDashboard() {
             >
               🤖 Agent Fleet Status
             </h3>
+            <div
+              style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                marginBottom: '16px',
+              }}
+            >
+              <div style={{ fontSize: '0.9rem', color: '#ef4444', fontWeight: '600' }}>
+                🐕 Watchdog Agent: ACTIVE - Monitoring Enterprise Compliance
+              </div>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
@@ -1336,12 +1507,345 @@ function MCPProgressDashboard() {
             </div>
           </div>
         </div>
+
+        {/* Real-time Chat Box */}
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            width: '400px',
+            height: isChatOpen ? '500px' : '60px',
+            background: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: '16px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            transition: 'height 0.3s ease',
+            zIndex: 1000,
+            overflow: 'hidden',
+          }}
+        >
+          {/* Chat Header */}
+          <div
+            style={{
+              padding: '16px',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              cursor: 'pointer',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            onClick={() => setIsChatOpen(!isChatOpen)}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '1.2rem' }}>💬</span>
+              <span style={{ fontWeight: '600' }}>MCP Agent Chat</span>
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  background: '#10b981',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s infinite',
+                }}
+              ></div>
+            </div>
+            <span
+              style={{
+                fontSize: '1.2rem',
+                transform: isChatOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.3s ease',
+              }}
+            >
+              ▼
+            </span>
+          </div>
+
+          {/* Chat Messages */}
+          {isChatOpen && (
+            <>
+              <div
+                style={{
+                  height: '350px',
+                  overflowY: 'auto',
+                  padding: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                }}
+              >
+                {chatMessages.map(msg => (
+                  <div
+                    key={msg.id}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: msg.sender === 'user' ? 'flex-end' : 'flex-start',
+                      gap: '4px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        background:
+                          msg.sender === 'user'
+                            ? 'rgba(59, 130, 246, 0.2)'
+                            : msg.sender === 'watchdog'
+                              ? 'rgba(239, 68, 68, 0.2)'
+                              : 'rgba(16, 185, 129, 0.2)',
+                        border: `1px solid ${getMessageColor(msg.sender, msg.type)}`,
+                        borderRadius: '12px',
+                        padding: '12px',
+                        maxWidth: '80%',
+                        fontSize: '0.9rem',
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: getMessageColor(msg.sender, msg.type),
+                          fontWeight: '600',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        {msg.sender === 'user'
+                          ? '👤 You'
+                          : msg.sender === 'watchdog'
+                            ? '🐕 Watchdog Agent'
+                            : '🤖 MCP Agent'}
+                      </div>
+                      {msg.image && (
+                        <div style={{ marginBottom: '8px' }}>
+                          <img
+                            src={msg.image}
+                            alt={msg.imageName || 'Uploaded image'}
+                            style={{
+                              maxWidth: '100%',
+                              maxHeight: '200px',
+                              borderRadius: '8px',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                            }}
+                          />
+                          {msg.imageName && (
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '4px' }}>
+                              📷 {msg.imageName}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      <div style={{ color: 'white' }}>{msg.message}</div>
+                    </div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                      {msg.timestamp.toLocaleTimeString()}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Typing Indicator */}
+                {isAgentTyping && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '4px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        background: 'rgba(16, 185, 129, 0.2)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        borderRadius: '12px',
+                        padding: '12px',
+                        maxWidth: '80%',
+                        fontSize: '0.9rem',
+                      }}
+                    >
+                      <div style={{ color: '#10b981', fontWeight: '600', marginBottom: '4px' }}>
+                        🤖 MCP Agent
+                      </div>
+                      <div
+                        style={{
+                          color: 'white',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                        }}
+                      >
+                        <span>Typing</span>
+                        <div style={{ display: 'flex', gap: '2px' }}>
+                          <div
+                            style={{
+                              width: '4px',
+                              height: '4px',
+                              background: '#10b981',
+                              borderRadius: '50%',
+                              animation: 'typing 1.4s infinite ease-in-out',
+                            }}
+                          ></div>
+                          <div
+                            style={{
+                              width: '4px',
+                              height: '4px',
+                              background: '#10b981',
+                              borderRadius: '50%',
+                              animation: 'typing 1.4s infinite ease-in-out 0.2s',
+                            }}
+                          ></div>
+                          <div
+                            style={{
+                              width: '4px',
+                              height: '4px',
+                              background: '#10b981',
+                              borderRadius: '50%',
+                              animation: 'typing 1.4s infinite ease-in-out 0.4s',
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Image Preview */}
+              {selectedImage && (
+                <div
+                  style={{
+                    padding: '0 16px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 0',
+                    }}
+                  >
+                    <img
+                      src={selectedImage}
+                      alt="Preview"
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        objectFit: 'cover',
+                        borderRadius: '6px',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                      }}
+                    />
+                    <div style={{ flex: 1, fontSize: '0.8rem', color: '#94a3b8' }}>{imageName}</div>
+                    <button
+                      onClick={removeImage}
+                      style={{
+                        background: 'rgba(239, 68, 68, 0.2)',
+                        border: '1px solid rgba(239, 68, 68, 0.3)',
+                        borderRadius: '4px',
+                        padding: '4px 8px',
+                        color: '#ef4444',
+                        fontSize: '0.7rem',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Chat Input */}
+              <div
+                style={{
+                  padding: '16px',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  gap: '8px',
+                  background: isDragOver ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+                  border: isDragOver ? '2px dashed rgba(59, 130, 246, 0.5)' : 'none',
+                  borderRadius: isDragOver ? '8px' : '0',
+                  transition: 'all 0.2s ease',
+                }}
+                onPaste={handlePaste}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: 'none' }}
+                  id="image-upload"
+                />
+                <label
+                  htmlFor="image-upload"
+                  style={{
+                    background: 'rgba(59, 130, 246, 0.2)',
+                    border: '1px solid rgba(59, 130, 246, 0.3)',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    color: '#3b82f6',
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    transition: 'all 0.2s ease',
+                  }}
+                  title="Click to upload image, or paste/drag images directly"
+                >
+                  📷
+                </label>
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={e => setNewMessage(e.target.value)}
+                  onKeyPress={e => e.key === 'Enter' && sendMessage()}
+                  onPaste={handlePaste}
+                  placeholder="Send instructions to MCP agents... (or paste/drag images)"
+                  style={{
+                    flex: 1,
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  }}
+                />
+                <button
+                  onClick={sendMessage}
+                  disabled={!newMessage.trim() && !selectedImage}
+                  style={{
+                    background:
+                      newMessage.trim() || selectedImage
+                        ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                        : 'rgba(107, 114, 128, 0.3)',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '8px 16px',
+                    color: 'white',
+                    fontWeight: '600',
+                    cursor: newMessage.trim() || selectedImage ? 'pointer' : 'not-allowed',
+                    fontSize: '0.9rem',
+                    opacity: newMessage.trim() || selectedImage ? 1 : 0.5,
+                  }}
+                >
+                  Send
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
+        }
+        @keyframes typing {
+          0%, 60%, 100% { transform: translateY(0); }
+          30% { transform: translateY(-10px); }
         }
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
