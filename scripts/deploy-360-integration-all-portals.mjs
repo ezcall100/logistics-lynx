@@ -84,8 +84,8 @@ import {
   Menu, X, Settings, User, LogOut, Home, Search, Filter, 
   Download, Upload, ChevronRight, ChevronDown, Star, Clock, AlertCircle
 } from 'lucide-react'
-import RealTimePortalStatus from '../../components/RealTimePortalStatus'
-import PortalUpdateSystem from '../../utils/PortalUpdateSystem'
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus'
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem'
 
 const {{PORTAL_NAME}}Portal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard')

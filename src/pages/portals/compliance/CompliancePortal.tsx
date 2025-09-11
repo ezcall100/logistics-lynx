@@ -1,542 +1,390 @@
-import React, { useState } from 'react';
-import { 
-  Shield, 
-  CheckCircle, 
-  AlertTriangle,
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Package,
+  DollarSign,
+  Plus,
   BarChart3,
-  Settings,
-  Users,
   FileText,
+  Bell,
+  ArrowRight,
+  Navigation,
+  Fuel,
+  Route,
+  Camera,
+  MessageSquare,
+  Menu,
+  X,
+  Settings,
+  User,
+  LogOut,
+  Home,
   Search,
   Filter,
   Download,
-  Eye,
-  Edit,
-  Plus,
-  RefreshCw,
-  FileCheck,
-  Award
+  Upload,
+  ChevronRight,
+  ChevronDown,
+  Star,
+  Clock,
+  AlertCircle,
 } from 'lucide-react';
-import PortalHeader from '../../../components/portals/PortalHeader';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
 const CompliancePortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fabOpen, setFabOpen] = useState(false);
+  const [notifications, setNotifications] = useState([1, 2, 3]);
+  const [realTimeData, setRealTimeData] = useState({
+    lastUpdate: new Date(),
+    status: 'active',
+    progress: 65,
+  });
 
-  const complianceItems = [
-    { id: 1, type: 'DOT Inspection', vehicle: 'DEMO-001', status: 'Passed', date: '2024-01-15', expiryDate: '2024-07-15', inspector: 'DEMO / PLACEHOLDER Inspector', score: 95, violations: 0 },
-    { id: 2, type: 'ELD Compliance', vehicle: 'DEMO-002', status: 'Warning', date: '2024-01-10', expiryDate: '2024-01-25', inspector: 'DEMO / PLACEHOLDER Inspector', score: 78, violations: 2 },
-    { id: 3, type: 'HOS Violation', vehicle: 'DEMO-003', status: 'Failed', date: '2024-01-08', expiryDate: '2024-01-22', inspector: 'DEMO / PLACEHOLDER Inspector', score: 45, violations: 5 }
+  // Initialize 360-degree integration system
+  useEffect(() => {
+    const updateSystem = PortalUpdateSystem.getInstance();
+    updateSystem.start();
+
+    const interval = setInterval(() => {
+      setRealTimeData(prev => ({
+        ...prev,
+        lastUpdate: new Date(),
+        progress: Math.min(100, prev.progress + Math.random() * 2),
+      }));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const stats = [
+    { label: 'Active Items', value: '12', change: '+3', icon: Package, color: 'text-blue-500' },
+    {
+      label: 'Revenue Today',
+      value: '$2,450',
+      change: '+$180',
+      icon: DollarSign,
+      color: 'text-green-500',
+    },
+    { label: 'Efficiency', value: '94%', change: '+2%', icon: BarChart3, color: 'text-purple-500' },
+    { label: 'Documents', value: '8', change: '2 new', icon: FileText, color: 'text-orange-500' },
   ];
 
-  const drivers = [
-    { id: 1, name: 'DEMO / PLACEHOLDER Driver A', license: 'CDL-001', status: 'Compliant', violations: 0, lastInspection: '2024-01-15', nextInspection: '2024-07-15', score: 98 },
-    { id: 2, name: 'DEMO / PLACEHOLDER Driver B', license: 'CDL-002', status: 'Warning', violations: 2, lastInspection: '2024-01-10', nextInspection: '2024-01-25', score: 78 },
-    { id: 3, name: 'DEMO / PLACEHOLDER Driver C', license: 'CDL-003', status: 'Non-Compliant', violations: 5, lastInspection: '2024-01-08', nextInspection: '2024-01-22', score: 45 }
+  const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
+    { id: 'items', label: 'Items', icon: Package, badge: '12' },
+    { id: 'earnings', label: 'Earnings', icon: DollarSign, badge: null },
+    { id: 'documents', label: 'Documents', icon: FileText, badge: '3' },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3, badge: 'New' },
   ];
 
-  const regulations = [
-    { id: 1, name: 'Hours of Service (HOS)', category: 'Driver Safety', status: 'Compliant', lastReview: '2024-01-15', nextReview: '2024-04-15', violations: 0, description: 'DEMO / PLACEHOLDER HOS regulation compliance' },
-    { id: 2, name: 'Electronic Logging Device (ELD)', category: 'Technology', status: 'Warning', lastReview: '2024-01-10', nextReview: '2024-01-25', violations: 2, description: 'DEMO / PLACEHOLDER ELD compliance monitoring' },
-    { id: 3, name: 'Vehicle Maintenance', category: 'Fleet Safety', status: 'Compliant', lastReview: '2024-01-12', nextReview: '2024-04-12', violations: 0, description: 'DEMO / PLACEHOLDER vehicle maintenance standards' }
+  const fabActions = [
+    { id: 'create', label: 'Create New', icon: Plus, color: 'bg-blue-500' },
+    { id: 'upload', label: 'Upload File', icon: Upload, color: 'bg-green-500' },
+    { id: 'search', label: 'Search', icon: Search, color: 'bg-purple-500' },
+    { id: 'settings', label: 'Settings', icon: Settings, color: 'bg-orange-500' },
   ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Compliant': return 'text-green-600 bg-green-100';
-      case 'Warning': return 'text-yellow-600 bg-yellow-100';
-      case 'Non-Compliant': return 'text-red-600 bg-red-100';
-      case 'Failed': return 'text-red-600 bg-red-100';
-      case 'Passed': return 'text-green-600 bg-green-100';
-      default: return 'text-gray-600 bg-gray-100';
-    }
-  };
-
-  const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-600';
-    if (score >= 70) return 'text-yellow-600';
-    return 'text-red-600';
-  };
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
-      <PortalHeader
-        title="Compliance Portal"
-        description="Regulatory compliance monitoring and management system"
-        icon={Shield}
-        color="from-green-600 to-emerald-600"
-      >
-        <div className="flex space-x-2">
-          <button className="px-4 py-2 bg-white text-green-600 border border-green-600 rounded-lg hover:bg-green-50 transition-colors">
-            <RefreshCw className="w-4 h-4 mr-2 inline" />
-            Refresh
-          </button>
-          <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-            <Plus className="w-4 h-4 mr-2 inline" />
-            Schedule Inspection
-          </button>
-        </div>
-      </PortalHeader>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%239C92AC%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10"></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Navigation Tabs */}
-        <div className="mb-8">
-          <nav className="flex space-x-8">
-            {[
-              { id: 'overview', label: 'Overview', icon: BarChart3 },
-              { id: 'inspections', label: 'Inspections', icon: FileCheck },
-              { id: 'drivers', label: 'Drivers', icon: Users },
-              { id: 'regulations', label: 'Regulations', icon: FileText },
-              { id: 'violations', label: 'Violations', icon: AlertTriangle },
-              { id: 'reports', label: 'Reports', icon: BarChart3 },
-              { id: 'settings', label: 'Settings', icon: Settings }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === tab.id
-                    ? 'border-green-500 text-green-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
+      {/* Layout Container */}
+      <div className="relative z-10 flex h-screen">
+        {/* Mobile Backdrop */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-40"
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Glassmorphism Sidebar */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.div
+              initial={{ x: -320, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -320, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="w-80 flex-shrink-0 fixed lg:relative lg:translate-x-0 z-50"
+            >
+              <div className="h-full bg-white/10 backdrop-blur-xl border-r border-white/20 shadow-2xl">
+                {/* Sidebar Header */}
+                <div className="p-6 border-b border-white/20">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <Package className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold text-white">Compliance Portal</h2>
+                        <p className="text-sm text-white/70">Enterprise Dashboard</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                    >
+                      <X className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Navigation Items */}
+                <div className="p-4 space-y-2">
+                  {sidebarItems.map(item => (
+                    <motion.button
+                      key={item.id}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
+                        activeTab === item.id
+                          ? 'bg-white/20 text-white shadow-lg'
+                          : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                      {item.badge && (
+                        <span className="ml-auto px-2 py-1 text-xs bg-blue-500 text-white rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Real-time Status */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm text-white/70">Live Status</span>
+                    </div>
+                    <div className="text-xs text-white/50">
+                      Last update: {realTimeData.lastUpdate.toLocaleTimeString()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Header */}
+          <div className="bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 z-40">
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    <Menu className="w-6 h-6 text-white" />
+                  </button>
+                  <div>
+                    <h1 className="text-2xl font-bold text-white">Compliance Portal</h1>
+                    <p className="text-white/70">Enterprise-grade portal with 360° integration</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Bell className="w-6 h-6 text-white" />
+                    {notifications.length > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                        {notifications.length}
+                      </span>
+                    )}
+                  </button>
+                  <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Settings className="w-6 h-6 text-white" />
+                  </button>
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Area */}
+          <div className="flex-1 overflow-y-auto p-6">
+            <div className="max-w-7xl mx-auto">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/10">
+                        <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                      </div>
+                      <span className="text-sm text-green-400 font-medium">{stat.change}</span>
+                    </div>
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/70">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* MCP Agent Real-Time Status */}
+              <div className="mb-8">
+                <RealTimePortalStatus portalId="compliance" />
+              </div>
+
+              {/* Main Content Card */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-white">Dashboard Overview</h2>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-white/70">Real-time updates</span>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  {activeTab === 'dashboard' && (
+                    <div className="space-y-8">
+                      {/* Quick Actions */}
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            <Plus className="w-5 h-5" />
+                            <span className="font-medium">Create New</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
+                            <Upload className="w-5 h-5" />
+                            <span className="font-medium">Upload File</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200">
+                            <Search className="w-5 h-5" />
+                            <span className="font-medium">Search</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
+                            <Settings className="w-5 h-5" />
+                            <span className="font-medium">Settings</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Enterprise Features Info */}
+                      <div className="mt-8 p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10">
+                        <div className="text-white/70">
+                          <p className="mb-4">
+                            Welcome to the Compliance Portal with enterprise-grade features:
+                          </p>
+                          <ul className="space-y-2 text-sm">
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Glassmorphism UI with backdrop blur effects
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Floating Action Button (FAB) for quick actions
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Multi-level sidebar navigation
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Mobile-first responsive design
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Real-time MCP agent integration
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              360-degree autonomous development
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'earnings' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Earnings Overview</h3>
+                      <div className="text-white/70">
+                        <p>Real-time earnings data with MCP agent monitoring...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'documents' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Document Management</h3>
+                      <div className="text-white/70">
+                        <p>Enterprise document management with 360° integration...</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Action Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <div className="relative">
+          <AnimatePresence>
+            {fabOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="absolute bottom-16 right-0 space-y-3"
               >
-                <tab.icon className="w-4 h-4" />
-                <span>{tab.label}</span>
-              </button>
-            ))}
-          </nav>
+                {fabActions.map((action, index) => (
+                  <motion.button
+                    key={action.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`${action.color} text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-3`}
+                  >
+                    <action.icon className="w-5 h-5" />
+                    <span className="text-sm font-medium">{action.label}</span>
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setFabOpen(!fabOpen)}
+            className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center"
+          >
+            <motion.div animate={{ rotate: fabOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
+              <Plus className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
         </div>
-
-        {/* Overview Tab */}
-        {activeTab === 'overview' && (
-          <div className="space-y-6">
-            {/* KPI Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="flex items-center">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <CheckCircle className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Compliant Items</p>
-                    <p className="text-2xl font-bold text-gray-900">18</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="flex items-center">
-                  <div className="p-2 bg-yellow-100 rounded-lg">
-                    <AlertTriangle className="w-6 h-6 text-yellow-600" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Warnings</p>
-                    <p className="text-2xl font-bold text-gray-900">3</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="flex items-center">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <AlertTriangle className="w-6 h-6 text-red-600" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Violations</p>
-                    <p className="text-2xl font-bold text-gray-900">2</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <div className="flex items-center">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Award className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Compliance Score</p>
-                    <p className="text-2xl font-bold text-gray-900">87%</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Compliance Status */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900">Recent Inspections</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    {complianceItems.map((item) => (
-                      <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-green-100 rounded-lg">
-                            <FileCheck className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-900">{item.vehicle} - {item.type}</p>
-                            <p className="text-sm text-gray-600">Score: {item.score}%</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}>
-                            {item.status}
-                          </span>
-                          <p className="text-sm text-gray-600 mt-1">{item.violations} violations</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900">Driver Compliance</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    {drivers.map((driver) => (
-                      <div key={driver.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-blue-100 rounded-lg">
-                            <Users className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-900">{driver.name}</p>
-                            <p className="text-sm text-gray-600">{driver.license}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(driver.status)}`}>
-                            {driver.status}
-                          </span>
-                          <p className={`text-sm mt-1 ${getScoreColor(driver.score)}`}>{driver.score}%</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Inspections Tab */}
-        {activeTab === 'inspections' && (
-          <div className="space-y-6">
-            {/* Search and Filters */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="text"
-                      placeholder="Search inspections..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                  <Filter className="w-4 h-4 mr-2 inline" />
-                  Filters
-                </button>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                  <Download className="w-4 h-4 mr-2 inline" />
-                  Export
-                </button>
-              </div>
-            </div>
-
-            {/* Inspections Table */}
-            <div className="bg-white rounded-lg shadow-sm border">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Compliance Inspections</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Violations</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expiry</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {complianceItems.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.type}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.vehicle}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}>
-                            {item.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`text-sm font-medium ${getScoreColor(item.score)}`}>{item.score}%</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.violations}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.date}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.expiryDate}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex space-x-2">
-                            <button className="text-blue-600 hover:text-blue-900">
-                              <Eye className="w-4 h-4" />
-                            </button>
-                            <button className="text-indigo-600 hover:text-indigo-900">
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button className="text-green-600 hover:text-green-900">
-                              <FileCheck className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Drivers Tab */}
-        {activeTab === 'drivers' && (
-          <div className="space-y-6">
-            {/* Drivers Table */}
-            <div className="bg-white rounded-lg shadow-sm border">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Driver Compliance</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Driver</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">License</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Violations</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Inspection</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Next Inspection</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {drivers.map((driver) => (
-                      <tr key={driver.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{driver.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.license}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(driver.status)}`}>
-                            {driver.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`text-sm font-medium ${getScoreColor(driver.score)}`}>{driver.score}%</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.violations}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.lastInspection}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.nextInspection}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex space-x-2">
-                            <button className="text-blue-600 hover:text-blue-900">
-                              <Eye className="w-4 h-4" />
-                            </button>
-                            <button className="text-indigo-600 hover:text-indigo-900">
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button className="text-green-600 hover:text-green-900">
-                              <FileCheck className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Regulations Tab */}
-        {activeTab === 'regulations' && (
-          <div className="space-y-6">
-            {/* Regulations Table */}
-            <div className="bg-white rounded-lg shadow-sm border">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Regulatory Compliance</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Regulation</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Violations</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Review</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Next Review</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {regulations.map((regulation) => (
-                      <tr key={regulation.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{regulation.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{regulation.category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(regulation.status)}`}>
-                            {regulation.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{regulation.violations}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{regulation.lastReview}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{regulation.nextReview}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex space-x-2">
-                            <button className="text-blue-600 hover:text-blue-900">
-                              <Eye className="w-4 h-4" />
-                            </button>
-                            <button className="text-indigo-600 hover:text-indigo-900">
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button className="text-green-600 hover:text-green-900">
-                              <FileText className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Violations Tab */}
-        {activeTab === 'violations' && (
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Violation Management</h3>
-              <div className="text-center py-12">
-                <AlertTriangle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Violation Tracking</h3>
-                <p className="text-gray-600 mb-4">Track and manage compliance violations with detailed reporting and corrective actions.</p>
-                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  <Plus className="w-4 h-4 mr-2 inline" />
-                  Add Violation
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Reports Tab */}
-        {activeTab === 'reports' && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Compliance Summary</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Overall Score</span>
-                    <span className="text-sm font-medium">87%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Compliant Items</span>
-                    <span className="text-sm font-medium">18/21</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Active Violations</span>
-                    <span className="text-sm font-medium">2</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Warnings</span>
-                    <span className="text-sm font-medium">3</span>
-                  </div>
-                </div>
-                <button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  <Download className="w-4 h-4 mr-2 inline" />
-                  Download Report
-                </button>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Inspection History</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Total Inspections</span>
-                    <span className="text-sm font-medium">45</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Passed</span>
-                    <span className="text-sm font-medium">38</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Failed</span>
-                    <span className="text-sm font-medium">5</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Average Score</span>
-                    <span className="text-sm font-medium">89%</span>
-                  </div>
-                </div>
-                <button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  <Download className="w-4 h-4 mr-2 inline" />
-                  Download Report
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Settings Tab */}
-        {activeTab === 'settings' && (
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Compliance Settings</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Inspection Reminder (days)</label>
-                  <input
-                    type="number"
-                    defaultValue="30"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Violation Alert Threshold</label>
-                  <input
-                    type="number"
-                    defaultValue="3"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Compliance Score Target</label>
-                  <input
-                    type="number"
-                    defaultValue="90"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  Save Settings
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

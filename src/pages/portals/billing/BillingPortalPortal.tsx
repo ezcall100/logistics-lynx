@@ -29,10 +29,10 @@ import {
   Clock,
   AlertCircle,
 } from 'lucide-react';
-import RealTimePortalStatus from '../../components/RealTimePortalStatus';
-import PortalUpdateSystem from '../../utils/PortalUpdateSystem';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
-const WarehousePortal: React.FC = () => {
+const BillingPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [fabOpen, setFabOpen] = useState(false);
@@ -60,7 +60,7 @@ const WarehousePortal: React.FC = () => {
   }, []);
 
   const stats = [
-    { label: 'Active Loads', value: '12', change: '+3', icon: Package, color: 'text-blue-500' },
+    { label: 'Active Items', value: '12', change: '+3', icon: Package, color: 'text-blue-500' },
     {
       label: 'Revenue Today',
       value: '$2,450',
@@ -74,7 +74,7 @@ const WarehousePortal: React.FC = () => {
 
   const sidebarItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
-    { id: 'loads', label: 'Loads', icon: Package, badge: '12' },
+    { id: 'items', label: 'Items', icon: Package, badge: '12' },
     { id: 'earnings', label: 'Earnings', icon: DollarSign, badge: null },
     { id: 'documents', label: 'Documents', icon: FileText, badge: '3' },
     { id: 'analytics', label: 'Analytics', icon: BarChart3, badge: 'New' },
@@ -129,7 +129,7 @@ const WarehousePortal: React.FC = () => {
                         <Package className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h2 className="text-xl font-bold text-white">Warehouse Portal</h2>
+                        <h2 className="text-xl font-bold text-white">Billing Portal</h2>
                         <p className="text-sm text-white/70">Enterprise Dashboard</p>
                       </div>
                     </div>
@@ -198,7 +198,7 @@ const WarehousePortal: React.FC = () => {
                     <Menu className="w-6 h-6 text-white" />
                   </button>
                   <div>
-                    <h1 className="text-2xl font-bold text-white">Warehouse Portal</h1>
+                    <h1 className="text-2xl font-bold text-white">Billing Portal</h1>
                     <p className="text-white/70">Enterprise-grade portal with 360° integration</p>
                   </div>
                 </div>
@@ -247,7 +247,7 @@ const WarehousePortal: React.FC = () => {
 
               {/* MCP Agent Real-Time Status */}
               <div className="mb-8">
-                <RealTimePortalStatus portalId="warehouse" />
+                <RealTimePortalStatus portalId="billing" />
               </div>
 
               {/* Main Content Card */}
@@ -290,7 +290,7 @@ const WarehousePortal: React.FC = () => {
                       <div className="mt-8 p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10">
                         <div className="text-white/70">
                           <p className="mb-4">
-                            Welcome to the Warehouse Portal with enterprise-grade features:
+                            Welcome to the Billing Portal with enterprise-grade features:
                           </p>
                           <ul className="space-y-2 text-sm">
                             <li className="flex items-center gap-2">
@@ -390,4 +390,4 @@ const WarehousePortal: React.FC = () => {
   );
 };
 
-export default WarehousePortal;
+export default BillingPortal;

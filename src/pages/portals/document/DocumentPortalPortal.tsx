@@ -29,8 +29,8 @@ import {
   Clock,
   AlertCircle,
 } from 'lucide-react';
-import RealTimePortalStatus from '../../components/RealTimePortalStatus';
-import PortalUpdateSystem from '../../utils/PortalUpdateSystem';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
 const DocumentPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');

@@ -1,452 +1,393 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { 
-  Globe, Users,
-  DollarSign, Target, BarChart3,
-  Plus, Search, Filter,
-  Star, MessageSquare,
-  Bell
-} from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Package,
+  DollarSign,
+  Plus,
+  BarChart3,
+  FileText,
+  Bell,
+  ArrowRight,
+  Navigation,
+  Fuel,
+  Route,
+  Camera,
+  MessageSquare,
+  Menu,
+  X,
+  Settings,
+  User,
+  LogOut,
+  Home,
+  Search,
+  Filter,
+  Download,
+  Upload,
+  ChevronRight,
+  ChevronDown,
+  Star,
+  Clock,
+  AlertCircle,
+} from 'lucide-react';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
 const PartnerPortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fabOpen, setFabOpen] = useState(false);
+  const [notifications, setNotifications] = useState([1, 2, 3]);
+  const [realTimeData, setRealTimeData] = useState({
+    lastUpdate: new Date(),
+    status: 'active',
+    progress: 65,
+  });
 
-  const partnerStats = [
-    { label: 'Active Partnerships', value: '24', change: '+3', icon: Users, color: 'text-blue-500' },
-    { label: 'Revenue Generated', value: '$156K', change: '+18%', icon: DollarSign, color: 'text-green-500' },
-    { label: 'Partner Rating', value: '4.9', change: '+0.1', icon: Star, color: 'text-yellow-500' },
-    { label: 'Joint Projects', value: '12', change: '+2', icon: Target, color: 'text-purple-500' }
-  ]
+  // Initialize 360-degree integration system
+  useEffect(() => {
+    const updateSystem = PortalUpdateSystem.getInstance();
+    updateSystem.start();
 
-  const activePartnerships = [
-    {
-      name: 'TechCorp Solutions',
-      type: 'Technology Partner',
-      status: 'Active',
-      revenue: '$45K',
-      projects: 3,
-      rating: 4.9,
-      lastActivity: '2 days ago'
-    },
-    {
-      name: 'Logistics Pro',
-      type: 'Service Partner',
-      status: 'Active',
-      revenue: '$32K',
-      projects: 2,
-      rating: 4.8,
-      lastActivity: '1 week ago'
-    },
-    {
-      name: 'Data Analytics Inc',
-      type: 'Data Partner',
-      status: 'Active',
-      revenue: '$28K',
-      projects: 1,
-      rating: 4.7,
-      lastActivity: '3 days ago'
-    }
-  ]
+    const interval = setInterval(() => {
+      setRealTimeData(prev => ({
+        ...prev,
+        lastUpdate: new Date(),
+        progress: Math.min(100, prev.progress + Math.random() * 2),
+      }));
+    }, 3000);
 
-  const jointProjects = [
-    {
-      name: 'AI Route Optimization',
-      partner: 'TechCorp Solutions',
-      status: 'In Progress',
-      progress: 75,
-      budget: '$50K',
-      deadline: '2024-03-15',
-      team: '8 members'
-    },
-    {
-      name: 'Real-time Tracking System',
-      partner: 'Logistics Pro',
-      status: 'Planning',
-      progress: 25,
-      budget: '$35K',
-      deadline: '2024-04-20',
-      team: '6 members'
-    },
-    {
-      name: 'Predictive Analytics Platform',
-      partner: 'Data Analytics Inc',
-      status: 'Completed',
-      progress: 100,
-      budget: '$42K',
-      deadline: '2024-01-30',
-      team: '10 members'
-    }
-  ]
+    return () => clearInterval(interval);
+  }, []);
 
-  const revenueSharing = [
-    { month: 'Jan 2024', amount: '$12,450', partners: 8, growth: '+15%' },
-    { month: 'Dec 2023', amount: '$10,820', partners: 7, growth: '+8%' },
-    { month: 'Nov 2023', amount: '$9,980', partners: 6, growth: '+12%' },
-    { month: 'Oct 2023', amount: '$8,920', partners: 5, growth: '+5%' }
-  ]
+  const stats = [
+    { label: 'Active Items', value: '12', change: '+3', icon: Package, color: 'text-blue-500' },
+    {
+      label: 'Revenue Today',
+      value: '$2,450',
+      change: '+$180',
+      icon: DollarSign,
+      color: 'text-green-500',
+    },
+    { label: 'Efficiency', value: '94%', change: '+2%', icon: BarChart3, color: 'text-purple-500' },
+    { label: 'Documents', value: '8', change: '2 new', icon: FileText, color: 'text-orange-500' },
+  ];
 
-  const partnerDirectory = [
-    {
-      name: 'Swift Logistics',
-      category: 'Carrier',
-      location: 'Nationwide',
-      specialties: ['Dry Van', 'Refrigerated'],
-      rating: 4.8,
-      status: 'Available'
-    },
-    {
-      name: 'Tech Solutions Ltd',
-      category: 'Technology',
-      location: 'San Francisco, CA',
-      specialties: ['AI/ML', 'Data Analytics'],
-      rating: 4.9,
-      status: 'Available'
-    },
-    {
-      name: 'Green Transport Co',
-      category: 'Sustainability',
-      location: 'Portland, OR',
-      specialties: ['Electric Vehicles', 'Carbon Tracking'],
-      rating: 4.7,
-      status: 'Busy'
-    }
-  ]
+  const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
+    { id: 'items', label: 'Items', icon: Package, badge: '12' },
+    { id: 'earnings', label: 'Earnings', icon: DollarSign, badge: null },
+    { id: 'documents', label: 'Documents', icon: FileText, badge: '3' },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3, badge: 'New' },
+  ];
+
+  const fabActions = [
+    { id: 'create', label: 'Create New', icon: Plus, color: 'bg-blue-500' },
+    { id: 'upload', label: 'Upload File', icon: Upload, color: 'bg-green-500' },
+    { id: 'search', label: 'Search', icon: Search, color: 'bg-purple-500' },
+    { id: 'settings', label: 'Settings', icon: Settings, color: 'bg-orange-500' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-100">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600">
-                <Globe className="w-8 h-8 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%239C92AC%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10"></div>
+      </div>
+
+      {/* Layout Container */}
+      <div className="relative z-10 flex h-screen">
+        {/* Mobile Backdrop */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-40"
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Glassmorphism Sidebar */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.div
+              initial={{ x: -320, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -320, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="w-80 flex-shrink-0 fixed lg:relative lg:translate-x-0 z-50"
+            >
+              <div className="h-full bg-white/10 backdrop-blur-xl border-r border-white/20 shadow-2xl">
+                {/* Sidebar Header */}
+                <div className="p-6 border-b border-white/20">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <Package className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold text-white">Partner Portal</h2>
+                        <p className="text-sm text-white/70">Enterprise Dashboard</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                    >
+                      <X className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Navigation Items */}
+                <div className="p-4 space-y-2">
+                  {sidebarItems.map(item => (
+                    <motion.button
+                      key={item.id}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
+                        activeTab === item.id
+                          ? 'bg-white/20 text-white shadow-lg'
+                          : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                      {item.badge && (
+                        <span className="ml-auto px-2 py-1 text-xs bg-blue-500 text-white rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Real-time Status */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm text-white/70">Live Status</span>
+                    </div>
+                    <div className="text-xs text-white/50">
+                      Last update: {realTimeData.lastUpdate.toLocaleTimeString()}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Partner Portal</h1>
-                <p className="text-gray-600">Strategic partner collaboration and management</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Header */}
+          <div className="bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 z-40">
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    <Menu className="w-6 h-6 text-white" />
+                  </button>
+                  <div>
+                    <h1 className="text-2xl font-bold text-white">Partner Portal</h1>
+                    <p className="text-white/70">Enterprise-grade portal with 360° integration</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Bell className="w-6 h-6 text-white" />
+                    {notifications.length > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                        {notifications.length}
+                      </span>
+                    )}
+                  </button>
+                  <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Settings className="w-6 h-6 text-white" />
+                  </button>
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-                <Bell className="w-5 h-5 text-gray-600" />
-              </button>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600"></div>
+          </div>
+
+          {/* Content Area */}
+          <div className="flex-1 overflow-y-auto p-6">
+            <div className="max-w-7xl mx-auto">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/10">
+                        <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                      </div>
+                      <span className="text-sm text-green-400 font-medium">{stat.change}</span>
+                    </div>
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/70">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* MCP Agent Real-Time Status */}
+              <div className="mb-8">
+                <RealTimePortalStatus portalId="partner" />
+              </div>
+
+              {/* Main Content Card */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-white">Dashboard Overview</h2>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-white/70">Real-time updates</span>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  {activeTab === 'dashboard' && (
+                    <div className="space-y-8">
+                      {/* Quick Actions */}
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            <Plus className="w-5 h-5" />
+                            <span className="font-medium">Create New</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
+                            <Upload className="w-5 h-5" />
+                            <span className="font-medium">Upload File</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200">
+                            <Search className="w-5 h-5" />
+                            <span className="font-medium">Search</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
+                            <Settings className="w-5 h-5" />
+                            <span className="font-medium">Settings</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Enterprise Features Info */}
+                      <div className="mt-8 p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10">
+                        <div className="text-white/70">
+                          <p className="mb-4">
+                            Welcome to the Partner Portal with enterprise-grade features:
+                          </p>
+                          <ul className="space-y-2 text-sm">
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Glassmorphism UI with backdrop blur effects
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Floating Action Button (FAB) for quick actions
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Multi-level sidebar navigation
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Mobile-first responsive design
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Real-time MCP agent integration
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              360-degree autonomous development
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'earnings' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Earnings Overview</h3>
+                      <div className="text-white/70">
+                        <p>Real-time earnings data with MCP agent monitoring...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'documents' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Document Management</h3>
+                      <div className="text-white/70">
+                        <p>Enterprise document management with 360° integration...</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Partner Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {partnerStats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-gray-50">
-                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                </div>
-                <span className="text-sm text-green-600 font-medium">{stat.change}</span>
-              </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
+      {/* Floating Action Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <div className="relative">
+          <AnimatePresence>
+            {fabOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="absolute bottom-16 right-0 space-y-3"
+              >
+                {fabActions.map((action, index) => (
+                  <motion.button
+                    key={action.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`${action.color} text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-3`}
+                  >
+                    <action.icon className="w-5 h-5" />
+                    <span className="text-sm font-medium">{action.label}</span>
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setFabOpen(!fabOpen)}
+            className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center"
+          >
+            <motion.div animate={{ rotate: fabOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
+              <Plus className="w-6 h-6" />
             </motion.div>
-          ))}
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="bg-white rounded-2xl shadow-lg mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
-              {[
-                { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-                { id: 'partnerships', label: 'Partnerships', icon: Users },
-                { id: 'projects', label: 'Joint Projects', icon: Target },
-                { id: 'directory', label: 'Partner Directory', icon: Users }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                    activeTab === tab.id
-                      ? 'border-cyan-500 text-cyan-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  <tab.icon className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="p-6">
-            {activeTab === 'dashboard' && (
-              <div className="space-y-8">
-                {/* Quick Actions */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-200">
-                      <Plus className="w-5 h-5" />
-                      <span className="font-medium">New Partnership</span>
-                    </button>
-                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
-                      <Target className="w-5 h-5" />
-                      <span className="font-medium">Start Project</span>
-                    </button>
-                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
-                      <MessageSquare className="w-5 h-5" />
-                      <span className="font-medium">Contact Partner</span>
-                    </button>
-                    <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200">
-                      <BarChart3 className="w-5 h-5" />
-                      <span className="font-medium">View Reports</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Revenue Sharing */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Revenue Sharing</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {revenueSharing.map((revenue, index) => (
-                      <motion.div
-                        key={revenue.month}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
-                      >
-                        <div className="text-sm text-gray-600 mb-1">{revenue.month}</div>
-                        <div className="text-xl font-bold text-gray-900 mb-1">{revenue.amount}</div>
-                        <div className="text-sm text-gray-600 mb-1">{revenue.partners} partners</div>
-                        <div className="text-sm text-green-600 font-medium">{revenue.growth}</div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'partnerships' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Active Partnerships</h3>
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search partners..."
-                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      />
-                    </div>
-                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                      <Filter className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  {activePartnerships.map((partnership, index) => (
-                    <motion.div
-                      key={partnership.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                            <Users className="w-6 h-6 text-gray-600" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">{partnership.name}</div>
-                            <div className="text-sm text-gray-600">{partnership.type}</div>
-                            <div className="text-xs text-gray-500">Last activity: {partnership.lastActivity}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-6">
-                          <div className="text-center">
-                            <div className="font-semibold text-gray-900">{partnership.revenue}</div>
-                            <div className="text-xs text-gray-500">Revenue</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="font-semibold text-gray-900">{partnership.projects}</div>
-                            <div className="text-xs text-gray-500">Projects</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="flex items-center gap-1">
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                              <span className="font-semibold text-gray-900">{partnership.rating}</span>
-                            </div>
-                            <div className="text-xs text-gray-500">Rating</div>
-                          </div>
-                          <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            partnership.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
-                          }`}>
-                            {partnership.status}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'projects' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Joint Projects</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors">
-                    <Plus className="w-4 h-4" />
-                    New Project
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {jointProjects.map((project, index) => (
-                    <motion.div
-                      key={project.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <h4 className="font-semibold text-gray-900">{project.name}</h4>
-                          <p className="text-sm text-gray-600">Partner: {project.partner}</p>
-                        </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          project.status === 'Completed' ? 'bg-green-100 text-green-700' :
-                          project.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                          'bg-yellow-100 text-yellow-700'
-                        }`}>
-                          {project.status}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                        <div>
-                          <div className="text-sm text-gray-600">Budget</div>
-                          <div className="font-semibold text-gray-900">{project.budget}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-gray-600">Deadline</div>
-                          <div className="font-semibold text-gray-900">{project.deadline}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-gray-600">Team Size</div>
-                          <div className="font-semibold text-gray-900">{project.team}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-gray-600">Progress</div>
-                          <div className="font-semibold text-gray-900">{project.progress}%</div>
-                        </div>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-cyan-500 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${project.progress}%` }}
-                        ></div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'directory' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Partner Directory</h3>
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search directory..."
-                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      />
-                    </div>
-                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                      <Filter className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {partnerDirectory.map((partner, index) => (
-                    <motion.div
-                      key={partner.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                            <Users className="w-6 h-6 text-gray-600" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">{partner.name}</div>
-                            <div className="text-sm text-gray-600">{partner.category}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm font-medium text-gray-900">{partner.rating}</span>
-                        </div>
-                      </div>
-                      <div className="space-y-2 mb-4">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Location:</span>
-                          <span className="font-medium text-gray-900">{partner.location}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Status:</span>
-                          <span className={`font-medium ${
-                            partner.status === 'Available' ? 'text-green-600' : 'text-yellow-600'
-                          }`}>
-                            {partner.status}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="mb-4">
-                        <div className="text-sm text-gray-600 mb-2">Specialties:</div>
-                        <div className="flex flex-wrap gap-2">
-                          {partner.specialties.map((specialty, idx) => (
-                            <span key={idx} className="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs rounded-full">
-                              {specialty}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button className="flex-1 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium">
-                          Contact
-                        </button>
-                        <button className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                          View Profile
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          </motion.button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PartnerPortal
+export default PartnerPortal;

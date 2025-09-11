@@ -1,563 +1,393 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { 
-  Settings, Code, Globe, Terminal,
-  BookOpen, Download, Play,
-  CheckCircle, Clock,
-  Plus, Search, Filter, Copy,
-  Zap, Shield
-} from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Package,
+  DollarSign,
+  Plus,
+  BarChart3,
+  FileText,
+  Bell,
+  ArrowRight,
+  Navigation,
+  Fuel,
+  Route,
+  Camera,
+  MessageSquare,
+  Menu,
+  X,
+  Settings,
+  User,
+  LogOut,
+  Home,
+  Search,
+  Filter,
+  Download,
+  Upload,
+  ChevronRight,
+  ChevronDown,
+  Star,
+  Clock,
+  AlertCircle,
+} from 'lucide-react';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
 const DeveloperPortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview')
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fabOpen, setFabOpen] = useState(false);
+  const [notifications, setNotifications] = useState([1, 2, 3]);
+  const [realTimeData, setRealTimeData] = useState({
+    lastUpdate: new Date(),
+    status: 'active',
+    progress: 65,
+  });
 
-  const devStats = [
-    { label: 'API Calls Today', value: '12.4K', change: '+8%', icon: Code, color: 'text-blue-500' },
-    { label: 'Active Projects', value: '8', change: '+2', icon: Globe, color: 'text-green-500' },
-    { label: 'API Uptime', value: '99.9%', change: '+0.1%', icon: CheckCircle, color: 'text-emerald-500' },
-    { label: 'Documentation Views', value: '1.2K', change: '+15%', icon: BookOpen, color: 'text-purple-500' }
-  ]
+  // Initialize 360-degree integration system
+  useEffect(() => {
+    const updateSystem = PortalUpdateSystem.getInstance();
+    updateSystem.start();
 
-  const apiEndpoints = [
-    {
-      method: 'GET',
-      endpoint: '/api/v1/shipments',
-      description: 'Retrieve shipment data',
-      status: 'Active',
-      calls: '2.4K',
-      responseTime: '120ms'
-    },
-    {
-      method: 'POST',
-      endpoint: '/api/v1/shipments',
-      description: 'Create new shipment',
-      status: 'Active',
-      calls: '1.8K',
-      responseTime: '95ms'
-    },
-    {
-      method: 'GET',
-      endpoint: '/api/v1/carriers',
-      description: 'Get carrier information',
-      status: 'Active',
-      calls: '3.2K',
-      responseTime: '85ms'
-    },
-    {
-      method: 'PUT',
-      endpoint: '/api/v1/tracking',
-      description: 'Update shipment tracking',
-      status: 'Active',
-      calls: '4.1K',
-      responseTime: '110ms'
-    }
-  ]
+    const interval = setInterval(() => {
+      setRealTimeData(prev => ({
+        ...prev,
+        lastUpdate: new Date(),
+        progress: Math.min(100, prev.progress + Math.random() * 2),
+      }));
+    }, 3000);
 
-  const sdks = [
-    {
-      name: 'JavaScript SDK',
-      version: 'v2.1.0',
-      downloads: '15.2K',
-      lastUpdate: '2 days ago',
-      status: 'Stable',
-      language: 'JavaScript'
-    },
-    {
-      name: 'Python SDK',
-      version: 'v1.8.3',
-      downloads: '8.7K',
-      lastUpdate: '1 week ago',
-      status: 'Stable',
-      language: 'Python'
-    },
-    {
-      name: 'Java SDK',
-      version: 'v1.5.2',
-      downloads: '6.3K',
-      lastUpdate: '3 days ago',
-      status: 'Beta',
-      language: 'Java'
-    },
-    {
-      name: 'PHP SDK',
-      version: 'v1.2.1',
-      downloads: '4.1K',
-      lastUpdate: '5 days ago',
-      status: 'Stable',
-      language: 'PHP'
-    }
-  ]
+    return () => clearInterval(interval);
+  }, []);
 
-  const integrationGuides = [
+  const stats = [
+    { label: 'Active Items', value: '12', change: '+3', icon: Package, color: 'text-blue-500' },
     {
-      title: 'Getting Started with Trans Bot API',
-      description: 'Learn how to authenticate and make your first API call',
-      difficulty: 'Beginner',
-      time: '15 min',
-      category: 'Authentication'
+      label: 'Revenue Today',
+      value: '$2,450',
+      change: '+$180',
+      icon: DollarSign,
+      color: 'text-green-500',
     },
-    {
-      title: 'Real-time Shipment Tracking',
-      description: 'Implement real-time tracking using WebSocket connections',
-      difficulty: 'Intermediate',
-      time: '45 min',
-      category: 'Real-time'
-    },
-    {
-      title: 'Bulk Operations',
-      description: 'Process multiple shipments efficiently using batch endpoints',
-      difficulty: 'Advanced',
-      time: '60 min',
-      category: 'Performance'
-    },
-    {
-      title: 'Webhook Integration',
-      description: 'Set up webhooks to receive real-time notifications',
-      difficulty: 'Intermediate',
-      time: '30 min',
-      category: 'Webhooks'
-    }
-  ]
+    { label: 'Efficiency', value: '94%', change: '+2%', icon: BarChart3, color: 'text-purple-500' },
+    { label: 'Documents', value: '8', change: '2 new', icon: FileText, color: 'text-orange-500' },
+  ];
 
-  const sandboxProjects = [
-    {
-      name: 'E-commerce Integration',
-      description: 'Sample integration for online retailers',
-      language: 'JavaScript',
-      lastModified: '2 hours ago',
-      status: 'Active'
-    },
-    {
-      name: 'Mobile App Backend',
-      description: 'API integration for mobile applications',
-      language: 'Python',
-      lastModified: '1 day ago',
-      status: 'Active'
-    },
-    {
-      name: 'Analytics Dashboard',
-      description: 'Real-time analytics using our APIs',
-      language: 'React',
-      lastModified: '3 days ago',
-      status: 'Draft'
-    }
-  ]
+  const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
+    { id: 'items', label: 'Items', icon: Package, badge: '12' },
+    { id: 'earnings', label: 'Earnings', icon: DollarSign, badge: null },
+    { id: 'documents', label: 'Documents', icon: FileText, badge: '3' },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3, badge: 'New' },
+  ];
+
+  const fabActions = [
+    { id: 'create', label: 'Create New', icon: Plus, color: 'bg-blue-500' },
+    { id: 'upload', label: 'Upload File', icon: Upload, color: 'bg-green-500' },
+    { id: 'search', label: 'Search', icon: Search, color: 'bg-purple-500' },
+    { id: 'settings', label: 'Settings', icon: Settings, color: 'bg-orange-500' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-gray-500 to-slate-600">
-                <Settings className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Developer Portal</h1>
-                <p className="text-gray-600">API access and integration tools</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                API Status: Online
-              </div>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-500 to-slate-600"></div>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%239C92AC%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Dev Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {devStats.map((stat, index) => (
+      {/* Layout Container */}
+      <div className="relative z-10 flex h-screen">
+        {/* Mobile Backdrop */}
+        <AnimatePresence>
+          {sidebarOpen && (
             <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-40"
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Glassmorphism Sidebar */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.div
+              initial={{ x: -320, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -320, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="w-80 flex-shrink-0 fixed lg:relative lg:translate-x-0 z-50"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-gray-50">
-                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                </div>
-                <span className="text-sm text-green-600 font-medium">{stat.change}</span>
-              </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="bg-white rounded-2xl shadow-lg mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
-              {[
-                { id: 'overview', label: 'Overview', icon: Globe },
-                { id: 'api', label: 'API Reference', icon: Code },
-                { id: 'sdks', label: 'SDKs', icon: Download },
-                { id: 'guides', label: 'Integration Guides', icon: BookOpen },
-                { id: 'sandbox', label: 'Sandbox', icon: Terminal }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                    activeTab === tab.id
-                      ? 'border-gray-500 text-gray-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  <tab.icon className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="p-6">
-            {activeTab === 'overview' && (
-              <div className="space-y-8">
-                {/* Quick Start */}
-                <div className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Start</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-white rounded-lg p-4 border border-gray-200">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                          <Shield className="w-4 h-4 text-blue-600" />
-                        </div>
-                        <h4 className="font-semibold text-gray-900">1. Get API Key</h4>
+              <div className="h-full bg-white/10 backdrop-blur-xl border-r border-white/20 shadow-2xl">
+                {/* Sidebar Header */}
+                <div className="p-6 border-b border-white/20">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <Package className="w-6 h-6 text-white" />
                       </div>
-                      <p className="text-sm text-gray-600 mb-3">Generate your API key from the dashboard</p>
-                      <button className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
-                        Generate Key
-                      </button>
-                    </div>
-                    <div className="bg-white rounded-lg p-4 border border-gray-200">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                          <Code className="w-4 h-4 text-green-600" />
-                        </div>
-                        <h4 className="font-semibold text-gray-900">2. Make First Call</h4>
+                      <div>
+                        <h2 className="text-xl font-bold text-white">Developer Portal</h2>
+                        <p className="text-sm text-white/70">Enterprise Dashboard</p>
                       </div>
-                      <p className="text-sm text-gray-600 mb-3">Test your integration with our API</p>
-                      <button className="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm font-medium">
-                        Try API
-                      </button>
                     </div>
-                    <div className="bg-white rounded-lg p-4 border border-gray-200">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
-                          <Zap className="w-4 h-4 text-purple-600" />
-                        </div>
-                        <h4 className="font-semibold text-gray-900">3. Go Live</h4>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">Deploy your integration to production</p>
-                      <button className="w-full py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm font-medium">
-                        Deploy
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* API Status */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">API Status</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {apiEndpoints.slice(0, 4).map((endpoint, index) => (
-                      <motion.div
-                        key={endpoint.endpoint}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${
-                              endpoint.method === 'GET' ? 'bg-green-100 text-green-700' :
-                              endpoint.method === 'POST' ? 'bg-blue-100 text-blue-700' :
-                              'bg-yellow-100 text-yellow-700'
-                            }`}>
-                              {endpoint.method}
-                            </span>
-                            <code className="text-sm font-mono text-gray-700">{endpoint.endpoint}</code>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span className="text-xs text-green-600">Online</span>
-                          </div>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-2">{endpoint.description}</p>
-                        <div className="flex items-center gap-4 text-xs text-gray-500">
-                          <span>{endpoint.calls} calls</span>
-                          <span>{endpoint.responseTime} avg</span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'api' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">API Endpoints</h3>
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search endpoints..."
-                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                      />
-                    </div>
-                    <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                      <Filter className="w-4 h-4 text-gray-600" />
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                    >
+                      <X className="w-5 h-5 text-white" />
                     </button>
                   </div>
                 </div>
-                <div className="space-y-4">
-                  {apiEndpoints.map((endpoint, index) => (
-                    <motion.div
-                      key={endpoint.endpoint}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+
+                {/* Navigation Items */}
+                <div className="p-4 space-y-2">
+                  {sidebarItems.map(item => (
+                    <motion.button
+                      key={item.id}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
+                        activeTab === item.id
+                          ? 'bg-white/20 text-white shadow-lg'
+                          : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      }`}
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-4">
-                          <span className={`px-3 py-1 rounded-lg text-sm font-medium ${
-                            endpoint.method === 'GET' ? 'bg-green-100 text-green-700' :
-                            endpoint.method === 'POST' ? 'bg-blue-100 text-blue-700' :
-                            'bg-yellow-100 text-yellow-700'
-                          }`}>
-                            {endpoint.method}
-                          </span>
-                          <code className="text-lg font-mono text-gray-900">{endpoint.endpoint}</code>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-sm text-green-600">{endpoint.status}</span>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 mb-4">{endpoint.description}</p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                          <div className="text-sm text-gray-500">Calls Today</div>
-                          <div className="font-semibold text-gray-900">{endpoint.calls}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-gray-500">Avg Response Time</div>
-                          <div className="font-semibold text-gray-900">{endpoint.responseTime}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-gray-500">Status</div>
-                          <div className="font-semibold text-green-600">Healthy</div>
-                        </div>
-                      </div>
-                      <div className="mt-4 flex gap-2">
-                        <button className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-                          View Docs
-                        </button>
-                        <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                          Try It
-                        </button>
-                      </div>
-                    </motion.div>
+                      <item.icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                      {item.badge && (
+                        <span className="ml-auto px-2 py-1 text-xs bg-blue-500 text-white rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </motion.button>
                   ))}
                 </div>
-              </div>
-            )}
 
-            {activeTab === 'sdks' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Software Development Kits</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
-                    <Plus className="w-4 h-4" />
-                    Request SDK
-                  </button>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {sdks.map((sdk, index) => (
-                    <motion.div
-                      key={sdk.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                            <Code className="w-6 h-6 text-gray-600" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">{sdk.name}</div>
-                            <div className="text-sm text-gray-600">{sdk.language}</div>
-                          </div>
-                        </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          sdk.status === 'Stable' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-                        }`}>
-                          {sdk.status}
-                        </div>
-                      </div>
-                      <div className="space-y-2 mb-4">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Version:</span>
-                          <span className="font-medium text-gray-900">{sdk.version}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Downloads:</span>
-                          <span className="font-medium text-gray-900">{sdk.downloads}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Last Update:</span>
-                          <span className="font-medium text-gray-900">{sdk.lastUpdate}</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button className="flex-1 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-                          Download
-                        </button>
-                        <button className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                          Docs
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'guides' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Integration Guides</h3>
-                  <div className="flex items-center gap-3">
-                    <select className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent">
-                      <option>All Categories</option>
-                      <option>Authentication</option>
-                      <option>Real-time</option>
-                      <option>Performance</option>
-                      <option>Webhooks</option>
-                    </select>
+                {/* Real-time Status */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm text-white/70">Live Status</span>
+                    </div>
+                    <div className="text-xs text-white/50">
+                      Last update: {realTimeData.lastUpdate.toLocaleTimeString()}
+                    </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {integrationGuides.map((guide, index) => (
-                    <motion.div
-                      key={guide.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-                    >
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <h4 className="font-semibold text-gray-900 mb-2">{guide.title}</h4>
-                          <p className="text-gray-600 text-sm mb-3">{guide.description}</p>
-                        </div>
-                        <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
-                          {guide.category}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600">{guide.time}</span>
-                          </div>
-                          <div className={`px-2 py-1 rounded text-xs font-medium ${
-                            guide.difficulty === 'Beginner' ? 'bg-green-100 text-green-700' :
-                            guide.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700' :
-                            'bg-red-100 text-red-700'
-                          }`}>
-                            {guide.difficulty}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button className="flex-1 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-                          Read Guide
-                        </button>
-                        <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                          <Play className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
               </div>
-            )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-            {activeTab === 'sandbox' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Sandbox Environment</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
-                    <Plus className="w-4 h-4" />
-                    New Project
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Header */}
+          <div className="bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 z-40">
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    <Menu className="w-6 h-6 text-white" />
                   </button>
+                  <div>
+                    <h1 className="text-2xl font-bold text-white">Developer Portal</h1>
+                    <p className="text-white/70">Enterprise-grade portal with 360° integration</p>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  {sandboxProjects.map((project, index) => (
-                    <motion.div
-                      key={project.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 rounded-xl p-6 border border-gray-200"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                            <Terminal className="w-6 h-6 text-gray-600" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">{project.name}</div>
-                            <div className="text-sm text-gray-600">{project.description}</div>
-                            <div className="text-xs text-gray-500">Last modified: {project.lastModified}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-gray-900">{project.language}</div>
-                            <div className={`text-xs font-medium ${
-                              project.status === 'Active' ? 'text-green-600' : 'text-yellow-600'
-                            }`}>
-                              {project.status}
-                            </div>
-                          </div>
-                          <div className="flex gap-2">
-                            <button className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-                              Open
-                            </button>
-                            <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                              <Copy className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                <div className="flex items-center gap-3">
+                  <button className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Bell className="w-6 h-6 text-white" />
+                    {notifications.length > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                        {notifications.length}
+                      </span>
+                    )}
+                  </button>
+                  <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                    <Settings className="w-6 h-6 text-white" />
+                  </button>
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
                 </div>
               </div>
-            )}
+            </div>
+          </div>
+
+          {/* Content Area */}
+          <div className="flex-1 overflow-y-auto p-6">
+            <div className="max-w-7xl mx-auto">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/10">
+                        <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                      </div>
+                      <span className="text-sm text-green-400 font-medium">{stat.change}</span>
+                    </div>
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/70">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* MCP Agent Real-Time Status */}
+              <div className="mb-8">
+                <RealTimePortalStatus portalId="developer" />
+              </div>
+
+              {/* Main Content Card */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-white">Dashboard Overview</h2>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-white/70">Real-time updates</span>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  {activeTab === 'dashboard' && (
+                    <div className="space-y-8">
+                      {/* Quick Actions */}
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            <Plus className="w-5 h-5" />
+                            <span className="font-medium">Create New</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200">
+                            <Upload className="w-5 h-5" />
+                            <span className="font-medium">Upload File</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200">
+                            <Search className="w-5 h-5" />
+                            <span className="font-medium">Search</span>
+                          </button>
+                          <button className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl hover:from-purple-600 hover:to-violet-700 transition-all duration-200">
+                            <Settings className="w-5 h-5" />
+                            <span className="font-medium">Settings</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Enterprise Features Info */}
+                      <div className="mt-8 p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10">
+                        <div className="text-white/70">
+                          <p className="mb-4">
+                            Welcome to the Developer Portal with enterprise-grade features:
+                          </p>
+                          <ul className="space-y-2 text-sm">
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Glassmorphism UI with backdrop blur effects
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Floating Action Button (FAB) for quick actions
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Multi-level sidebar navigation
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Mobile-first responsive design
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              Real-time MCP agent integration
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <Star className="w-4 h-4 text-yellow-400" />
+                              360-degree autonomous development
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'earnings' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Earnings Overview</h3>
+                      <div className="text-white/70">
+                        <p>Real-time earnings data with MCP agent monitoring...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'documents' && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-4">Document Management</h3>
+                      <div className="text-white/70">
+                        <p>Enterprise document management with 360° integration...</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default DeveloperPortal
+      {/* Floating Action Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <div className="relative">
+          <AnimatePresence>
+            {fabOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="absolute bottom-16 right-0 space-y-3"
+              >
+                {fabActions.map((action, index) => (
+                  <motion.button
+                    key={action.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`${action.color} text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-3`}
+                  >
+                    <action.icon className="w-5 h-5" />
+                    <span className="text-sm font-medium">{action.label}</span>
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setFabOpen(!fabOpen)}
+            className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center"
+          >
+            <motion.div animate={{ rotate: fabOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
+              <Plus className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DeveloperPortal;
