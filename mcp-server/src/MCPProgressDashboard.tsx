@@ -21,60 +21,60 @@ interface AgentStatus {
 
 function MCPProgressDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [overallProgress, setOverallProgress] = useState(68.6); // 24/35 = 68.6%
+  const [overallProgress, setOverallProgress] = useState(0); // RESTARTED FROM 0%
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
     total: 250,
-    active: 238,
-    maintenance: 7,
-    error: 5,
+    active: 250,
+    maintenance: 0,
+    error: 0,
   });
 
   // All 35+ portals with real-time simulation
   const [portals, setPortals] = useState<Portal[]>([
-    // Core TMS Portals (11) - 100% Complete
+    // Core TMS Portals (11) - RESTARTED TO 0%
     {
       id: 'customer',
       name: 'Customer Portal',
       category: 'Core TMS',
-      progress: 100,
-      status: 'complete',
-      agentsAssigned: 0,
-      estimatedCompletion: 'Complete',
-      blockers: [],
-      lastUpdate: '2 hours ago',
+      progress: 0,
+      status: 'planning',
+      agentsAssigned: 12,
+      estimatedCompletion: 'Oct 15, 2025',
+      blockers: ['Enterprise starter kit deployment'],
+      lastUpdate: 'Just now',
     },
     {
       id: 'broker',
       name: 'Broker Portal',
       category: 'Core TMS',
-      progress: 100,
-      status: 'complete',
-      agentsAssigned: 0,
-      estimatedCompletion: 'Complete',
-      blockers: [],
-      lastUpdate: '1 hour ago',
+      progress: 0,
+      status: 'planning',
+      agentsAssigned: 15,
+      estimatedCompletion: 'Oct 15, 2025',
+      blockers: ['Enterprise starter kit deployment'],
+      lastUpdate: 'Just now',
     },
     {
       id: 'carrier',
       name: 'Carrier Portal',
       category: 'Core TMS',
-      progress: 100,
-      status: 'complete',
-      agentsAssigned: 0,
-      estimatedCompletion: 'Complete',
-      blockers: [],
-      lastUpdate: '3 hours ago',
+      progress: 0,
+      status: 'planning',
+      agentsAssigned: 18,
+      estimatedCompletion: 'Oct 15, 2025',
+      blockers: ['Enterprise starter kit deployment'],
+      lastUpdate: 'Just now',
     },
     {
       id: 'driver',
       name: 'Driver Portal',
       category: 'Core TMS',
-      progress: 100,
-      status: 'complete',
-      agentsAssigned: 0,
-      estimatedCompletion: 'Complete',
-      blockers: [],
-      lastUpdate: '4 hours ago',
+      progress: 0,
+      status: 'planning',
+      agentsAssigned: 20,
+      estimatedCompletion: 'Oct 15, 2025',
+      blockers: ['Enterprise starter kit deployment'],
+      lastUpdate: 'Just now',
     },
     {
       id: 'shipper',
