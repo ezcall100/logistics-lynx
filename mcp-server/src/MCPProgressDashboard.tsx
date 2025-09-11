@@ -1273,6 +1273,218 @@ function MCPProgressDashboard() {
             </div>
           </div>
 
+          {/* Execution Timeline */}
+          <div
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: '20px',
+              padding: '28px',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              position: 'relative',
+              overflow: 'hidden',
+              marginBottom: '24px',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '100px',
+                height: '100px',
+                background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, transparent 100%)',
+                borderRadius: '0 20px 0 100px',
+              }}
+            ></div>
+            <h3
+              style={{
+                fontSize: '1.4rem',
+                fontWeight: '700',
+                marginBottom: '20px',
+                color: '#a855f7',
+              }}
+            >
+              📅 Execution Timeline
+            </h3>
+            <div
+              style={{
+                background: 'rgba(168, 85, 247, 0.1)',
+                border: '1px solid rgba(168, 85, 247, 0.3)',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                marginBottom: '16px',
+              }}
+            >
+              <div style={{ fontSize: '0.9rem', color: '#a855f7', fontWeight: '600' }}>
+                🚀 Project Start: September 09, 2025 at 10:00:21 AM (California Time)
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '16px',
+              }}
+            >
+              {/* Phase 1 */}
+              <div
+                style={{
+                  background: 'rgba(16, 185, 129, 0.1)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  borderRadius: '12px',
+                  padding: '16px',
+                }}
+              >
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      background: '#10b981',
+                      borderRadius: '50%',
+                    }}
+                  ></div>
+                  <span style={{ fontWeight: '700', color: '#10b981', fontSize: '1rem' }}>
+                    Phase 1 (Week 1)
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: '1.4' }}>
+                  Core infrastructure, database, auth, roles
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#10b981',
+                    marginTop: '8px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Sep 09 - Sep 15, 2025
+                </div>
+              </div>
+
+              {/* Phase 2 */}
+              <div
+                style={{
+                  background: 'rgba(59, 130, 246, 0.1)',
+                  border: '1px solid rgba(59, 130, 246, 0.3)',
+                  borderRadius: '12px',
+                  padding: '16px',
+                }}
+              >
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      background: '#3b82f6',
+                      borderRadius: '50%',
+                    }}
+                  ></div>
+                  <span style={{ fontWeight: '700', color: '#3b82f6', fontSize: '1rem' }}>
+                    Phase 2 (Weeks 2-3)
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: '1.4' }}>
+                  UI/UX design system, portal templates, core features
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#3b82f6',
+                    marginTop: '8px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Sep 16 - Sep 29, 2025
+                </div>
+              </div>
+
+              {/* Phase 3 */}
+              <div
+                style={{
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  borderRadius: '12px',
+                  padding: '16px',
+                }}
+              >
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      background: '#f59e0b',
+                      borderRadius: '50%',
+                    }}
+                  ></div>
+                  <span style={{ fontWeight: '700', color: '#f59e0b', fontSize: '1rem' }}>
+                    Phase 3 (Weeks 4-5)
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: '1.4' }}>
+                  Full portal builds, RBAC, workflows
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#f59e0b',
+                    marginTop: '8px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Sep 30 - Oct 13, 2025
+                </div>
+              </div>
+
+              {/* Phase 4 */}
+              <div
+                style={{
+                  background: 'rgba(139, 92, 246, 0.1)',
+                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                  borderRadius: '12px',
+                  padding: '16px',
+                }}
+              >
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      background: '#8b5cf6',
+                      borderRadius: '50%',
+                    }}
+                  ></div>
+                  <span style={{ fontWeight: '700', color: '#8b5cf6', fontSize: '1rem' }}>
+                    Phase 4 (Weeks 6-7)
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: '1.4' }}>
+                  Integrations, scaling, and optimizations
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#8b5cf6',
+                    marginTop: '8px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Oct 14 - Oct 27, 2025
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* MCP 251 Agents Status Banner */}
           <div
             style={{
