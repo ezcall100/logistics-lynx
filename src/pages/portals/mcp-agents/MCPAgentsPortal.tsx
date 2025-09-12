@@ -463,7 +463,7 @@ const MCPAgentsPortal: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-indigo-50/20">
       {/* Header */}
-      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 dark:border-slate-700/50 sticky top-0 z-40">
+      <header className="bg-white/80 dark:bg-slate-800/80backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50sticky top-0 z-40">
         <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -550,7 +550,7 @@ const MCPAgentsPortal: React.FC = () => {
       <div className="flex">
         {/* Sidebar */}
         <aside
-          className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-slate-700/50 dark:border-slate-700/50 transition-all duration-300 fixed md:relative h-screen z-30`}
+          className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/70 dark:bg-slate-800/70backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-slate-700/50transition-all duration-300 fixed md:relative h-screen z-30`}
         >
           <div className="p-4">
             <div className="flex items-center justify-between mb-6">
@@ -683,7 +683,7 @@ const MCPAgentsPortal: React.FC = () => {
         {/* Main Content */}
         <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
           {/* Dashboard Header */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 dark:border-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
@@ -748,7 +748,7 @@ const MCPAgentsPortal: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 dark:border-slate-700/50 hover:shadow-xl transition-all duration-300`}
+                  className={`bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50hover:shadow-xl transition-all duration-300`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
@@ -802,7 +802,7 @@ const MCPAgentsPortal: React.FC = () => {
           </div>
 
           {/* Agents Grid */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 dark:border-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">

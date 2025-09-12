@@ -15,6 +15,11 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 }) => {
   const { theme, toggleTheme } = useTheme();
 
+  const handleToggle = () => {
+    console.log('Theme toggle clicked, current theme:', theme);
+    toggleTheme();
+  };
+
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-10 h-10',
@@ -29,7 +34,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className={`
         ${sizeClasses[size]}
         relative overflow-hidden

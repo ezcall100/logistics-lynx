@@ -61,6 +61,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f172a' : '#ffffff');
     }
+
+    // Debug log (remove in production)
+    console.log('Theme changed to:', theme);
   }, [theme]);
 
   // Listen for system theme changes
