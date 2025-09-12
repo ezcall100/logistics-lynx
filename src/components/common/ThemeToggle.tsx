@@ -16,7 +16,6 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   const { theme, toggleTheme } = useTheme();
 
   const handleToggle = () => {
-    console.log('Theme toggle clicked, current theme:', theme);
     toggleTheme();
   };
 

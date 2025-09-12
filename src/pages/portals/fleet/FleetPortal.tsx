@@ -742,9 +742,9 @@ function FleetPortal() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900dark:via-slate-800dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Enhanced Header - Responsive */}
-      <header className="bg-white/80 dark:bg-slate-800/80backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50sticky top-0 z-40">
+      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
         <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -1013,7 +1013,7 @@ function FleetPortal() {
       <div className="flex relative">
         {/* Enhanced Permanent Sidebar - Responsive */}
         <aside
-          className={`${sidebarCollapsed ? 'w-16' : 'w-64 lg:w-72'} bg-white/90 dark:bg-slate-800/90backdrop-blur-lg shadow-xl border-r border-gray-200 dark:border-slate-700/50transition-all duration-300 ease-in-out sticky top-20 h-[calc(100vh-5rem)] z-30 hidden md:block`}
+          className={`${sidebarCollapsed ? 'w-16' : 'w-64 lg:w-72'} bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg shadow-xl border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ease-in-out sticky top-20 h-[calc(100vh-5rem)] z-30 hidden md:block`}
         >
           <div className="flex flex-col h-full">
             {/* Sidebar Header */}
@@ -1206,7 +1206,7 @@ function FleetPortal() {
               onClick={() => setSidebarCollapsed(true)}
             />
             {/* Mobile Sidebar */}
-            <aside className="absolute left-0 top-0 w-80 h-full bg-white/95 dark:bg-slate-800/95backdrop-blur-lg shadow-2xl border-r border-gray-200 dark:border-slate-700/50">
+            <aside className="absolute left-0 top-0 w-80 h-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl border-r border-gray-200 dark:border-slate-700/50">
               <div className="flex flex-col h-full">
                 {/* Mobile Sidebar Header */}
                 <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
@@ -1363,7 +1363,7 @@ function FleetPortal() {
           <RealTimePortalStatus portalId="fleet" />
 
           {/* Dashboard Header - Responsive */}
-          <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
@@ -1416,7 +1416,7 @@ function FleetPortal() {
           </div>
 
           {/* Enhanced Navigation Tabs */}
-          <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
             <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl">
               {menuItems.map(item => (
                 <button
@@ -1438,7 +1438,7 @@ function FleetPortal() {
           {/* Enhanced Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Performance Overview */}
-            <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -1484,7 +1484,7 @@ function FleetPortal() {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white/70 dark:bg-slate-800/70backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -1547,7 +1547,7 @@ function FleetPortal() {
               }}
               onMouseDown={e => e.stopPropagation()}
               onMouseUp={e => e.stopPropagation()}
-              className="group p-2 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50transition-all duration-300 hover:scale-110 pointer-events-auto"
+              className="group p-2 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto"
             >
               <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-200 transition-transform duration-300 group-hover:-translate-x-0.5" />
             </button>
@@ -1710,7 +1710,7 @@ function FleetPortal() {
                           className={`group relative p-4 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                             msg.unread
                               ? 'bg-gradient-to-br from-blue-50/90 to-indigo-50/90 border-blue-200/70 shadow-sm'
-                              : 'bg-gradient-to-br from-white/70 to-gray-50/70 border-gray-200 dark:border-slate-700/50hover:from-white/80 hover:to-gray-50/80'
+                              : 'bg-gradient-to-br from-white/70 to-gray-50/70 border-gray-200 dark:border-slate-700/50 hover:from-white/80 hover:to-gray-50/80'
                           }`}
                         >
                           <div className="flex items-center justify-between mb-2">
@@ -1747,7 +1747,7 @@ function FleetPortal() {
                       <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-3 text-sm border border-gray-200 dark:border-slate-700/50rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-300/50 bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm transition-all duration-300"
+                        className="flex-1 px-4 py-3 text-sm border border-gray-200 dark:border-slate-700/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-300/50 bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm transition-all duration-300"
                       />
                       <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                         <Send className="h-4 w-4" />
