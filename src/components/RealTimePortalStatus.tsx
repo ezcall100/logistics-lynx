@@ -7,10 +7,6 @@ import {
   CheckCircle,
   AlertCircle,
   XCircle,
-  Play,
-  Pause,
-  RotateCcw,
-  Zap,
   Code,
   TestTube,
   Rocket,
@@ -29,7 +25,6 @@ const RealTimePortalStatus: React.FC<RealTimePortalStatusProps> = ({
 }) => {
   const [portalUpdate, setPortalUpdate] = useState<PortalUpdate | null>(null);
   const [agentActivities, setAgentActivities] = useState<AgentActivity[]>([]);
-  const [isSystemActive, setIsSystemActive] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {

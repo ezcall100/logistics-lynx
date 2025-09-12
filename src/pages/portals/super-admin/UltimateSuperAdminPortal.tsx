@@ -1,64 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Bot, 
-  Brain, 
-  Globe, 
-  Shield, 
-  BarChart3, 
-  Activity, 
-  Heart, 
-  Settings, 
-  Users, 
-  Database, 
-  Server, 
-  Network, 
-  Zap, 
-  Target, 
-  Eye, 
-  Command, 
-  Terminal, 
-  TrendingUp, 
-  AlertTriangle, 
-  CheckCircle, 
-  Clock, 
-  RefreshCw, 
-  Bell, 
-  Search, 
-  Filter, 
-  Download, 
-  Upload, 
-  Maximize2, 
-  Minimize2, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Power, 
-  PowerOff, 
-  ExternalLink, 
-  Copy, 
-  Share, 
-  Star, 
-  StarOff, 
-  Heart as HeartIcon, 
-  HeartOff as HeartOffIcon, 
-  Wifi, 
-  WifiOff, 
-  Signal, 
-  SignalZero, 
-  SignalLow, 
-  SignalMedium, 
-  SignalHigh, 
-  Volume2, 
-  VolumeX, 
-  BellOff, 
-  EyeOff, 
-  Lock, 
-  Unlock, 
-  Cpu, 
-  MemoryStick, 
-  PieChart, 
-  LineChart
+import {
+  Bot,
+  Brain,
+  Globe,
+  Shield,
+  BarChart3,
+  Activity,
+  Heart,
+  Settings,
+  TrendingUp,
+  TrendingDown,
+  RefreshCw,
+  Bell,
+  Search,
+  X,
 } from 'lucide-react';
 
 // Import all the Super Admin components
@@ -91,9 +47,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
   const [activeModule, setActiveModule] = useState<string>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [notifications, setNotifications] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   // Define all Super Admin modules
   const modules: SuperAdminModule[] = [
@@ -107,7 +61,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'critical',
       features: ['Live Metrics', 'Performance Charts', 'Portal Status', 'Quick Actions'],
-      metrics: { value: 99.7, unit: '%', trend: 'up' }
+      metrics: { value: 99.7, unit: '%', trend: 'up' },
     },
     {
       id: 'mcp-agents',
@@ -119,7 +73,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'critical',
       features: ['Agent Monitoring', 'Cluster Management', 'Performance Tracking', 'Auto-Scaling'],
-      metrics: { value: 248, unit: '/250', trend: 'stable' }
+      metrics: { value: 248, unit: '/250', trend: 'stable' },
     },
     {
       id: 'ai-command',
@@ -130,8 +84,13 @@ const UltimateSuperAdminPortal: React.FC = () => {
       component: AICommandCenter,
       status: 'active',
       priority: 'high',
-      features: ['AI Monitoring', 'Command Terminal', 'Performance Analytics', 'Automation Control'],
-      metrics: { value: 94.5, unit: '%', trend: 'up' }
+      features: [
+        'AI Monitoring',
+        'Command Terminal',
+        'Performance Analytics',
+        'Automation Control',
+      ],
+      metrics: { value: 94.5, unit: '%', trend: 'up' },
     },
     {
       id: 'portal-control',
@@ -143,7 +102,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'high',
       features: ['Portal Management', 'User Analytics', 'Feature Control', 'Deployment'],
-      metrics: { value: 10, unit: 'portals', trend: 'stable' }
+      metrics: { value: 10, unit: 'portals', trend: 'stable' },
     },
     {
       id: 'security',
@@ -155,7 +114,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'critical',
       features: ['Threat Detection', 'Security Events', 'Auto Response', 'Compliance'],
-      metrics: { value: 3, unit: 'threats', trend: 'down' }
+      metrics: { value: 3, unit: 'threats', trend: 'down' },
     },
     {
       id: 'business-intel',
@@ -167,7 +126,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'medium',
       features: ['Predictive Analytics', 'Business Metrics', 'Reports', 'Insights'],
-      metrics: { value: 2.4, unit: 'M$', trend: 'up' }
+      metrics: { value: 2.4, unit: 'M$', trend: 'up' },
     },
     {
       id: 'health-monitor',
@@ -179,8 +138,8 @@ const UltimateSuperAdminPortal: React.FC = () => {
       status: 'active',
       priority: 'high',
       features: ['Health Monitoring', 'Auto-Healing', 'Component Status', 'Performance'],
-      metrics: { value: 94, unit: '%', trend: 'stable' }
-    }
+      metrics: { value: 94, unit: '%', trend: 'stable' },
+    },
   ];
 
   const getModuleColor = (color: string) => {
@@ -191,42 +150,56 @@ const UltimateSuperAdminPortal: React.FC = () => {
       emerald: 'from-emerald-500/20 to-emerald-600/20 border-emerald-500/30',
       red: 'from-red-500/20 to-red-600/20 border-red-500/30',
       teal: 'from-teal-500/20 to-teal-600/20 border-teal-500/30',
-      cyan: 'from-cyan-500/20 to-cyan-600/20 border-cyan-500/30'
+      cyan: 'from-cyan-500/20 to-cyan-600/20 border-cyan-500/30',
     };
     return colors[color as keyof typeof colors] || colors.indigo;
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-400 bg-green-400/20';
-      case 'maintenance': return 'text-yellow-400 bg-yellow-400/20';
-      case 'development': return 'text-blue-400 bg-blue-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'active':
+        return 'text-green-400 bg-green-400/20';
+      case 'maintenance':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'development':
+        return 'text-blue-400 bg-blue-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'critical': return 'text-red-500';
-      case 'high': return 'text-orange-500';
-      case 'medium': return 'text-yellow-500';
-      case 'low': return 'text-green-500';
-      default: return 'text-gray-500';
+      case 'critical':
+        return 'text-red-500';
+      case 'high':
+        return 'text-orange-500';
+      case 'medium':
+        return 'text-yellow-500';
+      case 'low':
+        return 'text-green-500';
+      default:
+        return 'text-gray-500';
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'up': return <TrendingUp className="w-4 h-4 text-green-400" />;
-      case 'down': return <TrendingDown className="w-4 h-4 text-red-400" />;
-      case 'stable': return <Activity className="w-4 h-4 text-gray-400" />;
-      default: return <Activity className="w-4 h-4 text-gray-400" />;
+      case 'up':
+        return <TrendingUp className="w-4 h-4 text-green-400" />;
+      case 'down':
+        return <TrendingDown className="w-4 h-4 text-red-400" />;
+      case 'stable':
+        return <Activity className="w-4 h-4 text-gray-400" />;
+      default:
+        return <Activity className="w-4 h-4 text-gray-400" />;
     }
   };
 
-  const filteredModules = modules.filter(module => 
-    module.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    module.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredModules = modules.filter(
+    module =>
+      module.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      module.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const activeModuleData = modules.find(m => m.id === activeModule);
@@ -248,12 +221,8 @@ const UltimateSuperAdminPortal: React.FC = () => {
           <div className="flex items-center justify-between mb-8">
             {!sidebarCollapsed && (
               <div>
-                <h1 className="text-2xl font-bold text-white mb-2">
-                  🚀 Ultimate Super Admin
-                </h1>
-                <p className="text-sm text-gray-300">
-                  Complete system control center
-                </p>
+                <h1 className="text-2xl font-bold text-white mb-2">🚀 Ultimate Super Admin</h1>
+                <p className="text-sm text-gray-300">Complete system control center</p>
               </div>
             )}
             <button
@@ -273,7 +242,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
                   type="text"
                   placeholder="Search modules..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -306,21 +275,25 @@ const UltimateSuperAdminPortal: React.FC = () => {
                 transition={{ delay: index * 0.05 }}
                 onClick={() => setActiveModule(module.id)}
                 className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all ${
-                  activeModule === module.id 
-                    ? 'bg-white/20 text-white' 
+                  activeModule === module.id
+                    ? 'bg-white/20 text-white'
                     : 'bg-white/5 text-gray-300 hover:bg-white/10'
                 }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                  activeModule === module.id ? 'bg-white/20' : 'bg-white/10'
-                }`}>
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                    activeModule === module.id ? 'bg-white/20' : 'bg-white/10'
+                  }`}
+                >
                   <module.icon className="w-4 h-4" />
                 </div>
                 {!sidebarCollapsed && (
                   <div className="flex-1 text-left">
                     <div className="flex items-center justify-between">
                       <span className="font-medium">{module.name}</span>
-                      <div className={`px-2 py-1 rounded-full text-xs ${getStatusColor(module.status)}`}>
+                      <div
+                        className={`px-2 py-1 rounded-full text-xs ${getStatusColor(module.status)}`}
+                      >
                         {module.status}
                       </div>
                     </div>
@@ -363,13 +336,16 @@ const UltimateSuperAdminPortal: React.FC = () => {
               <h2 className="text-xl font-bold text-white">
                 {activeModuleData?.name || 'Super Admin Portal'}
               </h2>
-              <div className={`px-3 py-1 rounded-full text-xs ${getStatusColor(activeModuleData?.status || 'active')}`}>
+              <div
+                className={`px-3 py-1 rounded-full text-xs ${getStatusColor(activeModuleData?.status || 'active')}`}
+              >
                 {activeModuleData?.status || 'active'}
               </div>
               <div className="flex items-center space-x-1">
                 {getTrendIcon(activeModuleData?.metrics.trend || 'stable')}
                 <span className="text-sm text-gray-300">
-                  {activeModuleData?.metrics.value}{activeModuleData?.metrics.unit}
+                  {activeModuleData?.metrics.value}
+                  {activeModuleData?.metrics.unit}
                 </span>
               </div>
             </div>
@@ -381,7 +357,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
                   {autoRefresh ? 'Live Updates' : 'Paused'}
                 </span>
               </div>
-              <button 
+              <button
                 onClick={() => setAutoRefresh(!autoRefresh)}
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
               >
@@ -430,7 +406,7 @@ const UltimateSuperAdminPortal: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl w-full border border-white/20 max-h-[80vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-6">
@@ -461,7 +437,9 @@ const UltimateSuperAdminPortal: React.FC = () => {
                         <module.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex flex-col items-end space-y-1">
-                        <div className={`px-2 py-1 rounded-full text-xs ${getStatusColor(module.status)}`}>
+                        <div
+                          className={`px-2 py-1 rounded-full text-xs ${getStatusColor(module.status)}`}
+                        >
                           {module.status}
                         </div>
                         <div className={`text-xs ${getPriorityColor(module.priority)}`}>
@@ -479,7 +457,8 @@ const UltimateSuperAdminPortal: React.FC = () => {
                         <div className="flex items-center space-x-1">
                           {getTrendIcon(module.metrics.trend)}
                           <span className="text-sm text-white">
-                            {module.metrics.value}{module.metrics.unit}
+                            {module.metrics.value}
+                            {module.metrics.unit}
                           </span>
                         </div>
                       </div>
@@ -488,7 +467,10 @@ const UltimateSuperAdminPortal: React.FC = () => {
                         <p className="text-xs text-gray-400 mb-2">Key Features</p>
                         <div className="flex flex-wrap gap-1">
                           {module.features.slice(0, 2).map((feature, idx) => (
-                            <span key={idx} className="px-2 py-1 bg-white/10 text-white rounded text-xs">
+                            <span
+                              key={idx}
+                              className="px-2 py-1 bg-white/10 text-white rounded text-xs"
+                            >
                               {feature}
                             </span>
                           ))}

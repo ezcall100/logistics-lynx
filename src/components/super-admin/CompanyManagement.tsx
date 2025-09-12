@@ -21,7 +21,13 @@ import {
 import { Button } from '../../design-system/components/Button';
 import { Card, CardContent } from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
-import { formatCurrency, formatNumber, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
+import {
+  formatCurrency,
+  formatNumber,
+  formatRelativeTime,
+  getStatusColor,
+  getStatusIcon,
+} from '../../lib/utils';
 
 interface Company {
   id: number;
@@ -93,8 +99,8 @@ const CompanyManagement: React.FC = () => {
     contact: {
       email: '',
       phone: '',
-      address: ''
-    }
+      address: '',
+    },
   });
   const [loading, setLoading] = useState(false);
   const [bulkSelected, setBulkSelected] = useState<number[]>([]);
@@ -116,7 +122,7 @@ const CompanyManagement: React.FC = () => {
         contact: {
           email: 'admin@globallogistics.com',
           phone: '+1-555-0123',
-          address: '123 Business Ave, New York, NY 10001'
+          address: '123 Business Ave, New York, NY 10001',
         },
         settings: {
           maxUsers: 2000,
@@ -124,14 +130,14 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: 100000,
           customBranding: true,
           ssoEnabled: true,
-          auditLogs: true
+          auditLogs: true,
         },
         billing: {
           cycle: 'yearly',
           nextBilling: '2024-12-15T00:00:00Z',
           paymentMethod: 'Credit Card',
-          invoices: 12
-        }
+          invoices: 12,
+        },
       },
       {
         id: 2,
@@ -147,7 +153,7 @@ const CompanyManagement: React.FC = () => {
         contact: {
           email: 'contact@swifttransport.com',
           phone: '+1-555-0456',
-          address: '456 Transport St, Los Angeles, CA 90210'
+          address: '456 Transport St, Los Angeles, CA 90210',
         },
         settings: {
           maxUsers: 1000,
@@ -155,14 +161,14 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: 50000,
           customBranding: true,
           ssoEnabled: false,
-          auditLogs: true
+          auditLogs: true,
         },
         billing: {
           cycle: 'monthly',
           nextBilling: '2024-02-15T00:00:00Z',
           paymentMethod: 'Bank Transfer',
-          invoices: 24
-        }
+          invoices: 24,
+        },
       },
       {
         id: 3,
@@ -178,7 +184,7 @@ const CompanyManagement: React.FC = () => {
         contact: {
           email: 'info@metrofreight.com',
           phone: '+1-555-0789',
-          address: '789 Freight Blvd, Chicago, IL 60601'
+          address: '789 Freight Blvd, Chicago, IL 60601',
         },
         settings: {
           maxUsers: 500,
@@ -186,14 +192,14 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: 10000,
           customBranding: false,
           ssoEnabled: false,
-          auditLogs: false
+          auditLogs: false,
         },
         billing: {
           cycle: 'monthly',
           nextBilling: '2024-02-15T00:00:00Z',
           paymentMethod: 'Credit Card',
-          invoices: 18
-        }
+          invoices: 18,
+        },
       },
       {
         id: 4,
@@ -209,7 +215,7 @@ const CompanyManagement: React.FC = () => {
         contact: {
           email: 'hello@coastalshipping.com',
           phone: '+1-555-0321',
-          address: '321 Harbor Dr, Miami, FL 33101'
+          address: '321 Harbor Dr, Miami, FL 33101',
         },
         settings: {
           maxUsers: 50,
@@ -217,15 +223,15 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: 1000,
           customBranding: false,
           ssoEnabled: false,
-          auditLogs: false
+          auditLogs: false,
         },
         billing: {
           cycle: 'monthly',
           nextBilling: '2024-02-14T00:00:00Z',
           paymentMethod: 'Trial',
-          invoices: 0
-        }
-      }
+          invoices: 0,
+        },
+      },
     ];
 
     setCompanies(mockCompanies);
@@ -238,10 +244,11 @@ const CompanyManagement: React.FC = () => {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered.filter(company =>
-        company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        company.domain.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        company.contact.email.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        company =>
+          company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          company.domain.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          company.contact.email.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -271,7 +278,7 @@ const CompanyManagement: React.FC = () => {
         name: formData.name,
         domain: formData.domain,
         users: 0,
-        plan: formData.plan as any,
+        plan: formData.plan as 'Basic' | 'Standard' | 'Professional' | 'Enterprise',
         status: 'Trial',
         revenue: 0,
         growth: 0,
@@ -284,14 +291,14 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: formData.apiCallsLimit,
           customBranding: formData.customBranding,
           ssoEnabled: formData.ssoEnabled,
-          auditLogs: formData.auditLogs
+          auditLogs: formData.auditLogs,
         },
         billing: {
           cycle: 'monthly',
           nextBilling: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
           paymentMethod: 'Trial',
-          invoices: 0
-        }
+          invoices: 0,
+        },
       };
 
       setCompanies(prev => [...prev, newCompany]);
@@ -313,7 +320,7 @@ const CompanyManagement: React.FC = () => {
         ...editingCompany,
         name: formData.name,
         domain: formData.domain,
-        plan: formData.plan as any,
+        plan: formData.plan as 'Basic' | 'Standard' | 'Professional' | 'Enterprise',
         features: getFeaturesForPlan(formData.plan),
         contact: formData.contact,
         settings: {
@@ -323,11 +330,11 @@ const CompanyManagement: React.FC = () => {
           apiCallsLimit: formData.apiCallsLimit,
           customBranding: formData.customBranding,
           ssoEnabled: formData.ssoEnabled,
-          auditLogs: formData.auditLogs
-        }
+          auditLogs: formData.auditLogs,
+        },
       };
 
-      setCompanies(prev => prev.map(c => c.id === editingCompany.id ? updatedCompany : c));
+      setCompanies(prev => prev.map(c => (c.id === editingCompany.id ? updatedCompany : c)));
       setEditingCompany(null);
       setShowCompanyModal(false);
       resetForm();
@@ -353,15 +360,23 @@ const CompanyManagement: React.FC = () => {
         }
         break;
       case 'suspend':
-        setCompanies(prev => prev.map(c => 
-          bulkSelected.includes(c.id) ? { ...c, status: 'Suspended' as any } : c
-        ));
+        setCompanies(prev =>
+          prev.map(c =>
+            bulkSelected.includes(c.id)
+              ? { ...c, status: 'Suspended' as 'Active' | 'Suspended' | 'Trial' }
+              : c
+          )
+        );
         setBulkSelected([]);
         break;
       case 'activate':
-        setCompanies(prev => prev.map(c => 
-          bulkSelected.includes(c.id) ? { ...c, status: 'Active' as any } : c
-        ));
+        setCompanies(prev =>
+          prev.map(c =>
+            bulkSelected.includes(c.id)
+              ? { ...c, status: 'Active' as 'Active' | 'Suspended' | 'Trial' }
+              : c
+          )
+        );
         setBulkSelected([]);
         break;
     }
@@ -396,8 +411,8 @@ const CompanyManagement: React.FC = () => {
       contact: {
         email: '',
         phone: '',
-        address: ''
-      }
+        address: '',
+      },
     });
   };
 
@@ -413,7 +428,7 @@ const CompanyManagement: React.FC = () => {
       customBranding: company.settings.customBranding,
       ssoEnabled: company.settings.ssoEnabled,
       auditLogs: company.settings.auditLogs,
-      contact: company.contact
+      contact: company.contact,
     });
     setShowCompanyModal(true);
   };
@@ -457,13 +472,13 @@ const CompanyManagement: React.FC = () => {
                 <Input
                   label="Company Name"
                   value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Enter company name"
                 />
                 <Input
                   label="Domain"
                   value={formData.domain}
-                  onChange={(e) => setFormData(prev => ({ ...prev, domain: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, domain: e.target.value }))}
                   placeholder="company.com"
                 />
               </div>
@@ -473,7 +488,7 @@ const CompanyManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
                   <select
                     value={formData.plan}
-                    onChange={(e) => setFormData(prev => ({ ...prev, plan: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, plan: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="Basic">Basic</option>
@@ -486,22 +501,30 @@ const CompanyManagement: React.FC = () => {
                   label="Max Users"
                   type="number"
                   value={formData.maxUsers}
-                  onChange={(e) => setFormData(prev => ({ ...prev, maxUsers: parseInt(e.target.value) }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, maxUsers: parseInt(e.target.value) }))
+                  }
                 />
                 <Input
                   label="Storage Limit (GB)"
                   type="number"
                   value={formData.storageLimit}
-                  onChange={(e) => setFormData(prev => ({ ...prev, storageLimit: parseInt(e.target.value) }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, storageLimit: parseInt(e.target.value) }))
+                  }
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">API Calls Limit</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  API Calls Limit
+                </label>
                 <Input
                   type="number"
                   value={formData.apiCallsLimit}
-                  onChange={(e) => setFormData(prev => ({ ...prev, apiCallsLimit: parseInt(e.target.value) }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, apiCallsLimit: parseInt(e.target.value) }))
+                  }
                 />
               </div>
 
@@ -512,29 +535,35 @@ const CompanyManagement: React.FC = () => {
                     label="Email"
                     type="email"
                     value={formData.contact.email}
-                    onChange={(e) => setFormData(prev => ({ 
-                      ...prev, 
-                      contact: { ...prev.contact, email: e.target.value }
-                    }))}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        contact: { ...prev.contact, email: e.target.value },
+                      }))
+                    }
                     leftIcon={<Mail className="w-4 h-4" />}
                   />
                   <Input
                     label="Phone"
                     value={formData.contact.phone}
-                    onChange={(e) => setFormData(prev => ({ 
-                      ...prev, 
-                      contact: { ...prev.contact, phone: e.target.value }
-                    }))}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        contact: { ...prev.contact, phone: e.target.value },
+                      }))
+                    }
                     leftIcon={<Phone className="w-4 h-4" />}
                   />
                 </div>
                 <Input
                   label="Address"
                   value={formData.contact.address}
-                  onChange={(e) => setFormData(prev => ({ 
-                    ...prev, 
-                    contact: { ...prev.contact, address: e.target.value }
-                  }))}
+                  onChange={e =>
+                    setFormData(prev => ({
+                      ...prev,
+                      contact: { ...prev.contact, address: e.target.value },
+                    }))
+                  }
                   leftIcon={<MapPin className="w-4 h-4" />}
                 />
               </div>
@@ -545,16 +574,18 @@ const CompanyManagement: React.FC = () => {
                   {[
                     { key: 'customBranding', label: 'Custom Branding' },
                     { key: 'ssoEnabled', label: 'SSO Enabled' },
-                    { key: 'auditLogs', label: 'Audit Logs' }
-                  ].map((setting) => (
+                    { key: 'auditLogs', label: 'Audit Logs' },
+                  ].map(setting => (
                     <label key={setting.key} className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         checked={formData[setting.key as keyof CompanyFormData] as boolean}
-                        onChange={(e) => setFormData(prev => ({ 
-                          ...prev, 
-                          [setting.key]: e.target.checked 
-                        }))}
+                        onChange={e =>
+                          setFormData(prev => ({
+                            ...prev,
+                            [setting.key]: e.target.checked,
+                          }))
+                        }
                         className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                       />
                       <span className="text-sm text-gray-700">{setting.label}</span>
@@ -590,7 +621,6 @@ const CompanyManagement: React.FC = () => {
     </AnimatePresence>
   );
 
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -623,14 +653,14 @@ const CompanyManagement: React.FC = () => {
               <Input
                 placeholder="Search companies..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 leftIcon={<Search className="w-4 h-4" />}
               />
             </div>
             <div className="flex gap-3">
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={e => setStatusFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
@@ -641,7 +671,7 @@ const CompanyManagement: React.FC = () => {
               </select>
               <select
                 value={planFilter}
-                onChange={(e) => setPlanFilter(e.target.value)}
+                onChange={e => setPlanFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Plans</option>
@@ -694,8 +724,11 @@ const CompanyManagement: React.FC = () => {
                   <th className="px-6 py-4 text-left">
                     <input
                       type="checkbox"
-                      checked={bulkSelected.length === filteredCompanies.length && filteredCompanies.length > 0}
-                      onChange={(e) => {
+                      checked={
+                        bulkSelected.length === filteredCompanies.length &&
+                        filteredCompanies.length > 0
+                      }
+                      onChange={e => {
                         if (e.target.checked) {
                           setBulkSelected(filteredCompanies.map(c => c.id));
                         } else {
@@ -732,13 +765,13 @@ const CompanyManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredCompanies.map((company) => (
+                {filteredCompanies.map(company => (
                   <tr key={company.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(company.id)}
-                        onChange={(e) => {
+                        onChange={e => {
                           if (e.target.checked) {
                             setBulkSelected(prev => [...prev, company.id]);
                           } else {
@@ -763,17 +796,24 @@ const CompanyManagement: React.FC = () => {
                       {formatNumber(company.users)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        company.plan === 'Enterprise' ? 'bg-purple-100 text-purple-800' :
-                        company.plan === 'Professional' ? 'bg-blue-100 text-blue-800' :
-                        company.plan === 'Standard' ? 'bg-green-100 text-green-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          company.plan === 'Enterprise'
+                            ? 'bg-purple-100 text-purple-800'
+                            : company.plan === 'Professional'
+                              ? 'bg-blue-100 text-blue-800'
+                              : company.plan === 'Standard'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
                         {company.plan}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(company.status)}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(company.status)}`}
+                      >
                         {getStatusIcon(company.status)}
                         {company.status}
                       </span>
@@ -789,17 +829,10 @@ const CompanyManagement: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                        >
+                        <Button size="sm" variant="ghost">
                           <Eye className="w-4 h-4" />
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => openEditModal(company)}
-                        >
+                        <Button size="sm" variant="ghost" onClick={() => openEditModal(company)}>
                           <Edit className="w-4 h-4" />
                         </Button>
                         <Button

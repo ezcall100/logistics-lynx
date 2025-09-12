@@ -1,60 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  BarChart3, 
-  PieChart, 
-  LineChart, 
-  TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
-  Users, 
-  Activity, 
-  Target, 
-  Zap, 
-  Brain, 
-  Eye, 
-  Download, 
-  RefreshCw, 
-  Settings, 
-  Filter, 
-  Search, 
-  Calendar, 
-  Clock, 
-  Globe, 
-  Database, 
-  Server, 
-  Cpu, 
-  MemoryStick, 
-  Network, 
-  AlertTriangle, 
-  CheckCircle, 
-  ArrowUpRight, 
-  ArrowDownRight, 
-  Maximize2, 
-  Minimize2, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Power, 
-  PowerOff, 
-  ExternalLink, 
-  Copy, 
-  Share, 
-  Star, 
-  StarOff, 
-  Heart, 
-  HeartOff, 
-  Bell, 
-  BellOff, 
-  Volume2, 
-  VolumeX, 
-  Wifi, 
-  WifiOff, 
-  Signal, 
-  SignalZero, 
-  SignalLow, 
-  SignalMedium, 
-  SignalHigh
+import {
+  BarChart3,
+  Target,
+  Brain,
+  Eye,
+  Download,
+  RefreshCw,
+  ArrowUpRight,
+  ArrowDownRight,
+  X,
 } from 'lucide-react';
 
 interface BusinessMetric {
@@ -94,8 +49,9 @@ interface ReportData {
 }
 
 const BusinessIntelligenceCenter: React.FC = () => {
-  const [selectedMetric, setSelectedMetric] = useState<BusinessMetric | null>(null);
-  const [viewMode, setViewMode] = useState<'overview' | 'insights' | 'reports' | 'predictions'>('overview');
+  const [viewMode, setViewMode] = useState<'overview' | 'insights' | 'reports' | 'predictions'>(
+    'overview'
+  );
   const [timeRange, setTimeRange] = useState('30d');
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [selectedInsight, setSelectedInsight] = useState<PredictiveInsight | null>(null);
@@ -112,7 +68,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Total monthly recurring revenue',
       target: 2500000,
-      unit: '$'
+      unit: '$',
     },
     {
       id: 'users',
@@ -124,7 +80,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'users',
       description: 'Monthly active users across all portals',
       target: 15000,
-      unit: ''
+      unit: '',
     },
     {
       id: 'conversion',
@@ -136,7 +92,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'performance',
       description: 'Trial to paid conversion rate',
       target: 20,
-      unit: '%'
+      unit: '%',
     },
     {
       id: 'churn',
@@ -148,7 +104,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'performance',
       description: 'Monthly customer churn rate',
       target: 2.5,
-      unit: '%'
+      unit: '%',
     },
     {
       id: 'ltv',
@@ -160,7 +116,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Average customer lifetime value',
       target: 15000,
-      unit: '$'
+      unit: '$',
     },
     {
       id: 'cac',
@@ -172,11 +128,11 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Customer acquisition cost',
       target: 750,
-      unit: '$'
-    }
+      unit: '$',
+    },
   ]);
 
-  const [insights, setInsights] = useState<PredictiveInsight[]>([
+  const [insights] = useState<PredictiveInsight[]>([
     {
       id: 'insight-1',
       title: 'Revenue Growth Opportunity',
@@ -186,7 +142,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 3 months',
       recommendation: 'Increase marketing spend on broker segment by 30%',
       category: 'revenue',
-      status: 'active'
+      status: 'active',
     },
     {
       id: 'insight-2',
@@ -197,7 +153,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 2 months',
       recommendation: 'Implement gamification features to boost engagement',
       category: 'users',
-      status: 'monitoring'
+      status: 'monitoring',
     },
     {
       id: 'insight-3',
@@ -208,7 +164,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 6 months',
       recommendation: 'Deploy AI-powered automation for common queries',
       category: 'operations',
-      status: 'active'
+      status: 'active',
     },
     {
       id: 'insight-4',
@@ -219,11 +175,11 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 12 months',
       recommendation: 'Prioritize EDI portal development for EU expansion',
       category: 'revenue',
-      status: 'monitoring'
-    }
+      status: 'monitoring',
+    },
   ]);
 
-  const [reports, setReports] = useState<ReportData[]>([
+  const [reports] = useState<ReportData[]>([
     {
       id: 'report-1',
       name: 'Monthly Financial Report',
@@ -232,7 +188,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 1250,
       insights: 15,
       status: 'ready',
-      downloadUrl: '/reports/monthly-financial.pdf'
+      downloadUrl: '/reports/monthly-financial.pdf',
     },
     {
       id: 'report-2',
@@ -242,7 +198,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 8900,
       insights: 23,
       status: 'ready',
-      downloadUrl: '/reports/user-behavior.pdf'
+      downloadUrl: '/reports/user-behavior.pdf',
     },
     {
       id: 'report-3',
@@ -251,7 +207,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       generatedAt: '3 hours ago',
       dataPoints: 2100,
       insights: 8,
-      status: 'generating'
+      status: 'generating',
     },
     {
       id: 'report-4',
@@ -261,8 +217,8 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 3400,
       insights: 12,
       status: 'ready',
-      downloadUrl: '/reports/operational.pdf'
-    }
+      downloadUrl: '/reports/operational.pdf',
+    },
   ]);
 
   // Simulate real-time updates
@@ -270,11 +226,15 @@ const BusinessIntelligenceCenter: React.FC = () => {
     if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      setMetrics(prevMetrics => 
+      setMetrics(prevMetrics =>
         prevMetrics.map(metric => ({
           ...metric,
           value: metric.value + (Math.random() - 0.5) * (metric.value * 0.01),
-          trend: [...metric.trend.slice(1), metric.trend[metric.trend.length - 1] + (Math.random() - 0.5) * (metric.trend[metric.trend.length - 1] * 0.02)]
+          trend: [
+            ...metric.trend.slice(1),
+            metric.trend[metric.trend.length - 1] +
+              (Math.random() - 0.5) * (metric.trend[metric.trend.length - 1] * 0.02),
+          ],
         }))
       );
     }, 5000);
@@ -284,29 +244,42 @@ const BusinessIntelligenceCenter: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'revenue': return 'text-green-400 bg-green-400/20';
-      case 'users': return 'text-blue-400 bg-blue-400/20';
-      case 'performance': return 'text-purple-400 bg-purple-400/20';
-      case 'growth': return 'text-orange-400 bg-orange-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'revenue':
+        return 'text-green-400 bg-green-400/20';
+      case 'users':
+        return 'text-blue-400 bg-blue-400/20';
+      case 'performance':
+        return 'text-purple-400 bg-purple-400/20';
+      case 'growth':
+        return 'text-orange-400 bg-orange-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getImpactColor = (impact: string) => {
     switch (impact) {
-      case 'high': return 'text-red-500 bg-red-500/20';
-      case 'medium': return 'text-yellow-500 bg-yellow-500/20';
-      case 'low': return 'text-green-500 bg-green-500/20';
-      default: return 'text-gray-500 bg-gray-500/20';
+      case 'high':
+        return 'text-red-500 bg-red-500/20';
+      case 'medium':
+        return 'text-yellow-500 bg-yellow-500/20';
+      case 'low':
+        return 'text-green-500 bg-green-500/20';
+      default:
+        return 'text-gray-500 bg-gray-500/20';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'ready': return 'text-green-400 bg-green-400/20';
-      case 'generating': return 'text-yellow-400 bg-yellow-400/20';
-      case 'error': return 'text-red-400 bg-red-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'ready':
+        return 'text-green-400 bg-green-400/20';
+      case 'generating':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'error':
+        return 'text-red-400 bg-red-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
@@ -326,9 +299,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              📊 Business Intelligence Center
-            </h1>
+            <h1 className="text-4xl font-bold text-white mb-2">📊 Business Intelligence Center</h1>
             <p className="text-gray-300 text-lg">
               Advanced analytics and predictive insights for strategic decision making
             </p>
@@ -340,7 +311,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
                 {autoRefresh ? 'Live Analytics' : 'Paused'}
               </span>
             </div>
-            <button 
+            <button
               onClick={() => setAutoRefresh(!autoRefresh)}
               className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
@@ -356,14 +327,14 @@ const BusinessIntelligenceCenter: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'insights', label: 'Insights', icon: Brain },
             { id: 'reports', label: 'Reports', icon: Download },
-            { id: 'predictions', label: 'Predictions', icon: Target }
+            { id: 'predictions', label: 'Predictions', icon: Target },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'overview' | 'insights' | 'reports' | 'predictions')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                viewMode === id 
-                  ? 'bg-teal-600 text-white' 
+                viewMode === id
+                  ? 'bg-teal-600 text-white'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
@@ -377,7 +348,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
         <div className="flex items-center space-x-4 mb-8">
           <select
             value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value)}
+            onChange={e => setTimeRange(e.target.value)}
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="7d">Last 7 Days</option>
@@ -385,9 +356,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
             <option value="90d">Last 90 Days</option>
             <option value="1y">Last Year</option>
           </select>
-          <div className="text-sm text-gray-400">
-            Showing data for {timeRange}
-          </div>
+          <div className="text-sm text-gray-400">Showing data for {timeRange}</div>
         </div>
       </div>
 
@@ -402,7 +371,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => setSelectedMetric(metric)}
+                onClick={() => {}}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-4">
@@ -415,7 +384,9 @@ const BusinessIntelligenceCenter: React.FC = () => {
                       <p className="text-xs text-gray-400">{metric.description}</p>
                     </div>
                   </div>
-                  <div className={`px-2 py-1 rounded-full text-xs ${getCategoryColor(metric.category)}`}>
+                  <div
+                    className={`px-2 py-1 rounded-full text-xs ${getCategoryColor(metric.category)}`}
+                  >
                     {metric.category}
                   </div>
                 </div>
@@ -431,12 +402,17 @@ const BusinessIntelligenceCenter: React.FC = () => {
                       ) : metric.changeType === 'decrease' ? (
                         <ArrowDownRight className="w-4 h-4 text-red-400" />
                       ) : null}
-                      <span className={`text-sm font-medium ${
-                        metric.changeType === 'increase' ? 'text-green-400' : 
-                        metric.changeType === 'decrease' ? 'text-red-400' : 
-                        'text-gray-400'
-                      }`}>
-                        {metric.change > 0 ? '+' : ''}{metric.change}%
+                      <span
+                        className={`text-sm font-medium ${
+                          metric.changeType === 'increase'
+                            ? 'text-green-400'
+                            : metric.changeType === 'decrease'
+                              ? 'text-red-400'
+                              : 'text-gray-400'
+                        }`}
+                      >
+                        {metric.change > 0 ? '+' : ''}
+                        {metric.change}%
                       </span>
                     </div>
                   </div>
@@ -447,7 +423,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
                   </div>
 
                   <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-teal-400 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${Math.min(100, (metric.value / metric.target) * 100)}%` }}
                     ></div>
@@ -492,7 +468,9 @@ const BusinessIntelligenceCenter: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className={`px-3 py-1 rounded-full text-xs ${getImpactColor(insight.impact)}`}>
+                  <div
+                    className={`px-3 py-1 rounded-full text-xs ${getImpactColor(insight.impact)}`}
+                  >
                     {insight.impact} impact
                   </div>
                   <div className="text-right">
@@ -561,7 +539,9 @@ const BusinessIntelligenceCenter: React.FC = () => {
               <div className="grid grid-cols-3 gap-4 mb-4">
                 <div className="text-center">
                   <p className="text-xs text-gray-400">Data Points</p>
-                  <p className="text-lg font-bold text-white">{report.dataPoints.toLocaleString()}</p>
+                  <p className="text-lg font-bold text-white">
+                    {report.dataPoints.toLocaleString()}
+                  </p>
                 </div>
                 <div className="text-center">
                   <p className="text-xs text-gray-400">Insights</p>
@@ -607,7 +587,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
             >
               <div className="flex items-center justify-between mb-6">
@@ -636,7 +616,9 @@ const BusinessIntelligenceCenter: React.FC = () => {
                   </div>
                   <div>
                     <label className="text-sm text-gray-400">Impact Level</label>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm ${getImpactColor(selectedInsight.impact)}`}>
+                    <div
+                      className={`inline-block px-3 py-1 rounded-full text-sm ${getImpactColor(selectedInsight.impact)}`}
+                    >
                       {selectedInsight.impact}
                     </div>
                   </div>

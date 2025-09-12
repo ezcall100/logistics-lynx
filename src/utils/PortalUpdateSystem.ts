@@ -198,7 +198,7 @@ class PortalUpdateSystem {
     ];
   }
 
-  private generateAgentActivities(portalId: string, progress: number): AgentActivity[] {
+  private generateAgentActivities(portalId: string, _progress: number): AgentActivity[] {
     const activities: AgentActivity[] = [];
     const agentCount = Math.floor(Math.random() * 3) + 1; // 1-3 activities per update
 
@@ -232,7 +232,7 @@ class PortalUpdateSystem {
     return activities;
   }
 
-  private generatePortalChanges(portalId: string, progress: number): PortalChange[] {
+  private generatePortalChanges(portalId: string, _progress: number): PortalChange[] {
     const changes: PortalChange[] = [];
     const changeCount = Math.floor(Math.random() * 2) + 1; // 1-2 changes per update
 

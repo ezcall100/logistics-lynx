@@ -15,7 +15,6 @@ import {
   Home,
   ShieldCheck,
   BarChart,
-  User,
 } from 'lucide-react';
 
 import EnhancedHeader from '../../../design-system/components/EnhancedHeader';
@@ -184,7 +183,7 @@ const EnhancedSuperAdminPortal: React.FC = () => {
     {
       id: 'profile',
       label: 'Profile & Settings',
-      icon: User,
+      icon: Users,
       description: 'Account preferences',
       url: '/profile',
     },

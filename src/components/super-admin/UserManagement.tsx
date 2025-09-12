@@ -19,7 +19,6 @@ import {
   X,
   Save,
   Crown,
-  User,
   UserCog,
   Clock,
 } from 'lucide-react';
@@ -29,11 +28,11 @@ import { Card, CardContent } from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
 import { formatNumber, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
 
-interface User {
+interface UserData {
   id: number;
   name: string;
   email: string;
-  role: 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer';
+  role: 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer';
   company: string;
   companyId: number;
   status: 'Active' | 'Inactive' | 'Suspended' | 'Pending';
@@ -75,23 +74,23 @@ interface UserFormData {
 }
 
 const UserManagement: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<UserData[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<UserData[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [companyFilter, setCompanyFilter] = useState<string>('all');
   const [showUserModal, setShowUserModal] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editingUserData, setEditingUserData] = useState<UserData | null>(null);
   const [formData, setFormData] = useState<UserFormData>({
     name: '',
     email: '',
-    role: 'User',
+    role: 'UserData',
     companyId: 1,
     phone: '',
     department: '',
     title: '',
-    permissions: []
+    permissions: [],
   });
   const [loading, setLoading] = useState(false);
   const [bulkSelected, setBulkSelected] = useState<number[]>([]);
@@ -103,7 +102,7 @@ const UserManagement: React.FC = () => {
       description: 'Full system access and control',
       permissions: ['*'],
       level: 5,
-      color: 'text-red-600 bg-red-50'
+      color: 'text-red-600 bg-red-50',
     },
     {
       id: 'admin',
@@ -111,7 +110,7 @@ const UserManagement: React.FC = () => {
       description: 'Company administration and management',
       permissions: ['user_management', 'company_settings', 'billing', 'analytics'],
       level: 4,
-      color: 'text-purple-600 bg-purple-50'
+      color: 'text-purple-600 bg-purple-50',
     },
     {
       id: 'manager',
@@ -119,15 +118,15 @@ const UserManagement: React.FC = () => {
       description: 'Team and project management',
       permissions: ['user_management', 'project_management', 'reports'],
       level: 3,
-      color: 'text-blue-600 bg-blue-50'
+      color: 'text-blue-600 bg-blue-50',
     },
     {
       id: 'user',
-      name: 'User',
+      name: 'UserData',
       description: 'Standard user access',
       permissions: ['basic_access', 'view_reports'],
       level: 2,
-      color: 'text-green-600 bg-green-50'
+      color: 'text-green-600 bg-green-50',
     },
     {
       id: 'viewer',
@@ -135,15 +134,15 @@ const UserManagement: React.FC = () => {
       description: 'Read-only access',
       permissions: ['view_only'],
       level: 1,
-      color: 'text-gray-600 bg-gray-50'
-    }
+      color: 'text-gray-600 bg-gray-50',
+    },
   ];
 
   const companies = [
     { id: 1, name: 'Global Logistics Corp' },
     { id: 2, name: 'Swift Transport Ltd' },
     { id: 3, name: 'Metro Freight Inc' },
-    { id: 4, name: 'Coastal Shipping Co' }
+    { id: 4, name: 'Coastal Shipping Co' },
   ];
 
   const availablePermissions = [
@@ -158,12 +157,12 @@ const UserManagement: React.FC = () => {
     'view_only',
     'api_access',
     'data_export',
-    'system_settings'
+    'system_settings',
   ];
 
   // Mock data initialization
   useEffect(() => {
-    const mockUsers: User[] = [
+    const mockUsers: UserData[] = [
       {
         id: 1,
         name: 'John Smith',
@@ -178,13 +177,13 @@ const UserManagement: React.FC = () => {
         profile: {
           phone: '+1-555-0123',
           department: 'Operations',
-          title: 'Operations Manager'
+          title: 'Operations Manager',
         },
         security: {
           twoFactorEnabled: true,
           passwordLastChanged: '2024-01-01T00:00:00Z',
-          loginAttempts: 0
-        }
+          loginAttempts: 0,
+        },
       },
       {
         id: 2,
@@ -200,20 +199,20 @@ const UserManagement: React.FC = () => {
         profile: {
           phone: '+1-555-0456',
           department: 'Logistics',
-          title: 'Logistics Coordinator'
+          title: 'Logistics Coordinator',
         },
         security: {
           twoFactorEnabled: false,
           passwordLastChanged: '2023-12-15T00:00:00Z',
           loginAttempts: 1,
-          lastFailedLogin: '2024-01-10T15:30:00Z'
-        }
+          lastFailedLogin: '2024-01-10T15:30:00Z',
+        },
       },
       {
         id: 3,
         name: 'Mike Davis',
         email: 'mike.davis@metrofreight.com',
-        role: 'User',
+        role: 'UserData',
         company: 'Metro Freight Inc',
         companyId: 3,
         status: 'Active',
@@ -223,13 +222,13 @@ const UserManagement: React.FC = () => {
         profile: {
           phone: '+1-555-0789',
           department: 'Fleet',
-          title: 'Fleet Coordinator'
+          title: 'Fleet Coordinator',
         },
         security: {
           twoFactorEnabled: true,
           passwordLastChanged: '2024-01-05T00:00:00Z',
-          loginAttempts: 0
-        }
+          loginAttempts: 0,
+        },
       },
       {
         id: 4,
@@ -245,14 +244,14 @@ const UserManagement: React.FC = () => {
         profile: {
           phone: '+1-555-0321',
           department: 'Finance',
-          title: 'Financial Analyst'
+          title: 'Financial Analyst',
         },
         security: {
           twoFactorEnabled: false,
           passwordLastChanged: '2024-01-14T16:00:00Z',
-          loginAttempts: 0
-        }
-      }
+          loginAttempts: 0,
+        },
+      },
     ];
 
     setUsers(mockUsers);
@@ -265,10 +264,11 @@ const UserManagement: React.FC = () => {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered.filter(user =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.company.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        user =>
+          user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.company.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -295,14 +295,14 @@ const UserManagement: React.FC = () => {
     setFilteredUsers(filtered);
   }, [users, searchQuery, statusFilter, roleFilter, companyFilter]);
 
-  const handleCreateUser = async () => {
+  const handleCreateUserData = async () => {
     setLoading(true);
     try {
-      const newUser: User = {
+      const newUserData: UserData = {
         id: Math.max(...users.map(u => u.id)) + 1,
         name: formData.name,
         email: formData.email,
-        role: formData.role as any,
+        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer',
         company: companies.find(c => c.id === formData.companyId)?.name || '',
         companyId: formData.companyId,
         status: 'Pending',
@@ -312,16 +312,16 @@ const UserManagement: React.FC = () => {
         profile: {
           phone: formData.phone,
           department: formData.department,
-          title: formData.title
+          title: formData.title,
         },
         security: {
           twoFactorEnabled: false,
           passwordLastChanged: new Date().toISOString(),
-          loginAttempts: 0
-        }
+          loginAttempts: 0,
+        },
       };
 
-      setUsers(prev => [...prev, newUser]);
+      setUsers(prev => [...prev, newUserData]);
       setShowUserModal(false);
       resetForm();
     } catch (error) {
@@ -331,29 +331,29 @@ const UserManagement: React.FC = () => {
     }
   };
 
-  const handleUpdateUser = async () => {
-    if (!editingUser) return;
+  const handleUpdateUserData = async () => {
+    if (!editingUserData) return;
 
     setLoading(true);
     try {
-      const updatedUser: User = {
-        ...editingUser,
+      const updatedUserData: UserData = {
+        ...editingUserData,
         name: formData.name,
         email: formData.email,
-        role: formData.role as any,
+        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer',
         company: companies.find(c => c.id === formData.companyId)?.name || '',
         companyId: formData.companyId,
         permissions: formData.permissions,
         profile: {
-          ...editingUser.profile,
+          ...editingUserData.profile,
           phone: formData.phone,
           department: formData.department,
-          title: formData.title
-        }
+          title: formData.title,
+        },
       };
 
-      setUsers(prev => prev.map(u => u.id === editingUser.id ? updatedUser : u));
-      setEditingUser(null);
+      setUsers(prev => prev.map(u => (u.id === editingUserData.id ? updatedUserData : u)));
+      setEditingUserData(null);
       setShowUserModal(false);
       resetForm();
     } catch (error) {
@@ -363,7 +363,7 @@ const UserManagement: React.FC = () => {
     }
   };
 
-  const handleDeleteUser = async (id: number) => {
+  const handleDeleteUserData = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       setUsers(prev => prev.filter(u => u.id !== id));
     }
@@ -378,15 +378,23 @@ const UserManagement: React.FC = () => {
         }
         break;
       case 'suspend':
-        setUsers(prev => prev.map(u => 
-          bulkSelected.includes(u.id) ? { ...u, status: 'Suspended' as any } : u
-        ));
+        setUsers(prev =>
+          prev.map(u =>
+            bulkSelected.includes(u.id)
+              ? { ...u, status: 'Suspended' as 'Active' | 'Suspended' | 'Pending' }
+              : u
+          )
+        );
         setBulkSelected([]);
         break;
       case 'activate':
-        setUsers(prev => prev.map(u => 
-          bulkSelected.includes(u.id) ? { ...u, status: 'Active' as any } : u
-        ));
+        setUsers(prev =>
+          prev.map(u =>
+            bulkSelected.includes(u.id)
+              ? { ...u, status: 'Active' as 'Active' | 'Suspended' | 'Pending' }
+              : u
+          )
+        );
         setBulkSelected([]);
         break;
       case 'reset-password':
@@ -400,17 +408,17 @@ const UserManagement: React.FC = () => {
     setFormData({
       name: '',
       email: '',
-      role: 'User',
+      role: 'UserData',
       companyId: 1,
       phone: '',
       department: '',
       title: '',
-      permissions: []
+      permissions: [],
     });
   };
 
-  const openEditModal = (user: User) => {
-    setEditingUser(user);
+  const openEditModal = (user: UserData) => {
+    setEditingUserData(user);
     setFormData({
       name: user.name,
       email: user.email,
@@ -419,7 +427,7 @@ const UserManagement: React.FC = () => {
       phone: user.profile.phone || '',
       department: user.profile.department || '',
       title: user.profile.title || '',
-      permissions: user.permissions
+      permissions: user.permissions,
     });
     setShowUserModal(true);
   };
@@ -432,12 +440,12 @@ const UserManagement: React.FC = () => {
         return <Shield className="w-4 h-4" />;
       case 'Manager':
         return <UserCog className="w-4 h-4" />;
-      case 'User':
-        return <User className="w-4 h-4" />;
+      case 'UserData':
+        return <Users className="w-4 h-4" />;
       case 'Viewer':
         return <Eye className="w-4 h-4" />;
       default:
-        return <User className="w-4 h-4" />;
+        return <Users className="w-4 h-4" />;
     }
   };
 
@@ -464,14 +472,14 @@ const UserManagement: React.FC = () => {
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-gray-900">
-                  {editingUser ? 'Edit User' : 'Add New User'}
+                  {editingUserData ? 'Edit UserData' : 'Add New UserData'}
                 </h2>
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => {
                     setShowUserModal(false);
-                    setEditingUser(null);
+                    setEditingUserData(null);
                     resetForm();
                   }}
                 >
@@ -485,14 +493,14 @@ const UserManagement: React.FC = () => {
                 <Input
                   label="Full Name"
                   value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Enter full name"
                 />
                 <Input
                   label="Email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
                   placeholder="user@company.com"
                 />
               </div>
@@ -502,11 +510,13 @@ const UserManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
                   <select
                     value={formData.role}
-                    onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     {roles.map(role => (
-                      <option key={role.id} value={role.name}>{role.name}</option>
+                      <option key={role.id} value={role.name}>
+                        {role.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -514,11 +524,15 @@ const UserManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
                   <select
                     value={formData.companyId}
-                    onChange={(e) => setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))}
+                    onChange={e =>
+                      setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     {companies.map(company => (
-                      <option key={company.id} value={company.id}>{company.name}</option>
+                      <option key={company.id} value={company.id}>
+                        {company.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -528,19 +542,19 @@ const UserManagement: React.FC = () => {
                 <Input
                   label="Phone"
                   value={formData.phone}
-                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                   placeholder="+1-555-0123"
                 />
                 <Input
                   label="Department"
                   value={formData.department}
-                  onChange={(e) => setFormData(prev => ({ ...prev, department: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, department: e.target.value }))}
                   placeholder="Operations"
                 />
                 <Input
                   label="Title"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
                   placeholder="Manager"
                 />
               </div>
@@ -553,16 +567,16 @@ const UserManagement: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={formData.permissions.includes(permission)}
-                        onChange={(e) => {
+                        onChange={e => {
                           if (e.target.checked) {
                             setFormData(prev => ({
                               ...prev,
-                              permissions: [...prev.permissions, permission]
+                              permissions: [...prev.permissions, permission],
                             }));
                           } else {
                             setFormData(prev => ({
                               ...prev,
-                              permissions: prev.permissions.filter(p => p !== permission)
+                              permissions: prev.permissions.filter(p => p !== permission),
                             }));
                           }
                         }}
@@ -582,7 +596,7 @@ const UserManagement: React.FC = () => {
                 variant="outline"
                 onClick={() => {
                   setShowUserModal(false);
-                  setEditingUser(null);
+                  setEditingUserData(null);
                   resetForm();
                 }}
               >
@@ -590,11 +604,11 @@ const UserManagement: React.FC = () => {
                 Cancel
               </Button>
               <Button
-                onClick={editingUser ? handleUpdateUser : handleCreateUser}
+                onClick={editingUserData ? handleUpdateUserData : handleCreateUserData}
                 loading={loading}
               >
                 <Save className="w-4 h-4 mr-2" />
-                {editingUser ? 'Update User' : 'Create User'}
+                {editingUserData ? 'Update UserData' : 'Create UserData'}
               </Button>
             </div>
           </motion.div>
@@ -608,7 +622,7 @@ const UserManagement: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900">UserData Management</h2>
           <p className="text-gray-600">Manage user accounts, roles, and permissions</p>
         </div>
         <div className="flex items-center gap-3">
@@ -622,7 +636,7 @@ const UserManagement: React.FC = () => {
           </Button>
           <Button onClick={() => setShowUserModal(true)}>
             <UserPlus className="w-4 h-4 mr-2" />
-            Add User
+            Add UserData
           </Button>
         </div>
       </div>
@@ -630,11 +644,31 @@ const UserManagement: React.FC = () => {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { title: 'Total Users', count: formatNumber(users.length), icon: Users, color: 'text-blue-500' },
-          { title: 'Active Users', count: formatNumber(users.filter(u => u.status === 'Active').length), icon: UserCheck, color: 'text-green-500' },
-          { title: 'Pending Users', count: formatNumber(users.filter(u => u.status === 'Pending').length), icon: Clock, color: 'text-yellow-500' },
-          { title: 'Suspended Users', count: formatNumber(users.filter(u => u.status === 'Suspended').length), icon: UserX, color: 'text-red-500' }
-        ].map((stat) => (
+          {
+            title: 'Total Users',
+            count: formatNumber(users.length),
+            icon: Users,
+            color: 'text-blue-500',
+          },
+          {
+            title: 'Active Users',
+            count: formatNumber(users.filter(u => u.status === 'Active').length),
+            icon: UserCheck,
+            color: 'text-green-500',
+          },
+          {
+            title: 'Pending Users',
+            count: formatNumber(users.filter(u => u.status === 'Pending').length),
+            icon: Clock,
+            color: 'text-yellow-500',
+          },
+          {
+            title: 'Suspended Users',
+            count: formatNumber(users.filter(u => u.status === 'Suspended').length),
+            icon: UserX,
+            color: 'text-red-500',
+          },
+        ].map(stat => (
           <Card key={stat.title}>
             <CardContent className="p-6">
               <div className="flex items-center space-x-4">
@@ -659,14 +693,14 @@ const UserManagement: React.FC = () => {
               <Input
                 placeholder="Search users..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 leftIcon={<Search className="w-4 h-4" />}
               />
             </div>
             <div className="flex gap-3">
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={e => setStatusFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
@@ -677,22 +711,26 @@ const UserManagement: React.FC = () => {
               </select>
               <select
                 value={roleFilter}
-                onChange={(e) => setRoleFilter(e.target.value)}
+                onChange={e => setRoleFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Roles</option>
                 {roles.map(role => (
-                  <option key={role.id} value={role.name}>{role.name}</option>
+                  <option key={role.id} value={role.name}>
+                    {role.name}
+                  </option>
                 ))}
               </select>
               <select
                 value={companyFilter}
-                onChange={(e) => setCompanyFilter(e.target.value)}
+                onChange={e => setCompanyFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Companies</option>
                 {companies.map(company => (
-                  <option key={company.id} value={company.id}>{company.name}</option>
+                  <option key={company.id} value={company.id}>
+                    {company.name}
+                  </option>
                 ))}
               </select>
               <Button variant="outline">
@@ -709,9 +747,7 @@ const UserManagement: React.FC = () => {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">
-                {bulkSelected.length} users selected
-              </span>
+              <span className="text-sm text-gray-600">{bulkSelected.length} users selected</span>
               <div className="flex gap-2">
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('activate')}>
                   <UserCheck className="w-4 h-4 mr-2" />
@@ -721,7 +757,11 @@ const UserManagement: React.FC = () => {
                   <UserX className="w-4 h-4 mr-2" />
                   Suspend
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => handleBulkAction('reset-password')}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => handleBulkAction('reset-password')}
+                >
                   <Key className="w-4 h-4 mr-2" />
                   Reset Password
                 </Button>
@@ -745,8 +785,10 @@ const UserManagement: React.FC = () => {
                   <th className="px-6 py-4 text-left">
                     <input
                       type="checkbox"
-                      checked={bulkSelected.length === filteredUsers.length && filteredUsers.length > 0}
-                      onChange={(e) => {
+                      checked={
+                        bulkSelected.length === filteredUsers.length && filteredUsers.length > 0
+                      }
+                      onChange={e => {
                         if (e.target.checked) {
                           setBulkSelected(filteredUsers.map(u => u.id));
                         } else {
@@ -757,7 +799,7 @@ const UserManagement: React.FC = () => {
                     />
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    User
+                    UserData
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Company
@@ -780,13 +822,13 @@ const UserManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredUsers.map((user) => (
+                {filteredUsers.map(user => (
                   <tr key={user.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(user.id)}
-                        onChange={(e) => {
+                        onChange={e => {
                           if (e.target.checked) {
                             setBulkSelected(prev => [...prev, user.id]);
                           } else {
@@ -800,7 +842,10 @@ const UserManagement: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
                           <span className="text-white font-medium text-sm">
-                            {user.name.split(' ').map(n => n[0]).join('')}
+                            {user.name
+                              .split(' ')
+                              .map(n => n[0])
+                              .join('')}
                           </span>
                         </div>
                         <div>
@@ -813,13 +858,17 @@ const UserManagement: React.FC = () => {
                       {user.company}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}
+                      >
                         {getRoleIcon(user.role)}
                         {user.role}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(user.status)}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(user.status)}`}
+                      >
                         {getStatusIcon(user.status)}
                         {user.status}
                       </span>
@@ -839,7 +888,10 @@ const UserManagement: React.FC = () => {
                           </span>
                         )}
                         {user.security.loginAttempts > 0 && (
-                          <span className="text-red-600" title={`${user.security.loginAttempts} failed attempts`}>
+                          <span
+                            className="text-red-600"
+                            title={`${user.security.loginAttempts} failed attempts`}
+                          >
                             <AlertTriangle className="w-4 h-4" />
                           </span>
                         )}
@@ -847,23 +899,16 @@ const UserManagement: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                        >
+                        <Button size="sm" variant="ghost">
                           <Eye className="w-4 h-4" />
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => openEditModal(user)}
-                        >
+                        <Button size="sm" variant="ghost" onClick={() => openEditModal(user)}>
                           <Edit className="w-4 h-4" />
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => handleDeleteUser(user.id)}
+                          onClick={() => handleDeleteUserData(user.id)}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>

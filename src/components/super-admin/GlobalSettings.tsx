@@ -23,7 +23,13 @@ import {
 } from 'lucide-react';
 
 import { Button } from '../../design-system/components/Button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../design-system/components/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
 import { cn, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
 
@@ -32,7 +38,7 @@ interface SystemSettings {
   category: string;
   name: string;
   description: string;
-  value: any;
+  value: unknown;
   type: 'string' | 'number' | 'boolean' | 'select' | 'json';
   options?: string[];
   required: boolean;
@@ -93,7 +99,7 @@ const GlobalSettings: React.FC = () => {
     { id: 'notifications', name: 'Notifications', icon: Bell },
     { id: 'api', name: 'API', icon: Zap },
     { id: 'backup', name: 'Backup', icon: Database },
-    { id: 'monitoring', name: 'Monitoring', icon: Activity }
+    { id: 'monitoring', name: 'Monitoring', icon: Activity },
   ];
 
   // Mock data initialization
@@ -109,7 +115,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'app_version',
@@ -121,7 +127,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'maintenance_mode',
@@ -133,7 +139,7 @@ const GlobalSettings: React.FC = () => {
         required: false,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'session_timeout',
@@ -145,7 +151,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'password_policy',
@@ -158,7 +164,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'two_factor_required',
@@ -170,7 +176,7 @@ const GlobalSettings: React.FC = () => {
         required: false,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'database_pool_size',
@@ -182,7 +188,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'backup_frequency',
@@ -195,7 +201,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'smtp_host',
@@ -207,7 +213,7 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: true,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
+        modifiedBy: 'Super Admin',
       },
       {
         id: 'api_rate_limit',
@@ -219,8 +225,8 @@ const GlobalSettings: React.FC = () => {
         required: true,
         sensitive: false,
         lastModified: '2024-01-15T10:30:00Z',
-        modifiedBy: 'Super Admin'
-      }
+        modifiedBy: 'Super Admin',
+      },
     ];
 
     const mockMaintenanceWindows: MaintenanceWindow[] = [
@@ -234,7 +240,7 @@ const GlobalSettings: React.FC = () => {
         affectedServices: ['Database', 'API', 'Web Portal'],
         notifications: true,
         createdBy: 'Super Admin',
-        createdAt: '2024-01-15T10:30:00Z'
+        createdAt: '2024-01-15T10:30:00Z',
       },
       {
         id: 2,
@@ -246,8 +252,8 @@ const GlobalSettings: React.FC = () => {
         affectedServices: ['All Services'],
         notifications: true,
         createdBy: 'Super Admin',
-        createdAt: '2024-01-15T10:30:00Z'
-      }
+        createdAt: '2024-01-15T10:30:00Z',
+      },
     ];
 
     const mockSystemHealth: SystemHealth[] = [
@@ -257,7 +263,7 @@ const GlobalSettings: React.FC = () => {
         uptime: 99.9,
         responseTime: 12,
         lastCheck: '2024-01-15T10:30:00Z',
-        details: 'All database connections healthy'
+        details: 'All database connections healthy',
       },
       {
         service: 'API Gateway',
@@ -265,7 +271,7 @@ const GlobalSettings: React.FC = () => {
         uptime: 99.8,
         responseTime: 45,
         lastCheck: '2024-01-15T10:30:00Z',
-        details: 'API gateway responding normally'
+        details: 'API gateway responding normally',
       },
       {
         service: 'Web Portal',
@@ -273,7 +279,7 @@ const GlobalSettings: React.FC = () => {
         uptime: 99.7,
         responseTime: 120,
         lastCheck: '2024-01-15T10:30:00Z',
-        details: 'Web portal accessible'
+        details: 'Web portal accessible',
       },
       {
         service: 'Email Service',
@@ -281,8 +287,8 @@ const GlobalSettings: React.FC = () => {
         uptime: 98.5,
         responseTime: 250,
         lastCheck: '2024-01-15T10:30:00Z',
-        details: 'Email service experiencing delays'
-      }
+        details: 'Email service experiencing delays',
+      },
     ];
 
     const mockBackups: BackupInfo[] = [
@@ -294,7 +300,7 @@ const GlobalSettings: React.FC = () => {
         status: 'completed',
         createdAt: '2024-01-15T02:00:00Z',
         expiresAt: '2024-02-15T02:00:00Z',
-        location: 's3://backups/daily-2024-01-15.tar.gz'
+        location: 's3://backups/daily-2024-01-15.tar.gz',
       },
       {
         id: 2,
@@ -304,7 +310,7 @@ const GlobalSettings: React.FC = () => {
         status: 'completed',
         createdAt: '2024-01-14T02:00:00Z',
         expiresAt: '2024-02-14T02:00:00Z',
-        location: 's3://backups/weekly-2024-01-14.tar.gz'
+        location: 's3://backups/weekly-2024-01-14.tar.gz',
       },
       {
         id: 3,
@@ -314,8 +320,8 @@ const GlobalSettings: React.FC = () => {
         status: 'in_progress',
         createdAt: '2024-01-15T10:30:00Z',
         expiresAt: '2024-01-22T10:30:00Z',
-        location: 's3://backups/incremental-2024-01-15.tar.gz'
-      }
+        location: 's3://backups/incremental-2024-01-15.tar.gz',
+      },
     ];
 
     setSettings(mockSettings);
@@ -325,25 +331,28 @@ const GlobalSettings: React.FC = () => {
   }, []);
 
   const filteredSettings = settings.filter(setting => {
-    const matchesSearch = setting.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         setting.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      setting.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      setting.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = categoryFilter === 'all' || setting.category === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
-  const handleUpdateSetting = async (settingId: string, newValue: any) => {
+  const handleUpdateSetting = async (settingId: string, newValue: unknown) => {
     setLoading(true);
     try {
-      setSettings(prev => prev.map(setting => 
-        setting.id === settingId 
-          ? { 
-              ...setting, 
-              value: newValue, 
-              lastModified: new Date().toISOString(),
-              modifiedBy: 'Super Admin'
-            }
-          : setting
-      ));
+      setSettings(prev =>
+        prev.map(setting =>
+          setting.id === settingId
+            ? {
+                ...setting,
+                value: newValue,
+                lastModified: new Date().toISOString(),
+                modifiedBy: 'Super Admin',
+              }
+            : setting
+        )
+      );
     } catch (error) {
       console.error('Error updating setting:', error);
     } finally {
@@ -363,7 +372,6 @@ const GlobalSettings: React.FC = () => {
       setLoading(false);
     }
   };
-
 
   const renderGeneralSettings = () => (
     <div className="space-y-6">
@@ -409,15 +417,23 @@ const GlobalSettings: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {systemHealth.map((health) => (
-              <div key={health.service} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+            {systemHealth.map(health => (
+              <div
+                key={health.service}
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
                 <div className="flex items-center gap-3">
-                  <div className={`w-3 h-3 rounded-full ${
-                    health.status === 'healthy' ? 'bg-green-500' :
-                    health.status === 'warning' ? 'bg-yellow-500' :
-                    health.status === 'error' ? 'bg-red-500' :
-                    'bg-gray-500'
-                  }`} />
+                  <div
+                    className={`w-3 h-3 rounded-full ${
+                      health.status === 'healthy'
+                        ? 'bg-green-500'
+                        : health.status === 'warning'
+                          ? 'bg-yellow-500'
+                          : health.status === 'error'
+                            ? 'bg-red-500'
+                            : 'bg-gray-500'
+                    }`}
+                  />
                   <div>
                     <div className="font-medium text-gray-900">{health.service}</div>
                     <div className="text-sm text-gray-600">{health.details}</div>
@@ -445,18 +461,20 @@ const GlobalSettings: React.FC = () => {
               <Input
                 placeholder="Search settings..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-64"
                 leftIcon={<Search className="w-4 h-4" />}
               />
               <select
                 value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                onChange={e => setCategoryFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Categories</option>
                 {settingCategories.map(category => (
-                  <option key={category.id} value={category.id}>{category.name}</option>
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -464,21 +482,21 @@ const GlobalSettings: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {filteredSettings.map((setting) => (
-              <div key={setting.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+            {filteredSettings.map(setting => (
+              <div
+                key={setting.id}
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <div className="font-medium text-gray-900">{setting.name}</div>
-                    {setting.required && (
-                      <span className="text-red-500 text-xs">*</span>
-                    )}
-                    {setting.sensitive && (
-                      <Lock className="w-4 h-4 text-gray-400" />
-                    )}
+                    {setting.required && <span className="text-red-500 text-xs">*</span>}
+                    {setting.sensitive && <Lock className="w-4 h-4 text-gray-400" />}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{setting.description}</div>
                   <div className="text-xs text-gray-500 mt-1">
-                    Last modified: {formatRelativeTime(setting.lastModified)} by {setting.modifiedBy}
+                    Last modified: {formatRelativeTime(setting.lastModified)} by{' '}
+                    {setting.modifiedBy}
                   </div>
                 </div>
                 <div className="ml-4">
@@ -499,21 +517,26 @@ const GlobalSettings: React.FC = () => {
                     </button>
                   ) : setting.type === 'select' ? (
                     <select
-                      value={setting.value}
-                      onChange={(e) => handleUpdateSetting(setting.id, e.target.value)}
+                      value={setting.value as string}
+                      onChange={e => handleUpdateSetting(setting.id, e.target.value)}
                       className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
                       {setting.options?.map(option => (
-                        <option key={option} value={option}>{option}</option>
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
                       ))}
                     </select>
                   ) : (
                     <Input
                       type={setting.type === 'number' ? 'number' : 'text'}
-                      value={setting.value}
-                      onChange={(e) => handleUpdateSetting(setting.id, 
-                        setting.type === 'number' ? parseFloat(e.target.value) : e.target.value
-                      )}
+                      value={setting.value as string}
+                      onChange={e =>
+                        handleUpdateSetting(
+                          setting.id,
+                          setting.type === 'number' ? parseFloat(e.target.value) : e.target.value
+                        )
+                      }
                       className="w-48"
                       rightIcon={setting.sensitive ? <Eye className="w-4 h-4" /> : undefined}
                     />
@@ -541,14 +564,16 @@ const GlobalSettings: React.FC = () => {
       </div>
 
       <div className="space-y-4">
-        {maintenanceWindows.map((window) => (
+        {maintenanceWindows.map(window => (
           <Card key={window.id}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h4 className="font-medium text-gray-900">{window.name}</h4>
-                    <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(window.status)}`}>
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(window.status)}`}
+                    >
                       {getStatusIcon(window.status)}
                       {window.status}
                     </span>
@@ -596,14 +621,16 @@ const GlobalSettings: React.FC = () => {
       </div>
 
       <div className="space-y-4">
-        {backups.map((backup) => (
+        {backups.map(backup => (
           <Card key={backup.id}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h4 className="font-medium text-gray-900">{backup.name}</h4>
-                    <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(backup.status)}`}>
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(backup.status)}`}
+                    >
                       {getStatusIcon(backup.status)}
                       {backup.status}
                     </span>
@@ -663,7 +690,7 @@ const GlobalSettings: React.FC = () => {
         <CardContent className="p-0">
           <div className="border-b border-gray-200">
             <nav className="flex space-x-8 px-6">
-              {settingCategories.map((category) => (
+              {settingCategories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setActiveTab(category.id)}
@@ -745,9 +772,7 @@ const GlobalSettings: React.FC = () => {
             <CardTitle>Maintenance Windows</CardTitle>
             <CardDescription>Schedule and manage system maintenance</CardDescription>
           </CardHeader>
-          <CardContent>
-            {renderMaintenanceWindows()}
-          </CardContent>
+          <CardContent>{renderMaintenanceWindows()}</CardContent>
         </Card>
       )}
     </div>

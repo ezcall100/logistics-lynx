@@ -1,65 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Activity, 
-  Heart, 
-  HeartOff, 
-  Zap, 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle, 
-  Clock, 
-  TrendingUp, 
-  TrendingDown, 
-  Cpu, 
-  MemoryStick, 
-  Database, 
-  Server, 
-  Network, 
-  Globe, 
-  Users, 
-  BarChart3, 
-  PieChart, 
-  LineChart, 
-  RefreshCw, 
-  Settings, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Power, 
-  PowerOff, 
-  Eye, 
-  EyeOff, 
-  Maximize2, 
-  Minimize2, 
-  Download, 
-  Upload, 
-  Filter, 
-  Search, 
-  Calendar, 
-  Bell, 
-  BellOff, 
-  Volume2, 
-  VolumeX, 
-  Wifi, 
-  WifiOff, 
-  Signal, 
-  SignalZero, 
-  SignalLow, 
-  SignalMedium, 
-  SignalHigh, 
-  Target, 
-  Brain, 
-  Bot, 
-  Command, 
-  Terminal, 
-  ExternalLink, 
-  Copy, 
-  Share, 
-  Star, 
-  StarOff, 
-  Heart as HeartIcon, 
-  HeartOff as HeartOffIcon
+import {
+  Activity,
+  Heart,
+  Zap,
+  AlertTriangle,
+  CheckCircle,
+  TrendingUp,
+  TrendingDown,
+  Database,
+  Server,
+  Network,
+  Globe,
+  BarChart3,
+  RefreshCw,
+  Settings,
+  RotateCcw,
+  X,
 } from 'lucide-react';
 
 interface SystemComponent {
@@ -105,10 +62,11 @@ interface HealingAction {
 
 const SystemHealthMonitor: React.FC = () => {
   const [selectedComponent, setSelectedComponent] = useState<SystemComponent | null>(null);
-  const [viewMode, setViewMode] = useState<'overview' | 'components' | 'healing' | 'metrics'>('overview');
+  const [viewMode, setViewMode] = useState<'overview' | 'components' | 'healing' | 'metrics'>(
+    'overview'
+  );
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [autoHealing, setAutoHealing] = useState(true);
-  const [selectedAction, setSelectedAction] = useState<HealingAction | null>(null);
 
   // Mock data for system components
   const [components, setComponents] = useState<SystemComponent[]>([
@@ -128,7 +86,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.4.1',
       alerts: 0,
       autoHealing: true,
-      dependencies: ['load-balancer', 'database-cluster']
+      dependencies: ['load-balancer', 'database-cluster'],
     },
     {
       id: 'database-cluster',
@@ -146,7 +104,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v3.2.0',
       alerts: 2,
       autoHealing: true,
-      dependencies: ['backup-service', 'monitoring-service']
+      dependencies: ['backup-service', 'monitoring-service'],
     },
     {
       id: 'load-balancer',
@@ -164,7 +122,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v1.8.2',
       alerts: 0,
       autoHealing: true,
-      dependencies: ['dns-service']
+      dependencies: ['dns-service'],
     },
     {
       id: 'broker-portal',
@@ -182,7 +140,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.4.1',
       alerts: 1,
       autoHealing: false,
-      dependencies: ['web-server-1', 'database-cluster']
+      dependencies: ['web-server-1', 'database-cluster'],
     },
     {
       id: 'api-gateway',
@@ -200,8 +158,8 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.1.5',
       alerts: 5,
       autoHealing: true,
-      dependencies: ['auth-service', 'rate-limiter']
-    }
+      dependencies: ['auth-service', 'rate-limiter'],
+    },
   ]);
 
   const [metrics, setMetrics] = useState<HealthMetric[]>([
@@ -213,7 +171,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'stable',
       unit: 'ms',
-      description: 'Average API response time'
+      description: 'Average API response time',
     },
     {
       id: 'error-rate',
@@ -223,7 +181,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'down',
       unit: '%',
-      description: 'Percentage of failed requests'
+      description: 'Percentage of failed requests',
     },
     {
       id: 'throughput',
@@ -233,7 +191,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'up',
       unit: 'req/s',
-      description: 'Requests per second'
+      description: 'Requests per second',
     },
     {
       id: 'availability',
@@ -243,11 +201,11 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'stable',
       unit: '%',
-      description: 'System uptime percentage'
-    }
+      description: 'System uptime percentage',
+    },
   ]);
 
-  const [healingActions, setHealingActions] = useState<HealingAction[]>([
+  const [healingActions] = useState<HealingAction[]>([
     {
       id: 'heal-1',
       component: 'database-cluster',
@@ -256,7 +214,7 @@ const SystemHealthMonitor: React.FC = () => {
       startedAt: '5 minutes ago',
       completedAt: '3 minutes ago',
       result: 'Database service restarted successfully',
-      automated: true
+      automated: true,
     },
     {
       id: 'heal-2',
@@ -264,7 +222,7 @@ const SystemHealthMonitor: React.FC = () => {
       action: 'Scale Up Resources',
       status: 'running',
       startedAt: '2 minutes ago',
-      automated: true
+      automated: true,
     },
     {
       id: 'heal-3',
@@ -272,8 +230,8 @@ const SystemHealthMonitor: React.FC = () => {
       action: 'Clear Cache',
       status: 'pending',
       startedAt: '1 minute ago',
-      automated: false
-    }
+      automated: false,
+    },
   ]);
 
   // Simulate real-time updates
@@ -281,20 +239,20 @@ const SystemHealthMonitor: React.FC = () => {
     if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      setComponents(prevComponents => 
+      setComponents(prevComponents =>
         prevComponents.map(component => ({
           ...component,
           health: Math.max(0, Math.min(100, component.health + (Math.random() - 0.5) * 5)),
           cpu: Math.max(0, Math.min(100, component.cpu + (Math.random() - 0.5) * 10)),
           memory: Math.max(0, Math.min(100, component.memory + (Math.random() - 0.5) * 8)),
-          lastCheck: 'Just now'
+          lastCheck: 'Just now',
         }))
       );
 
-      setMetrics(prevMetrics => 
+      setMetrics(prevMetrics =>
         prevMetrics.map(metric => ({
           ...metric,
-          value: Math.max(0, metric.value + (Math.random() - 0.5) * (metric.value * 0.1))
+          value: Math.max(0, metric.value + (Math.random() - 0.5) * (metric.value * 0.1)),
         }))
       );
     }, 3000);
@@ -304,11 +262,16 @@ const SystemHealthMonitor: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'healthy': return 'text-green-400 bg-green-400/20';
-      case 'warning': return 'text-yellow-400 bg-yellow-400/20';
-      case 'critical': return 'text-red-400 bg-red-400/20';
-      case 'offline': return 'text-gray-400 bg-gray-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'healthy':
+        return 'text-green-400 bg-green-400/20';
+      case 'warning':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'critical':
+        return 'text-red-400 bg-red-400/20';
+      case 'offline':
+        return 'text-gray-400 bg-gray-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
@@ -321,38 +284,55 @@ const SystemHealthMonitor: React.FC = () => {
 
   const getMetricStatusColor = (status: string) => {
     switch (status) {
-      case 'good': return 'text-green-400 bg-green-400/20';
-      case 'warning': return 'text-yellow-400 bg-yellow-400/20';
-      case 'critical': return 'text-red-400 bg-red-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'good':
+        return 'text-green-400 bg-green-400/20';
+      case 'warning':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'critical':
+        return 'text-red-400 bg-red-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getActionStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-400 bg-green-400/20';
-      case 'running': return 'text-blue-400 bg-blue-400/20';
-      case 'pending': return 'text-yellow-400 bg-yellow-400/20';
-      case 'failed': return 'text-red-400 bg-red-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'completed':
+        return 'text-green-400 bg-green-400/20';
+      case 'running':
+        return 'text-blue-400 bg-blue-400/20';
+      case 'pending':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'failed':
+        return 'text-red-400 bg-red-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'server': return <Server className="w-4 h-4" />;
-      case 'database': return <Database className="w-4 h-4" />;
-      case 'network': return <Network className="w-4 h-4" />;
-      case 'service': return <Zap className="w-4 h-4" />;
-      case 'portal': return <Globe className="w-4 h-4" />;
-      default: return <Activity className="w-4 h-4" />;
+      case 'server':
+        return <Server className="w-4 h-4" />;
+      case 'database':
+        return <Database className="w-4 h-4" />;
+      case 'network':
+        return <Network className="w-4 h-4" />;
+      case 'service':
+        return <Zap className="w-4 h-4" />;
+      case 'portal':
+        return <Globe className="w-4 h-4" />;
+      default:
+        return <Activity className="w-4 h-4" />;
     }
   };
 
   const totalComponents = components.length;
   const healthyComponents = components.filter(c => c.status === 'healthy').length;
   const criticalComponents = components.filter(c => c.status === 'critical').length;
-  const averageHealth = Math.round(components.reduce((sum, c) => sum + c.health, 0) / components.length);
+  const averageHealth = Math.round(
+    components.reduce((sum, c) => sum + c.health, 0) / components.length
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 p-6">
@@ -360,9 +340,7 @@ const SystemHealthMonitor: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              💚 System Health Monitor
-            </h1>
+            <h1 className="text-4xl font-bold text-white mb-2">💚 System Health Monitor</h1>
             <p className="text-gray-300 text-lg">
               Autonomous system monitoring and self-healing capabilities
             </p>
@@ -374,7 +352,7 @@ const SystemHealthMonitor: React.FC = () => {
                 {autoRefresh ? 'Live Monitoring' : 'Paused'}
               </span>
             </div>
-            <button 
+            <button
               onClick={() => setAutoHealing(!autoHealing)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 autoHealing ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'
@@ -383,7 +361,7 @@ const SystemHealthMonitor: React.FC = () => {
               <Heart className="w-4 h-4" />
               <span>{autoHealing ? 'Auto-Healing ON' : 'Auto-Healing OFF'}</span>
             </button>
-            <button 
+            <button
               onClick={() => setAutoRefresh(!autoRefresh)}
               className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
@@ -399,14 +377,14 @@ const SystemHealthMonitor: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'components', label: 'Components', icon: Server },
             { id: 'healing', label: 'Healing', icon: Heart },
-            { id: 'metrics', label: 'Metrics', icon: Activity }
+            { id: 'metrics', label: 'Metrics', icon: Activity },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'overview' | 'components' | 'healing' | 'metrics')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                viewMode === id 
-                  ? 'bg-cyan-600 text-white' 
+                viewMode === id
+                  ? 'bg-cyan-600 text-white'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
@@ -418,7 +396,7 @@ const SystemHealthMonitor: React.FC = () => {
 
         {/* System Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
@@ -433,7 +411,7 @@ const SystemHealthMonitor: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -449,7 +427,7 @@ const SystemHealthMonitor: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -465,7 +443,7 @@ const SystemHealthMonitor: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -504,11 +482,15 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-white font-bold">{component.name}</h3>
-                    <p className="text-sm text-gray-300">{component.type} • {component.location}</p>
+                    <p className="text-sm text-gray-300">
+                      {component.type} • {component.location}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className={`px-3 py-1 rounded-full text-xs ${getStatusColor(component.status)}`}>
+                  <div
+                    className={`px-3 py-1 rounded-full text-xs ${getStatusColor(component.status)}`}
+                  >
                     {component.status}
                   </div>
                   <div className="text-right">
@@ -578,7 +560,7 @@ const SystemHealthMonitor: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              onClick={() => setSelectedAction(action)}
+              onClick={() => {}}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
             >
               <div className="flex items-center justify-between mb-4">
@@ -592,7 +574,9 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className={`px-3 py-1 rounded-full text-xs ${getActionStatusColor(action.status)}`}>
+                  <div
+                    className={`px-3 py-1 rounded-full text-xs ${getActionStatusColor(action.status)}`}
+                  >
                     {action.status}
                   </div>
                   <div className="text-right">
@@ -648,7 +632,9 @@ const SystemHealthMonitor: React.FC = () => {
                   <h3 className="text-white font-bold">{metric.name}</h3>
                   <p className="text-sm text-gray-300">{metric.description}</p>
                 </div>
-                <div className={`px-3 py-1 rounded-full text-xs ${getMetricStatusColor(metric.status)}`}>
+                <div
+                  className={`px-3 py-1 rounded-full text-xs ${getMetricStatusColor(metric.status)}`}
+                >
                   {metric.status}
                 </div>
               </div>
@@ -656,7 +642,8 @@ const SystemHealthMonitor: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-white">
-                    {metric.value}{metric.unit}
+                    {metric.value}
+                    {metric.unit}
                   </span>
                   <div className="flex items-center space-x-1">
                     {metric.trend === 'up' ? (
@@ -672,14 +659,20 @@ const SystemHealthMonitor: React.FC = () => {
 
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-400">Threshold</span>
-                  <span className="text-white">{metric.threshold}{metric.unit}</span>
+                  <span className="text-white">
+                    {metric.threshold}
+                    {metric.unit}
+                  </span>
                 </div>
 
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div 
+                  <div
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      metric.status === 'good' ? 'bg-green-400' :
-                      metric.status === 'warning' ? 'bg-yellow-400' : 'bg-red-400'
+                      metric.status === 'good'
+                        ? 'bg-green-400'
+                        : metric.status === 'warning'
+                          ? 'bg-yellow-400'
+                          : 'bg-red-400'
                     }`}
                     style={{ width: `${Math.min(100, (metric.value / metric.threshold) * 100)}%` }}
                   ></div>
@@ -704,7 +697,7 @@ const SystemHealthMonitor: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
             >
               <div className="flex items-center justify-between mb-6">
@@ -714,7 +707,9 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">{selectedComponent.name}</h3>
-                    <p className="text-gray-300">{selectedComponent.type} • {selectedComponent.location}</p>
+                    <p className="text-gray-300">
+                      {selectedComponent.type} • {selectedComponent.location}
+                    </p>
                   </div>
                 </div>
                 <button
@@ -735,7 +730,9 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                   <div>
                     <label className="text-sm text-gray-400">Status</label>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedComponent.status)}`}>
+                    <div
+                      className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedComponent.status)}`}
+                    >
                       {selectedComponent.status}
                     </div>
                   </div>
@@ -751,7 +748,7 @@ const SystemHealthMonitor: React.FC = () => {
                           <span className="text-white">{selectedComponent.cpu}%</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-blue-400 h-2 rounded-full"
                             style={{ width: `${selectedComponent.cpu}%` }}
                           ></div>
@@ -763,7 +760,7 @@ const SystemHealthMonitor: React.FC = () => {
                           <span className="text-white">{selectedComponent.memory}%</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-green-400 h-2 rounded-full"
                             style={{ width: `${selectedComponent.memory}%` }}
                           ></div>
@@ -775,7 +772,7 @@ const SystemHealthMonitor: React.FC = () => {
                           <span className="text-white">{selectedComponent.disk}%</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-purple-400 h-2 rounded-full"
                             style={{ width: `${selectedComponent.disk}%` }}
                           ></div>
@@ -787,7 +784,7 @@ const SystemHealthMonitor: React.FC = () => {
                           <span className="text-white">{selectedComponent.network}%</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-orange-400 h-2 rounded-full"
                             style={{ width: `${selectedComponent.network}%` }}
                           ></div>

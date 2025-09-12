@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Palette, 
-  Monitor, 
-  Smartphone, 
-  Globe, 
-  Save, 
-  Eye, 
+import {
+  Palette,
+  Monitor,
+  Smartphone,
+  Globe,
+  Save,
+  Eye,
   RefreshCw,
   CheckCircle,
-  Settings
+  Settings,
 } from 'lucide-react';
 
 interface PortalTheme {
@@ -62,7 +62,7 @@ interface PortalTheme {
 
 interface PortalThemeManagerProps {
   onThemeUpdate?: (theme: PortalTheme) => void;
-  onDomainUpdate?: (domainConfig: any) => void;
+  onDomainUpdate?: (domainConfig: unknown) => void;
 }
 
 export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThemeManagerProps) {
@@ -84,41 +84,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#A78BFA',
         backgroundColor: '#FAF5FF',
         textColor: '#4C1D95',
-        borderColor: '#DDD6FE'
+        borderColor: '#DDD6FE',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/customer-logo.svg',
         favicon: '/favicons/customer-favicon.ico',
         companyName: 'CustomerHub',
         tagline: 'Self-Service Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'customer.transbot.ai',
         customDomains: ['portal.customer.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['customer-user', 'customer-admin'],
         permissions: ['account_management', 'service_requests', 'billing_history'],
-        features: ['account_dashboard', 'service_tickets', 'payment_history']
+        features: ['account_dashboard', 'service_tickets', 'payment_history'],
       },
       status: 'active',
       lastModified: '2024-01-15T11:00:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'broker',
@@ -131,41 +131,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#3B82F6',
         backgroundColor: '#F8FAFC',
         textColor: '#1E293B',
-        borderColor: '#E2E8F0'
+        borderColor: '#E2E8F0',
       },
       layout: {
         headerStyle: 'detailed',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/broker-logo.svg',
         favicon: '/favicons/broker-favicon.ico',
         companyName: 'BrokerPro',
         tagline: 'Advanced Load Management',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'broker.transbot.ai',
         customDomains: ['broker.acmelogistics.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['broker-manager', 'broker-user', 'broker-admin'],
         permissions: ['load_management', 'carrier_matching', 'rate_optimization'],
-        features: ['load_board', 'carrier_network', 'rate_management']
+        features: ['load_board', 'carrier_network', 'rate_management'],
       },
       status: 'active',
       lastModified: '2024-01-15T10:30:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'carrier',
@@ -178,41 +178,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#10B981',
         backgroundColor: '#F0FDF4',
         textColor: '#064E3B',
-        borderColor: '#BBF7D0'
+        borderColor: '#BBF7D0',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'square',
         cardStyle: 'flat',
         inputStyle: 'filled',
-        tableStyle: 'bordered'
+        tableStyle: 'bordered',
       },
       branding: {
         logo: '/logos/carrier-logo.svg',
         favicon: '/favicons/carrier-favicon.ico',
         companyName: 'FleetMaster',
         tagline: 'Complete Fleet Management',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'carrier.transbot.ai',
         customDomains: ['fleet.fleetmasters.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['carrier-manager', 'carrier-user', 'carrier-admin'],
         permissions: ['fleet_management', 'driver_dispatch', 'route_planning'],
-        features: ['fleet_tracking', 'driver_management', 'route_optimization']
+        features: ['fleet_tracking', 'driver_management', 'route_optimization'],
       },
       status: 'active',
       lastModified: '2024-01-15T09:15:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'shipper',
@@ -225,41 +225,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#8B5CF6',
         backgroundColor: '#FAF5FF',
         textColor: '#4C1D95',
-        borderColor: '#DDD6FE'
+        borderColor: '#DDD6FE',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'floating',
         navigationStyle: 'breadcrumbs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'pill',
         cardStyle: 'outlined',
         inputStyle: 'underlined',
-        tableStyle: 'minimal'
+        tableStyle: 'minimal',
       },
       branding: {
         logo: '/logos/shipper-logo.svg',
         favicon: '/favicons/shipper-favicon.ico',
         companyName: 'ShipSmart',
         tagline: 'Intelligent Shipping Solutions',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'shipper.transbot.ai',
         customDomains: ['ship.smartlogistics.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['shipper-manager', 'shipper-user', 'shipper-admin'],
         permissions: ['shipment_booking', 'carrier_search', 'tracking'],
-        features: ['load_planning', 'carrier_selection', 'real_time_tracking']
+        features: ['load_planning', 'carrier_selection', 'real_time_tracking'],
       },
       status: 'active',
       lastModified: '2024-01-15T08:45:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'driver',
@@ -272,41 +272,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#FB923C',
         backgroundColor: '#FFF7ED',
         textColor: '#9A3412',
-        borderColor: '#FED7AA'
+        borderColor: '#FED7AA',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'floating',
         navigationStyle: 'tabs',
-        footerStyle: 'none'
+        footerStyle: 'none',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'filled',
-        tableStyle: 'minimal'
+        tableStyle: 'minimal',
       },
       branding: {
         logo: '/logos/driver-logo.svg',
         favicon: '/favicons/driver-favicon.ico',
         companyName: 'DrivePro',
         tagline: 'Mobile Driver Experience',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'driver.transbot.ai',
         customDomains: ['mobile.driverapp.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['driver', 'driver-supervisor'],
         permissions: ['load_viewing', 'route_navigation', 'document_upload'],
-        features: ['load_details', 'route_maps', 'documentation']
+        features: ['load_details', 'route_maps', 'documentation'],
       },
       status: 'active',
       lastModified: '2024-01-15T07:30:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'autonomous',
@@ -319,41 +319,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#34D399',
         backgroundColor: '#ECFDF5',
         textColor: '#064E3B',
-        borderColor: '#A7F3D0'
+        borderColor: '#A7F3D0',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'filled',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/autonomous-logo.svg',
         favicon: '/favicons/autonomous-favicon.ico',
         companyName: 'AutoDrive',
         tagline: 'AI-Powered Operations',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'autonomous.transbot.ai',
         customDomains: ['ai.autodrive.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['ai-engineer', 'autonomous-manager', 'ai-admin'],
         permissions: ['ai_management', 'autonomous_operations', 'ml_training'],
-        features: ['ai_agents', 'automated_decisions', 'machine_learning']
+        features: ['ai_agents', 'automated_decisions', 'machine_learning'],
       },
       status: 'active',
       lastModified: '2024-01-15T06:45:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'yard',
@@ -366,41 +366,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#FBBF24',
         backgroundColor: '#FFFBEB',
         textColor: '#92400E',
-        borderColor: '#FDE68A'
+        borderColor: '#FDE68A',
       },
       layout: {
         headerStyle: 'detailed',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'square',
         cardStyle: 'flat',
         inputStyle: 'outlined',
-        tableStyle: 'bordered'
+        tableStyle: 'bordered',
       },
       branding: {
         logo: '/logos/yard-logo.svg',
         favicon: '/favicons/yard-favicon.ico',
         companyName: 'YardMaster',
         tagline: 'Terminal Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'yard.transbot.ai',
         customDomains: ['yard.terminal.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['yard-manager', 'yard-operator', 'yard-admin'],
         permissions: ['yard_planning', 'gate_management', 'trailer_tracking'],
-        features: ['yard_planning', 'gate_management', 'trailer_tracking']
+        features: ['yard_planning', 'gate_management', 'trailer_tracking'],
       },
       status: 'active',
       lastModified: '2024-01-15T05:30:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'financial',
@@ -413,41 +413,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#10B981',
         backgroundColor: '#F0FDF4',
         textColor: '#064E3B',
-        borderColor: '#BBF7D0'
+        borderColor: '#BBF7D0',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/financial-logo.svg',
         favicon: '/favicons/financial-favicon.ico',
         companyName: 'FinancePro',
         tagline: 'Financial Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'financial.transbot.ai',
         customDomains: ['finance.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['finance-manager', 'accountant', 'finance-admin'],
         permissions: ['invoice_management', 'payment_processing', 'financial_reporting'],
-        features: ['invoice_management', 'payment_processing', 'financial_reporting']
+        features: ['invoice_management', 'payment_processing', 'financial_reporting'],
       },
       status: 'active',
       lastModified: '2024-01-15T04:15:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'partner',
@@ -460,41 +460,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#8B5CF6',
         backgroundColor: '#FAF5FF',
         textColor: '#4C1D95',
-        borderColor: '#DDD6FE'
+        borderColor: '#DDD6FE',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'floating',
         navigationStyle: 'breadcrumbs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'pill',
         cardStyle: 'outlined',
         inputStyle: 'underlined',
-        tableStyle: 'minimal'
+        tableStyle: 'minimal',
       },
       branding: {
         logo: '/logos/partner-logo.svg',
         favicon: '/favicons/partner-favicon.ico',
         companyName: 'PartnerHub',
         tagline: 'Collaboration Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'partner.transbot.ai',
         customDomains: ['partners.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['partner-manager', 'partner-user', 'partner-admin'],
         permissions: ['partner_directory', 'collaboration_tools', 'performance_tracking'],
-        features: ['partner_directory', 'collaboration_tools', 'performance_tracking']
+        features: ['partner_directory', 'collaboration_tools', 'performance_tracking'],
       },
       status: 'active',
       lastModified: '2024-01-15T03:00:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'developer',
@@ -507,41 +507,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#374151',
         backgroundColor: '#F9FAFB',
         textColor: '#111827',
-        borderColor: '#E5E7EB'
+        borderColor: '#E5E7EB',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'square',
         cardStyle: 'flat',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/developer-logo.svg',
         favicon: '/favicons/developer-favicon.ico',
         companyName: 'DevHub',
         tagline: 'API Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'developer.transbot.ai',
         customDomains: ['api.developer.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['developer', 'api-user', 'developer-admin'],
         permissions: ['api_documentation', 'sdk_access', 'sandbox_environment'],
-        features: ['api_documentation', 'sdk_access', 'sandbox_environment']
+        features: ['api_documentation', 'sdk_access', 'sandbox_environment'],
       },
       status: 'active',
       lastModified: '2024-01-15T02:30:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'warehouse',
@@ -554,41 +554,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#EF4444',
         backgroundColor: '#FEF2F2',
         textColor: '#991B1B',
-        borderColor: '#FECACA'
+        borderColor: '#FECACA',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'filled',
-        tableStyle: 'bordered'
+        tableStyle: 'bordered',
       },
       branding: {
         logo: '/logos/warehouse-logo.svg',
         favicon: '/favicons/warehouse-favicon.ico',
         companyName: 'WarehousePro',
         tagline: 'Inventory Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'warehouse.transbot.ai',
         customDomains: ['warehouse.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['warehouse-manager', 'warehouse-operator', 'warehouse-admin'],
         permissions: ['inventory_management', 'order_processing', 'shipping_coordination'],
-        features: ['inventory_management', 'order_processing', 'shipping_coordination']
+        features: ['inventory_management', 'order_processing', 'shipping_coordination'],
       },
       status: 'active',
       lastModified: '2024-01-15T01:45:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'fleet',
@@ -601,41 +601,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#06B6D4',
         backgroundColor: '#F0F9FF',
         textColor: '#164E63',
-        borderColor: '#BAE6FD'
+        borderColor: '#BAE6FD',
       },
       layout: {
         headerStyle: 'detailed',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/fleet-logo.svg',
         favicon: '/favicons/fleet-favicon.ico',
         companyName: 'FleetMaster',
         tagline: 'Fleet Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'fleet.transbot.ai',
         customDomains: ['fleet.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['fleet-manager', 'fleet-operator', 'fleet-admin'],
         permissions: ['vehicle_tracking', 'driver_management', 'route_optimization'],
-        features: ['vehicle_tracking', 'driver_management', 'route_optimization']
+        features: ['vehicle_tracking', 'driver_management', 'route_optimization'],
       },
       status: 'active',
       lastModified: '2024-01-15T01:00:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'dispatch',
@@ -648,41 +648,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#FB923C',
         backgroundColor: '#FFF7ED',
         textColor: '#9A3412',
-        borderColor: '#FED7AA'
+        borderColor: '#FED7AA',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'square',
         cardStyle: 'flat',
         inputStyle: 'filled',
-        tableStyle: 'bordered'
+        tableStyle: 'bordered',
       },
       branding: {
         logo: '/logos/dispatch-logo.svg',
         favicon: '/favicons/dispatch-favicon.ico',
         companyName: 'DispatchPro',
         tagline: 'Real-time Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'dispatch.transbot.ai',
         customDomains: ['dispatch.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['dispatcher', 'dispatch-manager', 'dispatch-admin'],
         permissions: ['load_assignment', 'driver_coordination', 'real_time_tracking'],
-        features: ['load_assignment', 'driver_coordination', 'real_time_tracking']
+        features: ['load_assignment', 'driver_coordination', 'real_time_tracking'],
       },
       status: 'active',
       lastModified: '2024-01-15T00:30:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'maintenance',
@@ -695,41 +695,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#D97706',
         backgroundColor: '#FFFBEB',
         textColor: '#92400E',
-        borderColor: '#FDE68A'
+        borderColor: '#FDE68A',
       },
       layout: {
         headerStyle: 'detailed',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'outlined',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/maintenance-logo.svg',
         favicon: '/favicons/maintenance-favicon.ico',
         companyName: 'MaintenancePro',
         tagline: 'Service Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'maintenance.transbot.ai',
         customDomains: ['maintenance.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['maintenance-manager', 'technician', 'maintenance-admin'],
         permissions: ['service_scheduling', 'parts_management', 'technician_coordination'],
-        features: ['service_scheduling', 'parts_management', 'technician_coordination']
+        features: ['service_scheduling', 'parts_management', 'technician_coordination'],
       },
       status: 'active',
       lastModified: '2024-01-14T23:45:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'fuel',
@@ -742,41 +742,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#D97706',
         backgroundColor: '#FFFBEB',
         textColor: '#92400E',
-        borderColor: '#FDE68A'
+        borderColor: '#FDE68A',
       },
       layout: {
         headerStyle: 'minimal',
         sidebarStyle: 'floating',
         navigationStyle: 'breadcrumbs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'pill',
         cardStyle: 'outlined',
         inputStyle: 'underlined',
-        tableStyle: 'minimal'
+        tableStyle: 'minimal',
       },
       branding: {
         logo: '/logos/fuel-logo.svg',
         favicon: '/favicons/fuel-favicon.ico',
         companyName: 'FuelMaster',
         tagline: 'Efficiency Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'fuel.transbot.ai',
         customDomains: ['fuel.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['fuel-manager', 'fuel-analyst', 'fuel-admin'],
         permissions: ['fuel_tracking', 'efficiency_analytics', 'cost_management'],
-        features: ['fuel_tracking', 'efficiency_analytics', 'cost_management']
+        features: ['fuel_tracking', 'efficiency_analytics', 'cost_management'],
       },
       status: 'active',
       lastModified: '2024-01-14T23:00:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'insurance',
@@ -789,41 +789,41 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#3B82F6',
         backgroundColor: '#EFF6FF',
         textColor: '#1E3A8A',
-        borderColor: '#BFDBFE'
+        borderColor: '#BFDBFE',
       },
       layout: {
         headerStyle: 'dashboard',
         sidebarStyle: 'fixed',
         navigationStyle: 'menu',
-        footerStyle: 'minimal'
+        footerStyle: 'minimal',
       },
       components: {
         buttonStyle: 'rounded',
         cardStyle: 'elevated',
         inputStyle: 'filled',
-        tableStyle: 'striped'
+        tableStyle: 'striped',
       },
       branding: {
         logo: '/logos/insurance-logo.svg',
         favicon: '/favicons/insurance-favicon.ico',
         companyName: 'InsurancePro',
         tagline: 'Protection Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'insurance.transbot.ai',
         customDomains: ['insurance.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['insurance-manager', 'claims-processor', 'insurance-admin'],
         permissions: ['policy_management', 'claims_processing', 'coverage_tracking'],
-        features: ['policy_management', 'claims_processing', 'coverage_tracking']
+        features: ['policy_management', 'claims_processing', 'coverage_tracking'],
       },
       status: 'active',
       lastModified: '2024-01-14T22:15:00Z',
-      version: '2.1.0'
+      version: '2.1.0',
     },
     {
       id: 'compliance',
@@ -836,42 +836,42 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         accentColor: '#10B981',
         backgroundColor: '#F0FDF4',
         textColor: '#064E3B',
-        borderColor: '#BBF7D0'
+        borderColor: '#BBF7D0',
       },
       layout: {
         headerStyle: 'detailed',
         sidebarStyle: 'collapsible',
         navigationStyle: 'tabs',
-        footerStyle: 'detailed'
+        footerStyle: 'detailed',
       },
       components: {
         buttonStyle: 'square',
         cardStyle: 'flat',
         inputStyle: 'outlined',
-        tableStyle: 'bordered'
+        tableStyle: 'bordered',
       },
       branding: {
         logo: '/logos/compliance-logo.svg',
         favicon: '/favicons/compliance-favicon.ico',
         companyName: 'CompliancePro',
         tagline: 'Regulatory Excellence',
-        customCSS: ''
+        customCSS: '',
       },
       domainConfig: {
         subdomain: 'compliance.transbot.ai',
         customDomains: ['compliance.company.com'],
         sslEnabled: true,
-        cdnEnabled: true
+        cdnEnabled: true,
       },
       accessControl: {
         roles: ['compliance-manager', 'compliance-officer', 'compliance-admin'],
         permissions: ['regulatory_tracking', 'audit_management', 'violation_monitoring'],
-        features: ['regulatory_tracking', 'audit_management', 'violation_monitoring']
+        features: ['regulatory_tracking', 'audit_management', 'violation_monitoring'],
       },
       status: 'active',
       lastModified: '2024-01-14T21:30:00Z',
-      version: '2.1.0'
-    }
+      version: '2.1.0',
+    },
   ]);
 
   const [currentTheme, setCurrentTheme] = useState<PortalTheme>(
@@ -889,10 +889,10 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
     }
   }, [selectedPortal, portalThemes]);
 
-  const handleThemeChange = (path: string, value: any) => {
+  const handleThemeChange = (path: string, value: unknown) => {
     setThemeChanges(prev => ({
       ...prev,
-      [path]: value
+      [path]: value,
     }));
   };
 
@@ -900,16 +900,14 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
     setIsSaving(true);
     try {
       const updatedTheme = { ...currentTheme, ...themeChanges };
-      setPortalThemes(prev => 
-        prev.map(p => p.id === selectedPortal ? updatedTheme : p)
-      );
+      setPortalThemes(prev => prev.map(p => (p.id === selectedPortal ? updatedTheme : p)));
       setCurrentTheme(updatedTheme);
       setThemeChanges({});
-      
+
       if (onThemeUpdate) {
         onThemeUpdate(updatedTheme);
       }
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) {
@@ -919,17 +917,18 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
     }
   };
 
-  const handleDomainUpdate = async (domainConfig: any) => {
+  const handleDomainUpdate = async (domainConfig: unknown) => {
     try {
-      const updatedTheme = { 
-        ...currentTheme, 
-        domainConfig: { ...currentTheme.domainConfig, ...domainConfig }
+      const updatedTheme = {
+        ...currentTheme,
+        domainConfig: {
+          ...currentTheme.domainConfig,
+          ...(domainConfig as Record<string, unknown>),
+        },
       };
-      setPortalThemes(prev => 
-        prev.map(p => p.id === selectedPortal ? updatedTheme : p)
-      );
+      setPortalThemes(prev => prev.map(p => (p.id === selectedPortal ? updatedTheme : p)));
       setCurrentTheme(updatedTheme);
-      
+
       if (onDomainUpdate) {
         onDomainUpdate(domainConfig);
       }
@@ -937,7 +936,6 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
       console.error('Failed to update domain:', error);
     }
   };
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
@@ -950,19 +948,18 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">
-                Portal Theme Manager
-              </h1>
+              <h1 className="text-4xl font-bold text-white mb-2">Portal Theme Manager</h1>
               <p className="text-gray-300 text-lg">
-                Design unique UI experiences for each portal with custom branding and domain management
+                Design unique UI experiences for each portal with custom branding and domain
+                management
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setIsPreviewMode(!isPreviewMode)}
                 className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
-                  isPreviewMode 
-                    ? 'bg-green-600 text-white' 
+                  isPreviewMode
+                    ? 'bg-green-600 text-white'
                     : 'bg-white/10 text-gray-300 hover:bg-white/20'
                 }`}
               >
@@ -995,7 +992,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
               <h3 className="text-white font-semibold mb-4">Select Portal</h3>
               <div className="space-y-2">
-                {portalThemes.map((portal) => (
+                {portalThemes.map(portal => (
                   <button
                     key={portal.id}
                     onClick={() => setSelectedPortal(portal.id)}
@@ -1027,11 +1024,13 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                     { id: 'design', label: 'Design', icon: Palette },
                     { id: 'domain', label: 'Domain', icon: Globe },
                     { id: 'access', label: 'Access', icon: Settings },
-                    { id: 'preview', label: 'Preview', icon: Monitor }
-                  ].map((tab) => (
+                    { id: 'preview', label: 'Preview', icon: Monitor },
+                  ].map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id as any)}
+                      onClick={() =>
+                        setActiveTab(tab.id as 'domain' | 'design' | 'access' | 'preview')
+                      }
                       className={`flex items-center space-x-2 px-6 py-4 transition-colors ${
                         activeTab === tab.id
                           ? 'bg-blue-600 text-white'
@@ -1056,8 +1055,8 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       exit={{ opacity: 0, y: -20 }}
                       className="space-y-6"
                     >
-                      <DesignTab 
-                        theme={currentTheme} 
+                      <DesignTab
+                        theme={currentTheme}
                         changes={themeChanges}
                         onThemeChange={handleThemeChange}
                       />
@@ -1072,7 +1071,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       exit={{ opacity: 0, y: -20 }}
                       className="space-y-6"
                     >
-                      <DomainTab 
+                      <DomainTab
                         domainConfig={currentTheme.domainConfig}
                         onDomainUpdate={handleDomainUpdate}
                       />
@@ -1087,9 +1086,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       exit={{ opacity: 0, y: -20 }}
                       className="space-y-6"
                     >
-                      <AccessTab 
-                        accessControl={currentTheme.accessControl}
-                      />
+                      <AccessTab accessControl={currentTheme.accessControl} />
                     </motion.div>
                   )}
 
@@ -1101,9 +1098,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       exit={{ opacity: 0, y: -20 }}
                       className="space-y-6"
                     >
-                      <PreviewTab 
-                        theme={{ ...currentTheme, ...themeChanges }}
-                      />
+                      <PreviewTab theme={{ ...currentTheme, ...themeChanges }} />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -1117,7 +1112,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
 }
 
 // Design Tab Component
-function DesignTab({ theme, changes, onThemeChange }: any) {
+function DesignTab({ theme, changes, onThemeChange }: Record<string, unknown>) {
   const currentTheme = { ...theme, ...changes };
 
   return (
@@ -1132,23 +1127,21 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
             { key: 'accentColor', label: 'Accent', description: 'Highlight color' },
             { key: 'backgroundColor', label: 'Background', description: 'Page background' },
             { key: 'textColor', label: 'Text', description: 'Primary text color' },
-            { key: 'borderColor', label: 'Border', description: 'Border color' }
-          ].map((color) => (
+            { key: 'borderColor', label: 'Border', description: 'Border color' },
+          ].map(color => (
             <div key={color.key} className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">
-                {color.label}
-              </label>
+              <label className="text-sm font-medium text-gray-300">{color.label}</label>
               <div className="flex items-center space-x-3">
                 <input
                   type="color"
                   value={currentTheme.theme[color.key]}
-                  onChange={(e) => onThemeChange(`theme.${color.key}`, e.target.value)}
+                  onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
                   className="w-12 h-12 rounded-lg border-2 border-white/20 cursor-pointer"
                 />
                 <input
                   type="text"
                   value={currentTheme.theme[color.key]}
-                  onChange={(e) => onThemeChange(`theme.${color.key}`, e.target.value)}
+                  onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
                   className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder={color.description}
                 />
@@ -1164,12 +1157,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Header Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Header Style</label>
               <select
                 value={currentTheme.layout.headerStyle}
-                onChange={(e) => onThemeChange('layout.headerStyle', e.target.value)}
+                onChange={e => onThemeChange('layout.headerStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="minimal">Minimal</option>
@@ -1178,12 +1169,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Sidebar Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Sidebar Style</label>
               <select
                 value={currentTheme.layout.sidebarStyle}
-                onChange={(e) => onThemeChange('layout.sidebarStyle', e.target.value)}
+                onChange={e => onThemeChange('layout.sidebarStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="collapsible">Collapsible</option>
@@ -1199,7 +1188,7 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
               </label>
               <select
                 value={currentTheme.layout.navigationStyle}
-                onChange={(e) => onThemeChange('layout.navigationStyle', e.target.value)}
+                onChange={e => onThemeChange('layout.navigationStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="tabs">Tabs</option>
@@ -1208,12 +1197,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Footer Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Footer Style</label>
               <select
                 value={currentTheme.layout.footerStyle}
-                onChange={(e) => onThemeChange('layout.footerStyle', e.target.value)}
+                onChange={e => onThemeChange('layout.footerStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="minimal">Minimal</option>
@@ -1231,12 +1218,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Button Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Button Style</label>
               <select
                 value={currentTheme.components.buttonStyle}
-                onChange={(e) => onThemeChange('components.buttonStyle', e.target.value)}
+                onChange={e => onThemeChange('components.buttonStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="rounded">Rounded</option>
@@ -1245,12 +1230,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Card Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Card Style</label>
               <select
                 value={currentTheme.components.cardStyle}
-                onChange={(e) => onThemeChange('components.cardStyle', e.target.value)}
+                onChange={e => onThemeChange('components.cardStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="elevated">Elevated</option>
@@ -1261,12 +1244,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
           </div>
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Input Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Input Style</label>
               <select
                 value={currentTheme.components.inputStyle}
-                onChange={(e) => onThemeChange('components.inputStyle', e.target.value)}
+                onChange={e => onThemeChange('components.inputStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="filled">Filled</option>
@@ -1275,12 +1256,10 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Table Style
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Table Style</label>
               <select
                 value={currentTheme.components.tableStyle}
-                onChange={(e) => onThemeChange('components.tableStyle', e.target.value)}
+                onChange={e => onThemeChange('components.tableStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="striped">Striped</option>
@@ -1298,37 +1277,31 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Company Name
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Company Name</label>
               <input
                 type="text"
                 value={currentTheme.branding.companyName}
-                onChange={(e) => onThemeChange('branding.companyName', e.target.value)}
+                onChange={e => onThemeChange('branding.companyName', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter company name"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
-                Tagline
-              </label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Tagline</label>
               <input
                 type="text"
                 value={currentTheme.branding.tagline}
-                onChange={(e) => onThemeChange('branding.tagline', e.target.value)}
+                onChange={e => onThemeChange('branding.tagline', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter tagline"
               />
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-300 mb-2 block">
-              Custom CSS
-            </label>
+            <label className="text-sm font-medium text-gray-300 mb-2 block">Custom CSS</label>
             <textarea
               value={currentTheme.branding.customCSS || ''}
-              onChange={(e) => onThemeChange('branding.customCSS', e.target.value)}
+              onChange={e => onThemeChange('branding.customCSS', e.target.value)}
               rows={6}
               className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
               placeholder="/* Custom CSS styles */"
@@ -1341,13 +1314,13 @@ function DesignTab({ theme, changes, onThemeChange }: any) {
 }
 
 // Domain Tab Component
-function DomainTab({ domainConfig, onDomainUpdate }: any) {
+function DomainTab({ domainConfig, onDomainUpdate }: Record<string, unknown>) {
   const [newDomain, setNewDomain] = useState('');
 
   const handleAddDomain = () => {
     if (newDomain && !domainConfig.customDomains.includes(newDomain)) {
       onDomainUpdate({
-        customDomains: [...domainConfig.customDomains, newDomain]
+        customDomains: [...domainConfig.customDomains, newDomain],
       });
       setNewDomain('');
     }
@@ -1355,7 +1328,7 @@ function DomainTab({ domainConfig, onDomainUpdate }: any) {
 
   const handleRemoveDomain = (domain: string) => {
     onDomainUpdate({
-      customDomains: domainConfig.customDomains.filter((d: string) => d !== domain)
+      customDomains: domainConfig.customDomains.filter((d: string) => d !== domain),
     });
   };
 
@@ -1401,12 +1374,12 @@ function DomainTab({ domainConfig, onDomainUpdate }: any) {
               </div>
             </div>
           ))}
-          
+
           <div className="flex items-center space-x-2">
             <input
               type="text"
               value={newDomain}
-              onChange={(e) => setNewDomain(e.target.value)}
+              onChange={e => setNewDomain(e.target.value)}
               placeholder="Enter custom domain (e.g., portal.company.com)"
               className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -1427,7 +1400,9 @@ function DomainTab({ domainConfig, onDomainUpdate }: any) {
           <div className="bg-white/5 rounded-lg p-4 border border-white/10">
             <div className="flex items-center justify-between mb-2">
               <span className="text-white font-medium">SSL Certificate</span>
-              <div className={`w-3 h-3 rounded-full ${domainConfig.sslEnabled ? 'bg-green-400' : 'bg-red-400'}`} />
+              <div
+                className={`w-3 h-3 rounded-full ${domainConfig.sslEnabled ? 'bg-green-400' : 'bg-red-400'}`}
+              />
             </div>
             <div className="text-gray-400 text-sm">
               {domainConfig.sslEnabled ? 'SSL enabled' : 'SSL disabled'}
@@ -1439,11 +1414,13 @@ function DomainTab({ domainConfig, onDomainUpdate }: any) {
               {domainConfig.sslEnabled ? 'Disable' : 'Enable'} SSL
             </button>
           </div>
-          
+
           <div className="bg-white/5 rounded-lg p-4 border border-white/10">
             <div className="flex items-center justify-between mb-2">
               <span className="text-white font-medium">CDN</span>
-              <div className={`w-3 h-3 rounded-full ${domainConfig.cdnEnabled ? 'bg-green-400' : 'bg-red-400'}`} />
+              <div
+                className={`w-3 h-3 rounded-full ${domainConfig.cdnEnabled ? 'bg-green-400' : 'bg-red-400'}`}
+              />
             </div>
             <div className="text-gray-400 text-sm">
               {domainConfig.cdnEnabled ? 'CDN enabled' : 'CDN disabled'}
@@ -1462,7 +1439,9 @@ function DomainTab({ domainConfig, onDomainUpdate }: any) {
 }
 
 // Access Tab Component
-function AccessTab({ accessControl }: {
+function AccessTab({
+  accessControl,
+}: {
   accessControl: {
     roles: string[];
     permissions: string[];
@@ -1511,9 +1490,7 @@ function AccessTab({ accessControl }: {
 }
 
 // Preview Tab Component
-function PreviewTab({ theme }: {
-  theme: PortalTheme;
-}) {
+function PreviewTab({ theme }: { theme: PortalTheme }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -1525,19 +1502,19 @@ function PreviewTab({ theme }: {
       </div>
 
       <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
-        <div 
+        <div
           className="p-6"
           style={{
             backgroundColor: theme.theme.backgroundColor,
-            color: theme.theme.textColor
+            color: theme.theme.textColor,
           }}
         >
           {/* Header Preview */}
-          <div 
+          <div
             className="mb-6 p-4 rounded-lg"
             style={{
               backgroundColor: theme.theme.primaryColor,
-              color: 'white'
+              color: 'white',
             }}
           >
             <div className="flex items-center justify-between">
@@ -1546,21 +1523,21 @@ function PreviewTab({ theme }: {
                 <p className="text-sm opacity-90">{theme.branding.tagline}</p>
               </div>
               <div className="flex items-center space-x-4">
-                <button 
+                <button
                   className="px-4 py-2 rounded-lg text-sm font-medium"
                   style={{
                     backgroundColor: theme.theme.accentColor,
-                    color: 'white'
+                    color: 'white',
                   }}
                 >
                   Dashboard
                 </button>
-                <button 
+                <button
                   className="px-4 py-2 rounded-lg text-sm font-medium"
                   style={{
                     backgroundColor: 'transparent',
                     color: 'white',
-                    border: `1px solid ${theme.theme.borderColor}`
+                    border: `1px solid ${theme.theme.borderColor}`,
                   }}
                 >
                   Settings
@@ -1571,11 +1548,11 @@ function PreviewTab({ theme }: {
 
           {/* Content Preview */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div 
+            <div
               className="p-4 rounded-lg"
               style={{
                 backgroundColor: 'white',
-                border: `1px solid ${theme.theme.borderColor}`
+                border: `1px solid ${theme.theme.borderColor}`,
               }}
             >
               <h3 className="font-semibold mb-2" style={{ color: theme.theme.textColor }}>
@@ -1584,22 +1561,22 @@ function PreviewTab({ theme }: {
               <p className="text-sm mb-4" style={{ color: theme.theme.textColor }}>
                 This is a preview of how your portal will look with the selected theme.
               </p>
-              <button 
+              <button
                 className="px-4 py-2 rounded-lg text-sm font-medium"
                 style={{
                   backgroundColor: theme.theme.primaryColor,
-                  color: 'white'
+                  color: 'white',
                 }}
               >
                 Action Button
               </button>
             </div>
-            
-            <div 
+
+            <div
               className="p-4 rounded-lg"
               style={{
                 backgroundColor: 'white',
-                border: `1px solid ${theme.theme.borderColor}`
+                border: `1px solid ${theme.theme.borderColor}`,
               }}
             >
               <h3 className="font-semibold mb-2" style={{ color: theme.theme.textColor }}>
@@ -1608,11 +1585,11 @@ function PreviewTab({ theme }: {
               <p className="text-sm mb-4" style={{ color: theme.theme.textColor }}>
                 All components will use your custom color scheme and styling.
               </p>
-              <button 
+              <button
                 className="px-4 py-2 rounded-lg text-sm font-medium"
                 style={{
                   backgroundColor: theme.theme.secondaryColor,
-                  color: 'white'
+                  color: 'white',
                 }}
               >
                 Secondary Button

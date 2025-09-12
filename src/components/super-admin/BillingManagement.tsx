@@ -27,9 +27,22 @@ import {
 } from 'lucide-react';
 
 import { Button } from '../../design-system/components/Button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../design-system/components/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
-import { formatCurrency, formatNumber, formatPercentage, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
+import {
+  formatCurrency,
+  formatNumber,
+  formatPercentage,
+  formatRelativeTime,
+  getStatusColor,
+  getStatusIcon,
+} from '../../lib/utils';
 
 interface BillingInfo {
   id: number;
@@ -104,7 +117,7 @@ const BillingManagement: React.FC = () => {
     currency: 'USD',
     status: 'active',
     plan: 'Basic',
-    features: []
+    features: [],
   });
   const [loading, setLoading] = useState(false);
   const [bulkSelected, setBulkSelected] = useState<number[]>([]);
@@ -114,14 +127,19 @@ const BillingManagement: React.FC = () => {
     { id: 1, name: 'Global Logistics Corp' },
     { id: 2, name: 'Swift Transport Ltd' },
     { id: 3, name: 'Metro Freight Inc' },
-    { id: 4, name: 'Coastal Shipping Co' }
+    { id: 4, name: 'Coastal Shipping Co' },
   ];
 
   const availablePlans = [
     { id: 'basic', name: 'Basic', price: 99, features: ['basic_access'] },
     { id: 'standard', name: 'Standard', price: 299, features: ['basic_access', 'analytics'] },
-    { id: 'professional', name: 'Professional', price: 599, features: ['basic_access', 'analytics', 'api_access'] },
-    { id: 'enterprise', name: 'Enterprise', price: 1299, features: ['*'] }
+    {
+      id: 'professional',
+      name: 'Professional',
+      price: 599,
+      features: ['basic_access', 'analytics', 'api_access'],
+    },
+    { id: 'enterprise', name: 'Enterprise', price: 1299, features: ['*'] },
   ];
 
   const availableFeatures = [
@@ -134,7 +152,7 @@ const BillingManagement: React.FC = () => {
     'priority_support',
     'custom_integrations',
     'advanced_reporting',
-    'white_label'
+    'white_label',
   ];
 
   // Mock data initialization
@@ -162,23 +180,28 @@ const BillingManagement: React.FC = () => {
             amount: 45000,
             status: 'paid',
             items: [
-              { description: 'Enterprise Plan - Annual', quantity: 1, unitPrice: 45000, total: 45000 }
+              {
+                description: 'Enterprise Plan - Annual',
+                quantity: 1,
+                unitPrice: 45000,
+                total: 45000,
+              },
             ],
             paymentMethod: 'Credit Card',
-            paidAt: '2024-01-15T10:30:00Z'
-          }
+            paidAt: '2024-01-15T10:30:00Z',
+          },
         ],
         usage: {
           users: 1250,
           storage: 2.5,
           apiCalls: 45000,
-          overages: 0
+          overages: 0,
         },
         limits: {
           maxUsers: 2000,
           maxStorage: 1000,
-          maxApiCalls: 100000
-        }
+          maxApiCalls: 100000,
+        },
       },
       {
         id: 2,
@@ -202,23 +225,28 @@ const BillingManagement: React.FC = () => {
             amount: 28500,
             status: 'paid',
             items: [
-              { description: 'Professional Plan - Monthly', quantity: 1, unitPrice: 28500, total: 28500 }
+              {
+                description: 'Professional Plan - Monthly',
+                quantity: 1,
+                unitPrice: 28500,
+                total: 28500,
+              },
             ],
             paymentMethod: 'Bank Transfer',
-            paidAt: '2024-01-15T09:15:00Z'
-          }
+            paidAt: '2024-01-15T09:15:00Z',
+          },
         ],
         usage: {
           users: 890,
           storage: 1.2,
           apiCalls: 25000,
-          overages: 0
+          overages: 0,
         },
         limits: {
           maxUsers: 1000,
           maxStorage: 500,
-          maxApiCalls: 50000
-        }
+          maxApiCalls: 50000,
+        },
       },
       {
         id: 3,
@@ -242,23 +270,28 @@ const BillingManagement: React.FC = () => {
             amount: 15200,
             status: 'paid',
             items: [
-              { description: 'Standard Plan - Monthly', quantity: 1, unitPrice: 15200, total: 15200 }
+              {
+                description: 'Standard Plan - Monthly',
+                quantity: 1,
+                unitPrice: 15200,
+                total: 15200,
+              },
             ],
             paymentMethod: 'Credit Card',
-            paidAt: '2024-01-15T08:45:00Z'
-          }
+            paidAt: '2024-01-15T08:45:00Z',
+          },
         ],
         usage: {
           users: 456,
           storage: 0.8,
           apiCalls: 12000,
-          overages: 0
+          overages: 0,
         },
         limits: {
           maxUsers: 500,
           maxStorage: 100,
-          maxApiCalls: 10000
-        }
+          maxApiCalls: 10000,
+        },
       },
       {
         id: 4,
@@ -278,14 +311,14 @@ const BillingManagement: React.FC = () => {
           users: 234,
           storage: 0.2,
           apiCalls: 2000,
-          overages: 0
+          overages: 0,
         },
         limits: {
           maxUsers: 50,
           maxStorage: 10,
-          maxApiCalls: 1000
-        }
-      }
+          maxApiCalls: 1000,
+        },
+      },
     ];
 
     setBillingInfo(mockBillingInfo);
@@ -298,10 +331,11 @@ const BillingManagement: React.FC = () => {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered.filter(billing =>
-        billing.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        billing.plan.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        billing.paymentMethod.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        billing =>
+          billing.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          billing.plan.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          billing.paymentMethod.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -330,13 +364,13 @@ const BillingManagement: React.FC = () => {
         id: Math.max(...billingInfo.map(b => b.id)) + 1,
         companyId: formData.companyId,
         companyName: companies.find(c => c.id === formData.companyId)?.name || '',
-        billingCycle: formData.billingCycle as any,
+        billingCycle: formData.billingCycle as 'monthly' | 'yearly',
         nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
         paymentMethod: formData.paymentMethod,
         subscriptionId: `sub_${Date.now()}`,
         amount: formData.amount,
         currency: formData.currency,
-        status: formData.status as any,
+        status: formData.status as 'active' | 'suspended' | 'trial' | 'cancelled',
         plan: formData.plan,
         features: formData.features,
         invoices: [],
@@ -344,13 +378,13 @@ const BillingManagement: React.FC = () => {
           users: 0,
           storage: 0,
           apiCalls: 0,
-          overages: 0
+          overages: 0,
         },
         limits: {
           maxUsers: 50,
           maxStorage: 10,
-          maxApiCalls: 1000
-        }
+          maxApiCalls: 1000,
+        },
       };
 
       setBillingInfo(prev => [...prev, newBilling]);
@@ -372,16 +406,16 @@ const BillingManagement: React.FC = () => {
         ...editingBilling,
         companyId: formData.companyId,
         companyName: companies.find(c => c.id === formData.companyId)?.name || '',
-        billingCycle: formData.billingCycle as any,
+        billingCycle: formData.billingCycle as 'monthly' | 'yearly',
         paymentMethod: formData.paymentMethod,
         amount: formData.amount,
         currency: formData.currency,
-        status: formData.status as any,
+        status: formData.status as 'active' | 'suspended' | 'trial' | 'cancelled',
         plan: formData.plan,
-        features: formData.features
+        features: formData.features,
       };
 
-      setBillingInfo(prev => prev.map(b => b.id === editingBilling.id ? updatedBilling : b));
+      setBillingInfo(prev => prev.map(b => (b.id === editingBilling.id ? updatedBilling : b)));
       setEditingBilling(null);
       setShowBillingModal(false);
       resetForm();
@@ -401,21 +435,31 @@ const BillingManagement: React.FC = () => {
   const handleBulkAction = (action: string) => {
     switch (action) {
       case 'delete':
-        if (window.confirm(`Are you sure you want to delete ${bulkSelected.length} billing records?`)) {
+        if (
+          window.confirm(`Are you sure you want to delete ${bulkSelected.length} billing records?`)
+        ) {
           setBillingInfo(prev => prev.filter(b => !bulkSelected.includes(b.id)));
           setBulkSelected([]);
         }
         break;
       case 'suspend':
-        setBillingInfo(prev => prev.map(b => 
-          bulkSelected.includes(b.id) ? { ...b, status: 'suspended' as any } : b
-        ));
+        setBillingInfo(prev =>
+          prev.map(b =>
+            bulkSelected.includes(b.id)
+              ? { ...b, status: 'suspended' as 'active' | 'suspended' | 'trial' | 'cancelled' }
+              : b
+          )
+        );
         setBulkSelected([]);
         break;
       case 'activate':
-        setBillingInfo(prev => prev.map(b => 
-          bulkSelected.includes(b.id) ? { ...b, status: 'active' as any } : b
-        ));
+        setBillingInfo(prev =>
+          prev.map(b =>
+            bulkSelected.includes(b.id)
+              ? { ...b, status: 'active' as 'active' | 'suspended' | 'trial' | 'cancelled' }
+              : b
+          )
+        );
         setBulkSelected([]);
         break;
     }
@@ -430,7 +474,7 @@ const BillingManagement: React.FC = () => {
       currency: 'USD',
       status: 'active',
       plan: 'Basic',
-      features: []
+      features: [],
     });
   };
 
@@ -444,7 +488,7 @@ const BillingManagement: React.FC = () => {
       currency: billing.currency,
       status: billing.status,
       plan: billing.plan,
-      features: billing.features
+      features: billing.features,
     });
     setShowBillingModal(true);
   };
@@ -509,11 +553,15 @@ const BillingManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
                   <select
                     value={formData.companyId}
-                    onChange={(e) => setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))}
+                    onChange={e =>
+                      setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     {companies.map(company => (
-                      <option key={company.id} value={company.id}>{company.name}</option>
+                      <option key={company.id} value={company.id}>
+                        {company.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -521,11 +569,13 @@ const BillingManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
                   <select
                     value={formData.plan}
-                    onChange={(e) => setFormData(prev => ({ ...prev, plan: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, plan: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     {availablePlans.map(plan => (
-                      <option key={plan.id} value={plan.name}>{plan.name}</option>
+                      <option key={plan.id} value={plan.name}>
+                        {plan.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -533,10 +583,12 @@ const BillingManagement: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Billing Cycle</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Billing Cycle
+                  </label>
                   <select
                     value={formData.billingCycle}
-                    onChange={(e) => setFormData(prev => ({ ...prev, billingCycle: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, billingCycle: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="monthly">Monthly</option>
@@ -544,10 +596,14 @@ const BillingManagement: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Payment Method
+                  </label>
                   <select
                     value={formData.paymentMethod}
-                    onChange={(e) => setFormData(prev => ({ ...prev, paymentMethod: e.target.value }))}
+                    onChange={e =>
+                      setFormData(prev => ({ ...prev, paymentMethod: e.target.value }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="Credit Card">Credit Card</option>
@@ -560,7 +616,7 @@ const BillingManagement: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
                   <select
                     value={formData.status}
-                    onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, status: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="active">Active</option>
@@ -576,14 +632,16 @@ const BillingManagement: React.FC = () => {
                   label="Amount"
                   type="number"
                   value={formData.amount}
-                  onChange={(e) => setFormData(prev => ({ ...prev, amount: parseFloat(e.target.value) }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, amount: parseFloat(e.target.value) }))
+                  }
                   placeholder="0.00"
                 />
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
                   <select
                     value={formData.currency}
-                    onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, currency: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="USD">USD</option>
@@ -602,16 +660,16 @@ const BillingManagement: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={formData.features.includes(feature)}
-                        onChange={(e) => {
+                        onChange={e => {
                           if (e.target.checked) {
                             setFormData(prev => ({
                               ...prev,
-                              features: [...prev.features, feature]
+                              features: [...prev.features, feature],
                             }));
                           } else {
                             setFormData(prev => ({
                               ...prev,
-                              features: prev.features.filter(f => f !== feature)
+                              features: prev.features.filter(f => f !== feature),
                             }));
                           }
                         }}
@@ -663,7 +721,7 @@ const BillingManagement: React.FC = () => {
             change: '+15.7% vs last month',
             icon: DollarSign,
             color: 'text-green-500',
-            bgColor: 'bg-green-50'
+            bgColor: 'bg-green-50',
           },
           {
             title: 'Active Subscriptions',
@@ -671,7 +729,7 @@ const BillingManagement: React.FC = () => {
             change: '+8.3% vs last month',
             icon: CreditCard,
             color: 'text-blue-500',
-            bgColor: 'bg-blue-50'
+            bgColor: 'bg-blue-50',
           },
           {
             title: 'Churn Rate',
@@ -679,7 +737,7 @@ const BillingManagement: React.FC = () => {
             change: '-0.3% vs last month',
             icon: TrendingDown,
             color: 'text-red-500',
-            bgColor: 'bg-red-50'
+            bgColor: 'bg-red-50',
           },
           {
             title: 'ARPU',
@@ -687,9 +745,9 @@ const BillingManagement: React.FC = () => {
             change: '+12.5% vs last month',
             icon: Users,
             color: 'text-purple-500',
-            bgColor: 'bg-purple-50'
-          }
-        ].map((stat) => (
+            bgColor: 'bg-purple-50',
+          },
+        ].map(stat => (
           <Card key={stat.title}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
@@ -769,14 +827,14 @@ const BillingManagement: React.FC = () => {
               <Input
                 placeholder="Search subscriptions..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 leftIcon={<Search className="w-4 h-4" />}
               />
             </div>
             <div className="flex gap-3">
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={e => setStatusFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
@@ -787,12 +845,14 @@ const BillingManagement: React.FC = () => {
               </select>
               <select
                 value={planFilter}
-                onChange={(e) => setPlanFilter(e.target.value)}
+                onChange={e => setPlanFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Plans</option>
                 {availablePlans.map(plan => (
-                  <option key={plan.id} value={plan.name}>{plan.name}</option>
+                  <option key={plan.id} value={plan.name}>
+                    {plan.name}
+                  </option>
                 ))}
               </select>
               <Button variant="outline">
@@ -841,8 +901,10 @@ const BillingManagement: React.FC = () => {
                   <th className="px-6 py-4 text-left">
                     <input
                       type="checkbox"
-                      checked={bulkSelected.length === filteredBilling.length && filteredBilling.length > 0}
-                      onChange={(e) => {
+                      checked={
+                        bulkSelected.length === filteredBilling.length && filteredBilling.length > 0
+                      }
+                      onChange={e => {
                         if (e.target.checked) {
                           setBulkSelected(filteredBilling.map(b => b.id));
                         } else {
@@ -876,13 +938,13 @@ const BillingManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredBilling.map((billing) => (
+                {filteredBilling.map(billing => (
                   <tr key={billing.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(billing.id)}
-                        onChange={(e) => {
+                        onChange={e => {
                           if (e.target.checked) {
                             setBulkSelected(prev => [...prev, billing.id]);
                           } else {
@@ -898,23 +960,32 @@ const BillingManagement: React.FC = () => {
                           <Building2 className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{billing.companyName}</div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {billing.companyName}
+                          </div>
                           <div className="text-sm text-gray-500">{billing.subscriptionId}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        billing.plan === 'Enterprise' ? 'bg-purple-100 text-purple-800' :
-                        billing.plan === 'Professional' ? 'bg-blue-100 text-blue-800' :
-                        billing.plan === 'Standard' ? 'bg-green-100 text-green-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          billing.plan === 'Enterprise'
+                            ? 'bg-purple-100 text-purple-800'
+                            : billing.plan === 'Professional'
+                              ? 'bg-blue-100 text-blue-800'
+                              : billing.plan === 'Standard'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
                         {billing.plan}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(billing.status)}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(billing.status)}`}
+                      >
                         {getStatusIcon(billing.status)}
                         {billing.status}
                       </span>
@@ -930,17 +1001,10 @@ const BillingManagement: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                        >
+                        <Button size="sm" variant="ghost">
                           <Eye className="w-4 h-4" />
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => openEditModal(billing)}
-                        >
+                        <Button size="sm" variant="ghost" onClick={() => openEditModal(billing)}>
                           <Edit className="w-4 h-4" />
                         </Button>
                         <Button
@@ -998,8 +1062,8 @@ const BillingManagement: React.FC = () => {
                 { id: 'overview', label: 'Overview', icon: BarChart3 },
                 { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
                 { id: 'invoices', label: 'Invoices', icon: FileText },
-                { id: 'analytics', label: 'Analytics', icon: TrendingUp }
-              ].map((tab) => (
+                { id: 'analytics', label: 'Analytics', icon: TrendingUp },
+              ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}

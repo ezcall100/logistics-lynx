@@ -21,7 +21,13 @@ import {
 } from 'lucide-react';
 
 import { Button } from '../../design-system/components/Button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../design-system/components/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
 import { formatNumber, formatRelativeTime } from '../../lib/utils';
 
@@ -36,7 +42,7 @@ interface SecurityEvent {
   companyName?: string;
   ipAddress: string;
   userAgent: string;
-  details: Record<string, any>;
+  details: Record<string, unknown>;
   resolved: boolean;
   resolvedAt?: string;
   resolvedBy?: string;
@@ -86,14 +92,13 @@ const SecurityCompliance: React.FC = () => {
     resolvedEvents: 0,
     activeThreats: 0,
     complianceScore: 0,
-    lastScan: ''
+    lastScan: '',
   });
   const [activeTab, setActiveTab] = useState('overview');
   const [searchQuery, setSearchQuery] = useState('');
   const [severityFilter, setSeverityFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [, setLoading] = useState(false);
-
 
   const complianceCategories = [
     'GDPR',
@@ -103,7 +108,7 @@ const SecurityCompliance: React.FC = () => {
     'PCI-DSS',
     'CCPA',
     'NIST',
-    'COBIT'
+    'COBIT',
   ];
 
   // Mock data initialization
@@ -123,10 +128,10 @@ const SecurityCompliance: React.FC = () => {
         details: {
           attempts: 5,
           timeframe: '10 minutes',
-          location: 'New York, NY'
+          location: 'New York, NY',
         },
         resolved: false,
-        createdAt: '2024-01-15T10:30:00Z'
+        createdAt: '2024-01-15T10:30:00Z',
       },
       {
         id: 2,
@@ -142,12 +147,12 @@ const SecurityCompliance: React.FC = () => {
         details: {
           api_calls: 1000,
           timeframe: '1 hour',
-          endpoint: '/api/loads'
+          endpoint: '/api/loads',
         },
         resolved: true,
         resolvedAt: '2024-01-15T11:00:00Z',
         resolvedBy: 'Security Admin',
-        createdAt: '2024-01-15T10:00:00Z'
+        createdAt: '2024-01-15T10:00:00Z',
       },
       {
         id: 3,
@@ -161,12 +166,12 @@ const SecurityCompliance: React.FC = () => {
         details: {
           target: 'customer_database',
           method: 'sql_injection',
-          blocked: true
+          blocked: true,
         },
         resolved: true,
         resolvedAt: '2024-01-15T09:45:00Z',
         resolvedBy: 'Security Admin',
-        createdAt: '2024-01-15T09:30:00Z'
+        createdAt: '2024-01-15T09:30:00Z',
       },
       {
         id: 4,
@@ -182,10 +187,10 @@ const SecurityCompliance: React.FC = () => {
         details: {
           file_name: 'invoice.pdf',
           file_size: '2.3MB',
-          malware_type: 'trojan'
+          malware_type: 'trojan',
         },
         resolved: false,
-        createdAt: '2024-01-15T08:15:00Z'
+        createdAt: '2024-01-15T08:15:00Z',
       },
       {
         id: 5,
@@ -201,13 +206,13 @@ const SecurityCompliance: React.FC = () => {
         details: {
           resource: '/admin/settings',
           permission_required: 'admin',
-          user_role: 'user'
+          user_role: 'user',
         },
         resolved: true,
         resolvedAt: '2024-01-15T08:30:00Z',
         resolvedBy: 'System',
-        createdAt: '2024-01-15T08:20:00Z'
-      }
+        createdAt: '2024-01-15T08:20:00Z',
+      },
     ];
 
     const mockComplianceChecks: ComplianceCheck[] = [
@@ -220,7 +225,7 @@ const SecurityCompliance: React.FC = () => {
         lastCheck: '2024-01-15T10:30:00Z',
         nextCheck: '2024-01-22T10:30:00Z',
         details: 'All personal data is encrypted and access is properly controlled',
-        requirements: ['Data encryption', 'Access controls', 'Data retention policies']
+        requirements: ['Data encryption', 'Access controls', 'Data retention policies'],
       },
       {
         id: 'soc2_availability',
@@ -231,7 +236,7 @@ const SecurityCompliance: React.FC = () => {
         lastCheck: '2024-01-15T10:30:00Z',
         nextCheck: '2024-01-22T10:30:00Z',
         details: 'System uptime is 99.9% which exceeds SOC2 requirements',
-        requirements: ['99.9% uptime', 'Backup procedures', 'Disaster recovery']
+        requirements: ['99.9% uptime', 'Backup procedures', 'Disaster recovery'],
       },
       {
         id: 'iso27001_access_control',
@@ -242,7 +247,7 @@ const SecurityCompliance: React.FC = () => {
         lastCheck: '2024-01-15T10:30:00Z',
         nextCheck: '2024-01-22T10:30:00Z',
         details: 'Some users have not changed passwords in 90+ days',
-        requirements: ['Password policies', 'Access reviews', 'Privilege management']
+        requirements: ['Password policies', 'Access reviews', 'Privilege management'],
       },
       {
         id: 'pci_dss_encryption',
@@ -253,8 +258,8 @@ const SecurityCompliance: React.FC = () => {
         lastCheck: '2024-01-15T10:30:00Z',
         nextCheck: '2024-01-22T10:30:00Z',
         details: 'Payment data is not encrypted at rest',
-        requirements: ['Data encryption', 'Secure transmission', 'Key management']
-      }
+        requirements: ['Data encryption', 'Secure transmission', 'Key management'],
+      },
     ];
 
     const mockThreatIntelligence: ThreatIntelligence[] = [
@@ -267,7 +272,7 @@ const SecurityCompliance: React.FC = () => {
         indicators: ['203.0.113.42', 'malware-c2.example.com'],
         firstSeen: '2024-01-15T09:30:00Z',
         lastSeen: '2024-01-15T10:30:00Z',
-        status: 'active'
+        status: 'active',
       },
       {
         id: 2,
@@ -278,7 +283,7 @@ const SecurityCompliance: React.FC = () => {
         indicators: ['phishing-site.com', 'fake-login.net'],
         firstSeen: '2024-01-14T15:20:00Z',
         lastSeen: '2024-01-15T08:45:00Z',
-        status: 'investigating'
+        status: 'investigating',
       },
       {
         id: 3,
@@ -289,48 +294,52 @@ const SecurityCompliance: React.FC = () => {
         indicators: ['a1b2c3d4e5f6...', 'malware.exe'],
         firstSeen: '2024-01-15T08:15:00Z',
         lastSeen: '2024-01-15T08:15:00Z',
-        status: 'resolved'
-      }
+        status: 'resolved',
+      },
     ];
 
     setSecurityEvents(mockSecurityEvents);
     setComplianceChecks(mockComplianceChecks);
     setThreatIntelligence(mockThreatIntelligence);
-    
+
     setSecurityMetrics({
       totalEvents: mockSecurityEvents.length,
       criticalEvents: mockSecurityEvents.filter(e => e.severity === 'critical').length,
       resolvedEvents: mockSecurityEvents.filter(e => e.resolved).length,
       activeThreats: mockThreatIntelligence.filter(t => t.status === 'active').length,
       complianceScore: 75,
-      lastScan: '2024-01-15T10:30:00Z'
+      lastScan: '2024-01-15T10:30:00Z',
     });
   }, []);
 
   const filteredEvents = securityEvents.filter(event => {
-    const matchesSearch = event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         event.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         (event.userName && event.userName.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch =
+      event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      event.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (event.userName && event.userName.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesSeverity = severityFilter === 'all' || event.severity === severityFilter;
-    const matchesStatus = statusFilter === 'all' || 
-                         (statusFilter === 'resolved' && event.resolved) ||
-                         (statusFilter === 'unresolved' && !event.resolved);
+    const matchesStatus =
+      statusFilter === 'all' ||
+      (statusFilter === 'resolved' && event.resolved) ||
+      (statusFilter === 'unresolved' && !event.resolved);
     return matchesSearch && matchesSeverity && matchesStatus;
   });
 
   const handleResolveEvent = async (eventId: number) => {
     setLoading(true);
     try {
-      setSecurityEvents(prev => prev.map(event => 
-        event.id === eventId 
-          ? { 
-              ...event, 
-              resolved: true, 
-              resolvedAt: new Date().toISOString(),
-              resolvedBy: 'Security Admin'
-            }
-          : event
-      ));
+      setSecurityEvents(prev =>
+        prev.map(event =>
+          event.id === eventId
+            ? {
+                ...event,
+                resolved: true,
+                resolvedAt: new Date().toISOString(),
+                resolvedBy: 'Security Admin',
+              }
+            : event
+        )
+      );
     } catch (error) {
       console.error('Error resolving event:', error);
     } finally {
@@ -379,7 +388,7 @@ const SecurityCompliance: React.FC = () => {
             change: '+12 this week',
             icon: Shield,
             color: 'text-blue-500',
-            bgColor: 'bg-blue-50'
+            bgColor: 'bg-blue-50',
           },
           {
             title: 'Critical Events',
@@ -387,7 +396,7 @@ const SecurityCompliance: React.FC = () => {
             change: '+2 this week',
             icon: AlertTriangle,
             color: 'text-red-500',
-            bgColor: 'bg-red-50'
+            bgColor: 'bg-red-50',
           },
           {
             title: 'Resolved Events',
@@ -395,7 +404,7 @@ const SecurityCompliance: React.FC = () => {
             change: '+8 this week',
             icon: CheckCircle,
             color: 'text-green-500',
-            bgColor: 'bg-green-50'
+            bgColor: 'bg-green-50',
           },
           {
             title: 'Compliance Score',
@@ -403,9 +412,9 @@ const SecurityCompliance: React.FC = () => {
             change: '+5% this month',
             icon: ShieldCheck,
             color: 'text-purple-500',
-            bgColor: 'bg-purple-50'
-          }
-        ].map((stat) => (
+            bgColor: 'bg-purple-50',
+          },
+        ].map(stat => (
           <Card key={stat.title}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
@@ -464,7 +473,7 @@ const SecurityCompliance: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {securityEvents.slice(0, 5).map((event) => (
+            {securityEvents.slice(0, 5).map(event => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, x: -20 }}
@@ -472,7 +481,9 @@ const SecurityCompliance: React.FC = () => {
                 className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200"
               >
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getSeverityColor(event.severity)}`}>
+                  <div
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${getSeverityColor(event.severity)}`}
+                  >
                     {getSeverityIcon(event.severity)}
                   </div>
                   <div>
@@ -484,7 +495,9 @@ const SecurityCompliance: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-500">{formatRelativeTime(event.createdAt)}</span>
+                  <span className="text-sm text-gray-500">
+                    {formatRelativeTime(event.createdAt)}
+                  </span>
                   {!event.resolved && (
                     <Button
                       size="sm"
@@ -513,14 +526,14 @@ const SecurityCompliance: React.FC = () => {
               <Input
                 placeholder="Search security events..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 leftIcon={<Search className="w-4 h-4" />}
               />
             </div>
             <div className="flex gap-3">
               <select
                 value={severityFilter}
-                onChange={(e) => setSeverityFilter(e.target.value)}
+                onChange={e => setSeverityFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Severities</option>
@@ -531,7 +544,7 @@ const SecurityCompliance: React.FC = () => {
               </select>
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={e => setStatusFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
@@ -578,7 +591,7 @@ const SecurityCompliance: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredEvents.map((event) => (
+                {filteredEvents.map(event => (
                   <tr key={event.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
@@ -587,7 +600,9 @@ const SecurityCompliance: React.FC = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getSeverityColor(event.severity)}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getSeverityColor(event.severity)}`}
+                      >
                         {getSeverityIcon(event.severity)}
                         {event.severity}
                       </span>
@@ -595,17 +610,27 @@ const SecurityCompliance: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <div>
                         {event.userName && <div>{event.userName}</div>}
-                        {event.companyName && <div className="text-gray-500">{event.companyName}</div>}
+                        {event.companyName && (
+                          <div className="text-gray-500">{event.companyName}</div>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {event.ipAddress}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
-                        event.resolved ? 'text-green-600 bg-green-50 border-green-200' : 'text-red-600 bg-red-50 border-red-200'
-                      }`}>
-                        {event.resolved ? <CheckCircle className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
+                          event.resolved
+                            ? 'text-green-600 bg-green-50 border-green-200'
+                            : 'text-red-600 bg-red-50 border-red-200'
+                        }`}
+                      >
+                        {event.resolved ? (
+                          <CheckCircle className="w-4 h-4" />
+                        ) : (
+                          <XCircle className="w-4 h-4" />
+                        )}
                         {event.resolved ? 'Resolved' : 'Open'}
                       </span>
                     </td>
@@ -614,10 +639,7 @@ const SecurityCompliance: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                        >
+                        <Button size="sm" variant="ghost">
                           <Eye className="w-4 h-4" />
                         </Button>
                         {!event.resolved && (
@@ -647,12 +669,12 @@ const SecurityCompliance: React.FC = () => {
   const renderCompliance = () => (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {complianceCategories.map((category) => {
+        {complianceCategories.map(category => {
           const categoryChecks = complianceChecks.filter(check => check.category === category);
           const passedChecks = categoryChecks.filter(check => check.status === 'pass').length;
           const totalChecks = categoryChecks.length;
           const score = totalChecks > 0 ? (passedChecks / totalChecks) * 100 : 0;
-          
+
           return (
             <Card key={category}>
               <CardContent className="p-6">
@@ -661,7 +683,9 @@ const SecurityCompliance: React.FC = () => {
                   <ShieldCheck className="w-8 h-8 text-primary-500" />
                 </div>
                 <div className="text-sm font-medium text-gray-900">{category}</div>
-                <div className="text-xs text-gray-500">{passedChecks}/{totalChecks} checks passed</div>
+                <div className="text-xs text-gray-500">
+                  {passedChecks}/{totalChecks} checks passed
+                </div>
               </CardContent>
             </Card>
           );
@@ -675,21 +699,34 @@ const SecurityCompliance: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {complianceChecks.map((check) => (
-              <div key={check.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+            {complianceChecks.map(check => (
+              <div
+                key={check.id}
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h4 className="font-medium text-gray-900">{check.name}</h4>
-                    <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
-                      check.status === 'pass' ? 'text-green-600 bg-green-50 border-green-200' :
-                      check.status === 'fail' ? 'text-red-600 bg-red-50 border-red-200' :
-                      check.status === 'warning' ? 'text-yellow-600 bg-yellow-50 border-yellow-200' :
-                      'text-gray-600 bg-gray-50 border-gray-200'
-                    }`}>
-                      {check.status === 'pass' ? <CheckCircle className="w-4 h-4" /> :
-                       check.status === 'fail' ? <XCircle className="w-4 h-4" /> :
-                        check.status === 'warning' ? <AlertTriangle className="w-4 h-4" /> :
-                       <Clock className="w-4 h-4" />}
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
+                        check.status === 'pass'
+                          ? 'text-green-600 bg-green-50 border-green-200'
+                          : check.status === 'fail'
+                            ? 'text-red-600 bg-red-50 border-red-200'
+                            : check.status === 'warning'
+                              ? 'text-yellow-600 bg-yellow-50 border-yellow-200'
+                              : 'text-gray-600 bg-gray-50 border-gray-200'
+                      }`}
+                    >
+                      {check.status === 'pass' ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : check.status === 'fail' ? (
+                        <XCircle className="w-4 h-4" />
+                      ) : check.status === 'warning' ? (
+                        <AlertTriangle className="w-4 h-4" />
+                      ) : (
+                        <Clock className="w-4 h-4" />
+                      )}
                       {check.status}
                     </span>
                   </div>
@@ -741,8 +778,8 @@ const SecurityCompliance: React.FC = () => {
                 { id: 'overview', label: 'Overview', icon: BarChart3 },
                 { id: 'events', label: 'Security Events', icon: Shield },
                 { id: 'compliance', label: 'Compliance', icon: ShieldCheck },
-                { id: 'threats', label: 'Threat Intelligence', icon: AlertTriangle }
-              ].map((tab) => (
+                { id: 'threats', label: 'Threat Intelligence', icon: AlertTriangle },
+              ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}

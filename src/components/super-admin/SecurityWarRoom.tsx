@@ -1,56 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle, 
-  Lock, 
-  Unlock, 
-  Eye, 
-  EyeOff, 
-  Activity, 
-  Users, 
-  Globe, 
-  Database, 
-  Server, 
-  Cpu, 
-  MemoryStick, 
-  Network, 
-  Clock, 
-  TrendingUp, 
-  TrendingDown, 
-  Zap, 
-  Target, 
-  Search, 
-  Filter, 
-  Download, 
-  Settings, 
-  Bell, 
-  BellOff, 
-  Volume2, 
-  VolumeX, 
-  Maximize2, 
-  Minimize2, 
-  RefreshCw, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Power, 
-  PowerOff, 
-  ExternalLink, 
-  Copy, 
-  Share, 
-  Star, 
-  StarOff, 
-  Heart, 
-  HeartOff, 
-  Wifi, 
-  WifiOff, 
-  Signal, 
-  SignalZero, 
-  SignalLow, 
-  SignalMedium, 
-  SignalHigh
+import {
+  Shield,
+  AlertTriangle,
+  CheckCircle,
+  Eye,
+  Activity,
+  Clock,
+  TrendingUp,
+  Zap,
+  Volume2,
+  VolumeX,
+  RefreshCw,
+  X,
 } from 'lucide-react';
 
 interface SecurityThreat {
@@ -94,7 +56,9 @@ interface SecurityEvent {
 
 const SecurityWarRoom: React.FC = () => {
   const [selectedThreat, setSelectedThreat] = useState<SecurityThreat | null>(null);
-  const [viewMode, setViewMode] = useState<'threats' | 'events' | 'metrics' | 'response'>('threats');
+  const [viewMode, setViewMode] = useState<'threats' | 'events' | 'metrics' | 'response'>(
+    'threats'
+  );
   const [filterType, setFilterType] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -116,7 +80,7 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Potential unauthorized access',
       affectedSystems: ['Admin Portal', 'Database Server'],
       recommendedActions: ['Block IP address', 'Enable 2FA', 'Review access logs'],
-      autoResponse: true
+      autoResponse: true,
     },
     {
       id: 'threat-2',
@@ -131,7 +95,7 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Data breach risk',
       affectedSystems: ['Customer Database', 'API Gateway'],
       recommendedActions: ['Suspend user account', 'Audit data access', 'Notify compliance team'],
-      autoResponse: false
+      autoResponse: false,
     },
     {
       id: 'threat-3',
@@ -146,11 +110,11 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Service disruption risk',
       affectedSystems: ['Load Balancer', 'Web Servers'],
       recommendedActions: ['Monitor traffic', 'Update firewall rules', 'Review network config'],
-      autoResponse: true
-    }
+      autoResponse: true,
+    },
   ]);
 
-  const [metrics, setMetrics] = useState<SecurityMetrics>({
+  const [metrics] = useState<SecurityMetrics>({
     totalThreats: 127,
     activeThreats: 3,
     criticalThreats: 1,
@@ -158,10 +122,10 @@ const SecurityWarRoom: React.FC = () => {
     averageResponseTime: 4.2,
     systemSecurityScore: 94,
     complianceScore: 98,
-    lastScanTime: '5 minutes ago'
+    lastScanTime: '5 minutes ago',
   });
 
-  const [events, setEvents] = useState<SecurityEvent[]>([
+  const [events] = useState<SecurityEvent[]>([
     {
       id: 'event-1',
       type: 'login',
@@ -171,7 +135,7 @@ const SecurityWarRoom: React.FC = () => {
       location: 'New York, US',
       timestamp: '2 minutes ago',
       status: 'failed',
-      details: 'Invalid password attempt'
+      details: 'Invalid password attempt',
     },
     {
       id: 'event-2',
@@ -182,7 +146,7 @@ const SecurityWarRoom: React.FC = () => {
       location: 'California, US',
       timestamp: '5 minutes ago',
       status: 'success',
-      details: 'Accessed customer records'
+      details: 'Accessed customer records',
     },
     {
       id: 'event-3',
@@ -193,8 +157,8 @@ const SecurityWarRoom: React.FC = () => {
       location: 'Unknown',
       timestamp: '10 minutes ago',
       status: 'blocked',
-      details: 'Blocked by firewall'
-    }
+      details: 'Blocked by firewall',
+    },
   ]);
 
   // Simulate real-time updates
@@ -202,11 +166,11 @@ const SecurityWarRoom: React.FC = () => {
     if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      setThreats(prevThreats => 
+      setThreats(prevThreats =>
         prevThreats.map(threat => ({
           ...threat,
           severity: Math.max(0, Math.min(100, threat.severity + (Math.random() - 0.5) * 10)),
-          timestamp: 'Just now'
+          timestamp: 'Just now',
         }))
       );
     }, 2000);
@@ -216,41 +180,57 @@ const SecurityWarRoom: React.FC = () => {
 
   const getThreatColor = (type: string) => {
     switch (type) {
-      case 'critical': return 'text-red-500 bg-red-500/20 border-red-500/50';
-      case 'high': return 'text-orange-500 bg-orange-500/20 border-orange-500/50';
-      case 'medium': return 'text-yellow-500 bg-yellow-500/20 border-yellow-500/50';
-      case 'low': return 'text-green-500 bg-green-500/20 border-green-500/50';
-      default: return 'text-gray-500 bg-gray-500/20 border-gray-500/50';
+      case 'critical':
+        return 'text-red-500 bg-red-500/20 border-red-500/50';
+      case 'high':
+        return 'text-orange-500 bg-orange-500/20 border-orange-500/50';
+      case 'medium':
+        return 'text-yellow-500 bg-yellow-500/20 border-yellow-500/50';
+      case 'low':
+        return 'text-green-500 bg-green-500/20 border-green-500/50';
+      default:
+        return 'text-gray-500 bg-gray-500/20 border-gray-500/50';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-red-400 bg-red-400/20';
-      case 'investigating': return 'text-yellow-400 bg-yellow-400/20';
-      case 'contained': return 'text-blue-400 bg-blue-400/20';
-      case 'resolved': return 'text-green-400 bg-green-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'active':
+        return 'text-red-400 bg-red-400/20';
+      case 'investigating':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'contained':
+        return 'text-blue-400 bg-blue-400/20';
+      case 'resolved':
+        return 'text-green-400 bg-green-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getEventStatusColor = (status: string) => {
     switch (status) {
-      case 'success': return 'text-green-400 bg-green-400/20';
-      case 'failed': return 'text-red-400 bg-red-400/20';
-      case 'blocked': return 'text-orange-400 bg-orange-400/20';
-      case 'suspicious': return 'text-yellow-400 bg-yellow-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'success':
+        return 'text-green-400 bg-green-400/20';
+      case 'failed':
+        return 'text-red-400 bg-red-400/20';
+      case 'blocked':
+        return 'text-orange-400 bg-orange-400/20';
+      case 'suspicious':
+        return 'text-yellow-400 bg-yellow-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const filteredThreats = threats.filter(threat => {
     const matchesType = filterType === 'all' || threat.type === filterType;
     const matchesStatus = filterStatus === 'all' || threat.status === filterStatus;
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch =
+      searchQuery === '' ||
       threat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       threat.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesType && matchesStatus && matchesSearch;
   });
 
@@ -260,9 +240,7 @@ const SecurityWarRoom: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              🛡️ Security War Room
-            </h1>
+            <h1 className="text-4xl font-bold text-white mb-2">🛡️ Security War Room</h1>
             <p className="text-gray-300 text-lg">
               Real-time threat detection and security response center
             </p>
@@ -274,7 +252,7 @@ const SecurityWarRoom: React.FC = () => {
                 {autoRefresh ? 'Live Monitoring' : 'Paused'}
               </span>
             </div>
-            <button 
+            <button
               onClick={() => setAlertSound(!alertSound)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 alertSound ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'
@@ -282,7 +260,7 @@ const SecurityWarRoom: React.FC = () => {
             >
               {alertSound ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
             </button>
-            <button 
+            <button
               onClick={() => setAutoRefresh(!autoRefresh)}
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
@@ -298,14 +276,14 @@ const SecurityWarRoom: React.FC = () => {
             { id: 'threats', label: 'Threats', icon: AlertTriangle },
             { id: 'events', label: 'Events', icon: Activity },
             { id: 'metrics', label: 'Metrics', icon: TrendingUp },
-            { id: 'response', label: 'Response', icon: Shield }
+            { id: 'response', label: 'Response', icon: Shield },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'threats' | 'events' | 'metrics' | 'response')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                viewMode === id 
-                  ? 'bg-red-600 text-white' 
+                viewMode === id
+                  ? 'bg-red-600 text-white'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
@@ -317,7 +295,7 @@ const SecurityWarRoom: React.FC = () => {
 
         {/* Security Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
@@ -332,7 +310,7 @@ const SecurityWarRoom: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -348,7 +326,7 @@ const SecurityWarRoom: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -364,7 +342,7 @@ const SecurityWarRoom: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -390,13 +368,13 @@ const SecurityWarRoom: React.FC = () => {
               type="text"
               placeholder="Search threats..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
           <select
             value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
+            onChange={e => setFilterType(e.target.value)}
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <option value="all">All Types</option>
@@ -407,7 +385,7 @@ const SecurityWarRoom: React.FC = () => {
           </select>
           <select
             value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
+            onChange={e => setFilterStatus(e.target.value)}
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <option value="all">All Status</option>
@@ -453,7 +431,9 @@ const SecurityWarRoom: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className={`px-3 py-1 rounded-full text-xs ${getStatusColor(threat.status)}`}>
+                  <div
+                    className={`px-3 py-1 rounded-full text-xs ${getStatusColor(threat.status)}`}
+                  >
                     {threat.status}
                   </div>
                   <div className="text-right">
@@ -524,11 +504,15 @@ const SecurityWarRoom: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-white font-medium">{event.action}</h4>
-                      <p className="text-xs text-gray-400">{event.user} • {event.ip}</p>
+                      <p className="text-xs text-gray-400">
+                        {event.user} • {event.ip}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className={`px-3 py-1 rounded-full text-xs ${getEventStatusColor(event.status)}`}>
+                    <div
+                      className={`px-3 py-1 rounded-full text-xs ${getEventStatusColor(event.status)}`}
+                    >
                       {event.status}
                     </div>
                     <span className="text-xs text-gray-400">{event.timestamp}</span>
@@ -554,7 +538,7 @@ const SecurityWarRoom: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
             >
               <div className="flex items-center justify-between mb-6">
@@ -583,7 +567,9 @@ const SecurityWarRoom: React.FC = () => {
                   </div>
                   <div>
                     <label className="text-sm text-gray-400">Status</label>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedThreat.status)}`}>
+                    <div
+                      className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedThreat.status)}`}
+                    >
                       {selectedThreat.status}
                     </div>
                   </div>

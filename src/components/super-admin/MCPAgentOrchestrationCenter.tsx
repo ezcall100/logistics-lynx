@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Bot, 
-  Cpu, 
-  Activity, 
-  Zap, 
-  Shield, 
-  Brain, 
-  Network, 
-  Settings, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  AlertTriangle, 
-  CheckCircle, 
-  Clock, 
-  TrendingUp,
-  Users,
-  Database,
-  Globe,
-  Lock,
-  Eye,
-  Command,
+import {
+  Bot,
+  Activity,
+  Shield,
+  Brain,
+  Network,
+  Play,
+  Pause,
+  RotateCcw,
+  AlertTriangle,
   Terminal,
   BarChart3,
-  PieChart,
-  LineChart
+  X,
 } from 'lucide-react';
 
 interface MCPAgent {
@@ -72,17 +59,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `core-${i + 1}`,
         name: `Core Agent ${i + 1}`,
         type: 'core' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '2 minutes ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'US-East-1',
         capabilities: ['System Management', 'Database Operations', 'API Management'],
-        health: Math.floor(Math.random() * 100)
-      }))
+        health: Math.floor(Math.random() * 100),
+      })),
     },
     {
       id: 'portal-management',
@@ -94,17 +89,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `portal-${i + 1}`,
         name: `Portal Agent ${i + 1}`,
         type: 'portal' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '1 minute ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'US-West-2',
         capabilities: ['Portal Control', 'User Management', 'Feature Toggles'],
-        health: Math.floor(Math.random() * 100)
-      }))
+        health: Math.floor(Math.random() * 100),
+      })),
     },
     {
       id: 'security-monitoring',
@@ -116,17 +119,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `security-${i + 1}`,
         name: `Security Agent ${i + 1}`,
         type: 'security' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '30 seconds ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'EU-Central-1',
         capabilities: ['Threat Detection', 'Access Control', 'Audit Logging'],
-        health: Math.floor(Math.random() * 100)
-      }))
+        health: Math.floor(Math.random() * 100),
+      })),
     },
     {
       id: 'analytics-intelligence',
@@ -138,17 +149,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `analytics-${i + 1}`,
         name: `Analytics Agent ${i + 1}`,
         type: 'analytics' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '5 minutes ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'AP-Southeast-1',
         capabilities: ['Data Processing', 'ML Models', 'Predictive Analytics'],
-        health: Math.floor(Math.random() * 100)
-      }))
+        health: Math.floor(Math.random() * 100),
+      })),
     },
     {
       id: 'automation-workflows',
@@ -160,17 +179,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `automation-${i + 1}`,
         name: `Automation Agent ${i + 1}`,
         type: 'automation' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '3 minutes ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'US-Central-1',
         capabilities: ['Workflow Automation', 'Task Scheduling', 'Process Optimization'],
-        health: Math.floor(Math.random() * 100)
-      }))
+        health: Math.floor(Math.random() * 100),
+      })),
     },
     {
       id: 'integration-services',
@@ -182,55 +209,79 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         id: `integration-${i + 1}`,
         name: `Integration Agent ${i + 1}`,
         type: 'integration' as const,
-        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as 'active' | 'idle' | 'error' | 'maintenance',
+        status: ['active', 'idle', 'error', 'maintenance'][Math.floor(Math.random() * 4)] as
+          | 'active'
+          | 'idle'
+          | 'error'
+          | 'maintenance',
         cpu: Math.floor(Math.random() * 100),
         memory: Math.floor(Math.random() * 100),
         uptime: Math.floor(Math.random() * 100),
         tasksCompleted: Math.floor(Math.random() * 1000),
         lastActivity: '4 minutes ago',
-        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as 'critical' | 'high' | 'medium' | 'low',
+        priority: ['critical', 'high', 'medium', 'low'][Math.floor(Math.random() * 4)] as
+          | 'critical'
+          | 'high'
+          | 'medium'
+          | 'low',
         location: 'Global',
         capabilities: ['API Integration', 'Data Sync', 'Third-party Services'],
-        health: Math.floor(Math.random() * 100)
-      }))
-    }
+        health: Math.floor(Math.random() * 100),
+      })),
+    },
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-400 bg-green-400/20';
-      case 'idle': return 'text-yellow-400 bg-yellow-400/20';
-      case 'error': return 'text-red-400 bg-red-400/20';
-      case 'maintenance': return 'text-blue-400 bg-blue-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'active':
+        return 'text-green-400 bg-green-400/20';
+      case 'idle':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'error':
+        return 'text-red-400 bg-red-400/20';
+      case 'maintenance':
+        return 'text-blue-400 bg-blue-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'critical': return 'text-red-500';
-      case 'high': return 'text-orange-500';
-      case 'medium': return 'text-yellow-500';
-      case 'low': return 'text-green-500';
-      default: return 'text-gray-500';
+      case 'critical':
+        return 'text-red-500';
+      case 'high':
+        return 'text-orange-500';
+      case 'medium':
+        return 'text-yellow-500';
+      case 'low':
+        return 'text-green-500';
+      default:
+        return 'text-gray-500';
     }
   };
 
   const getClusterStatusColor = (status: string) => {
     switch (status) {
-      case 'healthy': return 'border-green-500 bg-green-500/10';
-      case 'warning': return 'border-yellow-500 bg-yellow-500/10';
-      case 'critical': return 'border-red-500 bg-red-500/10';
-      default: return 'border-gray-500 bg-gray-500/10';
+      case 'healthy':
+        return 'border-green-500 bg-green-500/10';
+      case 'warning':
+        return 'border-yellow-500 bg-yellow-500/10';
+      case 'critical':
+        return 'border-red-500 bg-red-500/10';
+      default:
+        return 'border-gray-500 bg-gray-500/10';
     }
   };
 
   const totalAgents = agentClusters.reduce((sum, cluster) => sum + cluster.agents.length, 0);
-  const activeAgents = agentClusters.reduce((sum, cluster) => 
-    sum + cluster.agents.filter(agent => agent.status === 'active').length, 0
+  const activeAgents = agentClusters.reduce(
+    (sum, cluster) => sum + cluster.agents.filter(agent => agent.status === 'active').length,
+    0
   );
-  const errorAgents = agentClusters.reduce((sum, cluster) => 
-    sum + cluster.agents.filter(agent => agent.status === 'error').length, 0
+  const errorAgents = agentClusters.reduce(
+    (sum, cluster) => sum + cluster.agents.filter(agent => agent.status === 'error').length,
+    0
   );
 
   return (
@@ -251,7 +302,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-white font-medium">Live</span>
             </div>
-            <button 
+            <button
               onClick={() => setRealTimeData(!realTimeData)}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
             >
@@ -262,7 +313,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
@@ -276,7 +327,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -291,7 +342,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -306,7 +357,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -331,13 +382,13 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               type="text"
               placeholder="Search agents..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
           <select
             value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
+            onChange={e => setFilterType(e.target.value)}
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="all">All Types</option>
@@ -354,8 +405,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           <button
             onClick={() => setViewMode('cluster')}
             className={`px-4 py-2 rounded-lg transition-colors ${
-              viewMode === 'cluster' 
-                ? 'bg-purple-600 text-white' 
+              viewMode === 'cluster'
+                ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
@@ -364,8 +415,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           <button
             onClick={() => setViewMode('grid')}
             className={`px-4 py-2 rounded-lg transition-colors ${
-              viewMode === 'grid' 
-                ? 'bg-purple-600 text-white' 
+              viewMode === 'grid'
+                ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
@@ -374,8 +425,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           <button
             onClick={() => setViewMode('list')}
             className={`px-4 py-2 rounded-lg transition-colors ${
-              viewMode === 'list' 
-                ? 'bg-purple-600 text-white' 
+              viewMode === 'list'
+                ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
@@ -454,11 +505,11 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-2">
                       <Bot className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-white truncate">
-                        {agent.name}
-                      </span>
+                      <span className="text-sm font-medium text-white truncate">{agent.name}</span>
                     </div>
-                    <div className={`px-2 py-1 rounded-full text-xs ${getStatusColor(agent.status)}`}>
+                    <div
+                      className={`px-2 py-1 rounded-full text-xs ${getStatusColor(agent.status)}`}
+                    >
                       {agent.status}
                     </div>
                   </div>
@@ -469,7 +520,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                       <span>{agent.cpu}%</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-1">
-                      <div 
+                      <div
                         className="bg-purple-400 h-1 rounded-full transition-all duration-300"
                         style={{ width: `${agent.cpu}%` }}
                       ></div>
@@ -480,7 +531,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                       <span>{agent.memory}%</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-1">
-                      <div 
+                      <div
                         className="bg-blue-400 h-1 rounded-full transition-all duration-300"
                         style={{ width: `${agent.memory}%` }}
                       ></div>
@@ -504,7 +555,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                   </div>
                 </motion.div>
               ))}
-              
+
               {cluster.agents.length > 8 && (
                 <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 flex items-center justify-center">
                   <div className="text-center">
@@ -536,7 +587,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
             >
               <div className="flex items-center justify-between mb-6">
@@ -561,13 +612,17 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm text-gray-400">Status</label>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedAgent.status)}`}>
+                    <div
+                      className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedAgent.status)}`}
+                    >
                       {selectedAgent.status}
                     </div>
                   </div>
                   <div>
                     <label className="text-sm text-gray-400">Priority</label>
-                    <p className={`text-sm font-medium ${getPriorityColor(selectedAgent.priority)}`}>
+                    <p
+                      className={`text-sm font-medium ${getPriorityColor(selectedAgent.priority)}`}
+                    >
                       {selectedAgent.priority}
                     </p>
                   </div>
@@ -586,7 +641,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     <label className="text-sm text-gray-400">CPU Usage</label>
                     <div className="flex items-center space-x-2">
                       <div className="flex-1 bg-gray-700 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-purple-400 h-2 rounded-full"
                           style={{ width: `${selectedAgent.cpu}%` }}
                         ></div>
@@ -598,7 +653,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     <label className="text-sm text-gray-400">Memory Usage</label>
                     <div className="flex items-center space-x-2">
                       <div className="flex-1 bg-gray-700 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-blue-400 h-2 rounded-full"
                           style={{ width: `${selectedAgent.memory}%` }}
                         ></div>
@@ -610,7 +665,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     <label className="text-sm text-gray-400">Health Score</label>
                     <div className="flex items-center space-x-2">
                       <div className="flex-1 bg-gray-700 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-green-400 h-2 rounded-full"
                           style={{ width: `${selectedAgent.health}%` }}
                         ></div>
@@ -620,7 +675,9 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                   </div>
                   <div>
                     <label className="text-sm text-gray-400">Tasks Completed</label>
-                    <p className="text-sm text-white">{selectedAgent.tasksCompleted.toLocaleString()}</p>
+                    <p className="text-sm text-white">
+                      {selectedAgent.tasksCompleted.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </div>
