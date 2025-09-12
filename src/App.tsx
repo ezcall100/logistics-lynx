@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './styles/dark-mode.css';
 import { HorizontalMegaMenu } from './components/HorizontalMegaMenu';
 import { AdvancedFAB } from './components/AdvancedFAB';
 import { NeuralBackground } from './components/NeuralBackground';
@@ -17,6 +18,7 @@ import { SubdomainManagement } from './pages/admin/SubdomainManagement';
 import { MCPAgentAdmin } from './pages/portals/admin/MCPAgentAdmin';
 import { HumanDeveloperAdmin } from './pages/portals/admin/HumanDeveloperAdmin';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
@@ -97,955 +99,957 @@ import DriverSolutions from './pages/solutions/DriverSolutions';
 
 function App() {
   return (
-    <AuthProvider>
-      <SubdomainRouter>
-        <Router>
-          <div className="min-h-screen relative">
-            <NeuralBackground />
-            <HorizontalMegaMenu />
-            <AdvancedFAB />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <HeroSection />
-                    <TrustedBy />
-                    <FeaturesSection />
-                    <EcosystemGrid />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/classic"
-                element={
-                  <>
-                    <HeroSection />
-                    <TrustedBy />
-                    <FeaturesSection />
-                    <EcosystemGrid />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route path="/test" element={<TestDesign />} />
-              <Route path="/test-auth" element={<TestAuth />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route
-                path="/portal/*"
-                element={
-                  <ProtectedRoute>
-                    <PortalEntry />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/super-admin/*" element={<SuperAdminPortal />} />
-              <Route path="/mcp-agents/*" element={<MCPAgentsPortal />} />
-              <Route path="/get-started" element={<GetStartedPage />} />
-              <Route path="/admin/subdomains" element={<SubdomainManagement />} />
-              <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />
-              <Route path="/admin/human-developers" element={<HumanDeveloperAdmin />} />
-              {/* <Route path="/mcp-dashboard" element={<MCPProgressDashboard />} /> */}{' '}
-              {/* Using port 3002 instead */}
-              <Route
-                path="/solutions"
-                element={
-                  <>
-                    <SolutionsPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/transportation"
-                element={
-                  <>
-                    <TransportationManagement />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/warehouse"
-                element={
-                  <>
-                    <WarehouseManagement />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/route-optimization"
-                element={
-                  <>
-                    <RouteOptimization />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/load-matching"
-                element={
-                  <>
-                    <LoadMatching />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/predictive-analytics"
-                element={
-                  <>
-                    <PredictiveAnalyticsSolution />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/fleet-management"
-                element={
-                  <>
-                    <FleetManagement />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/last-mile"
-                element={
-                  <>
-                    <LastMileDelivery />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/yard-management"
-                element={
-                  <>
-                    <YardManagementSolution />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/financial-management"
-                element={
-                  <>
-                    <FinancialManagementSolution />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/load-board"
-                element={
-                  <>
-                    <LoadBoardSolution />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/crm"
-                element={
-                  <>
-                    <CRMSolution />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/shipper"
-                element={
-                  <>
-                    <ShipperSolutions />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/carrier"
-                element={
-                  <>
-                    <CarrierSolutions />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/broker"
-                element={
-                  <>
-                    <BrokerSolutions />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/owner-operator"
-                element={
-                  <>
-                    <OwnerOperatorSolutions />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/solutions/driver"
-                element={
-                  <>
-                    <DriverSolutions />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/route-optimizer"
-                element={
-                  <>
-                    <RouteOptimizer />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/load-matcher"
-                element={
-                  <>
-                    <LoadMatcher />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/customer"
-                element={
-                  <>
-                    <CustomerPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/partner"
-                element={
-                  <>
-                    <PartnerPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/developer"
-                element={
-                  <>
-                    <DeveloperPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/admin"
-                element={
-                  <>
-                    <AdminPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/super-admin"
-                element={
-                  <>
-                    <SuperAdminPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/autonomous"
-                element={
-                  <>
-                    <AutonomousPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/broker"
-                element={
-                  <>
-                    <BrokerPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/carrier"
-                element={
-                  <>
-                    <CarrierPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/driver"
-                element={
-                  <>
-                    <DriverPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/shipper"
-                element={
-                  <>
-                    <ShipperPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/analytics"
-                element={
-                  <>
-                    <AnalyticsPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/yms"
-                element={
-                  <>
-                    <YMSPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/directory"
-                element={
-                  <>
-                    <DirectoryPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/rates"
-                element={
-                  <>
-                    <RatesPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/marketplace"
-                element={
-                  <>
-                    <MarketplacePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/financials"
-                element={
-                  <>
-                    <FinancialsPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/load-board"
-                element={
-                  <>
-                    <LoadBoardPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/crm"
-                element={
-                  <>
-                    <CRMPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/edi"
-                element={
-                  <>
-                    <EDIPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/owner-operator"
-                element={
-                  <>
-                    <OwnerOperatorPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/workers"
-                element={
-                  <>
-                    <WorkersPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/factoring"
-                element={
-                  <>
-                    <FactoringPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/warehouse"
-                element={
-                  <>
-                    <WarehousePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/fleet"
-                element={
-                  <>
-                    <FleetPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/dispatch"
-                element={
-                  <>
-                    <DispatchPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/maintenance"
-                element={
-                  <>
-                    <MaintenancePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/fuel"
-                element={
-                  <>
-                    <FuelPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/insurance"
-                element={
-                  <>
-                    <InsurancePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals/compliance"
-                element={
-                  <>
-                    <CompliancePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/broker"
-                element={
-                  <>
-                    <BrokerPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/carrier"
-                element={
-                  <>
-                    <CarrierPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/driver"
-                element={
-                  <>
-                    <DriverPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/shipper"
-                element={
-                  <>
-                    <ShipperPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/analytics"
-                element={
-                  <>
-                    <AnalyticsPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/autonomous"
-                element={
-                  <>
-                    <AutonomousPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/yms"
-                element={
-                  <>
-                    <YMSPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/directory"
-                element={
-                  <>
-                    <DirectoryPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/rates"
-                element={
-                  <>
-                    <RatesPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/marketplace"
-                element={
-                  <>
-                    <MarketplacePortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/financials"
-                element={
-                  <>
-                    <FinancialsPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/load-board"
-                element={
-                  <>
-                    <LoadBoardPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/crm"
-                element={
-                  <>
-                    <CRMPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/edi"
-                element={
-                  <>
-                    <EDIPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/owner-operator"
-                element={
-                  <>
-                    <OwnerOperatorPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/workers"
-                element={
-                  <>
-                    <WorkersPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/factoring"
-                element={
-                  <>
-                    <FactoringPortal />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/predictive-analytics"
-                element={
-                  <>
-                    <PredictiveAnalytics />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/fleet-manager"
-                element={
-                  <>
-                    <FleetManager />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/fuel-optimizer"
-                element={
-                  <>
-                    <FuelOptimizer />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/demand-forecaster"
-                element={
-                  <>
-                    <DemandForecaster />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/price-optimizer"
-                element={
-                  <>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                          Price Optimizer
-                        </h1>
-                        <p className="text-transbot-text-secondary">
-                          Coming Soon - Dynamic pricing strategies with AI
-                        </p>
+    <ThemeProvider>
+      <AuthProvider>
+        <SubdomainRouter>
+          <Router>
+            <div className="min-h-screen relative">
+              <NeuralBackground />
+              <HorizontalMegaMenu />
+              <AdvancedFAB />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <HeroSection />
+                      <TrustedBy />
+                      <FeaturesSection />
+                      <EcosystemGrid />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/classic"
+                  element={
+                    <>
+                      <HeroSection />
+                      <TrustedBy />
+                      <FeaturesSection />
+                      <EcosystemGrid />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route path="/test" element={<TestDesign />} />
+                <Route path="/test-auth" element={<TestAuth />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/portal/*"
+                  element={
+                    <ProtectedRoute>
+                      <PortalEntry />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/super-admin/*" element={<SuperAdminPortal />} />
+                <Route path="/mcp-agents/*" element={<MCPAgentsPortal />} />
+                <Route path="/get-started" element={<GetStartedPage />} />
+                <Route path="/admin/subdomains" element={<SubdomainManagement />} />
+                <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />
+                <Route path="/admin/human-developers" element={<HumanDeveloperAdmin />} />
+                {/* <Route path="/mcp-dashboard" element={<MCPProgressDashboard />} /> */}{' '}
+                {/* Using port 3002 instead */}
+                <Route
+                  path="/solutions"
+                  element={
+                    <>
+                      <SolutionsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/transportation"
+                  element={
+                    <>
+                      <TransportationManagement />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/warehouse"
+                  element={
+                    <>
+                      <WarehouseManagement />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/route-optimization"
+                  element={
+                    <>
+                      <RouteOptimization />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/load-matching"
+                  element={
+                    <>
+                      <LoadMatching />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/predictive-analytics"
+                  element={
+                    <>
+                      <PredictiveAnalyticsSolution />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/fleet-management"
+                  element={
+                    <>
+                      <FleetManagement />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/last-mile"
+                  element={
+                    <>
+                      <LastMileDelivery />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/yard-management"
+                  element={
+                    <>
+                      <YardManagementSolution />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/financial-management"
+                  element={
+                    <>
+                      <FinancialManagementSolution />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/load-board"
+                  element={
+                    <>
+                      <LoadBoardSolution />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/crm"
+                  element={
+                    <>
+                      <CRMSolution />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/shipper"
+                  element={
+                    <>
+                      <ShipperSolutions />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/carrier"
+                  element={
+                    <>
+                      <CarrierSolutions />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/broker"
+                  element={
+                    <>
+                      <BrokerSolutions />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/owner-operator"
+                  element={
+                    <>
+                      <OwnerOperatorSolutions />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/solutions/driver"
+                  element={
+                    <>
+                      <DriverSolutions />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/route-optimizer"
+                  element={
+                    <>
+                      <RouteOptimizer />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/load-matcher"
+                  element={
+                    <>
+                      <LoadMatcher />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/customer"
+                  element={
+                    <>
+                      <CustomerPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/partner"
+                  element={
+                    <>
+                      <PartnerPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/developer"
+                  element={
+                    <>
+                      <DeveloperPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/admin"
+                  element={
+                    <>
+                      <AdminPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/super-admin"
+                  element={
+                    <>
+                      <SuperAdminPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/autonomous"
+                  element={
+                    <>
+                      <AutonomousPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/broker"
+                  element={
+                    <>
+                      <BrokerPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/carrier"
+                  element={
+                    <>
+                      <CarrierPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/driver"
+                  element={
+                    <>
+                      <DriverPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/shipper"
+                  element={
+                    <>
+                      <ShipperPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/analytics"
+                  element={
+                    <>
+                      <AnalyticsPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/yms"
+                  element={
+                    <>
+                      <YMSPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/directory"
+                  element={
+                    <>
+                      <DirectoryPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/rates"
+                  element={
+                    <>
+                      <RatesPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/marketplace"
+                  element={
+                    <>
+                      <MarketplacePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/financials"
+                  element={
+                    <>
+                      <FinancialsPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/load-board"
+                  element={
+                    <>
+                      <LoadBoardPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/crm"
+                  element={
+                    <>
+                      <CRMPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/edi"
+                  element={
+                    <>
+                      <EDIPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/owner-operator"
+                  element={
+                    <>
+                      <OwnerOperatorPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/workers"
+                  element={
+                    <>
+                      <WorkersPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/factoring"
+                  element={
+                    <>
+                      <FactoringPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/warehouse"
+                  element={
+                    <>
+                      <WarehousePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/fleet"
+                  element={
+                    <>
+                      <FleetPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/dispatch"
+                  element={
+                    <>
+                      <DispatchPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/maintenance"
+                  element={
+                    <>
+                      <MaintenancePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/fuel"
+                  element={
+                    <>
+                      <FuelPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/insurance"
+                  element={
+                    <>
+                      <InsurancePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals/compliance"
+                  element={
+                    <>
+                      <CompliancePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/broker"
+                  element={
+                    <>
+                      <BrokerPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/carrier"
+                  element={
+                    <>
+                      <CarrierPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/driver"
+                  element={
+                    <>
+                      <DriverPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/shipper"
+                  element={
+                    <>
+                      <ShipperPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/analytics"
+                  element={
+                    <>
+                      <AnalyticsPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/autonomous"
+                  element={
+                    <>
+                      <AutonomousPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/yms"
+                  element={
+                    <>
+                      <YMSPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/directory"
+                  element={
+                    <>
+                      <DirectoryPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/rates"
+                  element={
+                    <>
+                      <RatesPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/marketplace"
+                  element={
+                    <>
+                      <MarketplacePortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/financials"
+                  element={
+                    <>
+                      <FinancialsPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/load-board"
+                  element={
+                    <>
+                      <LoadBoardPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/crm"
+                  element={
+                    <>
+                      <CRMPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/edi"
+                  element={
+                    <>
+                      <EDIPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/owner-operator"
+                  element={
+                    <>
+                      <OwnerOperatorPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/workers"
+                  element={
+                    <>
+                      <WorkersPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/factoring"
+                  element={
+                    <>
+                      <FactoringPortal />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/predictive-analytics"
+                  element={
+                    <>
+                      <PredictiveAnalytics />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/fleet-manager"
+                  element={
+                    <>
+                      <FleetManager />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/fuel-optimizer"
+                  element={
+                    <>
+                      <FuelOptimizer />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/demand-forecaster"
+                  element={
+                    <>
+                      <DemandForecaster />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/price-optimizer"
+                  element={
+                    <>
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
+                            Price Optimizer
+                          </h1>
+                          <p className="text-transbot-text-secondary">
+                            Coming Soon - Dynamic pricing strategies with AI
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/maintenance-predictor"
-                element={
-                  <>
-                    <MaintenancePredictor />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/carbon-optimizer"
-                element={
-                  <>
-                    <CarbonOptimizer />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/smart-warehouse"
-                element={
-                  <>
-                    <SmartWarehouse />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/customer-experience"
-                element={
-                  <>
-                    <CustomerExperience />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/agents/risk-assessment"
-                element={
-                  <>
-                    <RiskAssessment />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/pricing"
-                element={
-                  <>
-                    <PricingPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources"
-                element={
-                  <>
-                    <ResourcesPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/company"
-                element={
-                  <>
-                    <CompanyPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/company/about"
-                element={
-                  <>
-                    <AboutPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/company/careers"
-                element={
-                  <>
-                    <CareersPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/company/contact"
-                element={
-                  <>
-                    <ContactPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/company/leadership"
-                element={
-                  <>
-                    <LeadershipPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/press"
-                element={
-                  <>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                          Press & News
-                        </h1>
-                        <p className="text-transbot-text-secondary">
-                          Coming Soon - Latest news and updates
-                        </p>
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/maintenance-predictor"
+                  element={
+                    <>
+                      <MaintenancePredictor />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/carbon-optimizer"
+                  element={
+                    <>
+                      <CarbonOptimizer />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/smart-warehouse"
+                  element={
+                    <>
+                      <SmartWarehouse />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/customer-experience"
+                  element={
+                    <>
+                      <CustomerExperience />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/agents/risk-assessment"
+                  element={
+                    <>
+                      <RiskAssessment />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/pricing"
+                  element={
+                    <>
+                      <PricingPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources"
+                  element={
+                    <>
+                      <ResourcesPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company"
+                  element={
+                    <>
+                      <CompanyPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/about"
+                  element={
+                    <>
+                      <AboutPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/careers"
+                  element={
+                    <>
+                      <CareersPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/contact"
+                  element={
+                    <>
+                      <ContactPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/leadership"
+                  element={
+                    <>
+                      <LeadershipPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/press"
+                  element={
+                    <>
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
+                            Press & News
+                          </h1>
+                          <p className="text-transbot-text-secondary">
+                            Coming Soon - Latest news and updates
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/investors"
-                element={
-                  <>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                          Investor Information
-                        </h1>
-                        <p className="text-transbot-text-secondary">
-                          Coming Soon - Investor relations and financial information
-                        </p>
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/investors"
+                  element={
+                    <>
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
+                            Investor Information
+                          </h1>
+                          <p className="text-transbot-text-secondary">
+                            Coming Soon - Investor relations and financial information
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/partners"
-                element={
-                  <>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                          Strategic Partners
-                        </h1>
-                        <p className="text-transbot-text-secondary">
-                          Coming Soon - Our strategic partnerships
-                        </p>
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/partners"
+                  element={
+                    <>
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
+                            Strategic Partners
+                          </h1>
+                          <p className="text-transbot-text-secondary">
+                            Coming Soon - Our strategic partnerships
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/security"
-                element={
-                  <>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                          Security & Compliance
-                        </h1>
-                        <p className="text-transbot-text-secondary">
-                          Coming Soon - Security and compliance information
-                        </p>
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/security"
+                  element={
+                    <>
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
+                            Security & Compliance
+                          </h1>
+                          <p className="text-transbot-text-secondary">
+                            Coming Soon - Security and compliance information
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/industries"
-                element={
-                  <>
-                    <IndustriesPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/portals"
-                element={
-                  <>
-                    <PortalsPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/ai-agents"
-                element={
-                  <>
-                    <AIAgentsPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources/blog"
-                element={
-                  <>
-                    <BlogPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources/case-studies"
-                element={
-                  <>
-                    <CaseStudiesPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources/api-docs"
-                element={
-                  <>
-                    <APIDocumentationPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources/webinars"
-                element={
-                  <>
-                    <WebinarsPage />
-                    <Footer />
-                  </>
-                }
-              />
-              <Route
-                path="/resources/help-center"
-                element={
-                  <>
-                    <HelpCenterPage />
-                    <Footer />
-                  </>
-                }
-              />
-              {/* MCP Dashboard routes removed - causing errors */}
-            </Routes>
-          </div>
-        </Router>
-      </SubdomainRouter>
-    </AuthProvider>
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/industries"
+                  element={
+                    <>
+                      <IndustriesPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/portals"
+                  element={
+                    <>
+                      <PortalsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/ai-agents"
+                  element={
+                    <>
+                      <AIAgentsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources/blog"
+                  element={
+                    <>
+                      <BlogPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources/case-studies"
+                  element={
+                    <>
+                      <CaseStudiesPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources/api-docs"
+                  element={
+                    <>
+                      <APIDocumentationPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources/webinars"
+                  element={
+                    <>
+                      <WebinarsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/resources/help-center"
+                  element={
+                    <>
+                      <HelpCenterPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                {/* MCP Dashboard routes removed - causing errors */}
+              </Routes>
+            </div>
+          </Router>
+        </SubdomainRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,0 +1,294 @@
+/* Dark Mode CSS Enhancements for TransBot AI Portals */
+
+/* Ensure smooth transitions between light and dark modes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode scrollbar styling */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Dark mode selection styling */
+.dark ::selection {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* Dark mode focus ring enhancements */
+.dark .focus\:ring-blue-500:focus {
+  --tw-ring-color: #3b82f6;
+}
+
+.dark .focus\:ring-2:focus {
+  --tw-ring-width: 2px;
+}
+
+/* Dark mode backdrop blur enhancements */
+.dark .backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+.dark .backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Dark mode shadow enhancements */
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode gradient enhancements */
+.dark .bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+.dark .bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+/* Dark mode glassmorphism effects */
+.dark .glass-effect {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+/* Dark mode button hover effects */
+.dark .hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.dark .hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+/* Dark mode animation enhancements */
+@keyframes dark-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.dark .animate-pulse {
+  animation: dark-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Dark mode text gradient enhancements */
+.dark .bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.dark .text-transparent {
+  color: transparent;
+}
+
+/* Dark mode border radius consistency */
+.dark .rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.dark .rounded-2xl {
+  border-radius: 1rem;
+}
+
+.dark .rounded-lg {
+  border-radius: 0.5rem;
+}
+
+/* Dark mode z-index management */
+.dark .z-30 {
+  z-index: 30;
+}
+
+.dark .z-40 {
+  z-index: 40;
+}
+
+.dark .z-50 {
+  z-index: 50;
+}
+
+/* Dark mode responsive breakpoints */
+@media (max-width: 768px) {
+  .dark .md\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .dark .md\:block {
+    display: block;
+  }
+}
+
+/* Dark mode accessibility enhancements */
+.dark .focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.dark .focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+/* Dark mode form elements */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+  background-color: rgba(51, 65, 85, 0.7);
+  border-color: rgba(71, 85, 105, 0.5);
+  color: #e2e8f0;
+}
+
+.dark input[type="text"]:focus,
+.dark input[type="email"]:focus,
+.dark input[type="password"]:focus,
+.dark input[type="search"]:focus,
+.dark textarea:focus,
+.dark select:focus {
+  background-color: rgba(51, 65, 85, 0.9);
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Dark mode placeholder text */
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* Dark mode link styling */
+.dark a {
+  color: #60a5fa;
+}
+
+.dark a:hover {
+  color: #93c5fd;
+}
+
+/* Dark mode code blocks */
+.dark code {
+  background-color: rgba(30, 41, 59, 0.8);
+  color: #e2e8f0;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.dark pre {
+  background-color: rgba(30, 41, 59, 0.9);
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/* Dark mode table styling */
+.dark table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.dark th,
+.dark td {
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.dark th {
+  background-color: rgba(30, 41, 59, 0.8);
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.dark td {
+  background-color: rgba(51, 65, 85, 0.5);
+  color: #cbd5e1;
+}
+
+.dark tr:hover td {
+  background-color: rgba(51, 65, 85, 0.7);
+}
+
+/* Dark mode modal and overlay styling */
+.dark .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.dark .modal-content {
+  background-color: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode tooltip styling */
+.dark .tooltip {
+  background-color: rgba(15, 23, 42, 0.95);
+  color: #e2e8f0;
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode notification styling */
+.dark .notification {
+  background-color: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  color: #e2e8f0;
+}
+
+.dark .notification.success {
+  border-color: rgba(34, 197, 94, 0.3);
+  background-color: rgba(22, 101, 52, 0.2);
+}
+
+.dark .notification.error {
+  border-color: rgba(239, 68, 68, 0.3);
+  background-color: rgba(127, 29, 29, 0.2);
+}
+
+.dark .notification.warning {
+  border-color: rgba(245, 158, 11, 0.3);
+  background-color: rgba(146, 64, 14, 0.2);
+}
+
+.dark .notification.info {
+  border-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(30, 64, 175, 0.2);
+}
