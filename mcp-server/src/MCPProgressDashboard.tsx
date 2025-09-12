@@ -1678,17 +1678,50 @@ function MCPProgressDashboard() {
                   </div>
                 </div>
 
-                {/* Compact Agent List - Show only first 20 agents */}
+                {/* MCP Agents Spreadsheet Table */}
                 <div
                   style={{
                     background: 'rgba(255, 255, 255, 0.05)',
-                    borderRadius: '12px',
-                    padding: '16px',
-                    marginBottom: '16px',
+                    borderRadius: '16px',
+                    padding: '20px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(10px)',
+                    overflow: 'hidden',
                   }}
                 >
+                  {/* Table Header */}
                   <div
-                    style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: '20px',
+                      paddingBottom: '16px',
+                      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                    }}
+                  >
+                    <h3
+                      style={{ fontSize: '1.3rem', fontWeight: '700', margin: 0, color: '#e2e8f0' }}
+                    >
+                      📊 All 251 MCP Agents - Live Spreadsheet
+                    </h3>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Total Agents:</span>
+                      <span style={{ fontSize: '1rem', fontWeight: '700', color: '#3b82f6' }}>
+                        251
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Table Controls */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      gap: '12px',
+                      marginBottom: '16px',
+                      flexWrap: 'wrap',
+                      alignItems: 'center',
+                    }}
                   >
                     <input
                       type="text"
@@ -1712,6 +1745,7 @@ function MCPProgressDashboard() {
                         padding: '8px 12px',
                         color: 'white',
                         fontSize: '0.9rem',
+                        minWidth: '120px',
                       }}
                     >
                       <option value="">All Status</option>
@@ -1728,132 +1762,246 @@ function MCPProgressDashboard() {
                         padding: '8px 12px',
                         color: 'white',
                         fontSize: '0.9rem',
+                        minWidth: '140px',
                       }}
                     >
-                      <option value="">All Portals</option>
-                      <option value="Portal">Portal Agents (1-34)</option>
-                      <option value="Support">Support Agents (35-251)</option>
+                      <option value="">All Types</option>
+                      <option value="Portal">Portal Agents</option>
+                      <option value="Support">Support Agents</option>
                     </select>
                   </div>
 
-                  {/* Compact Agent Grid - Show only first 20 agents */}
+                  {/* Spreadsheet Table */}
                   <div
                     style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                      gap: '8px',
-                      maxHeight: '400px',
-                      overflowY: 'auto',
+                      background: 'rgba(0, 0, 0, 0.2)',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
                     }}
                   >
-                    {agentProgress.slice(0, 20).map(agent => {
-                      const statusColor =
-                        agent.health === 'excellent'
-                          ? '#10b981'
-                          : agent.health === 'good'
-                            ? '#3b82f6'
-                            : agent.health === 'warning'
-                              ? '#f59e0b'
-                              : '#ef4444';
-
-                      return (
-                        <div
-                          key={agent.id}
-                          style={{
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            borderRadius: '8px',
-                            padding: '12px',
-                            border: `1px solid ${statusColor}20`,
-                            transition: 'all 0.2s ease',
-                          }}
-                        >
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              marginBottom: '6px',
-                            }}
-                          >
-                            <span
-                              style={{ fontSize: '0.8rem', fontWeight: '600', color: '#e2e8f0' }}
-                            >
-                              Agent #{agent.id}
-                            </span>
-                            <span
-                              style={{ fontSize: '0.7rem', color: statusColor, fontWeight: '600' }}
-                            >
-                              {agent.progress.toFixed(1)}%
-                            </span>
-                          </div>
-
-                          <div
-                            style={{
-                              width: '100%',
-                              height: '4px',
-                              background: 'rgba(255, 255, 255, 0.1)',
-                              borderRadius: '2px',
-                              overflow: 'hidden',
-                              marginBottom: '6px',
-                            }}
-                          >
-                            <div
-                              style={{
-                                width: `${agent.progress}%`,
-                                height: '100%',
-                                background: statusColor,
-                                borderRadius: '2px',
-                                transition: 'width 0.3s ease',
-                              }}
-                            />
-                          </div>
-
-                          <div
-                            style={{ fontSize: '0.7rem', color: '#94a3b8', marginBottom: '2px' }}
-                          >
-                            <span style={{ color: statusColor, fontWeight: '600' }}>
-                              {agent.status.toUpperCase()}
-                            </span>
-                          </div>
-
-                          <div
-                            style={{
-                              fontSize: '0.6rem',
-                              color: '#64748b',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                            }}
-                          >
-                            {agent.currentTask}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Show More Button */}
-                  <div style={{ textAlign: 'center', marginTop: '12px' }}>
-                    <button
+                    {/* Table Header Row */}
+                    <div
                       style={{
-                        background: 'rgba(59, 130, 246, 0.2)',
-                        border: '1px solid rgba(59, 130, 246, 0.3)',
-                        borderRadius: '8px',
-                        padding: '8px 16px',
-                        color: '#3b82f6',
+                        display: 'grid',
+                        gridTemplateColumns: '60px 80px 120px 100px 100px 200px 120px 100px',
+                        background: 'rgba(59, 130, 246, 0.1)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                        padding: '12px 16px',
                         fontSize: '0.8rem',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = 'rgba(59, 130, 246, 0.3)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = 'rgba(59, 130, 246, 0.2)';
+                        fontWeight: '600',
+                        color: '#3b82f6',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px',
                       }}
                     >
-                      View All 251 Agents (Expandable)
-                    </button>
+                      <div>ID</div>
+                      <div>Progress</div>
+                      <div>Status</div>
+                      <div>Health</div>
+                      <div>Efficiency</div>
+                      <div>Current Task</div>
+                      <div>Portal</div>
+                      <div>Last Update</div>
+                    </div>
+
+                    {/* Table Body - All 251 Agents */}
+                    <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                      {agentProgress.map((agent, index) => {
+                        const statusColor =
+                          agent.health === 'excellent'
+                            ? '#10b981'
+                            : agent.health === 'good'
+                              ? '#3b82f6'
+                              : agent.health === 'warning'
+                                ? '#f59e0b'
+                                : '#ef4444';
+
+                        const isEven = index % 2 === 0;
+
+                        return (
+                          <div
+                            key={agent.id}
+                            style={{
+                              display: 'grid',
+                              gridTemplateColumns: '60px 80px 120px 100px 100px 200px 120px 100px',
+                              padding: '12px 16px',
+                              background: isEven
+                                ? 'rgba(255, 255, 255, 0.02)'
+                                : 'rgba(255, 255, 255, 0.05)',
+                              borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                              fontSize: '0.85rem',
+                              transition: 'all 0.2s ease',
+                              cursor: 'pointer',
+                            }}
+                            onMouseEnter={e => {
+                              e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)';
+                              e.currentTarget.style.transform = 'translateX(4px)';
+                            }}
+                            onMouseLeave={e => {
+                              e.currentTarget.style.background = isEven
+                                ? 'rgba(255, 255, 255, 0.02)'
+                                : 'rgba(255, 255, 255, 0.05)';
+                              e.currentTarget.style.transform = 'translateX(0px)';
+                            }}
+                          >
+                            {/* Agent ID */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                fontWeight: '600',
+                                color: '#e2e8f0',
+                              }}
+                            >
+                              #{agent.id}
+                            </div>
+
+                            {/* Progress */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <div
+                                style={{
+                                  width: '40px',
+                                  height: '6px',
+                                  background: 'rgba(255, 255, 255, 0.1)',
+                                  borderRadius: '3px',
+                                  overflow: 'hidden',
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: `${agent.progress}%`,
+                                    height: '100%',
+                                    background: statusColor,
+                                    borderRadius: '3px',
+                                    transition: 'width 0.3s ease',
+                                  }}
+                                />
+                              </div>
+                              <span
+                                style={{
+                                  fontSize: '0.8rem',
+                                  fontWeight: '600',
+                                  color: statusColor,
+                                  minWidth: '35px',
+                                }}
+                              >
+                                {agent.progress.toFixed(1)}%
+                              </span>
+                            </div>
+
+                            {/* Status */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: statusColor,
+                                fontWeight: '600',
+                                fontSize: '0.8rem',
+                              }}
+                            >
+                              {agent.status.toUpperCase()}
+                            </div>
+
+                            {/* Health */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: statusColor,
+                                fontWeight: '600',
+                                fontSize: '0.8rem',
+                              }}
+                            >
+                              {agent.health.toUpperCase()}
+                            </div>
+
+                            {/* Efficiency */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: '#e2e8f0',
+                                fontWeight: '600',
+                                fontSize: '0.8rem',
+                              }}
+                            >
+                              {agent.efficiency.toFixed(1)}%
+                            </div>
+
+                            {/* Current Task */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: '#94a3b8',
+                                fontSize: '0.8rem',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                              }}
+                            >
+                              {agent.currentTask}
+                            </div>
+
+                            {/* Portal Assignment */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: '#94a3b8',
+                                fontSize: '0.8rem',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                              }}
+                            >
+                              {agent.portalAssigned}
+                            </div>
+
+                            {/* Last Update */}
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: '#94a3b8',
+                                fontSize: '0.8rem',
+                              }}
+                            >
+                              {agent.lastUpdate.toLocaleTimeString()}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Table Footer */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginTop: '16px',
+                      paddingTop: '16px',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                      fontSize: '0.8rem',
+                      color: '#94a3b8',
+                    }}
+                  >
+                    <div>Showing all 251 MCP agents • Real-time updates every 3 seconds</div>
+                    <div style={{ display: 'flex', gap: '16px' }}>
+                      <span>
+                        Excellent: {agentProgress.filter(a => a.health === 'excellent').length}
+                      </span>
+                      <span>Good: {agentProgress.filter(a => a.health === 'good').length}</span>
+                      <span>
+                        Warning: {agentProgress.filter(a => a.health === 'warning').length}
+                      </span>
+                      <span>
+                        Critical: {agentProgress.filter(a => a.health === 'critical').length}
+                      </span>
+                    </div>
                   </div>
                 </div>
 

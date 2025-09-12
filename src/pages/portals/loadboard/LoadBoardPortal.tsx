@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
 import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
-function YMSPortal() {
+function LoadBoardPortal() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [portalData, setPortalData] = useState({
     status: 'active',
@@ -84,7 +84,7 @@ function YMSPortal() {
                 letterSpacing: '-0.02em',
               }}
             >
-              🚀 YMS Portal
+              🚀 LoadBoard Portal
             </h1>
             <p style={{ fontSize: '1.2rem', color: '#94a3b8', margin: 0, fontWeight: '500' }}>
               Enterprise-grade {PortalName.toLowerCase()} management with real-time analytics
@@ -265,7 +265,7 @@ function YMSPortal() {
         <h3
           style={{ fontSize: '1.2rem', fontWeight: '700', margin: '0 0 24px 0', color: '#e2e8f0' }}
         >
-          YMS Portal
+          LoadBoard Portal
         </h3>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {['Dashboard', 'Analytics', 'Settings', 'Reports', 'Users', 'Configuration'].map(item => (
@@ -309,4 +309,4 @@ function YMSPortal() {
   );
 }
 
-export default YMSPortal;
+export default LoadBoardPortal;

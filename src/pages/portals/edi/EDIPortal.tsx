@@ -1,460 +1,312 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { 
-  FileText, 
-  Download, 
-  CheckCircle, 
-  Database, 
-  Settings, 
-  Search,
-  Eye, 
-  Edit, 
-  Trash2, 
-  Plus, 
-  RefreshCw,
-  Activity,
-  BarChart3,
-  TrendingUp,
-  Users,
-  XCircle
-} from 'lucide-react'
-import PortalHeader from '../../../components/portals/PortalHeader'
+import React, { useState, useEffect } from 'react';
+import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
+import PortalUpdateSystem from '../../../utils/PortalUpdateSystem';
 
-const EDIPortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('dashboard')
-  const [transactions] = useState([
-    {
-      id: 'EDI001',
-      type: '856',
-      partner: 'Walmart Inc.',
-      status: 'Processed',
-      timestamp: '2024-01-15 10:30:25',
-      direction: 'Outbound',
-      size: '2.4 KB',
-      records: 156,
-      processingTime: '0.8s'
+function EDIPortal() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [portalData, setPortalData] = useState({
+    status: 'active',
+    progress: 0,
+    lastUpdate: new Date(),
+    metrics: {
+      efficiency: 0,
+      performance: 0,
+      reliability: 0,
     },
-    {
-      id: 'EDI002',
-      type: '810',
-      partner: 'Target Corp.',
-      status: 'Pending',
-      timestamp: '2024-01-15 10:25:12',
-      direction: 'Inbound',
-      size: '1.8 KB',
-      records: 89,
-      processingTime: 'N/A'
-    },
-    {
-      id: 'EDI003',
-      type: '997',
-      partner: 'Amazon Logistics',
-      status: 'Failed',
-      timestamp: '2024-01-15 10:20:45',
-      direction: 'Outbound',
-      size: '0.5 KB',
-      records: 1,
-      processingTime: 'N/A'
-    }
-  ])
+  });
 
-  const [partners] = useState([
-    {
-      id: 1,
-      name: 'Walmart Inc.',
-      idNumber: 'WALM001',
-      status: 'Active',
-      documents: ['856', '810', '997'],
-      lastActivity: '2024-01-15 10:30',
-      connectionType: 'AS2',
-      compliance: 'Current'
-    },
-    {
-      id: 2,
-      name: 'Target Corp.',
-      idNumber: 'TGT001',
-      status: 'Active',
-      documents: ['856', '810'],
-      lastActivity: '2024-01-15 10:25',
-      connectionType: 'FTP',
-      compliance: 'Current'
-    },
-    {
-      id: 3,
-      name: 'Amazon Logistics',
-      idNumber: 'AMZ001',
-      status: 'Inactive',
-      documents: ['856', '997'],
-      lastActivity: '2024-01-14 16:45',
-      connectionType: 'AS2',
-      compliance: 'Expired'
-    }
-  ])
+  // Real-time updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+      setPortalData(prev => ({
+        ...prev,
+        progress: Math.min(prev.progress + Math.random() * 2, 100),
+        lastUpdate: new Date(),
+        metrics: {
+          efficiency: Math.min(prev.metrics.efficiency + Math.random() * 1, 100),
+          performance: Math.min(prev.metrics.performance + Math.random() * 1, 100),
+          reliability: Math.min(prev.metrics.reliability + Math.random() * 1, 100),
+        },
+      }));
+    }, 3000);
 
-  const stats = {
-    totalTransactions: 2847,
-    processedToday: 156,
-    failedToday: 3,
-    activePartners: 12,
-    avgProcessingTime: '1.2s',
-    successRate: 98.7,
-    totalVolume: '2.4 GB'
-  }
-
-  const renderDashboard = () => (
-    <div className="space-y-6">
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-slate-600">Total Transactions</p>
-              <p className="text-3xl font-bold text-slate-900">{stats.totalTransactions.toLocaleString()}</p>
-            </div>
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-blue-600" />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-slate-600">Processed Today</p>
-              <p className="text-3xl font-bold text-green-600">{stats.processedToday}</p>
-            </div>
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <CheckCircle className="w-6 h-6 text-green-600" />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-slate-600">Failed Today</p>
-              <p className="text-3xl font-bold text-red-600">{stats.failedToday}</p>
-            </div>
-            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-              <XCircle className="w-6 h-6 text-red-600" />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-slate-600">Success Rate</p>
-              <p className="text-3xl font-bold text-purple-600">{stats.successRate}%</p>
-            </div>
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Recent Transactions */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
-      >
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Recent Transactions</h3>
-        <div className="space-y-4">
-          {transactions.slice(0, 5).map((transaction) => (
-            <div key={transaction.id} className="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
-              <div className="flex items-center space-x-4">
-                <div className={`w-3 h-3 rounded-full ${
-                  transaction.status === 'Processed' ? 'bg-green-500' :
-                  transaction.status === 'Pending' ? 'bg-yellow-500' : 'bg-red-500'
-                }`}></div>
-                <div>
-                  <p className="font-medium text-slate-900">{transaction.id} - {transaction.type}</p>
-                  <p className="text-sm text-slate-600">{transaction.partner}</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-medium text-slate-900">{transaction.status}</p>
-                <p className="text-xs text-slate-500">{transaction.timestamp}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  )
-
-  const renderTransactions = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">EDI Transactions</h2>
-        <div className="flex items-center space-x-4">
-          <button className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Refresh
-          </button>
-          <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            <Plus className="w-4 h-4 mr-2" />
-            New Transaction
-          </button>
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="flex items-center space-x-4">
-        <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search transactions..."
-            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-        </div>
-        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <option>All Status</option>
-          <option>Processed</option>
-          <option>Pending</option>
-          <option>Failed</option>
-        </select>
-        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <option>All Types</option>
-          <option>856 - Advance Ship Notice</option>
-          <option>810 - Invoice</option>
-          <option>997 - Functional Acknowledgment</option>
-        </select>
-      </div>
-
-      {/* Transactions Table */}
-      <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-slate-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Transaction ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Partner</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Direction</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Size</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Timestamp</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200">
-              {transactions.map((transaction) => (
-                <tr key={transaction.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                    {transaction.id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                      {transaction.type}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
-                    {transaction.partner}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      transaction.status === 'Processed' ? 'bg-green-100 text-green-800' :
-                      transaction.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
-                    }`}>
-                      {transaction.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
-                    {transaction.direction}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
-                    {transaction.size}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
-                    {transaction.timestamp}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button className="text-green-600 hover:text-green-900">
-                        <Download className="w-4 h-4" />
-                      </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  )
-
-  const renderPartners = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">EDI Partners</h2>
-        <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Plus className="w-4 h-4 mr-2" />
-          Add Partner
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {partners.map((partner) => (
-          <div key={partner.id} className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-900">{partner.name}</h3>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                partner.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-              }`}>
-                {partner.status}
-              </span>
-            </div>
-            
-            <div className="space-y-3">
-              <div>
-                <p className="text-sm text-slate-600">ID Number</p>
-                <p className="font-medium text-slate-900">{partner.idNumber}</p>
-              </div>
-              
-              <div>
-                <p className="text-sm text-slate-600">Connection Type</p>
-                <p className="font-medium text-slate-900">{partner.connectionType}</p>
-              </div>
-              
-              <div>
-                <p className="text-sm text-slate-600">Supported Documents</p>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {partner.documents.map((doc) => (
-                    <span key={doc} className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                      {doc}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <p className="text-sm text-slate-600">Last Activity</p>
-                <p className="font-medium text-slate-900">{partner.lastActivity}</p>
-              </div>
-              
-              <div className="flex items-center justify-between pt-4">
-                <span className={`text-sm ${
-                  partner.compliance === 'Current' ? 'text-green-600' : 'text-red-600'
-                }`}>
-                  Compliance: {partner.compliance}
-                </span>
-                <div className="flex items-center space-x-2">
-                  <button className="text-blue-600 hover:text-blue-900">
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button className="text-green-600 hover:text-green-900">
-                    <Activity className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16">
-      <PortalHeader
-        title="EDI Portal"
-        description="Electronic Data Interchange management and transaction processing"
-        icon={Database}
-        color="from-green-500 to-teal-600"
+    <div
+      style={{
+        minHeight: '100vh',
+        background:
+          'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%)',
+        color: 'white',
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Animated Background Elements */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.15) 0%, transparent 50%)
+          `,
+          animation: 'pulse 20s ease-in-out infinite',
+        }}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        {/* Navigation Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-8"
-        >
-          <div className="border-b border-slate-200">
-            <nav className="-mb-px flex space-x-8">
-              {[
-                { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-                { id: 'transactions', label: 'Transactions', icon: FileText },
-                { id: 'partners', label: 'Partners', icon: Users },
-                { id: 'monitoring', label: 'Monitoring', icon: Activity },
-                { id: 'settings', label: 'Settings', icon: Settings }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  <tab.icon className="w-4 h-4" />
-                  <span>{tab.label}</span>
-                </button>
-              ))}
-            </nav>
+      {/* Real-time Portal Status */}
+      <RealTimePortalStatus />
+
+      {/* Main Content */}
+      <div style={{ position: 'relative', zIndex: 10, padding: '32px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          {/* Header */}
+          <div style={{ marginBottom: '32px' }}>
+            <h1
+              style={{
+                fontSize: '3rem',
+                fontWeight: '900',
+                margin: '0 0 12px 0',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: '0 0 30px rgba(102, 126, 234, 0.5)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              🚀 EDI Portal
+            </h1>
+            <p style={{ fontSize: '1.2rem', color: '#94a3b8', margin: 0, fontWeight: '500' }}>
+              Enterprise-grade {PortalName.toLowerCase()} management with real-time analytics
+            </p>
           </div>
-        </motion.div>
 
-        {/* Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          {activeTab === 'dashboard' && renderDashboard()}
-          {activeTab === 'transactions' && renderTransactions()}
-          {activeTab === 'partners' && renderPartners()}
-          {activeTab === 'monitoring' && (
-            <div className="text-center py-12">
-              <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-slate-900 mb-2">Monitoring Coming Soon</h3>
-              <p className="text-slate-600">Real-time monitoring and alerting features will be available soon.</p>
+          {/* Dashboard Grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+              gap: '24px',
+            }}
+          >
+            {/* Status Card */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                borderRadius: '24px',
+                padding: '32px',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(20px)',
+                position: 'relative',
+                overflow: 'hidden',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  margin: '0 0 16px 0',
+                  color: '#e2e8f0',
+                }}
+              >
+                📊 Portal Status
+              </h3>
+              <div
+                style={{
+                  fontSize: '3rem',
+                  fontWeight: '800',
+                  color: '#10b981',
+                  marginBottom: '16px',
+                }}
+              >
+                {portalData.progress.toFixed(1)}%
+              </div>
+              <div
+                style={{
+                  width: '100%',
+                  height: '12px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: '6px',
+                  overflow: 'hidden',
+                  marginBottom: '16px',
+                }}
+              >
+                <div
+                  style={{
+                    width: `${portalData.progress}%`,
+                    height: '100%',
+                    background: 'linear-gradient(90deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%)',
+                    borderRadius: '6px',
+                    transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                />
+              </div>
+              <p style={{ fontSize: '0.9rem', color: '#94a3b8', margin: 0 }}>
+                Last updated: {portalData.lastUpdate.toLocaleTimeString()}
+              </p>
             </div>
-          )}
-          {activeTab === 'settings' && (
-            <div className="text-center py-12">
-              <Settings className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-slate-900 mb-2">Settings Coming Soon</h3>
-              <p className="text-slate-600">Configuration and settings options will be available soon.</p>
-            </div>
-          )}
-        </motion.div>
+
+            {/* Metrics Cards */}
+            {Object.entries(portalData.metrics).map(([key, value]) => (
+              <div
+                key={key}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  borderRadius: '24px',
+                  padding: '24px',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow:
+                    '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                }}
+              >
+                <h4
+                  style={{
+                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    margin: '0 0 12px 0',
+                    color: '#e2e8f0',
+                  }}
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </h4>
+                <div
+                  style={{
+                    fontSize: '2rem',
+                    fontWeight: '700',
+                    color: '#3b82f6',
+                    marginBottom: '8px',
+                  }}
+                >
+                  {value.toFixed(1)}%
+                </div>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '6px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '3px',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${value}%`,
+                      height: '100%',
+                      background: 'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)',
+                      borderRadius: '3px',
+                      transition: 'width 0.3s ease',
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Floating Action Button */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '32px',
+          right: '32px',
+          width: '64px',
+          height: '64px',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          boxShadow: '0 8px 32px rgba(102, 126, 234, 0.4)',
+          transition: 'all 0.3s ease',
+          zIndex: 1000,
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = 'scale(1.1)';
+          e.currentTarget.style.boxShadow = '0 12px 40px rgba(102, 126, 234, 0.6)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(102, 126, 234, 0.4)';
+        }}
+      >
+        <span style={{ fontSize: '1.5rem' }}>⚡</span>
+      </div>
+
+      {/* Sidebar */}
+      <div
+        style={{
+          position: 'fixed',
+          left: '0',
+          top: '0',
+          width: '280px',
+          height: '100vh',
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(20px)',
+          borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '32px 24px',
+          zIndex: 100,
+          overflowY: 'auto',
+        }}
+      >
+        <h3
+          style={{ fontSize: '1.2rem', fontWeight: '700', margin: '0 0 24px 0', color: '#e2e8f0' }}
+        >
+          EDI Portal
+        </h3>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {['Dashboard', 'Analytics', 'Settings', 'Reports', 'Users', 'Configuration'].map(item => (
+            <a
+              key={item}
+              href="#"
+              style={{
+                display: 'block',
+                padding: '12px 16px',
+                color: '#94a3b8',
+                textDecoration: 'none',
+                borderRadius: '8px',
+                transition: 'all 0.2s ease',
+                fontSize: '0.9rem',
+                fontWeight: '500',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)';
+                e.currentTarget.style.color = '#3b82f6';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.color = '#94a3b8';
+              }}
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <style>
+        {`
+          @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+          }
+        `}
+      </style>
     </div>
-  )
+  );
 }
 
-export default EDIPortal
+export default EDIPortal;
