@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion } from 'framer-motion';
-import EnhancedSuperAdminCommandCenter from './EnhancedSuperAdminCommandCenter';
 import {
   Users,
   Search,
@@ -42,7 +41,6 @@ import {
   Video,
   CheckSquare,
   Square,
-  // Additional icons needed for comprehensive menu
   Building2,
   Brain,
   Bot,
@@ -55,13 +53,12 @@ import {
 } from 'lucide-react';
 
 function SuperAdminPortal() {
-  const [useEnhancedCommandCenter, setUseEnhancedCommandCenter] = useState(true);
   const [user] = useState({
     id: 1,
-    name: 'Demo User',
-    email: 'demo@transbotai.com',
-    role: 'admin',
-    permissions: ['read', 'write', 'admin'],
+    name: 'Super Admin',
+    email: 'admin@transbotai.com',
+    role: 'super-admin',
+    permissions: ['all'],
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
   });
@@ -78,57 +75,57 @@ function SuperAdminPortal() {
   const notifications = [
     {
       id: 1,
-      title: 'New superadmin registered',
-      message: 'Acme Corporation has been added',
-      time: '5 minutes ago',
+      title: 'System Update Available',
+      message: 'Version 2.1.0 is ready for deployment',
+      time: '2 minutes ago',
       type: 'info',
     },
     {
       id: 2,
-      title: 'SuperAdmin status updated',
-      message: 'Mark Johnson is now active',
-      time: '1 hour ago',
-      type: 'success',
+      title: 'Security Alert',
+      message: 'Unusual login activity detected',
+      time: '15 minutes ago',
+      type: 'warning',
     },
     {
       id: 3,
-      title: 'Payment overdue',
-      message: 'Invoice #INV-2023-001 is 3 days overdue',
-      time: '3 days ago',
-      type: 'warning',
+      title: 'Backup Completed',
+      message: 'Daily backup completed successfully',
+      time: '1 hour ago',
+      type: 'success',
     },
   ];
 
   const metrics = [
     {
-      id: 'active',
-      title: 'Active SuperAdmins',
-      value: '128',
-      change: '+12%',
+      id: 'users',
+      title: 'Total Users',
+      value: '12,456',
+      change: '+15%',
       changeType: 'increase',
-      icon: Activity,
-      color: 'text-emerald-600',
-      bgColor: 'bg-emerald-50',
-      borderColor: 'border-emerald-200',
-    },
-    {
-      id: 'revenue',
-      title: 'Monthly Revenue',
-      value: '$258,143',
-      change: '+8%',
-      changeType: 'increase',
-      icon: DollarSign,
+      icon: Users,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200',
     },
     {
-      id: 'efficiency',
-      title: 'Satisfaction Rate',
-      value: '92%',
-      change: '+5%',
+      id: 'systems',
+      title: 'Active Systems',
+      value: '47',
+      change: '+2',
       changeType: 'increase',
-      icon: TrendingUp,
+      icon: Cpu,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50 dark:bg-green-900/20',
+      borderColor: 'border-green-200',
+    },
+    {
+      id: 'security',
+      title: 'Security Score',
+      value: '98.7%',
+      change: '+1.2%',
+      changeType: 'increase',
+      icon: Shield,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200',
@@ -1426,11 +1423,6 @@ function SuperAdminPortal() {
         return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
     }
   };
-
-  // Use enhanced command center if enabled
-  if (useEnhancedCommandCenter) {
-    return <EnhancedSuperAdminCommandCenter theme="dark" />;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">

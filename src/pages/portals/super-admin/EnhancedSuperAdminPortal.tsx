@@ -5,17 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Building2,
-  Users,
-  Settings,
-  Globe,
-  Brain,
-  CreditCard,
-  Home,
-  ShieldCheck,
-  BarChart,
-} from 'lucide-react';
+import { Users, Settings, Globe, CreditCard, Home } from 'lucide-react';
 
 import EnhancedHeader from '../../../design-system/components/EnhancedHeader';
 import EnhancedSidebar, { NavigationItem } from '../../../design-system/components/EnhancedSidebar';

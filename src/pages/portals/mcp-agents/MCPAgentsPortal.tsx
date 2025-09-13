@@ -1,6 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Settings, BarChart3, Users, Shield, Plus, Search, RefreshCw, Bell, Home, ChevronDown, ChevronRight, Star, TrendingUp, CheckSquare, FileText, CheckCircle, Activity, Clock, AlertTriangle, Server, Calendar, User } 'lucide-react';
+import {
+  Bot,
+  Settings,
+  BarChart3,
+  Users,
+  Shield,
+  Plus,
+  Search,
+  RefreshCw,
+  Bell,
+  Home,
+  Menu,
+  ChevronDown,
+  ChevronRight,
+  Star,
+  Database,
+  Network,
+  TrendingUp,
+  CheckSquare,
+  FileText,
+  CheckCircle,
+  Activity,
+  Clock,
+  AlertTriangle,
+  Server,
+  Monitor,
+  Calendar,
+  User,
+} from 'lucide-react';
 
 interface MCPAgent {
   id: string;

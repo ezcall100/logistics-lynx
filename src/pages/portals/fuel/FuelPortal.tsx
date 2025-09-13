@@ -1,7 +1,53 @@
 import { useState } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion } from 'framer-motion';
-import { Users, Search, Bell, Settings, Plus, BarChart3, TrendingUp, Activity, CheckCircle, AlertTriangle, Home, DollarSign, ChevronRight, ChevronLeft, ChevronDown, Zap, Shield, UserPlus, FileText, CreditCard, Calendar, Message Phone, HelpCircle, Globe, Wifi, RefreshCw, History, Star, Heart, Flag, LogOut, User, Mail, Lock, Server, MessageCircle, Send, Video, CheckSquare, Square, Truck, Package, MapPin, Clock, BookOpen } 'lucide-react';
+import {
+  Users,
+  Search,
+  Bell,
+  Settings,
+  Plus,
+  TrendingUp,
+  AlertTriangle,
+  DollarSign,
+  ChevronRight,
+  ChevronLeft,
+  ChevronDown,
+  FileText,
+  Calendar,
+  MessageSquare,
+  Phone,
+  MessageCircle,
+  Send,
+  Video,
+  CheckSquare,
+  User,
+  Mail,
+  LogOut,
+  Home,
+  BarChart3,
+  Activity,
+  CheckCircle,
+  Zap,
+  Shield,
+  UserPlus,
+  CreditCard,
+  HelpCircle,
+  Globe,
+  Wifi,
+  RefreshCw,
+  History,
+  Star,
+  Heart,
+  Flag,
+  Lock,
+  Server,
+  Truck,
+  Package,
+  MapPin,
+  Clock,
+  BookOpen,
+} from 'lucide-react';
 
 function FuelPortal() {
   const [user] = useState({
@@ -83,95 +129,95 @@ function FuelPortal() {
   ];
 
   const menuItems = [
-  {
-    "id": "overview",
-    "label": "Overview",
-    "icon": "Home",
-    "subMenus": [
-      {
-        "id": "dashboard",
-        "label": "Dashboard",
-        "icon": "BarChart3"
-      },
-      {
-        "id": "analytics",
-        "label": "Analytics",
-        "icon": "TrendingUp"
-      }
-    ]
-  },
-  {
-    "id": "fuel-management",
-    "label": "Fuel Management",
-    "icon": "Zap",
-    "subMenus": [
-      {
-        "id": "fuel-cards",
-        "label": "Fuel Cards",
-        "icon": "CreditCard"
-      },
-      {
-        "id": "fuel-prices",
-        "label": "Fuel Prices",
-        "icon": "DollarSign"
-      },
-      {
-        "id": "fuel-stations",
-        "label": "Fuel Stations",
-        "icon": "MapPin"
-      },
-      {
-        "id": "fuel-reports",
-        "label": "Fuel Reports",
-        "icon": "FileText"
-      }
-    ]
-  },
-  {
-    "id": "vehicles",
-    "label": "Vehicles",
-    "icon": "Truck",
-    "subMenus": [
-      {
-        "id": "fleet",
-        "label": "Fleet Management",
-        "icon": "Users"
-      },
-      {
-        "id": "maintenance",
-        "label": "Maintenance",
-        "icon": "Settings"
-      },
-      {
-        "id": "fuel-efficiency",
-        "label": "Fuel Efficiency",
-        "icon": "Activity"
-      }
-    ]
-  },
-  {
-    "id": "accounting",
-    "label": "Accounting",
-    "icon": "DollarSign",
-    "subMenus": [
-      {
-        "id": "expenses",
-        "label": "Fuel Expenses",
-        "icon": "CreditCard"
-      },
-      {
-        "id": "invoicing",
-        "label": "Invoicing",
-        "icon": "FileText"
-      },
-      {
-        "id": "reports",
-        "label": "Financial Reports",
-        "icon": "BarChart3"
-      }
-    ]
-  }
-];
+    {
+      id: 'overview',
+      label: 'Overview',
+      icon: 'Home',
+      subMenus: [
+        {
+          id: 'dashboard',
+          label: 'Dashboard',
+          icon: 'BarChart3',
+        },
+        {
+          id: 'analytics',
+          label: 'Analytics',
+          icon: 'TrendingUp',
+        },
+      ],
+    },
+    {
+      id: 'fuel-management',
+      label: 'Fuel Management',
+      icon: 'Zap',
+      subMenus: [
+        {
+          id: 'fuel-cards',
+          label: 'Fuel Cards',
+          icon: 'CreditCard',
+        },
+        {
+          id: 'fuel-prices',
+          label: 'Fuel Prices',
+          icon: 'DollarSign',
+        },
+        {
+          id: 'fuel-stations',
+          label: 'Fuel Stations',
+          icon: 'MapPin',
+        },
+        {
+          id: 'fuel-reports',
+          label: 'Fuel Reports',
+          icon: 'FileText',
+        },
+      ],
+    },
+    {
+      id: 'vehicles',
+      label: 'Vehicles',
+      icon: 'Truck',
+      subMenus: [
+        {
+          id: 'fleet',
+          label: 'Fleet Management',
+          icon: 'Users',
+        },
+        {
+          id: 'maintenance',
+          label: 'Maintenance',
+          icon: 'Settings',
+        },
+        {
+          id: 'fuel-efficiency',
+          label: 'Fuel Efficiency',
+          icon: 'Activity',
+        },
+      ],
+    },
+    {
+      id: 'accounting',
+      label: 'Accounting',
+      icon: 'DollarSign',
+      subMenus: [
+        {
+          id: 'expenses',
+          label: 'Fuel Expenses',
+          icon: 'CreditCard',
+        },
+        {
+          id: 'invoicing',
+          label: 'Invoicing',
+          icon: 'FileText',
+        },
+        {
+          id: 'reports',
+          label: 'Financial Reports',
+          icon: 'BarChart3',
+        },
+      ],
+    },
+  ];
 
   const crmTabs = [
     { id: 'chat', label: 'Chat', icon: MessageCircle },
@@ -186,9 +232,7 @@ function FuelPortal() {
 
   const toggleMenu = (menuId: string) => {
     setExpandedMenus(prev =>
-      prev.includes(menuId)
-        ? prev.filter(id => id !== menuId)
-        : [...prev, menuId]
+      prev.includes(menuId) ? prev.filter(id => id !== menuId) : [...prev, menuId]
     );
   };
 
@@ -230,7 +274,7 @@ function FuelPortal() {
                   type="text"
                   placeholder="Search..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 bg-white/50 dark:bg-slate-700/50 border border-slate-200/50 dark:border-slate-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm"
                 />
               </div>
@@ -241,10 +285,10 @@ function FuelPortal() {
               <button className="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors">
                 <Bell className="w-5 h-5" />
               </button>
-              
+
               <ThemeToggle />
-              
-              <button 
+
+              <button
                 onClick={() => setShowSettingsMenu(!showSettingsMenu)}
                 className="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors"
               >
@@ -257,29 +301,36 @@ function FuelPortal() {
                   onClick={() => setShowUserMenu(!showUserMenu)}
                   className="flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors"
                 >
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-8 h-8 rounded-full"
-                  />
+                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
                   <div className="hidden sm:block text-left">
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{user.name}</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                      {user.name}
+                    </p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">{user.role}</p>
                   </div>
                 </button>
 
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-50">
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                    >
                       <User className="w-4 h-4 mr-3" />
                       Profile
                     </a>
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                    >
                       <Settings className="w-4 h-4 mr-3" />
                       Settings
                     </a>
                     <hr className="my-1 border-slate-200 dark:border-slate-700" />
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700"
+                    >
                       <LogOut className="w-4 h-4 mr-3" />
                       Sign out
                     </a>
@@ -293,17 +344,23 @@ function FuelPortal() {
 
       <div className="flex">
         {/* Left Sidebar */}
-        <aside className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}>
+        <aside
+          className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}
+        >
           <div className="p-4">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               className="w-full flex items-center justify-center p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors mb-4"
             >
-              {sidebarCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+              {sidebarCollapsed ? (
+                <ChevronRight className="w-5 h-5" />
+              ) : (
+                <ChevronLeft className="w-5 h-5" />
+              )}
             </button>
 
             <nav className="space-y-1">
-              {menuItems.map((item) => {
+              {menuItems.map(item => {
                 const Icon = eval(item.icon);
                 const isExpanded = expandedMenus.includes(item.id);
                 const isActive = activeMenuItem === item.id;
@@ -325,13 +382,15 @@ function FuelPortal() {
                         {!sidebarCollapsed && <span className="font-medium">{item.label}</span>}
                       </div>
                       {!sidebarCollapsed && item.subMenus && item.subMenus.length > 0 && (
-                        <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        />
                       )}
                     </button>
 
                     {!sidebarCollapsed && isExpanded && item.subMenus && (
                       <div className="ml-4 mt-1 space-y-1">
-                        {item.subMenus.map((subItem) => {
+                        {item.subMenus.map(subItem => {
                           const SubIcon = eval(subItem.icon);
                           return (
                             <button
@@ -360,7 +419,9 @@ function FuelPortal() {
             <div className="mb-8">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Dashboard</h1>
+                  <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+                    Dashboard
+                  </h1>
                   <p className="text-slate-600 dark:text-slate-400 mt-1">
                     Welcome back, {user.name}! Here's what's happening with your Fuel Management.
                   </p>
@@ -388,18 +449,26 @@ function FuelPortal() {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{metric.title}</p>
-                        <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{metric.value}</p>
+                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                          {metric.title}
+                        </p>
+                        <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">
+                          {metric.value}
+                        </p>
                       </div>
                       <div className={`p-3 rounded-xl ${metric.bgColor}`}>
                         <Icon className={`w-6 h-6 ${metric.iconColor}`} />
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className={`text-sm font-medium ${metric.change.type === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                      <span
+                        className={`text-sm font-medium ${metric.change.type === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
+                      >
                         {metric.change.value}
                       </span>
-                      <span className="text-sm text-slate-500 dark:text-slate-400 ml-1">from last month</span>
+                      <span className="text-sm text-slate-500 dark:text-slate-400 ml-1">
+                        from last month
+                      </span>
                     </div>
                   </motion.div>
                 );
@@ -411,15 +480,28 @@ function FuelPortal() {
               {/* Recent Activity */}
               <div className="lg:col-span-2">
                 <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
-                  <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Recent Activity</h2>
+                  <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+                    Recent Activity
+                  </h2>
                   <div className="space-y-4">
-                    {notifications.map((notification) => (
-                      <div key={notification.id} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${notification.type === 'info' ? 'bg-blue-500' : notification.type === 'success' ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+                    {notifications.map(notification => (
+                      <div
+                        key={notification.id}
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <div
+                          className={`w-2 h-2 rounded-full mt-2 ${notification.type === 'info' ? 'bg-blue-500' : notification.type === 'success' ? 'bg-green-500' : 'bg-yellow-500'}`}
+                        ></div>
                         <div className="flex-1">
-                          <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{notification.title}</p>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">{notification.message}</p>
-                          <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">{notification.time}</p>
+                          <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                            {notification.title}
+                          </p>
+                          <p className="text-sm text-slate-600 dark:text-slate-400">
+                            {notification.message}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
+                            {notification.time}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -430,7 +512,9 @@ function FuelPortal() {
               {/* Quick Actions */}
               <div>
                 <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
-                  <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Quick Actions</h2>
+                  <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+                    Quick Actions
+                  </h2>
                   <div className="space-y-3">
                     <button className="w-full flex items-center space-x-3 p-3 text-left text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
                       <Plus className="w-5 h-5" />
@@ -452,7 +536,9 @@ function FuelPortal() {
         </main>
 
         {/* Right CRM Sidebar */}
-        <aside className={`${rightSidebarCollapsed ? 'w-12' : 'w-80'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-l border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}>
+        <aside
+          className={`${rightSidebarCollapsed ? 'w-12' : 'w-80'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-l border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}
+        >
           {rightSidebarCollapsed ? (
             <div className="p-2">
               <button
@@ -465,7 +551,9 @@ function FuelPortal() {
           ) : (
             <div className="p-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">CRM Tools</h3>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                  CRM Tools
+                </h3>
                 <button
                   onClick={toggleRightSidebar}
                   className="p-1 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
@@ -476,7 +564,7 @@ function FuelPortal() {
 
               {/* CRM Tabs */}
               <div className="grid grid-cols-2 gap-2 mb-4">
-                {crmTabs.map((tab) => {
+                {crmTabs.map(tab => {
                   const Icon = tab.icon;
                   return (
                     <button
@@ -496,7 +584,9 @@ function FuelPortal() {
                 {activeCrmTab === 'chat' && (
                   <div className="space-y-3">
                     <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                      <p className="text-sm text-slate-600 dark:text-slate-400">Recent conversations</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">
+                        Recent conversations
+                      </p>
                     </div>
                   </div>
                 )}
