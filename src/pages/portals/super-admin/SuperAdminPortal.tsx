@@ -137,9 +137,9 @@ function SuperAdminPortal() {
       change: '-2',
       changeType: 'decrease',
       icon: AlertTriangle,
-      color: 'text-amber-600',
-      bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-200',
+      color: 'text-amber-600 dark:text-amber-400',
+      bgColor: 'bg-amber-50 dark:bg-amber-900/20',
+      borderColor: 'border-amber-200 dark:border-amber-800',
     },
   ];
 
@@ -1173,7 +1173,7 @@ function SuperAdminPortal() {
       case 'active':
         return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800';
       case 'inactive':
-        return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
+        return 'text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-slate-700';
       case 'maintenance':
         return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800';
       case 'error':
@@ -1996,18 +1996,20 @@ function SuperAdminPortal() {
           </div>
 
           {/* Compact MCP Agents Connection Status */}
-          <div className="bg-gradient-to-r from-blue-50/80 to-indigo-50/80 border border-blue-200/50 rounded-lg px-3 py-2 shadow-sm">
+          <div className="bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-blue-900/80 dark:to-indigo-900/80 border border-blue-200/50 dark:border-blue-700/50 rounded-lg px-3 py-2 shadow-sm">
             <div className="flex items-center space-x-2">
-              <div className="h-2 w-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <span className="text-xs font-medium text-blue-700">Connecting to MCP agents...</span>
+              <div className="h-2 w-2 bg-blue-400 dark:bg-blue-300 rounded-full animate-pulse"></div>
+              <span className="text-xs font-medium text-blue-700 dark:text-blue-300">
+                Connecting to MCP agents...
+              </span>
               <div className="flex space-x-1 ml-auto">
-                <div className="h-1.5 w-1.5 bg-blue-400 rounded-full animate-bounce"></div>
+                <div className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"></div>
                 <div
-                  className="h-1.5 w-1.5 bg-blue-400 rounded-full animate-bounce"
+                  className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"
                   style={{ animationDelay: '0.1s' }}
                 ></div>
                 <div
-                  className="h-1.5 w-1.5 bg-blue-400 rounded-full animate-bounce"
+                  className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"
                   style={{ animationDelay: '0.2s' }}
                 ></div>
               </div>
@@ -2050,7 +2052,7 @@ function SuperAdminPortal() {
           </div>
 
           {/* Enhanced Portal Command Center */}
-          <div className="bg-gradient-to-br from-white/90 via-blue-50/50 to-indigo-50/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-white/90 via-blue-50/50 to-indigo-50/30 dark:from-slate-800/90 dark:via-slate-700/50 dark:to-slate-600/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 opacity-5">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400 via-purple-400 to-indigo-400"></div>
@@ -2104,8 +2106,8 @@ function SuperAdminPortal() {
                       whileTap={{ scale: 0.98 }}
                       className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
                         isActive
-                          ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl shadow-blue-100/50'
-                          : 'border-gray-200 dark:border-slate-700/50bg-white/80 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-50/30 backdrop-blur-sm'
+                          ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/50 dark:to-indigo-900/50 shadow-xl shadow-blue-100/50 dark:shadow-blue-900/50'
+                          : 'border-gray-200 dark:border-slate-700/50 bg-white/80 dark:bg-slate-800/80 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-50/30 dark:hover:shadow-blue-900/30 backdrop-blur-sm'
                       }`}
                     >
                       {/* Active Indicator */}
@@ -2119,8 +2121,8 @@ function SuperAdminPortal() {
                       <div
                         className={`mb-4 p-4 rounded-xl transition-all duration-300 ${
                           isActive
-                            ? 'bg-gradient-to-br from-blue-100 to-indigo-100 shadow-lg'
-                            : 'bg-gradient-to-br from-gray-100 to-gray-50 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:shadow-md'
+                            ? 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-800/50 dark:to-indigo-800/50 shadow-lg'
+                            : 'bg-gradient-to-br from-gray-100 to-gray-50 dark:from-slate-700/50 dark:to-slate-600/50 group-hover:from-blue-50 group-hover:to-indigo-50 dark:group-hover:from-blue-800/30 dark:group-hover:to-indigo-800/30 group-hover:shadow-md'
                         }`}
                       >
                         <Icon
@@ -2137,8 +2139,8 @@ function SuperAdminPortal() {
                         <h4
                           className={`text-lg font-bold mb-2 transition-colors duration-300 ${
                             isActive
-                              ? 'text-blue-900'
-                              : 'text-gray-900 dark:text-gray-100 group-hover:text-blue-800'
+                              ? 'text-blue-900 dark:text-blue-100'
+                              : 'text-gray-900 dark:text-gray-100 group-hover:text-blue-800 dark:group-hover:text-blue-200'
                           }`}
                         >
                           {item.label}
@@ -2146,8 +2148,8 @@ function SuperAdminPortal() {
                         <p
                           className={`text-sm transition-colors duration-300 ${
                             isActive
-                              ? 'text-blue-700'
-                              : 'text-gray-600 dark:text-gray-300 group-hover:text-blue-600'
+                              ? 'text-blue-700 dark:text-blue-200'
+                              : 'text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-300'
                           }`}
                         >
                           {item.subMenus ? `${item.subMenus.length} sub-modules` : 'Direct access'}
@@ -2354,7 +2356,7 @@ function SuperAdminPortal() {
           </div>
 
           {/* Portal Control Center - Master Controller */}
-          <div className="bg-gradient-to-br from-white/90 via-purple-50/50 to-indigo-50/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-white/90 via-purple-50/50 to-indigo-50/30 dark:from-slate-800/90 dark:via-purple-900/50 dark:to-indigo-900/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 opacity-5">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-blue-400 to-indigo-400"></div>
@@ -2571,7 +2573,7 @@ function SuperAdminPortal() {
               </div>
 
               {/* Enhanced CRM Tabs */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
+              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-r from-white/60 to-white/40 dark:from-slate-700/60 dark:to-slate-600/40 backdrop-blur-sm">
                 <div className="grid grid-cols-2 gap-3">
                   {crmTabs.map((tab, index) => {
                     const Icon = tab.icon;
@@ -3084,7 +3086,7 @@ function SuperAdminPortal() {
                 </div>
 
                 {/* Mobile CRM Tabs */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
+                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-r from-white/60 to-white/40 dark:from-slate-700/60 dark:to-slate-600/40 backdrop-blur-sm">
                   <div className="grid grid-cols-2 gap-3">
                     {crmTabs.map((tab, index) => {
                       const Icon = tab.icon;
