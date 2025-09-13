@@ -31,15 +31,7 @@ import {
   Moon,
   Globe,
   Wifi,
-  Volume2,
-  VolumeX,
-  Maximize2,
-  Minimize2,
   RefreshCw,
-  Download,
-  Upload,
-  Share2,
-  Bookmark,
   History,
   Star,
   Heart,
@@ -74,8 +66,6 @@ function WarehousePortal() {
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['overview']);
   const [activeMenuItem, setActiveMenuItem] = useState('overview');
   const [darkMode, setDarkMode] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
-  const [fullscreen, setFullscreen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
