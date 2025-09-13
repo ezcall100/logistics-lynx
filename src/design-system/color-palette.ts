@@ -287,14 +287,17 @@ export const superAdminColorPalette: SuperAdminColorPalette = {
 // Color utility functions
 export const getColorValue = (color: string, shade: keyof ColorScale = 500): string => {
   const colorPath = color.split('.');
-  let current: Record<string, unknown> = superAdminColorPalette as Record<string, unknown>;
+  let current: Record<string, unknown> = superAdminColorPalette as unknown as Record<
+    string,
+    unknown
+  >;
 
   for (const path of colorPath) {
-    current = current[path];
+    current = (current as Record<string, unknown>)[path] as Record<string, unknown>;
     if (!current) return '#000000';
   }
 
-  return current[shade] || '#000000';
+  return (current as Record<keyof ColorScale, string>)[shade] || '#000000';
 };
 
 export const getGradientValue = (gradient: keyof SuperAdminColorPalette['gradients']): string => {
