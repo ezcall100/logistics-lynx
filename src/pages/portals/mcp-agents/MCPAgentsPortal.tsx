@@ -433,13 +433,13 @@ const MCPAgentsPortal: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'text-green-600 bg-green-50 border-green-200';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800';
       case 'inactive':
         return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
       case 'maintenance':
-        return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800';
       case 'error':
-        return 'text-red-600 bg-red-50 border-red-200';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
       default:
         return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
     }
@@ -624,7 +624,7 @@ const MCPAgentsPortal: React.FC = () => {
                               <div key={subItem.id}>
                                 <button
                                   onClick={() => handleMenuItemClick(subItem.id, subItem.path)}
-                                  className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-100"
+                                  className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100"
                                 >
                                   <SubIcon className={`h-4 w-4 ${subItem.color}`} />
                                   <span>{subItem.label}</span>
@@ -642,7 +642,7 @@ const MCPAgentsPortal: React.FC = () => {
                                         onClick={() =>
                                           handleMenuItemClick(subSubItem.id, subSubItem.path)
                                         }
-                                        className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300"
+                                        className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300"
                                       >
                                         <div className="h-2 w-2 bg-gray-300 rounded-full"></div>
                                         <span>{subSubItem.label}</span>

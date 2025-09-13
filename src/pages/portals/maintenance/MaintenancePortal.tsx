@@ -115,7 +115,7 @@ function MaintenancePortal() {
       changeType: 'increase',
       icon: DollarSign,
       color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200',
     },
     {
@@ -126,7 +126,7 @@ function MaintenancePortal() {
       changeType: 'increase',
       icon: TrendingUp,
       color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200',
     },
     {
@@ -568,7 +568,7 @@ function MaintenancePortal() {
       label: 'Chat',
       icon: MessageCircle,
       color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200',
     },
     {
@@ -584,7 +584,7 @@ function MaintenancePortal() {
       label: 'Tasks',
       icon: CheckSquare,
       color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200',
     },
     {
@@ -608,7 +608,7 @@ function MaintenancePortal() {
       label: 'Video',
       icon: Video,
       color: 'text-red-600',
-      bgColor: 'bg-red-50',
+      bgColor: 'bg-red-50 dark:bg-red-900/20',
       borderColor: 'border-red-200',
     },
     {
@@ -624,7 +624,7 @@ function MaintenancePortal() {
       label: 'Notes',
       icon: FileText,
       color: 'text-gray-600 dark:text-gray-300',
-      bgColor: 'bg-gray-50',
+      bgColor: 'bg-gray-50 dark:bg-slate-700/50',
       borderColor: 'border-gray-200 dark:border-slate-700',
     },
   ];
@@ -763,13 +763,13 @@ function MaintenancePortal() {
   const getStatusColor = (type: string) => {
     switch (type) {
       case 'success':
-        return 'text-emerald-600 bg-emerald-50 border-emerald-200';
+        return 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800';
       case 'warning':
         return 'text-amber-600 bg-amber-50 border-amber-200';
       case 'error':
-        return 'text-red-600 bg-red-50 border-red-200';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
       default:
-        return 'text-blue-600 bg-blue-50 border-blue-200';
+        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
     }
   };
 
@@ -954,23 +954,23 @@ function MaintenancePortal() {
                         </h3>
                       </div>
                       <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <User className="h-4 w-4" />
                           <span>Profile Settings</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Lock className="h-4 w-4" />
                           <span>Security</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Globe className="h-4 w-4" />
                           <span>Language</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Wifi className="h-4 w-4" />
                           <span>Network</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Star className="h-4 w-4" />
                           <span>Preferences</span>
                         </button>
@@ -985,7 +985,7 @@ function MaintenancePortal() {
                 <div className="relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center space-x-3 hover:bg-gray-50 rounded-xl p-2 transition-colors"
+                    className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors"
                   >
                     <img
                       className="h-10 w-10 rounded-xl shadow-md"
@@ -1011,19 +1011,19 @@ function MaintenancePortal() {
                         <p className="text-xs text-gray-500">{user.email}</p>
                       </div>
                       <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <User className="h-4 w-4" />
                           <span>My Profile</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Mail className="h-4 w-4" />
                           <span>Messages</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Heart className="h-4 w-4" />
                           <span>Favorites</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Flag className="h-4 w-4" />
                           <span>Reports</span>
                         </button>
@@ -1093,8 +1093,8 @@ function MaintenancePortal() {
                         }}
                         className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 group ${
                           isActive
-                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
-                            : 'hover:bg-gray-50 hover:shadow-sm'
+                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 shadow-sm'
+                            : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                         }`}
                       >
                         <div className="flex items-center space-x-3">
@@ -1144,8 +1144,8 @@ function MaintenancePortal() {
                                 }}
                                 className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-200 group ${
                                   isSubActive
-                                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 shadow-sm'
-                                    : 'hover:bg-gray-50 hover:shadow-sm'
+                                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 shadow-sm'
+                                    : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                 }`}
                               >
                                 <div className="flex items-center space-x-3">
@@ -1185,8 +1185,8 @@ function MaintenancePortal() {
                                         }
                                         className={`w-full flex items-center space-x-3 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                           isSubSubActive
-                                            ? 'bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 shadow-sm'
-                                            : 'hover:bg-gray-50 hover:shadow-sm'
+                                            ? 'bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-200 shadow-sm'
+                                            : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                         }`}
                                       >
                                         <div className="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
@@ -1329,7 +1329,7 @@ function MaintenancePortal() {
                                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 group ${
                                         isSubActive
                                           ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
-                                          : 'hover:bg-gray-50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                                          : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                                       }`}
                                     >
                                       <div className="flex items-center space-x-2">
@@ -1360,7 +1360,7 @@ function MaintenancePortal() {
                                               className={`w-full flex items-center space-x-2 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                                 isSubSubActive
                                                   ? 'bg-gradient-to-r from-blue-300 to-purple-400 text-white shadow-sm'
-                                                  : 'hover:bg-gray-50 text-gray-500 hover:text-gray-700 dark:text-gray-300'
+                                                  : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-500 hover:text-gray-700 dark:text-gray-300'
                                               }`}
                                             >
                                               <div
@@ -1803,7 +1803,7 @@ function MaintenancePortal() {
                       {emailList.map(email => (
                         <div
                           key={email.id}
-                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -1860,7 +1860,7 @@ function MaintenancePortal() {
                             <span
                               className={`text-xs px-2 py-1 rounded ${
                                 task.priority === 'high'
-                                  ? 'bg-red-100 text-red-600'
+                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600'
                                   : task.priority === 'medium'
                                     ? 'bg-yellow-100 text-yellow-600'
                                     : 'bg-green-100 text-green-600'
@@ -1941,7 +1941,7 @@ function MaintenancePortal() {
                       {smsMessages.map(sms => (
                         <div
                           key={sms.id}
-                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 border-indigo-200' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -1973,7 +1973,7 @@ function MaintenancePortal() {
                     <div className="space-y-2">
                       <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50">
                         <div className="flex items-center space-x-2 mb-2">
-                          <div className="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
+                          <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
                             <Video className="h-4 w-4 text-red-600" />
                           </div>
                           <div>

@@ -117,7 +117,7 @@ function SuperAdminPortal() {
       changeType: 'increase',
       icon: DollarSign,
       color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200',
     },
     {
@@ -128,7 +128,7 @@ function SuperAdminPortal() {
       changeType: 'increase',
       icon: TrendingUp,
       color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200',
     },
     {
@@ -1172,13 +1172,13 @@ function SuperAdminPortal() {
   const getPortalStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'text-green-600 bg-green-50 border-green-200';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800';
       case 'inactive':
         return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
       case 'maintenance':
-        return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800';
       case 'error':
-        return 'text-red-600 bg-red-50 border-red-200';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
       default:
         return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
     }
@@ -1187,13 +1187,13 @@ function SuperAdminPortal() {
   const getPortalTypeColor = (type: string) => {
     switch (type) {
       case 'Administration':
-        return 'text-purple-600 bg-purple-50';
+        return 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20';
       case 'Business':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20';
       case 'Logistics':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
       case 'Operations':
-        return 'text-orange-600 bg-orange-50';
+        return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20';
       case 'AI Management':
         return 'text-indigo-600 bg-indigo-50';
       case 'Analytics':
@@ -1203,11 +1203,11 @@ function SuperAdminPortal() {
       case 'Security':
         return 'text-red-600 bg-red-50';
       case 'Development':
-        return 'text-cyan-600 bg-cyan-50';
+        return 'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20';
       case 'Technical':
         return 'text-gray-600 dark:text-gray-300 bg-gray-50';
       case 'Marketing':
-        return 'text-yellow-600 bg-yellow-50';
+        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
       default:
         return 'text-gray-600 dark:text-gray-300 bg-gray-50';
     }
@@ -1220,7 +1220,7 @@ function SuperAdminPortal() {
       label: 'Chat',
       icon: MessageCircle,
       color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200',
     },
     {
@@ -1236,7 +1236,7 @@ function SuperAdminPortal() {
       label: 'Tasks',
       icon: CheckSquare,
       color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200',
     },
     {
@@ -1260,7 +1260,7 @@ function SuperAdminPortal() {
       label: 'Video',
       icon: Video,
       color: 'text-red-600',
-      bgColor: 'bg-red-50',
+      bgColor: 'bg-red-50 dark:bg-red-900/20',
       borderColor: 'border-red-200',
     },
     {
@@ -1276,7 +1276,7 @@ function SuperAdminPortal() {
       label: 'Notes',
       icon: FileText,
       color: 'text-gray-600 dark:text-gray-300',
-      bgColor: 'bg-gray-50',
+      bgColor: 'bg-gray-50 dark:bg-slate-700/50',
       borderColor: 'border-gray-200 dark:border-slate-700',
     },
   ];
@@ -1415,13 +1415,13 @@ function SuperAdminPortal() {
   const getStatusColor = (type: string) => {
     switch (type) {
       case 'success':
-        return 'text-emerald-600 bg-emerald-50 border-emerald-200';
+        return 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800';
       case 'warning':
         return 'text-amber-600 bg-amber-50 border-amber-200';
       case 'error':
-        return 'text-red-600 bg-red-50 border-red-200';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
       default:
-        return 'text-blue-600 bg-blue-50 border-blue-200';
+        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
     }
   };
 
@@ -1541,23 +1541,23 @@ function SuperAdminPortal() {
                         </h3>
                       </div>
                       <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <User className="h-4 w-4" />
                           <span>Profile Settings</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Lock className="h-4 w-4" />
                           <span>Security</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Globe className="h-4 w-4" />
                           <span>Language</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Wifi className="h-4 w-4" />
                           <span>Network</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Star className="h-4 w-4" />
                           <span>Preferences</span>
                         </button>
@@ -1572,7 +1572,7 @@ function SuperAdminPortal() {
                 <div className="relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center space-x-3 hover:bg-gray-50 rounded-xl p-2 transition-colors"
+                    className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors"
                   >
                     <img
                       className="h-10 w-10 rounded-xl shadow-md"
@@ -1598,19 +1598,19 @@ function SuperAdminPortal() {
                         <p className="text-xs text-gray-500">{user.email}</p>
                       </div>
                       <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <User className="h-4 w-4" />
                           <span>My Profile</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Mail className="h-4 w-4" />
                           <span>Messages</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Heart className="h-4 w-4" />
                           <span>Favorites</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 flex items-center space-x-2">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
                           <Flag className="h-4 w-4" />
                           <span>Reports</span>
                         </button>
@@ -1680,8 +1680,8 @@ function SuperAdminPortal() {
                         }}
                         className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 group ${
                           isActive
-                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
-                            : 'hover:bg-gray-50 hover:shadow-sm'
+                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 shadow-sm'
+                            : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                         }`}
                       >
                         <div className="flex items-center space-x-3">
@@ -1731,8 +1731,8 @@ function SuperAdminPortal() {
                                 }}
                                 className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-200 group ${
                                   isSubActive
-                                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 shadow-sm'
-                                    : 'hover:bg-gray-50 hover:shadow-sm'
+                                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 shadow-sm'
+                                    : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                 }`}
                               >
                                 <div className="flex items-center space-x-3">
@@ -1772,8 +1772,8 @@ function SuperAdminPortal() {
                                         }
                                         className={`w-full flex items-center space-x-3 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                           isSubSubActive
-                                            ? 'bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 shadow-sm'
-                                            : 'hover:bg-gray-50 hover:shadow-sm'
+                                            ? 'bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-200 shadow-sm'
+                                            : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                         }`}
                                       >
                                         <div className="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
@@ -1916,7 +1916,7 @@ function SuperAdminPortal() {
                                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 group ${
                                         isSubActive
                                           ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
-                                          : 'hover:bg-gray-50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                                          : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                                       }`}
                                     >
                                       <div className="flex items-center space-x-2">
@@ -1947,7 +1947,7 @@ function SuperAdminPortal() {
                                               className={`w-full flex items-center space-x-2 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                                 isSubSubActive
                                                   ? 'bg-gradient-to-r from-blue-300 to-purple-400 text-white shadow-sm'
-                                                  : 'hover:bg-gray-50 text-gray-500 hover:text-gray-700 dark:text-gray-300'
+                                                  : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-500 hover:text-gray-700 dark:text-gray-300'
                                               }`}
                                             >
                                               <div
@@ -2215,7 +2215,7 @@ function SuperAdminPortal() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
                   <div className="flex items-center space-x-3">
                     <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-sm font-medium text-green-800">
@@ -2462,7 +2462,7 @@ function SuperAdminPortal() {
                       </button>
                       <button
                         onClick={() => handlePortalAction(portal.id, 'stop')}
-                        className="flex-1 px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium hover:bg-red-200 transition-colors"
+                        className="flex-1 px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 rounded text-xs font-medium hover:bg-red-200 transition-colors"
                       >
                         Stop
                       </button>
@@ -2745,7 +2745,7 @@ function SuperAdminPortal() {
                       {emailList.map(email => (
                         <div
                           key={email.id}
-                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2802,7 +2802,7 @@ function SuperAdminPortal() {
                             <span
                               className={`text-xs px-2 py-1 rounded ${
                                 task.priority === 'high'
-                                  ? 'bg-red-100 text-red-600'
+                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600'
                                   : task.priority === 'medium'
                                     ? 'bg-yellow-100 text-yellow-600'
                                     : 'bg-green-100 text-green-600'
@@ -2883,7 +2883,7 @@ function SuperAdminPortal() {
                       {smsMessages.map(sms => (
                         <div
                           key={sms.id}
-                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 border-indigo-200' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2915,7 +2915,7 @@ function SuperAdminPortal() {
                     <div className="space-y-2">
                       <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50">
                         <div className="flex items-center space-x-2 mb-2">
-                          <div className="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
+                          <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
                             <Video className="h-4 w-4 text-red-600" />
                           </div>
                           <div>
