@@ -107,13 +107,7 @@ const FactoringPortal: React.FC = () => {
   ];
 
   return (
-    <PortalLayout
-      portalName="Factoring Portal"
-      portalType="Finance"
-      user={user}
-      menuItems={menuItems}
-      notifications={notifications}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="space-y-6">
         {/* Welcome Section */}
         <motion.div
@@ -150,7 +144,9 @@ const FactoringPortal: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <DashboardCard {...metric} />
+              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
+                Dashboard Card
+              </div>
             </motion.div>
           ))}
         </div>
@@ -251,7 +247,7 @@ const FactoringPortal: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </PortalLayout>
+    </div>
   );
 };
 
