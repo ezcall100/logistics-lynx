@@ -2528,18 +2528,18 @@ function SuperAdminPortal() {
           </div>
         ) : (
           /* Expanded State - Full CRM Sidebar */
-          <aside className="bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 sticky top-20 h-[calc(100vh-5rem)] z-30 w-72 sm:w-80 transition-all duration-500 ease-out hidden lg:block">
+          <aside className="bg-gradient-to-b from-white/95 via-white/90 to-white/85 dark:from-slate-800/95 dark:via-slate-800/90 dark:to-slate-800/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 dark:from-purple-800/50 dark:via-pink-800/30 dark:to-indigo-800/50 sticky top-20 h-[calc(100vh-5rem)] z-30 w-72 sm:w-80 transition-all duration-500 ease-out hidden lg:block">
             <div className="flex flex-col h-full relative overflow-hidden">
               {/* Animated Background Pattern */}
               <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400"></div>
-                <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 left-8 w-24 h-24 bg-pink-300 rounded-full blur-2xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 rounded-full blur-xl animate-pulse delay-500"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400 dark:from-purple-600 dark:via-pink-600 dark:to-indigo-600"></div>
+                <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 dark:bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 left-8 w-24 h-24 bg-pink-300 dark:bg-pink-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
+                <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 dark:bg-indigo-500 rounded-full blur-xl animate-pulse delay-500"></div>
               </div>
 
               {/* Enhanced CRM Sidebar Header */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
+              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-r from-white/80 to-white/60 dark:from-slate-800/80 dark:to-slate-800/60 backdrop-blur-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="relative">
@@ -2650,7 +2650,7 @@ function SuperAdminPortal() {
               <div className="flex-1 p-4 overflow-y-auto relative">
                 {/* Content Background Pattern */}
                 <div className="absolute inset-0 opacity-3">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20 dark:via-purple-900/20 dark:to-pink-900/20"></div>
                 </div>
 
                 {!rightSidebarCollapsed && activeCrmTab === 'chat' && (
@@ -2660,7 +2660,7 @@ function SuperAdminPortal() {
                     transition={{ duration: 0.3 }}
                     className="space-y-4 relative"
                   >
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 backdrop-blur-sm border border-blue-200/50">
+                    <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-blue-900/20 dark:to-indigo-900/20 backdrop-blur-sm border border-blue-200/50 dark:border-blue-800/50">
                       <h3 className="text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                         Live Chat
                       </h3>
@@ -2683,8 +2683,8 @@ function SuperAdminPortal() {
                           transition={{ delay: index * 0.1 }}
                           className={`group relative p-4 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                             msg.unread
-                              ? 'bg-gradient-to-br from-blue-50/90 to-indigo-50/90 border-blue-200/70 shadow-sm'
-                              : 'bg-gradient-to-br from-white/70 to-gray-50/70 border-gray-200 dark:border-slate-700/50 hover:from-white/80 hover:to-gray-50/80'
+                              ? 'bg-gradient-to-br from-blue-50/90 to-indigo-50/90 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200/70 dark:border-blue-800/70 shadow-sm'
+                              : 'bg-gradient-to-br from-white/70 to-gray-50/70 dark:from-slate-700/70 dark:to-slate-600/70 border-gray-200 dark:border-slate-700/50 hover:from-white/80 hover:to-gray-50/80 dark:hover:from-slate-600/80 dark:hover:to-slate-500/80'
                           }`}
                         >
                           <div className="flex items-center justify-between mb-2">
@@ -2745,7 +2745,7 @@ function SuperAdminPortal() {
                       {emailList.map(email => (
                         <div
                           key={email.id}
-                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 dark:bg-slate-700/50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2780,7 +2780,7 @@ function SuperAdminPortal() {
                       {tasks.map(task => (
                         <div
                           key={task.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
                         >
                           <div className="flex items-center space-x-2 mb-2">
                             <button
@@ -2837,7 +2837,7 @@ function SuperAdminPortal() {
                       {recentCalls.map(call => (
                         <div
                           key={call.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2883,7 +2883,7 @@ function SuperAdminPortal() {
                       {smsMessages.map(sms => (
                         <div
                           key={sms.id}
-                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
+                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 dark:bg-slate-700/50 border-gray-200 dark:border-slate-700'}`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2913,7 +2913,7 @@ function SuperAdminPortal() {
                       </button>
                     </div>
                     <div className="space-y-2">
-                      <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50">
+                      <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50">
                         <div className="flex items-center space-x-2 mb-2">
                           <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
                             <Video className="h-4 w-4 text-red-600" />
@@ -2945,7 +2945,7 @@ function SuperAdminPortal() {
                       {calendarEvents.map(event => (
                         <div
                           key={event.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2990,7 +2990,7 @@ function SuperAdminPortal() {
                       {notes.map(note => (
                         <div
                           key={note.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -3056,10 +3056,10 @@ function SuperAdminPortal() {
               onClick={() => setRightSidebarCollapsed(true)}
             />
             {/* Mobile CRM Sidebar */}
-            <aside className="absolute right-0 top-0 w-80 h-full bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50">
+            <aside className="absolute right-0 top-0 w-80 h-full bg-gradient-to-b from-white/95 via-white/90 to-white/85 dark:from-slate-800/95 dark:via-slate-800/90 dark:to-slate-800/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 dark:from-purple-800/50 dark:via-pink-800/30 dark:to-indigo-800/50">
               <div className="flex flex-col h-full relative overflow-hidden">
                 {/* Mobile CRM Header */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
+                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-r from-white/80 to-white/60 dark:from-slate-800/80 dark:to-slate-800/60 backdrop-blur-sm">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="relative">
