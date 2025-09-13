@@ -2306,18 +2306,42 @@ function SuperAdminPortal() {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    Recent Activity
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    Latest updates and notifications
-                  </p>
+            <div className="bg-gradient-to-br from-white/80 via-emerald-50/30 to-teal-50/20 dark:from-slate-800/80 dark:via-emerald-900/30 dark:to-teal-900/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
+              {/* Animated Background Elements */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400"></div>
+                <div className="absolute top-8 right-8 w-24 h-24 bg-emerald-300 rounded-full blur-2xl animate-pulse"></div>
+                <div className="absolute bottom-8 left-8 w-20 h-20 bg-teal-300 rounded-full blur-xl animate-pulse delay-1000"></div>
+              </div>
+
+              <div className="flex items-center justify-between mb-8 relative z-10">
+                <div className="flex items-center space-x-4">
+                  <div className="relative">
+                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 flex items-center justify-center shadow-xl">
+                      <Activity className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 h-5 w-5 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg"></div>
+                    <div className="absolute inset-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 animate-ping opacity-20"></div>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                      Recent Activity
+                    </h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <div className="flex space-x-1">
+                        <div className="h-2 w-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <div className="h-2 w-2 bg-teal-400 rounded-full animate-pulse delay-100"></div>
+                        <div className="h-2 w-2 bg-cyan-400 rounded-full animate-pulse delay-200"></div>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+                        Latest updates and notifications
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <Activity className="h-4 w-4 text-white" />
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">Live</span>
                 </div>
               </div>
 
@@ -2390,86 +2414,122 @@ function SuperAdminPortal() {
               </div>
 
               {/* Portal Control Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {allPortals.slice(0, 12).map((portal, index) => (
                   <motion.div
                     key={portal.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-lg cursor-pointer ${getPortalStatusColor(portal.status)}`}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 hover:shadow-xl cursor-pointer overflow-hidden ${getPortalStatusColor(portal.status)}`}
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center space-x-2">
-                        <div
-                          className={`h-2 w-2 rounded-full ${
-                            portal.status === 'active'
-                              ? 'bg-green-400'
-                              : portal.status === 'maintenance'
-                                ? 'bg-yellow-400'
-                                : 'bg-red-400'
-                          }`}
-                        ></div>
-                        <span className="font-semibold text-sm">{portal.name}</span>
+                    {/* Animated Background */}
+                    <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-indigo-400 to-blue-400"></div>
+                      <div className="absolute top-2 right-2 w-8 h-8 bg-purple-300 rounded-full blur-lg animate-pulse"></div>
+                    </div>
+
+                    {/* Status Indicator */}
+                    <div className="flex items-center justify-between mb-4 relative z-10">
+                      <div className="flex items-center space-x-3">
+                        <div className="relative">
+                          <div
+                            className={`h-3 w-3 rounded-full ${
+                              portal.status === 'active'
+                                ? 'bg-green-400'
+                                : portal.status === 'maintenance'
+                                  ? 'bg-yellow-400'
+                                  : 'bg-red-400'
+                            }`}
+                          ></div>
+                          <div
+                            className={`absolute inset-0 h-3 w-3 rounded-full animate-ping ${
+                              portal.status === 'active'
+                                ? 'bg-green-400'
+                                : portal.status === 'maintenance'
+                                  ? 'bg-yellow-400'
+                                  : 'bg-red-400'
+                            } opacity-20`}
+                          ></div>
+                        </div>
+                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
+                          {portal.name}
+                        </span>
                       </div>
                       <div className="flex space-x-1">
                         <button
                           onClick={() => handlePortalAction(portal.id, 'restart')}
-                          className="p-1 rounded hover:bg-white/50 dark:hover:bg-slate-600/50 transition-colors"
+                          className="p-2 rounded-lg hover:bg-white/60 dark:hover:bg-slate-600/60 transition-all duration-200 hover:scale-110"
                           title="Restart Portal"
                         >
-                          <RefreshCw className="h-3 w-3" />
+                          <RefreshCw className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                         </button>
                         <button
                           onClick={() => handlePortalAction(portal.id, 'settings')}
-                          className="p-1 rounded hover:bg-white/50 dark:hover:bg-slate-600/50 transition-colors"
+                          className="p-2 rounded-lg hover:bg-white/60 dark:hover:bg-slate-600/60 transition-all duration-200 hover:scale-110"
                           title="Portal Settings"
                         >
-                          <Settings className="h-3 w-3" />
+                          <Settings className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                         </button>
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs">
-                        <span>Type:</span>
+                    {/* Portal Details */}
+                    <div className="space-y-3 relative z-10">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                          Type:
+                        </span>
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${getPortalTypeColor(portal.type)}`}
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${getPortalTypeColor(portal.type)}`}
                         >
                           {portal.type}
                         </span>
                       </div>
-                      <div className="flex justify-between text-xs">
-                        <span>Users:</span>
-                        <span className="font-medium">{portal.users.toLocaleString()}</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                          Users:
+                        </span>
+                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
+                          {portal.users.toLocaleString()}
+                        </span>
                       </div>
-                      <div className="flex justify-between text-xs">
-                        <span>Port:</span>
-                        <span className="font-medium">{portal.port}</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                          Port:
+                        </span>
+                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
+                          {portal.port}
+                        </span>
                       </div>
-                      <div className="flex justify-between text-xs">
-                        <span>Status:</span>
-                        <span className="font-medium capitalize">{portal.status}</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                          Status:
+                        </span>
+                        <span className="font-bold text-sm capitalize text-gray-800 dark:text-gray-100">
+                          {portal.status}
+                        </span>
                       </div>
                     </div>
 
                     {/* Control Actions */}
-                    <div className="mt-3 flex space-x-2">
+                    <div className="mt-4 flex space-x-2 relative z-10">
                       <button
                         onClick={() => handlePortalAction(portal.id, 'start')}
-                        className="flex-1 px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium hover:bg-green-200 transition-colors"
+                        className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg text-xs font-bold hover:from-green-600 hover:to-emerald-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
                       >
                         Start
                       </button>
                       <button
                         onClick={() => handlePortalAction(portal.id, 'stop')}
-                        className="flex-1 px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 rounded text-xs font-medium hover:bg-red-200 transition-colors"
+                        className="flex-1 px-3 py-2 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg text-xs font-bold hover:from-red-600 hover:to-rose-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
                       >
                         Stop
                       </button>
                       <button
                         onClick={() => handlePortalAction(portal.id, 'monitor')}
-                        className="flex-1 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium hover:bg-blue-200 transition-colors"
+                        className="flex-1 px-3 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg text-xs font-bold hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
                       >
                         Monitor
                       </button>
@@ -2540,20 +2600,37 @@ function SuperAdminPortal() {
               </div>
 
               {/* Enhanced CRM Sidebar Header */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-r from-white/80 to-white/60 dark:from-slate-800/80 dark:to-slate-800/60 backdrop-blur-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
+              <div className="relative p-6 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-br from-white/90 via-purple-50/30 to-pink-50/20 dark:from-slate-800/90 dark:via-purple-900/30 dark:to-pink-900/20 backdrop-blur-xl">
+                {/* Animated Background Elements */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400"></div>
+                  <div className="absolute top-4 right-4 w-16 h-16 bg-purple-300 rounded-full blur-2xl animate-pulse"></div>
+                  <div className="absolute bottom-4 left-4 w-12 h-12 bg-pink-300 rounded-full blur-xl animate-pulse delay-1000"></div>
+                </div>
+
+                <div className="flex items-center justify-between relative z-10">
+                  <div className="flex items-center space-x-4">
                     <div className="relative">
-                      <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <MessageCircle className="h-5 w-5 text-white" />
+                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-xl">
+                        <MessageCircle className="h-6 w-6 text-white" />
                       </div>
-                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                      <div className="absolute -top-1 -right-1 h-5 w-5 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg"></div>
+                      <div className="absolute inset-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 animate-ping opacity-20"></div>
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      <h3 className="text-lg font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
                         CRM Command Center
                       </h3>
-                      <p className="text-xs text-gray-500 font-medium">All systems active</p>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <div className="flex space-x-1">
+                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
+                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse delay-100"></div>
+                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse delay-200"></div>
+                        </div>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                          All systems operational
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <button
@@ -2573,8 +2650,8 @@ function SuperAdminPortal() {
               </div>
 
               {/* Enhanced CRM Tabs */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-r from-white/60 to-white/40 dark:from-slate-700/60 dark:to-slate-600/40 backdrop-blur-sm">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="relative p-6 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
+                <div className="grid grid-cols-2 gap-4">
                   {crmTabs.map((tab, index) => {
                     const Icon = tab.icon;
                     const isActive = activeCrmTab === tab.id;
@@ -2585,40 +2662,51 @@ function SuperAdminPortal() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                         onClick={() => setActiveCrmTab(tab.id)}
-                        className={`group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 overflow-hidden ${
+                        className={`group relative flex flex-col items-center space-y-2 px-4 py-4 rounded-2xl transition-all duration-300 overflow-hidden ${
                           isActive
-                            ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                            : 'hover:bg-white/70 dark:hover:bg-slate-600/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
+                            ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-xl transform scale-105`
+                            : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-lg hover:scale-102 backdrop-blur-sm border border-transparent'
                         }`}
                       >
                         {/* Animated Background */}
                         <div
                           className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
                             isActive
-                              ? 'bg-gradient-to-br from-white/80 to-white/60'
-                              : 'bg-gradient-to-br from-white/40 to-white/20 group-hover:from-white/60 group-hover:to-white/40'
+                              ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70'
+                              : 'bg-gradient-to-br from-white/50 to-white/30 dark:from-slate-700/50 dark:to-slate-600/30 group-hover:from-white/70 group-hover:to-white/50 dark:group-hover:from-slate-600/70 dark:group-hover:to-slate-500/50'
                           }`}
                         ></div>
 
                         {/* Icon with enhanced styling */}
                         <div
-                          className={`relative p-2 rounded-xl transition-all duration-300 ${
+                          className={`relative p-3 rounded-xl transition-all duration-300 ${
                             isActive
-                              ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70 shadow-md'
-                              : 'bg-white/50 dark:bg-slate-700/50 group-hover:bg-white/70 dark:group-hover:bg-slate-600/70 group-hover:shadow-sm'
+                              ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-lg'
+                              : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-md'
                           }`}
                         >
                           <Icon
-                            className={`h-4 w-4 transition-all duration-300 ${
+                            className={`h-5 w-5 transition-all duration-300 ${
                               isActive
                                 ? tab.color
-                                : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'
+                                : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
                             }`}
                           />
                           {isActive && (
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
                           )}
                         </div>
+
+                        {/* Label */}
+                        <span
+                          className={`text-xs font-semibold transition-all duration-300 relative z-10 ${
+                            isActive
+                              ? 'text-gray-800 dark:text-gray-100'
+                              : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
+                          }`}
+                        >
+                          {tab.label}
+                        </span>
 
                         {!rightSidebarCollapsed && (
                           <div className="relative flex-1">
