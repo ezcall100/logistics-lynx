@@ -2650,8 +2650,8 @@ function SuperAdminPortal() {
               </div>
 
               {/* Enhanced CRM Tabs */}
-              <div className="relative p-6 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
+                <div className="grid grid-cols-4 gap-2">
                   {crmTabs.map((tab, index) => {
                     const Icon = tab.icon;
                     const isActive = activeCrmTab === tab.id;
@@ -2660,46 +2660,46 @@ function SuperAdminPortal() {
                         key={tab.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.05 }}
                         onClick={() => setActiveCrmTab(tab.id)}
-                        className={`group relative flex flex-col items-center space-y-2 px-4 py-4 rounded-2xl transition-all duration-300 overflow-hidden ${
+                        className={`group relative flex flex-col items-center space-y-1 px-2 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
                           isActive
-                            ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-xl transform scale-105`
-                            : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-lg hover:scale-102 backdrop-blur-sm border border-transparent'
+                            ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
+                            : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
                         }`}
                       >
                         {/* Animated Background */}
                         <div
-                          className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
+                          className={`absolute inset-0 rounded-xl transition-all duration-300 ${
                             isActive
                               ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70'
                               : 'bg-gradient-to-br from-white/50 to-white/30 dark:from-slate-700/50 dark:to-slate-600/30 group-hover:from-white/70 group-hover:to-white/50 dark:group-hover:from-slate-600/70 dark:group-hover:to-slate-500/50'
                           }`}
                         ></div>
 
-                        {/* Icon with enhanced styling */}
+                        {/* Compact Icon */}
                         <div
-                          className={`relative p-3 rounded-xl transition-all duration-300 ${
+                          className={`relative p-2 rounded-lg transition-all duration-300 ${
                             isActive
-                              ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-lg'
-                              : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-md'
+                              ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-md'
+                              : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-sm'
                           }`}
                         >
                           <Icon
-                            className={`h-5 w-5 transition-all duration-300 ${
+                            className={`h-4 w-4 transition-all duration-300 ${
                               isActive
                                 ? tab.color
                                 : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
                             }`}
                           />
                           {isActive && (
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
+                            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
                           )}
                         </div>
 
-                        {/* Label */}
+                        {/* Compact Label */}
                         <span
-                          className={`text-xs font-semibold transition-all duration-300 relative z-10 ${
+                          className={`text-xs font-medium transition-all duration-300 relative z-10 text-center leading-tight ${
                             isActive
                               ? 'text-gray-800 dark:text-gray-100'
                               : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
@@ -2707,23 +2707,6 @@ function SuperAdminPortal() {
                         >
                           {tab.label}
                         </span>
-
-                        {!rightSidebarCollapsed && (
-                          <div className="relative flex-1">
-                            <span
-                              className={`text-xs font-semibold transition-all duration-300 ${
-                                isActive
-                                  ? tab.color
-                                  : 'text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:text-gray-200'
-                              }`}
-                            >
-                              {tab.label}
-                            </span>
-                            {isActive && (
-                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50"></div>
-                            )}
-                          </div>
-                        )}
 
                         {/* Active indicator */}
                         {isActive && (
@@ -3174,8 +3157,8 @@ function SuperAdminPortal() {
                 </div>
 
                 {/* Mobile CRM Tabs */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-r from-white/60 to-white/40 dark:from-slate-700/60 dark:to-slate-600/40 backdrop-blur-sm">
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
+                  <div className="grid grid-cols-4 gap-2">
                     {crmTabs.map((tab, index) => {
                       const Icon = tab.icon;
                       const isActive = activeCrmTab === tab.id;
@@ -3184,57 +3167,53 @@ function SuperAdminPortal() {
                           key={tab.id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ delay: index * 0.05 }}
                           onClick={() => setActiveCrmTab(tab.id)}
-                          className={`group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 overflow-hidden ${
+                          className={`group relative flex flex-col items-center space-y-1 px-2 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
                             isActive
                               ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                              : 'hover:bg-white/70 dark:hover:bg-slate-600/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
+                              : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
                           }`}
                         >
                           {/* Animated Background */}
                           <div
-                            className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
+                            className={`absolute inset-0 rounded-xl transition-all duration-300 ${
                               isActive
-                                ? 'bg-gradient-to-br from-white/80 to-white/60'
-                                : 'bg-gradient-to-br from-white/40 to-white/20 group-hover:from-white/60 group-hover:to-white/40'
+                                ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70'
+                                : 'bg-gradient-to-br from-white/50 to-white/30 dark:from-slate-700/50 dark:to-slate-600/30 group-hover:from-white/70 group-hover:to-white/50 dark:group-hover:from-slate-600/70 dark:group-hover:to-slate-500/50'
                             }`}
                           ></div>
 
-                          {/* Icon with enhanced styling */}
+                          {/* Compact Icon */}
                           <div
-                            className={`relative p-2 rounded-xl transition-all duration-300 ${
+                            className={`relative p-2 rounded-lg transition-all duration-300 ${
                               isActive
-                                ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70 shadow-md'
-                                : 'bg-white/50 dark:bg-slate-700/50 group-hover:bg-white/70 dark:group-hover:bg-slate-600/70 group-hover:shadow-sm'
+                                ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-md'
+                                : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-sm'
                             }`}
                           >
                             <Icon
                               className={`h-4 w-4 transition-all duration-300 ${
                                 isActive
                                   ? tab.color
-                                  : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'
+                                  : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
                               }`}
                             />
                             {isActive && (
-                              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
+                              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
                             )}
                           </div>
 
-                          <div className="relative flex-1">
-                            <span
-                              className={`text-xs font-semibold transition-all duration-300 ${
-                                isActive
-                                  ? tab.color
-                                  : 'text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:text-gray-200'
-                              }`}
-                            >
-                              {tab.label}
-                            </span>
-                            {isActive && (
-                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50"></div>
-                            )}
-                          </div>
+                          {/* Compact Label */}
+                          <span
+                            className={`text-xs font-medium transition-all duration-300 relative z-10 text-center leading-tight ${
+                              isActive
+                                ? 'text-gray-800 dark:text-gray-100'
+                                : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
+                            }`}
+                          >
+                            {tab.label}
+                          </span>
 
                           {/* Active indicator */}
                           {isActive && (
