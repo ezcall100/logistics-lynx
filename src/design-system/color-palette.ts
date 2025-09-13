@@ -287,7 +287,7 @@ export const superAdminColorPalette: SuperAdminColorPalette = {
 // Color utility functions
 export const getColorValue = (color: string, shade: keyof ColorScale = 500): string => {
   const colorPath = color.split('.');
-  let current: Record<string, unknown> = superAdminColorPalette;
+  let current: Record<string, unknown> = superAdminColorPalette as Record<string, unknown>;
 
   for (const path of colorPath) {
     current = current[path];
@@ -298,7 +298,9 @@ export const getColorValue = (color: string, shade: keyof ColorScale = 500): str
 };
 
 export const getGradientValue = (gradient: keyof SuperAdminColorPalette['gradients']): string => {
-  return superAdminColorPalette.gradients[gradient] || superAdminColorPalette.gradients.primary;
+  const gradientValue =
+    superAdminColorPalette.gradients[gradient] || superAdminColorPalette.gradients.primary;
+  return Array.isArray(gradientValue) ? gradientValue[0] : gradientValue;
 };
 
 // Accessibility helpers
@@ -347,7 +349,7 @@ export const getPriorityColor = (priority: 'critical' | 'high' | 'medium' | 'low
 export const getThemeColor = (color: string, isDark: boolean = false): string => {
   if (isDark) {
     // For dark theme, use lighter shades for better contrast
-    const darkMappings: Record<string, keyof ColorScale> = {
+    const darkMappings: Record<string, string> = {
       'primary.500': 'primary.400',
       'secondary.500': 'secondary.400',
       'accent.500': 'accent.400',
@@ -357,7 +359,8 @@ export const getThemeColor = (color: string, isDark: boolean = false): string =>
 
     const mapping = darkMappings[color];
     if (mapping) {
-      return getColorValue(color.replace('.500', ''), mapping.split('.')[1] as keyof ColorScale);
+      const parts = mapping.split('.');
+      return getColorValue(parts[0], parts[1] as unknown as keyof ColorScale);
     }
   }
 

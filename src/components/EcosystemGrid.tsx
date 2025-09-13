@@ -5,7 +5,6 @@ import {
   MapPin,
   BarChart3,
   Users,
-  CreditCard,
   Smartphone,
   Globe,
   Shield,

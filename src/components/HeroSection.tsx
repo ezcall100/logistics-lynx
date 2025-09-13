@@ -12,6 +12,7 @@ import {
   Sparkles,
   Target,
   Clock,
+  Star,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 

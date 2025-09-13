@@ -653,7 +653,6 @@ export function RoleBasedAccessControl() {
                       roles={roles}
                       selectedRole={selectedRole}
                       onSelectRole={setSelectedRole}
-                      isEditing={isEditing}
                     />
                   </motion.div>
                 )}
@@ -703,7 +702,15 @@ export function RoleBasedAccessControl() {
 }
 
 // Roles Tab Component
-function RolesTab({ roles, selectedRole, onSelectRole }: Record<string, unknown>) {
+function RolesTab({
+  roles,
+  selectedRole,
+  onSelectRole,
+}: {
+  roles: UserRole[];
+  selectedRole: string | null;
+  onSelectRole: (roleId: string) => void;
+}) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -810,7 +817,7 @@ function RolesTab({ roles, selectedRole, onSelectRole }: Record<string, unknown>
 }
 
 // Users Tab Component
-function UsersTab({ users, roles }: Record<string, unknown>) {
+function UsersTab({ users, roles }: { users: User[]; roles: UserRole[] }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -955,7 +962,7 @@ function PermissionsTab({ permissions }: { permissions: Permission[] }) {
 }
 
 // Domains Tab Component
-function DomainsTab({ roles }: unknown) {
+function DomainsTab({ roles }: { roles: UserRole[] }) {
   const domainStats = {
     totalDomains: 156,
     customDomains: 89,

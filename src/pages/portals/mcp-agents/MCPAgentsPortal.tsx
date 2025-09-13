@@ -21,6 +21,8 @@ import {
   CheckSquare,
   FileText,
   CheckCircle,
+  Activity,
+  Clock,
   AlertTriangle,
   Server,
   Monitor,
@@ -47,8 +49,6 @@ interface MCPAgent {
 
 const MCPAgentsPortal: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
-  const [fullscreen, setFullscreen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState('dashboard');
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['dashboard']);
   const [searchQuery, setSearchQuery] = useState('');

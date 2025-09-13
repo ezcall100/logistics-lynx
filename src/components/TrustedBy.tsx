@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Star, Users, Award, Globe, TrendingUp, Clock, Shield, Zap } from 'lucide-react';
+import { Star, Award, TrendingUp, Clock, Shield, Zap } from 'lucide-react';
 
 export function TrustedBy() {
   const impactStats = [

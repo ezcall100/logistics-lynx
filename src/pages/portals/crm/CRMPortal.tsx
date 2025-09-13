@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -13,8 +13,6 @@ import {
 // Removed non-existent design system imports
 
 const CrmPortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-
   const metrics = [
     {
       title: 'Active Users',

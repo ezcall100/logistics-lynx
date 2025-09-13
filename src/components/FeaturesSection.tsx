@@ -1,21 +1,5 @@
 import { motion } from 'framer-motion';
-import {
-  Brain,
-  Zap,
-  Shield,
-  BarChart3,
-  Truck,
-  Globe,
-  Clock,
-  Users,
-  TrendingUp,
-  Smartphone,
-  Database,
-  Lock,
-  Target,
-  Lightbulb,
-  Rocket,
-} from 'lucide-react';
+import { Brain, Shield, Globe, TrendingUp, Target, Lightbulb, Rocket } from 'lucide-react';
 
 export function FeaturesSection() {
   const problemSolutions = [

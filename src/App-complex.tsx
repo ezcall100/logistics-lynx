@@ -18,7 +18,7 @@ import { SubdomainManagement } from './pages/admin/SubdomainManagement';
 import { MCPAgentAdmin } from './pages/portals/admin/MCPAgentAdmin';
 import { HumanDeveloperAdmin } from './pages/portals/admin/HumanDeveloperAdmin';
 import { AuthProvider } from './contexts/AuthContext';
-import { ThemeProvider } from './design-system/ThemeProvider';
+
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
@@ -49,7 +49,7 @@ import CustomerPortal from './pages/portals/customer/CustomerPortal';
 import PartnerPortal from './pages/portals/partner/PartnerPortal';
 import DeveloperPortal from './pages/portals/developer/DeveloperPortal';
 import AdminPortal from './pages/portals/admin/AdminPortal';
-import SuperAdminPortal from './pages/portals/super-admin/SuperAdminPortalNew';
+import SuperAdminPortal from './pages/portals/super-admin/SuperAdminPortal';
 import MCPAgentsPortal from './pages/portals/mcp-agents/MCPAgentsPortal';
 import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal';
 import BrokerPortal from './pages/portals/broker/BrokerPortal';

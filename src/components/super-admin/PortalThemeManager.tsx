@@ -1112,7 +1112,15 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
 }
 
 // Design Tab Component
-function DesignTab({ theme, changes, onThemeChange }: Record<string, unknown>) {
+function DesignTab({
+  theme,
+  changes,
+  onThemeChange,
+}: {
+  theme: Record<string, unknown>;
+  changes: Record<string, unknown>;
+  onThemeChange: (path: string, value: string) => void;
+}) {
   const currentTheme = { ...theme, ...changes };
 
   return (
