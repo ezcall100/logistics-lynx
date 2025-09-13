@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -15,31 +15,18 @@ import {
   Wrench,
   Plus,
   Eye,
-  Play,
-  Pause,
-  Square,
-  Activity,
-  Zap,
-  Globe,
   Database,
   Server,
-  Cpu,
-  HardDrive,
   Wifi,
-  Lock,
   CheckCircle,
-  XCircle,
-  Clock,
-  RefreshCw,
+  Play,
+  Pause,
 } from 'lucide-react';
 import { PortalLayout } from '../../../design-system/PortalLayout';
 import { DashboardCard } from '../../../design-system/DashboardCard';
 import { Button } from '../../../design-system/Button';
 
 const SuperAdminPortalNew: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [selectedPortal, setSelectedPortal] = useState<string | null>(null);
-
   const user = {
     name: 'Demo User',
     email: 'demo@transbotai.com',

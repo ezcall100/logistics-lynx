@@ -1,0 +1,276 @@
+{
+  "topbar": [
+    {
+      "label": "Solutions",
+      "path": "/solutions",
+      "children": [
+        {
+          "label": "Broker Portal",
+          "path": "/solutions/broker"
+        },
+        {
+          "label": "Carrier Portal",
+          "path": "/solutions/carrier"
+        },
+        {
+          "label": "Shipper Portal",
+          "path": "/solutions/shipper"
+        },
+        {
+          "label": "Driver Portal",
+          "path": "/solutions/driver"
+        },
+        {
+          "label": "Owner-Operator Portal",
+          "path": "/solutions/owner-operator"
+        },
+        {
+          "label": "CRM Portal",
+          "path": "/solutions/crm"
+        },
+        {
+          "label": "EDI Portal",
+          "path": "/solutions/edi"
+        },
+        {
+          "label": "Financials Portal",
+          "path": "/solutions/financials"
+        },
+        {
+          "label": "Factoring Portal",
+          "path": "/solutions/factoring"
+        },
+        {
+          "label": "Marketplace Portal",
+          "path": "/solutions/marketplace"
+        },
+        {
+          "label": "Analytics Portal",
+          "path": "/solutions/analytics"
+        },
+        {
+          "label": "Autonomous Portal",
+          "path": "/solutions/autonomous"
+        },
+        {
+          "label": "Super Admin Portal",
+          "path": "/solutions/super-admin"
+        },
+        {
+          "label": "TMS Admin Portal",
+          "path": "/solutions/tms-admin"
+        },
+        {
+          "label": "Security & Compliance",
+          "path": "/solutions/security-compliance"
+        }
+      ]
+    },
+    {
+      "label": "Product",
+      "path": "/product",
+      "children": [
+        {
+          "label": "Portal OS",
+          "path": "/product/portal-os"
+        },
+        {
+          "label": "Theme System",
+          "path": "/product/theme-system"
+        },
+        {
+          "label": "Automation",
+          "path": "/product/automation"
+        },
+        {
+          "label": "Security",
+          "path": "/product/security"
+        },
+        {
+          "label": "Permissions",
+          "path": "/product/permissions"
+        },
+        {
+          "label": "Row-Level Security (RLS)",
+          "path": "/product/rls"
+        },
+        {
+          "label": "Integrations",
+          "path": "/product/integrations"
+        },
+        {
+          "label": "APIs",
+          "path": "/product/apis"
+        },
+        {
+          "label": "Mobile",
+          "path": "/product/mobile"
+        },
+        {
+          "label": "Dashboard Customization",
+          "path": "/product/dashboard-customization"
+        },
+        {
+          "label": "Audit Logs",
+          "path": "/product/audit-logs"
+        },
+        {
+          "label": "Scalability",
+          "path": "/product/scalability"
+        }
+      ]
+    },
+    {
+      "label": "Pricing",
+      "path": "/pricing",
+      "children": [
+        {
+          "label": "Starter",
+          "path": "/pricing/starter"
+        },
+        {
+          "label": "Pro",
+          "path": "/pricing/pro"
+        },
+        {
+          "label": "Enterprise",
+          "path": "/pricing/enterprise"
+        },
+        {
+          "label": "Custom",
+          "path": "/pricing/custom"
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "path": "/resources",
+      "children": [
+        {
+          "label": "Blog",
+          "path": "/resources/blog"
+        },
+        {
+          "label": "Case Studies",
+          "path": "/resources/case-studies"
+        },
+        {
+          "label": "Documentation",
+          "path": "/resources/documentation"
+        },
+        {
+          "label": "Webinars",
+          "path": "/resources/webinars"
+        },
+        {
+          "label": "FAQ",
+          "path": "/resources/faq"
+        },
+        {
+          "label": "Support",
+          "path": "/resources/support"
+        },
+        {
+          "label": "API Reference",
+          "path": "/resources/api-reference"
+        },
+        {
+          "label": "Whitepapers",
+          "path": "/resources/whitepapers"
+        },
+        {
+          "label": "Tutorials",
+          "path": "/resources/tutorials"
+        },
+        {
+          "label": "Downloads",
+          "path": "/resources/downloads"
+        },
+        {
+          "label": "Changelog",
+          "path": "/resources/changelog"
+        },
+        {
+          "label": "Release Notes",
+          "path": "/resources/release-notes"
+        },
+        {
+          "label": "SLA & Uptime",
+          "path": "/resources/sla-uptime"
+        },
+        {
+          "label": "Security Bulletins",
+          "path": "/resources/security-bulletins"
+        },
+        {
+          "label": "Roadmap",
+          "path": "/resources/roadmap"
+        },
+        {
+          "label": "Community",
+          "path": "/resources/community"
+        },
+        {
+          "label": "Status",
+          "path": "/resources/status"
+        },
+        {
+          "label": "Brand Assets",
+          "path": "/resources/brand-assets"
+        }
+      ]
+    },
+    {
+      "label": "Company",
+      "path": "/company",
+      "children": [
+        {
+          "label": "About Us",
+          "path": "/company/about"
+        },
+        {
+          "label": "Careers",
+          "path": "/company/careers"
+        },
+        {
+          "label": "Partners",
+          "path": "/company/partners"
+        },
+        {
+          "label": "Newsroom",
+          "path": "/company/newsroom"
+        },
+        {
+          "label": "Contact Us",
+          "path": "/company/contact"
+        },
+        {
+          "label": "Leadership",
+          "path": "/company/leadership"
+        },
+        {
+          "label": "Vision & Mission",
+          "path": "/company/vision-mission"
+        },
+        {
+          "label": "Locations",
+          "path": "/company/locations"
+        }
+      ]
+    }
+  ],
+  "cta": [
+    {
+      "label": "Sign In",
+      "path": "/signin"
+    },
+    {
+      "label": "Sign Up",
+      "path": "/signup"
+    },
+    {
+      "label": "Contact Us",
+      "path": "/company/contact"
+    }
+  ]
+}

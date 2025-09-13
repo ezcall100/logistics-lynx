@@ -6,19 +6,12 @@ import {
   Search,
   Bell,
   Settings,
-  User,
   ChevronDown,
   Home,
   BarChart3,
   Users,
   Shield,
   Cog,
-  DollarSign,
-  Truck,
-  Building,
-  TrendingUp,
-  Link,
-  Wrench,
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 

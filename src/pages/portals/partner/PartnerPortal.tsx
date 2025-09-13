@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Handshake,
   Users,
   DollarSign,
   TrendingUp,
   AlertTriangle,
   Plus,
   Eye,
-  Play,
-  Pause,
-  Activity,
-  Zap,
-  Globe,
   Database,
   Server,
-  Cpu,
-  HardDrive,
   Wifi,
-  Lock,
   CheckCircle,
-  XCircle,
-  Clock,
-  RefreshCw,
+  Settings,
 } from 'lucide-react';
 import { PortalLayout } from '../../../design-system/PortalLayout';
 import { DashboardCard } from '../../../design-system/DashboardCard';
 import { Button } from '../../../design-system/Button';
 
 const PartnerPortal: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-
   const user = {
     name: 'Demo User',
     email: 'demo@transbotai.com',
@@ -62,7 +49,7 @@ const PartnerPortal: React.FC = () => {
     {
       id: 'dashboard',
       label: 'Dashboard',
-      icon: Handshake,
+      icon: HandshakeIcon,
       path: '/dashboard',
     },
     {
