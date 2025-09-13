@@ -23,9 +23,7 @@ import {
   Clock,
   RefreshCw,
 } from 'lucide-react';
-import { PortalLayout } from '../../../design-system/PortalLayout';
-import { DashboardCard } from '../../../design-system/DashboardCard';
-import { Button } from '../../../design-system/Button';
+// Removed non-existent design system imports
 
 const CrmPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
