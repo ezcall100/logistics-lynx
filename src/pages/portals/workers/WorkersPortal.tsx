@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -7,17 +7,29 @@ import {
   AlertTriangle,
   Plus,
   Eye,
+  Play,
+  Pause,
+  Activity,
+  Zap,
+  Globe,
   Database,
   Server,
+  Cpu,
+  HardDrive,
   Wifi,
+  Lock,
   CheckCircle,
-  Settings,
+  XCircle,
+  Clock,
+  RefreshCw,
 } from 'lucide-react';
 import { PortalLayout } from '../../../design-system/PortalLayout';
 import { DashboardCard } from '../../../design-system/DashboardCard';
 import { Button } from '../../../design-system/Button';
 
 const WorkersPortal: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
   const user = {
     name: 'Demo User',
     email: 'demo@transbotai.com',

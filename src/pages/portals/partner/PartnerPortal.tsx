@@ -49,7 +49,7 @@ const PartnerPortal: React.FC = () => {
     {
       id: 'dashboard',
       label: 'Dashboard',
-      icon: HandshakeIcon,
+      icon: Handshake,
       path: '/dashboard',
     },
     {
