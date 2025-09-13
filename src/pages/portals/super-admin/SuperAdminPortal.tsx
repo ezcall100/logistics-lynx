@@ -3260,6 +3260,70 @@ function SuperAdminPortal() {
             </aside>
           </div>
         )}
+
+        {/* AI Chatbot FAB - Trans Bot */}
+        <motion.button
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => {
+            // TODO: Open AI chatbot modal/panel
+            console.log('Trans Bot AI Chatbot opened');
+          }}
+          className="fixed bottom-6 right-6 z-50 group"
+        >
+          <div className="relative">
+            {/* Main FAB Button */}
+            <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center group-hover:from-blue-600 group-hover:via-purple-600 group-hover:to-indigo-700">
+              {/* AI Brain Icon */}
+              <svg
+                className="h-7 w-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                />
+              </svg>
+
+              {/* Pulsing Ring Animation */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 animate-ping opacity-20"></div>
+
+              {/* Status Indicator */}
+              <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg">
+                <div className="absolute inset-0 h-4 w-4 bg-green-400 rounded-full animate-ping opacity-30"></div>
+              </div>
+            </div>
+
+            {/* Tooltip */}
+            <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              Trans Bot AI Assistant
+              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+            </div>
+
+            {/* Floating Particles Effect */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div
+                className="absolute top-2 left-2 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-60"
+                style={{ animationDelay: '0s' }}
+              ></div>
+              <div
+                className="absolute top-4 right-3 w-1 h-1 bg-purple-300 rounded-full animate-ping opacity-60"
+                style={{ animationDelay: '0.5s' }}
+              ></div>
+              <div
+                className="absolute bottom-3 left-4 w-1 h-1 bg-indigo-300 rounded-full animate-ping opacity-60"
+                style={{ animationDelay: '1s' }}
+              ></div>
+            </div>
+          </div>
+        </motion.button>
       </div>
     </div>
   );
