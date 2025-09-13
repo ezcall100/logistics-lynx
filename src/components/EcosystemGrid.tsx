@@ -1,146 +1,308 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ExternalLink, ArrowRight } from 'lucide-react'
-import { portals } from '../data/portals'
+import { motion } from 'framer-motion';
+import {
+  Truck,
+  Package,
+  MapPin,
+  BarChart3,
+  Users,
+  CreditCard,
+  Smartphone,
+  Globe,
+  Shield,
+  Zap,
+  Brain,
+  Target,
+  Clock,
+  TrendingUp,
+  Lightbulb,
+  Database,
+} from 'lucide-react';
 
 export function EcosystemGrid() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const ecosystemJourney = [
+    {
+      phase: 'Intelligence Layer',
+      description: 'The brain of your operations',
+      color: 'blue',
+      items: [
+        {
+          icon: <Brain className="w-5 h-5" />,
+          title: 'AI Decision Engine',
+          desc: '250 autonomous agents making real-time decisions',
+        },
+        {
+          icon: <Target className="w-5 h-5" />,
+          title: 'Predictive Analytics',
+          desc: 'Forecast demand, optimize routes, prevent issues',
+        },
+        {
+          icon: <Lightbulb className="w-5 h-5" />,
+          title: 'Smart Automation',
+          desc: 'Automate complex workflows and processes',
+        },
+      ],
+    },
+    {
+      phase: 'Operations Layer',
+      description: 'Core logistics functions',
+      color: 'green',
+      items: [
+        {
+          icon: <Truck className="w-5 h-5" />,
+          title: 'Fleet Management',
+          desc: 'Real-time tracking, maintenance, driver management',
+        },
+        {
+          icon: <Package className="w-5 h-5" />,
+          title: 'Warehouse Ops',
+          desc: 'Inventory optimization, automated picking, storage',
+        },
+        {
+          icon: <MapPin className="w-5 h-5" />,
+          title: 'Route Optimization',
+          desc: 'Dynamic routing, traffic analysis, fuel efficiency',
+        },
+      ],
+    },
+    {
+      phase: 'Experience Layer',
+      description: 'User interfaces and interactions',
+      color: 'purple',
+      items: [
+        {
+          icon: <Users className="w-5 h-5" />,
+          title: 'Customer Portal',
+          desc: 'Real-time tracking, notifications, self-service',
+        },
+        {
+          icon: <Smartphone className="w-5 h-5" />,
+          title: 'Mobile Platform',
+          desc: 'Access anywhere, driver apps, field operations',
+        },
+        {
+          icon: <BarChart3 className="w-5 h-5" />,
+          title: 'Analytics Dashboard',
+          desc: 'Insights, reporting, performance metrics',
+        },
+      ],
+    },
+    {
+      phase: 'Integration Layer',
+      description: 'Connect with the world',
+      color: 'orange',
+      items: [
+        {
+          icon: <Globe className="w-5 h-5" />,
+          title: 'Global Network',
+          desc: '500+ carriers, shippers, partners worldwide',
+        },
+        {
+          icon: <Database className="w-5 h-5" />,
+          title: 'API Ecosystem',
+          desc: 'Seamless integration with existing systems',
+        },
+        {
+          icon: <Shield className="w-5 h-5" />,
+          title: 'Security & Compliance',
+          desc: 'Enterprise-grade security, SOC 2 certified',
+        },
+      ],
+    },
+  ];
 
-  const categories = ['All', 'Core TMS', 'Business Operations', 'Admin']
-  const filteredPortals = selectedCategory === 'All' 
-    ? portals 
-    : portals.filter(portal => portal.category === selectedCategory)
+  const capabilities = [
+    {
+      title: 'Autonomous Operations',
+      description:
+        'Our AI agents work independently, making decisions and taking actions without human intervention.',
+      icon: <Zap className="w-6 h-6" />,
+      color: 'cyan',
+      examples: ['Route optimization', 'Load matching', 'Demand forecasting'],
+    },
+    {
+      title: 'Predictive Intelligence',
+      description:
+        'Anticipate problems before they happen with advanced machine learning and pattern recognition.',
+      icon: <TrendingUp className="w-6 h-6" />,
+      color: 'purple',
+      examples: ['Maintenance alerts', 'Demand spikes', 'Market changes'],
+    },
+    {
+      title: 'Real-time Adaptation',
+      description:
+        'Instantly adjust to changing conditions, from traffic jams to weather disruptions.',
+      icon: <Clock className="w-6 h-6" />,
+      color: 'green',
+      examples: ['Dynamic routing', 'Capacity adjustment', 'Price optimization'],
+    },
+  ];
 
   return (
-    <section id="ecosystem" className="py-16">
-      <div className="container-pro">
-        {/* Header */}
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            The Unified <span className="text-[#00D4FF]">Ecosystem</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            The{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              TransBot AI
+            </span>{' '}
+            Ecosystem
           </h2>
-          <p className="subhead">
-            25 integrated portals working in perfect harmony. From lead capture to final payment, 
-            every aspect of logistics is unified in one intelligent operating system.
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            A comprehensive platform that transforms every aspect of logistics operations through
+            intelligent automation and seamless integration.
           </p>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-xl font-medium transition-all duration-200 ease-out ${
-                selectedCategory === category
-                  ? 'bg-[#00D4FF] text-[#0A0E27]'
-                  : 'bg-[rgba(255,255,255,0.08)] text-[#EAF2FF]/80 hover:text-[#EAF2FF] hover:bg-[rgba(255,255,255,0.14)] border border-[rgba(255,255,255,0.15)]'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Portal Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {filteredPortals.map((portal, index) => (
+        {/* Ecosystem Journey */}
+        <div className="space-y-12 mb-20">
+          {ecosystemJourney.map((phase, index) => (
             <motion.div
-              key={portal.id}
+              key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="portal-card group cursor-pointer"
+              className="relative"
             >
-              {/* Portal Icon */}
-              <div className="portal-card__icon">
-                {portal.icon}
+              {/* Phase Header */}
+              <div className="flex items-center gap-4 mb-8">
+                <div
+                  className={`w-12 h-12 rounded-full bg-${phase.color}-500 flex items-center justify-center text-white font-bold text-lg`}
+                >
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{phase.phase}</h3>
+                  <p className="text-gray-300">{phase.description}</p>
+                </div>
               </div>
 
-              {/* Portal Info */}
-              <h3 className="portal-card__title">
-                {portal.name}
-              </h3>
-              <p className="portal-card__desc">
-                {portal.description}
-              </p>
-
-              {/* Category Badge */}
-              <div className="flex items-center justify-between mt-4">
-                <span className={`px-2 py-1 rounded-lg text-xs font-medium ${
-                  portal.category === 'Core TMS' ? 'bg-[#00D4FF]/20 text-[#00D4FF]' :
-                  portal.category === 'Business Operations' ? 'bg-[#00FF88]/20 text-[#00FF88]' :
-                  'bg-[#EAF2FF]/20 text-[#EAF2FF]/70'
-                }`}>
-                  {portal.category}
-                </span>
-                <ExternalLink className="w-4 h-4 text-[#EAF2FF]/40 group-hover:text-[#00D4FF] transition-colors" />
-              </div>
-
-              {/* Features Preview */}
-              <div className="space-y-2 mt-4">
-                {portal.features.slice(0, 2).map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-[#00FF88] rounded-full" />
-                    <span className="text-xs text-[#EAF2FF]/60">{feature}</span>
-                  </div>
+              {/* Phase Items */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {phase.items.map((item, itemIndex) => (
+                  <motion.div
+                    key={itemIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: itemIndex * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -5 }}
+                    className="group p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  >
+                    <div
+                      className={`inline-flex p-3 rounded-lg bg-${phase.color}-500/20 text-${phase.color}-400 mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      {item.icon}
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">{item.desc}</p>
+                  </motion.div>
                 ))}
-                {portal.features.length > 2 && (
-                  <div className="text-xs text-[#EAF2FF]/40">
-                    +{portal.features.length - 2} more features
-                  </div>
-                )}
               </div>
+
+              {/* Connection Line */}
+              {index < ecosystemJourney.length - 1 && (
+                <div className="flex justify-center mt-8">
+                  <div className="w-px h-8 bg-gradient-to-b from-cyan-400 to-blue-400"></div>
+                </div>
+              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* CTA Section */}
+        {/* AI Capabilities */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="mb-16"
         >
-          <div className="card max-w-2xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4">
-              Ready to Experience the Full Ecosystem?
-            </h3>
-            <p className="text-[#EAF2FF]/70 mb-6">
-              See how all 25 portals work together in perfect harmony. 
-              From lead capture to final payment, experience the complete freight lifecycle.
+          <h3 className="text-3xl font-bold text-center mb-12">
+            Powered by{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              Advanced AI
+            </span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {capabilities.map((capability, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                className="group p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+              >
+                <div
+                  className={`inline-flex p-3 rounded-lg bg-${capability.color}-500/20 text-${capability.color}-400 mb-4 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  {capability.icon}
+                </div>
+                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                  {capability.title}
+                </h4>
+                <p className="text-gray-300 mb-4 leading-relaxed">{capability.description}</p>
+                <div className="space-y-2">
+                  {capability.examples.map((example, exampleIndex) => (
+                    <div
+                      key={exampleIndex}
+                      className="flex items-center gap-2 text-sm text-gray-400"
+                    >
+                      <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                      <span>{example}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <h3 className="text-2xl font-bold mb-4">Experience the Future of Logistics</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Join thousands of companies already using TransBot AI to revolutionize their logistics
+              operations and achieve unprecedented efficiency.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
-            >
-              <span>Explore All Portals</span>
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300"
+              >
+                Explore the Platform
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white/30 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 transition-all duration-300"
+              >
+                See AI in Action
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
