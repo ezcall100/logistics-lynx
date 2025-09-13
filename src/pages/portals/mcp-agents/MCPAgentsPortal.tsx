@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bot,
-  Activity,
   Settings,
   BarChart3,
   Users,
   Shield,
-  Zap,
-  Play,
   Plus,
   Search,
   RefreshCw,
@@ -19,19 +15,15 @@ import {
   ChevronDown,
   ChevronRight,
   Star,
-  Cpu,
   Database,
   Network,
+  TrendingUp,
+  CheckSquare,
+  FileText,
+  CheckCircle,
+  AlertTriangle,
   Server,
   Monitor,
-  AlertTriangle,
-  CheckCircle,
-  XCircle,
-  Clock,
-  TrendingUp,
-  Globe,
-  Lock,
-  FileText,
   Calendar,
   User,
 } from 'lucide-react';
@@ -42,7 +34,7 @@ interface MCPAgent {
   type: string;
   status: 'active' | 'inactive' | 'maintenance' | 'error';
   performance: number;
-  lastActivity: string;
+  last: string;
   tasksCompleted: number;
   currentTask?: string;
   location: string;
@@ -55,6 +47,8 @@ interface MCPAgent {
 
 const MCPAgentsPortal: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [fullscreen, setFullscreen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState('dashboard');
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['dashboard']);
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,7 +66,7 @@ const MCPAgentsPortal: React.FC = () => {
         | 'maintenance'
         | 'error',
       performance: Math.floor(Math.random() * 40) + 60,
-      lastActivity: `${Math.floor(Math.random() * 60)} minutes ago`,
+      last: `${Math.floor(Math.random() * 60)} minutes ago`,
       tasksCompleted: Math.floor(Math.random() * 1000) + 100,
       currentTask: Math.random() > 0.5 ? `Task ${Math.floor(Math.random() * 100)}` : undefined,
       location: ['US-East', 'US-West', 'EU-Central', 'Asia-Pacific'][i % 4],
@@ -159,7 +153,7 @@ const MCPAgentsPortal: React.FC = () => {
         {
           id: 'agent-types',
           label: 'Agent Types',
-          icon: Cpu,
+          icon: Bot,
           color: 'text-indigo-400',
           path: '/mcp-agents/management/types',
           subSubMenus: [
@@ -293,7 +287,7 @@ const MCPAgentsPortal: React.FC = () => {
         {
           id: 'api-settings',
           label: 'API Settings',
-          icon: Globe,
+          icon: Settings,
           color: 'text-blue-400',
           path: '/mcp-agents/configuration/api',
         },
@@ -302,14 +296,14 @@ const MCPAgentsPortal: React.FC = () => {
     {
       id: 'tasks',
       label: 'Task Management',
-      icon: Zap,
+      icon: CheckSquare,
       color: 'text-yellow-500',
       path: '/mcp-agents/tasks',
       subMenus: [
         {
           id: 'active-tasks',
           label: 'Active Tasks',
-          icon: Play,
+          icon: Activity,
           color: 'text-yellow-400',
           path: '/mcp-agents/tasks/active',
         },
@@ -353,7 +347,7 @@ const MCPAgentsPortal: React.FC = () => {
         {
           id: 'access-control',
           label: 'Access Control',
-          icon: Lock,
+          icon: Shield,
           color: 'text-red-400',
           path: '/mcp-agents/security/access',
         },
@@ -442,21 +436,6 @@ const MCPAgentsPortal: React.FC = () => {
         return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
       default:
         return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'active':
-        return CheckCircle;
-      case 'inactive':
-        return XCircle;
-      case 'maintenance':
-        return Clock;
-      case 'error':
-        return AlertTriangle;
-      default:
-        return XCircle;
     }
   };
 
@@ -731,13 +710,19 @@ const MCPAgentsPortal: React.FC = () => {
                 color: 'green',
                 icon: CheckCircle,
               },
-              { label: 'Tasks Running', value: '1,247', change: '+8%', color: 'blue', icon: Play },
+              {
+                label: 'Tasks Running',
+                value: '1,247',
+                change: '+8%',
+                color: 'blue',
+                icon: Activity,
+              },
               {
                 label: 'System Health',
                 value: '99.9%',
                 change: '+0.1%',
                 color: 'purple',
-                icon: Activity,
+                icon: CheckCircle,
               },
               { label: 'Alerts', value: '3', change: '-2', color: 'yellow', icon: AlertTriangle },
             ].map((stat, index) => {
@@ -822,7 +807,6 @@ const MCPAgentsPortal: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {agents.slice(0, 12).map((agent, index) => {
-                const StatusIcon = getStatusIcon(agent.status);
                 return (
                   <motion.div
                     key={agent.id}
@@ -837,7 +821,7 @@ const MCPAgentsPortal: React.FC = () => {
                         <Bot className="h-5 w-5" />
                         <span className="font-semibold text-sm">{agent.name}</span>
                       </div>
-                      <StatusIcon className="h-4 w-4" />
+                      <CheckCircle className="h-4 w-4" />
                     </div>
 
                     <div className="space-y-2">

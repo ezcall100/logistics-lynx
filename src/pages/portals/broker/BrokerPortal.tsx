@@ -20,9 +20,7 @@ import {
   Zap,
   Shield,
   UserPlus,
-  UserCheck,
   FileText,
-  CreditCard,
   Calendar,
   MessageSquare,
   Phone,
@@ -46,6 +44,15 @@ import {
   Video,
   CheckSquare,
   Square,
+  Download,
+  Upload,
+  Share2,
+  Bookmark,
+  Volume2,
+  VolumeX,
+  Minimize2,
+  Maximize2,
+  CreditCard,
 } from 'lucide-react';
 
 import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
@@ -60,6 +67,8 @@ function BrokerPortal() {
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
   });
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [fullscreen, setFullscreen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -277,7 +286,7 @@ function BrokerPortal() {
         {
           id: 'broker-verification',
           label: 'Verification',
-          icon: UserCheck,
+          icon: CheckCircle,
           path: '/brokers/verification',
           subSubMenus: [
             {
@@ -390,7 +399,7 @@ function BrokerPortal() {
         {
           id: 'payments',
           label: 'Payments',
-          icon: CreditCard,
+          icon: DollarSign,
           path: '/billing/payments',
           subSubMenus: [
             { id: 'payment-methods', label: 'Payment Methods', path: '/billing/payments/methods' },
@@ -488,7 +497,7 @@ function BrokerPortal() {
         {
           id: 'account-settings',
           label: 'Account Settings',
-          icon: UserCheck,
+          icon: Settings,
           path: '/settings/account',
           subSubMenus: [
             {
@@ -771,7 +780,7 @@ function BrokerPortal() {
                 </div>
                 <div className="hidden sm:block">
                   <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                    TransBot AI
+                    TransAI
                   </h1>
                   <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
                     Broker Portal
@@ -779,7 +788,7 @@ function BrokerPortal() {
                 </div>
                 <div className="sm:hidden">
                   <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                    TransBot
+                    Trans
                   </h1>
                 </div>
               </div>
@@ -1219,7 +1228,7 @@ function BrokerPortal() {
                       </div>
                       <div>
                         <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                          TransBot AI
+                          TransAI
                         </h2>
                         <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                           Broker Portal

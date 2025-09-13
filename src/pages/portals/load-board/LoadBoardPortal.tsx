@@ -1,76 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  ClipboardList,
   Users,
   DollarSign,
   TrendingUp,
   AlertTriangle,
-  Plus,
-  Eye,
   Database,
   Server,
   Wifi,
   CheckCircle,
-  Settings,
 } from 'lucide-react';
 // Removed non-existent design system imports
 
 const LoadboardPortal: React.FC = () => {
-  const user = {
-    name: 'Demo User',
-    email: 'demo@transbotai.com',
-    avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-    role: 'Logistics User',
-  };
-
-  const notifications = [
-    {
-      id: '1',
-      title: 'New logistics activity',
-      message: 'Recent activity detected in your portal',
-      time: '5 minutes ago',
-      type: 'info' as const,
-      unread: true,
-    },
-    {
-      id: '2',
-      title: 'System update available',
-      message: 'New features and improvements available',
-      time: '1 hour ago',
-      type: 'success' as const,
-      unread: false,
-    },
-  ];
-
-  const menuItems = [
-    {
-      id: 'dashboard',
-      label: 'Dashboard',
-      icon: ClipboardList,
-      path: '/dashboard',
-    },
-    {
-      id: 'analytics',
-      label: 'Analytics',
-      icon: TrendingUp,
-      path: '/analytics',
-    },
-    {
-      id: 'users',
-      label: 'Users',
-      icon: Users,
-      path: '/users',
-    },
-    {
-      id: 'settings',
-      label: 'Settings',
-      icon: Settings,
-      path: '/settings',
-    },
-  ];
-
   const metrics = [
     {
       title: 'Active Users',
@@ -164,30 +106,18 @@ const LoadboardPortal: React.FC = () => {
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Button
-                variant="primary"
-                icon={Plus}
-                onClick={() => console.log('Create new')}
-                className="h-20 flex-col space-y-2"
-              >
+              <button onClick={() => console.log('Create new')} className="h-20 flex-col space-y-2">
                 <span>Create New</span>
-              </Button>
-              <Button
-                variant="outline"
-                icon={Eye}
+              </button>
+              <button
                 onClick={() => console.log('View reports')}
                 className="h-20 flex-col space-y-2"
               >
                 <span>View Reports</span>
-              </Button>
-              <Button
-                variant="secondary"
-                icon={Settings}
-                onClick={() => console.log('Settings')}
-                className="h-20 flex-col space-y-2"
-              >
-                <span>Settings</span>
-              </Button>
+              </button>
+              <button onClick={() => console.log('')} className="h-20 flex-col space-y-2">
+                <span></span>
+              </button>
             </div>
           </div>
         </motion.div>

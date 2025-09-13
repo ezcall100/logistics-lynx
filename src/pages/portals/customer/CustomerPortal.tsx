@@ -20,7 +20,6 @@ import {
   Zap,
   Shield,
   UserPlus,
-  UserCheck,
   FileText,
   CreditCard,
   Calendar,
@@ -46,6 +45,14 @@ import {
   Video,
   CheckSquare,
   Square,
+  Download,
+  Upload,
+  Share2,
+  Bookmark,
+  Volume2,
+  VolumeX,
+  Minimize2,
+  Maximize2,
 } from 'lucide-react';
 
 import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
@@ -60,6 +67,8 @@ function CustomerPortal() {
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
   });
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [fullscreen, setFullscreen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -293,7 +302,7 @@ function CustomerPortal() {
         {
           id: 'customer-verification',
           label: 'Verification',
-          icon: UserCheck,
+          icon: CheckCircle,
           path: '/customers/verification',
           subSubMenus: [
             {
@@ -504,7 +513,7 @@ function CustomerPortal() {
         {
           id: 'account-settings',
           label: 'Account Settings',
-          icon: UserCheck,
+          icon: Settings,
           path: '/settings/account',
           subSubMenus: [
             {

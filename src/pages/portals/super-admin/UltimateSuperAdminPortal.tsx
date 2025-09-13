@@ -144,13 +144,16 @@ const UltimateSuperAdminPortal: React.FC = () => {
 
   const getModuleColor = (color: string) => {
     const colors = {
-      indigo: 'from-indigo-500/20 to-indigo-600/20 border-indigo-500/30',
-      purple: 'from-purple-500/20 to-purple-600/20 border-purple-500/30',
-      blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/30',
-      emerald: 'from-emerald-500/20 to-emerald-600/20 border-emerald-500/30',
+      indigo:
+        'from-super-admin-primary-500/20 to-super-admin-primary-600/20 border-super-admin-primary-500/30',
+      purple:
+        'from-super-admin-secondary-500/20 to-super-admin-secondary-600/20 border-super-admin-secondary-500/30',
+      blue: 'from-super-admin-primary-400/20 to-super-admin-primary-500/20 border-super-admin-primary-400/30',
+      emerald:
+        'from-super-admin-accent-500/20 to-super-admin-accent-600/20 border-super-admin-accent-500/30',
       red: 'from-red-500/20 to-red-600/20 border-red-500/30',
-      teal: 'from-teal-500/20 to-teal-600/20 border-teal-500/30',
-      cyan: 'from-cyan-500/20 to-cyan-600/20 border-cyan-500/30',
+      teal: 'from-super-admin-accent-400/20 to-super-admin-accent-500/20 border-super-admin-accent-400/30',
+      cyan: 'from-super-admin-primary-300/20 to-super-admin-primary-400/20 border-super-admin-primary-300/30',
     };
     return colors[color as keyof typeof colors] || colors.indigo;
   };
@@ -158,41 +161,41 @@ const UltimateSuperAdminPortal: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'text-green-400 bg-green-400/20';
+        return 'text-super-admin-success-500 bg-super-admin-success-500/20';
       case 'maintenance':
-        return 'text-yellow-400 bg-yellow-400/20';
+        return 'text-super-admin-warning-500 bg-super-admin-warning-500/20';
       case 'development':
-        return 'text-blue-400 bg-blue-400/20';
+        return 'text-super-admin-primary-500 bg-super-admin-primary-500/20';
       default:
-        return 'text-gray-400 bg-gray-400/20';
+        return 'text-super-admin-neutral-500 bg-super-admin-neutral-500/20';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'text-red-500';
+        return 'text-super-admin-error-500';
       case 'high':
-        return 'text-orange-500';
+        return 'text-super-admin-warning-500';
       case 'medium':
-        return 'text-yellow-500';
+        return 'text-super-admin-primary-500';
       case 'low':
-        return 'text-green-500';
+        return 'text-super-admin-success-500';
       default:
-        return 'text-gray-500';
+        return 'text-super-admin-neutral-500';
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'up':
-        return <TrendingUp className="w-4 h-4 text-green-400" />;
+        return <TrendingUp className="w-4 h-4 text-super-admin-success-500" />;
       case 'down':
-        return <TrendingDown className="w-4 h-4 text-red-400" />;
+        return <TrendingDown className="w-4 h-4 text-super-admin-error-500" />;
       case 'stable':
-        return <Activity className="w-4 h-4 text-gray-400" />;
+        return <Activity className="w-4 h-4 text-super-admin-neutral-500" />;
       default:
-        return <Activity className="w-4 h-4 text-gray-400" />;
+        return <Activity className="w-4 h-4 text-super-admin-neutral-500" />;
     }
   };
 

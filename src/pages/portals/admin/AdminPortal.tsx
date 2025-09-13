@@ -1,76 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Shield,
   Users,
   DollarSign,
   TrendingUp,
   AlertTriangle,
-  Plus,
-  Eye,
   Database,
   Server,
   Wifi,
   CheckCircle,
+  Plus,
+  BarChart3,
   Settings,
 } from 'lucide-react';
 // Removed non-existent design system imports
 
 const AdminPortal: React.FC = () => {
-  const user = {
-    name: 'Demo User',
-    email: 'demo@transbotai.com',
-    avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-    role: 'Administration User',
-  };
-
-  const notifications = [
-    {
-      id: '1',
-      title: 'New administration activity',
-      message: 'Recent activity detected in your portal',
-      time: '5 minutes ago',
-      type: 'info' as const,
-      unread: true,
-    },
-    {
-      id: '2',
-      title: 'System update available',
-      message: 'New features and improvements available',
-      time: '1 hour ago',
-      type: 'success' as const,
-      unread: false,
-    },
-  ];
-
-  const menuItems = [
-    {
-      id: 'dashboard',
-      label: 'Dashboard',
-      icon: Shield,
-      path: '/dashboard',
-    },
-    {
-      id: 'analytics',
-      label: 'Analytics',
-      icon: TrendingUp,
-      path: '/analytics',
-    },
-    {
-      id: 'users',
-      label: 'Users',
-      icon: Users,
-      path: '/users',
-    },
-    {
-      id: 'settings',
-      label: 'Settings',
-      icon: Settings,
-      path: '/settings',
-    },
-  ];
-
   const metrics = [
     {
       title: 'Active Users',
@@ -164,30 +109,27 @@ const AdminPortal: React.FC = () => {
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Button
-                variant="primary"
-                icon={Plus}
+              <button
                 onClick={() => console.log('Create new')}
-                className="h-20 flex-col space-y-2"
+                className="h-20 flex-col space-y-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 transition-colors"
               >
+                <Plus className="w-6 h-6" />
                 <span>Create New</span>
-              </Button>
-              <Button
-                variant="outline"
-                icon={Eye}
+              </button>
+              <button
                 onClick={() => console.log('View reports')}
-                className="h-20 flex-col space-y-2"
+                className="h-20 flex-col space-y-2 bg-green-500 hover:bg-green-600 text-white rounded-lg p-4 transition-colors"
               >
+                <BarChart3 className="w-6 h-6" />
                 <span>View Reports</span>
-              </Button>
-              <Button
-                variant="secondary"
-                icon={Settings}
+              </button>
+              <button
                 onClick={() => console.log('Settings')}
-                className="h-20 flex-col space-y-2"
+                className="h-20 flex-col space-y-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg p-4 transition-colors"
               >
+                <Settings className="w-6 h-6" />
                 <span>Settings</span>
-              </Button>
+              </button>
             </div>
           </div>
         </motion.div>
