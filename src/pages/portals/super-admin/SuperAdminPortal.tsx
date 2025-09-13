@@ -25,8 +25,6 @@ import {
   MessageSquare,
   Phone,
   HelpCircle,
-  Sun,
-  Moon,
   Globe,
   Wifi,
   RefreshCw,
@@ -70,7 +68,6 @@ function SuperAdminPortal() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['overview']);
   const [activeMenuItem, setActiveMenuItem] = useState('overview');
-  const [darkMode, setDarkMode] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
@@ -1498,77 +1495,12 @@ function SuperAdminPortal() {
                   <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
 
-                {/* Download Button - Hidden on mobile */}
-                <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Download Reports"
-                >
-                  <Download className="h-5 w-5" />
-                </button>
-
-                {/* Upload Button - Hidden on mobile */}
-                <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Upload Data"
-                >
-                  <Upload className="h-5 w-5" />
-                </button>
-
-                {/* Share Button - Hidden on mobile */}
-                <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Share Dashboard"
-                >
-                  <Share2 className="h-5 w-5" />
-                </button>
-
-                {/* Bookmark Button */}
-                <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Bookmark"
-                >
-                  <Bookmark className="h-5 w-5" />
-                </button>
-
                 {/* History Button */}
                 <button
                   className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
                   title="Recent Activity"
                 >
                   <History className="h-5 w-5" />
-                </button>
-
-                {/* Sound Toggle */}
-                <button
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  className={`p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors ${
-                    soundEnabled ? 'text-gray-600 dark:text-gray-300' : 'text-gray-400'
-                  }`}
-                  title={soundEnabled ? 'Mute Sounds' : 'Enable Sounds'}
-                >
-                  {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
-                </button>
-
-                {/* Dark Mode Toggle */}
-                <button
-                  onClick={() => setDarkMode(!darkMode)}
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title={darkMode ? 'Light Mode' : 'Dark Mode'}
-                >
-                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </button>
-
-                {/* Fullscreen Toggle */}
-                <button
-                  onClick={() => setFullscreen(!fullscreen)}
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title={fullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-                >
-                  {fullscreen ? (
-                    <Minimize2 className="h-5 w-5" />
-                  ) : (
-                    <Maximize2 className="h-5 w-5" />
-                  )}
                 </button>
 
                 {/* Help Button */}
