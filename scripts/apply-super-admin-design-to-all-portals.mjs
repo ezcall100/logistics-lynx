@@ -1,14 +1,354 @@
-import { useState } from 'react';
+import fs from 'fs';
+import path from 'path';
+
+// Portals that already have the full Super Admin design
+const portalsWithFullDesign = [
+  'CustomerPortal.tsx',
+  'DriverPortal.tsx', 
+  'BrokerPortal.tsx',
+  'AnalyticsPortal.tsx',
+  'MCPAgentsPortal.tsx',
+  'SuperAdminPortal.tsx'
+];
+
+// Portal-specific menu configurations
+const portalMenuConfigs = {
+  'FuelPortal.tsx': {
+    name: 'Fuel Management',
+    menus: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        icon: 'Home',
+        subMenus: [
+          { id: 'dashboard', label: 'Dashboard', icon: 'BarChart3' },
+          { id: 'analytics', label: 'Analytics', icon: 'TrendingUp' }
+        ]
+      },
+      {
+        id: 'fuel-management',
+        label: 'Fuel Management',
+        icon: 'Zap',
+        subMenus: [
+          { id: 'fuel-cards', label: 'Fuel Cards', icon: 'CreditCard' },
+          { id: 'fuel-prices', label: 'Fuel Prices', icon: 'DollarSign' },
+          { id: 'fuel-stations', label: 'Fuel Stations', icon: 'MapPin' },
+          { id: 'fuel-reports', label: 'Fuel Reports', icon: 'FileText' }
+        ]
+      },
+      {
+        id: 'vehicles',
+        label: 'Vehicles',
+        icon: 'Truck',
+        subMenus: [
+          { id: 'fleet', label: 'Fleet Management', icon: 'Users' },
+          { id: 'maintenance', label: 'Maintenance', icon: 'Settings' },
+          { id: 'fuel-efficiency', label: 'Fuel Efficiency', icon: 'Activity' }
+        ]
+      },
+      {
+        id: 'accounting',
+        label: 'Accounting',
+        icon: 'DollarSign',
+        subMenus: [
+          { id: 'expenses', label: 'Fuel Expenses', icon: 'CreditCard' },
+          { id: 'invoicing', label: 'Invoicing', icon: 'FileText' },
+          { id: 'reports', label: 'Financial Reports', icon: 'BarChart3' }
+        ]
+      }
+    ]
+  },
+  'WarehousePortal.tsx': {
+    name: 'Warehouse Management',
+    menus: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        icon: 'Home',
+        subMenus: [
+          { id: 'dashboard', label: 'Dashboard', icon: 'BarChart3' },
+          { id: 'analytics', label: 'Analytics', icon: 'TrendingUp' }
+        ]
+      },
+      {
+        id: 'inventory',
+        label: 'Inventory',
+        icon: 'Package',
+        subMenus: [
+          { id: 'stock', label: 'Stock Management', icon: 'Database' },
+          { id: 'receiving', label: 'Receiving', icon: 'Truck' },
+          { id: 'shipping', label: 'Shipping', icon: 'Send' },
+          { id: 'tracking', label: 'Inventory Tracking', icon: 'Activity' }
+        ]
+      },
+      {
+        id: 'operations',
+        label: 'Operations',
+        icon: 'Settings',
+        subMenus: [
+          { id: 'picking', label: 'Order Picking', icon: 'CheckSquare' },
+          { id: 'packing', label: 'Packing', icon: 'Package' },
+          { id: 'quality', label: 'Quality Control', icon: 'CheckCircle' }
+        ]
+      },
+      {
+        id: 'reports',
+        label: 'Reports',
+        icon: 'FileText',
+        subMenus: [
+          { id: 'inventory-reports', label: 'Inventory Reports', icon: 'BarChart3' },
+          { id: 'performance', label: 'Performance', icon: 'TrendingUp' },
+          { id: 'costs', label: 'Cost Analysis', icon: 'DollarSign' }
+        ]
+      }
+    ]
+  },
+  'CRMPortal.tsx': {
+    name: 'CRM Management',
+    menus: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        icon: 'Home',
+        subMenus: [
+          { id: 'dashboard', label: 'Dashboard', icon: 'BarChart3' },
+          { id: 'analytics', label: 'Analytics', icon: 'TrendingUp' }
+        ]
+      },
+      {
+        id: 'customers',
+        label: 'Customers',
+        icon: 'Users',
+        subMenus: [
+          { id: 'customer-list', label: 'Customer List', icon: 'Users' },
+          { id: 'customer-profiles', label: 'Profiles', icon: 'User' },
+          { id: 'customer-history', label: 'History', icon: 'History' }
+        ]
+      },
+      {
+        id: 'sales',
+        label: 'Sales',
+        icon: 'DollarSign',
+        subMenus: [
+          { id: 'leads', label: 'Leads', icon: 'UserPlus' },
+          { id: 'opportunities', label: 'Opportunities', icon: 'TrendingUp' },
+          { id: 'deals', label: 'Deals', icon: 'CheckCircle' }
+        ]
+      },
+      {
+        id: 'marketing',
+        label: 'Marketing',
+        icon: 'Zap',
+        subMenus: [
+          { id: 'campaigns', label: 'Campaigns', icon: 'Zap' },
+          { id: 'email-marketing', label: 'Email Marketing', icon: 'Mail' },
+          { id: 'analytics', label: 'Marketing Analytics', icon: 'BarChart3' }
+        ]
+      }
+    ]
+  },
+  'WorkersPortal.tsx': {
+    name: 'Workers Management',
+    menus: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        icon: 'Home',
+        subMenus: [
+          { id: 'dashboard', label: 'Dashboard', icon: 'BarChart3' },
+          { id: 'analytics', label: 'Analytics', icon: 'TrendingUp' }
+        ]
+      },
+      {
+        id: 'workers',
+        label: 'Workers',
+        icon: 'Users',
+        subMenus: [
+          { id: 'worker-list', label: 'Worker List', icon: 'Users' },
+          { id: 'worker-profiles', label: 'Profiles', icon: 'User' },
+          { id: 'schedules', label: 'Schedules', icon: 'Calendar' }
+        ]
+      },
+      {
+        id: 'payroll',
+        label: 'Payroll',
+        icon: 'DollarSign',
+        subMenus: [
+          { id: 'timesheets', label: 'Timesheets', icon: 'Clock' },
+          { id: 'payments', label: 'Payments', icon: 'CreditCard' },
+          { id: 'reports', label: 'Payroll Reports', icon: 'FileText' }
+        ]
+      },
+      {
+        id: 'hr',
+        label: 'Human Resources',
+        icon: 'Users',
+        subMenus: [
+          { id: 'recruitment', label: 'Recruitment', icon: 'UserPlus' },
+          { id: 'training', label: 'Training', icon: 'BookOpen' },
+          { id: 'performance', label: 'Performance', icon: 'TrendingUp' }
+        ]
+      }
+    ]
+  }
+};
+
+// Get all portal files
+const portalDir = 'src/pages/portals';
+const allPortals = [];
+
+function getAllPortals(dir) {
+  const items = fs.readdirSync(dir);
+  for (const item of items) {
+    const fullPath = path.join(dir, item);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory()) {
+      getAllPortals(fullPath);
+    } else if (item.endsWith('Portal.tsx') && !item.includes('SuperAdmin')) {
+      allPortals.push(fullPath);
+    }
+  }
+}
+
+getAllPortals(portalDir);
+
+console.log('🔍 Found portals:', allPortals.length);
+
+// Read Super Admin template
+const superAdminTemplate = fs.readFileSync('src/pages/portals/super-admin/SuperAdminPortal.tsx', 'utf8');
+
+// Extract the template structure (everything except the menu configuration)
+const templateStart = superAdminTemplate.indexOf('function SuperAdminPortal() {');
+const templateEnd = superAdminTemplate.indexOf('  const menuItems = [');
+const templateBeforeMenus = superAdminTemplate.substring(0, templateEnd);
+const templateAfterMenus = superAdminTemplate.substring(superAdminTemplate.indexOf('  return ('));
+const templateEndFunction = superAdminTemplate.substring(superAdminTemplate.lastIndexOf('}'));
+
+console.log('📋 Processing portals...');
+
+allPortals.forEach(portalPath => {
+  const fileName = path.basename(portalPath);
+  
+  // Skip if already has full design
+  if (portalsWithFullDesign.includes(fileName)) {
+    console.log(`⏭️  Skipping ${fileName} - already has full design`);
+    return;
+  }
+
+  // Get portal name from file path
+  const portalName = fileName.replace('Portal.tsx', '');
+  const portalConfig = portalMenuConfigs[fileName] || {
+    name: `${portalName} Management`,
+    menus: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        icon: 'Home',
+        subMenus: [
+          { id: 'dashboard', label: 'Dashboard', icon: 'BarChart3' },
+          { id: 'analytics', label: 'Analytics', icon: 'TrendingUp' }
+        ]
+      },
+      {
+        id: 'management',
+        label: 'Management',
+        icon: 'Settings',
+        subMenus: [
+          { id: 'settings', label: 'Settings', icon: 'Settings' },
+          { id: 'reports', label: 'Reports', icon: 'FileText' }
+        ]
+      }
+    ]
+  };
+
+  console.log(`🔄 Updating ${fileName}...`);
+
+  // Generate menu items
+  const menuItems = portalConfig.menus.map(menu => {
+    const subMenus = menu.subMenus.map(subMenu => ({
+      id: subMenu.id,
+      label: subMenu.label,
+      icon: subMenu.icon
+    }));
+
+    return {
+      id: menu.id,
+      label: menu.label,
+      icon: menu.icon,
+      subMenus
+    };
+  });
+
+  // Generate the new portal content
+  const newContent = `import { useState } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion } from 'framer-motion';
-import { Users, Search, Bell, Settings, Plus, BarChart3, TrendingUp, Activity, CheckCircle, AlertTriangle, Home, DollarSign, ChevronRight, ChevronLeft, ChevronDown, Zap, Shield, UserPlus, FileText, CreditCard, Calendar, Message Phone, HelpCircle, Globe, Wifi, RefreshCw, History, Star, Heart, Flag, LogOut, User, Mail, Lock, Server, MessageCircle, Send, Video, CheckSquare, Square, Truck, Package, MapPin, Clock, BookOpen } 'lucide-react';
+import {
+  Users,
+  Search,
+  Bell,
+  Settings,
+  Plus,
+  BarChart3,
+  TrendingUp,
+  Activity,
+  CheckCircle,
+  AlertTriangle,
+  Home,
+  DollarSign,
+  ChevronRight,
+  ChevronLeft,
+  ChevronDown,
+  Zap,
+  Shield,
+  UserPlus,
+  FileText,
+  CreditCard,
+  Calendar,
+  MessageSquare,
+  Phone,
+  HelpCircle,
+  Sun,
+  Moon,
+  Globe,
+  Wifi,
+  RefreshCw,
+  History,
+  Star,
+  Heart,
+  Flag,
+  LogOut,
+  User,
+  Mail,
+  Lock,
+  Server,
+  MessageCircle,
+  Send,
+  Video,
+  CheckSquare,
+  Square,
+  Download,
+  Upload,
+  Share2,
+  Bookmark,
+  Volume2,
+  VolumeX,
+  Minimize2,
+  Maximize2,
+  Handshake,
+  Truck,
+  Package,
+  MapPin,
+  Clock,
+  BookOpen
+} from 'lucide-react';
 
-function SecurityAdminPortal() {
+function ${portalName}Portal() {
   const [user] = useState({
     id: 1,
     name: 'Demo User',
     email: 'demo@transbotai.com',
-    role: 'securityadmin',
+    role: '${portalName.toLowerCase()}',
     permissions: ['read', 'write', 'admin'],
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
@@ -26,14 +366,14 @@ function SecurityAdminPortal() {
   const notifications = [
     {
       id: 1,
-      title: 'New securityadmin registered',
+      title: 'New ${portalName.toLowerCase()} registered',
       message: 'Acme Corporation has been added',
       time: '5 minutes ago',
       type: 'info',
     },
     {
       id: 2,
-      title: 'SecurityAdmin status updated',
+      title: '${portalName} status updated',
       message: 'Mark Johnson is now active',
       time: '1 hour ago',
       type: 'success',
@@ -82,42 +422,7 @@ function SecurityAdminPortal() {
     },
   ];
 
-  const menuItems = [
-  {
-    "id": "overview",
-    "label": "Overview",
-    "icon": "Home",
-    "subMenus": [
-      {
-        "id": "dashboard",
-        "label": "Dashboard",
-        "icon": "BarChart3"
-      },
-      {
-        "id": "analytics",
-        "label": "Analytics",
-        "icon": "TrendingUp"
-      }
-    ]
-  },
-  {
-    "id": "management",
-    "label": "Management",
-    "icon": "Settings",
-    "subMenus": [
-      {
-        "id": "settings",
-        "label": "Settings",
-        "icon": "Settings"
-      },
-      {
-        "id": "reports",
-        "label": "Reports",
-        "icon": "FileText"
-      }
-    ]
-  }
-];
+  const menuItems = ${JSON.stringify(menuItems, null, 2)};
 
   const crmTabs = [
     { id: 'chat', label: 'Chat', icon: MessageCircle },
@@ -163,7 +468,7 @@ function SecurityAdminPortal() {
                   <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     TransBot AI
                   </h1>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">SecurityAdmin Management</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">${portalConfig.name}</p>
                 </div>
               </div>
             </div>
@@ -239,7 +544,7 @@ function SecurityAdminPortal() {
 
       <div className="flex">
         {/* Left Sidebar */}
-        <aside className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}>
+        <aside className={\`\${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto\`}>
           <div className="p-4">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -264,14 +569,14 @@ function SecurityAdminPortal() {
                           setActiveMenuItem(item.id);
                         }
                       }}
-                      className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} p-3 text-left rounded-lg transition-colors ${isActive ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
+                      className={\`w-full flex items-center \${sidebarCollapsed ? 'justify-center' : 'justify-between'} p-3 text-left rounded-lg transition-colors \${isActive ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}\`}
                     >
                       <div className="flex items-center space-x-3">
                         <Icon className="w-5 h-5 flex-shrink-0" />
                         {!sidebarCollapsed && <span className="font-medium">{item.label}</span>}
                       </div>
                       {!sidebarCollapsed && item.subMenus && item.subMenus.length > 0 && (
-                        <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={\`w-4 h-4 transition-transform \${isExpanded ? 'rotate-180' : ''}\`} />
                       )}
                     </button>
 
@@ -308,7 +613,7 @@ function SecurityAdminPortal() {
                 <div>
                   <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Dashboard</h1>
                   <p className="text-slate-600 dark:text-slate-400 mt-1">
-                    Welcome back, {user.name}! Here's what's happening with your SecurityAdmin Management.
+                    Welcome back, {user.name}! Here's what's happening with your ${portalConfig.name}.
                   </p>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -337,12 +642,12 @@ function SecurityAdminPortal() {
                         <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{metric.title}</p>
                         <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{metric.value}</p>
                       </div>
-                      <div className={`p-3 rounded-xl ${metric.bgColor}`}>
-                        <Icon className={`w-6 h-6 ${metric.iconColor}`} />
+                      <div className={\`p-3 rounded-xl \${metric.bgColor}\`}>
+                        <Icon className={\`w-6 h-6 \${metric.iconColor}\`} />
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className={`text-sm font-medium ${metric.change.type === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                      <span className={\`text-sm font-medium \${metric.change.type === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}\`}>
                         {metric.change.value}
                       </span>
                       <span className="text-sm text-slate-500 dark:text-slate-400 ml-1">from last month</span>
@@ -361,7 +666,7 @@ function SecurityAdminPortal() {
                   <div className="space-y-4">
                     {notifications.map((notification) => (
                       <div key={notification.id} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${notification.type === 'info' ? 'bg-blue-500' : notification.type === 'success' ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+                        <div className={\`w-2 h-2 rounded-full mt-2 \${notification.type === 'info' ? 'bg-blue-500' : notification.type === 'success' ? 'bg-green-500' : 'bg-yellow-500'}\`}></div>
                         <div className="flex-1">
                           <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{notification.title}</p>
                           <p className="text-sm text-slate-600 dark:text-slate-400">{notification.message}</p>
@@ -398,7 +703,7 @@ function SecurityAdminPortal() {
         </main>
 
         {/* Right CRM Sidebar */}
-        <aside className={`${rightSidebarCollapsed ? 'w-12' : 'w-80'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-l border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto`}>
+        <aside className={\`\${rightSidebarCollapsed ? 'w-12' : 'w-80'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-l border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto\`}>
           {rightSidebarCollapsed ? (
             <div className="p-2">
               <button
@@ -428,7 +733,7 @@ function SecurityAdminPortal() {
                     <button
                       key={tab.id}
                       onClick={() => handleCrmTabClick(tab.id)}
-                      className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${activeCrmTab === tab.id ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
+                      className={\`flex items-center space-x-2 p-2 rounded-lg transition-colors \${activeCrmTab === tab.id ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'}\`}
                     >
                       <Icon className="w-4 h-4" />
                       <span className="text-sm">{tab.label}</span>
@@ -469,4 +774,11 @@ function SecurityAdminPortal() {
   );
 }
 
-export default SecurityAdminPortal;
+export default ${portalName}Portal;`;
+
+  // Write the new content
+  fs.writeFileSync(portalPath, newContent);
+  console.log(`✅ Updated ${fileName}`);
+});
+
+console.log('🎉 All portals updated with Super Admin design!');

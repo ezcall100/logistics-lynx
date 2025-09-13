@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion } from 'framer-motion';
+import EnhancedSuperAdminCommandCenter from './EnhancedSuperAdminCommandCenter';
 import {
   Users,
   Search,
@@ -54,6 +55,7 @@ import {
 } from 'lucide-react';
 
 function SuperAdminPortal() {
+  const [useEnhancedCommandCenter, setUseEnhancedCommandCenter] = useState(true);
   const [user] = useState({
     id: 1,
     name: 'Demo User',
@@ -1424,6 +1426,11 @@ function SuperAdminPortal() {
         return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
     }
   };
+
+  // Use enhanced command center if enabled
+  if (useEnhancedCommandCenter) {
+    return <EnhancedSuperAdminCommandCenter theme="dark" />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">

@@ -99,7 +99,7 @@ import DriverSolutions from './pages/solutions/DriverSolutions';
 
 function App() {
   return (
-    <ThemeProvider>
+    <AuthProvider>
       <AuthProvider>
         <SubdomainRouter>
           <Router>
@@ -1049,7 +1049,7 @@ function App() {
           </Router>
         </SubdomainRouter>
       </AuthProvider>
-    </ThemeProvider>
+    </AuthProvider>
   );
 }
 
