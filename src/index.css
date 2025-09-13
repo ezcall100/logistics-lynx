@@ -7,11 +7,25 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* ===== GLOBAL DARK MODE STYLES ===== */
+body {
+  @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-white transition-colors duration-200;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+/* Ensure proper dark mode for all elements */
+* {
+  @apply border-gray-200 dark:border-gray-700;
+}
+
 /* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
   /* Super Admin Dashboard Color System */
   
-  /* Theme Colors */
+  /* Light Theme Colors */
   --color-background: #ffffff;
   --color-surface: #fafafa;
   --color-surface-elevated: #f5f5f5;
@@ -242,16 +256,13 @@
 
 /* ===== DARK MODE ===== */
 .dark {
-  --color-background: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-elevated: #1a1a1a;
-  --color-border: #262626;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a3a3a3;
-  --color-text-tertiary: #737373;
-  
-  --glass-bg: rgba(0, 0, 0, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-elevated: #334155;
+  --color-border: #475569;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
 }
 
 /* ===== CSS RESET ===== */

@@ -1533,7 +1533,7 @@ function SuperAdminPortal() {
 
                   {/* Settings Dropdown Menu */}
                   {showSettingsMenu && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
+                    <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
                       <div className="px-4 py-2 border-b border-gray-100">
                         <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           Settings
@@ -1589,7 +1589,7 @@ function SuperAdminPortal() {
 
                   {/* User Dropdown Menu */}
                   {showUserMenu && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
+                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
                       <div className="px-4 py-3 border-b border-gray-100">
                         <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           {user.name}
@@ -1950,7 +1950,7 @@ function SuperAdminPortal() {
                                               }`}
                                             >
                                               <div
-                                                className={`h-3 w-3 rounded-full ${isSubSubActive ? 'bg-white' : 'bg-gray-400'}`}
+                                                className={`h-3 w-3 rounded-full ${isSubSubActive ? 'bg-white dark:bg-slate-200' : 'bg-gray-400 dark:bg-gray-600'}`}
                                               ></div>
                                               <span className="text-xs font-medium">
                                                 {subSubMenu.label}
@@ -2111,7 +2111,7 @@ function SuperAdminPortal() {
                       {/* Active Indicator */}
                       {isActive && (
                         <div className="absolute -top-2 -right-2 h-6 w-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
-                          <div className="h-2 w-2 bg-white rounded-full animate-pulse"></div>
+                          <div className="h-2 w-2 bg-white dark:bg-slate-200 rounded-full animate-pulse"></div>
                         </div>
                       )}
 
@@ -2413,14 +2413,14 @@ function SuperAdminPortal() {
                       <div className="flex space-x-1">
                         <button
                           onClick={() => handlePortalAction(portal.id, 'restart')}
-                          className="p-1 rounded hover:bg-white/50 transition-colors"
+                          className="p-1 rounded hover:bg-white/50 dark:hover:bg-slate-600/50 transition-colors"
                           title="Restart Portal"
                         >
                           <RefreshCw className="h-3 w-3" />
                         </button>
                         <button
                           onClick={() => handlePortalAction(portal.id, 'settings')}
-                          className="p-1 rounded hover:bg-white/50 transition-colors"
+                          className="p-1 rounded hover:bg-white/50 dark:hover:bg-slate-600/50 transition-colors"
                           title="Portal Settings"
                         >
                           <Settings className="h-3 w-3" />
@@ -2520,7 +2520,7 @@ function SuperAdminPortal() {
               }}
               onMouseDown={e => e.stopPropagation()}
               onMouseUp={e => e.stopPropagation()}
-              className="group p-2 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto"
+              className="group p-2 sm:p-3 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto"
             >
               <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-200 transition-transform duration-300 group-hover:-translate-x-0.5" />
             </button>
@@ -2586,7 +2586,7 @@ function SuperAdminPortal() {
                         className={`group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 overflow-hidden ${
                           isActive
                             ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                            : 'hover:bg-white/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
+                            : 'hover:bg-white/70 dark:hover:bg-slate-600/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
                         }`}
                       >
                         {/* Animated Background */}
@@ -2602,8 +2602,8 @@ function SuperAdminPortal() {
                         <div
                           className={`relative p-2 rounded-xl transition-all duration-300 ${
                             isActive
-                              ? 'bg-gradient-to-br from-white/90 to-white/70 shadow-md'
-                              : 'bg-white/50 group-hover:bg-white/70 group-hover:shadow-sm'
+                              ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70 shadow-md'
+                              : 'bg-white/50 dark:bg-slate-700/50 group-hover:bg-white/70 dark:group-hover:bg-slate-600/70 group-hover:shadow-sm'
                           }`}
                         >
                           <Icon
@@ -3099,7 +3099,7 @@ function SuperAdminPortal() {
                           className={`group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 overflow-hidden ${
                             isActive
                               ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                              : 'hover:bg-white/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
+                              : 'hover:bg-white/70 dark:hover:bg-slate-600/70 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
                           }`}
                         >
                           {/* Animated Background */}
@@ -3115,8 +3115,8 @@ function SuperAdminPortal() {
                           <div
                             className={`relative p-2 rounded-xl transition-all duration-300 ${
                               isActive
-                                ? 'bg-gradient-to-br from-white/90 to-white/70 shadow-md'
-                                : 'bg-white/50 group-hover:bg-white/70 group-hover:shadow-sm'
+                                ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70 shadow-md'
+                                : 'bg-white/50 dark:bg-slate-700/50 group-hover:bg-white/70 dark:group-hover:bg-slate-600/70 group-hover:shadow-sm'
                             }`}
                           >
                             <Icon
