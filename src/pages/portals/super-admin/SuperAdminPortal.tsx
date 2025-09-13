@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
   Search,
@@ -18,6 +18,12 @@ import {
   ChevronLeft,
   ChevronDown,
   Zap,
+  Send,
+  X,
+  Minimize2,
+  Maximize2,
+  Bot,
+  User,
   Shield,
   FileText,
   CreditCard,
@@ -33,17 +39,14 @@ import {
   Heart,
   Flag,
   LogOut,
-  User,
   Mail,
   Lock,
   MessageCircle,
-  Send,
   Video,
   CheckSquare,
   Square,
   Building2,
   Brain,
-  Bot,
   Cpu,
   FileCheck,
   Truck,
@@ -67,6 +70,29 @@ function SuperAdminPortal() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['overview']);
   const [activeMenuItem, setActiveMenuItem] = useState('overview');
+
+  // Trans Bot AI Chatbot State
+  type ChatMessage = {
+    id: number;
+    type: 'bot' | 'user';
+    message: string;
+    timestamp: Date;
+  };
+
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const [isChatbotMinimized, setIsChatbotMinimized] = useState(false);
+  const [transBotMessages, setTransBotMessages] = useState<ChatMessage[]>([
+    {
+      id: 1,
+      type: 'bot',
+      message:
+        "Hello! I'm Trans Bot, your AI assistant. How can I help you with your Super Admin Portal today?",
+      timestamp: new Date(),
+    },
+  ]);
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
@@ -1160,6 +1186,84 @@ function SuperAdminPortal() {
     setActiveMenuItem(itemId);
     // Here you would typically handle navigation
     console.log(`Navigating to: ${path}`);
+  };
+
+  // Trans Bot AI Chatbot Functions
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [transBotMessages]);
+
+  const handleSendMessage = async () => {
+    if (!currentMessage.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now(),
+      type: 'user',
+      message: currentMessage,
+      timestamp: new Date(),
+    };
+
+    setTransBotMessages(prev => [...prev, userMessage]);
+    setCurrentMessage('');
+    setIsTyping(true);
+
+    // Simulate AI response
+    setTimeout(() => {
+      const botResponse = generateBotResponse(currentMessage);
+      const botMessage: ChatMessage = {
+        id: Date.now() + 1,
+        type: 'bot',
+        message: botResponse,
+        timestamp: new Date(),
+      };
+      setTransBotMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+    }, 1500);
+  };
+
+  const generateBotResponse = (userMessage: string): string => {
+    const message = userMessage.toLowerCase();
+
+    if (message.includes('hello') || message.includes('hi')) {
+      return "Hello! I'm Trans Bot, your AI assistant. I can help you with portal management, system monitoring, user administration, and more. What would you like to know?";
+    }
+
+    if (message.includes('portal') || message.includes('system')) {
+      return 'I can help you manage your portals! You have 43 active portals including Super Admin, MCP Agents, Customer, Broker, and more. Would you like me to show you the status of any specific portal?';
+    }
+
+    if (message.includes('user') || message.includes('admin')) {
+      return 'I can assist with user management! You currently have 12,456 total users across all portals. I can help you create new users, manage permissions, or view user analytics. What would you like to do?';
+    }
+
+    if (message.includes('security') || message.includes('alert')) {
+      return 'Your security score is 98.7% with 7 active alerts. I can help you review security settings, manage alerts, or check system vulnerabilities. Would you like me to show you the security dashboard?';
+    }
+
+    if (message.includes('help') || message.includes('support')) {
+      return "I'm here to help! I can assist with:\n• Portal management and monitoring\n• User administration\n• Security and compliance\n• System analytics\n• Troubleshooting issues\n\nWhat specific area would you like help with?";
+    }
+
+    if (message.includes('analytics') || message.includes('report')) {
+      return 'I can help you with analytics and reporting! You can view real-time metrics, generate custom reports, and analyze system performance. Would you like me to show you the analytics dashboard or help you create a specific report?';
+    }
+
+    return (
+      'I understand you\'re asking about: "' +
+      userMessage +
+      "\". I'm here to help with your Super Admin Portal needs. I can assist with portal management, user administration, security monitoring, analytics, and more. Could you be more specific about what you'd like help with?"
+    );
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   // Portal Control Functions
@@ -3269,8 +3373,8 @@ function SuperAdminPortal() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
-            // TODO: Open AI chatbot modal/panel
-            console.log('Trans Bot AI Chatbot opened');
+            setIsChatbotOpen(true);
+            setIsChatbotMinimized(false);
           }}
           className="fixed bottom-6 right-6 z-50 group"
         >
@@ -3324,6 +3428,167 @@ function SuperAdminPortal() {
             </div>
           </div>
         </motion.button>
+
+        {/* Trans Bot AI Chatbot Interface */}
+        <AnimatePresence>
+          {isChatbotOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className={`fixed bottom-6 right-24 z-50 ${
+                isChatbotMinimized ? 'h-16' : 'h-[600px]'
+              } w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 overflow-hidden backdrop-blur-xl`}
+            >
+              {/* Chatbot Header */}
+              <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-4 text-white relative">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="relative">
+                      <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <Bot className="h-6 w-6" />
+                      </div>
+                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg">Trans Bot</h3>
+                      <p className="text-xs text-blue-100">AI Assistant</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => setIsChatbotMinimized(!isChatbotMinimized)}
+                      className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                    >
+                      {isChatbotMinimized ? (
+                        <Maximize2 className="h-4 w-4" />
+                      ) : (
+                        <Minimize2 className="h-4 w-4" />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => setIsChatbotOpen(false)}
+                      className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {!isChatbotMinimized && (
+                <>
+                  {/* Chat Messages */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-4 h-[480px]">
+                    {transBotMessages.map(message => (
+                      <motion.div
+                        key={message.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div
+                          className={`flex items-start space-x-2 max-w-[80%] ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}
+                        >
+                          <div
+                            className={`h-8 w-8 rounded-full flex items-center justify-center ${
+                              message.type === 'user'
+                                ? 'bg-blue-500'
+                                : 'bg-gradient-to-br from-purple-500 to-indigo-600'
+                            }`}
+                          >
+                            {message.type === 'user' ? (
+                              <User className="h-4 w-4 text-white" />
+                            ) : (
+                              <Bot className="h-4 w-4 text-white" />
+                            )}
+                          </div>
+                          <div
+                            className={`rounded-2xl px-4 py-2 ${
+                              message.type === 'user'
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-gray-100'
+                            }`}
+                          >
+                            <p className="text-sm whitespace-pre-wrap">{message.message}</p>
+                            <p
+                              className={`text-xs mt-1 ${
+                                message.type === 'user'
+                                  ? 'text-blue-100'
+                                  : 'text-gray-500 dark:text-gray-400'
+                              }`}
+                            >
+                              {message.timestamp.toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    {isTyping && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex justify-start"
+                      >
+                        <div className="flex items-start space-x-2">
+                          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                            <Bot className="h-4 w-4 text-white" />
+                          </div>
+                          <div className="bg-gray-100 dark:bg-slate-700 rounded-2xl px-4 py-2">
+                            <div className="flex space-x-1">
+                              <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"></div>
+                              <div
+                                className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"
+                                style={{ animationDelay: '0.1s' }}
+                              ></div>
+                              <div
+                                className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"
+                                style={{ animationDelay: '0.2s' }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+
+                  {/* Message Input */}
+                  <div className="p-4 border-t border-gray-200 dark:border-slate-700">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex-1 relative">
+                        <input
+                          type="text"
+                          value={currentMessage}
+                          onChange={e => setCurrentMessage(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          placeholder="Ask Trans Bot anything..."
+                          className="w-full px-4 py-3 pr-12 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                        />
+                        <button
+                          onClick={handleSendMessage}
+                          disabled={!currentMessage.trim()}
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                        >
+                          <Send className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+                      Press Enter to send • Shift+Enter for new line
+                    </p>
+                  </div>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
