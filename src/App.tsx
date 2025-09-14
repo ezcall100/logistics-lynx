@@ -55,7 +55,6 @@ import PartnerPortal from './pages/portals/partner/PartnerPortal';
 import DeveloperPortal from './pages/portals/developer/DeveloperPortal';
 import AdminPortal from './pages/portals/admin/AdminPortal';
 import SuperAdminPortal from './pages/portals/super-admin/SuperAdminPortal';
-import SuperAdminIndex from './pages/SuperAdminIndex';
 import MCPAgentsPortal from './pages/portals/mcp-agents/MCPAgentsPortal';
 import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal';
 import BrokerPortal from './pages/portals/broker/BrokerPortal';
@@ -362,15 +361,6 @@ function App() {
                   element={
                     <>
                       <AdminPortal />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/portals/super-admin"
-                  element={
-                    <>
-                      <SuperAdminIndex />
                       <Footer />
                     </>
                   }
