@@ -150,8 +150,8 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-                <Route path="/super-admin" element={<SuperAdminIndex />} />
-                <Route path="/super-admin/*" element={<SuperAdminIndex />} />
+                <Route path="/super-admin" element={<SuperAdminPortal />} />
+                <Route path="/super-admin/*" element={<SuperAdminPortal />} />
                 <Route path="/mcp-agents/*" element={<MCPAgentsPortal />} />
                 <Route path="/get-started" element={<GetStartedPage />} />
                 <Route path="/admin/subdomains" element={<SubdomainManagement />} />
@@ -370,7 +370,7 @@ function App() {
                   path="/portals/super-admin"
                   element={
                     <>
-                      <SuperAdminPortal />
+                      <SuperAdminIndex />
                       <Footer />
                     </>
                   }
