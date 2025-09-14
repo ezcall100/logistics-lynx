@@ -4,13 +4,13 @@
  * Runs a single MCP agent with continuous operation
  */
 
-const PlanBot = require('./agents/testing/planbot');
-const CaseBot = require('./agents/testing/casebot');
-const DataBot = require('./agents/testing/databot');
-const FormBot = require('./agents/testing/formbot');
-const TableBot = require('./agents/testing/tablebot');
-const ButtonBot = require('./agents/testing/buttonbot');
-const MenuBot = require('./agents/testing/menubot');
+const PlanBot = require('./agents/testing/planbot.cjs');
+const CaseBot = require('./agents/testing/casebot.cjs');
+const DataBot = require('./agents/testing/databot.cjs');
+const FormBot = require('./agents/testing/formbot.cjs');
+const TableBot = require('./agents/testing/tablebot.cjs');
+const ButtonBot = require('./agents/testing/buttonbot.cjs');
+const MenuBot = require('./agents/testing/menubot.cjs');
 
 class MCPAgentRunner {
   constructor() {

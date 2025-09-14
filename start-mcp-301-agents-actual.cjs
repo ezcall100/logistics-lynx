@@ -21,13 +21,13 @@ const agentConfig = {
   newTestingAgents: 50,
   workingDirectory: path.join(__dirname, 'mcp-server'),
   agentFiles: [
-    'agents/testing/planbot.js',
-    'agents/testing/casebot.js', 
-    'agents/testing/databot.js',
-    'agents/testing/formbot.js',
-    'agents/testing/tablebot.js',
-    'agents/testing/buttonbot.js',
-    'agents/testing/menubot.js'
+    'agents/testing/planbot.cjs',
+    'agents/testing/casebot.cjs', 
+    'agents/testing/databot.cjs',
+    'agents/testing/formbot.cjs',
+    'agents/testing/tablebot.cjs',
+    'agents/testing/buttonbot.cjs',
+    'agents/testing/menubot.cjs'
   ]
 };
 
@@ -74,13 +74,13 @@ function createAgentRunner() {
  * Runs a single MCP agent with continuous operation
  */
 
-const PlanBot = require('./agents/testing/planbot');
-const CaseBot = require('./agents/testing/casebot');
-const DataBot = require('./agents/testing/databot');
-const FormBot = require('./agents/testing/formbot');
-const TableBot = require('./agents/testing/tablebot');
-const ButtonBot = require('./agents/testing/buttonbot');
-const MenuBot = require('./agents/testing/menubot');
+const PlanBot = require('./agents/testing/planbot.cjs');
+const CaseBot = require('./agents/testing/casebot.cjs');
+const DataBot = require('./agents/testing/databot.cjs');
+const FormBot = require('./agents/testing/formbot.cjs');
+const TableBot = require('./agents/testing/tablebot.cjs');
+const ButtonBot = require('./agents/testing/buttonbot.cjs');
+const MenuBot = require('./agents/testing/menubot.cjs');
 
 class MCPAgentRunner {
   constructor() {
@@ -224,7 +224,7 @@ if (require.main === module) {
 module.exports = MCPAgentRunner;
 `;
 
-  const runnerPath = path.join(agentConfig.workingDirectory, 'agent-runner.js');
+  const runnerPath = path.join(agentConfig.workingDirectory, 'agent-runner.cjs');
   fs.writeFileSync(runnerPath, agentRunnerScript);
   console.log('✅ Created agent runner script');
   return runnerPath;

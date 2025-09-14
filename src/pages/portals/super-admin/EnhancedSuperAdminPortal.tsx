@@ -89,7 +89,7 @@ const EnhancedSuperAdminPortal: React.FC = () => {
     databaseQueries: 890000,
     storageUsed: 2.4,
     bandwidth: 15.8,
-    mcpAgents: 250,
+    mcpAgents: 301,
     responseTime: 45,
     errorRate: 0.03,
   });
