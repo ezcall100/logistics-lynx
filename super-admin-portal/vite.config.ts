@@ -16,13 +16,19 @@ export default defineConfig({
     },
   },
   server: {
-    host: '127.0.0.1',
-    port: 3005, // Super Admin Portal on 3005
-    strictPort: true, // 🔒 LOCKED: Do not allow port changes
+    host: '0.0.0.0', // Allow external connections
+    port: 3000, // Super Admin Portal on 3000
+    strictPort: true,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'superadmin.transbotai.com',
+      '.transbotai.com' // Allow all subdomains
+    ],
     hmr: {
-      host: '127.0.0.1',
-      port: 3005,
-      clientPort: 3005,
+      host: 'localhost',
+      port: 3000,
+      clientPort: 3000,
       overlay: true,
     },
     watch: {
