@@ -27,17 +27,21 @@ interface CompanyData {
   id: string;
   name: string;
   domain: string;
+  industry: string;
+  size: string;
   plan: string;
   status: string;
   users: number;
-  revenue: number;
-  growth: number;
-  lastActive: string;
-  features: string[];
-  contact: {
-    email: string;
-    phone: string;
-    address: string;
+  lastUpdated: string;
+  settings: {
+    profile: { completed: boolean; lastUpdated: string };
+    billing: { completed: boolean; lastUpdated: string };
+    users: { completed: boolean; lastUpdated: string };
+    api: { completed: boolean; lastUpdated: string };
+    security: { completed: boolean; lastUpdated: string };
+    notifications: { completed: boolean; lastUpdated: string };
+    compliance: { completed: boolean; lastUpdated: string };
+    analytics: { completed: boolean; lastUpdated: string };
   };
 }
 
@@ -47,7 +51,7 @@ interface CompanySettingsTab {
   icon: React.ComponentType<{ className?: string }>;
   description: string;
   status: 'active' | 'pending' | 'completed';
-  component: React.ComponentType<{ company: CompanyData }>;
+  component: React.ComponentType<{ company: CompanyData | null }>;
 }
 
 const CompanySettingsMain: React.FC = () => {
@@ -314,7 +318,7 @@ const CompanySettingsMain: React.FC = () => {
                       <p className="text-gray-400">{tab.description}</p>
                     </div>
 
-                    <tab.component />
+                    <tab.component company={selectedCompany} />
                   </motion.div>
                 )
             )}
@@ -326,7 +330,7 @@ const CompanySettingsMain: React.FC = () => {
 };
 
 // Placeholder components for each settings section
-const CompanyProfileSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
+const CompanyProfileSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="bg-white/5 border border-white/10 rounded-lg p-6">
@@ -379,7 +383,7 @@ const CompanyProfileSettings: React.FC<{ company: CompanyData }> = ({ company })
   </div>
 );
 
-const CompanyBillingSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
+const CompanyBillingSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Subscription Details</h4>
@@ -408,7 +412,7 @@ const CompanyBillingSettings: React.FC<{ company: CompanyData }> = ({ company })
   </div>
 );
 
-const CompanyUserSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
+const CompanyUserSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">User Management</h4>
@@ -432,7 +436,7 @@ const CompanyUserSettings: React.FC<{ company: CompanyData }> = ({ company }) =>
   </div>
 );
 
-const CompanyAPISettings: React.FC<{ company: CompanyData }> = () => (
+const CompanyAPISettings: React.FC<{ company: CompanyData | null }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">API Configuration</h4>
@@ -455,7 +459,7 @@ const CompanyAPISettings: React.FC<{ company: CompanyData }> = () => (
   </div>
 );
 
-const CompanySecuritySettings: React.FC<{ company: CompanyData }> = () => (
+const CompanySecuritySettings: React.FC<{ company: CompanyData | null }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Security Policies</h4>
@@ -475,7 +479,7 @@ const CompanySecuritySettings: React.FC<{ company: CompanyData }> = () => (
   </div>
 );
 
-const CompanyNotificationSettings: React.FC<{ company: CompanyData }> = () => (
+const CompanyNotificationSettings: React.FC<{ company: CompanyData | null }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Notification Preferences</h4>
@@ -495,7 +499,7 @@ const CompanyNotificationSettings: React.FC<{ company: CompanyData }> = () => (
   </div>
 );
 
-const CompanyComplianceSettings: React.FC<{ company: CompanyData }> = () => (
+const CompanyComplianceSettings: React.FC<{ company: CompanyData | null }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Compliance & Legal</h4>
@@ -516,7 +520,7 @@ const CompanyComplianceSettings: React.FC<{ company: CompanyData }> = () => (
   </div>
 );
 
-const CompanyAnalyticsSettings: React.FC<{ company: CompanyData }> = () => (
+const CompanyAnalyticsSettings: React.FC<{ company: CompanyData | null }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Analytics & Reporting</h4>

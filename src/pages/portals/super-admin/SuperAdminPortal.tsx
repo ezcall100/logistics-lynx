@@ -784,9 +784,9 @@ const SuperAdminPortal: React.FC = () => {
                             >
                                   {item.label}
                                 </span>
-                                {(item as any).badge && (
+                                {(item as { badge?: number }).badge && (
                                   <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                                    {(item as any).badge}
+                                    {(item as { badge?: number }).badge}
                             </span>
                           )}
                         </div>
