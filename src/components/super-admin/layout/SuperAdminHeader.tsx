@@ -1,0 +1,139 @@
+import React from 'react';
+import {
+  Search,
+  Bell,
+  Moon,
+  Sun,
+  Menu,
+  Brain,
+  User as UserIcon,
+  Settings
+} from 'lucide-react';
+
+/**
+ * SuperAdminHeader - Modular Header Component
+ * Created by MCP 301 Agents - Design Logic Refactoring
+ * Timestamp: 2025-09-14T17:28:33.000Z
+ * 
+ * This component provides the header functionality for the Super Admin portal
+ * with proper responsive design and glass-morphism styling.
+ */
+interface SuperAdminHeaderProps {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  notificationCount: number;
+  setActiveTab: (tab: string) => void;
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+}
+
+export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
+  darkMode,
+  toggleDarkMode,
+  searchQuery,
+  setSearchQuery,
+  notificationCount,
+  setActiveTab,
+  mobileMenuOpen,
+  setMobileMenuOpen
+}) => {
+  return (
+    <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
+      <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+              <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            </div>
+            <div className="hidden sm:block">
+              <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                TransBot AI
+              </h1>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
+                Super Admin Portal
+              </p>
+            </div>
+            <div className="sm:hidden">
+              <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                TransBot AI
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-1 sm:space-x-2">
+          {/* Search Bar - Responsive */}
+          <div className="relative hidden md:block">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search companies, users, reports..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
+            />
+          </div>
+          {/* Mobile Search Button */}
+          <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
+            <Search className="h-5 w-5" />
+          </button>
+
+          {/* Essential Icons */}
+          <div className="flex items-center space-x-1">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              title={darkMode ? 'Light Mode' : 'Dark Mode'}
+            >
+              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+
+            {/* Notifications */}
+            <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
+              <Bell className="h-5 w-5" />
+              {notificationCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {notificationCount}
+                </span>
+              )}
+            </button>
+
+            {/* Settings */}
+            <button
+              onClick={() => setActiveTab('company-settings')}
+              className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+              title="Company Settings"
+            >
+              <Settings className="h-5 w-5" />
+            </button>
+
+            {/* User Profile */}
+            <div className="relative">
+              <button
+                onClick={() => setActiveTab('profile')}
+                className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                title="Profile & Account"
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
+                  <UserIcon className="h-4 w-4 text-white" />
+                </div>
+                <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">Super Admin</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default SuperAdminHeader;
