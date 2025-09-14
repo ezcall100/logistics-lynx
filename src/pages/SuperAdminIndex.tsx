@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Users, TrendingUp, Shield, Settings, Search, Bell, 
-  Moon, Sun, Menu, Globe, Brain, BarChart3, 
-  ChevronLeft, ChevronRight, X, User as UserIcon, 
-  MessageCircle, Building, Bot, Activity, Zap, 
-  CheckCircle, Clock, AlertTriangle, Star
+import {
+  Users,
+  TrendingUp,
+  Shield,
+  Settings,
+  Bell,
+  Menu,
+  Brain,
+  BarChart3,
+  User as UserIcon,
+  MessageCircle,
+  Building,
+  Bot,
+  Activity,
+  Zap,
+  CheckCircle,
+  Clock,
+  Star,
 } from 'lucide-react';
 import MCP301AgentsWorking from './portals/super-admin/MCP301AgentsWorking';
 
@@ -34,25 +46,83 @@ const SuperAdminIndex: React.FC = () => {
   // Mock MCP 301 agents data
   useEffect(() => {
     const agents: MCPAgent[] = [
-      { id: '1', name: 'PlanBot', role: 'Strategy Planner', status: 'active', progress: 100, lastActivity: '2 min ago' },
-      { id: '2', name: 'FormBot', role: 'Form Developer', status: 'working', progress: 85, lastActivity: '1 min ago' },
-      { id: '3', name: 'TableBot', role: 'Table Specialist', status: 'working', progress: 90, lastActivity: '30 sec ago' },
-      { id: '4', name: 'UIBot', role: 'UI Designer', status: 'active', progress: 95, lastActivity: '1 min ago' },
-      { id: '5', name: 'SecurityBot', role: 'Security Expert', status: 'working', progress: 80, lastActivity: '45 sec ago' },
-      { id: '6', name: 'PerformanceBot', role: 'Performance Optimizer', status: 'active', progress: 88, lastActivity: '2 min ago' },
-      { id: '7', name: 'TestBot', role: 'Quality Tester', status: 'working', progress: 92, lastActivity: '1 min ago' },
-      { id: '8', name: 'IntegrationBot', role: 'API Integrator', status: 'active', progress: 87, lastActivity: '30 sec ago' }
+      {
+        id: '1',
+        name: 'PlanBot',
+        role: 'Strategy Planner',
+        status: 'active',
+        progress: 100,
+        lastActivity: '2 min ago',
+      },
+      {
+        id: '2',
+        name: 'FormBot',
+        role: 'Form Developer',
+        status: 'working',
+        progress: 85,
+        lastActivity: '1 min ago',
+      },
+      {
+        id: '3',
+        name: 'TableBot',
+        role: 'Table Specialist',
+        status: 'working',
+        progress: 90,
+        lastActivity: '30 sec ago',
+      },
+      {
+        id: '4',
+        name: 'UIBot',
+        role: 'UI Designer',
+        status: 'active',
+        progress: 95,
+        lastActivity: '1 min ago',
+      },
+      {
+        id: '5',
+        name: 'SecurityBot',
+        role: 'Security Expert',
+        status: 'working',
+        progress: 80,
+        lastActivity: '45 sec ago',
+      },
+      {
+        id: '6',
+        name: 'PerformanceBot',
+        role: 'Performance Optimizer',
+        status: 'active',
+        progress: 88,
+        lastActivity: '2 min ago',
+      },
+      {
+        id: '7',
+        name: 'TestBot',
+        role: 'Quality Tester',
+        status: 'working',
+        progress: 92,
+        lastActivity: '1 min ago',
+      },
+      {
+        id: '8',
+        name: 'IntegrationBot',
+        role: 'API Integrator',
+        status: 'active',
+        progress: 87,
+        lastActivity: '30 sec ago',
+      },
     ];
     setMcpAgents(agents);
 
     // Simulate real-time updates
     if (isLiveUpdate) {
       const interval = setInterval(() => {
-        setMcpAgents(prev => prev.map(agent => ({
-          ...agent,
-          progress: Math.min(100, agent.progress + Math.random() * 2),
-          lastActivity: 'Just now'
-        })));
+        setMcpAgents(prev =>
+          prev.map(agent => ({
+            ...agent,
+            progress: Math.min(100, agent.progress + Math.random() * 2),
+            lastActivity: 'Just now',
+          }))
+        );
       }, 5000);
       return () => clearInterval(interval);
     }
@@ -66,24 +136,32 @@ const SuperAdminIndex: React.FC = () => {
     { id: 'analytics', name: 'Analytics', icon: TrendingUp, color: 'yellow' },
     { id: 'settings', name: 'Settings', icon: Settings, color: 'gray' },
     { id: 'mcp-agents', name: 'MCP Agents', icon: Bot, color: 'indigo' },
-    { id: 'communication', name: 'Communication Hub', icon: MessageCircle, color: 'pink' }
+    { id: 'communication', name: 'Communication Hub', icon: MessageCircle, color: 'pink' },
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-400';
-      case 'working': return 'text-blue-400';
-      case 'idle': return 'text-gray-400';
-      default: return 'text-gray-400';
+      case 'active':
+        return 'text-green-400';
+      case 'working':
+        return 'text-blue-400';
+      case 'idle':
+        return 'text-gray-400';
+      default:
+        return 'text-gray-400';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active': return <CheckCircle className="w-4 h-4" />;
-      case 'working': return <Activity className="w-4 h-4" />;
-      case 'idle': return <Clock className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case 'active':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'working':
+        return <Activity className="w-4 h-4" />;
+      case 'idle':
+        return <Clock className="w-4 h-4" />;
+      default:
+        return <Clock className="w-4 h-4" />;
     }
   };
 
@@ -109,10 +187,12 @@ const SuperAdminIndex: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}></div>
+              <div
+                className={`w-2 h-2 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}
+              ></div>
               <span className="text-sm text-gray-400">
                 {isLiveUpdate ? 'Live Updates' : 'Paused'}
               </span>
@@ -142,7 +222,7 @@ const SuperAdminIndex: React.FC = () => {
         >
           <div className="p-4">
             <nav className="space-y-2">
-              {modules.map((module) => (
+              {modules.map(module => (
                 <button
                   key={module.id}
                   onClick={() => setActiveModule(module.id)}
@@ -153,9 +233,7 @@ const SuperAdminIndex: React.FC = () => {
                   }`}
                 >
                   <module.icon className="w-5 h-5 flex-shrink-0" />
-                  {!sidebarCollapsed && (
-                    <span className="font-medium">{module.name}</span>
-                  )}
+                  {!sidebarCollapsed && <span className="font-medium">{module.name}</span>}
                 </button>
               ))}
             </nav>
@@ -239,8 +317,11 @@ const SuperAdminIndex: React.FC = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {mcpAgents.map((agent) => (
-                      <div key={agent.id} className="bg-white/5 border border-white/10 rounded-lg p-4">
+                    {mcpAgents.map(agent => (
+                      <div
+                        key={agent.id}
+                        className="bg-white/5 border border-white/10 rounded-lg p-4"
+                      >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center space-x-2">
                             {getStatusIcon(agent.status)}
@@ -252,12 +333,14 @@ const SuperAdminIndex: React.FC = () => {
                         </div>
                         <p className="text-xs text-gray-400 mb-2">{agent.role}</p>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${agent.progress}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-400 mt-1">{Math.round(agent.progress)}% complete</p>
+                        <p className="text-xs text-gray-400 mt-1">
+                          {Math.round(agent.progress)}% complete
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -268,12 +351,35 @@ const SuperAdminIndex: React.FC = () => {
                   <h3 className="text-xl font-semibold text-white mb-4">Recent Activity</h3>
                   <div className="space-y-3">
                     {[
-                      { action: 'FormBot created new user registration form', time: '2 minutes ago', icon: CheckCircle, color: 'green' },
-                      { action: 'TableBot optimized data table performance', time: '5 minutes ago', icon: Zap, color: 'blue' },
-                      { action: 'SecurityBot implemented new security measures', time: '8 minutes ago', icon: Shield, color: 'red' },
-                      { action: 'UIBot enhanced glass-morphism design', time: '12 minutes ago', icon: Star, color: 'yellow' }
+                      {
+                        action: 'FormBot created new user registration form',
+                        time: '2 minutes ago',
+                        icon: CheckCircle,
+                        color: 'green',
+                      },
+                      {
+                        action: 'TableBot optimized data table performance',
+                        time: '5 minutes ago',
+                        icon: Zap,
+                        color: 'blue',
+                      },
+                      {
+                        action: 'SecurityBot implemented new security measures',
+                        time: '8 minutes ago',
+                        icon: Shield,
+                        color: 'red',
+                      },
+                      {
+                        action: 'UIBot enhanced glass-morphism design',
+                        time: '12 minutes ago',
+                        icon: Star,
+                        color: 'yellow',
+                      },
                     ].map((activity, index) => (
-                      <div key={index} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                      <div
+                        key={index}
+                        className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg"
+                      >
                         <activity.icon className={`w-5 h-5 text-${activity.color}-400`} />
                         <div className="flex-1">
                           <p className="text-sm text-white">{activity.action}</p>

@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Bot, Activity, CheckCircle, Clock, AlertTriangle, 
-  Users, Settings, Shield, BarChart3, MessageCircle,
-  Zap, Star, TrendingUp, Code, Database, Globe,
-  Smartphone, Monitor, Tablet, Eye, Edit, Trash,
-  Plus, Search, Filter, Download, RefreshCw, Play, Pause
+import {
+  Bot,
+  Activity,
+  CheckCircle,
+  Clock,
+  Shield,
+  BarChart3,
+  Zap,
+  Star,
+  TrendingUp,
+  Code,
+  Database,
+  RefreshCw,
+  Play,
+  Pause,
 } from 'lucide-react';
 
 /**
@@ -52,7 +61,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'active',
         lastUpdate: 'Just now',
         filesCreated: 12,
-        linesOfCode: 2847
+        linesOfCode: 2847,
       },
       {
         id: '2',
@@ -63,7 +72,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'working',
         lastUpdate: '30 seconds ago',
         filesCreated: 8,
-        linesOfCode: 1923
+        linesOfCode: 1923,
       },
       {
         id: '3',
@@ -74,7 +83,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'working',
         lastUpdate: '1 minute ago',
         filesCreated: 6,
-        linesOfCode: 1654
+        linesOfCode: 1654,
       },
       {
         id: '4',
@@ -85,7 +94,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'active',
         lastUpdate: '45 seconds ago',
         filesCreated: 15,
-        linesOfCode: 3241
+        linesOfCode: 3241,
       },
       {
         id: '5',
@@ -96,7 +105,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'working',
         lastUpdate: '2 minutes ago',
         filesCreated: 7,
-        linesOfCode: 1987
+        linesOfCode: 1987,
       },
       {
         id: '6',
@@ -107,7 +116,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'active',
         lastUpdate: '1 minute ago',
         filesCreated: 9,
-        linesOfCode: 2134
+        linesOfCode: 2134,
       },
       {
         id: '7',
@@ -118,7 +127,7 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'working',
         lastUpdate: '30 seconds ago',
         filesCreated: 11,
-        linesOfCode: 2567
+        linesOfCode: 2567,
       },
       {
         id: '8',
@@ -129,8 +138,8 @@ const MCP301AgentsWorking: React.FC = () => {
         status: 'active',
         lastUpdate: '1 minute ago',
         filesCreated: 5,
-        linesOfCode: 1876
-      }
+        linesOfCode: 1876,
+      },
     ];
 
     const initialProgress: DevelopmentProgress[] = [
@@ -138,32 +147,32 @@ const MCP301AgentsWorking: React.FC = () => {
         category: 'CRUD Operations',
         completed: 8,
         total: 10,
-        agents: ['FormBot', 'TableBot', 'ButtonBot', 'ModalBot']
+        agents: ['FormBot', 'TableBot', 'ButtonBot', 'ModalBot'],
       },
       {
         category: 'UI Components',
         completed: 15,
         total: 20,
-        agents: ['UIBot', 'DesignBot', 'ThemeBot', 'AnimationBot']
+        agents: ['UIBot', 'DesignBot', 'ThemeBot', 'AnimationBot'],
       },
       {
         category: 'Security Features',
         completed: 6,
         total: 8,
-        agents: ['SecurityBot', 'AuthBot', 'PermissionBot']
+        agents: ['SecurityBot', 'AuthBot', 'PermissionBot'],
       },
       {
         category: 'Performance Optimization',
         completed: 12,
         total: 15,
-        agents: ['PerformanceBot', 'OptimizationBot', 'MemoryBot']
+        agents: ['PerformanceBot', 'OptimizationBot', 'MemoryBot'],
       },
       {
         category: 'Testing & Quality',
         completed: 9,
         total: 12,
-        agents: ['TestBot', 'QualityBot', 'BugBot']
-      }
+        agents: ['TestBot', 'QualityBot', 'BugBot'],
+      },
     ];
 
     setAgents(initialAgents);
@@ -172,18 +181,22 @@ const MCP301AgentsWorking: React.FC = () => {
     // Simulate real-time updates
     if (isLiveUpdate) {
       const interval = setInterval(() => {
-        setAgents(prev => prev.map(agent => ({
-          ...agent,
-          progress: Math.min(100, agent.progress + Math.random() * 2),
-          lastUpdate: 'Just now',
-          filesCreated: agent.filesCreated + (Math.random() > 0.8 ? 1 : 0),
-          linesOfCode: agent.linesOfCode + Math.floor(Math.random() * 50)
-        })));
+        setAgents(prev =>
+          prev.map(agent => ({
+            ...agent,
+            progress: Math.min(100, agent.progress + Math.random() * 2),
+            lastUpdate: 'Just now',
+            filesCreated: agent.filesCreated + (Math.random() > 0.8 ? 1 : 0),
+            linesOfCode: agent.linesOfCode + Math.floor(Math.random() * 50),
+          }))
+        );
 
-        setProgress(prev => prev.map(category => ({
-          ...category,
-          completed: Math.min(category.total, category.completed + (Math.random() > 0.9 ? 1 : 0))
-        })));
+        setProgress(prev =>
+          prev.map(category => ({
+            ...category,
+            completed: Math.min(category.total, category.completed + (Math.random() > 0.9 ? 1 : 0)),
+          }))
+        );
       }, 3000);
 
       return () => clearInterval(interval);
@@ -192,21 +205,31 @@ const MCP301AgentsWorking: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-400 bg-green-400/20';
-      case 'working': return 'text-blue-400 bg-blue-400/20';
-      case 'completed': return 'text-purple-400 bg-purple-400/20';
-      case 'idle': return 'text-gray-400 bg-gray-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'active':
+        return 'text-green-400 bg-green-400/20';
+      case 'working':
+        return 'text-blue-400 bg-blue-400/20';
+      case 'completed':
+        return 'text-purple-400 bg-purple-400/20';
+      case 'idle':
+        return 'text-gray-400 bg-gray-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active': return <CheckCircle className="w-4 h-4" />;
-      case 'working': return <Activity className="w-4 h-4" />;
-      case 'completed': return <CheckCircle className="w-4 h-4" />;
-      case 'idle': return <Clock className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case 'active':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'working':
+        return <Activity className="w-4 h-4" />;
+      case 'completed':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'idle':
+        return <Clock className="w-4 h-4" />;
+      default:
+        return <Clock className="w-4 h-4" />;
     }
   };
 
@@ -224,10 +247,12 @@ const MCP301AgentsWorking: React.FC = () => {
               <p className="text-gray-400">Real-time Super Admin Development</p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div className={`w-3 h-3 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}></div>
+              <div
+                className={`w-3 h-3 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}
+              ></div>
               <span className="text-sm text-gray-400">
                 {isLiveUpdate ? 'Live Updates Active' : 'Updates Paused'}
               </span>
@@ -235,8 +260,8 @@ const MCP301AgentsWorking: React.FC = () => {
             <button
               onClick={() => setIsLiveUpdate(!isLiveUpdate)}
               className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                isLiveUpdate 
-                  ? 'bg-red-600 hover:bg-red-700 text-white' 
+                isLiveUpdate
+                  ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-green-600 hover:bg-green-700 text-white'
               }`}
             >
@@ -291,7 +316,8 @@ const MCP301AgentsWorking: React.FC = () => {
             <div>
               <p className="text-sm text-gray-400">Completion</p>
               <p className="text-3xl font-bold text-white">
-                {Math.round(agents.reduce((sum, agent) => sum + agent.progress, 0) / agents.length)}%
+                {Math.round(agents.reduce((sum, agent) => sum + agent.progress, 0) / agents.length)}
+                %
               </p>
               <p className="text-sm text-yellow-400">On track</p>
             </div>
@@ -313,14 +339,14 @@ const MCP301AgentsWorking: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              {agents.map((agent) => (
+              {agents.map(agent => (
                 <motion.div
                   key={agent.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className={`p-4 rounded-lg border transition-all duration-300 ${
-                    selectedAgent === agent.id 
-                      ? 'bg-blue-500/20 border-blue-500/50' 
+                    selectedAgent === agent.id
+                      ? 'bg-blue-500/20 border-blue-500/50'
                       : 'bg-white/5 border-white/10 hover:bg-white/10'
                   }`}
                   onClick={() => setSelectedAgent(selectedAgent === agent.id ? null : agent.id)}
@@ -337,7 +363,9 @@ const MCP301AgentsWorking: React.FC = () => {
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-gray-400">{agent.lastUpdate}</p>
-                      <p className="text-xs text-gray-500">{agent.filesCreated} files • {agent.linesOfCode} LOC</p>
+                      <p className="text-xs text-gray-500">
+                        {agent.filesCreated} files • {agent.linesOfCode} LOC
+                      </p>
                     </div>
                   </div>
 
@@ -350,7 +378,7 @@ const MCP301AgentsWorking: React.FC = () => {
                         <span>{Math.round(agent.progress)}%</span>
                       </div>
                       <div className="w-full bg-gray-700 rounded-full h-2">
-                        <motion.div 
+                        <motion.div
                           className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
                           initial={{ width: 0 }}
                           animate={{ width: `${agent.progress}%` }}
@@ -375,7 +403,9 @@ const MCP301AgentsWorking: React.FC = () => {
                           </div>
                           <div>
                             <p className="text-gray-400">Lines of Code</p>
-                            <p className="text-white font-semibold">{agent.linesOfCode.toLocaleString()}</p>
+                            <p className="text-white font-semibold">
+                              {agent.linesOfCode.toLocaleString()}
+                            </p>
                           </div>
                           <div>
                             <p className="text-gray-400">Status</p>
@@ -399,7 +429,7 @@ const MCP301AgentsWorking: React.FC = () => {
         <div>
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
             <h2 className="text-2xl font-bold text-white mb-6">Development Progress</h2>
-            
+
             <div className="space-y-4">
               {progress.map((category, index) => (
                 <div key={index} className="bg-white/5 border border-white/10 rounded-lg p-4">
@@ -409,19 +439,19 @@ const MCP301AgentsWorking: React.FC = () => {
                       {category.completed}/{category.total}
                     </span>
                   </div>
-                  
+
                   <div className="w-full bg-gray-700 rounded-full h-2 mb-3">
-                    <motion.div 
+                    <motion.div
                       className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: `${(category.completed / category.total) * 100}%` }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                     ></motion.div>
                   </div>
-                  
+
                   <div className="flex flex-wrap gap-1">
                     {category.agents.map((agent, agentIndex) => (
-                      <span 
+                      <span
                         key={agentIndex}
                         className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded"
                       >
@@ -437,14 +467,39 @@ const MCP301AgentsWorking: React.FC = () => {
           {/* Recent Achievements */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mt-6">
             <h2 className="text-2xl font-bold text-white mb-6">Recent Achievements</h2>
-            
+
             <div className="space-y-3">
               {[
-                { achievement: 'Complete CRUD system implemented', agent: 'FormBot', time: '2 min ago', icon: CheckCircle },
-                { achievement: 'Glass-morphism design system created', agent: 'UIBot', time: '5 min ago', icon: Star },
-                { achievement: 'Advanced table features completed', agent: 'TableBot', time: '8 min ago', icon: BarChart3 },
-                { achievement: 'Security measures implemented', agent: 'SecurityBot', time: '12 min ago', icon: Shield },
-                { achievement: 'Performance optimizations applied', agent: 'PerformanceBot', time: '15 min ago', icon: Zap }
+                {
+                  achievement: 'Complete CRUD system implemented',
+                  agent: 'FormBot',
+                  time: '2 min ago',
+                  icon: CheckCircle,
+                },
+                {
+                  achievement: 'Glass-morphism design system created',
+                  agent: 'UIBot',
+                  time: '5 min ago',
+                  icon: Star,
+                },
+                {
+                  achievement: 'Advanced table features completed',
+                  agent: 'TableBot',
+                  time: '8 min ago',
+                  icon: BarChart3,
+                },
+                {
+                  achievement: 'Security measures implemented',
+                  agent: 'SecurityBot',
+                  time: '12 min ago',
+                  icon: Shield,
+                },
+                {
+                  achievement: 'Performance optimizations applied',
+                  agent: 'PerformanceBot',
+                  time: '15 min ago',
+                  icon: Zap,
+                },
               ].map((achievement, index) => (
                 <motion.div
                   key={index}
@@ -456,7 +511,9 @@ const MCP301AgentsWorking: React.FC = () => {
                   <achievement.icon className="w-5 h-5 text-green-400" />
                   <div className="flex-1">
                     <p className="text-sm text-white">{achievement.achievement}</p>
-                    <p className="text-xs text-gray-400">by {achievement.agent} • {achievement.time}</p>
+                    <p className="text-xs text-gray-400">
+                      by {achievement.agent} • {achievement.time}
+                    </p>
                   </div>
                 </motion.div>
               ))}
