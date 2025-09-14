@@ -18,15 +18,28 @@ import {
   Maximize2,
 } from 'lucide-react';
 
+/**
+ * Interface representing a metric card for the dashboard
+ * @interface MetricCard
+ */
 interface MetricCard {
+  /** Unique identifier for the metric */
   id: string;
+  /** Display title of the metric */
   title: string;
+  /** Current value of the metric */
   value: string | number;
+  /** Percentage change from previous period */
   change: number;
+  /** Type of change (increase, decrease, or neutral) */
   changeType: 'increase' | 'decrease' | 'neutral';
+  /** Icon component to display */
   icon: React.ComponentType<{ className?: string }>;
+  /** Color theme for the metric card */
   color: string;
+  /** Historical trend data points */
   trend: number[];
+  /** Description of what the metric represents */
   description: string;
 }
 
@@ -58,6 +71,16 @@ interface PerformanceData {
   responseTime: number;
 }
 
+/**
+ * EnterpriseDashboard Component
+ * 
+ * A comprehensive dashboard providing real-time system metrics,
+ * performance monitoring, and portal status overview for enterprise
+ * administrators.
+ * 
+ * @component
+ * @returns {JSX.Element} The EnterpriseDashboard component
+ */
 const EnterpriseDashboard: React.FC = () => {
   const [selectedTimeRange, setSelectedTimeRange] = useState('24h');
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -356,7 +379,7 @@ const EnterpriseDashboard: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-4xl font-bold text-white mb-2">🏢 Enterprise Dashboard</h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-gray-200 text-lg">
               Real-time system overview and performance metrics
             </p>
           </div>
@@ -430,7 +453,7 @@ const EnterpriseDashboard: React.FC = () => {
                   <metric.icon className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-300">{metric.title}</h3>
+                  <h3 className="text-sm text-gray-200">{metric.title}</h3>
                   <p className="text-2xl font-bold text-white">{metric.value}</p>
                 </div>
               </div>
@@ -455,7 +478,7 @@ const EnterpriseDashboard: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-xs text-gray-400 mb-4">{metric.description}</p>
+            <p className="text-xs text-gray-300 mb-4">{metric.description}</p>
 
             {/* Mini Trend Chart */}
             <div className="h-16 flex items-end space-x-1">
@@ -478,11 +501,11 @@ const EnterpriseDashboard: React.FC = () => {
                   className="mt-4 pt-4 border-t border-white/20"
                 >
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-300">
                       <span>Peak Value</span>
                       <span>{Math.max(...metric.trend).toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-300">
                       <span>Average</span>
                       <span>
                         {Math.round(
@@ -490,7 +513,7 @@ const EnterpriseDashboard: React.FC = () => {
                         ).toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-300">
                       <span>Growth Rate</span>
                       <span className="text-green-400">+{metric.change}%</span>
                     </div>

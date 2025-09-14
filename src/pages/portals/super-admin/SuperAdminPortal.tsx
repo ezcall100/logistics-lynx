@@ -1,1558 +1,649 @@
-import { useState, useRef, useEffect } from 'react';
-import { ThemeToggle } from '../../../components/common/ThemeToggle';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../../../contexts/ThemeContext';
 import {
   Users,
+  TrendingUp,
+  Shield,
+  Settings,
   Search,
   Bell,
-  Settings,
-  Plus,
-  BarChart3,
-  TrendingUp,
-  Activity,
-  CheckCircle,
-  AlertTriangle,
-  Home,
-  DollarSign,
-  ChevronRight,
-  ChevronLeft,
-  ChevronDown,
-  Zap,
-  Send,
-  X,
-  Minimize2,
-  Maximize2,
-  Bot,
-  User,
-  Shield,
-  FileText,
-  CreditCard,
-  Calendar,
-  MessageSquare,
-  Phone,
-  HelpCircle,
+  Moon,
+  Sun,
+  Menu,
   Globe,
-  Wifi,
-  RefreshCw,
-  History,
-  Star,
-  Heart,
-  Flag,
-  LogOut,
-  Mail,
-  Lock,
-  MessageCircle,
-  Video,
-  CheckSquare,
-  Square,
-  Building2,
   Brain,
-  Cpu,
-  FileCheck,
-  Truck,
-  Package,
-  Network,
-  MapPin,
+  BarChart3,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  User as UserIcon,
+  MessageCircle,
+  Building
 } from 'lucide-react';
 
-function SuperAdminPortal() {
-  const [user] = useState({
-    id: 1,
-    name: 'Super Admin',
-    email: 'admin@transbotai.com',
-    role: 'super-admin',
-    permissions: ['all'],
-    avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-  });
+// Import the new modular Communication Hub
+import { CommunicationHub } from '../../../components/CommunicationHub';
 
-  const [searchQuery, setSearchQuery] = useState('');
+// Import all the real Super Admin components
+import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashboard';
+import UserManagement from '../../../components/super-admin/UserManagement';
+import PortalManagement from '../../../components/super-admin/PortalManagement';
+import BillingManagement from '../../../components/super-admin/BillingManagement';
+import BusinessIntelligenceCenter from '../../../components/super-admin/BusinessIntelligenceCenter';
+import GlobalSettings from '../../../components/super-admin/GlobalSettings';
+import SecurityCompliance from '../../../components/super-admin/SecurityCompliance';
+import SystemHealthMonitor from '../../../components/super-admin/SystemHealthMonitor';
+import MCPAgentOrchestrationCenter from '../../../components/super-admin/MCPAgentOrchestrationCenter';
+import SecurityWarRoom from '../../../components/super-admin/SecurityWarRoom';
+import { RoleBasedAccessControl } from '../../../components/super-admin/RoleBasedAccessControl';
+
+// Import Dashboard pages
+import SystemOverview from '../../../components/super-admin/dashboard/SystemOverview';
+import ActiveUsers from '../../../components/super-admin/dashboard/ActiveUsers';
+import RevenueMetrics from '../../../components/super-admin/dashboard/RevenueMetrics';
+import SystemAlerts from '../../../components/super-admin/dashboard/SystemAlerts';
+
+// Import Communication Hub pages
+import CommunicationHubOverview from '../../../components/super-admin/communication-hub/CommunicationHubOverview';
+import CommunicationHubCustomization from '../../../components/super-admin/communication-hub/CommunicationHubCustomization';
+
+// Import Settings and Profile pages
+import CompanySettings from '../../../components/super-admin/settings/CompanySettings';
+import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
+
+// Placeholder component for Settings Management
+const SettingsManagementPlaceholder = () => (
+  <div className="p-6">
+    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Settings Management</h2>
+    <p className="text-gray-600 dark:text-gray-400">Settings Management functionality coming soon...</p>
+  </div>
+);
+
+/**
+ * DEMO / PLACEHOLDER data for demonstration purposes
+ * All data is fictional and follows mock data guidelines
+ */
+const mockData = {
+  companies: [
+    {
+      id: 1,
+      name: 'DEMO Company A',
+      domain: 'demo-company-a.com',
+      users: 1250,
+      plan: 'Enterprise',
+      status: 'Active',
+      revenue: 45000,
+      growth: 12,
+      lastActive: '2024-01-15T10:30:00Z',
+      features: ['TMS Core', 'Load Board', 'Fleet Management', 'Analytics'],
+      contact: {
+        email: 'admin@demo-company-a.com',
+        phone: '+1-555-0001',
+        address: '123 Demo Street, Demo City, DC 00001'
+      }
+    },
+    {
+      id: 2,
+      name: 'DEMO Company B',
+      domain: 'demo-company-b.com',
+      users: 890,
+      plan: 'Professional',
+      status: 'Active',
+      revenue: 28500,
+      growth: 8,
+      lastActive: '2024-01-15T09:15:00Z',
+      features: ['TMS Core', 'Load Board', 'Driver App'],
+      contact: {
+        email: 'contact@demo-company-b.com',
+        phone: '+1-555-0002',
+        address: '456 Demo Avenue, Demo City, DC 00002'
+      }
+    },
+    {
+      id: 3,
+      name: 'DEMO Company C',
+      domain: 'demo-company-c.com',
+      users: 456,
+      plan: 'Standard',
+      status: 'Active',
+      revenue: 15200,
+      growth: 15,
+      lastActive: '2024-01-15T08:45:00Z',
+      features: ['TMS Core', 'Load Board'],
+      contact: {
+        email: 'info@demo-company-c.com',
+        phone: '+1-555-0003',
+        address: '789 Demo Boulevard, Demo City, DC 00003'
+      }
+    }
+  ],
+  users: [
+    {
+      id: 1,
+      name: 'DEMO Admin User',
+      email: 'admin@demo.com',
+      role: 'Super Admin',
+      company: 'DEMO Company A',
+      status: 'Active',
+      lastLogin: '2024-01-15T10:30:00Z',
+      permissions: ['Full Access']
+    },
+    {
+      id: 2,
+      name: 'DEMO Manager User',
+      email: 'manager@demo.com',
+      role: 'Manager',
+      company: 'DEMO Company B',
+      status: 'Active',
+      lastLogin: '2024-01-15T09:15:00Z',
+      permissions: ['Management Access']
+    }
+  ],
+  systemMetrics: {
+    totalCompanies: 1247,
+    totalUsers: 15689,
+    monthlyRevenue: 425000,
+    systemUptime: 99.97,
+    apiCalls: 1250000,
+    databaseQueries: 890000,
+    storageUsed: 2.4,
+    bandwidth: 15.8,
+    mcpAgents: 250,
+    responseTime: 45,
+    errorRate: 0.03
+  }
+};
+
+const SuperAdminPortal: React.FC = () => {
+  const { darkMode, toggleDarkMode } = useTheme();
+  const [activeTab, setActiveTab] = useState('system-overview');
+  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [expandedMenus, setExpandedMenus] = useState<string[]>(['overview']);
-  const [activeMenuItem, setActiveMenuItem] = useState('overview');
+  const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [notificationCount] = useState(12);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Trans Bot AI Chatbot State
-  type ChatMessage = {
-    id: number;
-    type: 'bot' | 'user';
-    message: string;
-    timestamp: Date;
+  const handleMenuToggle = (menuId: string) => {
+    setExpandedMenus(prev =>
+      prev.includes(menuId)
+        ? prev.filter(id => id !== menuId)
+        : [...prev, menuId]
+    );
   };
 
-  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  const [isChatbotMinimized, setIsChatbotMinimized] = useState(false);
-  const [transBotMessages, setTransBotMessages] = useState<ChatMessage[]>([
-    {
-      id: 1,
-      type: 'bot',
-      message:
-        "Hello! I'm Trans Bot, your AI assistant. How can I help you with your Super Admin Portal today?",
-      timestamp: new Date(),
-    },
-  ]);
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-  const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
-  const [activeCrmTab, setActiveCrmTab] = useState('chat');
+  const handleMenuItemClick = (menuId: string, path: string) => {
+    setActiveTab(menuId);
+    // Handle navigation logic here
+    console.log(`Navigating to ${path}`);
+  };
 
-  const notifications = [
-    {
-      id: 1,
-      title: 'System Update Available',
-      message: 'Version 2.1.0 is ready for deployment',
-      time: '2 minutes ago',
-      type: 'info',
-    },
-    {
-      id: 2,
-      title: 'Security Alert',
-      message: 'Unusual login activity detected',
-      time: '15 minutes ago',
-      type: 'warning',
-    },
-    {
-      id: 3,
-      title: 'Backup Completed',
-      message: 'Daily backup completed successfully',
-      time: '1 hour ago',
-      type: 'success',
-    },
-  ];
 
-  const metrics = [
-    {
-      id: 'users',
-      title: 'Total Users',
-      value: '12,456',
-      change: '+15%',
-      changeType: 'increase',
-      icon: Users,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-      borderColor: 'border-blue-200',
-    },
-    {
-      id: 'systems',
-      title: 'Active Systems',
-      value: '47',
-      change: '+2',
-      changeType: 'increase',
-      icon: Cpu,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50 dark:bg-green-900/20',
-      borderColor: 'border-green-200',
-    },
-    {
-      id: 'security',
-      title: 'Security Score',
-      value: '98.7%',
-      change: '+1.2%',
-      changeType: 'increase',
-      icon: Shield,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-      borderColor: 'border-purple-200',
-    },
-    {
-      id: 'alerts',
-      title: 'Active Alerts',
-      value: '7',
-      change: '-2',
-      changeType: 'decrease',
-      icon: AlertTriangle,
-      color: 'text-amber-600 dark:text-amber-400',
-      bgColor: 'bg-amber-50 dark:bg-amber-900/20',
-      borderColor: 'border-amber-200 dark:border-amber-800',
-    },
-  ];
-
-  const performanceData = [
-    {
-      label: 'SuperAdmin Satisfaction',
-      value: 92,
-      color: 'bg-gradient-to-r from-emerald-400 to-emerald-600',
-    },
-    { label: 'Response Time', value: 99.8, color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
-    { label: 'Retention Rate', value: 95, color: 'bg-gradient-to-r from-purple-400 to-purple-600' },
-    {
-      label: 'Support Efficiency',
-      value: 83,
-      color: 'bg-gradient-to-r from-amber-400 to-amber-600',
-    },
-  ];
-
-  const recentActivity = [
-    {
-      id: 1,
-      action: 'New superadmin created',
-      details: 'Acme Corporation has been added to your network',
-      time: '5 minutes ago',
-      type: 'info',
-      icon: Plus,
-    },
-    {
-      id: 2,
-      action: 'Status updated',
-      details: 'Mark Johnson is now active with superadmin #5678',
-      time: '1 hour ago',
-      type: 'success',
-      icon: CheckCircle,
-    },
-    {
-      id: 3,
-      action: 'Payment overdue',
-      details: 'Invoice #INV-2023-001 is 3 days overdue',
-      time: '3 days ago',
-      type: 'warning',
-      icon: AlertTriangle,
-    },
-    {
-      id: 4,
-      action: 'New user registered',
-      details: 'Beta Corp has been added to your network',
-      time: 'Yesterday',
-      type: 'info',
-      icon: Users,
-    },
-    {
-      id: 5,
-      action: 'System maintenance',
-      details: 'Scheduled maintenance in 2 days',
-      time: '2 days ago',
-      type: 'warning',
-      icon: Settings,
-    },
-  ];
-
-  // Portal Control System - All 43 Portals
-  const allPortals = [
-    {
-      id: 'super-admin',
-      name: 'Super Admin Portal',
-      status: 'active',
-      users: 5,
-      port: 3005,
-      type: 'Administration',
-    },
-    {
-      id: 'mcp-agents',
-      name: 'MCP 251 Agents Portal',
-      status: 'active',
-      users: 1,
-      port: 3000,
-      type: 'AI Management',
-    },
-    {
-      id: 'customer',
-      name: 'Customer Portal',
-      status: 'active',
-      users: 1200,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'broker',
-      name: 'Broker Portal',
-      status: 'active',
-      users: 850,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'carrier',
-      name: 'Carrier Portal',
-      status: 'active',
-      users: 1800,
-      port: 3000,
-      type: 'Logistics',
-    },
-    {
-      id: 'shipper',
-      name: 'Shipper Portal',
-      status: 'active',
-      users: 650,
-      port: 3000,
-      type: 'Logistics',
-    },
-    {
-      id: 'driver',
-      name: 'Driver Portal',
-      status: 'active',
-      users: 3200,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'admin',
-      name: 'Admin Portal',
-      status: 'active',
-      users: 150,
-      port: 3000,
-      type: 'Administration',
-    },
-    {
-      id: 'partner',
-      name: 'Partner Portal',
-      status: 'active',
-      users: 420,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'developer',
-      name: 'Developer Portal',
-      status: 'active',
-      users: 85,
-      port: 3000,
-      type: 'Development',
-    },
-    {
-      id: 'autonomous',
-      name: 'Autonomous Portal',
-      status: 'maintenance',
-      users: 0,
-      port: 3000,
-      type: 'AI',
-    },
-    {
-      id: 'analytics',
-      name: 'Analytics Portal',
-      status: 'active',
-      users: 320,
-      port: 3000,
-      type: 'Analytics',
-    },
-    {
-      id: 'billing',
-      name: 'Billing Portal',
-      status: 'active',
-      users: 45,
-      port: 3000,
-      type: 'Finance',
-    },
-    {
-      id: 'compliance',
-      name: 'Compliance Portal',
-      status: 'active',
-      users: 25,
-      port: 3000,
-      type: 'Security',
-    },
-    {
-      id: 'integration',
-      name: 'Integration Portal',
-      status: 'active',
-      users: 120,
-      port: 3000,
-      type: 'Technical',
-    },
-    {
-      id: 'monitoring',
-      name: 'Monitoring Portal',
-      status: 'active',
-      users: 15,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'reporting',
-      name: 'Reporting Portal',
-      status: 'active',
-      users: 180,
-      port: 3000,
-      type: 'Analytics',
-    },
-    {
-      id: 'support',
-      name: 'Support Portal',
-      status: 'active',
-      users: 95,
-      port: 3000,
-      type: 'Customer Service',
-    },
-    {
-      id: 'training',
-      name: 'Training Portal',
-      status: 'active',
-      users: 250,
-      port: 3000,
-      type: 'Education',
-    },
-    {
-      id: 'documentation',
-      name: 'Documentation Portal',
-      status: 'active',
-      users: 75,
-      port: 3000,
-      type: 'Resources',
-    },
-    {
-      id: 'api-gateway',
-      name: 'API Gateway Portal',
-      status: 'active',
-      users: 200,
-      port: 3000,
-      type: 'Technical',
-    },
-    {
-      id: 'webhook',
-      name: 'Webhook Portal',
-      status: 'active',
-      users: 60,
-      port: 3000,
-      type: 'Integration',
-    },
-    { id: 'sso', name: 'SSO Portal', status: 'active', users: 0, port: 3000, type: 'Security' },
-    {
-      id: 'backup',
-      name: 'Backup Portal',
-      status: 'active',
-      users: 5,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'disaster-recovery',
-      name: 'Disaster Recovery Portal',
-      status: 'active',
-      users: 3,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'performance',
-      name: 'Performance Portal',
-      status: 'active',
-      users: 40,
-      port: 3000,
-      type: 'Monitoring',
-    },
-    {
-      id: 'security',
-      name: 'Security Portal',
-      status: 'active',
-      users: 30,
-      port: 3000,
-      type: 'Security',
-    },
-    {
-      id: 'audit',
-      name: 'Audit Portal',
-      status: 'active',
-      users: 20,
-      port: 3000,
-      type: 'Compliance',
-    },
-    {
-      id: 'governance',
-      name: 'Governance Portal',
-      status: 'active',
-      users: 15,
-      port: 3000,
-      type: 'Administration',
-    },
-    {
-      id: 'risk-management',
-      name: 'Risk Management Portal',
-      status: 'active',
-      users: 25,
-      port: 3000,
-      type: 'Compliance',
-    },
-    {
-      id: 'quality-assurance',
-      name: 'Quality Assurance Portal',
-      status: 'active',
-      users: 50,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'testing',
-      name: 'Testing Portal',
-      status: 'active',
-      users: 35,
-      port: 3000,
-      type: 'Development',
-    },
-    {
-      id: 'staging',
-      name: 'Staging Portal',
-      status: 'active',
-      users: 20,
-      port: 3000,
-      type: 'Development',
-    },
-    {
-      id: 'production',
-      name: 'Production Portal',
-      status: 'active',
-      users: 10,
-      port: 3000,
-      type: 'Operations',
-    },
-    {
-      id: 'development',
-      name: 'Development Portal',
-      status: 'active',
-      users: 45,
-      port: 3000,
-      type: 'Development',
-    },
-    {
-      id: 'sandbox',
-      name: 'Sandbox Portal',
-      status: 'active',
-      users: 80,
-      port: 3000,
-      type: 'Development',
-    },
-    {
-      id: 'demo',
-      name: 'Demo Portal',
-      status: 'active',
-      users: 200,
-      port: 3000,
-      type: 'Marketing',
-    },
-    {
-      id: 'trial',
-      name: 'Trial Portal',
-      status: 'active',
-      users: 500,
-      port: 3000,
-      type: 'Marketing',
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise Portal',
-      status: 'active',
-      users: 100,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'premium',
-      name: 'Premium Portal',
-      status: 'active',
-      users: 75,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'basic',
-      name: 'Basic Portal',
-      status: 'active',
-      users: 300,
-      port: 3000,
-      type: 'Business',
-    },
-    {
-      id: 'free',
-      name: 'Free Portal',
-      status: 'active',
-      users: 1000,
-      port: 3000,
-      type: 'Business',
-    },
-  ];
-
-  // Comprehensive multi-level menu structure
-  // Comprehensive 88+ Pages Menu System
-  const menuItems = [
+  const navigationItems = [
     {
       id: 'dashboard',
       label: 'Dashboard',
-      icon: Home,
+      icon: BarChart3,
+      description: 'System overview and metrics',
       color: 'text-blue-500',
-      path: '/dashboard',
+      bgColor: 'bg-blue-50',
+      component: EnterpriseDashboard,
       subMenus: [
         {
-          id: 'overview',
+          id: 'system-overview',
           label: 'System Overview',
-          icon: BarChart3,
-          color: 'text-blue-400',
-          path: '/dashboard/overview',
-          subSubMenus: [
-            { id: 'metrics', label: 'Real-time Metrics', path: '/dashboard/overview/metrics' },
-            {
-              id: 'performance',
-              label: 'Performance Analytics',
-              path: '/dashboard/overview/performance',
-            },
-            { id: 'health', label: 'System Health', path: '/dashboard/overview/health' },
-          ],
+          path: '/super-admin/dashboard',
+          component: SystemOverview
         },
         {
-          id: 'analytics',
-          label: 'Analytics Center',
-          icon: TrendingUp,
-          color: 'text-green-400',
-          path: '/dashboard/analytics',
-          subSubMenus: [
-            { id: 'reports', label: 'Custom Reports', path: '/dashboard/analytics/reports' },
-            { id: 'insights', label: 'Business Insights', path: '/dashboard/analytics/insights' },
-            {
-              id: 'forecasting',
-              label: 'Predictive Analytics',
-              path: '/dashboard/analytics/forecasting',
-            },
-          ],
+          id: 'active-users',
+          label: 'Active Users',
+          path: '/super-admin/dashboard/users',
+          component: ActiveUsers
         },
-      ],
+        {
+          id: 'revenue-metrics',
+          label: 'Revenue Metrics',
+          path: '/super-admin/dashboard/revenue',
+          component: RevenueMetrics
+        },
+        {
+          id: 'system-alerts',
+          label: 'System Alerts',
+          path: '/super-admin/dashboard/alerts',
+          component: SystemAlerts
+        }
+      ]
     },
     {
-      id: 'platform-management',
-      label: 'Platform Management',
-      icon: Building2,
-      color: 'text-purple-500',
-      path: '/platform',
-      subMenus: [
-        {
-          id: 'companies',
-          label: 'Company Management',
-          icon: Building2,
-          color: 'text-purple-400',
-          path: '/platform/companies',
-          subSubMenus: [
-            { id: 'list', label: 'All Companies', path: '/platform/companies/list' },
-            { id: 'create', label: 'Add Company', path: '/platform/companies/create' },
-            { id: 'settings', label: 'Company Settings', path: '/platform/companies/settings' },
-            { id: 'billing', label: 'Billing Management', path: '/platform/companies/billing' },
-          ],
-        },
-        {
-          id: 'users',
+      id: 'user-management',
           label: 'User Management',
           icon: Users,
-          color: 'text-blue-400',
-          path: '/platform/users',
-          subSubMenus: [
-            { id: 'all-users', label: 'All Users', path: '/platform/users/all' },
-            { id: 'roles', label: 'Role Management', path: '/platform/users/roles' },
-            { id: 'permissions', label: 'Permissions', path: '/platform/users/permissions' },
-            { id: 'activity', label: 'User Activity', path: '/platform/users/activity' },
-          ],
-        },
-        {
-          id: 'portals',
-          label: 'Portal Management',
-          icon: Globe,
-          color: 'text-green-400',
-          path: '/platform/portals',
-          subSubMenus: [
-            { id: 'portal-list', label: 'All Portals', path: '/platform/portals/list' },
-            {
-              id: 'portal-config',
-              label: 'Portal Configuration',
-              path: '/platform/portals/config',
-            },
-            { id: 'portal-access', label: 'Access Control', path: '/platform/portals/access' },
-            {
-              id: 'portal-monitoring',
-              label: 'Portal Monitoring',
-              path: '/platform/portals/monitoring',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'ai-command-center',
-      label: 'AI Command Center',
-      icon: Brain,
-      color: 'text-indigo-500',
-      path: '/ai-command',
+      description: 'User accounts & permissions',
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-50',
+      count: mockData.users.length,
+      component: UserManagement,
       subMenus: [
         {
-          id: 'mcp-agents',
-          label: 'MCP Agents',
-          icon: Bot,
-          color: 'text-indigo-400',
-          path: '/ai-command/mcp-agents',
-          subSubMenus: [
-            { id: 'agent-list', label: 'All Agents', path: '/ai-command/mcp-agents/list' },
-            {
-              id: 'agent-monitoring',
-              label: 'Agent Monitoring',
-              path: '/ai-command/mcp-agents/monitoring',
-            },
-            {
-              id: 'agent-config',
-              label: 'Agent Configuration',
-              path: '/ai-command/mcp-agents/config',
-            },
-            {
-              id: 'agent-performance',
-              label: 'Performance Analytics',
-              path: '/ai-command/mcp-agents/performance',
-            },
-          ],
+          id: 'all-users',
+          label: 'All Users',
+          path: '/super-admin/user-management/AllUsers',
+          component: UserManagement
         },
         {
-          id: 'ai-models',
-          label: 'AI Models',
-          icon: Cpu,
-          color: 'text-purple-400',
-          path: '/ai-command/ai-models',
-          subSubMenus: [
-            { id: 'model-list', label: 'Model Library', path: '/ai-command/ai-models/list' },
-            {
-              id: 'model-training',
-              label: 'Model Training',
-              path: '/ai-command/ai-models/training',
-            },
-            {
-              id: 'model-deployment',
-              label: 'Model Deployment',
-              path: '/ai-command/ai-models/deployment',
-            },
-            {
-              id: 'model-monitoring',
-              label: 'Model Monitoring',
-              path: '/ai-command/ai-models/monitoring',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'security-compliance',
-      label: 'Security & Compliance',
-      icon: Shield,
-      color: 'text-red-500',
-      path: '/security',
-      subMenus: [
-        {
-          id: 'security-monitoring',
-          label: 'Security Monitoring',
-          icon: Shield,
-          color: 'text-red-400',
-          path: '/security/monitoring',
-          subSubMenus: [
-            {
-              id: 'threat-detection',
-              label: 'Threat Detection',
-              path: '/security/monitoring/threats',
-            },
-            { id: 'access-logs', label: 'Access Logs', path: '/security/monitoring/access' },
-            {
-              id: 'security-alerts',
-              label: 'Security Alerts',
-              path: '/security/monitoring/alerts',
-            },
-            {
-              id: 'incident-response',
-              label: 'Incident Response',
-              path: '/security/monitoring/incidents',
-            },
-          ],
+          id: 'user-roles',
+          label: 'User Roles',
+          path: '/super-admin/user-management/UserRoles',
+          component: UserManagement
         },
         {
-          id: 'compliance',
-          label: 'Compliance Management',
-          icon: FileCheck,
-          color: 'text-orange-400',
-          path: '/security/compliance',
-          subSubMenus: [
-            { id: 'audit-trails', label: 'Audit Trails', path: '/security/compliance/audit' },
-            {
-              id: 'compliance-reports',
-              label: 'Compliance Reports',
-              path: '/security/compliance/reports',
-            },
-            {
-              id: 'policy-management',
-              label: 'Policy Management',
-              path: '/security/compliance/policies',
-            },
-            { id: 'risk-assessment', label: 'Risk Assessment', path: '/security/compliance/risk' },
-          ],
+          id: 'user-groups',
+          label: 'User Groups',
+          path: '/super-admin/user-management/UserGroups',
+          component: UserManagement
         },
-      ],
+        {
+          id: 'access-control',
+          label: 'Access Control',
+          path: '/super-admin/user-management/AccessControl',
+          component: RoleBasedAccessControl
+        },
+        {
+          id: 'user-analytics',
+          label: 'User Analytics',
+          path: '/super-admin/user-management/UserAnalytics',
+          component: UserManagement
+        },
+        {
+          id: 'billing-management',
+          label: 'Billing Management',
+          path: '/super-admin/user-management/BillingManagement',
+          component: BillingManagement
+        },
+        {
+          id: 'support-tickets',
+          label: 'Support Tickets',
+          path: '/super-admin/user-management/SupportTickets',
+          component: UserManagement
+        },
+        {
+          id: 'user-onboarding',
+          label: 'User Onboarding',
+          path: '/super-admin/user-management/UserOnboarding',
+          component: UserManagement
+        }
+      ]
     },
     {
       id: 'system-administration',
       label: 'System Administration',
       icon: Settings,
+      description: 'System configuration',
       color: 'text-gray-500',
-      path: '/system',
+      bgColor: 'bg-gray-50',
+      component: GlobalSettings,
       subMenus: [
+        {
+          id: 'database-management',
+          label: 'Database Management',
+          path: '/super-admin/system-administration/DatabaseManagement',
+          component: GlobalSettings
+        },
+        {
+          id: 'api-management',
+          label: 'API Management',
+          path: '/super-admin/system-administration/APIManagement',
+          component: GlobalSettings
+        },
+        {
+          id: 'server-monitoring',
+          label: 'Server Monitoring',
+          path: '/super-admin/system-administration/ServerMonitoring',
+          component: SystemHealthMonitor
+        },
+        {
+          id: 'security-settings',
+          label: 'Security Settings',
+          path: '/super-admin/system-administration/SecuritySettings',
+          component: SecurityCompliance
+        },
         {
           id: 'system-settings',
           label: 'System Settings',
-          icon: Settings,
-          color: 'text-gray-400',
-          path: '/system/settings',
-          subSubMenus: [
-            { id: 'global-settings', label: 'Global Settings', path: '/system/settings/global' },
-            {
-              id: 'database-config',
-              label: 'Database Configuration',
-              path: '/system/settings/database',
-            },
-            { id: 'api-settings', label: 'API Settings', path: '/system/settings/api' },
-            { id: 'backup-restore', label: 'Backup & Restore', path: '/system/settings/backup' },
-          ],
-        },
-        {
-          id: 'monitoring',
-          label: 'System Monitoring',
-          icon: Activity,
-          color: 'text-green-400',
-          path: '/system/monitoring',
-          subSubMenus: [
-            { id: 'system-health', label: 'System Health', path: '/system/monitoring/health' },
-            {
-              id: 'performance-metrics',
-              label: 'Performance Metrics',
-              path: '/system/monitoring/performance',
-            },
-            { id: 'resource-usage', label: 'Resource Usage', path: '/system/monitoring/resources' },
-            { id: 'log-management', label: 'Log Management', path: '/system/monitoring/logs' },
-          ],
-        },
-      ],
+          path: '/super-admin/system-administration/SystemSettings',
+          component: GlobalSettings
+        }
+      ]
     },
     {
-      id: 'billing-finance',
-      label: 'Billing & Finance',
-      icon: DollarSign,
-      color: 'text-green-500',
-      path: '/billing',
+      id: 'mcp-agents',
+      label: 'MCP Agents',
+      icon: Brain,
+      description: 'MCP agent orchestration',
+      color: 'text-violet-500',
+      bgColor: 'bg-violet-50',
+      component: MCPAgentOrchestrationCenter,
       subMenus: [
         {
-          id: 'billing-management',
-          label: 'Billing Management',
-          icon: CreditCard,
-          color: 'text-green-400',
-          path: '/billing/management',
-          subSubMenus: [
-            { id: 'invoices', label: 'Invoices', path: '/billing/management/invoices' },
-            {
-              id: 'subscriptions',
-              label: 'Subscriptions',
-              path: '/billing/management/subscriptions',
-            },
-            { id: 'payments', label: 'Payment Processing', path: '/billing/management/payments' },
-            {
-              id: 'revenue-analytics',
-              label: 'Revenue Analytics',
-              path: '/billing/management/revenue',
-            },
-          ],
+          id: 'mcp-overview',
+          label: 'MCP Overview',
+          path: '/super-admin/mcp/MCPOverview',
+          component: MCPAgentOrchestrationCenter
+        },
+        {
+          id: 'agent-management',
+          label: 'Agent Management',
+          path: '/super-admin/mcp-agents/AgentManagement',
+          component: MCPAgentOrchestrationCenter
+        },
+        {
+          id: 'agent-workflows',
+          label: 'Agent Workflows',
+          path: '/super-admin/agent-workflows/AgentWorkflows',
+          component: MCPAgentOrchestrationCenter
+        }
+      ]
+    },
+    {
+      id: 'analytics-reports',
+      label: 'Analytics & Reports',
+      icon: TrendingUp,
+      description: 'Platform performance metrics',
+      color: 'text-cyan-500',
+      bgColor: 'bg-cyan-50',
+      component: BusinessIntelligenceCenter,
+      subMenus: [
+        {
+          id: 'business-analytics',
+          label: 'Business Analytics',
+          path: '/super-admin/analytics-reports/BusinessAnalytics',
+          component: BusinessIntelligenceCenter
+        },
+        {
+          id: 'performance-reports',
+          label: 'Performance Reports',
+          path: '/super-admin/analytics-reports/PerformanceReports',
+          component: BusinessIntelligenceCenter
         },
         {
           id: 'financial-reports',
           label: 'Financial Reports',
-          icon: BarChart3,
-          color: 'text-blue-400',
-          path: '/billing/reports',
-          subSubMenus: [
-            { id: 'profit-loss', label: 'Profit & Loss', path: '/billing/reports/profit-loss' },
-            { id: 'cash-flow', label: 'Cash Flow', path: '/billing/reports/cash-flow' },
-            {
-              id: 'financial-summary',
-              label: 'Financial Summary',
-              path: '/billing/reports/summary',
-            },
-            { id: 'tax-reports', label: 'Tax Reports', path: '/billing/reports/tax' },
-          ],
-        },
-      ],
+          path: '/super-admin/analytics-reports/FinancialReports',
+          component: BusinessIntelligenceCenter
+        }
+      ]
     },
     {
-      id: 'logistics-portals',
-      label: 'Logistics Portals',
-      icon: Truck,
-      color: 'text-orange-500',
-      path: '/logistics',
-      subMenus: [
-        {
-          id: 'broker-portal',
-          label: 'Broker Portal',
-          icon: Users,
-          color: 'text-orange-400',
-          path: '/logistics/broker',
-          subSubMenus: [
-            { id: 'load-board', label: 'Load Board', path: '/logistics/broker/load-board' },
-            {
-              id: 'carrier-network',
-              label: 'Carrier Network',
-              path: '/logistics/broker/carrier-network',
-            },
-            {
-              id: 'rate-management',
-              label: 'Rate Management',
-              path: '/logistics/broker/rate-management',
-            },
-            {
-              id: 'document-management',
-              label: 'Document Management',
-              path: '/logistics/broker/documents',
-            },
-          ],
-        },
-        {
-          id: 'carrier-portal',
-          label: 'Carrier Portal',
-          icon: Truck,
-          color: 'text-blue-400',
-          path: '/logistics/carrier',
-          subSubMenus: [
-            { id: 'fleet-management', label: 'Fleet Management', path: '/logistics/carrier/fleet' },
-            {
-              id: 'load-optimization',
-              label: 'Load Optimization',
-              path: '/logistics/carrier/load-optimization',
-            },
-            {
-              id: 'driver-management',
-              label: 'Driver Management',
-              path: '/logistics/carrier/drivers',
-            },
-            {
-              id: 'maintenance',
-              label: 'Maintenance Tracking',
-              path: '/logistics/carrier/maintenance',
-            },
-          ],
-        },
-        {
-          id: 'shipper-portal',
-          label: 'Shipper Portal',
-          icon: Package,
-          color: 'text-green-400',
-          path: '/logistics/shipper',
-          subSubMenus: [
-            {
-              id: 'shipment-management',
-              label: 'Shipment Management',
-              path: '/logistics/shipper/shipments',
-            },
-            { id: 'rate-quotes', label: 'Rate Quotes', path: '/logistics/shipper/rate-quotes' },
-            { id: 'tracking', label: 'Shipment Tracking', path: '/logistics/shipper/tracking' },
-            { id: 'invoicing', label: 'Invoicing', path: '/logistics/shipper/invoicing' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'business-portals',
-      label: 'Business Portals',
-      icon: Building2,
-      color: 'text-purple-500',
-      path: '/business',
-      subMenus: [
-        {
-          id: 'crm-portal',
-          label: 'CRM Portal',
-          icon: Users,
-          color: 'text-purple-400',
-          path: '/business/crm',
-          subSubMenus: [
-            {
-              id: 'customer-management',
-              label: 'Customer Management',
-              path: '/business/crm/customers',
-            },
-            { id: 'lead-management', label: 'Lead Management', path: '/business/crm/leads' },
-            { id: 'sales-pipeline', label: 'Sales Pipeline', path: '/business/crm/sales' },
-            {
-              id: 'marketing-automation',
-              label: 'Marketing Automation',
-              path: '/business/crm/marketing',
-            },
-          ],
-        },
-        {
-          id: 'billing-portal',
-          label: 'Billing Portal',
-          icon: CreditCard,
-          color: 'text-green-400',
-          path: '/business/billing',
-          subSubMenus: [
-            {
-              id: 'invoice-management',
-              label: 'Invoice Management',
-              path: '/business/billing/invoices',
-            },
-            {
-              id: 'payment-processing',
-              label: 'Payment Processing',
-              path: '/business/billing/payments',
-            },
-            {
-              id: 'subscription-management',
-              label: 'Subscription Management',
-              path: '/business/billing/subscriptions',
-            },
-            {
-              id: 'financial-reporting',
-              label: 'Financial Reporting',
-              path: '/business/billing/reports',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'analytics-portals',
-      label: 'Analytics Portals',
-      icon: BarChart3,
-      color: 'text-blue-500',
-      path: '/analytics',
-      subMenus: [
-        {
-          id: 'business-intelligence',
-          label: 'Business Intelligence',
-          icon: BarChart3,
-          color: 'text-blue-400',
-          path: '/analytics/business-intelligence',
-          subSubMenus: [
-            {
-              id: 'dashboard',
-              label: 'BI Dashboard',
-              path: '/analytics/business-intelligence/dashboard',
-            },
-            {
-              id: 'reports',
-              label: 'Custom Reports',
-              path: '/analytics/business-intelligence/reports',
-            },
-            {
-              id: 'data-visualization',
-              label: 'Data Visualization',
-              path: '/analytics/business-intelligence/visualization',
-            },
-            {
-              id: 'predictive-analytics',
-              label: 'Predictive Analytics',
-              path: '/analytics/business-intelligence/predictive',
-            },
-          ],
-        },
-        {
-          id: 'reporting-portal',
-          label: 'Reporting Portal',
-          icon: FileText,
-          color: 'text-green-400',
-          path: '/analytics/reporting',
-          subSubMenus: [
-            {
-              id: 'standard-reports',
-              label: 'Standard Reports',
-              path: '/analytics/reporting/standard',
-            },
-            { id: 'custom-reports', label: 'Custom Reports', path: '/analytics/reporting/custom' },
-            {
-              id: 'scheduled-reports',
-              label: 'Scheduled Reports',
-              path: '/analytics/reporting/scheduled',
-            },
-            { id: 'report-builder', label: 'Report Builder', path: '/analytics/reporting/builder' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'integration-portals',
-      label: 'Integration Portals',
-      icon: Network,
-      color: 'text-indigo-500',
-      path: '/integration',
-      subMenus: [
-        {
-          id: 'api-management',
-          label: 'API Management',
-          icon: Network,
-          color: 'text-indigo-400',
-          path: '/integration/api-management',
-          subSubMenus: [
-            {
-              id: 'api-gateway',
-              label: 'API Gateway',
-              path: '/integration/api-management/gateway',
-            },
-            {
-              id: 'api-documentation',
-              label: 'API Documentation',
-              path: '/integration/api-management/documentation',
-            },
-            {
-              id: 'api-monitoring',
-              label: 'API Monitoring',
-              path: '/integration/api-management/monitoring',
-            },
-            {
-              id: 'api-security',
-              label: 'API Security',
-              path: '/integration/api-management/security',
-            },
-          ],
-        },
-        {
-          id: 'edi-portal',
-          label: 'EDI Portal',
-          icon: FileText,
-          color: 'text-orange-400',
-          path: '/integration/edi',
-          subSubMenus: [
-            { id: 'edi-mapping', label: 'EDI Mapping', path: '/integration/edi/mapping' },
-            {
-              id: 'edi-transactions',
-              label: 'EDI Transactions',
-              path: '/integration/edi/transactions',
-            },
-            { id: 'edi-monitoring', label: 'EDI Monitoring', path: '/integration/edi/monitoring' },
-            { id: 'edi-testing', label: 'EDI Testing', path: '/integration/edi/testing' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'operations-portals',
-      label: 'Operations Portals',
+      id: 'development-devops',
+      label: 'Development & DevOps',
       icon: Settings,
-      color: 'text-gray-500',
-      path: '/operations',
+      description: 'Development and deployment',
+      color: 'text-indigo-500',
+      bgColor: 'bg-indigo-50',
+      component: GlobalSettings,
       subMenus: [
         {
-          id: 'dispatch-portal',
-          label: 'Dispatch Portal',
-          icon: MapPin,
-          color: 'text-gray-400',
-          path: '/operations/dispatch',
-          subSubMenus: [
-            {
-              id: 'load-dispatch',
-              label: 'Load Dispatch',
-              path: '/operations/dispatch/load-dispatch',
-            },
-            {
-              id: 'driver-assignment',
-              label: 'Driver Assignment',
-              path: '/operations/dispatch/driver-assignment',
-            },
-            {
-              id: 'route-optimization',
-              label: 'Route Optimization',
-              path: '/operations/dispatch/route-optimization',
-            },
-            {
-              id: 'real-time-tracking',
-              label: 'Real-time Tracking',
-              path: '/operations/dispatch/tracking',
-            },
-          ],
+          id: 'ci-cd-pipeline',
+          label: 'CI/CD Pipeline',
+          path: '/super-admin/development-devops/CICDPipeline',
+          component: GlobalSettings
         },
         {
-          id: 'fleet-portal',
-          label: 'Fleet Portal',
-          icon: Truck,
-          color: 'text-blue-400',
-          path: '/operations/fleet',
-          subSubMenus: [
-            { id: 'fleet-overview', label: 'Fleet Overview', path: '/operations/fleet/overview' },
-            {
-              id: 'vehicle-management',
-              label: 'Vehicle Management',
-              path: '/operations/fleet/vehicles',
-            },
-            {
-              id: 'maintenance-scheduling',
-              label: 'Maintenance Scheduling',
-              path: '/operations/fleet/maintenance',
-            },
-            { id: 'fuel-management', label: 'Fuel Management', path: '/operations/fleet/fuel' },
-          ],
+          id: 'environment-management',
+          label: 'Environment Management',
+          path: '/super-admin/development-devops/EnvironmentManagement',
+          component: GlobalSettings
         },
-      ],
-    },
-  ];
-
-  const handleMenuToggle = (menuId: string) => {
-    if (expandedMenus.includes(menuId)) {
-      setExpandedMenus(expandedMenus.filter(id => id !== menuId));
-    } else {
-      setExpandedMenus([...expandedMenus, menuId]);
-    }
-  };
-
-  const handleMenuItemClick = (itemId: string, path: string) => {
-    setActiveMenuItem(itemId);
-    // Here you would typically handle navigation
-    console.log(`Navigating to: ${path}`);
-  };
-
-  // Trans Bot AI Chatbot Functions
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [transBotMessages]);
-
-  const handleSendMessage = async () => {
-    if (!currentMessage.trim()) return;
-
-    const userMessage: ChatMessage = {
-      id: Date.now(),
-      type: 'user',
-      message: currentMessage,
-      timestamp: new Date(),
-    };
-
-    setTransBotMessages(prev => [...prev, userMessage]);
-    setCurrentMessage('');
-    setIsTyping(true);
-
-    // Simulate AI response
-    setTimeout(() => {
-      const botResponse = generateBotResponse(currentMessage);
-      const botMessage: ChatMessage = {
-        id: Date.now() + 1,
-        type: 'bot',
-        message: botResponse,
-        timestamp: new Date(),
-      };
-      setTransBotMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1500);
-  };
-
-  const generateBotResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase();
-
-    if (message.includes('hello') || message.includes('hi')) {
-      return "Hello! I'm Trans Bot, your AI assistant. I can help you with portal management, system monitoring, user administration, and more. What would you like to know?";
-    }
-
-    if (message.includes('portal') || message.includes('system')) {
-      return 'I can help you manage your portals! You have 43 active portals including Super Admin, MCP Agents, Customer, Broker, and more. Would you like me to show you the status of any specific portal?';
-    }
-
-    if (message.includes('user') || message.includes('admin')) {
-      return 'I can assist with user management! You currently have 12,456 total users across all portals. I can help you create new users, manage permissions, or view user analytics. What would you like to do?';
-    }
-
-    if (message.includes('security') || message.includes('alert')) {
-      return 'Your security score is 98.7% with 7 active alerts. I can help you review security settings, manage alerts, or check system vulnerabilities. Would you like me to show you the security dashboard?';
-    }
-
-    if (message.includes('help') || message.includes('support')) {
-      return "I'm here to help! I can assist with:\n• Portal management and monitoring\n• User administration\n• Security and compliance\n• System analytics\n• Troubleshooting issues\n\nWhat specific area would you like help with?";
-    }
-
-    if (message.includes('analytics') || message.includes('report')) {
-      return 'I can help you with analytics and reporting! You can view real-time metrics, generate custom reports, and analyze system performance. Would you like me to show you the analytics dashboard or help you create a specific report?';
-    }
-
-    return (
-      'I understand you\'re asking about: "' +
-      userMessage +
-      "\". I'm here to help with your Super Admin Portal needs. I can assist with portal management, user administration, security monitoring, analytics, and more. Could you be more specific about what you'd like help with?"
-    );
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  // Portal Control Functions
-  const handlePortalAction = (portalId: string, action: string) => {
-    console.log(`${action} portal: ${portalId}`);
-    // Implement portal control logic here
-  };
-
-  const getPortalStatusColor = (status: string) => {
-    switch (status) {
-      case 'active':
-        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800';
-      case 'inactive':
-        return 'text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-slate-700';
-      case 'maintenance':
-        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800';
-      case 'error':
-        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
-      default:
-        return 'text-gray-600 dark:text-gray-300 bg-gray-50 border-gray-200 dark:border-slate-700';
-    }
-  };
-
-  const getPortalTypeColor = (type: string) => {
-    switch (type) {
-      case 'Administration':
-        return 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20';
-      case 'Business':
-        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20';
-      case 'Logistics':
-        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
-      case 'Operations':
-        return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20';
-      case 'AI Management':
-        return 'text-indigo-600 bg-indigo-50';
-      case 'Analytics':
-        return 'text-pink-600 bg-pink-50';
-      case 'Finance':
-        return 'text-emerald-600 bg-emerald-50';
-      case 'Security':
-        return 'text-red-600 bg-red-50';
-      case 'Development':
-        return 'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20';
-      case 'Technical':
-        return 'text-gray-600 dark:text-gray-300 bg-gray-50';
-      case 'Marketing':
-        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
-      default:
-        return 'text-gray-600 dark:text-gray-300 bg-gray-50';
-    }
-  };
-
-  // CRM Functions Data
-  const crmTabs = [
-    {
-      id: 'chat',
-      label: 'Chat',
-      icon: MessageCircle,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-      borderColor: 'border-blue-200',
+        {
+          id: 'testing-suite',
+          label: 'Testing Suite',
+          path: '/super-admin/qa-testing/TestingSuite',
+          component: GlobalSettings
+        }
+      ]
     },
     {
-      id: 'email',
-      label: 'Email',
-      icon: Mail,
-      color: 'text-emerald-600',
-      bgColor: 'bg-emerald-50',
-      borderColor: 'border-emerald-200',
+      id: 'ui-components',
+      label: 'UI/UX Components',
+      icon: Settings,
+      description: 'UI component management',
+      color: 'text-pink-500',
+      bgColor: 'bg-pink-50',
+      component: GlobalSettings,
+      subMenus: [
+        {
+          id: 'ui-component-registry',
+          label: 'UI Component Registry',
+          path: '/super-admin/ui-components/UIComponentRegistry',
+          component: GlobalSettings
+        },
+        {
+          id: 'design-system',
+          label: 'Design System',
+          path: '/super-admin/ui-components/DesignSystem',
+          component: GlobalSettings
+        }
+      ]
     },
     {
-      id: 'tasks',
-      label: 'Tasks',
-      icon: CheckSquare,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-      borderColor: 'border-purple-200',
-    },
-    {
-      id: 'phone',
-      label: 'Phone',
-      icon: Phone,
-      color: 'text-amber-600',
-      bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-200',
-    },
-    {
-      id: 'text',
-      label: 'SMS',
-      icon: MessageSquare,
-      color: 'text-indigo-600',
-      bgColor: 'bg-indigo-50',
-      borderColor: 'border-indigo-200',
-    },
-    {
-      id: 'video',
-      label: 'Video',
-      icon: Video,
-      color: 'text-red-600',
-      bgColor: 'bg-red-50 dark:bg-red-900/20',
-      borderColor: 'border-red-200',
-    },
-    {
-      id: 'calendar',
-      label: 'Calendar',
-      icon: Calendar,
-      color: 'text-teal-600',
+      id: 'deployment-operations',
+      label: 'Deployment & Operations',
+      icon: Settings,
+      description: 'Deployment management',
+      color: 'text-teal-500',
       bgColor: 'bg-teal-50',
-      borderColor: 'border-teal-200',
+      component: GlobalSettings,
+      subMenus: [
+        {
+          id: 'deployment-management',
+          label: 'Deployment Management',
+          path: '/super-admin/deployment/DeploymentManagement',
+          component: GlobalSettings
+        },
+        {
+          id: 'performance-monitoring',
+          label: 'Performance Monitoring',
+          path: '/super-admin/performance/PerformanceMonitoring',
+          component: SystemHealthMonitor
+        },
+        {
+          id: 'uptime-monitoring',
+          label: 'Uptime Monitoring',
+          path: '/super-admin/system-monitoring/UptimeMonitoring',
+          component: SystemHealthMonitor
+        }
+      ]
     },
     {
-      id: 'notes',
-      label: 'Notes',
-      icon: FileText,
-      color: 'text-gray-600 dark:text-gray-300',
-      bgColor: 'bg-gray-50 dark:bg-slate-700/50',
-      borderColor: 'border-gray-200 dark:border-slate-700',
-    },
-  ];
-
-  const chatMessages = [
-    {
-      id: 1,
-      sender: 'John Doe',
-      message: 'Hi, I need help with my order',
-      time: '2 min ago',
-      unread: true,
-    },
-    {
-      id: 2,
-      sender: 'Sarah Wilson',
-      message: 'Thank you for the quick response!',
-      time: '5 min ago',
-      unread: false,
-    },
-    {
-      id: 3,
-      sender: 'Mike Johnson',
-      message: 'Can you check the status?',
-      time: '10 min ago',
-      unread: true,
-    },
-  ];
-
-  const emailList = [
-    {
-      id: 1,
-      from: 'superadmin@example.com',
-      subject: 'Order Inquiry',
-      time: '1 hour ago',
-      unread: true,
+      id: 'security',
+      label: 'Security',
+      icon: Shield,
+      description: 'Security monitoring',
+      color: 'text-red-500',
+      bgColor: 'bg-red-50',
+      component: SecurityCompliance,
+      subMenus: [
+        {
+          id: 'security-audit',
+          label: 'Security Audit',
+          path: '/super-admin/security/SecurityAudit',
+          component: SecurityCompliance
+        },
+        {
+          id: 'security-policies',
+          label: 'Security Policies',
+          path: '/super-admin/security/SecurityPolicies',
+          component: SecurityCompliance
+        },
+        {
+          id: 'incident-response',
+          label: 'Incident Response',
+          path: '/super-admin/security/IncidentResponse',
+          component: SecurityWarRoom
+        }
+      ]
     },
     {
-      id: 2,
-      from: 'support@company.com',
-      subject: 'Your order has shipped',
-      time: '2 hours ago',
-      unread: false,
+      id: 'mobile-portal-management',
+      label: 'Mobile & Portal Management',
+      icon: Globe,
+      description: 'Portal and mobile management',
+      color: 'text-orange-500',
+      bgColor: 'bg-orange-50',
+      component: PortalManagement,
+      subMenus: [
+        {
+          id: 'mobile-management',
+          label: 'Mobile Management',
+          path: '/super-admin/mobile/MobileManagement',
+          component: PortalManagement
+        },
+        {
+          id: 'portal-management',
+          label: 'Portal Management',
+          path: '/super-admin/portal-management/PortalManagement',
+          component: PortalManagement
+        }
+      ]
     },
     {
-      id: 3,
-      from: 'billing@company.com',
-      subject: 'Invoice #12345',
-      time: '3 hours ago',
-      unread: true,
-    },
-  ];
-
-  const tasks = [
-    { id: 1, title: 'Follow up with John Doe', priority: 'high', due: 'Today', completed: false },
-    {
-      id: 2,
-      title: 'Review superadmin feedback',
-      priority: 'medium',
-      due: 'Tomorrow',
-      completed: false,
+      id: 'company-settings',
+      label: 'Company Settings',
+      icon: Building,
+      description: 'Company-wide configuration and preferences',
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-50',
+      component: CompanySettings,
     },
     {
-      id: 3,
-      title: 'Update superadmin records',
-      priority: 'low',
-      due: 'Next week',
-      completed: true,
-    },
-  ];
-
-  const recentCalls = [
-    {
-      id: 1,
-      contact: 'John Doe',
-      type: 'incoming',
-      duration: '5:32',
-      time: '10 min ago',
-      status: 'completed',
-    },
-    {
-      id: 2,
-      contact: 'Sarah Wilson',
-      type: 'outgoing',
-      duration: '2:15',
-      time: '1 hour ago',
-      status: 'completed',
-    },
-    {
-      id: 3,
-      contact: 'Mike Johnson',
-      type: 'missed',
-      duration: '0:00',
-      time: '2 hours ago',
-      status: 'missed',
-    },
-  ];
-
-  const smsMessages = [
-    {
-      id: 1,
-      contact: 'John Doe',
-      message: 'Thanks for the update!',
-      time: '5 min ago',
-      unread: false,
-    },
-    {
-      id: 2,
-      contact: 'Sarah Wilson',
-      message: 'When will my order arrive?',
-      time: '1 hour ago',
-      unread: true,
-    },
-  ];
-
-  const calendarEvents = [
-    { id: 1, title: 'Team Meeting', time: '10:00 AM', date: 'Today', type: 'meeting' },
-    { id: 2, title: 'SuperAdmin Call', time: '2:00 PM', date: 'Today', type: 'call' },
-    { id: 3, title: 'Project Review', time: '4:00 PM', date: 'Tomorrow', type: 'review' },
-  ];
-
-  const notes = [
-    {
-      id: 1,
-      title: 'SuperAdmin Meeting Notes',
-      content: 'Discussed new features...',
-      updated: '2 hours ago',
+      id: 'settings-management',
+      label: 'Settings Management',
+      icon: Settings,
+      description: 'System-wide settings for all portals',
+      color: 'text-emerald-500',
+      bgColor: 'bg-emerald-50',
+      component: SettingsManagementPlaceholder,
+      subMenus: [
+        {
+          id: 'global-settings',
+          label: 'Global Settings',
+          path: '/super-admin/settings-management/GlobalSettings',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'portal-settings',
+          label: 'Portal Settings',
+          path: '/super-admin/settings-management/PortalSettings',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'user-preferences',
+          label: 'User Preferences',
+          path: '/super-admin/settings-management/UserPreferences',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'security-settings',
+          label: 'Security Settings',
+          path: '/super-admin/settings-management/SecuritySettings',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'notification-settings',
+          label: 'Notification Settings',
+          path: '/super-admin/settings-management/NotificationSettings',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'integration-settings',
+          label: 'Integration Settings',
+          path: '/super-admin/settings-management/IntegrationSettings',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'backup-restore',
+          label: 'Backup & Restore',
+          path: '/super-admin/settings-management/BackupRestore',
+          component: SettingsManagementPlaceholder
+        },
+        {
+          id: 'audit-logs',
+          label: 'Audit Logs',
+          path: '/super-admin/settings-management/AuditLogs',
+          component: SettingsManagementPlaceholder
+        }
+      ]
     },
     {
-      id: 2,
-      title: 'Project Ideas',
-      content: 'Brainstorming session notes...',
-      updated: '1 day ago',
-    },
-  ];
-
-  const getStatusColor = (type: string) => {
-    switch (type) {
-      case 'success':
-        return 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800';
-      case 'warning':
-        return 'text-amber-600 bg-amber-50 border-amber-200';
-      case 'error':
-        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
-      default:
-        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
+      id: 'communication-hub',
+      label: 'Communication Hub',
+      icon: MessageCircle,
+      description: 'Communication Hub management',
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-50',
+      component: CommunicationHubOverview,
+      subMenus: [
+        {
+          id: 'communication-hub-overview',
+          label: 'Communication Hub Overview',
+          path: '/super-admin/communication-hub/CommunicationHubOverview',
+          component: CommunicationHubOverview
+        },
+        {
+          id: 'communication-hub-customization',
+          label: 'Communication Hub Customization',
+          path: '/super-admin/communication-hub/CommunicationHubCustomization',
+          component: CommunicationHubCustomization
+        }
+      ]
     }
+  ];
+
+  const getActiveComponent = () => {
+    // Handle Settings and Profile pages
+    if (activeTab === 'profile') {
+      return ProfilePage;
+    }
+    
+    // Handle Company Settings page
+    if (activeTab === 'company-settings') {
+      return CompanySettings;
+    }
+    
+    // First check if activeTab matches a submenu
+    for (const item of navigationItems) {
+      if (item.subMenus) {
+        const subMenu = item.subMenus.find(sub => sub.id === activeTab);
+        if (subMenu) {
+          return subMenu.component;
+        }
+      }
+    }
+    
+    // If not a submenu, check main menu items
+    const activeItem = navigationItems.find(item => item.id === activeTab);
+    return activeItem?.component || SystemOverview;
   };
+
+  const ActiveComponent = getActiveComponent();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {/* Enhanced Header - Responsive */}
-      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
-        <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              {/* Mobile Menu Button */}
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Header */}
+      <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
+        <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
               <button
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden"
+            >
+              <Menu className="h-5 w-5" />
               </button>
-
               <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                  <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
                 <div className="hidden sm:block">
                   <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
@@ -1564,7 +655,7 @@ function SuperAdminPortal() {
                 </div>
                 <div className="sm:hidden">
                   <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                    TransBot
+                  TransBot AI
                   </h1>
                 </div>
               </div>
@@ -1576,7 +667,7 @@ function SuperAdminPortal() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search superadmins, orders, reports..."
+                placeholder="Search companies, users, reports..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
@@ -1587,2011 +678,372 @@ function SuperAdminPortal() {
                 <Search className="h-5 w-5" />
               </button>
 
-              {/* Action Icons - Responsive */}
+              {/* Essential Icons */}
               <div className="flex items-center space-x-1">
-                {/* Refresh Button */}
+                {/* Dark Mode Toggle */}
                 <button
-                  onClick={() => window.location.reload()}
-                  className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Refresh"
+                  onClick={toggleDarkMode}
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  title={darkMode ? 'Light Mode' : 'Dark Mode'}
                 >
-                  <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5" />
-                </button>
-
-                {/* History Button */}
-                <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Recent Activity"
-                >
-                  <History className="h-5 w-5" />
-                </button>
-
-                {/* Help Button */}
-                <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Help & Support"
-                >
-                  <HelpCircle className="h-5 w-5" />
+                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                 </button>
 
                 {/* Notifications */}
                 <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
                   <Bell className="h-5 w-5" />
-                  {notifications.length > 0 && (
-                    <span className="absolute top-1 right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
+                  {notificationCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {notificationCount}
+                    </span>
                   )}
                 </button>
 
-                {/* Settings Dropdown */}
-                <div className="relative">
-                  {/* Theme Toggle */}
-                  <ThemeToggle size="sm" />
-
+                {/* Settings */}
                   <button
-                    onClick={() => setShowSettingsMenu(!showSettingsMenu)}
+                  onClick={() => setActiveTab('company-settings')}
                     className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                    title="Settings"
+                  title="Company Settings"
                   >
                     <Settings className="h-5 w-5" />
                   </button>
 
-                  {/* Settings Dropdown Menu */}
-                  {showSettingsMenu && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                          Settings
-                        </h3>
-                      </div>
-                      <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <User className="h-4 w-4" />
-                          <span>Profile Settings</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Lock className="h-4 w-4" />
-                          <span>Security</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Globe className="h-4 w-4" />
-                          <span>Language</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Wifi className="h-4 w-4" />
-                          <span>Network</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Star className="h-4 w-4" />
-                          <span>Preferences</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* User Profile Section */}
-              <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-slate-700">
+              {/* User Profile */}
                 <div className="relative">
                   <button
-                    onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors"
-                  >
-                    <img
-                      className="h-10 w-10 rounded-xl shadow-md"
-                      src={user.avatar}
-                      alt={user.name}
-                    />
-                    <div className="hidden md:block text-left">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-gray-500 font-medium">{user.role}</p>
+                  onClick={() => setActiveTab('profile')}
+                  className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  title="Profile & Account"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
+                    <UserIcon className="h-4 w-4 text-white" />
                     </div>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">Super Admin</span>
                   </button>
-
-                  {/* User Dropdown Menu */}
-                  {showUserMenu && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
-                      <div className="px-4 py-3 border-b border-gray-100">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                          {user.name}
-                        </p>
-                        <p className="text-xs text-gray-500">{user.email}</p>
                       </div>
-                      <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <User className="h-4 w-4" />
-                          <span>My Profile</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Mail className="h-4 w-4" />
-                          <span>Messages</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Heart className="h-4 w-4" />
-                          <span>Favorites</span>
-                        </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Flag className="h-4 w-4" />
-                          <span>Reports</span>
-                        </button>
-                        <div className="border-t border-gray-100 my-1"></div>
-                        <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2">
-                          <LogOut className="h-4 w-4" />
-                          <span>Sign Out</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="flex relative">
-        {/* Enhanced Permanent Sidebar - Responsive */}
-        <aside
-          className={`${sidebarCollapsed ? 'w-16' : 'w-64 lg:w-72'} bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg shadow-xl border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ease-in-out sticky top-20 h-[calc(100vh-5rem)] z-30 hidden md:block`}
-        >
-          <div className="flex flex-col h-full">
+      <div className="flex">
+        {/* Left Sidebar - Super Admin Navigation */}
+        <aside className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
+          sidebarCollapsed ? 'w-16' : 'w-64'
+        }`}>
+          <div className="h-full flex flex-col">
             {/* Sidebar Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
+            <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-slate-700/50">
               <div className="flex items-center justify-between">
                 {!sidebarCollapsed && (
-                  <div className="flex items-center space-x-2">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                      <Zap className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                      Navigation
-                    </span>
-                  </div>
+                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
                 )}
                 <button
                   onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                 >
-                  <ChevronRight
-                    className={`h-4 w-4 text-gray-500 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`}
-                  />
+                  {sidebarCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
                 </button>
               </div>
             </div>
 
-            {/* Multi-Level Navigation Menu */}
-            <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-              {menuItems.map(menuItem => {
-                const Icon = menuItem.icon;
-                const isExpanded = expandedMenus.includes(menuItem.id);
-                const isActive = activeMenuItem === menuItem.id;
+            {/* Navigation Items */}
+            <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-y-auto">
+              {navigationItems.map(item => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                const isExpanded = expandedMenus.includes(item.id);
 
                 return (
-                  <div key={menuItem.id} className="space-y-1">
+                  <div key={item.id} className="space-y-1">
                     {/* Main Menu Item */}
                     <div className="space-y-1">
                       <button
                         onClick={() => {
-                          if (menuItem.subMenus && menuItem.subMenus.length > 0) {
-                            handleMenuToggle(menuItem.id);
+                          if (item.subMenus && item.subMenus.length > 0) {
+                            handleMenuToggle(item.id);
                           } else {
-                            handleMenuItemClick(menuItem.id, menuItem.path);
+                            handleMenuItemClick(item.id, '');
                           }
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 group ${
+                        className={`w-full flex items-center justify-between px-2 sm:px-3 py-2.5 rounded-lg transition-all duration-200 group ${
                           isActive
                             ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 shadow-sm'
                             : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                         }`}
                       >
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
                           <Icon
-                            className={`h-5 w-5 ${isActive ? menuItem.color : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
+                            className={`h-4 w-4 sm:h-5 sm:w-5 ${isActive ? item.color : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
                           />
                           {!sidebarCollapsed && (
+                            <div className="flex-1 text-left">
+                              <div className="flex items-center space-x-2">
                             <span
                               className={`text-sm font-medium ${isActive ? 'text-blue-700' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:text-gray-100'}`}
                             >
-                              {menuItem.label}
+                                  {item.label}
+                                </span>
+                                {(item as any).badge && (
+                                  <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                                    {(item as any).badge}
                             </span>
                           )}
                         </div>
-                        {!sidebarCollapsed && menuItem.subMenus && menuItem.subMenus.length > 0 && (
+                              <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                {item.description}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {!sidebarCollapsed && item.count && (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                              {item.count}
+                            </span>
+                          )}
+                          {!sidebarCollapsed && item.subMenus && item.subMenus.length > 0 && (
                           <ChevronRight
                             className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
                           />
                         )}
+                        </div>
                       </button>
                     </div>
 
                     {/* Sub-Menus */}
-                    {!sidebarCollapsed && isExpanded && menuItem.subMenus && (
+                    {!sidebarCollapsed && isExpanded && item.subMenus && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4"
+                        className="ml-2 sm:ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-2 sm:pl-4"
                       >
-                        {menuItem.subMenus.map(subMenu => {
-                          const SubIcon = subMenu.icon;
-                          const isSubExpanded = expandedMenus.includes(subMenu.id);
-                          const isSubActive = activeMenuItem === subMenu.id;
+                        {item.subMenus.map(subMenu => {
+                          const isSubActive = activeTab === subMenu.id;
 
                           return (
-                            <div key={subMenu.id} className="space-y-1">
-                              {/* Sub-Menu Item */}
                               <button
-                                onClick={() => {
-                                  if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
-                                    handleMenuToggle(subMenu.id);
-                                  } else {
-                                    handleMenuItemClick(subMenu.id, subMenu.path);
-                                  }
-                                }}
-                                className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-200 group ${
+                              key={subMenu.id}
+                              onClick={() => handleMenuItemClick(subMenu.id, subMenu.path)}
+                              className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
                                   isSubActive
-                                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 shadow-sm'
-                                    : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
-                                }`}
-                              >
-                                <div className="flex items-center space-x-3">
-                                  <SubIcon
-                                    className={`h-4 w-4 ${isSubActive ? 'text-emerald-600' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
-                                  />
-                                  <span
-                                    className={`text-sm font-medium ${isSubActive ? 'text-emerald-700' : 'text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:text-gray-200'}`}
-                                  >
-                                    {subMenu.label}
-                                  </span>
-                                </div>
-                                {subMenu.subSubMenus && subMenu.subSubMenus.length > 0 && (
-                                  <ChevronRight
-                                    className={`h-3 w-3 text-gray-400 transition-transform duration-200 ${isSubExpanded ? 'rotate-90' : ''}`}
-                                  />
-                                )}
-                              </button>
-
-                              {/* Sub-Sub-Menus */}
-                              {isSubExpanded && subMenu.subSubMenus && (
-                                <motion.div
-                                  initial={{ opacity: 0, height: 0 }}
-                                  animate={{ opacity: 1, height: 'auto' }}
-                                  exit={{ opacity: 0, height: 0 }}
-                                  transition={{ duration: 0.2 }}
-                                  className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4"
-                                >
-                                  {subMenu.subSubMenus.map(subSubMenu => {
-                                    const isSubSubActive = activeMenuItem === subSubMenu.id;
-
-                                    return (
-                                      <button
-                                        key={subSubMenu.id}
-                                        onClick={() =>
-                                          handleMenuItemClick(subSubMenu.id, subSubMenu.path)
-                                        }
-                                        className={`w-full flex items-center space-x-3 px-3 py-1.5 rounded-md transition-all duration-200 group ${
-                                          isSubSubActive
-                                            ? 'bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-200 shadow-sm'
-                                            : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
-                                        }`}
-                                      >
-                                        <div className="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                                        <span
-                                          className={`text-xs font-medium ${isSubSubActive ? 'text-purple-700' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
-                                        >
-                                          {subSubMenu.label}
-                                        </span>
-                                      </button>
-                                    );
-                                  })}
-                                </motion.div>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </motion.div>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* Sidebar Footer */}
-            <div className="p-4 border-t border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200 dark:border-slate-700">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <Shield className="h-4 w-4 text-white" />
-                </div>
-                {!sidebarCollapsed && (
-                  <div className="flex-1">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
-                      MCP 251 Agents
-                    </p>
-                    <p className="text-xs text-gray-500">24/7 Active</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        {/* Mobile Sidebar Overlay */}
-        {!sidebarCollapsed && (
-          <div className="md:hidden fixed inset-0 z-50">
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-              onClick={() => setSidebarCollapsed(true)}
-            />
-            {/* Mobile Sidebar */}
-            <aside className="absolute left-0 top-0 w-80 h-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl border-r border-gray-200 dark:border-slate-700/50">
-              <div className="flex flex-col h-full">
-                {/* Mobile Sidebar Header */}
-                <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <Users className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                          TransBot AI
-                        </h2>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
-                          Super Admin Portal
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => setSidebarCollapsed(true)}
-                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Mobile Navigation - Same as desktop but full width */}
-                <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-                  {menuItems.map(menuItem => {
-                    const isActive = activeMenuItem === menuItem.id;
-                    const isExpanded = expandedMenus.includes(menuItem.id);
-
-                    return (
-                      <div key={menuItem.id} className="space-y-1">
-                        {/* Main Menu Item */}
-                        <div className="space-y-1">
-                          <button
-                            onClick={() => handleMenuToggle(menuItem.id)}
-                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
-                              isActive
-                                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                                : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
-                            }`}
-                          >
-                            <div className="flex items-center space-x-3">
-                              <menuItem.icon
-                                className={`h-5 w-5 ${isActive ? 'text-white' : menuItem.color}`}
-                              />
-                              <span className="font-medium">{menuItem.label}</span>
-                            </div>
-                            {menuItem.subMenus && menuItem.subMenus.length > 0 && (
-                              <ChevronDown
-                                className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''} ${isActive ? 'text-white' : 'text-gray-400'}`}
-                              />
-                            )}
-                          </button>
-
-                          {/* Sub-menus */}
-                          {isExpanded && menuItem.subMenus && (
-                            <div className="ml-4 space-y-1">
-                              {menuItem.subMenus.map(subMenu => {
-                                const isSubActive = activeMenuItem === subMenu.id;
-                                const isSubExpanded = expandedMenus.includes(subMenu.id);
-
-                                return (
-                                  <div key={subMenu.id} className="space-y-1">
-                                    {/* Sub-Menu Item */}
-                                    <button
-                                      onClick={() => {
-                                        if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
-                                          handleMenuToggle(subMenu.id);
-                                        } else {
-                                          handleMenuItemClick(subMenu.id, subMenu.path);
-                                        }
-                                      }}
-                                      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                        isSubActive
-                                          ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
+                                  ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'
                                           : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                                       }`}
                                     >
-                                      <div className="flex items-center space-x-2">
-                                        <subMenu.icon
-                                          className={`h-4 w-4 ${isSubActive ? 'text-white' : 'text-gray-500'}`}
-                                        />
+                              <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
                                         <span className="text-sm font-medium">{subMenu.label}</span>
-                                      </div>
-                                      {subMenu.subSubMenus && subMenu.subSubMenus.length > 0 && (
-                                        <ChevronDown
-                                          className={`h-3 w-3 transition-transform duration-200 ${isSubExpanded ? 'rotate-180' : ''} ${isSubActive ? 'text-white' : 'text-gray-400'}`}
-                                        />
-                                      )}
-                                    </button>
-
-                                    {/* Sub-sub-menus */}
-                                    {isSubExpanded && subMenu.subSubMenus && (
-                                      <div className="ml-4 space-y-1">
-                                        {subMenu.subSubMenus.map(subSubMenu => {
-                                          const isSubSubActive = activeMenuItem === subSubMenu.id;
-
-                                          return (
-                                            <button
-                                              key={subSubMenu.id}
-                                              onClick={() =>
-                                                handleMenuItemClick(subSubMenu.id, subSubMenu.path)
-                                              }
-                                              className={`w-full flex items-center space-x-2 px-3 py-1.5 rounded-md transition-all duration-200 group ${
-                                                isSubSubActive
-                                                  ? 'bg-gradient-to-r from-blue-300 to-purple-400 text-white shadow-sm'
-                                                  : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-500 hover:text-gray-700 dark:text-gray-300'
-                                              }`}
-                                            >
-                                              <div
-                                                className={`h-3 w-3 rounded-full ${isSubSubActive ? 'bg-white dark:bg-slate-200' : 'bg-gray-400 dark:bg-gray-600'}`}
-                                              ></div>
-                                              <span className="text-xs font-medium">
-                                                {subSubMenu.label}
-                                              </span>
                                             </button>
                                           );
                                         })}
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          )}
-                        </div>
+                      </motion.div>
+                    )}
                       </div>
                     );
                   })}
                 </nav>
               </div>
             </aside>
-          </div>
-        )}
 
-        {/* Main Content Area - Responsive */}
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
-          {/* Dashboard Header - Responsive */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                  Dashboard
-                </h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1">
-                  Welcome back, {user.name}! Here's what's happening with your Super Admin Portal.
-                </p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">Live</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Compact MCP Agents Connection Status */}
-          <div className="bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-blue-900/80 dark:to-indigo-900/80 border border-blue-200/50 dark:border-blue-700/50 rounded-lg px-3 py-2 shadow-sm">
-            <div className="flex items-center space-x-2">
-              <div className="h-2 w-2 bg-blue-400 dark:bg-blue-300 rounded-full animate-pulse"></div>
-              <span className="text-xs font-medium text-blue-700 dark:text-blue-300">
-                Connecting to MCP agents...
-              </span>
-              <div className="flex space-x-1 ml-auto">
-                <div className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"></div>
-                <div
-                  className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"
-                  style={{ animationDelay: '0.1s' }}
-                ></div>
-                <div
-                  className="h-1.5 w-1.5 bg-blue-400 dark:bg-blue-300 rounded-full animate-bounce"
-                  style={{ animationDelay: '0.2s' }}
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Enhanced Metrics Grid - Responsive */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {metrics.map(metric => {
-              const Icon = metric.icon;
-              return (
+        {/* Main Content Area */}
+        <main className="flex-1 p-3 sm:p-4 md:p-6">
+          <AnimatePresence mode="wait">
                 <motion.div
-                  key={metric.id}
+              key={activeTab}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className={`${metric.bgColor} ${metric.borderColor} border rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div
-                      className={`p-3 rounded-xl ${metric.bgColor} border ${metric.borderColor}`}
-                    >
-                      <Icon className={`h-6 w-6 ${metric.color}`} />
-                    </div>
-                    <div
-                      className={`text-sm font-semibold ${metric.changeType === 'increase' ? 'text-green-600' : 'text-red-600'}`}
-                    >
-                      {metric.change}
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      {metric.value}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{metric.title}</p>
-                  </div>
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="h-full"
+            >
+              <ActiveComponent />
                 </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Enhanced Portal Command Center */}
-          <div className="bg-gradient-to-br from-white/90 via-blue-50/50 to-indigo-50/30 dark:from-slate-800/90 dark:via-slate-700/50 dark:to-slate-600/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400 via-purple-400 to-indigo-400"></div>
-              <div className="absolute top-10 right-10 w-32 h-32 bg-blue-300 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-20 left-8 w-24 h-24 bg-purple-300 rounded-full blur-2xl animate-pulse delay-1000"></div>
-              <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 rounded-full blur-xl animate-pulse delay-500"></div>
-            </div>
-
-            <div className="relative z-10">
-              {/* Header Section */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center space-x-4">
-                  <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-800 bg-clip-text text-transparent">
-                      Portal Command Center
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                      Access all portal categories and perform quick actions
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">
-                    All Systems Active
-                  </span>
-                </div>
-              </div>
-
-              {/* Portal Categories Grid - Enhanced Design */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {menuItems.map((item, index) => {
-                  const Icon = item.icon;
-                  const isActive = activeMenuItem === item.id;
-
-                  return (
-                    <motion.button
-                      key={item.id}
-                      onClick={() => handleMenuItemClick(item.id, item.path)}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      whileHover={{
-                        scale: 1.02,
-                        y: -5,
-                        transition: { duration: 0.2 },
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
-                        isActive
-                          ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/50 dark:to-indigo-900/50 shadow-xl shadow-blue-100/50 dark:shadow-blue-900/50'
-                          : 'border-gray-200 dark:border-slate-700/50 bg-white/80 dark:bg-slate-800/80 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-50/30 dark:hover:shadow-blue-900/30 backdrop-blur-sm'
-                      }`}
-                    >
-                      {/* Active Indicator */}
-                      {isActive && (
-                        <div className="absolute -top-2 -right-2 h-6 w-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
-                          <div className="h-2 w-2 bg-white dark:bg-slate-200 rounded-full animate-pulse"></div>
-                        </div>
-                      )}
-
-                      {/* Icon Container */}
-                      <div
-                        className={`mb-4 p-4 rounded-xl transition-all duration-300 ${
-                          isActive
-                            ? 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-800/50 dark:to-indigo-800/50 shadow-lg'
-                            : 'bg-gradient-to-br from-gray-100 to-gray-50 dark:from-slate-700/50 dark:to-slate-600/50 group-hover:from-blue-50 group-hover:to-indigo-50 dark:group-hover:from-blue-800/30 dark:group-hover:to-indigo-800/30 group-hover:shadow-md'
-                        }`}
-                      >
-                        <Icon
-                          className={`h-8 w-8 transition-colors duration-300 ${
-                            isActive
-                              ? 'text-blue-600'
-                              : 'text-gray-600 dark:text-gray-300 group-hover:text-blue-600'
-                          }`}
-                        />
-                      </div>
-
-                      {/* Content */}
-                      <div className="text-left">
-                        <h4
-                          className={`text-lg font-bold mb-2 transition-colors duration-300 ${
-                            isActive
-                              ? 'text-blue-900 dark:text-blue-100'
-                              : 'text-gray-900 dark:text-gray-100 group-hover:text-blue-800 dark:group-hover:text-blue-200'
-                          }`}
-                        >
-                          {item.label}
-                        </h4>
-                        <p
-                          className={`text-sm transition-colors duration-300 ${
-                            isActive
-                              ? 'text-blue-700 dark:text-blue-200'
-                              : 'text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-300'
-                          }`}
-                        >
-                          {item.subMenus ? `${item.subMenus.length} sub-modules` : 'Direct access'}
-                        </p>
-                      </div>
-
-                      {/* Hover Effect Overlay */}
-                      <div
-                        className={`absolute inset-0 rounded-2xl transition-opacity duration-300 ${
-                          isActive
-                            ? 'bg-gradient-to-br from-blue-500/5 to-indigo-500/5'
-                            : 'bg-gradient-to-br from-blue-500/0 to-indigo-500/0 group-hover:from-blue-500/5 group-hover:to-indigo-500/5'
-                        }`}
-                      ></div>
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-              {/* Quick Stats Footer */}
-              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700/50">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      {menuItems.length}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">
-                      Portal Categories
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">99.9%</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">System Uptime</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">1,247</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">Active Users</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">248</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">MCP Agents</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Enhanced Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* System Status Overview */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    System Status
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    Real-time system health monitoring
-                  </p>
-                </div>
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                  <Activity className="h-4 w-4 text-white" />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                  <div className="flex items-center space-x-3">
-                    <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-green-800">
-                      All Systems Operational
-                    </span>
-                  </div>
-                  <span className="text-xs text-green-600 font-semibold">99.9%</span>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
-                      API Response Time
-                    </span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      45ms
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
-                      Database Performance
-                    </span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      98.5%
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">Active Users</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      1,247
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">MCP Agents</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      248/250
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Performance Overview */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    Performance Overview
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    Key performance indicators
-                  </p>
-                </div>
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <BarChart3 className="h-4 w-4 text-white" />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {performanceData.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="space-y-2"
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        {item.label}
-                      </span>
-                      <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
-                        {item.value}%
-                      </span>
-                    </div>
-                    <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${item.value}%` }}
-                        transition={{ duration: 1, delay: index * 0.2 }}
-                        className={`h-full ${item.color} rounded-full shadow-sm`}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Recent Activity */}
-            <div className="bg-gradient-to-br from-white/80 via-emerald-50/30 to-teal-50/20 dark:from-slate-800/80 dark:via-emerald-900/30 dark:to-teal-900/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
-              {/* Animated Background Elements */}
-              <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400"></div>
-                <div className="absolute top-8 right-8 w-24 h-24 bg-emerald-300 rounded-full blur-2xl animate-pulse"></div>
-                <div className="absolute bottom-8 left-8 w-20 h-20 bg-teal-300 rounded-full blur-xl animate-pulse delay-1000"></div>
-              </div>
-
-              <div className="flex items-center justify-between mb-8 relative z-10">
-                <div className="flex items-center space-x-4">
-                  <div className="relative">
-                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 flex items-center justify-center shadow-xl">
-                      <Activity className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="absolute -top-1 -right-1 h-5 w-5 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg"></div>
-                    <div className="absolute inset-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 animate-ping opacity-20"></div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                      Recent Activity
-                    </h3>
-                    <div className="flex items-center space-x-2 mt-1">
-                      <div className="flex space-x-1">
-                        <div className="h-2 w-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <div className="h-2 w-2 bg-teal-400 rounded-full animate-pulse delay-100"></div>
-                        <div className="h-2 w-2 bg-cyan-400 rounded-full animate-pulse delay-200"></div>
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
-                        Latest updates and notifications
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">Live</span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {recentActivity.map((activity, index) => {
-                  const Icon = activity.icon;
-                  return (
-                    <motion.div
-                      key={activity.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className={`flex items-start space-x-3 p-3 rounded-xl border ${getStatusColor(activity.type)} hover:shadow-md transition-all duration-200 cursor-pointer`}
-                    >
-                      <div
-                        className={`p-2 rounded-lg ${getStatusColor(activity.type).split(' ')[1]}`}
-                      >
-                        <Icon
-                          className={`h-4 w-4 ${getStatusColor(activity.type).split(' ')[0]}`}
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                          {activity.action}
-                        </p>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
-                          {activity.details}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Portal Control Center - Master Controller */}
-          <div className="bg-gradient-to-br from-white/90 via-purple-50/50 to-indigo-50/30 dark:from-slate-800/90 dark:via-purple-900/50 dark:to-indigo-900/30 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-slate-600/20 relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-blue-400 to-indigo-400"></div>
-              <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-20 left-8 w-24 h-24 bg-indigo-300 rounded-full blur-2xl animate-pulse delay-1000"></div>
-              <div className="absolute top-1/2 right-4 w-16 h-16 bg-blue-300 rounded-full blur-xl animate-pulse delay-500"></div>
-            </div>
-
-            <div className="relative z-10">
-              {/* Header Section */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center space-x-4">
-                  <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 flex items-center justify-center shadow-lg">
-                    <Globe className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-purple-800 to-indigo-800 bg-clip-text text-transparent">
-                      Portal Control Center
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                      Master controller for all 43 portals
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">
-                    All Systems Controlled
-                  </span>
-                </div>
-              </div>
-
-              {/* Portal Control Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {allPortals.slice(0, 12).map((portal, index) => (
-                  <motion.div
-                    key={portal.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    whileHover={{ scale: 1.02, y: -5 }}
-                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 hover:shadow-xl cursor-pointer overflow-hidden ${getPortalStatusColor(portal.status)}`}
-                  >
-                    {/* Animated Background */}
-                    <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
-                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-indigo-400 to-blue-400"></div>
-                      <div className="absolute top-2 right-2 w-8 h-8 bg-purple-300 rounded-full blur-lg animate-pulse"></div>
-                    </div>
-
-                    {/* Status Indicator */}
-                    <div className="flex items-center justify-between mb-4 relative z-10">
-                      <div className="flex items-center space-x-3">
-                        <div className="relative">
-                          <div
-                            className={`h-3 w-3 rounded-full ${
-                              portal.status === 'active'
-                                ? 'bg-green-400'
-                                : portal.status === 'maintenance'
-                                  ? 'bg-yellow-400'
-                                  : 'bg-red-400'
-                            }`}
-                          ></div>
-                          <div
-                            className={`absolute inset-0 h-3 w-3 rounded-full animate-ping ${
-                              portal.status === 'active'
-                                ? 'bg-green-400'
-                                : portal.status === 'maintenance'
-                                  ? 'bg-yellow-400'
-                                  : 'bg-red-400'
-                            } opacity-20`}
-                          ></div>
-                        </div>
-                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
-                          {portal.name}
-                        </span>
-                      </div>
-                      <div className="flex space-x-1">
-                        <button
-                          onClick={() => handlePortalAction(portal.id, 'restart')}
-                          className="p-2 rounded-lg hover:bg-white/60 dark:hover:bg-slate-600/60 transition-all duration-200 hover:scale-110"
-                          title="Restart Portal"
-                        >
-                          <RefreshCw className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-                        </button>
-                        <button
-                          onClick={() => handlePortalAction(portal.id, 'settings')}
-                          className="p-2 rounded-lg hover:bg-white/60 dark:hover:bg-slate-600/60 transition-all duration-200 hover:scale-110"
-                          title="Portal Settings"
-                        >
-                          <Settings className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Portal Details */}
-                    <div className="space-y-3 relative z-10">
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          Type:
-                        </span>
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-bold ${getPortalTypeColor(portal.type)}`}
-                        >
-                          {portal.type}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          Users:
-                        </span>
-                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
-                          {portal.users.toLocaleString()}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          Port:
-                        </span>
-                        <span className="font-bold text-sm text-gray-800 dark:text-gray-100">
-                          {portal.port}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          Status:
-                        </span>
-                        <span className="font-bold text-sm capitalize text-gray-800 dark:text-gray-100">
-                          {portal.status}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Control Actions */}
-                    <div className="mt-4 flex space-x-2 relative z-10">
-                      <button
-                        onClick={() => handlePortalAction(portal.id, 'start')}
-                        className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg text-xs font-bold hover:from-green-600 hover:to-emerald-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
-                      >
-                        Start
-                      </button>
-                      <button
-                        onClick={() => handlePortalAction(portal.id, 'stop')}
-                        className="flex-1 px-3 py-2 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg text-xs font-bold hover:from-red-600 hover:to-rose-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
-                      >
-                        Stop
-                      </button>
-                      <button
-                        onClick={() => handlePortalAction(portal.id, 'monitor')}
-                        className="flex-1 px-3 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg text-xs font-bold hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
-                      >
-                        Monitor
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Portal Statistics Footer */}
-              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700/50">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      {allPortals.length}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">Total Portals</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">
-                      {allPortals.filter(p => p.status === 'active').length}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">Active Portals</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">
-                      {allPortals.reduce((sum, p) => sum + p.users, 0).toLocaleString()}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">Total Users</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">99.9%</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">Uptime</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </AnimatePresence>
         </main>
 
-        {/* Enhanced Right CRM Sidebar - Responsive */}
-        {rightSidebarCollapsed ? (
-          /* Collapsed State - Only Toggle Button */
-          <div className="fixed right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
-            <button
-              onClick={e => {
-                e.stopPropagation();
-                e.preventDefault();
-                console.log('Toggle button clicked - opening sidebar');
-                setRightSidebarCollapsed(false);
-              }}
-              onMouseDown={e => e.stopPropagation()}
-              onMouseUp={e => e.stopPropagation()}
-              className="group p-2 sm:p-3 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto"
-            >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-200 transition-transform duration-300 group-hover:-translate-x-0.5" />
-            </button>
-          </div>
-        ) : (
-          /* Expanded State - Full CRM Sidebar */
-          <aside className="bg-gradient-to-b from-white/95 via-white/90 to-white/85 dark:from-slate-800/95 dark:via-slate-800/90 dark:to-slate-800/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 dark:from-purple-800/50 dark:via-pink-800/30 dark:to-indigo-800/50 sticky top-20 h-[calc(100vh-5rem)] z-30 w-72 sm:w-80 transition-all duration-500 ease-out hidden lg:block">
-            <div className="flex flex-col h-full relative overflow-hidden">
-              {/* Animated Background Pattern */}
-              <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400 dark:from-purple-600 dark:via-pink-600 dark:to-indigo-600"></div>
-                <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 dark:bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 left-8 w-24 h-24 bg-pink-300 dark:bg-pink-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 dark:bg-indigo-500 rounded-full blur-xl animate-pulse delay-500"></div>
-              </div>
-
-              {/* Enhanced CRM Sidebar Header */}
-              <div className="relative p-6 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-br from-white/90 via-purple-50/30 to-pink-50/20 dark:from-slate-800/90 dark:via-purple-900/30 dark:to-pink-900/20 backdrop-blur-xl">
-                {/* Animated Background Elements */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400"></div>
-                  <div className="absolute top-4 right-4 w-16 h-16 bg-purple-300 rounded-full blur-2xl animate-pulse"></div>
-                  <div className="absolute bottom-4 left-4 w-12 h-12 bg-pink-300 rounded-full blur-xl animate-pulse delay-1000"></div>
-                </div>
-
-                <div className="flex items-center justify-between relative z-10">
-                  <div className="flex items-center space-x-4">
-                    <div className="relative">
-                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-xl">
-                        <MessageCircle className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="absolute -top-1 -right-1 h-5 w-5 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg"></div>
-                      <div className="absolute inset-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 animate-ping opacity-20"></div>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
-                        CRM Command Center
-                      </h3>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="flex space-x-1">
-                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse delay-100"></div>
-                          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse delay-200"></div>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
-                          All systems operational
-                        </p>
-                      </div>
-                    </div>
+        {/* Right Sidebar - Communication Hub */}
+        <motion.aside
+          initial={{ width: '20rem' }}
+          animate={{ width: rightSidebarCollapsed ? '4rem' : '20rem' }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg border-l border-gray-200 dark:border-gray-700 shadow-xl relative z-20"
+        >
+          <div className="h-full flex flex-col">
+            {/* Communication Hub Header */}
+            {!rightSidebarCollapsed && (
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                      <MessageCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <button
-                    onClick={e => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      console.log('Close button clicked - closing sidebar');
-                      setRightSidebarCollapsed(true);
-                    }}
-                    onMouseDown={e => e.stopPropagation()}
-                    onMouseUp={e => e.stopPropagation()}
-                    className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                <div>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Hub</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">Communication center</p>
+                </div>
+                </div>
+                        <button
+                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
+                    title="Collapse Hub"
                   >
-                    <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180" />
+                    <ChevronRight className="h-5 w-5" />
+                        </button>
+                      </div>
+                    </div>
+            )}
+            
+            {/* Collapsed Header - Only Toggle Button */}
+            {rightSidebarCollapsed && (
+              <div className="p-2 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex justify-center">
+                      <button
+                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
+                    title="Expand Hub"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                      </button>
+                    </div>
+              </div>
+            )}
+
+            {/* Communication Hub Content */}
+            <div className="flex-1 overflow-hidden">
+        {rightSidebarCollapsed ? (
+                <div className="flex flex-col items-center py-6 space-y-4">
+            <button
+                    onClick={() => setRightSidebarCollapsed(false)}
+                    className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105"
+                    title="Expand Hub"
+                  >
+                    <MessageCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            </button>
+                  <div className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight font-medium">
+                          Hub
+          </div>
+                  <div className="flex flex-col space-y-2 mt-4">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+              </div>
+                </div>
+              ) : (
+                <div className="h-full overflow-y-auto">
+                  <CommunicationHub />
+                      </div>
+              )}
+                    </div>
+                        </div>
+        </motion.aside>
+                      </div>
+
+        {/* Mobile Sidebar Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
+                  <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  <X className="h-5 w-5" />
                   </button>
                 </div>
               </div>
+            <nav className="p-4">
+              <div className="space-y-2">
+                {navigationItems.map(item => {
+                  const isActive = activeTab === item.id;
+                  const isExpanded = expandedMenus.includes(item.id);
 
-              {/* Enhanced CRM Tabs */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
-                <div className="grid grid-cols-4 gap-2">
-                  {crmTabs.map((tab, index) => {
-                    const Icon = tab.icon;
-                    const isActive = activeCrmTab === tab.id;
                     return (
-                      <motion.button
-                        key={tab.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        onClick={() => setActiveCrmTab(tab.id)}
-                        className={`group relative flex flex-col items-center space-y-1 px-2 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
+                    <div key={item.id} className="space-y-1">
+                        {/* Main Menu Item */}
+                          <button
+                        onClick={() => {
+                          if (item.subMenus && item.subMenus.length > 0) {
+                            handleMenuToggle(item.id);
+                          } else {
+                            setActiveTab(item.id);
+                            setMobileMenuOpen(false);
+                          }
+                        }}
+                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
                           isActive
-                            ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                            : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
-                        }`}
-                      >
-                        {/* Animated Background */}
-                        <div
-                          className={`absolute inset-0 rounded-xl transition-all duration-300 ${
-                            isActive
-                              ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70'
-                              : 'bg-gradient-to-br from-white/50 to-white/30 dark:from-slate-700/50 dark:to-slate-600/30 group-hover:from-white/70 group-hover:to-white/50 dark:group-hover:from-slate-600/70 dark:group-hover:to-slate-500/50'
-                          }`}
-                        ></div>
-
-                        {/* Compact Icon */}
-                        <div
-                          className={`relative p-2 rounded-lg transition-all duration-300 ${
-                            isActive
-                              ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-md'
-                              : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-sm'
-                          }`}
-                        >
-                          <Icon
-                            className={`h-4 w-4 transition-all duration-300 ${
-                              isActive
-                                ? tab.color
-                                : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
+                                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                                : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
                             }`}
-                          />
-                          {isActive && (
-                            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
-                          )}
+                          >
+                            <div className="flex items-center space-x-3">
+                          <item.icon
+                            className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`}
+                              />
+                          <div className="flex-1 text-left">
+                            <div className="font-medium">{item.label}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              {item.description}
                         </div>
-
-                        {/* Compact Label */}
-                        <span
-                          className={`text-xs font-medium transition-all duration-300 relative z-10 text-center leading-tight ${
-                            isActive
-                              ? 'text-gray-800 dark:text-gray-100'
-                              : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
-                          }`}
-                        >
-                          {tab.label}
-                        </span>
-
-                        {/* Active indicator */}
-                        {isActive && (
-                          <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
-                        )}
-                      </motion.button>
-                    );
-                  })}
                 </div>
               </div>
-
-              {/* Enhanced CRM Content */}
-              <div className="flex-1 p-4 overflow-y-auto relative">
-                {/* Content Background Pattern */}
-                <div className="absolute inset-0 opacity-3">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20 dark:via-purple-900/20 dark:to-pink-900/20"></div>
-                </div>
-
-                {!rightSidebarCollapsed && activeCrmTab === 'chat' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-4 relative"
-                  >
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-blue-900/20 dark:to-indigo-900/20 backdrop-blur-sm border border-blue-200/50 dark:border-blue-800/50">
-                      <h3 className="text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        Live Chat
-                      </h3>
                       <div className="flex items-center space-x-2">
-                        <div className="relative">
-                          <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="absolute inset-0 h-3 w-3 bg-green-400 rounded-full animate-ping opacity-75"></div>
-                        </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
-                          Online
+                          {item.count && (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                              {item.count}
                         </span>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      {chatMessages.map((msg, index) => (
-                        <motion.div
-                          key={msg.id}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          className={`group relative p-4 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
-                            msg.unread
-                              ? 'bg-gradient-to-br from-blue-50/90 to-indigo-50/90 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200/70 dark:border-blue-800/70 shadow-sm'
-                              : 'bg-gradient-to-br from-white/70 to-gray-50/70 dark:from-slate-700/70 dark:to-slate-600/70 border-gray-200 dark:border-slate-700/50 hover:from-white/80 hover:to-gray-50/80 dark:hover:from-slate-600/80 dark:hover:to-slate-500/80'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center space-x-2">
-                              <div
-                                className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
-                                  msg.unread
-                                    ? 'bg-gradient-to-br from-blue-500 to-indigo-600'
-                                    : 'bg-gradient-to-br from-gray-400 to-gray-500'
-                                }`}
-                              >
-                                {msg.sender
-                                  .split(' ')
-                                  .map(n => n[0])
-                                  .join('')}
-                              </div>
-                              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                {msg.sender}
-                              </span>
-                            </div>
-                            <span className="text-xs text-gray-500 font-medium">{msg.time}</span>
-                          </div>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                            {msg.message}
-                          </p>
-                          {msg.unread && (
-                            <div className="absolute top-3 right-3 h-2 w-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full animate-pulse"></div>
                           )}
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="flex space-x-3 p-3 rounded-2xl bg-gradient-to-r from-white/80 to-gray-50/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50">
-                      <input
-                        type="text"
-                        placeholder="Type a message..."
-                        className="flex-1 px-4 py-3 text-sm border border-gray-200 dark:border-slate-700/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-300/50 bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm transition-all duration-300"
-                      />
-                      <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <Send className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'email' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Email
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
-                        Compose
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {emailList.map(email => (
-                        <div
-                          key={email.id}
-                          className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 dark:bg-slate-700/50 border-gray-200 dark:border-slate-700'}`}
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {email.from}
-                            </span>
-                            <span className="text-xs text-gray-500">{email.time}</span>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            {email.subject}
-                          </p>
-                          {email.unread && (
-                            <div className="h-2 w-2 bg-emerald-500 rounded-full mt-2"></div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'tasks' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Tasks
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
-                        Add Task
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {tasks.map(task => (
-                        <div
-                          key={task.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
-                        >
-                          <div className="flex items-center space-x-2 mb-2">
-                            <button
-                              className={`p-1 rounded ${task.completed ? 'text-green-600' : 'text-gray-400'}`}
-                            >
-                              {task.completed ? (
-                                <CheckSquare className="h-4 w-4" />
-                              ) : (
-                                <Square className="h-4 w-4" />
-                              )}
-                            </button>
-                            <span
-                              className={`text-sm font-medium ${task.completed ? 'line-through text-gray-500' : 'text-gray-900 dark:text-gray-100'}`}
-                            >
-                              {task.title}
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span
-                              className={`text-xs px-2 py-1 rounded ${
-                                task.priority === 'high'
-                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600'
-                                  : task.priority === 'medium'
-                                    ? 'bg-yellow-100 text-yellow-600'
-                                    : 'bg-green-100 text-green-600'
-                              }`}
-                            >
-                              {task.priority}
-                            </span>
-                            <span className="text-xs text-gray-500">{task.due}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'phone' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Phone
-                      </h3>
-                      <div className="flex space-x-1">
-                        <button className="p-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                          <Phone className="h-4 w-4" />
-                        </button>
-                        <button className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                          <Video className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      {recentCalls.map(call => (
-                        <div
-                          key={call.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {call.contact}
-                            </span>
-                            <span className="text-xs text-gray-500">{call.time}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                              <div
-                                className={`h-2 w-2 rounded-full ${
-                                  call.type === 'incoming'
-                                    ? 'bg-green-400'
-                                    : call.type === 'outgoing'
-                                      ? 'bg-blue-400'
-                                      : 'bg-red-400'
-                                }`}
-                              ></div>
-                              <span className="text-xs text-gray-600 dark:text-gray-300">
-                                {call.type}
-                              </span>
-                            </div>
-                            <span className="text-xs text-gray-500">{call.duration}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'text' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        SMS
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
-                        New SMS
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {smsMessages.map(sms => (
-                        <div
-                          key={sms.id}
-                          className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 dark:bg-slate-700/50 border-gray-200 dark:border-slate-700'}`}
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {sms.contact}
-                            </span>
-                            <span className="text-xs text-gray-500">{sms.time}</span>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">{sms.message}</p>
-                          {sms.unread && (
-                            <div className="h-2 w-2 bg-indigo-500 rounded-full mt-2"></div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'video' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Video Calls
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                        <Video className="h-3 w-3 inline mr-1" />
-                        Start Call
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                            <Video className="h-4 w-4 text-red-600" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              Team Meeting
-                            </p>
-                            <p className="text-xs text-gray-500">Starting in 5 minutes</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'calendar' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Calendar
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
-                        Add Event
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {calendarEvents.map(event => (
-                        <div
-                          key={event.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {event.title}
-                            </span>
-                            <span className="text-xs text-gray-500">{event.time}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-600 dark:text-gray-300">
-                              {event.date}
-                            </span>
-                            <span
-                              className={`text-xs px-2 py-1 rounded ${
-                                event.type === 'meeting'
-                                  ? 'bg-blue-100 text-blue-600'
-                                  : event.type === 'call'
-                                    ? 'bg-green-100 text-green-600'
-                                    : 'bg-purple-100 text-purple-600'
-                              }`}
-                            >
-                              {event.type}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!rightSidebarCollapsed && activeCrmTab === 'notes' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        Notes
-                      </h3>
-                      <button className="px-3 py-1 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
-                        New Note
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {notes.map(note => (
-                        <div
-                          key={note.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {note.title}
-                            </span>
-                            <span className="text-xs text-gray-500">{note.updated}</span>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">{note.content}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Enhanced CRM Sidebar Footer */}
-              <div className="relative p-4 border-t border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
-                <div className="relative flex items-center space-x-3 p-4 rounded-2xl bg-gradient-to-br from-purple-50/90 via-pink-50/80 to-indigo-50/90 border border-purple-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
-                  {/* Animated background elements */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full blur-xl animate-pulse"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-300/20 to-purple-300/20 rounded-full blur-lg animate-pulse delay-1000"></div>
-
-                  <div className="relative h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                    <Zap className="h-5 w-5 text-white" />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent"></div>
-                  </div>
-
-                  {!rightSidebarCollapsed && (
-                    <div className="flex-1 relative">
-                      <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        CRM Command Center
-                      </p>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="flex space-x-1">
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-100"></div>
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-200"></div>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
-                          All systems operational
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Status indicator */}
-                  <div className="relative">
-                    <div className="h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
-                    <div className="absolute inset-0 h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-75"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
-        )}
-
-        {/* Mobile CRM Sidebar Overlay */}
-        {!rightSidebarCollapsed && (
-          <div className="lg:hidden fixed inset-0 z-50">
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-              onClick={() => setRightSidebarCollapsed(true)}
-            />
-            {/* Mobile CRM Sidebar */}
-            <aside className="absolute right-0 top-0 w-80 h-full bg-gradient-to-b from-white/95 via-white/90 to-white/85 dark:from-slate-800/95 dark:via-slate-800/90 dark:to-slate-800/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 dark:from-purple-800/50 dark:via-pink-800/30 dark:to-indigo-800/50">
-              <div className="flex flex-col h-full relative overflow-hidden">
-                {/* Mobile CRM Header */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 dark:from-purple-800/50 dark:to-pink-800/50 bg-gradient-to-r from-white/80 to-white/60 dark:from-slate-800/80 dark:to-slate-800/60 backdrop-blur-sm">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="relative">
-                        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                          <MessageCircle className="h-5 w-5 text-white" />
-                        </div>
-                        <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                          CRM Command Center
-                        </h3>
-                        <p className="text-xs text-gray-500 font-medium">All systems active</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => setRightSidebarCollapsed(true)}
-                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
-                    >
-                      <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Mobile CRM Tabs */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 dark:from-purple-800/30 dark:to-pink-800/30 bg-gradient-to-br from-white/70 via-purple-50/20 to-pink-50/10 dark:from-slate-700/70 dark:via-purple-900/20 dark:to-pink-900/10 backdrop-blur-sm">
-                  <div className="grid grid-cols-4 gap-2">
-                    {crmTabs.map((tab, index) => {
-                      const Icon = tab.icon;
-                      const isActive = activeCrmTab === tab.id;
-                      return (
-                        <motion.button
-                          key={tab.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.05 }}
-                          onClick={() => setActiveCrmTab(tab.id)}
-                          className={`group relative flex flex-col items-center space-y-1 px-2 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
-                            isActive
-                              ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg transform scale-105`
-                              : 'hover:bg-white/80 dark:hover:bg-slate-600/80 hover:shadow-md hover:scale-102 backdrop-blur-sm border border-transparent'
-                          }`}
-                        >
-                          {/* Animated Background */}
-                          <div
-                            className={`absolute inset-0 rounded-xl transition-all duration-300 ${
-                              isActive
-                                ? 'bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-700/90 dark:to-slate-600/70'
-                                : 'bg-gradient-to-br from-white/50 to-white/30 dark:from-slate-700/50 dark:to-slate-600/30 group-hover:from-white/70 group-hover:to-white/50 dark:group-hover:from-slate-600/70 dark:group-hover:to-slate-500/50'
-                            }`}
-                          ></div>
-
-                          {/* Compact Icon */}
-                          <div
-                            className={`relative p-2 rounded-lg transition-all duration-300 ${
-                              isActive
-                                ? 'bg-gradient-to-br from-white/95 to-white/80 dark:from-slate-600/95 dark:to-slate-500/80 shadow-md'
-                                : 'bg-white/60 dark:bg-slate-600/60 group-hover:bg-white/80 dark:group-hover:bg-slate-500/80 group-hover:shadow-sm'
-                            }`}
-                          >
-                            <Icon
-                              className={`h-4 w-4 transition-all duration-300 ${
-                                isActive
-                                  ? tab.color
-                                  : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
-                              }`}
+                          {item.subMenus && item.subMenus.length > 0 && (
+                            <ChevronRight
+                              className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''} ${isActive ? 'text-white' : 'text-gray-400'}`}
                             />
-                            {isActive && (
-                              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/30 to-transparent dark:from-slate-400/30"></div>
-                            )}
-                          </div>
-
-                          {/* Compact Label */}
-                          <span
-                            className={`text-xs font-medium transition-all duration-300 relative z-10 text-center leading-tight ${
-                              isActive
-                                ? 'text-gray-800 dark:text-gray-100'
-                                : 'text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100'
-                            }`}
-                          >
-                            {tab.label}
-                          </span>
-
-                          {/* Active indicator */}
-                          {isActive && (
-                            <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
                           )}
-                        </motion.button>
+                    </div>
+                      </button>
+
+                          {/* Sub-menus */}
+                      {isExpanded && item.subMenus && (
+                            <div className="ml-4 space-y-1">
+                          {item.subMenus.map(subMenu => {
+                            const isSubActive = activeTab === subMenu.id;
+
+                      return (
+                                    <button
+                                key={subMenu.id}
+                                      onClick={() => {
+                                  setActiveTab(subMenu.id);
+                                  setMobileMenuOpen(false);
+                                }}
+                                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
+                                        isSubActive
+                                          ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
+                                          : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                                      }`}
+                                    >
+                                <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
+                                        <span className="text-sm font-medium">{subMenu.label}</span>
+                      </button>
                       );
                     })}
                   </div>
-                </div>
-
-                {/* Mobile CRM Content */}
-                <div className="flex-1 p-4 overflow-y-auto relative">
-                  {/* Content Background Pattern */}
-                  <div className="absolute inset-0 opacity-3">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20"></div>
-                  </div>
-
-                  {activeCrmTab === 'chat' && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="space-y-4 relative"
-                    >
-                      <div className="text-center py-8">
-                        <div className="text-gray-500 text-sm">Chat functionality</div>
-                        <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Other CRM tabs content would go here - simplified for mobile */}
-                  {activeCrmTab !== 'chat' && (
-                    <div className="text-center py-8">
-                      <div className="text-gray-500 text-sm">
-                        {activeCrmTab.charAt(0).toUpperCase() + activeCrmTab.slice(1)} functionality
-                      </div>
-                      <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
-            </aside>
-          </div>
+                      );
+                    })}
+                  </div>
+                </nav>
+                </div>
+                  </div>
         )}
 
-        {/* AI Chatbot FAB - Trans Bot */}
-        <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => {
-            setIsChatbotOpen(true);
-            setIsChatbotMinimized(false);
-          }}
-          className="fixed bottom-6 right-6 z-50 group"
-        >
-          <div className="relative">
-            {/* Main FAB Button */}
-            <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center group-hover:from-blue-600 group-hover:via-purple-600 group-hover:to-indigo-700">
-              {/* AI Brain Icon */}
-              <svg
-                className="h-7 w-7 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
 
-              {/* Pulsing Ring Animation */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 animate-ping opacity-20"></div>
-
-              {/* Status Indicator */}
-              <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 animate-pulse shadow-lg">
-                <div className="absolute inset-0 h-4 w-4 bg-green-400 rounded-full animate-ping opacity-30"></div>
-              </div>
-            </div>
-
-            {/* Tooltip */}
-            <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-              Trans Bot AI Assistant
-              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
-            </div>
-
-            {/* Floating Particles Effect */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div
-                className="absolute top-2 left-2 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-60"
-                style={{ animationDelay: '0s' }}
-              ></div>
-              <div
-                className="absolute top-4 right-3 w-1 h-1 bg-purple-300 rounded-full animate-ping opacity-60"
-                style={{ animationDelay: '0.5s' }}
-              ></div>
-              <div
-                className="absolute bottom-3 left-4 w-1 h-1 bg-indigo-300 rounded-full animate-ping opacity-60"
-                style={{ animationDelay: '1s' }}
-              ></div>
-            </div>
-          </div>
-        </motion.button>
-
-        {/* Trans Bot AI Chatbot Interface */}
-        <AnimatePresence>
-          {isChatbotOpen && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className={`fixed bottom-6 right-24 z-50 ${
-                isChatbotMinimized ? 'h-16' : 'h-[600px]'
-              } w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 overflow-hidden backdrop-blur-xl`}
-            >
-              {/* Chatbot Header */}
-              <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-4 text-white relative">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="relative">
-                      <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
-                        <Bot className="h-6 w-6" />
-                      </div>
-                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg">Trans Bot</h3>
-                      <p className="text-xs text-blue-100">AI Assistant</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => setIsChatbotMinimized(!isChatbotMinimized)}
-                      className="p-2 hover:bg-white/20 rounded-lg transition-colors"
-                    >
-                      {isChatbotMinimized ? (
-                        <Maximize2 className="h-4 w-4" />
-                      ) : (
-                        <Minimize2 className="h-4 w-4" />
-                      )}
-                    </button>
-                    <button
-                      onClick={() => setIsChatbotOpen(false)}
-                      className="p-2 hover:bg-white/20 rounded-lg transition-colors"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {!isChatbotMinimized && (
-                <>
-                  {/* Chat Messages */}
-                  <div className="flex-1 overflow-y-auto p-4 space-y-4 h-[480px]">
-                    {transBotMessages.map(message => (
-                      <motion.div
-                        key={message.id}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`flex items-start space-x-2 max-w-[80%] ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}
-                        >
-                          <div
-                            className={`h-8 w-8 rounded-full flex items-center justify-center ${
-                              message.type === 'user'
-                                ? 'bg-blue-500'
-                                : 'bg-gradient-to-br from-purple-500 to-indigo-600'
-                            }`}
-                          >
-                            {message.type === 'user' ? (
-                              <User className="h-4 w-4 text-white" />
-                            ) : (
-                              <Bot className="h-4 w-4 text-white" />
-                            )}
-                          </div>
-                          <div
-                            className={`rounded-2xl px-4 py-2 ${
-                              message.type === 'user'
-                                ? 'bg-blue-500 text-white'
-                                : 'bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-gray-100'
-                            }`}
-                          >
-                            <p className="text-sm whitespace-pre-wrap">{message.message}</p>
-                            <p
-                              className={`text-xs mt-1 ${
-                                message.type === 'user'
-                                  ? 'text-blue-100'
-                                  : 'text-gray-500 dark:text-gray-400'
-                              }`}
-                            >
-                              {message.timestamp.toLocaleTimeString([], {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                              })}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-
-                    {isTyping && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex justify-start"
-                      >
-                        <div className="flex items-start space-x-2">
-                          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                            <Bot className="h-4 w-4 text-white" />
-                          </div>
-                          <div className="bg-gray-100 dark:bg-slate-700 rounded-2xl px-4 py-2">
-                            <div className="flex space-x-1">
-                              <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"></div>
-                              <div
-                                className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"
-                                style={{ animationDelay: '0.1s' }}
-                              ></div>
-                              <div
-                                className="h-2 w-2 bg-gray-400 rounded-full animate-bounce"
-                                style={{ animationDelay: '0.2s' }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                    <div ref={messagesEndRef} />
-                  </div>
-
-                  {/* Message Input */}
-                  <div className="p-4 border-t border-gray-200 dark:border-slate-700">
-                    <div className="flex items-center space-x-2">
-                      <div className="flex-1 relative">
-                        <input
-                          type="text"
-                          value={currentMessage}
-                          onChange={e => setCurrentMessage(e.target.value)}
-                          onKeyPress={handleKeyPress}
-                          placeholder="Ask Trans Bot anything..."
-                          className="w-full px-4 py-3 pr-12 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                        />
-                        <button
-                          onClick={handleSendMessage}
-                          disabled={!currentMessage.trim()}
-                          className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-                        >
-                          <Send className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-                      Press Enter to send • Shift+Enter for new line
-                    </p>
-                  </div>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
     </div>
   );
-}
+};
 
 export default SuperAdminPortal;

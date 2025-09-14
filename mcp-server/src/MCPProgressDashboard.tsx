@@ -51,7 +51,7 @@ function MCPProgressDashboard() {
       id: '1',
       sender: 'watchdog',
       message:
-        '🐕 Watchdog Agent: All 251 MCP agents (250 + 1 Watchdog) are now under enterprise compliance monitoring. Ready to receive instructions.',
+        '🐕 Watchdog Agent: All 301 MCP agents (251 existing + 50 new testing agents) are now under enterprise compliance monitoring. Ready to receive instructions.',
       timestamp: new Date(),
       type: 'alert',
     },
@@ -215,30 +215,55 @@ function MCPProgressDashboard() {
   const [agentControlMode, setAgentControlMode] = useState<'auto' | 'on' | 'off'>('auto');
   const [isAgentsRunning, setIsAgentsRunning] = useState(true);
 
-  // Real agent progress tracking for all 251 agents
+  // Real agent progress tracking for all 301 agents (251 existing + 50 new testing agents)
   const [agentProgress, setAgentProgress] = useState<AgentProgress[]>(() => {
     const agents: AgentProgress[] = [];
+    
+    // Generate 251 existing agents
     for (let i = 1; i <= 251; i++) {
       agents.push({
         id: i,
         progress: 0,
         status: 'planning',
-        currentTask: `Initializing Agent #${i}`,
+        currentTask: `Initializing Existing Agent #${i}`,
         portalAssigned: i <= 34 ? `Portal ${i}` : `Support Agent #${i}`,
         lastUpdate: new Date(),
         efficiency: 0,
         health: 'good',
       });
     }
+    
+    // Generate 50 new testing agents
+    const testingAgents = [
+      'PlanBot', 'CaseBot', 'DataBot', 'FormBot', 'TableBot', 'ButtonBot', 'MenuBot', 'SearchBot', 'ThreeDotBot', 'ModalBot',
+      'FilterBot', 'SortBot', 'APIbot', 'FlowBot', 'ExportBot', 'ImportBot', 'PerfBot', 'ScaleBot', 'SpeedBot', 'CleanBot',
+      'StateBot', 'VulnBot', 'PenBot', 'SecureBot', 'DataGuard', 'RoleBot', 'HistoryBot', 'VisBot', 'ThemeBot', 'ResponBot',
+      'A11yBot', 'StyleBot', 'TokenBot', 'HeaderBot', 'HubBot', 'ToastBot', 'AlertBot', 'BuildBot', 'DeployBot', 'RollBot',
+      'WatchBot', 'ExploreBot', 'BugBot', 'SimBot', 'MetricBot', 'TrendBot', 'PredictBot', 'RealBot', 'ReportBot', 'SearchAIBot'
+    ];
+    
+    for (let i = 0; i < 50; i++) {
+      agents.push({
+        id: 252 + i,
+        progress: 0,
+        status: 'planning',
+        currentTask: `Initializing ${testingAgents[i]} - Testing Framework`,
+        portalAssigned: `Testing Portal ${Math.floor(Math.random() * 35) + 1}`,
+        lastUpdate: new Date(),
+        efficiency: 0,
+        health: 'good',
+      });
+    }
+    
     return agents;
   });
 
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
-    total: 251, // 250 MCP agents + 1 Watchdog Agent
-    active: 251,
+    total: 301, // 251 existing + 50 new testing agents
+    active: 301,
     maintenance: 0,
     error: 0,
-    efficiency: 99.8, // MCP 251 AGENTS - 24/7 AUTONOMOUS DEVELOPMENT SYSTEM DEPLOYED!
+    efficiency: 99.8, // MCP 301 AGENTS - 24/7 AUTONOMOUS DEVELOPMENT SYSTEM DEPLOYED!
   });
 
   const [portals, setPortals] = useState<Portal[]>([
@@ -788,7 +813,7 @@ function MCPProgressDashboard() {
       const errorChance = Math.random() < 0.01; // 1% chance of error
 
       setAgentStatus({
-        total: 251, // 250 MCP agents + 1 Watchdog Agent
+        total: 301, // 251 existing + 50 new testing agents
         active: 251 - (maintenanceChance ? 1 : 0) - (errorChance ? 1 : 0),
         maintenance: maintenanceChance ? 1 : 0,
         error: errorChance ? 1 : 0,
@@ -1096,7 +1121,7 @@ function MCPProgressDashboard() {
                 🚀 TransBot AI - MCP Command Center
               </h1>
               <p style={{ fontSize: '1.2rem', color: '#94a3b8', margin: 0, fontWeight: '500' }}>
-                MCP 251 AGENTS - 24/7 AUTONOMOUS DEVELOPMENT SYSTEM DEPLOYED!
+                MCP 301 AGENTS - 24/7 AUTONOMOUS DEVELOPMENT SYSTEM DEPLOYED!
               </p>
               <p
                 style={{
@@ -1106,7 +1131,7 @@ function MCPProgressDashboard() {
                   fontWeight: '600',
                 }}
               >
-                Real-time orchestration of 251 autonomous agents (250 MCP + 1 Watchdog) building the
+                Real-time orchestration of 301 autonomous agents (251 existing + 50 new testing agents) building the
                 future of logistics
               </p>
             </div>
@@ -1989,7 +2014,7 @@ function MCPProgressDashboard() {
                       color: '#94a3b8',
                     }}
                   >
-                    <div>Showing all 251 MCP agents • Real-time updates every 3 seconds</div>
+                    <div>Showing all 301 MCP agents • Real-time updates every 3 seconds</div>
                     <div style={{ display: 'flex', gap: '16px' }}>
                       <span>
                         Excellent: {agentProgress.filter(a => a.health === 'excellent').length}
@@ -2016,7 +2041,7 @@ function MCPProgressDashboard() {
                   }}
                 >
                   <div style={{ fontSize: '0.9rem', color: '#3b82f6', fontWeight: '600' }}>
-                    📊 Showing 20 of 251 MCP agents • Real-time progress tracking • 24/7 autonomous
+                    📊 Showing 20 of 301 MCP agents • Real-time progress tracking • 24/7 autonomous
                     development
                   </div>
                 </div>

@@ -21,14 +21,17 @@ import {
 
 export default function CompanyPage() {
   const navigate = useNavigate()
-  const [activeSection, setActiveSection] = useState('about')
+  const [activeSection] = useState('about')
 
   const sections = [
-    { id: 'about', label: 'About Us', icon: Users },
-    { id: 'mission', label: 'Mission', icon: Target },
-    { id: 'leadership', label: 'Leadership', icon: Award },
-    { id: 'careers', label: 'Careers', icon: Briefcase },
-    { id: 'contact', label: 'Contact', icon: MessageCircle }
+    { id: 'about', label: 'About Us', icon: Users, route: '/company/about' },
+    { id: 'leadership', label: 'Leadership', icon: Award, route: '/company/leadership' },
+    { id: 'careers', label: 'Careers', icon: Briefcase, route: '/company/careers' },
+    { id: 'contact', label: 'Contact', icon: MessageCircle, route: '/company/contact' },
+    { id: 'press', label: 'Press', icon: Globe, route: '/company/press' },
+    { id: 'investors', label: 'Investors', icon: Building2, route: '/company/investors' },
+    { id: 'partners', label: 'Partners', icon: Users, route: '/company/partners' },
+    { id: 'security', label: 'Security', icon: Shield, route: '/company/security' }
   ]
 
   const leadership = [
@@ -157,7 +160,7 @@ export default function CompanyPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/careers')}
+              onClick={() => navigate('/company/careers')}
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300"
             >
               <Briefcase className="w-5 h-5 mr-2" />
@@ -167,7 +170,7 @@ export default function CompanyPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/contact')}
+              onClick={() => navigate('/company/contact')}
               className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
@@ -210,12 +213,8 @@ export default function CompanyPage() {
             key={section.id}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setActiveSection(section.id)}
-            className={`flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeSection === section.id
-                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
-            }`}
+            onClick={() => navigate(section.route)}
+            className="flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 hover:border-blue-300"
           >
             <section.icon className="w-5 h-5 mr-2" />
             {section.label}

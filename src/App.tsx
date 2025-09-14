@@ -30,6 +30,10 @@ import AboutPage from './pages/company/AboutPage';
 import CareersPage from './pages/company/CareersPage';
 import ContactPage from './pages/company/ContactPage';
 import LeadershipPage from './pages/company/LeadershipPage';
+import PressPage from './pages/company/PressPage';
+import InvestorsPage from './pages/company/InvestorsPage';
+import PartnersPage from './pages/company/PartnersPage';
+import SecurityPage from './pages/company/SecurityPage';
 import IndustriesPage from './pages/IndustriesPage';
 import PortalsPage from './pages/PortalsPage';
 import AIAgentsPage from './pages/AIAgentsPage';
@@ -39,6 +43,7 @@ import LoadMatcher from './pages/ai-agents/load-matcher/LoadMatcher';
 import PredictiveAnalytics from './pages/ai-agents/predictive-analytics/PredictiveAnalytics';
 import FleetManager from './pages/ai-agents/fleet-manager/FleetManager';
 import FuelOptimizer from './pages/ai-agents/fuel-optimizer/FuelOptimizer';
+import PriceOptimizer from './pages/ai-agents/price-optimizer/PriceOptimizer';
 import DemandForecaster from './pages/ai-agents/demand-forecaster/DemandForecaster';
 import MaintenancePredictor from './pages/ai-agents/maintenance-predictor/MaintenancePredictor';
 import CarbonOptimizer from './pages/ai-agents/carbon-optimizer/CarbonOptimizer';
@@ -778,16 +783,7 @@ function App() {
                   path="/agents/price-optimizer"
                   element={
                     <>
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                            Price Optimizer
-                          </h1>
-                          <p className="text-transbot-text-secondary">
-                            Coming Soon - Dynamic pricing strategies with AI
-                          </p>
-                        </div>
-                      </div>
+                      <PriceOptimizer />
                       <Footer />
                     </>
                   }
@@ -856,15 +852,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/company"
-                  element={
-                    <>
-                      <CompanyPage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
                   path="/company/about"
                   element={
                     <>
@@ -901,19 +888,82 @@ function App() {
                   }
                 />
                 <Route
+                  path="/company/press"
+                  element={
+                    <>
+                      <PressPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/investors"
+                  element={
+                    <>
+                      <InvestorsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/partners"
+                  element={
+                    <>
+                      <PartnersPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company/security"
+                  element={
+                    <>
+                      <SecurityPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/company"
+                  element={
+                    <>
+                      <CompanyPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/careers"
+                  element={
+                    <>
+                      <CareersPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/contact"
+                  element={
+                    <>
+                      <ContactPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/leadership"
+                  element={
+                    <>
+                      <LeadershipPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
                   path="/press"
                   element={
                     <>
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                            Press & News
-                          </h1>
-                          <p className="text-transbot-text-secondary">
-                            Coming Soon - Latest news and updates
-                          </p>
-                        </div>
-                      </div>
+                      <PressPage />
                       <Footer />
                     </>
                   }
@@ -922,16 +972,7 @@ function App() {
                   path="/investors"
                   element={
                     <>
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                            Investor Information
-                          </h1>
-                          <p className="text-transbot-text-secondary">
-                            Coming Soon - Investor relations and financial information
-                          </p>
-                        </div>
-                      </div>
+                      <InvestorsPage />
                       <Footer />
                     </>
                   }
@@ -940,16 +981,7 @@ function App() {
                   path="/partners"
                   element={
                     <>
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                            Strategic Partners
-                          </h1>
-                          <p className="text-transbot-text-secondary">
-                            Coming Soon - Our strategic partnerships
-                          </p>
-                        </div>
-                      </div>
+                      <PartnersPage />
                       <Footer />
                     </>
                   }
@@ -958,16 +990,7 @@ function App() {
                   path="/security"
                   element={
                     <>
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                          <h1 className="text-4xl font-bold text-transbot-text-primary mb-4">
-                            Security & Compliance
-                          </h1>
-                          <p className="text-transbot-text-secondary">
-                            Coming Soon - Security and compliance information
-                          </p>
-                        </div>
-                      </div>
+                      <SecurityPage />
                       <Footer />
                     </>
                   }

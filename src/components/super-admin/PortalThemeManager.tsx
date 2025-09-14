@@ -1056,7 +1056,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       className="space-y-6"
                     >
                       <DesignTab
-                        theme={currentTheme}
+                        theme={currentTheme as unknown as Record<string, unknown>}
                         changes={themeChanges}
                         onThemeChange={handleThemeChange}
                       />
@@ -1142,13 +1142,13 @@ function DesignTab({
               <div className="flex items-center space-x-3">
                 <input
                   type="color"
-                  value={currentTheme.theme[color.key]}
+                  value={(currentTheme.theme as Record<string, string>)[color.key]}
                   onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
                   className="w-12 h-12 rounded-lg border-2 border-white/20 cursor-pointer"
                 />
                 <input
                   type="text"
-                  value={currentTheme.theme[color.key]}
+                  value={(currentTheme.theme as Record<string, string>)[color.key]}
                   onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
                   className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder={color.description}
@@ -1167,7 +1167,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Header Style</label>
               <select
-                value={currentTheme.layout.headerStyle}
+                value={(currentTheme.layout as Record<string, string>).headerStyle}
                 onChange={e => onThemeChange('layout.headerStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1179,7 +1179,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Sidebar Style</label>
               <select
-                value={currentTheme.layout.sidebarStyle}
+                value={(currentTheme.layout as Record<string, string>).sidebarStyle}
                 onChange={e => onThemeChange('layout.sidebarStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1195,7 +1195,7 @@ function DesignTab({
                 Navigation Style
               </label>
               <select
-                value={currentTheme.layout.navigationStyle}
+                value={(currentTheme.layout as Record<string, string>).navigationStyle}
                 onChange={e => onThemeChange('layout.navigationStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1207,7 +1207,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Footer Style</label>
               <select
-                value={currentTheme.layout.footerStyle}
+                value={(currentTheme.layout as Record<string, string>).footerStyle}
                 onChange={e => onThemeChange('layout.footerStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1228,7 +1228,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Button Style</label>
               <select
-                value={currentTheme.components.buttonStyle}
+                value={(currentTheme.components as Record<string, string>).buttonStyle}
                 onChange={e => onThemeChange('components.buttonStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1240,7 +1240,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Card Style</label>
               <select
-                value={currentTheme.components.cardStyle}
+                value={(currentTheme.components as Record<string, string>).cardStyle}
                 onChange={e => onThemeChange('components.cardStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1254,7 +1254,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Input Style</label>
               <select
-                value={currentTheme.components.inputStyle}
+                value={(currentTheme.components as Record<string, string>).inputStyle}
                 onChange={e => onThemeChange('components.inputStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1266,7 +1266,7 @@ function DesignTab({
             <div>
               <label className="text-sm font-medium text-gray-300 mb-2 block">Table Style</label>
               <select
-                value={currentTheme.components.tableStyle}
+                value={(currentTheme.components as Record<string, string>).tableStyle}
                 onChange={e => onThemeChange('components.tableStyle', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -1288,7 +1288,7 @@ function DesignTab({
               <label className="text-sm font-medium text-gray-300 mb-2 block">Company Name</label>
               <input
                 type="text"
-                value={currentTheme.branding.companyName}
+                value={(currentTheme.branding as Record<string, string>).companyName}
                 onChange={e => onThemeChange('branding.companyName', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter company name"
@@ -1298,7 +1298,7 @@ function DesignTab({
               <label className="text-sm font-medium text-gray-300 mb-2 block">Tagline</label>
               <input
                 type="text"
-                value={currentTheme.branding.tagline}
+                value={(currentTheme.branding as Record<string, string>).tagline}
                 onChange={e => onThemeChange('branding.tagline', e.target.value)}
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter tagline"
@@ -1308,7 +1308,7 @@ function DesignTab({
           <div>
             <label className="text-sm font-medium text-gray-300 mb-2 block">Custom CSS</label>
             <textarea
-              value={currentTheme.branding.customCSS || ''}
+              value={(currentTheme.branding as Record<string, string>).customCSS || ''}
               onChange={e => onThemeChange('branding.customCSS', e.target.value)}
               rows={6}
               className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
@@ -1322,7 +1322,7 @@ function DesignTab({
 }
 
 // Domain Tab Component
-function DomainTab({ domainConfig, onDomainUpdate }: Record<string, unknown>) {
+function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDomainUpdate: any }) {
   const [newDomain, setNewDomain] = useState('');
 
   const handleAddDomain = () => {

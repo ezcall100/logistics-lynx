@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -28,54 +28,109 @@ import { Card, CardContent } from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Input';
 import { formatNumber, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
 
+/**
+ * Interface representing user data structure
+ * @interface UserData
+ */
 interface UserData {
+  /** Unique identifier for the user */
   id: number;
+  /** Full name of the user */
   name: string;
+  /** Email address of the user */
   email: string;
-  role: 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer';
+  /** Role assigned to the user */
+  role: 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer';
+  /** Company name the user belongs to */
   company: string;
+  /** Company ID reference */
   companyId: number;
+  /** Current status of the user account */
   status: 'Active' | 'Inactive' | 'Suspended' | 'Pending';
+  /** Last login timestamp */
   lastLogin: string;
+  /** Account creation timestamp */
   createdAt: string;
+  /** Array of permission strings */
   permissions: string[];
+  /** User profile information */
   profile: {
+    /** Optional avatar URL */
     avatar?: string;
+    /** Optional phone number */
     phone?: string;
+    /** Optional department */
     department?: string;
+    /** Optional job title */
     title?: string;
   };
+  /** Security-related information */
   security: {
+    /** Whether two-factor authentication is enabled */
     twoFactorEnabled: boolean;
-    passwordLastChanged: string;
+    /** Last login attempt timestamp */
+    lastLoginAttempt: string;
+    /** Number of failed login attempts */
     loginAttempts: number;
-    lastFailedLogin?: string;
+    /** Current account security status */
+    accountStatus: 'secure' | 'warning' | 'critical';
   };
 }
 
+/**
+ * Interface representing user role structure
+ * @interface Role
+ */
 interface Role {
+  /** Unique identifier for the role */
   id: string;
+  /** Display name of the role */
   name: string;
+  /** Description of the role's purpose */
   description: string;
+  /** Array of permission strings for this role */
   permissions: string[];
+  /** Hierarchical level of the role (higher = more permissions) */
   level: number;
+  /** CSS color classes for role display */
   color: string;
 }
 
+/**
+ * Interface representing form data for user creation/editing
+ * @interface UserFormData
+ */
 interface UserFormData {
+  /** User's full name */
   name: string;
+  /** User's email address */
   email: string;
+  /** Selected role for the user */
   role: string;
+  /** Selected company ID */
   companyId: number;
+  /** User's phone number */
   phone: string;
+  /** User's department */
   department: string;
+  /** User's job title */
   title: string;
+  /** Array of selected permissions */
   permissions: string[];
 }
 
+/**
+ * UserManagement Component
+ * 
+ * A comprehensive user management interface for the super admin portal.
+ * Provides functionality for creating, reading, updating, and deleting users
+ * with role-based access control and security monitoring.
+ * 
+ * @component
+ * @returns {JSX.Element} The UserManagement component
+ */
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<UserData[]>([]);
-  const [filteredUsers, setFilteredUsers] = useState<UserData[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [roleFilter, setRoleFilter] = useState<string>('all');
@@ -85,7 +140,7 @@ const UserManagement: React.FC = () => {
   const [formData, setFormData] = useState<UserFormData>({
     name: '',
     email: '',
-    role: 'UserData',
+    role: 'User',
     companyId: 1,
     phone: '',
     department: '',
@@ -94,6 +149,7 @@ const UserManagement: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [bulkSelected, setBulkSelected] = useState<number[]>([]);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const roles: Role[] = [
     {
@@ -122,7 +178,7 @@ const UserManagement: React.FC = () => {
     },
     {
       id: 'user',
-      name: 'UserData',
+      name: 'User',
       description: 'Standard user access',
       permissions: ['basic_access', 'view_reports'],
       level: 2,
@@ -138,12 +194,12 @@ const UserManagement: React.FC = () => {
     },
   ];
 
-  const companies = [
+  const companies = useMemo(() => [
     { id: 1, name: 'Global Logistics Corp' },
     { id: 2, name: 'Swift Transport Ltd' },
     { id: 3, name: 'Metro Freight Inc' },
     { id: 4, name: 'Coastal Shipping Co' },
-  ];
+  ], []);
 
   const availablePermissions = [
     'user_management',
@@ -181,8 +237,9 @@ const UserManagement: React.FC = () => {
         },
         security: {
           twoFactorEnabled: true,
-          passwordLastChanged: '2024-01-01T00:00:00Z',
+          lastLoginAttempt: '2024-01-15T10:30:00Z',
           loginAttempts: 0,
+          accountStatus: 'secure',
         },
       },
       {
@@ -203,16 +260,16 @@ const UserManagement: React.FC = () => {
         },
         security: {
           twoFactorEnabled: false,
-          passwordLastChanged: '2023-12-15T00:00:00Z',
+          lastLoginAttempt: '2024-01-15T09:15:00Z',
           loginAttempts: 1,
-          lastFailedLogin: '2024-01-10T15:30:00Z',
+          accountStatus: 'warning',
         },
       },
       {
         id: 3,
         name: 'Mike Davis',
         email: 'mike.davis@metrofreight.com',
-        role: 'UserData',
+        role: 'User',
         company: 'Metro Freight Inc',
         companyId: 3,
         status: 'Active',
@@ -226,8 +283,9 @@ const UserManagement: React.FC = () => {
         },
         security: {
           twoFactorEnabled: true,
-          passwordLastChanged: '2024-01-05T00:00:00Z',
+          lastLoginAttempt: '2024-01-15T08:45:00Z',
           loginAttempts: 0,
+          accountStatus: 'secure',
         },
       },
       {
@@ -248,18 +306,18 @@ const UserManagement: React.FC = () => {
         },
         security: {
           twoFactorEnabled: false,
-          passwordLastChanged: '2024-01-14T16:00:00Z',
+          lastLoginAttempt: '2024-01-14T16:20:00Z',
           loginAttempts: 0,
+          accountStatus: 'secure',
         },
       },
     ];
 
     setUsers(mockUsers);
-    setFilteredUsers(mockUsers);
   }, []);
 
-  // Filter and search users
-  useEffect(() => {
+  // Memoized filtered users for better performance
+  const filteredUsers = useMemo(() => {
     let filtered = users;
 
     // Search filter
@@ -288,21 +346,23 @@ const UserManagement: React.FC = () => {
     }
 
     // Sort by name
-    filtered.sort((a, b) => {
+    return filtered.sort((a, b) => {
       return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
     });
-
-    setFilteredUsers(filtered);
   }, [users, searchQuery, statusFilter, roleFilter, companyFilter]);
 
-  const handleCreateUserData = async () => {
+  const handleCreateUser = useCallback(async () => {
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
     try {
       const newUserData: UserData = {
         id: Math.max(...users.map(u => u.id)) + 1,
         name: formData.name,
         email: formData.email,
-        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer',
+        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer',
         company: companies.find(c => c.id === formData.companyId)?.name || '',
         companyId: formData.companyId,
         status: 'Pending',
@@ -316,8 +376,9 @@ const UserManagement: React.FC = () => {
         },
         security: {
           twoFactorEnabled: false,
-          passwordLastChanged: new Date().toISOString(),
+          lastLoginAttempt: new Date().toISOString(),
           loginAttempts: 0,
+          accountStatus: 'secure',
         },
       };
 
@@ -326,13 +387,18 @@ const UserManagement: React.FC = () => {
       resetForm();
     } catch (error) {
       console.error('Error creating user:', error);
+      alert('Failed to create user. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [users, formData, companies]);
 
-  const handleUpdateUserData = async () => {
+  const handleUpdateUser = useCallback(async () => {
     if (!editingUserData) return;
+    
+    if (!validateForm()) {
+      return;
+    }
 
     setLoading(true);
     try {
@@ -340,7 +406,7 @@ const UserManagement: React.FC = () => {
         ...editingUserData,
         name: formData.name,
         email: formData.email,
-        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'UserData' | 'Viewer',
+        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer',
         company: companies.find(c => c.id === formData.companyId)?.name || '',
         companyId: formData.companyId,
         permissions: formData.permissions,
@@ -358,16 +424,23 @@ const UserManagement: React.FC = () => {
       resetForm();
     } catch (error) {
       console.error('Error updating user:', error);
+      alert('Failed to update user. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [editingUserData, formData, companies]);
 
-  const handleDeleteUserData = async (id: number) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
-      setUsers(prev => prev.filter(u => u.id !== id));
+  const handleDeleteUser = useCallback(async (id: number) => {
+    try {
+      if (window.confirm('Are you sure you want to delete this user?')) {
+        setUsers(prev => prev.filter(u => u.id !== id));
+        alert('User deleted successfully.');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      alert('Failed to delete user. Please try again.');
     }
-  };
+  }, []);
 
   const handleBulkAction = (action: string) => {
     switch (action) {
@@ -404,19 +477,56 @@ const UserManagement: React.FC = () => {
     }
   };
 
+  /**
+   * Validates the user form data
+   * @returns {boolean} True if form is valid, false otherwise
+   */
+  const validateForm = useCallback((): boolean => {
+    const errors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      errors.name = 'Name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.role) {
+      errors.role = 'Role is required';
+    }
+    
+    if (!formData.companyId) {
+      errors.companyId = 'Company is required';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  }, [formData]);
+
+  /**
+   * Resets the form data and validation errors to initial state
+   */
   const resetForm = () => {
     setFormData({
       name: '',
       email: '',
-      role: 'UserData',
+      role: 'User',
       companyId: 1,
       phone: '',
       department: '',
       title: '',
       permissions: [],
     });
+    setFormErrors({});
   };
 
+  /**
+   * Opens the edit modal with the selected user's data
+   * @param {UserData} user - The user to edit
+   */
   const openEditModal = (user: UserData) => {
     setEditingUserData(user);
     setFormData({
@@ -432,6 +542,11 @@ const UserManagement: React.FC = () => {
     setShowUserModal(true);
   };
 
+  /**
+   * Returns the appropriate icon for a given role
+   * @param {string} role - The role name
+   * @returns {JSX.Element} The icon component
+   */
   const getRoleIcon = (role: string) => {
     switch (role) {
       case 'Super Admin':
@@ -440,7 +555,7 @@ const UserManagement: React.FC = () => {
         return <Shield className="w-4 h-4" />;
       case 'Manager':
         return <UserCog className="w-4 h-4" />;
-      case 'UserData':
+      case 'User':
         return <Users className="w-4 h-4" />;
       case 'Viewer':
         return <Eye className="w-4 h-4" />;
@@ -449,6 +564,11 @@ const UserManagement: React.FC = () => {
     }
   };
 
+  /**
+   * Returns the appropriate color classes for a given role
+   * @param {string} role - The role name
+   * @returns {string} CSS color classes
+   */
   const getRoleColor = (role: string) => {
     const roleData = roles.find(r => r.name === role);
     return roleData?.color || 'text-gray-600 bg-gray-50';
@@ -472,7 +592,7 @@ const UserManagement: React.FC = () => {
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-gray-900">
-                  {editingUserData ? 'Edit UserData' : 'Add New UserData'}
+                  {editingUserData ? 'Edit User' : 'Add New User'}
                 </h2>
                 <Button
                   variant="ghost"
@@ -490,19 +610,25 @@ const UserManagement: React.FC = () => {
 
             <div className="p-6 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input
-                  label="Full Name"
-                  value={formData.name}
-                  onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Enter full name"
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  value={formData.email}
-                  onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  placeholder="user@company.com"
-                />
+                <div>
+                  <Input
+                    label="Full Name"
+                    value={formData.name}
+                    onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder="Enter full name"
+                    errorText={formErrors.name}
+                  />
+                </div>
+                <div>
+                  <Input
+                    label="Email"
+                    type="email"
+                    value={formData.email}
+                    onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    placeholder="user@company.com"
+                    errorText={formErrors.email}
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -511,7 +637,9 @@ const UserManagement: React.FC = () => {
                   <select
                     value={formData.role}
                     onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+                      formErrors.role ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   >
                     {roles.map(role => (
                       <option key={role.id} value={role.name}>
@@ -519,6 +647,9 @@ const UserManagement: React.FC = () => {
                       </option>
                     ))}
                   </select>
+                  {formErrors.role && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.role}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
@@ -527,7 +658,9 @@ const UserManagement: React.FC = () => {
                     onChange={e =>
                       setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+                      formErrors.companyId ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   >
                     {companies.map(company => (
                       <option key={company.id} value={company.id}>
@@ -535,6 +668,9 @@ const UserManagement: React.FC = () => {
                       </option>
                     ))}
                   </select>
+                  {formErrors.companyId && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.companyId}</p>
+                  )}
                 </div>
               </div>
 
@@ -604,11 +740,11 @@ const UserManagement: React.FC = () => {
                 Cancel
               </Button>
               <Button
-                onClick={editingUserData ? handleUpdateUserData : handleCreateUserData}
+                onClick={editingUserData ? handleUpdateUser : handleCreateUser}
                 loading={loading}
               >
                 <Save className="w-4 h-4 mr-2" />
-                {editingUserData ? 'Update UserData' : 'Create UserData'}
+                {editingUserData ? 'Update User' : 'Create User'}
               </Button>
             </div>
           </motion.div>
@@ -622,21 +758,23 @@ const UserManagement: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">UserData Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
           <p className="text-gray-600">Manage user accounts, roles, and permissions</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
-            Export
-          </Button>
-          <Button variant="outline">
-            <Upload className="w-4 h-4 mr-2" />
-            Import
-          </Button>
-          <Button onClick={() => setShowUserModal(true)}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm">
+              <Download className="w-4 h-4 mr-2" />
+              Export
+            </Button>
+            <Button variant="outline" size="sm">
+              <Upload className="w-4 h-4 mr-2" />
+              Import
+            </Button>
+          </div>
+          <Button onClick={() => setShowUserModal(true)} className="w-full sm:w-auto">
             <UserPlus className="w-4 h-4 mr-2" />
-            Add UserData
+            Add User
           </Button>
         </div>
       </div>
@@ -779,7 +917,7 @@ const UserManagement: React.FC = () => {
       <Card>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50 border-b">
                 <tr>
                   <th className="px-6 py-4 text-left">
@@ -799,7 +937,7 @@ const UserManagement: React.FC = () => {
                     />
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    UserData
+                    User
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Company
@@ -887,10 +1025,18 @@ const UserManagement: React.FC = () => {
                             <Shield className="w-4 h-4" />
                           </span>
                         )}
-                        {user.security.loginAttempts > 0 && (
+                        {user.security.accountStatus === 'warning' && (
+                          <span
+                            className="text-yellow-600"
+                            title="Account security warning"
+                          >
+                            <AlertTriangle className="w-4 h-4" />
+                          </span>
+                        )}
+                        {user.security.accountStatus === 'critical' && (
                           <span
                             className="text-red-600"
-                            title={`${user.security.loginAttempts} failed attempts`}
+                            title="Critical security issue"
                           >
                             <AlertTriangle className="w-4 h-4" />
                           </span>
@@ -908,7 +1054,7 @@ const UserManagement: React.FC = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => handleDeleteUserData(user.id)}
+                          onClick={() => handleDeleteUser(user.id)}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>

@@ -10,8 +10,6 @@ import {
   Bell,
   Settings,
   User,
-  Moon,
-  Sun,
   HelpCircle,
   ChevronDown,
   LogOut,
@@ -68,8 +66,6 @@ interface EnhancedHeaderProps {
   onProfileClick?: () => void;
   onSettingsClick?: () => void;
   onLogout?: () => void;
-  darkMode?: boolean;
-  onToggleDarkMode?: () => void;
   className?: string;
 }
 
@@ -129,8 +125,6 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
   onProfileClick,
   onSettingsClick,
   onLogout,
-  darkMode = false,
-  onToggleDarkMode,
   className,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -363,15 +357,6 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
             <RefreshCw className="w-4 h-4" />
           </Button>
 
-          {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onToggleDarkMode}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </Button>
 
           {/* Help */}
           <Button

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
 import { motion } from 'framer-motion';
-import {
+import { 
   Users,
   Search,
   Bell,
@@ -792,7 +792,7 @@ function DriverPortal() {
                   </h1>
                 </div>
               </div>
-            </div>
+      </div>
 
             <div className="flex items-center space-x-1 sm:space-x-2">
               {/* Search Bar - Responsive */}
@@ -1027,9 +1027,9 @@ function DriverPortal() {
           className={`${sidebarCollapsed ? 'w-16' : 'w-64 lg:w-72'} bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg shadow-xl border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ease-in-out sticky top-20 h-[calc(100vh-5rem)] z-30 hidden md:block`}
         >
           <div className="flex flex-col h-full">
-            {/* Sidebar Header */}
+              {/* Sidebar Header */}
             <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between">
                 {!sidebarCollapsed && (
                   <div className="flex items-center space-x-2">
                     <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
@@ -1038,18 +1038,18 @@ function DriverPortal() {
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                       Navigation
                     </span>
-                  </div>
+                    </div>
                 )}
-                <button
+                  <button
                   onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                   className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-                >
+                  >
                   <ChevronRight
                     className={`h-4 w-4 text-gray-500 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`}
                   />
-                </button>
+                  </button>
+                </div>
               </div>
-            </div>
 
             {/* Multi-Level Navigation Menu */}
             <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
@@ -1085,8 +1085,8 @@ function DriverPortal() {
                               className={`text-sm font-medium ${isActive ? 'text-blue-700' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:text-gray-100'}`}
                             >
                               {menuItem.label}
-                            </span>
-                          )}
+                      </span>
+                    )}
                         </div>
                         {!sidebarCollapsed && menuItem.subMenus && menuItem.subMenus.length > 0 && (
                           <ChevronRight
@@ -1094,7 +1094,7 @@ function DriverPortal() {
                           />
                         )}
                       </button>
-                    </div>
+              </div>
 
                     {/* Sub-Menus */}
                     {!sidebarCollapsed && isExpanded && menuItem.subMenus && (
@@ -1136,7 +1136,7 @@ function DriverPortal() {
                                   >
                                     {subMenu.label}
                                   </span>
-                                </div>
+                  </div>
                                 {subMenu.subSubMenus && subMenu.subSubMenus.length > 0 && (
                                   <ChevronRight
                                     className={`h-3 w-3 text-gray-400 transition-transform duration-200 ${isSubExpanded ? 'rotate-90' : ''}`}
@@ -1179,12 +1179,12 @@ function DriverPortal() {
                                   })}
                                 </motion.div>
                               )}
-                            </div>
+                  </div>
                           );
                         })}
                       </motion.div>
                     )}
-                  </div>
+                </div>
                 );
               })}
             </nav>
@@ -1194,14 +1194,14 @@ function DriverPortal() {
               <div className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200 dark:border-slate-700">
                 <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                   <Shield className="h-4 w-4 text-white" />
-                </div>
+              </div>
                 {!sidebarCollapsed && (
                   <div className="flex-1">
                     <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
                       MCP 251 Agents
                     </p>
                     <p className="text-xs text-gray-500">24/7 Active</p>
-                  </div>
+            </div>
                 )}
               </div>
             </div>
@@ -1221,7 +1221,7 @@ function DriverPortal() {
               <div className="flex flex-col h-full">
                 {/* Mobile Sidebar Header */}
                 <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
-                  <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
                         <Users className="h-6 w-6 text-white" />
@@ -1235,7 +1235,7 @@ function DriverPortal() {
                         </p>
                       </div>
                     </div>
-                    <button
+                <button
                       onClick={() => setSidebarCollapsed(true)}
                       className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
                     >
@@ -1252,9 +1252,9 @@ function DriverPortal() {
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
-                    </button>
-                  </div>
+                </button>
                 </div>
+              </div>
 
                 {/* Mobile Navigation - Same as desktop but full width */}
                 <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -1284,8 +1284,8 @@ function DriverPortal() {
                               <ChevronDown
                                 className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''} ${isActive ? 'text-white' : 'text-gray-400'}`}
                               />
-                            )}
-                          </button>
+                  )}
+                </button>
 
                           {/* Sub-menus */}
                           {isExpanded && menuItem.subMenus && (
@@ -1322,7 +1322,7 @@ function DriverPortal() {
                                           className={`h-3 w-3 transition-transform duration-200 ${isSubExpanded ? 'rotate-180' : ''} ${isSubActive ? 'text-white' : 'text-gray-400'}`}
                                         />
                                       )}
-                                    </button>
+                </button>
 
                                     {/* Sub-sub-menus */}
                                     {isSubExpanded && subMenu.subSubMenus && (
@@ -1351,14 +1351,14 @@ function DriverPortal() {
                                             </button>
                                           );
                                         })}
-                                      </div>
+              </div>
                                     )}
-                                  </div>
+            </div>
                                 );
                               })}
-                            </div>
+          </div>
                           )}
-                        </div>
+        </div>
                       </div>
                     );
                   })}
@@ -1413,7 +1413,7 @@ function DriverPortal() {
                       className={`text-sm font-semibold ${metric.changeType === 'increase' ? 'text-green-600' : 'text-red-600'}`}
                     >
                       {metric.change}
-                    </div>
+                  </div>
                   </div>
                   <div className="mt-4">
                     <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -1444,7 +1444,7 @@ function DriverPortal() {
                 </button>
               ))}
             </div>
-          </div>
+            </div>
 
           {/* Enhanced Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1491,8 +1491,8 @@ function DriverPortal() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
-            </div>
+                  </div>
+                </div>
 
             {/* Recent Activity */}
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
@@ -1504,11 +1504,11 @@ function DriverPortal() {
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     Latest updates and notifications
                   </p>
-                </div>
+                        </div>
                 <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                   <Activity className="h-4 w-4 text-white" />
-                </div>
-              </div>
+                        </div>
+                      </div>
 
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => {
@@ -1536,13 +1536,13 @@ function DriverPortal() {
                           {activity.details}
                         </p>
                         <p className="text-xs text-gray-500 mt-2">{activity.time}</p>
-                      </div>
+                    </div>
                     </motion.div>
                   );
                 })}
-              </div>
-            </div>
-          </div>
+                        </div>
+                      </div>
+                      </div>
         </main>
 
         {/* Enhanced Right CRM Sidebar - Responsive */}
@@ -1584,14 +1584,14 @@ function DriverPortal() {
                         <MessageCircle className="h-5 w-5 text-white" />
                       </div>
                       <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-                    </div>
-                    <div>
+                      </div>
+                      <div>
                       <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                         CRM Command Center
                       </h3>
                       <p className="text-xs text-gray-500 font-medium">All systems active</p>
+                      </div>
                     </div>
-                  </div>
                   <button
                     onClick={e => {
                       e.stopPropagation();
@@ -1605,7 +1605,7 @@ function DriverPortal() {
                   >
                     <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180" />
                   </button>
-                </div>
+                      </div>
               </div>
 
               {/* Enhanced CRM Tabs */}
@@ -1654,7 +1654,7 @@ function DriverPortal() {
                           {isActive && (
                             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
                           )}
-                        </div>
+                      </div>
 
                         {!rightSidebarCollapsed && (
                           <div className="relative flex-1">
@@ -1670,7 +1670,7 @@ function DriverPortal() {
                             {isActive && (
                               <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50"></div>
                             )}
-                          </div>
+                    </div>
                         )}
 
                         {/* Active indicator */}
@@ -1680,15 +1680,15 @@ function DriverPortal() {
                       </motion.button>
                     );
                   })}
+                  </div>
                 </div>
-              </div>
 
               {/* Enhanced CRM Content */}
               <div className="flex-1 p-4 overflow-y-auto relative">
                 {/* Content Background Pattern */}
                 <div className="absolute inset-0 opacity-3">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20"></div>
-                </div>
+              </div>
 
                 {!rightSidebarCollapsed && activeCrmTab === 'chat' && (
                   <motion.div
@@ -1762,8 +1762,8 @@ function DriverPortal() {
                       />
                       <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                         <Send className="h-4 w-4" />
-                      </button>
-                    </div>
+                  </button>
+                </div>
                   </motion.div>
                 )}
 
@@ -1804,7 +1804,7 @@ function DriverPortal() {
 
                 {!rightSidebarCollapsed && activeCrmTab === 'tasks' && (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
                       <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         Tasks
                       </h3>
@@ -1812,7 +1812,7 @@ function DriverPortal() {
                         <Plus className="h-3 w-3 inline mr-1" />
                         Add Task
                       </button>
-                    </div>
+                          </div>
                     <div className="space-y-2">
                       {tasks.map(task => (
                         <div
@@ -1848,10 +1848,10 @@ function DriverPortal() {
                               {task.priority}
                             </span>
                             <span className="text-xs text-gray-500">{task.due}</span>
-                          </div>
+                        </div>
                         </div>
                       ))}
-                    </div>
+                      </div>
                   </div>
                 )}
 
@@ -1900,10 +1900,10 @@ function DriverPortal() {
                             <span className="text-xs text-gray-500">{call.duration}</span>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                  ))}
+                </div>
+              </div>
+            )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'text' && (
                   <div className="space-y-3">
@@ -1914,8 +1914,8 @@ function DriverPortal() {
                       <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
                         <Plus className="h-3 w-3 inline mr-1" />
                         New SMS
-                      </button>
-                    </div>
+                  </button>
+                </div>
                     <div className="space-y-2">
                       {smsMessages.map(sms => (
                         <div
@@ -1940,7 +1940,7 @@ function DriverPortal() {
 
                 {!rightSidebarCollapsed && activeCrmTab === 'video' && (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
                       <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         Video Calls
                       </h3>
@@ -1962,7 +1962,7 @@ function DriverPortal() {
                             <p className="text-xs text-gray-500">Starting in 5 minutes</p>
                           </div>
                         </div>
-                      </div>
+                          </div>
                     </div>
                   </div>
                 )}
@@ -1976,8 +1976,8 @@ function DriverPortal() {
                       <button className="px-3 py-1 text-xs bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
                         <Plus className="h-3 w-3 inline mr-1" />
                         Add Event
-                      </button>
-                    </div>
+                          </button>
+                        </div>
                     <div className="space-y-2">
                       {calendarEvents.map(event => (
                         <div
@@ -1989,7 +1989,7 @@ function DriverPortal() {
                               {event.title}
                             </span>
                             <span className="text-xs text-gray-500">{event.time}</span>
-                          </div>
+                      </div>
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-gray-600 dark:text-gray-300">
                               {event.date}
@@ -2007,11 +2007,11 @@ function DriverPortal() {
                             </span>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
+                  ))}
+                </div>
+              </div>
+            )}
+            
                 {!rightSidebarCollapsed && activeCrmTab === 'notes' && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
@@ -2022,7 +2022,7 @@ function DriverPortal() {
                         <Plus className="h-3 w-3 inline mr-1" />
                         New Note
                       </button>
-                    </div>
+              </div>
                     <div className="space-y-2">
                       {notes.map(note => (
                         <div
@@ -2034,14 +2034,14 @@ function DriverPortal() {
                               {note.title}
                             </span>
                             <span className="text-xs text-gray-500">{note.updated}</span>
-                          </div>
+            </div>
                           <p className="text-sm text-gray-600 dark:text-gray-300">{note.content}</p>
-                        </div>
+          </div>
                       ))}
-                    </div>
+        </div>
                   </div>
                 )}
-              </div>
+      </div>
 
               {/* Enhanced CRM Sidebar Footer */}
               <div className="relative p-4 border-t border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
@@ -2074,7 +2074,7 @@ function DriverPortal() {
                   )}
 
                   {/* Status indicator */}
-                  <div className="relative">
+        <div className="relative">
                     <div className="h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
                     <div className="absolute inset-0 h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-75"></div>
                   </div>
@@ -2128,11 +2128,11 @@ function DriverPortal() {
                       const Icon = tab.icon;
                       const isActive = activeCrmTab === tab.id;
                       return (
-                        <motion.button
+                  <motion.button
                           key={tab.id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.1 }}
                           onClick={() => setActiveCrmTab(tab.id)}
                           className={`group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 overflow-hidden ${
                             isActive
@@ -2202,7 +2202,7 @@ function DriverPortal() {
                   </div>
 
                   {activeCrmTab === 'chat' && (
-                    <motion.div
+            <motion.div
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3 }}
@@ -2212,7 +2212,7 @@ function DriverPortal() {
                         <div className="text-gray-500 text-sm">Chat functionality</div>
                         <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
                       </div>
-                    </motion.div>
+            </motion.div>
                   )}
 
                   {/* Other CRM tabs content would go here - simplified for mobile */}
@@ -2220,11 +2220,11 @@ function DriverPortal() {
                     <div className="text-center py-8">
                       <div className="text-gray-500 text-sm">
                         {activeCrmTab.charAt(0).toUpperCase() + activeCrmTab.slice(1)} functionality
-                      </div>
+        </div>
                       <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
-                    </div>
+      </div>
                   )}
-                </div>
+    </div>
               </div>
             </aside>
           </div>

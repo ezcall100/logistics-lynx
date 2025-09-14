@@ -59,3 +59,4 @@ allPortals.forEach(portalPath => {
 });
 
 console.log('🎉 Import syntax errors fixed!');
+

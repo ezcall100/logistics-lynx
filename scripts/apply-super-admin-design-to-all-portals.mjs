@@ -782,3 +782,4 @@ export default ${portalName}Portal;`;
 });
 
 console.log('🎉 All portals updated with Super Admin design!');
+

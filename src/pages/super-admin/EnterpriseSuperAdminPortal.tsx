@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Crown,
+  Truck,
   Building2,
   Users,
   DollarSign,
@@ -28,6 +28,8 @@ import {
   CheckCircle,
   Clock,
   CreditCard,
+  HelpCircle,
+  ChevronDown,
 } from 'lucide-react';
 
 import { Button } from '../../design-system/components/Button';
@@ -35,13 +37,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { Input } from '../../design-system/components/Input';
 import { cn, formatCurrency, formatNumber, formatPercentage, formatRelativeTime } from '../../lib/utils';
 
-// Mock data for demonstration
+/**
+ * DEMO / PLACEHOLDER data for demonstration purposes
+ * All data is fictional and follows mock data guidelines
+ */
 const mockData = {
   companies: [
     {
       id: 1,
-      name: 'Global Logistics Corp',
-      domain: 'globallogistics.com',
+      name: 'DEMO Company A',
+      domain: 'demo-company-a.com',
       users: 1250,
       plan: 'Enterprise',
       status: 'Active',
@@ -50,15 +55,15 @@ const mockData = {
       lastActive: '2024-01-15T10:30:00Z',
       features: ['TMS Core', 'Load Board', 'Fleet Management', 'Analytics'],
       contact: {
-        email: 'admin@globallogistics.com',
-        phone: '+1-555-0123',
-        address: '123 Business Ave, New York, NY 10001'
+        email: 'admin@demo-company-a.com',
+        phone: '+1-555-0001',
+        address: '123 Demo Street, Demo City, DC 00001'
       }
     },
     {
       id: 2,
-      name: 'Swift Transport Ltd',
-      domain: 'swifttransport.com',
+      name: 'DEMO Company B',
+      domain: 'demo-company-b.com',
       users: 890,
       plan: 'Professional',
       status: 'Active',
@@ -67,15 +72,15 @@ const mockData = {
       lastActive: '2024-01-15T09:15:00Z',
       features: ['TMS Core', 'Load Board', 'Driver App'],
       contact: {
-        email: 'contact@swifttransport.com',
-        phone: '+1-555-0456',
-        address: '456 Transport St, Los Angeles, CA 90210'
+        email: 'contact@demo-company-b.com',
+        phone: '+1-555-0002',
+        address: '456 Demo Avenue, Demo City, DC 00002'
       }
     },
     {
       id: 3,
-      name: 'Metro Freight Inc',
-      domain: 'metrofreight.com',
+      name: 'DEMO Company C',
+      domain: 'demo-company-c.com',
       users: 456,
       plan: 'Standard',
       status: 'Active',
@@ -84,15 +89,15 @@ const mockData = {
       lastActive: '2024-01-15T08:45:00Z',
       features: ['TMS Core', 'Load Board'],
       contact: {
-        email: 'info@metrofreight.com',
-        phone: '+1-555-0789',
-        address: '789 Freight Blvd, Chicago, IL 60601'
+        email: 'info@demo-company-c.com',
+        phone: '+1-555-0003',
+        address: '789 Demo Boulevard, Demo City, DC 00003'
       }
     },
     {
       id: 4,
-      name: 'Coastal Shipping Co',
-      domain: 'coastalshipping.com',
+      name: 'DEMO Company D',
+      domain: 'demo-company-d.com',
       users: 234,
       plan: 'Basic',
       status: 'Trial',
@@ -101,29 +106,29 @@ const mockData = {
       lastActive: '2024-01-14T16:20:00Z',
       features: ['TMS Core'],
       contact: {
-        email: 'hello@coastalshipping.com',
-        phone: '+1-555-0321',
-        address: '321 Harbor Dr, Miami, FL 33101'
+        email: 'hello@demo-company-d.com',
+        phone: '+1-555-0004',
+        address: '321 Demo Drive, Demo City, DC 00004'
       }
     }
   ],
   users: [
     {
       id: 1,
-      name: 'John Smith',
-      email: 'john.smith@globallogistics.com',
+      name: 'DEMO User A',
+      email: 'demo.user.a@demo-company-a.com',
       role: 'Admin',
-      company: 'Global Logistics Corp',
+      company: 'DEMO Company A',
       status: 'Active',
       lastLogin: '2024-01-15T10:30:00Z',
       permissions: ['Full Access']
     },
     {
       id: 2,
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@swifttransport.com',
+      name: 'DEMO User B',
+      email: 'demo.user.b@demo-company-b.com',
       role: 'Manager',
-      company: 'Swift Transport Ltd',
+      company: 'DEMO Company B',
       status: 'Active',
       lastLogin: '2024-01-15T09:15:00Z',
       permissions: ['Load Management', 'User Management']
@@ -143,7 +148,7 @@ const mockData = {
     {
       id: 1,
       type: 'company_created',
-      message: 'New company "Coastal Shipping Co" registered',
+      message: 'New company "DEMO Company D" registered',
       time: '2024-01-15T10:30:00Z',
       status: 'success',
       severity: 'info'
@@ -151,7 +156,7 @@ const mockData = {
     {
       id: 2,
       type: 'payment_received',
-      message: 'Payment of $45,000 received from Global Logistics Corp',
+      message: 'Payment of $45,000 received from DEMO Company A',
       time: '2024-01-15T10:15:00Z',
       status: 'success',
       severity: 'info'
@@ -159,7 +164,7 @@ const mockData = {
     {
       id: 3,
       type: 'system_alert',
-      message: 'High API usage detected from Swift Transport Ltd',
+      message: 'High API usage detected from DEMO Company B',
       time: '2024-01-15T10:00:00Z',
       status: 'warning',
       severity: 'warning'
@@ -167,7 +172,7 @@ const mockData = {
     {
       id: 4,
       type: 'user_limit',
-      message: 'Metro Freight Inc approaching user limit',
+      message: 'DEMO Company C approaching user limit',
       time: '2024-01-15T09:45:00Z',
       status: 'info',
       severity: 'info'
@@ -183,11 +188,38 @@ const mockData = {
   ]
 };
 
+/**
+ * EnterpriseSuperAdminPortal Component
+ * 
+ * The main super admin portal interface providing comprehensive
+ * system management capabilities including company management,
+ * user administration, and system monitoring.
+ * 
+ * @component
+ * @returns {JSX.Element} The EnterpriseSuperAdminPortal component
+ */
 const EnterpriseSuperAdminPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [notificationCount] = useState(12);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
+        setProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const navigationItems = [
     {
@@ -271,30 +303,166 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
     }
   ];
 
+  /**
+   * Handles floating action button actions with loading state
+   * @param {string} action - The action to perform
+   */
+  const handleFabAction = useCallback(async (action: string) => {
+    try {
+      switch (action) {
+        case 'add-company':
+          alert('Company creation feature coming soon');
+          break;
+        case 'add-user':
+          alert('User creation feature coming soon');
+          break;
+        case 'system-check':
+          console.log('Running system check...');
+          break;
+        case 'maintenance':
+          console.log('Toggling maintenance mode...');
+          break;
+      }
+    } catch (error) {
+      console.error('Error performing action:', error);
+    }
+  }, []);
+
+  /**
+   * Handles search functionality with query validation
+   * @param {string} query - The search query
+   */
+  const handleSearch = useCallback((query: string) => {
+    if (query.trim()) {
+      console.log('Searching for:', query);
+      // TODO: Implement actual search functionality
+    }
+  }, []);
+
+  /**
+   * Handles help and support actions
+   */
+  const handleHelp = useCallback(() => {
+    console.log('Opening help and support');
+    // TODO: Implement help functionality
+  }, []);
+
+  /**
+   * Handles settings actions
+   */
+  const handleSettings = useCallback(() => {
+    console.log('Opening settings');
+    // TODO: Implement settings functionality
+  }, []);
+
+  /**
+   * Handles profile dropdown toggle
+   */
+  const handleProfileToggle = useCallback(() => {
+    setProfileDropdownOpen(!profileDropdownOpen);
+  }, [profileDropdownOpen]);
+
+  /**
+   * Handles dark mode toggle from profile dropdown
+   */
+  const handleDarkModeToggle = useCallback(() => {
+    try {
+      setDarkMode(!darkMode);
+      setProfileDropdownOpen(false); // Close dropdown after toggle
+    } catch (error) {
+      console.error('Error toggling theme:', error);
+    }
+  }, [darkMode]);
+
+  /**
+   * Memoized header elements for better performance and consistency
+   * Includes centralized icon sizing, colors, and styling system
+   */
+  const headerElements = useMemo(() => ({
+    logoGradient: 'bg-gradient-to-br from-primary-500 to-secondary-600',
+    userGradient: 'bg-gradient-to-br from-primary-500 to-secondary-600',
+    searchWidth: 'w-48 sm:w-64 md:w-80',
+    iconSizes: {
+      small: 'w-4 h-4',
+      medium: 'w-5 h-5 sm:w-6 sm:h-6',
+      large: 'w-6 h-6'
+    },
+    iconColors: {
+      primary: 'text-white',
+      secondary: 'text-gray-600',
+      accent: 'text-primary-600',
+      warning: 'text-yellow-500',
+      success: 'text-green-500'
+    }
+  }), []);
+
+  /**
+   * Utility Icons Group Component
+   * Groups settings, help, and theme toggle icons together for consistency
+   * All icons use identical styling for perfect alignment
+   */
+  const UtilityIconsGroup = useMemo(() => {
+    // Common button styling for all utility icons
+    const commonButtonClass = "h-10 w-10 flex items-center justify-center hover:bg-gray-100 transition-colors duration-200";
+    const commonIconClass = `${headerElements.iconSizes.medium} transition-colors duration-200`;
+    
+    return (
+      <div className="flex items-center gap-1 sm:gap-2">
+        {/* Settings Icon - Hidden on mobile, shown on desktop */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleSettings}
+          aria-label="Open settings"
+          className={`hidden sm:flex ${commonButtonClass}`}
+          title="Settings"
+        >
+          <Settings 
+            className={`${commonIconClass} ${headerElements.iconColors.secondary}`}
+          />
+        </Button>
+
+        {/* Help & Support Icon - Always visible */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleHelp}
+          aria-label="Open help and support"
+          className={commonButtonClass}
+          title="Help & Support"
+        >
+          <HelpCircle 
+            className={`${commonIconClass} ${headerElements.iconColors.secondary}`}
+          />
+        </Button>
+      </div>
+    );
+  }, [headerElements, handleSettings, handleHelp]);
+
   const fabActions = [
     {
       id: 'add-company',
       label: 'Add Company',
       icon: Building,
-      action: () => alert('Company creation feature coming soon')
+      action: () => handleFabAction('add-company')
     },
     {
       id: 'add-user',
       label: 'Add User',
       icon: Users,
-      action: () => alert('User creation feature coming soon')
+      action: () => handleFabAction('add-user')
     },
     {
       id: 'system-check',
       label: 'Run System Check',
       icon: Activity,
-      action: () => console.log('Running system check...')
+      action: () => handleFabAction('system-check')
     },
     {
       id: 'maintenance',
       label: 'Toggle Maintenance',
       icon: Settings,
-      action: () => console.log('Toggling maintenance mode...')
+      action: () => handleFabAction('maintenance')
     }
   ];
 
@@ -512,15 +680,15 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-900">Company Management</h2>
           <p className="text-gray-600">Manage client companies and their configurations</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <Input
             placeholder="Search companies..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             leftIcon={<Search className="w-4 h-4" />}
-            className="w-64"
+            className="w-full sm:w-64"
           />
-          <Button onClick={() => alert('Company creation feature coming soon')}>
+          <Button onClick={() => alert('Company creation feature coming soon')} className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
             Add Company
           </Button>
@@ -634,15 +802,15 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
           <p className="text-gray-600">Manage user accounts, roles, and permissions</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <Input
             placeholder="Search users..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             leftIcon={<Search className="w-4 h-4" />}
-            className="w-64"
+            className="w-full sm:w-64"
           />
-          <Button onClick={() => alert('User creation feature coming soon')}>
+          <Button onClick={() => alert('User creation feature coming soon')} className="w-full sm:w-auto">
             <Users className="w-4 h-4 mr-2" />
             Add User
           </Button>
@@ -776,23 +944,28 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 gap-4">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                 className="lg:hidden"
+                aria-label="Toggle sidebar navigation"
               >
-                <Menu className="w-5 h-5" />
+                <Menu className={`${headerElements.iconSizes.medium} ${headerElements.iconColors.secondary}`} />
               </Button>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-secondary-600 flex items-center justify-center">
-                  <Crown className="w-5 h-5 text-white" />
+                <div 
+                  className={`w-8 h-8 rounded-lg ${headerElements.logoGradient} flex items-center justify-center`}
+                  aria-label="Trans Bot AI - Transportation and Logistics Platform"
+                  title="Trans Bot AI - Transportation and Logistics Platform"
+                >
+                  <Truck className={`${headerElements.iconSizes.medium} ${headerElements.iconColors.primary}`} />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">Trans Bot AI</h1>
-                  <p className="text-sm text-gray-600">Super Admin Portal</p>
+                  <h1 className="text-lg font-bold text-gray-900">Trans Bot AI</h1>
+                  <p className="text-xs text-gray-500">Super Admin Portal</p>
                 </div>
               </div>
             </div>
@@ -801,32 +974,150 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
               <div className="relative">
                 <Input
                   placeholder="Search companies, users, portals..."
-                  className="w-80"
-                  leftIcon={<Search className="w-4 h-4" />}
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    handleSearch(e.target.value);
+                  }}
+                  className={headerElements.searchWidth}
+                  leftIcon={
+                    <Search 
+                      className={`${headerElements.iconSizes.small} ${headerElements.iconColors.secondary} cursor-pointer`}
+                      aria-label="Search icon - Click to search"
+                      onClick={() => handleSearch(searchQuery)}
+                    />
+                  }
+                  aria-label="Search companies, users, and portals"
                 />
               </div>
               
-              <Button variant="outline" size="sm">
-                <Bell className="w-4 h-4 mr-2" />
-                Platform Management
-                <span className="ml-2 bg-primary-600 text-white text-xs px-2 py-0.5 rounded-full">12</span>
+              {/* Desktop Platform Management Button */}
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="hidden sm:flex h-10"
+                aria-label={`Platform Management with ${notificationCount} notifications`}
+              >
+                <Bell 
+                  className={`${headerElements.iconSizes.small} mr-2 ${
+                    notificationCount > 0 ? headerElements.iconColors.accent : headerElements.iconColors.secondary
+                  }`}
+                  aria-label={`Notifications - ${notificationCount} unread`}
+                />
+                <span className="hidden md:inline">Platform Management</span>
+                {notificationCount > 0 && (
+                  <span className="ml-2 bg-primary-600 text-white text-xs px-2 py-0.5 rounded-full">
+                    {notificationCount}
+                  </span>
+                )}
               </Button>
 
+              {/* Mobile Notification Button */}
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setDarkMode(!darkMode)}
+                className="sm:hidden relative h-10 w-10 flex items-center justify-center hover:bg-gray-100 transition-colors duration-200"
+                aria-label={`${notificationCount} notifications`}
               >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                <Bell 
+                  className={`${headerElements.iconSizes.medium} ${
+                    notificationCount > 0 ? headerElements.iconColors.accent : headerElements.iconColors.secondary
+                  }`}
+                />
+                {notificationCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary-600 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[18px] h-[18px] flex items-center justify-center">
+                    {notificationCount > 9 ? '9+' : notificationCount}
+                  </span>
+                )}
               </Button>
 
+              {/* Utility Icons Group - Settings, Help */}
+              {UtilityIconsGroup}
+
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
+                {/* Mobile Settings Button - Only visible on mobile */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleSettings}
+                  aria-label="Open settings"
+                  className="sm:hidden h-10 w-10 flex items-center justify-center hover:bg-gray-100 transition-colors duration-200"
+                  title="Settings"
+                >
+                  <Settings 
+                    className={`${headerElements.iconSizes.medium} ${headerElements.iconColors.secondary} transition-colors duration-200`}
+                  />
+                </Button>
+
+                {/* User Profile with Dropdown */}
+                <div className="relative" ref={profileDropdownRef}>
+                  <button
+                    onClick={handleProfileToggle}
+                    className="flex items-center gap-2 hover:bg-gray-100 rounded-lg p-1 transition-colors duration-200"
+                    aria-label="Super Administrator profile menu"
+                  >
+                    <div 
+                      className={`w-8 h-8 rounded-full ${headerElements.userGradient} flex items-center justify-center`}
+                    >
                   <span className="text-white font-medium text-sm">SA</span>
                 </div>
-                <div className="hidden sm:block">
+                    <div className="hidden md:block">
                   <div className="text-sm font-medium text-gray-900">Super Administrator</div>
                   <div className="text-xs text-gray-500">Super Admin</div>
+                </div>
+                    <div className="md:hidden">
+                      <div className="text-xs font-medium text-gray-900">SA</div>
+              </div>
+                    <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${profileDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {/* Profile Dropdown Menu */}
+                  {profileDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                      <div className="py-1">
+                        <button
+                          onClick={handleDarkModeToggle}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                        >
+                          {darkMode ? (
+                            <>
+                              <Sun className="w-4 h-4 text-yellow-500" />
+                              Switch to Light Mode
+                            </>
+                          ) : (
+                            <>
+                              <Moon className="w-4 h-4 text-gray-600" />
+                              Switch to Dark Mode
+                            </>
+                          )}
+                        </button>
+                        <button
+                          onClick={handleSettings}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                        >
+                          <Settings className="w-4 h-4 text-gray-600" />
+                          Settings
+                        </button>
+                        <button
+                          onClick={handleHelp}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                        >
+                          <HelpCircle className="w-4 h-4 text-gray-600" />
+                          Help & Support
+                        </button>
+                        <hr className="my-1" />
+                        <button
+                          onClick={() => {
+                            console.log('Sign out');
+                            setProfileDropdownOpen(false);
+                          }}
+                          className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -852,6 +1143,8 @@ const EnterpriseSuperAdminPortal: React.FC = () => {
                       ? 'bg-primary-50 text-primary-700 border border-primary-200'
                       : 'hover:bg-gray-50 text-gray-700'
                   )}
+                  aria-label={`Navigate to ${item.label} section`}
+                  aria-current={activeTab === item.id ? 'page' : undefined}
                 >
                   <div className={cn('p-2 rounded-lg', item.bgColor)}>
                     <item.icon className={cn('w-5 h-5', item.color)} />

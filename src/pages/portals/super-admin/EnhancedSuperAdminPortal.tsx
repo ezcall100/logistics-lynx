@@ -50,7 +50,7 @@ interface SystemMetrics {
 const EnhancedSuperAdminPortal: React.FC = () => {
   const [activePage, setActivePage] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [, setSearchQuery] = useState('');
   const [notifications, setNotifications] = useState([
@@ -280,8 +280,6 @@ const EnhancedSuperAdminPortal: React.FC = () => {
         onProfileClick={() => setActivePage('profile')}
         onSettingsClick={() => setActivePage('settings')}
         onLogout={() => console.log('Logout')}
-        darkMode={darkMode}
-        onToggleDarkMode={() => setDarkMode(!darkMode)}
       />
 
       <div className="flex">
