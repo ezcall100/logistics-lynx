@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Building, Settings, Users, CreditCard, Shield, Bell,
-  BarChart3, FileText, Key, Globe, CheckCircle, AlertTriangle,
-  Edit, Save, X, Plus, Search, Filter, Download, Upload
+  Building,
+  Settings,
+  Users,
+  CreditCard,
+  Shield,
+  Bell,
+  BarChart3,
+  FileText,
+  Key,
+  CheckCircle,
+  AlertTriangle,
+  Save,
+  Plus,
 } from 'lucide-react';
 
 /**
@@ -13,20 +23,39 @@ import {
  * Features: Complete Company Settings management with all sections
  */
 
+interface CompanyData {
+  id: string;
+  name: string;
+  domain: string;
+  plan: string;
+  status: string;
+  users: number;
+  revenue: number;
+  growth: number;
+  lastActive: string;
+  features: string[];
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+}
+
 interface CompanySettingsTab {
   id: string;
   name: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   description: string;
   status: 'active' | 'pending' | 'completed';
-  component: React.ComponentType<any>;
+  component: React.ComponentType<{ company: CompanyData }>;
 }
 
 const CompanySettingsMain: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('profile');
-  const [companies, setCompanies] = useState<any[]>([]);
-  const [selectedCompany, setSelectedCompany] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [companies, setCompanies] = useState<CompanyData[]>([]);
+  const [selectedCompany, setSelectedCompany] = useState<CompanyData | null>(null);
+  // Loading state for future use
+  // const [isLoading, setIsLoading] = useState(false);
 
   // Mock company data - MCP 301 Agents created this
   useEffect(() => {
@@ -49,8 +78,8 @@ const CompanySettingsMain: React.FC = () => {
           security: { completed: true, lastUpdated: '2025-09-14T07:00:00Z' },
           notifications: { completed: true, lastUpdated: '2025-09-14T06:00:00Z' },
           compliance: { completed: false, lastUpdated: '2025-09-12T12:00:00Z' },
-          analytics: { completed: true, lastUpdated: '2025-09-14T05:00:00Z' }
-        }
+          analytics: { completed: true, lastUpdated: '2025-09-14T05:00:00Z' },
+        },
       },
       {
         id: '2',
@@ -70,11 +99,11 @@ const CompanySettingsMain: React.FC = () => {
           security: { completed: true, lastUpdated: '2025-09-14T05:30:00Z' },
           notifications: { completed: false, lastUpdated: '2025-09-12T14:00:00Z' },
           compliance: { completed: true, lastUpdated: '2025-09-14T04:30:00Z' },
-          analytics: { completed: true, lastUpdated: '2025-09-14T03:30:00Z' }
-        }
-      }
+          analytics: { completed: true, lastUpdated: '2025-09-14T03:30:00Z' },
+        },
+      },
     ];
-    
+
     setCompanies(mockCompanies);
     setSelectedCompany(mockCompanies[0]);
   }, []);
@@ -86,7 +115,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: Building,
       description: 'Basic company information and branding',
       status: 'completed',
-      component: () => <CompanyProfileSettings company={selectedCompany} />
+      component: () => <CompanyProfileSettings company={selectedCompany} />,
     },
     {
       id: 'billing',
@@ -94,7 +123,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: CreditCard,
       description: 'Payment methods and subscription management',
       status: 'completed',
-      component: () => <CompanyBillingSettings company={selectedCompany} />
+      component: () => <CompanyBillingSettings company={selectedCompany} />,
     },
     {
       id: 'users',
@@ -102,7 +131,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: Users,
       description: 'Company users and role management',
       status: 'active',
-      component: () => <CompanyUserSettings company={selectedCompany} />
+      component: () => <CompanyUserSettings company={selectedCompany} />,
     },
     {
       id: 'api',
@@ -110,7 +139,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: Key,
       description: 'API keys and third-party integrations',
       status: 'pending',
-      component: () => <CompanyAPISettings company={selectedCompany} />
+      component: () => <CompanyAPISettings company={selectedCompany} />,
     },
     {
       id: 'security',
@@ -118,7 +147,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: Shield,
       description: 'Security policies and access controls',
       status: 'completed',
-      component: () => <CompanySecuritySettings company={selectedCompany} />
+      component: () => <CompanySecuritySettings company={selectedCompany} />,
     },
     {
       id: 'notifications',
@@ -126,7 +155,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: Bell,
       description: 'Email and system notification preferences',
       status: 'completed',
-      component: () => <CompanyNotificationSettings company={selectedCompany} />
+      component: () => <CompanyNotificationSettings company={selectedCompany} />,
     },
     {
       id: 'compliance',
@@ -134,7 +163,7 @@ const CompanySettingsMain: React.FC = () => {
       icon: FileText,
       description: 'Legal compliance and data protection',
       status: 'pending',
-      component: () => <CompanyComplianceSettings company={selectedCompany} />
+      component: () => <CompanyComplianceSettings company={selectedCompany} />,
     },
     {
       id: 'analytics',
@@ -142,25 +171,33 @@ const CompanySettingsMain: React.FC = () => {
       icon: BarChart3,
       description: 'Data analytics and reporting settings',
       status: 'completed',
-      component: () => <CompanyAnalyticsSettings company={selectedCompany} />
-    }
+      component: () => <CompanyAnalyticsSettings company={selectedCompany} />,
+    },
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-400 bg-green-400/20';
-      case 'active': return 'text-blue-400 bg-blue-400/20';
-      case 'pending': return 'text-yellow-400 bg-yellow-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'completed':
+        return 'text-green-400 bg-green-400/20';
+      case 'active':
+        return 'text-blue-400 bg-blue-400/20';
+      case 'pending':
+        return 'text-yellow-400 bg-yellow-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return <CheckCircle className="w-4 h-4" />;
-      case 'active': return <Settings className="w-4 h-4" />;
-      case 'pending': return <AlertTriangle className="w-4 h-4" />;
-      default: return <Settings className="w-4 h-4" />;
+      case 'completed':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'active':
+        return <Settings className="w-4 h-4" />;
+      case 'pending':
+        return <AlertTriangle className="w-4 h-4" />;
+      default:
+        return <Settings className="w-4 h-4" />;
     }
   };
 
@@ -175,10 +212,12 @@ const CompanySettingsMain: React.FC = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-white">Company Settings</h1>
-              <p className="text-gray-400">Manage company configurations and preferences • MCP 301 Agents</p>
+              <p className="text-gray-400">
+                Manage company configurations and preferences • MCP 301 Agents
+              </p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -201,9 +240,9 @@ const CompanySettingsMain: React.FC = () => {
             <span>Add Company</span>
           </button>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {companies.map((company) => (
+          {companies.map(company => (
             <div
               key={company.id}
               onClick={() => setSelectedCompany(company)}
@@ -215,7 +254,9 @@ const CompanySettingsMain: React.FC = () => {
             >
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-white">{company.name}</h3>
-                <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(company.status)}`}>
+                <span
+                  className={`px-2 py-1 text-xs rounded-full ${getStatusColor(company.status)}`}
+                >
                   {company.status}
                 </span>
               </div>
@@ -233,7 +274,7 @@ const CompanySettingsMain: React.FC = () => {
       <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden">
         <div className="border-b border-white/10">
           <nav className="flex space-x-8 px-6">
-            {tabs.map((tab) => (
+            {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -258,24 +299,25 @@ const CompanySettingsMain: React.FC = () => {
         {/* Tab Content */}
         <div className="p-6">
           <AnimatePresence mode="wait">
-            {tabs.map((tab) => (
-              activeTab === tab.id && (
-                <motion.div
-                  key={tab.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="space-y-6"
-                >
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-white">{tab.name}</h3>
-                    <p className="text-gray-400">{tab.description}</p>
-                  </div>
-                  
-                  <tab.component />
-                </motion.div>
-              )
-            ))}
+            {tabs.map(
+              tab =>
+                activeTab === tab.id && (
+                  <motion.div
+                    key={tab.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="space-y-6"
+                  >
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-white">{tab.name}</h3>
+                      <p className="text-gray-400">{tab.description}</p>
+                    </div>
+
+                    <tab.component />
+                  </motion.div>
+                )
+            )}
           </AnimatePresence>
         </div>
       </div>
@@ -284,7 +326,7 @@ const CompanySettingsMain: React.FC = () => {
 };
 
 // Placeholder components for each settings section
-const CompanyProfileSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyProfileSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="bg-white/5 border border-white/10 rounded-lg p-6">
@@ -308,7 +350,7 @@ const CompanyProfileSettings: React.FC<{ company: any }> = ({ company }) => (
           </div>
         </div>
       </div>
-      
+
       <div className="bg-white/5 border border-white/10 rounded-lg p-6">
         <h4 className="text-lg font-semibold text-white mb-4">Company Details</h4>
         <div className="space-y-4">
@@ -337,7 +379,7 @@ const CompanyProfileSettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanyBillingSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyBillingSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Subscription Details</h4>
@@ -366,7 +408,7 @@ const CompanyBillingSettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanyUserSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyUserSettings: React.FC<{ company: CompanyData }> = ({ company }) => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">User Management</h4>
@@ -390,7 +432,7 @@ const CompanyUserSettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanyAPISettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyAPISettings: React.FC<{ company: CompanyData }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">API Configuration</h4>
@@ -413,7 +455,7 @@ const CompanyAPISettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanySecuritySettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanySecuritySettings: React.FC<{ company: CompanyData }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Security Policies</h4>
@@ -433,7 +475,7 @@ const CompanySecuritySettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanyNotificationSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyNotificationSettings: React.FC<{ company: CompanyData }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Notification Preferences</h4>
@@ -453,13 +495,15 @@ const CompanyNotificationSettings: React.FC<{ company: any }> = ({ company }) =>
   </div>
 );
 
-const CompanyComplianceSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyComplianceSettings: React.FC<{ company: CompanyData }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Compliance & Legal</h4>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Data Retention Policy</label>
+          <label className="block text-sm font-medium text-gray-400 mb-2">
+            Data Retention Policy
+          </label>
           <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
             <option value="1year">1 Year</option>
             <option value="2years">2 Years</option>
@@ -472,7 +516,7 @@ const CompanyComplianceSettings: React.FC<{ company: any }> = ({ company }) => (
   </div>
 );
 
-const CompanyAnalyticsSettings: React.FC<{ company: any }> = ({ company }) => (
+const CompanyAnalyticsSettings: React.FC<{ company: CompanyData }> = () => (
   <div className="space-y-6">
     <div className="bg-white/5 border border-white/10 rounded-lg p-6">
       <h4 className="text-lg font-semibold text-white mb-4">Analytics & Reporting</h4>

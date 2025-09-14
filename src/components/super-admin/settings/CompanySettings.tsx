@@ -50,11 +50,11 @@ interface CompanySettingsProps {
 interface CompanyTab {
   id: string;
   label: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   count?: number;
 }
 
-interface User {
+interface CompanyUser {
   id: number;
   name: string;
   email: string;
@@ -79,12 +79,11 @@ interface NewUser {
   ip: string;
 }
 
-
 const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState('company-profile');
   const [activeUserManagementTab, setActiveUserManagementTab] = useState('all-users');
   const [isEditing, setIsEditing] = useState(false);
-  
+
   // Advanced All Users State Management
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -97,7 +96,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isRealTime, setIsRealTime] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(new Date());
-  
+
   const [companyInfo, setCompanyInfo] = useState({
     name: 'TransBot Logistics',
     logo: '',
@@ -110,7 +109,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     email: 'info@transbotlogistics.com',
     website: 'https://transbotlogistics.com',
     taxId: '12-3456789',
-    businessType: 'Carrier'
+    businessType: 'Carrier',
   });
 
   const [branding, setBranding] = useState({
@@ -118,11 +117,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     secondaryColor: '#10B981',
     accentColor: '#F59E0B',
     logoUrl: '',
-    themePreference: 'light'
+    themePreference: 'light',
   });
 
   // User Management State
-  const [users, setUsers] = useState<User[]>([
+  const [users, setUsers] = useState<CompanyUser[]>([
     {
       id: 1,
       name: 'John Smith',
@@ -133,7 +132,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       device: 'desktop',
       location: 'Chicago, IL',
       ip: '192.168.1.100',
-      lastActive: '2 minutes ago'
+      lastActive: '2 minutes ago',
     },
     {
       id: 2,
@@ -145,7 +144,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       device: 'mobile',
       location: 'New York, NY',
       ip: '192.168.1.101',
-      lastActive: '15 minutes ago'
+      lastActive: '15 minutes ago',
     },
     {
       id: 3,
@@ -157,8 +156,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       device: 'tablet',
       location: 'Los Angeles, CA',
       ip: '192.168.1.102',
-      lastActive: '2 hours ago'
-    }
+      lastActive: '2 hours ago',
+    },
   ]);
 
   // Modal States
@@ -166,7 +165,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   const [showEditUserModal, setShowEditUserModal] = useState(false);
   const [showViewUserModal, setShowViewUserModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<CompanyUser | null>(null);
   const [newUser, setNewUser] = useState<NewUser>({
     name: '',
     email: '',
@@ -175,13 +174,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     status: 'active',
     device: 'desktop',
     location: '',
-    ip: ''
+    ip: '',
   });
 
   // Auto-refresh functionality
   useEffect(() => {
     if (!isRealTime) return;
-    
+
     const interval = setInterval(() => {
       setLastUpdated(new Date());
       // In a real app, you would fetch fresh data here
@@ -199,7 +198,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     { id: 'billing', label: 'Billing & Subscription', icon: CreditCard },
     { id: 'compliance', label: 'Compliance & Legal', icon: FileText, count: 12 },
     { id: 'notifications', label: 'Notifications', icon: Bell, count: 5 },
-    { id: 'security', label: 'Security Settings', icon: Shield }
+    { id: 'security', label: 'Security Settings', icon: Shield },
   ];
 
   // User Management Sub-tabs
@@ -211,7 +210,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     { id: 'user-analytics', label: 'User Analytics', icon: BarChart3, count: 127 },
     { id: 'billing-management', label: 'Billing Management', icon: DollarSign, count: 15 },
     { id: 'support-tickets', label: 'Support Tickets', icon: Ticket, count: 23 },
-    { id: 'user-onboarding', label: 'User Onboarding', icon: UserPlus, count: 7 }
+    { id: 'user-onboarding', label: 'User Onboarding', icon: UserPlus, count: 7 },
   ];
 
   const handleSave = () => {
@@ -227,7 +226,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
   // CRUD Handler Functions
   const handleAddUser = (userData: NewUser) => {
-    const newUser: User = {
+    const newUser: CompanyUser = {
       id: Math.max(...users.map(u => u.id)) + 1,
       name: userData.name,
       email: userData.email,
@@ -238,18 +237,30 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       location: userData.location,
       ip: userData.ip,
       lastActive: new Date().toISOString(),
-      avatar: userData.name.split(' ').map(n => n[0]).join('')
+      avatar: userData.name
+        .split(' ')
+        .map(n => n[0])
+        .join(''),
     };
     setUsers([...users, newUser]);
     setShowAddUserModal(false);
-    setNewUser({ name: '', email: '', role: '', company: '', status: 'active', device: 'desktop', location: '', ip: '' });
+    setNewUser({
+      name: '',
+      email: '',
+      role: '',
+      company: '',
+      status: 'active',
+      device: 'desktop',
+      location: '',
+      ip: '',
+    });
     setLastUpdated(new Date());
   };
 
   const handleEditUser = (userData: NewUser) => {
     if (!selectedUser) return;
-    const updatedUsers = users.map(user => 
-      user.id === selectedUser.id 
+    const updatedUsers = users.map(user =>
+      user.id === selectedUser.id
         ? { ...user, ...userData, lastActive: new Date().toISOString() }
         : user
     );
@@ -266,12 +277,12 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     setLastUpdated(new Date());
   };
 
-  const handleViewUser = (user: User) => {
+  const handleViewUser = (user: CompanyUser) => {
     setSelectedUser(user);
     setShowViewUserModal(true);
   };
 
-  const handleEditUserClick = (user: User) => {
+  const handleEditUserClick = (user: CompanyUser) => {
     setSelectedUser(user);
     setNewUser({
       name: user.name,
@@ -281,17 +292,15 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       status: user.status,
       device: user.device,
       location: user.location,
-      ip: user.ip
+      ip: user.ip,
     });
     setShowEditUserModal(true);
   };
 
-  const handleDeleteUserClick = (user: User) => {
+  const handleDeleteUserClick = (user: CompanyUser) => {
     setSelectedUser(user);
     setShowDeleteModal(true);
   };
-
-
 
   const handleBulkDelete = () => {
     setUsers(users.filter(user => !selectedUsers.includes(user.id)));
@@ -300,8 +309,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleBulkActivate = () => {
-    const updatedUsers = users.map(user => 
-      selectedUsers.includes(user.id) 
+    const updatedUsers = users.map(user =>
+      selectedUsers.includes(user.id)
         ? { ...user, status: 'active' as const, lastActive: new Date().toISOString() }
         : user
     );
@@ -311,8 +320,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleBulkDeactivate = () => {
-    const updatedUsers = users.map(user => 
-      selectedUsers.includes(user.id) 
+    const updatedUsers = users.map(user =>
+      selectedUsers.includes(user.id)
         ? { ...user, status: 'inactive' as const, lastActive: new Date().toISOString() }
         : user
     );
@@ -322,20 +331,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
+    setSelectedUsers(prev =>
+      prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
 
   const handleSelectAll = () => {
     const filteredUserIds = filteredUsers.map(user => user.id);
-    setSelectedUsers(
-      selectedUsers.length === filteredUserIds.length 
-        ? [] 
-        : filteredUserIds
-    );
+    setSelectedUsers(selectedUsers.length === filteredUserIds.length ? [] : filteredUserIds);
   };
 
   const handleSort = (field: string) => {
@@ -349,7 +352,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
   const handleExport = () => {
     const dataStr = JSON.stringify(filteredUsers, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     const exportFileDefaultName = 'users-export.json';
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -360,45 +363,60 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   // Utility Functions
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-      case 'idle': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
-      case 'inactive': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
+      case 'active':
+        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+      case 'idle':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'inactive':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     }
   };
 
   const getDeviceIcon = (device: string) => {
     switch (device) {
-      case 'desktop': return Monitor;
-      case 'mobile': return Smartphone;
-      case 'tablet': return Tablet;
-      default: return Monitor;
+      case 'desktop':
+        return Monitor;
+      case 'mobile':
+        return Smartphone;
+      case 'tablet':
+        return Tablet;
+      default:
+        return Monitor;
     }
   };
 
   const getSortIcon = (field: string) => {
     if (sortField !== field) return <ChevronUp className="h-4 w-4" />;
-    return sortDirection === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />;
+    return sortDirection === 'asc' ? (
+      <ChevronUp className="h-4 w-4" />
+    ) : (
+      <ChevronDown className="h-4 w-4" />
+    );
   };
 
   // Filtering and Sorting Logic
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.company.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-    const matchesRole = roleFilter === 'all' || user.role === roleFilter;
-    const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
-    
-    return matchesSearch && matchesStatus && matchesRole && matchesDevice;
-  }).sort((a, b) => {
-    const aValue = a[sortField as keyof User] || '';
-    const bValue = b[sortField as keyof User] || '';
-    
-    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-    return 0;
-  });
+  const filteredUsers = users
+    .filter(user => {
+      const matchesSearch =
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
+      const matchesRole = roleFilter === 'all' || user.role === roleFilter;
+      const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
+
+      return matchesSearch && matchesStatus && matchesRole && matchesDevice;
+    })
+    .sort((a, b) => {
+      const aValue = a[sortField as keyof CompanyUser] || '';
+      const bValue = b[sortField as keyof CompanyUser] || '';
+
+      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -424,7 +442,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <input
               type="text"
               value={companyInfo.name}
-              onChange={(e) => setCompanyInfo({...companyInfo, name: e.target.value})}
+              onChange={e => setCompanyInfo({ ...companyInfo, name: e.target.value })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
             />
@@ -436,7 +454,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </label>
             <select
               value={companyInfo.businessType}
-              onChange={(e) => setCompanyInfo({...companyInfo, businessType: e.target.value})}
+              onChange={e => setCompanyInfo({ ...companyInfo, businessType: e.target.value })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
             >
@@ -455,7 +473,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <input
               type="text"
               value={companyInfo.taxId}
-              onChange={(e) => setCompanyInfo({...companyInfo, taxId: e.target.value})}
+              onChange={e => setCompanyInfo({ ...companyInfo, taxId: e.target.value })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
             />
@@ -468,7 +486,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <input
               type="url"
               value={companyInfo.website}
-              onChange={(e) => setCompanyInfo({...companyInfo, website: e.target.value})}
+              onChange={e => setCompanyInfo({ ...companyInfo, website: e.target.value })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
             />
@@ -476,7 +494,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
         </div>
 
         <div className="mt-6">
-          <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">Contact Information</h4>
+          <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
+            Contact Information
+          </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -485,7 +505,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="tel"
                 value={companyInfo.phone}
-                onChange={(e) => setCompanyInfo({...companyInfo, phone: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, phone: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -498,7 +518,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="email"
                 value={companyInfo.email}
-                onChange={(e) => setCompanyInfo({...companyInfo, email: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, email: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -516,7 +536,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="text"
                 value={companyInfo.address}
-                onChange={(e) => setCompanyInfo({...companyInfo, address: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, address: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -528,7 +548,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="text"
                 value={companyInfo.city}
-                onChange={(e) => setCompanyInfo({...companyInfo, city: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, city: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -540,7 +560,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="text"
                 value={companyInfo.state}
-                onChange={(e) => setCompanyInfo({...companyInfo, state: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, state: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -552,7 +572,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="text"
                 value={companyInfo.zipCode}
-                onChange={(e) => setCompanyInfo({...companyInfo, zipCode: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, zipCode: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -564,7 +584,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="text"
                 value={companyInfo.country}
-                onChange={(e) => setCompanyInfo({...companyInfo, country: e.target.value})}
+                onChange={e => setCompanyInfo({ ...companyInfo, country: e.target.value })}
                 disabled={!isEditing}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-600"
               />
@@ -607,13 +627,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="color"
                 value={branding.primaryColor}
-                onChange={(e) => setBranding({...branding, primaryColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, primaryColor: e.target.value })}
                 className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer"
               />
               <input
                 type="text"
                 value={branding.primaryColor}
-                onChange={(e) => setBranding({...branding, primaryColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, primaryColor: e.target.value })}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
@@ -627,13 +647,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="color"
                 value={branding.secondaryColor}
-                onChange={(e) => setBranding({...branding, secondaryColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, secondaryColor: e.target.value })}
                 className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer"
               />
               <input
                 type="text"
                 value={branding.secondaryColor}
-                onChange={(e) => setBranding({...branding, secondaryColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, secondaryColor: e.target.value })}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
@@ -647,13 +667,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <input
                 type="color"
                 value={branding.accentColor}
-                onChange={(e) => setBranding({...branding, accentColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, accentColor: e.target.value })}
                 className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer"
               />
               <input
                 type="text"
                 value={branding.accentColor}
-                onChange={(e) => setBranding({...branding, accentColor: e.target.value})}
+                onChange={e => setBranding({ ...branding, accentColor: e.target.value })}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
@@ -665,7 +685,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </label>
             <select
               value={branding.themePreference}
-              onChange={(e) => setBranding({...branding, themePreference: e.target.value})}
+              onChange={e => setBranding({ ...branding, themePreference: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="light">Light</option>
@@ -682,7 +702,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <div className="flex items-center space-x-4">
             <div className="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-600">
               {branding.logoUrl ? (
-                <img src={branding.logoUrl} alt="Company Logo" className="w-full h-full object-contain rounded-lg" />
+                <img
+                  src={branding.logoUrl}
+                  alt="Company Logo"
+                  className="w-full h-full object-contain rounded-lg"
+                />
               ) : (
                 <Upload className="h-8 w-8 text-gray-400" />
               )}
@@ -692,9 +716,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Logo
               </button>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                PNG, JPG up to 2MB
-              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">PNG, JPG up to 2MB</p>
             </div>
           </div>
         </div>
@@ -741,22 +763,24 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Manage all users in your organization with advanced controls
           </p>
         </div>
-        
+
         <div className="flex items-center gap-3">
           {/* Real-time Toggle */}
           <button
             onClick={() => setIsRealTime(!isRealTime)}
             className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
-              isRealTime 
-                ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' 
+              isRealTime
+                ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
                 : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
             }`}
           >
             {isRealTime ? <Play className="h-4 w-4 mr-2" /> : <Pause className="h-4 w-4 mr-2" />}
             {isRealTime ? 'Live' : 'Paused'}
-            {isRealTime && <div className="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>}
+            {isRealTime && (
+              <div className="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            )}
           </button>
-          
+
           {/* Export Button */}
           <button
             onClick={handleExport}
@@ -765,7 +789,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <Download className="h-4 w-4 mr-2" />
             Export
           </button>
-          
+
           {/* Add User Button */}
           <button
             onClick={() => setShowAddUserModal(true)}
@@ -787,15 +811,15 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               type="text"
               placeholder="Search users..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
-          
+
           {/* Status Filter */}
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            onChange={e => setStatusFilter(e.target.value)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Status</option>
@@ -803,11 +827,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="idle">Idle</option>
             <option value="inactive">Inactive</option>
           </select>
-          
+
           {/* Role Filter */}
           <select
             value={roleFilter}
-            onChange={(e) => setRoleFilter(e.target.value)}
+            onChange={e => setRoleFilter(e.target.value)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Roles</option>
@@ -816,11 +840,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="Operator">Operator</option>
             <option value="Customer">Customer</option>
           </select>
-          
+
           {/* Device Filter */}
           <select
             value={deviceFilter}
-            onChange={(e) => setDeviceFilter(e.target.value)}
+            onChange={e => setDeviceFilter(e.target.value)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Devices</option>
@@ -873,10 +897,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-4 py-3 text-left">
-                  <button
-                    onClick={handleSelectAll}
-                    className="flex items-center"
-                  >
+                  <button onClick={handleSelectAll} className="flex items-center">
                     {selectedUsers.length === filteredUsers.length && filteredUsers.length > 0 ? (
                       <Check className="h-4 w-4 text-blue-600" />
                     ) : (
@@ -944,10 +965,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {paginatedUsers.map((user) => {
+              {paginatedUsers.map(user => {
                 const DeviceIcon = getDeviceIcon(user.device);
                 return (
-                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  <tr
+                    key={user.id}
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
                     <td className="px-4 py-3">
                       <button
                         onClick={() => handleSelectUser(user.id)}
@@ -963,32 +987,47 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                          {user.name.split(' ').map(n => n[0]).join('')}
+                          {user.name
+                            .split(' ')
+                            .map(n => n[0])
+                            .join('')}
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900 dark:text-white">{user.name}</div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">{user.company}</div>
+                          <div className="font-medium text-gray-900 dark:text-white">
+                            {user.name}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {user.company}
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">{user.email}</td>
+                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                      {user.email}
+                    </td>
                     <td className="px-4 py-3">
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
                         {user.role}
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(user.status)}`}>
+                      <span
+                        className={`px-2 py-1 text-xs rounded-full ${getStatusColor(user.status)}`}
+                      >
                         {user.status}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-2">
                         <DeviceIcon className="h-4 w-4 text-gray-500" />
-                        <span className="text-sm text-gray-900 dark:text-white capitalize">{user.device}</span>
+                        <span className="text-sm text-gray-900 dark:text-white capitalize">
+                          {user.device}
+                        </span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{user.lastActive}</td>
+                    <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      {user.lastActive}
+                    </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-2">
                         <button
@@ -1028,7 +1067,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <span className="text-sm text-gray-700 dark:text-gray-300">Show</span>
           <select
             value={itemsPerPage}
-            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+            onChange={e => setItemsPerPage(Number(e.target.value))}
             className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
           >
             <option value={5}>5</option>
@@ -1038,13 +1077,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </select>
           <span className="text-sm text-gray-700 dark:text-gray-300">per page</span>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-700 dark:text-gray-300">
-            Showing {startIndex + 1} to {Math.min(endIndex, filteredUsers.length)} of {filteredUsers.length} results
+            Showing {startIndex + 1} to {Math.min(endIndex, filteredUsers.length)} of{' '}
+            {filteredUsers.length} results
           </span>
         </div>
-        
+
         <div className="flex items-center space-x-1">
           <button
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -1053,7 +1093,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          
+
           {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
             const page = i + 1;
             return (
@@ -1070,7 +1110,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               </button>
             );
           })}
-          
+
           <button
             onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
@@ -1096,9 +1136,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Roles</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Manage user roles and permissions</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Manage user roles and permissions
+          </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add role')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1150,10 +1192,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-4 py-3 text-left">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300 dark:border-gray-600"
-                  />
+                  <input type="checkbox" className="rounded border-gray-300 dark:border-gray-600" />
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Role Name
@@ -1177,12 +1216,47 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {[
-                { id: 1, name: 'Super Admin', description: 'Full system access and control', users: 2, permissions: 'All', status: 'active' },
-                { id: 2, name: 'Manager', description: 'Team management and oversight', users: 5, permissions: '15/20', status: 'active' },
-                { id: 3, name: 'Operator', description: 'Standard operational access', users: 12, permissions: '8/20', status: 'active' },
-                { id: 4, name: 'Customer', description: 'Limited customer access', users: 25, permissions: '3/20', status: 'active' },
-                { id: 5, name: 'Guest', description: 'Read-only access', users: 8, permissions: '1/20', status: 'inactive' }
-              ].map((role) => (
+                {
+                  id: 1,
+                  name: 'Super Admin',
+                  description: 'Full system access and control',
+                  users: 2,
+                  permissions: 'All',
+                  status: 'active',
+                },
+                {
+                  id: 2,
+                  name: 'Manager',
+                  description: 'Team management and oversight',
+                  users: 5,
+                  permissions: '15/20',
+                  status: 'active',
+                },
+                {
+                  id: 3,
+                  name: 'Operator',
+                  description: 'Standard operational access',
+                  users: 12,
+                  permissions: '8/20',
+                  status: 'active',
+                },
+                {
+                  id: 4,
+                  name: 'Customer',
+                  description: 'Limited customer access',
+                  users: 25,
+                  permissions: '3/20',
+                  status: 'active',
+                },
+                {
+                  id: 5,
+                  name: 'Guest',
+                  description: 'Read-only access',
+                  users: 8,
+                  permissions: '1/20',
+                  status: 'inactive',
+                },
+              ].map(role => (
                 <tr key={role.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-4 py-3">
                     <input
@@ -1193,7 +1267,10 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                        {role.name.split(' ').map((n: string) => n[0]).join('')}
+                        {role.name
+                          .split(' ')
+                          .map((n: string) => n[0])
+                          .join('')}
                       </div>
                       <div>
                         <div className="font-medium text-gray-900 dark:text-white">{role.name}</div>
@@ -1209,22 +1286,27 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      role.permissions === 'All' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : role.permissions.includes('/') && parseInt(role.permissions.split('/')[0]) > 10
-                        ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        role.permissions === 'All'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : role.permissions.includes('/') &&
+                              parseInt(role.permissions.split('/')[0]) > 10
+                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                      }`}
+                    >
                       {role.permissions}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      role.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        role.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                      }`}
+                    >
                       {role.status}
                     </span>
                   </td>
@@ -1258,7 +1340,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1293,9 +1375,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Groups</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Organize users into groups for easier management</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Organize users into groups for easier management
+          </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add group')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1346,10 +1430,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-4 py-3 text-left">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300 dark:border-gray-600"
-                  />
+                  <input type="checkbox" className="rounded border-gray-300 dark:border-gray-600" />
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Group Name
@@ -1373,12 +1454,47 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {[
-                { id: 1, name: 'Development Team', description: 'Software development team', members: 8, created: '2024-01-15', status: 'active' },
-                { id: 2, name: 'Sales Team', description: 'Sales and marketing team', members: 5, created: '2024-01-10', status: 'active' },
-                { id: 3, name: 'Support Team', description: 'Customer support team', members: 3, created: '2024-01-08', status: 'active' },
-                { id: 4, name: 'Management', description: 'Executive and management team', members: 4, created: '2024-01-05', status: 'active' },
-                { id: 5, name: 'QA Team', description: 'Quality assurance team', members: 6, created: '2024-01-12', status: 'inactive' }
-              ].map((group) => (
+                {
+                  id: 1,
+                  name: 'Development Team',
+                  description: 'Software development team',
+                  members: 8,
+                  created: '2024-01-15',
+                  status: 'active',
+                },
+                {
+                  id: 2,
+                  name: 'Sales Team',
+                  description: 'Sales and marketing team',
+                  members: 5,
+                  created: '2024-01-10',
+                  status: 'active',
+                },
+                {
+                  id: 3,
+                  name: 'Support Team',
+                  description: 'Customer support team',
+                  members: 3,
+                  created: '2024-01-08',
+                  status: 'active',
+                },
+                {
+                  id: 4,
+                  name: 'Management',
+                  description: 'Executive and management team',
+                  members: 4,
+                  created: '2024-01-05',
+                  status: 'active',
+                },
+                {
+                  id: 5,
+                  name: 'QA Team',
+                  description: 'Quality assurance team',
+                  members: 6,
+                  created: '2024-01-12',
+                  status: 'inactive',
+                },
+              ].map(group => (
                 <tr key={group.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-4 py-3">
                     <input
@@ -1389,10 +1505,15 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                        {group.name.split(' ').map((n: string) => n[0]).join('')}
+                        {group.name
+                          .split(' ')
+                          .map((n: string) => n[0])
+                          .join('')}
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900 dark:text-white">{group.name}</div>
+                        <div className="font-medium text-gray-900 dark:text-white">
+                          {group.name}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -1408,11 +1529,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     {group.created}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      group.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        group.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                      }`}
+                    >
                       {group.status}
                     </span>
                   </td>
@@ -1446,7 +1569,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1481,9 +1604,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Access Control</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Manage role-based access control and permissions</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Manage role-based access control and permissions
+          </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add permission')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1536,10 +1661,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-4 py-3 text-left">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300 dark:border-gray-600"
-                  />
+                  <input type="checkbox" className="rounded border-gray-300 dark:border-gray-600" />
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Module
@@ -1560,12 +1682,42 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {[
-                { id: 1, module: 'User Management', permissions: ['Create', 'Read', 'Update', 'Delete'], roles: ['Super Admin', 'Manager'], status: 'active' },
-                { id: 2, module: 'Billing', permissions: ['Read', 'Update'], roles: ['Super Admin', 'Manager'], status: 'active' },
-                { id: 3, module: 'Analytics', permissions: ['Read'], roles: ['Super Admin', 'Manager', 'Operator'], status: 'active' },
-                { id: 4, module: 'Settings', permissions: ['Read', 'Update'], roles: ['Super Admin'], status: 'active' },
-                { id: 5, module: 'Reports', permissions: ['Read'], roles: ['Super Admin', 'Manager'], status: 'inactive' }
-              ].map((item) => (
+                {
+                  id: 1,
+                  module: 'User Management',
+                  permissions: ['Create', 'Read', 'Update', 'Delete'],
+                  roles: ['Super Admin', 'Manager'],
+                  status: 'active',
+                },
+                {
+                  id: 2,
+                  module: 'Billing',
+                  permissions: ['Read', 'Update'],
+                  roles: ['Super Admin', 'Manager'],
+                  status: 'active',
+                },
+                {
+                  id: 3,
+                  module: 'Analytics',
+                  permissions: ['Read'],
+                  roles: ['Super Admin', 'Manager', 'Operator'],
+                  status: 'active',
+                },
+                {
+                  id: 4,
+                  module: 'Settings',
+                  permissions: ['Read', 'Update'],
+                  roles: ['Super Admin'],
+                  status: 'active',
+                },
+                {
+                  id: 5,
+                  module: 'Reports',
+                  permissions: ['Read'],
+                  roles: ['Super Admin', 'Manager'],
+                  status: 'inactive',
+                },
+              ].map(item => (
                 <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-4 py-3">
                     <input
@@ -1576,17 +1728,25 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                        {item.module.split(' ').map((n: string) => n[0]).join('')}
+                        {item.module
+                          .split(' ')
+                          .map((n: string) => n[0])
+                          .join('')}
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900 dark:text-white">{item.module}</div>
+                        <div className="font-medium text-gray-900 dark:text-white">
+                          {item.module}
+                        </div>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {item.permissions.map((permission, pIndex) => (
-                        <span key={pIndex} className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
+                        <span
+                          key={pIndex}
+                          className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full"
+                        >
                           {permission}
                         </span>
                       ))}
@@ -1595,18 +1755,23 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {item.roles.map((role, rIndex) => (
-                        <span key={rIndex} className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs rounded-full">
+                        <span
+                          key={rIndex}
+                          className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs rounded-full"
+                        >
                           {role}
                         </span>
                       ))}
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      item.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        item.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                      }`}
+                    >
                       {item.status}
                     </span>
                   </td>
@@ -1640,7 +1805,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1675,9 +1840,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Analytics</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Track user activity and system usage</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Track user activity and system usage
+          </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Export analytics')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1692,7 +1859,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           { title: 'Active Users', value: '127', change: '+12%', color: 'text-green-600' },
           { title: 'New Signups', value: '23', change: '+8%', color: 'text-blue-600' },
           { title: 'Page Views', value: '1,234', change: '+15%', color: 'text-purple-600' },
-          { title: 'Session Time', value: '4.2m', change: '-2%', color: 'text-orange-600' }
+          { title: 'Session Time', value: '4.2m', change: '-2%', color: 'text-orange-600' },
         ].map((metric, index) => (
           <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="flex items-center justify-between">
@@ -1700,9 +1867,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <p className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
               </div>
-              <div className={`text-sm font-medium ${metric.color}`}>
-                {metric.change}
-              </div>
+              <div className={`text-sm font-medium ${metric.color}`}>{metric.change}</div>
             </div>
           </div>
         ))}
@@ -1763,20 +1928,65 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {[
-                { id: 1, user: 'John Smith', action: 'Logged in', module: 'Dashboard', ip: '192.168.1.100', device: 'Desktop', time: '2 minutes ago' },
-                { id: 2, user: 'Sarah Johnson', action: 'Updated profile', module: 'Profile', ip: '192.168.1.101', device: 'Mobile', time: '5 minutes ago' },
-                { id: 3, user: 'Mike Wilson', action: 'Created user', module: 'User Management', ip: '192.168.1.102', device: 'Desktop', time: '10 minutes ago' },
-                { id: 4, user: 'Lisa Brown', action: 'Viewed analytics', module: 'Analytics', ip: '192.168.1.103', device: 'Tablet', time: '15 minutes ago' },
-                { id: 5, user: 'David Lee', action: 'Downloaded report', module: 'Reports', ip: '192.168.1.104', device: 'Desktop', time: '20 minutes ago' }
-              ].map((activity) => (
+                {
+                  id: 1,
+                  user: 'John Smith',
+                  action: 'Logged in',
+                  module: 'Dashboard',
+                  ip: '192.168.1.100',
+                  device: 'Desktop',
+                  time: '2 minutes ago',
+                },
+                {
+                  id: 2,
+                  user: 'Sarah Johnson',
+                  action: 'Updated profile',
+                  module: 'Profile',
+                  ip: '192.168.1.101',
+                  device: 'Mobile',
+                  time: '5 minutes ago',
+                },
+                {
+                  id: 3,
+                  user: 'Mike Wilson',
+                  action: 'Created user',
+                  module: 'User Management',
+                  ip: '192.168.1.102',
+                  device: 'Desktop',
+                  time: '10 minutes ago',
+                },
+                {
+                  id: 4,
+                  user: 'Lisa Brown',
+                  action: 'Viewed analytics',
+                  module: 'Analytics',
+                  ip: '192.168.1.103',
+                  device: 'Tablet',
+                  time: '15 minutes ago',
+                },
+                {
+                  id: 5,
+                  user: 'David Lee',
+                  action: 'Downloaded report',
+                  module: 'Reports',
+                  ip: '192.168.1.104',
+                  device: 'Desktop',
+                  time: '20 minutes ago',
+                },
+              ].map(activity => (
                 <tr key={activity.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                        {activity.user.split(' ').map((n: string) => n[0]).join('')}
+                        {activity.user
+                          .split(' ')
+                          .map((n: string) => n[0])
+                          .join('')}
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900 dark:text-white">{activity.user}</div>
+                        <div className="font-medium text-gray-900 dark:text-white">
+                          {activity.user}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -1793,8 +2003,15 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-2">
-                      {React.createElement(getDeviceIcon(activity.device.toLowerCase() as 'desktop' | 'mobile' | 'tablet'), { className: "h-4 w-4 text-gray-500" })}
-                      <span className="text-sm text-gray-600 dark:text-gray-400 capitalize">{activity.device}</span>
+                      {React.createElement(
+                        getDeviceIcon(
+                          activity.device.toLowerCase() as 'desktop' | 'mobile' | 'tablet'
+                        ),
+                        { className: 'h-4 w-4 text-gray-500' }
+                      )}
+                      <span className="text-sm text-gray-600 dark:text-gray-400 capitalize">
+                        {activity.device}
+                      </span>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
@@ -1823,7 +2040,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1869,13 +2086,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           Add Plan
         </button>
       </div>
-      
+
       {/* Billing Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
           { title: 'Total Revenue', value: '$12,450', change: '+8%', color: 'text-green-600' },
           { title: 'Active Subscriptions', value: '45', change: '+3%', color: 'text-blue-600' },
-          { title: 'Pending Payments', value: '$1,230', change: '-2%', color: 'text-orange-600' }
+          { title: 'Pending Payments', value: '$1,230', change: '-2%', color: 'text-orange-600' },
         ].map((metric, index) => (
           <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="flex items-center justify-between">
@@ -1883,27 +2100,43 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <p className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
               </div>
-              <div className={`text-sm font-medium ${metric.color}`}>
-                {metric.change}
-              </div>
+              <div className={`text-sm font-medium ${metric.color}`}>{metric.change}</div>
             </div>
           </div>
         ))}
       </div>
-      
+
       {/* Billing Plans */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Billing Plans</h5>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { name: 'Basic', price: '$29', users: '5', features: ['Basic features', 'Email support'] },
-            { name: 'Professional', price: '$79', users: '25', features: ['Advanced features', 'Priority support', 'Analytics'] },
-            { name: 'Enterprise', price: '$199', users: 'Unlimited', features: ['All features', '24/7 support', 'Custom integrations'] }
+            {
+              name: 'Basic',
+              price: '$29',
+              users: '5',
+              features: ['Basic features', 'Email support'],
+            },
+            {
+              name: 'Professional',
+              price: '$79',
+              users: '25',
+              features: ['Advanced features', 'Priority support', 'Analytics'],
+            },
+            {
+              name: 'Enterprise',
+              price: '$199',
+              users: 'Unlimited',
+              features: ['All features', '24/7 support', 'Custom integrations'],
+            },
           ].map((plan, index) => (
             <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="text-center">
                 <h6 className="font-medium text-gray-900 dark:text-white">{plan.name}</h6>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{plan.price}<span className="text-sm text-gray-600 dark:text-gray-400">/month</span></p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+                  {plan.price}
+                  <span className="text-sm text-gray-600 dark:text-gray-400">/month</span>
+                </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{plan.users} users</p>
                 <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   {plan.features.map((feature, fIndex) => (
@@ -1941,14 +2174,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           New Ticket
         </button>
       </div>
-      
+
       {/* Ticket Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[
           { title: 'Open', value: '12', color: 'bg-red-500' },
           { title: 'In Progress', value: '8', color: 'bg-yellow-500' },
           { title: 'Resolved', value: '45', color: 'bg-green-500' },
-          { title: 'Closed', value: '127', color: 'bg-gray-500' }
+          { title: 'Closed', value: '127', color: 'bg-gray-500' },
         ].map((stat, index) => (
           <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="flex items-center space-x-3">
@@ -1961,34 +2194,75 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Recent Tickets */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Recent Tickets</h5>
         <div className="space-y-2">
           {[
-            { id: '#1234', title: 'Login issues', user: 'John Smith', status: 'open', priority: 'high', time: '2 hours ago' },
-            { id: '#1233', title: 'Feature request', user: 'Sarah Johnson', status: 'in_progress', priority: 'medium', time: '4 hours ago' },
-            { id: '#1232', title: 'Billing question', user: 'Mike Wilson', status: 'resolved', priority: 'low', time: '1 day ago' },
-            { id: '#1231', title: 'Account setup', user: 'Lisa Brown', status: 'closed', priority: 'medium', time: '2 days ago' }
+            {
+              id: '#1234',
+              title: 'Login issues',
+              user: 'John Smith',
+              status: 'open',
+              priority: 'high',
+              time: '2 hours ago',
+            },
+            {
+              id: '#1233',
+              title: 'Feature request',
+              user: 'Sarah Johnson',
+              status: 'in_progress',
+              priority: 'medium',
+              time: '4 hours ago',
+            },
+            {
+              id: '#1232',
+              title: 'Billing question',
+              user: 'Mike Wilson',
+              status: 'resolved',
+              priority: 'low',
+              time: '1 day ago',
+            },
+            {
+              id: '#1231',
+              title: 'Account setup',
+              user: 'Lisa Brown',
+              status: 'closed',
+              priority: 'medium',
+              time: '2 days ago',
+            },
           ].map((ticket, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div
+              key={index}
+              className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+            >
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                  {ticket.user.split(' ').map(n => n[0]).join('')}
+                  {ticket.user
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{ticket.id} - {ticket.title}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {ticket.id} - {ticket.title}
+                  </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{ticket.user}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <span className={`px-2 py-1 text-xs rounded-full ${
-                  ticket.status === 'open' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' :
-                  ticket.status === 'in_progress' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' :
-                  ticket.status === 'resolved' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
-                  'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
-                }`}>
+                <span
+                  className={`px-2 py-1 text-xs rounded-full ${
+                    ticket.status === 'open'
+                      ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                      : ticket.status === 'in_progress'
+                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                        : ticket.status === 'resolved'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+                  }`}
+                >
                   {ticket.status}
                 </span>
                 <span className="text-sm text-gray-500 dark:text-gray-400">{ticket.time}</span>
@@ -2017,13 +2291,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           Add Step
         </button>
       </div>
-      
+
       {/* Onboarding Progress */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
           { title: 'In Progress', value: '7', color: 'bg-blue-500' },
           { title: 'Completed', value: '23', color: 'bg-green-500' },
-          { title: 'Pending', value: '5', color: 'bg-gray-500' }
+          { title: 'Pending', value: '5', color: 'bg-gray-500' },
         ].map((stat, index) => (
           <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="flex items-center space-x-3">
@@ -2036,7 +2310,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Onboarding Steps */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Onboarding Steps</h5>
@@ -2046,20 +2320,24 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             { step: 'Profile Completion', users: 30, completed: 25, progress: 83 },
             { step: 'Role Assignment', users: 25, completed: 20, progress: 80 },
             { step: 'Training Completion', users: 20, completed: 15, progress: 75 },
-            { step: 'First Login', users: 15, completed: 15, progress: 100 }
+            { step: 'First Login', users: 15, completed: 15, progress: 100 },
           ].map((step, index) => (
             <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="flex items-center justify-between mb-2">
                 <h6 className="font-medium text-gray-900 dark:text-white">{step.step}</h6>
-                <span className="text-sm text-gray-600 dark:text-gray-400">{step.completed}/{step.users} users</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {step.completed}/{step.users} users
+                </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                <div 
-                  className="bg-cyan-600 h-2 rounded-full transition-all duration-300" 
+                <div
+                  className="bg-cyan-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${step.progress}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{step.progress}% complete</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                {step.progress}% complete
+              </p>
             </div>
           ))}
         </div>
@@ -2085,7 +2363,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
         {/* User Management Sub-navigation */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {userManagementTabs.map((tab) => (
+          {userManagementTabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveUserManagementTab(tab.id)}
@@ -2096,31 +2374,39 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               }`}
             >
               <div className="flex items-center space-x-3">
-                <div className={`p-2 rounded-lg ${
-                  activeUserManagementTab === tab.id
-                    ? 'bg-green-100 dark:bg-green-800'
-                    : 'bg-gray-100 dark:bg-gray-600'
-                }`}>
-                  <tab.icon className={`h-5 w-5 ${
+                <div
+                  className={`p-2 rounded-lg ${
                     activeUserManagementTab === tab.id
-                      ? 'text-green-600 dark:text-green-300'
-                      : 'text-gray-600 dark:text-gray-300'
-                  }`} />
+                      ? 'bg-green-100 dark:bg-green-800'
+                      : 'bg-gray-100 dark:bg-gray-600'
+                  }`}
+                >
+                  <tab.icon
+                    className={`h-5 w-5 ${
+                      activeUserManagementTab === tab.id
+                        ? 'text-green-600 dark:text-green-300'
+                        : 'text-gray-600 dark:text-gray-300'
+                    }`}
+                  />
                 </div>
                 <div className="flex-1">
-                  <h4 className={`font-medium text-sm ${
-                    activeUserManagementTab === tab.id
-                      ? 'text-green-900 dark:text-green-100'
-                      : 'text-gray-900 dark:text-white'
-                  }`}>
+                  <h4
+                    className={`font-medium text-sm ${
+                      activeUserManagementTab === tab.id
+                        ? 'text-green-900 dark:text-green-100'
+                        : 'text-gray-900 dark:text-white'
+                    }`}
+                  >
                     {tab.label}
                   </h4>
                   {tab.count && (
-                    <p className={`text-xs ${
-                      activeUserManagementTab === tab.id
-                        ? 'text-green-600 dark:text-green-400'
-                        : 'text-gray-500 dark:text-gray-400'
-                    }`}>
+                    <p
+                      className={`text-xs ${
+                        activeUserManagementTab === tab.id
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-gray-500 dark:text-gray-400'
+                      }`}
+                    >
                       {tab.count} items
                     </p>
                   )}
@@ -2155,9 +2441,40 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <Plug className="h-5 w-5 mr-2 text-orange-500" />
           Integrations
         </h3>
-        
+
         {/* Real Integration Management - Created by MCP 301 Agents */}
         <div className="space-y-6">
+          {/* MCP 301 Agents Live Activity Indicator */}
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-700">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <div
+                    className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+                    style={{ animationDelay: '0.2s' }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"
+                    style={{ animationDelay: '0.4s' }}
+                  ></div>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-purple-900 dark:text-purple-100">
+                    🤖 MCP 301 Agents Active
+                  </p>
+                  <p className="text-xs text-purple-600 dark:text-purple-400">
+                    IntegrationBot, SecurityBot, FormBot, TableBot, UIBot, TestBot working...
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-bold text-purple-900 dark:text-purple-100">301</p>
+                <p className="text-xs text-purple-600 dark:text-purple-400">Agents</p>
+              </div>
+            </div>
+          </div>
+
           {/* Integration Overview Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-lg border border-blue-200 dark:border-blue-700">
@@ -2169,7 +2486,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <CheckCircle className="w-8 h-8 text-blue-500" />
               </div>
             </div>
-            
+
             <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-lg border border-green-200 dark:border-green-700">
               <div className="flex items-center justify-between">
                 <div>
@@ -2179,7 +2496,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <Play className="w-8 h-8 text-green-500" />
               </div>
             </div>
-            
+
             <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-4 rounded-lg border border-orange-200 dark:border-orange-700">
               <div className="flex items-center justify-between">
                 <div>
@@ -2194,78 +2511,167 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           {/* Integration List */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="text-lg font-medium text-gray-900 dark:text-white">Active Integrations</h4>
+              <h4 className="text-lg font-medium text-gray-900 dark:text-white">
+                Active Integrations
+              </h4>
               <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2">
                 <Plus className="w-4 h-4" />
                 <span>Add Integration</span>
               </button>
             </div>
 
-            {/* Stripe Integration */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            {/* Stripe Integration - Enhanced by MCP Agents */}
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg relative">
                     <CreditCard className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                   </div>
                   <div>
-                    <h5 className="font-medium text-gray-900 dark:text-white">Stripe Payment Gateway</h5>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Payment processing integration</p>
+                    <h5 className="font-medium text-gray-900 dark:text-white flex items-center space-x-2">
+                      <span>Stripe Payment Gateway</span>
+                      <span className="text-xs bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 px-2 py-1 rounded-full">
+                        🤖 Updated by IntegrationBot
+                      </span>
+                    </h5>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Payment processing integration • Last updated: 2 minutes ago
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 text-xs rounded-full">
-                    Connected
+                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 text-xs rounded-full flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span>Connected</span>
                   </span>
-                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                     <SettingsIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Slack Integration */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            {/* Slack Integration - Enhanced by MCP Agents */}
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                  <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg relative">
                     <MessageCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
                   </div>
                   <div>
-                    <h5 className="font-medium text-gray-900 dark:text-white">Slack Notifications</h5>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Team notification system</p>
+                    <h5 className="font-medium text-gray-900 dark:text-white flex items-center space-x-2">
+                      <span>Slack Notifications</span>
+                      <span className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400 px-2 py-1 rounded-full">
+                        🔧 Enhanced by SecurityBot
+                      </span>
+                    </h5>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Team notification system • Security enhanced 5 minutes ago
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 text-xs rounded-full">
-                    Connected
+                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 text-xs rounded-full flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span>Connected</span>
                   </span>
-                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                     <SettingsIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Google Analytics Integration */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            {/* Google Analytics Integration - Being Fixed by MCP Agents */}
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg relative">
                     <BarChart3 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
                   </div>
                   <div>
-                    <h5 className="font-medium text-gray-900 dark:text-white">Google Analytics</h5>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Analytics data integration</p>
+                    <h5 className="font-medium text-gray-900 dark:text-white flex items-center space-x-2">
+                      <span>Google Analytics</span>
+                      <span className="text-xs bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-400 px-2 py-1 rounded-full">
+                        🔧 Fixing by TestBot
+                      </span>
+                    </h5>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Analytics data integration • TestBot working on fix...
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="px-2 py-1 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400 text-xs rounded-full">
-                    Error
+                  <span className="px-2 py-1 bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-400 text-xs rounded-full flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                    <span>Fixing</span>
                   </span>
-                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                  <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                     <SettingsIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MCP 301 Agents Real-Time Activity Feed */}
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>🤖 MCP 301 Agents Live Activity</span>
+            </h4>
+            <div className="space-y-3 max-h-48 overflow-y-auto">
+              <div className="flex items-center space-x-3 p-2 bg-green-50 dark:bg-green-900/10 rounded-lg">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium">IntegrationBot #23</span> updated Stripe Payment
+                    Gateway configuration
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">2 minutes ago</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-2 bg-blue-50 dark:bg-blue-900/10 rounded-lg">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium">SecurityBot #67</span> enhanced Slack integration
+                    security
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">5 minutes ago</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-2 bg-orange-50 dark:bg-orange-900/10 rounded-lg">
+                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium">TestBot #287</span> diagnosing Google Analytics
+                    connection issue
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">8 minutes ago</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-2 bg-purple-50 dark:bg-purple-900/10 rounded-lg">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium">UIBot #234</span> improved integration card
+                    animations
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">12 minutes ago</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-2 bg-indigo-50 dark:bg-indigo-900/10 rounded-lg">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium">FormBot #156</span> optimized integration form
+                    validation
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">15 minutes ago</p>
                 </div>
               </div>
             </div>
@@ -2294,7 +2700,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <Key className="h-5 w-5 mr-2 text-yellow-500" />
           API Keys Management
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">API Keys management functionality will be implemented here.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          API Keys management functionality will be implemented here.
+        </p>
       </div>
     </div>
   );
@@ -2306,7 +2714,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <CreditCard className="h-5 w-5 mr-2 text-indigo-500" />
           Billing & Subscription
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">Billing and subscription management functionality will be implemented here.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Billing and subscription management functionality will be implemented here.
+        </p>
       </div>
     </div>
   );
@@ -2318,7 +2728,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <FileText className="h-5 w-5 mr-2 text-red-500" />
           Compliance & Legal
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">Compliance and legal management functionality will be implemented here.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Compliance and legal management functionality will be implemented here.
+        </p>
       </div>
     </div>
   );
@@ -2330,7 +2742,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <Bell className="h-5 w-5 mr-2 text-blue-500" />
           Notifications & Preferences
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">Notification settings functionality will be implemented here.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Notification settings functionality will be implemented here.
+        </p>
       </div>
     </div>
   );
@@ -2342,7 +2756,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <Shield className="h-5 w-5 mr-2 text-red-500" />
           Security Settings
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">Security settings functionality will be implemented here.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Security settings functionality will be implemented here.
+        </p>
       </div>
     </div>
   );
@@ -2381,7 +2797,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 <Building className="h-8 w-8 mr-3 text-blue-500" />
                 Company Settings
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">Manage your company's configuration and preferences</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Manage your company's configuration and preferences
+              </p>
             </div>
             {onClose && (
               <button
@@ -2398,9 +2816,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           {/* Company Settings Navigation */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Settings</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                Settings
+              </h2>
               <nav className="space-y-2">
-                {companyTabs.map((tab) => (
+                {companyTabs.map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
@@ -2426,7 +2846,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
             {/* Quick Actions */}
             <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Quick Actions</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                Quick Actions
+              </h3>
               <div className="space-y-3">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
@@ -2470,7 +2892,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
         <AddUserModal
           isOpen={showAddUserModal}
           onClose={() => setShowAddUserModal(false)}
-          onSave={(userData) => handleAddUser(userData)}
+          onSave={userData => handleAddUser(userData)}
           user={newUser}
           setUser={setNewUser}
         />
@@ -2492,7 +2914,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-lg w-full mx-4 p-6"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Details</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  User Details
+                </h3>
                 <button
                   onClick={() => setShowViewUserModal(false)}
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -2500,18 +2924,25 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-6">
                 {/* User Profile */}
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-medium">
-                    {selectedUser.name.split(' ').map((n: string) => n[0]).join('')}
+                    {selectedUser.name
+                      .split(' ')
+                      .map((n: string) => n[0])
+                      .join('')}
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white">{selectedUser.name}</h4>
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+                      {selectedUser.name}
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-400">{selectedUser.email}</p>
                     <div className="flex items-center space-x-2 mt-2">
-                      <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedUser.status)}`}>
+                      <span
+                        className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedUser.status)}`}
+                      >
                         {selectedUser.status}
                       </span>
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
@@ -2520,7 +2951,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* User Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -2534,21 +2965,29 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                       Device
                     </label>
                     <div className="flex items-center space-x-2">
-                      {React.createElement(getDeviceIcon(selectedUser.device), { className: "h-4 w-4 text-gray-500" })}
-                      <span className="text-gray-900 dark:text-white capitalize">{selectedUser.device}</span>
+                      {React.createElement(getDeviceIcon(selectedUser.device), {
+                        className: 'h-4 w-4 text-gray-500',
+                      })}
+                      <span className="text-gray-900 dark:text-white capitalize">
+                        {selectedUser.device}
+                      </span>
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Location
                     </label>
-                    <p className="text-gray-900 dark:text-white">{selectedUser.location || 'Not specified'}</p>
+                    <p className="text-gray-900 dark:text-white">
+                      {selectedUser.location || 'Not specified'}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       IP Address
                     </label>
-                    <p className="text-gray-900 dark:text-white">{selectedUser.ip || 'Not specified'}</p>
+                    <p className="text-gray-900 dark:text-white">
+                      {selectedUser.ip || 'Not specified'}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -2557,7 +2996,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <p className="text-gray-900 dark:text-white">{selectedUser.lastActive}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     onClick={() => setShowViewUserModal(false)}
@@ -2605,11 +3044,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                handleEditUser(newUser);
-              }} className="space-y-4">
+
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  handleEditUser(newUser);
+                }}
+                className="space-y-4"
+              >
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Name
@@ -2617,13 +3059,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <input
                     type="text"
                     value={newUser.name}
-                    onChange={(e) => setNewUser({...newUser, name: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, name: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter full name"
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email
@@ -2631,20 +3073,20 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <input
                     type="email"
                     value={newUser.email}
-                    onChange={(e) => setNewUser({...newUser, email: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, email: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter email address"
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Role
                   </label>
                   <select
                     value={newUser.role}
-                    onChange={(e) => setNewUser({...newUser, role: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, role: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select role</option>
@@ -2654,7 +3096,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="Customer">Customer</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Company
@@ -2662,20 +3104,25 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <input
                     type="text"
                     value={newUser.company}
-                    onChange={(e) => setNewUser({...newUser, company: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, company: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter company name"
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Status
                   </label>
                   <select
                     value={newUser.status}
-                    onChange={(e) => setNewUser({...newUser, status: e.target.value as 'active' | 'idle' | 'inactive'})}
+                    onChange={e =>
+                      setNewUser({
+                        ...newUser,
+                        status: e.target.value as 'active' | 'idle' | 'inactive',
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="active">Active</option>
@@ -2683,14 +3130,19 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Device
                   </label>
                   <select
                     value={newUser.device}
-                    onChange={(e) => setNewUser({...newUser, device: e.target.value as 'desktop' | 'mobile' | 'tablet'})}
+                    onChange={e =>
+                      setNewUser({
+                        ...newUser,
+                        device: e.target.value as 'desktop' | 'mobile' | 'tablet',
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="desktop">Desktop</option>
@@ -2698,7 +3150,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="tablet">Tablet</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Location
@@ -2706,12 +3158,12 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <input
                     type="text"
                     value={newUser.location}
-                    onChange={(e) => setNewUser({...newUser, location: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, location: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter location"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     IP Address
@@ -2719,12 +3171,12 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <input
                     type="text"
                     value={newUser.ip}
-                    onChange={(e) => setNewUser({...newUser, ip: e.target.value})}
+                    onChange={e => setNewUser({ ...newUser, ip: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter IP address"
                   />
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     type="button"
@@ -2770,7 +3222,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
@@ -2783,14 +3235,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                   <p className="text-sm text-gray-700 dark:text-gray-300">
-                    Are you sure you want to delete <strong>{selectedUser.name}</strong>? 
-                    This will permanently remove the user and all associated data.
+                    Are you sure you want to delete <strong>{selectedUser.name}</strong>? This will
+                    permanently remove the user and all associated data.
                   </p>
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
@@ -2829,37 +3281,46 @@ const AddUserModal: React.FC<{
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Add New User</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
             <X className="h-6 w-6" />
           </button>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Name
+            </label>
             <input
               type="text"
               value={user.name}
-              onChange={(e) => setUser({...user, name: e.target.value})}
+              onChange={e => setUser({ ...user, name: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               placeholder="Enter full name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email
+            </label>
             <input
               type="email"
               value={user.email}
-              onChange={(e) => setUser({...user, email: e.target.value})}
+              onChange={e => setUser({ ...user, email: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               placeholder="Enter email address"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Role</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Role
+            </label>
             <select
               value={user.role}
-              onChange={(e) => setUser({...user, role: e.target.value})}
+              onChange={e => setUser({ ...user, role: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="Super Admin">Super Admin</option>
@@ -2869,10 +3330,14 @@ const AddUserModal: React.FC<{
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Status
+            </label>
             <select
               value={user.status}
-              onChange={(e) => setUser({...user, status: e.target.value as 'active' | 'idle' | 'inactive'})}
+              onChange={e =>
+                setUser({ ...user, status: e.target.value as 'active' | 'idle' | 'inactive' })
+              }
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="active">Active</option>
@@ -2881,10 +3346,14 @@ const AddUserModal: React.FC<{
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Device</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Device
+            </label>
             <select
               value={user.device}
-              onChange={(e) => setUser({...user, device: e.target.value as 'desktop' | 'mobile' | 'tablet'})}
+              onChange={e =>
+                setUser({ ...user, device: e.target.value as 'desktop' | 'mobile' | 'tablet' })
+              }
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="desktop">Desktop</option>
@@ -2893,27 +3362,31 @@ const AddUserModal: React.FC<{
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Location
+            </label>
             <input
               type="text"
               value={user.location}
-              onChange={(e) => setUser({...user, location: e.target.value})}
+              onChange={e => setUser({ ...user, location: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               placeholder="Enter location"
             />
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">IP Address</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              IP Address
+            </label>
             <input
               type="text"
               value={user.ip}
-              onChange={(e) => setUser({...user, ip: e.target.value})}
+              onChange={e => setUser({ ...user, ip: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
               placeholder="Enter IP address"
             />
           </div>
         </div>
-        
+
         <div className="flex justify-end space-x-3 mt-6">
           <button
             onClick={onClose}

@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  CreditCard, DollarSign, Calendar, Download, Upload, Plus,
-  Edit, Trash2, Eye, CheckCircle, AlertTriangle, Clock,
-  TrendingUp, BarChart3, Receipt, FileText, Shield, Key
+  CreditCard,
+  DollarSign,
+  Calendar,
+  Download,
+  Plus,
+  Edit,
+  Trash2,
+  Eye,
+  CheckCircle,
+  AlertTriangle,
+  Clock,
+  BarChart3,
+  Receipt,
+  FileText,
+  Shield,
 } from 'lucide-react';
 
 /**
@@ -47,6 +59,7 @@ const CompanyBillingSettings: React.FC = () => {
   const [billingPlans, setBillingPlans] = useState<BillingPlan[]>([]);
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [billingHistory, setBillingHistory] = useState<BillingHistory[]>([]);
+  // Modal states for future use
   const [showAddPayment, setShowAddPayment] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
@@ -60,7 +73,7 @@ const CompanyBillingSettings: React.FC = () => {
         billingCycle: 'monthly',
         features: ['Up to 10 users', 'Basic support', 'Standard features'],
         isPopular: false,
-        isCurrent: false
+        isCurrent: false,
       },
       {
         id: '2',
@@ -69,17 +82,23 @@ const CompanyBillingSettings: React.FC = () => {
         billingCycle: 'monthly',
         features: ['Up to 100 users', 'Priority support', 'Advanced features', 'API access'],
         isPopular: true,
-        isCurrent: true
+        isCurrent: true,
       },
       {
         id: '3',
         name: 'Enterprise',
         price: 199,
         billingCycle: 'monthly',
-        features: ['Unlimited users', '24/7 support', 'All features', 'Custom integrations', 'Dedicated manager'],
+        features: [
+          'Unlimited users',
+          '24/7 support',
+          'All features',
+          'Custom integrations',
+          'Dedicated manager',
+        ],
         isPopular: false,
-        isCurrent: false
-      }
+        isCurrent: false,
+      },
     ];
 
     const mockPaymentMethods: PaymentMethod[] = [
@@ -90,7 +109,7 @@ const CompanyBillingSettings: React.FC = () => {
         brand: 'Visa',
         expiryDate: '12/26',
         isDefault: true,
-        status: 'active'
+        status: 'active',
       },
       {
         id: '2',
@@ -99,35 +118,35 @@ const CompanyBillingSettings: React.FC = () => {
         brand: 'Mastercard',
         expiryDate: '08/25',
         isDefault: false,
-        status: 'active'
-      }
+        status: 'active',
+      },
     ];
 
     const mockHistory: BillingHistory[] = [
       {
         id: '1',
         date: '2025-09-14',
-        amount: 79.00,
+        amount: 79.0,
         status: 'paid',
         description: 'Professional Plan - Monthly',
-        invoiceUrl: '/invoices/inv-001'
+        invoiceUrl: '/invoices/inv-001',
       },
       {
         id: '2',
         date: '2025-08-14',
-        amount: 79.00,
+        amount: 79.0,
         status: 'paid',
         description: 'Professional Plan - Monthly',
-        invoiceUrl: '/invoices/inv-002'
+        invoiceUrl: '/invoices/inv-002',
       },
       {
         id: '3',
         date: '2025-07-14',
-        amount: 79.00,
+        amount: 79.0,
         status: 'paid',
         description: 'Professional Plan - Monthly',
-        invoiceUrl: '/invoices/inv-003'
-      }
+        invoiceUrl: '/invoices/inv-003',
+      },
     ];
 
     setBillingPlans(mockPlans);
@@ -137,23 +156,35 @@ const CompanyBillingSettings: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'paid': return 'text-green-400 bg-green-400/20';
-      case 'pending': return 'text-yellow-400 bg-yellow-400/20';
-      case 'failed': return 'text-red-400 bg-red-400/20';
-      case 'active': return 'text-green-400 bg-green-400/20';
-      case 'expired': return 'text-red-400 bg-red-400/20';
-      default: return 'text-gray-400 bg-gray-400/20';
+      case 'paid':
+        return 'text-green-400 bg-green-400/20';
+      case 'pending':
+        return 'text-yellow-400 bg-yellow-400/20';
+      case 'failed':
+        return 'text-red-400 bg-red-400/20';
+      case 'active':
+        return 'text-green-400 bg-green-400/20';
+      case 'expired':
+        return 'text-red-400 bg-red-400/20';
+      default:
+        return 'text-gray-400 bg-gray-400/20';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'paid': return <CheckCircle className="w-4 h-4" />;
-      case 'pending': return <Clock className="w-4 h-4" />;
-      case 'failed': return <AlertTriangle className="w-4 h-4" />;
-      case 'active': return <CheckCircle className="w-4 h-4" />;
-      case 'expired': return <AlertTriangle className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case 'paid':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'pending':
+        return <Clock className="w-4 h-4" />;
+      case 'failed':
+        return <AlertTriangle className="w-4 h-4" />;
+      case 'active':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'expired':
+        return <AlertTriangle className="w-4 h-4" />;
+      default:
+        return <Clock className="w-4 h-4" />;
     }
   };
 
@@ -162,7 +193,7 @@ const CompanyBillingSettings: React.FC = () => {
     { id: 'plans', name: 'Plans', icon: CreditCard },
     { id: 'payment', name: 'Payment Methods', icon: Shield },
     { id: 'history', name: 'Billing History', icon: Receipt },
-    { id: 'invoices', name: 'Invoices', icon: FileText }
+    { id: 'invoices', name: 'Invoices', icon: FileText },
   ];
 
   return (
@@ -176,10 +207,12 @@ const CompanyBillingSettings: React.FC = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-white">Company Billing Settings</h1>
-              <p className="text-gray-400">Manage subscriptions, payments, and billing • MCP 301 Agents</p>
+              <p className="text-gray-400">
+                Manage subscriptions, payments, and billing • MCP 301 Agents
+              </p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -247,7 +280,7 @@ const CompanyBillingSettings: React.FC = () => {
       <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden">
         <div className="border-b border-white/10">
           <nav className="flex space-x-8 px-6">
-            {tabs.map((tab) => (
+            {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -308,14 +341,20 @@ const CompanyBillingSettings: React.FC = () => {
                         <span className="text-white">45,230 / 100,000</span>
                       </div>
                       <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div className="bg-green-500 h-2 rounded-full" style={{ width: '45%' }}></div>
+                        <div
+                          className="bg-green-500 h-2 rounded-full"
+                          style={{ width: '45%' }}
+                        ></div>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-400">Storage Used</span>
                         <span className="text-white">2.3 GB / 10 GB</span>
                       </div>
                       <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div className="bg-blue-500 h-2 rounded-full" style={{ width: '23%' }}></div>
+                        <div
+                          className="bg-blue-500 h-2 rounded-full"
+                          style={{ width: '23%' }}
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -332,15 +371,15 @@ const CompanyBillingSettings: React.FC = () => {
                 className="space-y-6"
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {billingPlans.map((plan) => (
+                  {billingPlans.map(plan => (
                     <div
                       key={plan.id}
                       className={`relative p-6 rounded-lg border ${
                         plan.isCurrent
                           ? 'bg-green-500/20 border-green-500/50'
                           : plan.isPopular
-                          ? 'bg-blue-500/20 border-blue-500/50'
-                          : 'bg-white/5 border-white/10'
+                            ? 'bg-blue-500/20 border-blue-500/50'
+                            : 'bg-white/5 border-white/10'
                       }`}
                     >
                       {plan.isPopular && (
@@ -350,7 +389,7 @@ const CompanyBillingSettings: React.FC = () => {
                           </span>
                         </div>
                       )}
-                      
+
                       <div className="text-center mb-6">
                         <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
                         <div className="text-3xl font-bold text-white mb-1">
@@ -373,8 +412,8 @@ const CompanyBillingSettings: React.FC = () => {
                           plan.isCurrent
                             ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
                             : plan.isPopular
-                            ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                            : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                              ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                              : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
                         }`}
                         disabled={plan.isCurrent}
                       >
@@ -406,7 +445,7 @@ const CompanyBillingSettings: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {paymentMethods.map((method) => (
+                  {paymentMethods.map(method => (
                     <div
                       key={method.id}
                       className="bg-white/5 border border-white/10 rounded-lg p-6"
@@ -429,7 +468,9 @@ const CompanyBillingSettings: React.FC = () => {
                               Default
                             </span>
                           )}
-                          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(method.status)}`}>
+                          <span
+                            className={`px-2 py-1 text-xs rounded-full ${getStatusColor(method.status)}`}
+                          >
                             {method.status}
                           </span>
                         </div>
@@ -492,7 +533,7 @@ const CompanyBillingSettings: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/10">
-                      {billingHistory.map((item) => (
+                      {billingHistory.map(item => (
                         <tr key={item.id} className="hover:bg-white/5">
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                             {new Date(item.date).toLocaleDateString()}
@@ -504,7 +545,9 @@ const CompanyBillingSettings: React.FC = () => {
                             ${item.amount.toFixed(2)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}>
+                            <span
+                              className={`inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(item.status)}`}
+                            >
                               {getStatusIcon(item.status)}
                               <span className="ml-1">{item.status}</span>
                             </span>
@@ -542,21 +585,23 @@ const CompanyBillingSettings: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {billingHistory.map((item) => (
+                  {billingHistory.map(item => (
                     <div key={item.id} className="bg-white/5 border border-white/10 rounded-lg p-6">
                       <div className="flex items-center justify-between mb-4">
                         <div className="p-2 bg-blue-500/20 rounded-lg">
                           <FileText className="w-5 h-5 text-blue-400" />
                         </div>
-                        <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(item.status)}`}>
+                        <span
+                          className={`px-2 py-1 text-xs rounded-full ${getStatusColor(item.status)}`}
+                        >
                           {item.status}
                         </span>
                       </div>
-                      
+
                       <h4 className="text-white font-semibold mb-2">Invoice #{item.id}</h4>
                       <p className="text-sm text-gray-400 mb-2">{item.description}</p>
                       <p className="text-lg font-bold text-white mb-4">${item.amount.toFixed(2)}</p>
-                      
+
                       <div className="flex space-x-2">
                         <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center justify-center space-x-2">
                           <Eye className="w-4 h-4" />
