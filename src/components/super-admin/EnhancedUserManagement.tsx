@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  Plus, Eye, Edit, Trash, Search, Filter, Download, Refresh, 
+  Plus, Eye, Edit, Trash, Search, Download, RefreshCw, 
   ChevronLeft, ChevronRight, Check, X, MoreVertical, User, 
   Smartphone, Monitor, Tablet, Globe, MapPin, Clock, Shield
 } from 'lucide-react';
@@ -13,7 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * Features: Full CRUD, Advanced Table, Real-time Updates, Enterprise Features
  */
 
-interface User {
+interface UserData {
   id: string;
   name: string;
   email: string;
@@ -36,13 +36,13 @@ interface BulkAction {
 
 export const EnhancedUserManagement: React.FC = () => {
   // State Management
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<UserData[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [deviceFilter, setDeviceFilter] = useState<string>('all');
-  const [sortField, setSortField] = useState<keyof User>('name');
+  const [sortField, setSortField] = useState<keyof UserData>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -54,14 +54,14 @@ export const EnhancedUserManagement: React.FC = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   
   // Loading States
   const [isLoading, setIsLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
   // Mock Data - In real app, this would come from API
-  const mockUsers: User[] = useMemo(() => [
+  const mockUsers: UserData[] = useMemo(() => [
     {
       id: '1',
       name: 'John Smith',
@@ -161,7 +161,7 @@ export const EnhancedUserManagement: React.FC = () => {
   ];
 
   // Handlers
-  const handleSort = (field: keyof User) => {
+  const handleSort = (field: keyof UserData) => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
@@ -309,7 +309,7 @@ export const EnhancedUserManagement: React.FC = () => {
             onClick={() => setLastUpdated(new Date())}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
           >
-            <Refresh className="w-4 h-4" />
+            <RefreshCw className="w-4 h-4" />
             <span>Refresh</span>
           </button>
           

@@ -25,7 +25,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000, // Main Website with SubdomainRouter on port 3000
+    port: 3000, // Main Website on port 3000
     strictPort: true, // 🔒 LOCKED: Do not allow port changes if 3000 is busy
     host: true,
     // Enable HTTPS for local development with custom domain
