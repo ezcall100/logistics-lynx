@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 /**
  * User Registration Form - Super Admin Component
  * Created by MCP 301 Agents
- * Timestamp: 2025-09-14T17:58:56.528Z
+ * Timestamp: 2025-09-14T22:49:10.772Z
  * Features: Complete form validation, real-time feedback, professional design
  */
 
@@ -36,7 +36,7 @@ export const UserRegistrationForm: React.FC<{
     company: '',
     department: '',
     phone: '',
-    timezone: 'UTC'
+    timezone: 'UTC',
   });
 
   const [errors, setErrors] = useState<Partial<UserRegistrationData>>({});
@@ -94,10 +94,7 @@ export const UserRegistrationForm: React.FC<{
           <User className="w-6 h-6 text-blue-400" />
           <span>Register New User</span>
         </h2>
-        <button
-          onClick={onCancel}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-        >
+        <button onClick={onCancel} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
           <X className="w-5 h-5 text-gray-400" />
         </button>
       </div>
@@ -108,68 +105,54 @@ export const UserRegistrationForm: React.FC<{
           <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
             Personal Information
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                First Name *
-              </label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">First Name *</label>
               <input
                 type="text"
                 value={formData.firstName}
-                onChange={(e) => handleInputChange('firstName', e.target.value)}
+                onChange={e => handleInputChange('firstName', e.target.value)}
                 className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.firstName ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter first name"
               />
-              {errors.firstName && (
-                <p className="mt-1 text-sm text-red-400">{errors.firstName}</p>
-              )}
+              {errors.firstName && <p className="mt-1 text-sm text-red-400">{errors.firstName}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Last Name *
-              </label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Last Name *</label>
               <input
                 type="text"
                 value={formData.lastName}
-                onChange={(e) => handleInputChange('lastName', e.target.value)}
+                onChange={e => handleInputChange('lastName', e.target.value)}
                 className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.lastName ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter last name"
               />
-              {errors.lastName && (
-                <p className="mt-1 text-sm text-red-400">{errors.lastName}</p>
-              )}
+              {errors.lastName && <p className="mt-1 text-sm text-red-400">{errors.lastName}</p>}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Email Address *
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
+                onChange={e => handleInputChange('email', e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter email address"
               />
             </div>
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-            )}
+            {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Phone Number
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
             <input
               type="tel"
               value={formData.phone}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
+              onChange={e => handleInputChange('phone', e.target.value)}
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter phone number"
             />
@@ -181,25 +164,21 @@ export const UserRegistrationForm: React.FC<{
           <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
             Account Information
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Password *
-              </label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Password *</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="password"
                   value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
+                  onChange={e => handleInputChange('password', e.target.value)}
                   className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.password ? 'border-red-500' : 'border-white/20'}`}
                   placeholder="Enter password"
                 />
               </div>
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-400">{errors.password}</p>
-              )}
+              {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
             </div>
 
             <div>
@@ -211,7 +190,7 @@ export const UserRegistrationForm: React.FC<{
                 <input
                   type="password"
                   value={formData.confirmPassword}
-                  onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                  onChange={e => handleInputChange('confirmPassword', e.target.value)}
                   className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.confirmPassword ? 'border-red-500' : 'border-white/20'}`}
                   placeholder="Confirm password"
                 />
@@ -228,34 +207,28 @@ export const UserRegistrationForm: React.FC<{
           <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
             Company Information
           </h3>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Company *
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Company *</label>
             <div className="relative">
               <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 value={formData.company}
-                onChange={(e) => handleInputChange('company', e.target.value)}
+                onChange={e => handleInputChange('company', e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.company ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter company name"
               />
             </div>
-            {errors.company && (
-              <p className="mt-1 text-sm text-red-400">{errors.company}</p>
-            )}
+            {errors.company && <p className="mt-1 text-sm text-red-400">{errors.company}</p>}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Role
-              </label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Role</label>
               <select
                 value={formData.role}
-                onChange={(e) => handleInputChange('role', e.target.value)}
+                onChange={e => handleInputChange('role', e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="Customer">Customer</option>
@@ -266,13 +239,11 @@ export const UserRegistrationForm: React.FC<{
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Department
-              </label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Department</label>
               <input
                 type="text"
                 value={formData.department}
-                onChange={(e) => handleInputChange('department', e.target.value)}
+                onChange={e => handleInputChange('department', e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter department"
               />
@@ -280,12 +251,10 @@ export const UserRegistrationForm: React.FC<{
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Timezone
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Timezone</label>
             <select
               value={formData.timezone}
-              onChange={(e) => handleInputChange('timezone', e.target.value)}
+              onChange={e => handleInputChange('timezone', e.target.value)}
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="UTC">UTC</option>

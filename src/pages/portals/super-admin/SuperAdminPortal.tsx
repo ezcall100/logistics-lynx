@@ -19,7 +19,8 @@ import {
   X,
   User as UserIcon,
   MessageCircle,
-  Building
+  Building,
+  Activity,
 } from 'lucide-react';
 
 // Import the new modular Communication Hub
@@ -52,11 +53,16 @@ import CommunicationHubCustomization from '../../../components/super-admin/commu
 import CompanySettings from '../../../components/super-admin/settings/CompanySettings';
 import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
 
+// Import Real-Time Development Monitor
+import RealTimeDevelopmentMonitor from '../../../components/super-admin/RealTimeDevelopmentMonitor';
+
 // Placeholder component for Settings Management
 const SettingsManagementPlaceholder = () => (
   <div className="p-6">
     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Settings Management</h2>
-    <p className="text-gray-600 dark:text-gray-400">Settings Management functionality coming soon...</p>
+    <p className="text-gray-600 dark:text-gray-400">
+      Settings Management functionality coming soon...
+    </p>
   </div>
 );
 
@@ -80,8 +86,8 @@ const mockData = {
       contact: {
         email: 'admin@demo-company-a.com',
         phone: '+1-555-0001',
-        address: '123 Demo Street, Demo City, DC 00001'
-      }
+        address: '123 Demo Street, Demo City, DC 00001',
+      },
     },
     {
       id: 2,
@@ -97,8 +103,8 @@ const mockData = {
       contact: {
         email: 'contact@demo-company-b.com',
         phone: '+1-555-0002',
-        address: '456 Demo Avenue, Demo City, DC 00002'
-      }
+        address: '456 Demo Avenue, Demo City, DC 00002',
+      },
     },
     {
       id: 3,
@@ -114,9 +120,9 @@ const mockData = {
       contact: {
         email: 'info@demo-company-c.com',
         phone: '+1-555-0003',
-        address: '789 Demo Boulevard, Demo City, DC 00003'
-      }
-    }
+        address: '789 Demo Boulevard, Demo City, DC 00003',
+      },
+    },
   ],
   users: [
     {
@@ -127,7 +133,7 @@ const mockData = {
       company: 'DEMO Company A',
       status: 'Active',
       lastLogin: '2024-01-15T10:30:00Z',
-      permissions: ['Full Access']
+      permissions: ['Full Access'],
     },
     {
       id: 2,
@@ -137,8 +143,8 @@ const mockData = {
       company: 'DEMO Company B',
       status: 'Active',
       lastLogin: '2024-01-15T09:15:00Z',
-      permissions: ['Management Access']
-    }
+      permissions: ['Management Access'],
+    },
   ],
   systemMetrics: {
     totalCompanies: 1247,
@@ -151,8 +157,8 @@ const mockData = {
     bandwidth: 15.8,
     mcpAgents: 301,
     responseTime: 45,
-    errorRate: 0.03
-  }
+    errorRate: 0.03,
+  },
 };
 
 const SuperAdminPortal: React.FC = () => {
@@ -164,12 +170,11 @@ const SuperAdminPortal: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [notificationCount] = useState(12);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showRealTimeMonitor, setShowRealTimeMonitor] = useState(true);
 
   const handleMenuToggle = (menuId: string) => {
     setExpandedMenus(prev =>
-      prev.includes(menuId)
-        ? prev.filter(id => id !== menuId)
-        : [...prev, menuId]
+      prev.includes(menuId) ? prev.filter(id => id !== menuId) : [...prev, menuId]
     );
   };
 
@@ -178,7 +183,6 @@ const SuperAdminPortal: React.FC = () => {
     // Handle navigation logic here
     console.log(`Navigating to ${path}`);
   };
-
 
   const navigationItems = [
     {
@@ -194,32 +198,32 @@ const SuperAdminPortal: React.FC = () => {
           id: 'system-overview',
           label: 'System Overview',
           path: '/super-admin/dashboard',
-          component: SystemOverview
+          component: SystemOverview,
         },
         {
           id: 'active-users',
           label: 'Active Users',
           path: '/super-admin/dashboard/users',
-          component: ActiveUsers
+          component: ActiveUsers,
         },
         {
           id: 'revenue-metrics',
           label: 'Revenue Metrics',
           path: '/super-admin/dashboard/revenue',
-          component: RevenueMetrics
+          component: RevenueMetrics,
         },
         {
           id: 'system-alerts',
           label: 'System Alerts',
           path: '/super-admin/dashboard/alerts',
-          component: SystemAlerts
-        }
-      ]
+          component: SystemAlerts,
+        },
+      ],
     },
     {
       id: 'user-management',
-          label: 'User Management',
-          icon: Users,
+      label: 'User Management',
+      icon: Users,
       description: 'User accounts & permissions',
       color: 'text-purple-500',
       bgColor: 'bg-purple-50',
@@ -230,51 +234,51 @@ const SuperAdminPortal: React.FC = () => {
           id: 'all-users',
           label: 'All Users',
           path: '/super-admin/user-management/AllUsers',
-          component: UserManagement
+          component: UserManagement,
         },
         {
           id: 'user-roles',
           label: 'User Roles',
           path: '/super-admin/user-management/UserRoles',
-          component: UserManagement
+          component: UserManagement,
         },
         {
           id: 'user-groups',
           label: 'User Groups',
           path: '/super-admin/user-management/UserGroups',
-          component: UserManagement
+          component: UserManagement,
         },
         {
           id: 'access-control',
           label: 'Access Control',
           path: '/super-admin/user-management/AccessControl',
-          component: RoleBasedAccessControl
+          component: RoleBasedAccessControl,
         },
         {
           id: 'user-analytics',
           label: 'User Analytics',
           path: '/super-admin/user-management/UserAnalytics',
-          component: UserManagement
+          component: UserManagement,
         },
         {
           id: 'billing-management',
           label: 'Billing Management',
           path: '/super-admin/user-management/BillingManagement',
-          component: BillingManagement
+          component: BillingManagement,
         },
         {
           id: 'support-tickets',
           label: 'Support Tickets',
           path: '/super-admin/user-management/SupportTickets',
-          component: UserManagement
+          component: UserManagement,
         },
         {
           id: 'user-onboarding',
           label: 'User Onboarding',
           path: '/super-admin/user-management/UserOnboarding',
-          component: UserManagement
-        }
-      ]
+          component: UserManagement,
+        },
+      ],
     },
     {
       id: 'system-administration',
@@ -289,33 +293,33 @@ const SuperAdminPortal: React.FC = () => {
           id: 'database-management',
           label: 'Database Management',
           path: '/super-admin/system-administration/DatabaseManagement',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'api-management',
           label: 'API Management',
           path: '/super-admin/system-administration/APIManagement',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'server-monitoring',
           label: 'Server Monitoring',
           path: '/super-admin/system-administration/ServerMonitoring',
-          component: SystemHealthMonitor
+          component: SystemHealthMonitor,
         },
         {
           id: 'security-settings',
           label: 'Security Settings',
           path: '/super-admin/system-administration/SecuritySettings',
-          component: SecurityCompliance
+          component: SecurityCompliance,
         },
         {
           id: 'system-settings',
           label: 'System Settings',
           path: '/super-admin/system-administration/SystemSettings',
-          component: GlobalSettings
-        }
-      ]
+          component: GlobalSettings,
+        },
+      ],
     },
     {
       id: 'mcp-agents',
@@ -330,21 +334,21 @@ const SuperAdminPortal: React.FC = () => {
           id: 'mcp-overview',
           label: 'MCP Overview',
           path: '/super-admin/mcp/MCPOverview',
-          component: MCPAgentOrchestrationCenter
+          component: MCPAgentOrchestrationCenter,
         },
         {
           id: 'agent-management',
           label: 'Agent Management',
           path: '/super-admin/mcp-agents/AgentManagement',
-          component: MCPAgentOrchestrationCenter
+          component: MCPAgentOrchestrationCenter,
         },
         {
           id: 'agent-workflows',
           label: 'Agent Workflows',
           path: '/super-admin/agent-workflows/AgentWorkflows',
-          component: MCPAgentOrchestrationCenter
-        }
-      ]
+          component: MCPAgentOrchestrationCenter,
+        },
+      ],
     },
     {
       id: 'analytics-reports',
@@ -359,21 +363,21 @@ const SuperAdminPortal: React.FC = () => {
           id: 'business-analytics',
           label: 'Business Analytics',
           path: '/super-admin/analytics-reports/BusinessAnalytics',
-          component: BusinessIntelligenceCenter
+          component: BusinessIntelligenceCenter,
         },
         {
           id: 'performance-reports',
           label: 'Performance Reports',
           path: '/super-admin/analytics-reports/PerformanceReports',
-          component: BusinessIntelligenceCenter
+          component: BusinessIntelligenceCenter,
         },
         {
           id: 'financial-reports',
           label: 'Financial Reports',
           path: '/super-admin/analytics-reports/FinancialReports',
-          component: BusinessIntelligenceCenter
-        }
-      ]
+          component: BusinessIntelligenceCenter,
+        },
+      ],
     },
     {
       id: 'development-devops',
@@ -388,21 +392,21 @@ const SuperAdminPortal: React.FC = () => {
           id: 'ci-cd-pipeline',
           label: 'CI/CD Pipeline',
           path: '/super-admin/development-devops/CICDPipeline',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'environment-management',
           label: 'Environment Management',
           path: '/super-admin/development-devops/EnvironmentManagement',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'testing-suite',
           label: 'Testing Suite',
           path: '/super-admin/qa-testing/TestingSuite',
-          component: GlobalSettings
-        }
-      ]
+          component: GlobalSettings,
+        },
+      ],
     },
     {
       id: 'ui-components',
@@ -417,15 +421,15 @@ const SuperAdminPortal: React.FC = () => {
           id: 'ui-component-registry',
           label: 'UI Component Registry',
           path: '/super-admin/ui-components/UIComponentRegistry',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'design-system',
           label: 'Design System',
           path: '/super-admin/ui-components/DesignSystem',
-          component: GlobalSettings
-        }
-      ]
+          component: GlobalSettings,
+        },
+      ],
     },
     {
       id: 'deployment-operations',
@@ -440,21 +444,21 @@ const SuperAdminPortal: React.FC = () => {
           id: 'deployment-management',
           label: 'Deployment Management',
           path: '/super-admin/deployment/DeploymentManagement',
-          component: GlobalSettings
+          component: GlobalSettings,
         },
         {
           id: 'performance-monitoring',
           label: 'Performance Monitoring',
           path: '/super-admin/performance/PerformanceMonitoring',
-          component: SystemHealthMonitor
+          component: SystemHealthMonitor,
         },
         {
           id: 'uptime-monitoring',
           label: 'Uptime Monitoring',
           path: '/super-admin/system-monitoring/UptimeMonitoring',
-          component: SystemHealthMonitor
-        }
-      ]
+          component: SystemHealthMonitor,
+        },
+      ],
     },
     {
       id: 'security',
@@ -469,21 +473,21 @@ const SuperAdminPortal: React.FC = () => {
           id: 'security-audit',
           label: 'Security Audit',
           path: '/super-admin/security/SecurityAudit',
-          component: SecurityCompliance
+          component: SecurityCompliance,
         },
         {
           id: 'security-policies',
           label: 'Security Policies',
           path: '/super-admin/security/SecurityPolicies',
-          component: SecurityCompliance
+          component: SecurityCompliance,
         },
         {
           id: 'incident-response',
           label: 'Incident Response',
           path: '/super-admin/security/IncidentResponse',
-          component: SecurityWarRoom
-        }
-      ]
+          component: SecurityWarRoom,
+        },
+      ],
     },
     {
       id: 'mobile-portal-management',
@@ -498,15 +502,15 @@ const SuperAdminPortal: React.FC = () => {
           id: 'mobile-management',
           label: 'Mobile Management',
           path: '/super-admin/mobile/MobileManagement',
-          component: PortalManagement
+          component: PortalManagement,
         },
         {
           id: 'portal-management',
           label: 'Portal Management',
           path: '/super-admin/portal-management/PortalManagement',
-          component: PortalManagement
-        }
-      ]
+          component: PortalManagement,
+        },
+      ],
     },
     {
       id: 'company-settings',
@@ -530,51 +534,51 @@ const SuperAdminPortal: React.FC = () => {
           id: 'global-settings',
           label: 'Global Settings',
           path: '/super-admin/settings-management/GlobalSettings',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'portal-settings',
           label: 'Portal Settings',
           path: '/super-admin/settings-management/PortalSettings',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'user-preferences',
           label: 'User Preferences',
           path: '/super-admin/settings-management/UserPreferences',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'security-settings',
           label: 'Security Settings',
           path: '/super-admin/settings-management/SecuritySettings',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'notification-settings',
           label: 'Notification Settings',
           path: '/super-admin/settings-management/NotificationSettings',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'integration-settings',
           label: 'Integration Settings',
           path: '/super-admin/settings-management/IntegrationSettings',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'backup-restore',
           label: 'Backup & Restore',
           path: '/super-admin/settings-management/BackupRestore',
-          component: SettingsManagementPlaceholder
+          component: SettingsManagementPlaceholder,
         },
         {
           id: 'audit-logs',
           label: 'Audit Logs',
           path: '/super-admin/settings-management/AuditLogs',
-          component: SettingsManagementPlaceholder
-        }
-      ]
+          component: SettingsManagementPlaceholder,
+        },
+      ],
     },
     {
       id: 'communication-hub',
@@ -589,16 +593,16 @@ const SuperAdminPortal: React.FC = () => {
           id: 'communication-hub-overview',
           label: 'Communication Hub Overview',
           path: '/super-admin/communication-hub/CommunicationHubOverview',
-          component: CommunicationHubOverview
+          component: CommunicationHubOverview,
         },
         {
           id: 'communication-hub-customization',
           label: 'Communication Hub Customization',
           path: '/super-admin/communication-hub/CommunicationHubCustomization',
-          component: CommunicationHubCustomization
-        }
-      ]
-    }
+          component: CommunicationHubCustomization,
+        },
+      ],
+    },
   ];
 
   const getActiveComponent = () => {
@@ -606,12 +610,12 @@ const SuperAdminPortal: React.FC = () => {
     if (activeTab === 'profile') {
       return ProfilePage;
     }
-    
+
     // Handle Company Settings page
     if (activeTab === 'company-settings') {
       return CompanySettings;
     }
-    
+
     // First check if activeTab matches a submenu
     for (const item of navigationItems) {
       if (item.subMenus) {
@@ -621,7 +625,7 @@ const SuperAdminPortal: React.FC = () => {
         }
       }
     }
-    
+
     // If not a submenu, check main menu items
     const activeItem = navigationItems.find(item => item.id === activeTab);
     return activeItem?.component || SystemOverview;
@@ -630,97 +634,121 @@ const SuperAdminPortal: React.FC = () => {
   const ActiveComponent = getActiveComponent();
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}
+    >
       {/* Header */}
       <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
         <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center space-x-3 sm:space-x-4">
-              <button
+            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden"
             >
               <Menu className="h-5 w-5" />
-              </button>
-              <div className="flex items-center space-x-2 sm:space-x-3">
+            </button>
+            <div className="flex items-center space-x-2 sm:space-x-3">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                 <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-                </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
-                    TransBot AI
-                  </h1>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
-                    Super Admin Portal
-                  </p>
-                </div>
-                <div className="sm:hidden">
-                  <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+              </div>
+              <div className="hidden sm:block">
+                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
                   TransBot AI
-                  </h1>
-                </div>
+                </h1>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
+                  Super Admin Portal
+                </p>
+              </div>
+              <div className="sm:hidden">
+                <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                  TransBot AI
+                </h1>
               </div>
             </div>
+          </div>
 
-            <div className="flex items-center space-x-1 sm:space-x-2">
-              {/* Search Bar - Responsive */}
-              <div className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {/* Search Bar - Responsive */}
+            <div className="relative hidden md:block">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
                 placeholder="Search companies, users, reports..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
-                />
-              </div>
-              {/* Mobile Search Button */}
-              <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
-                <Search className="h-5 w-5" />
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
+              />
+            </div>
+            {/* Mobile Search Button */}
+            <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
+              <Search className="h-5 w-5" />
+            </button>
+
+            {/* Essential Icons */}
+            <div className="flex items-center space-x-1">
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={toggleDarkMode}
+                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                title={darkMode ? 'Light Mode' : 'Dark Mode'}
+              >
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
 
-              {/* Essential Icons */}
-              <div className="flex items-center space-x-1">
-                {/* Dark Mode Toggle */}
-                <button
-                  onClick={toggleDarkMode}
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  title={darkMode ? 'Light Mode' : 'Dark Mode'}
-                >
-                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </button>
+              {/* Notifications */}
+              <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
+                <Bell className="h-5 w-5" />
+                {notificationCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {notificationCount}
+                  </span>
+                )}
+              </button>
 
-                {/* Notifications */}
-                <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
-                  <Bell className="h-5 w-5" />
-                  {notificationCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {notificationCount}
-                    </span>
-                  )}
-                </button>
+              {/* Real-Time Development Monitor Toggle */}
+              <button
+                onClick={() => setShowRealTimeMonitor(!showRealTimeMonitor)}
+                className={`relative p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-colors ${
+                  showRealTimeMonitor
+                    ? 'text-green-500 hover:text-green-600 bg-green-50 dark:bg-green-900/20'
+                    : 'text-gray-400 hover:text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+                title={
+                  showRealTimeMonitor ? 'Hide Real-Time Development' : 'Show Real-Time Development'
+                }
+              >
+                <Activity className="h-5 w-5" />
+                {showRealTimeMonitor && (
+                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </span>
+                )}
+              </button>
 
-                {/* Settings */}
-                  <button
-                  onClick={() => setActiveTab('company-settings')}
-                    className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
-                  title="Company Settings"
-                  >
-                    <Settings className="h-5 w-5" />
-                  </button>
+              {/* Settings */}
+              <button
+                onClick={() => setActiveTab('company-settings')}
+                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                title="Company Settings"
+              >
+                <Settings className="h-5 w-5" />
+              </button>
 
               {/* User Profile */}
-                <div className="relative">
-                  <button
+              <div className="relative">
+                <button
                   onClick={() => setActiveTab('profile')}
                   className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   title="Profile & Account"
                 >
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
                     <UserIcon className="h-4 w-4 text-white" />
-                    </div>
-                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">Super Admin</span>
-                  </button>
-                      </div>
+                  </div>
+                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Super Admin
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -728,21 +756,29 @@ const SuperAdminPortal: React.FC = () => {
 
       <div className="flex">
         {/* Left Sidebar - Super Admin Navigation */}
-        <aside className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
-          sidebarCollapsed ? 'w-16' : 'w-64'
-        }`}>
+        <aside
+          className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
+            sidebarCollapsed ? 'w-16' : 'w-64'
+          }`}
+        >
           <div className="h-full flex flex-col">
             {/* Sidebar Header */}
             <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-slate-700/50">
               <div className="flex items-center justify-between">
                 {!sidebarCollapsed && (
-                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
+                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                    Navigation
+                  </h2>
                 )}
                 <button
                   onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                 >
-                  {sidebarCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
+                  {sidebarCollapsed ? (
+                    <ChevronRight className="h-5 w-5" />
+                  ) : (
+                    <ChevronLeft className="h-5 w-5" />
+                  )}
                 </button>
               </div>
             </div>
@@ -779,17 +815,17 @@ const SuperAdminPortal: React.FC = () => {
                           {!sidebarCollapsed && (
                             <div className="flex-1 text-left">
                               <div className="flex items-center space-x-2">
-                            <span
-                              className={`text-sm font-medium ${isActive ? 'text-blue-700' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:text-gray-100'}`}
-                            >
+                                <span
+                                  className={`text-sm font-medium ${isActive ? 'text-blue-700' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:text-gray-100'}`}
+                                >
                                   {item.label}
                                 </span>
                                 {(item as { badge?: number }).badge && (
                                   <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
                                     {(item as { badge?: number }).badge}
-                            </span>
-                          )}
-                        </div>
+                                  </span>
+                                )}
+                              </div>
                               <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
                                 {item.description}
                               </div>
@@ -803,10 +839,10 @@ const SuperAdminPortal: React.FC = () => {
                             </span>
                           )}
                           {!sidebarCollapsed && item.subMenus && item.subMenus.length > 0 && (
-                          <ChevronRight
-                            className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
-                          />
-                        )}
+                            <ChevronRight
+                              className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+                            />
+                          )}
                         </div>
                       </button>
                     </div>
@@ -824,42 +860,42 @@ const SuperAdminPortal: React.FC = () => {
                           const isSubActive = activeTab === subMenu.id;
 
                           return (
-                              <button
+                            <button
                               key={subMenu.id}
                               onClick={() => handleMenuItemClick(subMenu.id, subMenu.path)}
                               className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                  isSubActive
+                                isSubActive
                                   ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'
-                                          : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
-                                      }`}
-                                    >
+                                  : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                              }`}
+                            >
                               <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                                        <span className="text-sm font-medium">{subMenu.label}</span>
-                                            </button>
-                                          );
-                                        })}
+                              <span className="text-sm font-medium">{subMenu.label}</span>
+                            </button>
+                          );
+                        })}
                       </motion.div>
                     )}
-                      </div>
-                    );
-                  })}
-                </nav>
-              </div>
-            </aside>
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+        </aside>
 
         {/* Main Content Area */}
         <main className="flex-1 p-3 sm:p-4 md:p-6">
           <AnimatePresence mode="wait">
-                <motion.div
+            <motion.div
               key={activeTab}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
               className="h-full"
             >
               <ActiveComponent />
-                </motion.div>
+            </motion.div>
           </AnimatePresence>
         </main>
 
@@ -878,95 +914,110 @@ const SuperAdminPortal: React.FC = () => {
                   <div className="flex items-center space-x-3">
                     <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                       <MessageCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                        Hub
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        Communication center
+                      </p>
+                    </div>
                   </div>
-                <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Hub</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">Communication center</p>
-                </div>
-                </div>
-                        <button
+                  <button
                     onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
                     className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
                     title="Collapse Hub"
                   >
                     <ChevronRight className="h-5 w-5" />
-                        </button>
-                      </div>
-                    </div>
+                  </button>
+                </div>
+              </div>
             )}
-            
+
             {/* Collapsed Header - Only Toggle Button */}
             {rightSidebarCollapsed && (
               <div className="p-2 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex justify-center">
-                      <button
+                  <button
                     onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
                     className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
                     title="Expand Hub"
                   >
                     <ChevronLeft className="h-5 w-5" />
-                      </button>
-                    </div>
+                  </button>
+                </div>
               </div>
             )}
 
             {/* Communication Hub Content */}
             <div className="flex-1 overflow-hidden">
-        {rightSidebarCollapsed ? (
+              {rightSidebarCollapsed ? (
                 <div className="flex flex-col items-center py-6 space-y-4">
-            <button
+                  <button
                     onClick={() => setRightSidebarCollapsed(false)}
                     className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105"
                     title="Expand Hub"
                   >
                     <MessageCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-            </button>
+                  </button>
                   <div className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight font-medium">
-                          Hub
-          </div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight font-medium">
+                    Hub
+                  </div>
                   <div className="flex flex-col space-y-2 mt-4">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-              </div>
+                    <div
+                      className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+                      style={{ animationDelay: '0.5s' }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"
+                      style={{ animationDelay: '1s' }}
+                    ></div>
+                  </div>
                 </div>
               ) : (
                 <div className="h-full overflow-y-auto">
                   <CommunicationHub />
-                      </div>
+                </div>
               )}
-                    </div>
-                        </div>
+            </div>
+          </div>
         </motion.aside>
-                      </div>
+      </div>
 
-        {/* Mobile Sidebar Overlay */}
+      {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)} />
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50"
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
-                  <button
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                  Navigation
+                </h2>
+                <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                   <X className="h-5 w-5" />
-                  </button>
-                </div>
+                </button>
               </div>
+            </div>
             <nav className="p-4">
               <div className="space-y-2">
                 {navigationItems.map(item => {
                   const isActive = activeTab === item.id;
                   const isExpanded = expandedMenus.includes(item.id);
 
-                    return (
+                  return (
                     <div key={item.id} className="space-y-1">
-                        {/* Main Menu Item */}
-                          <button
+                      {/* Main Menu Item */}
+                      <button
                         onClick={() => {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
@@ -975,73 +1026,76 @@ const SuperAdminPortal: React.FC = () => {
                             setMobileMenuOpen(false);
                           }
                         }}
-                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
                           isActive
-                                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                                : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
-                            }`}
-                          >
-                            <div className="flex items-center space-x-3">
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                            : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-3">
                           <item.icon
                             className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`}
-                              />
+                          />
                           <div className="flex-1 text-left">
                             <div className="font-medium">{item.label}</div>
                             <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
                               {item.description}
+                            </div>
+                          </div>
                         </div>
-                </div>
-              </div>
-                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2">
                           {item.count && (
                             <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
                               {item.count}
-                        </span>
+                            </span>
                           )}
                           {item.subMenus && item.subMenus.length > 0 && (
                             <ChevronRight
                               className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''} ${isActive ? 'text-white' : 'text-gray-400'}`}
                             />
                           )}
-                    </div>
+                        </div>
                       </button>
 
-                          {/* Sub-menus */}
+                      {/* Sub-menus */}
                       {isExpanded && item.subMenus && (
-                            <div className="ml-4 space-y-1">
+                        <div className="ml-4 space-y-1">
                           {item.subMenus.map(subMenu => {
                             const isSubActive = activeTab === subMenu.id;
 
-                      return (
-                                    <button
+                            return (
+                              <button
                                 key={subMenu.id}
-                                      onClick={() => {
+                                onClick={() => {
                                   setActiveTab(subMenu.id);
                                   setMobileMenuOpen(false);
                                 }}
                                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                        isSubActive
-                                          ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
-                                          : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
-                                      }`}
-                                    >
+                                  isSubActive
+                                    ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
+                                    : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                                }`}
+                              >
                                 <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                                        <span className="text-sm font-medium">{subMenu.label}</span>
-                      </button>
-                      );
-                    })}
-                  </div>
-                )}
+                                <span className="text-sm font-medium">{subMenu.label}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-                      );
-                    })}
-                  </div>
-                </nav>
-                </div>
-                  </div>
-        )}
+            </nav>
+          </div>
+        </div>
+      )}
 
-
+      {/* Real-Time Development Monitor - Fixed Overlay */}
+      {showRealTimeMonitor && (
+        <RealTimeDevelopmentMonitor onClose={() => setShowRealTimeMonitor(false)} />
+      )}
     </div>
   );
 };

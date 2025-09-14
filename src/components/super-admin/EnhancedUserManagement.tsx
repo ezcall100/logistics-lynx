@@ -1,15 +1,33 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  Plus, Eye, Edit, Trash, Search, Download, RefreshCw, 
-  ChevronLeft, ChevronRight, Check, X, MoreVertical, User, 
-  Smartphone, Monitor, Tablet, Globe, MapPin, Clock, Shield
+import {
+  Plus,
+  Eye,
+  Edit,
+  Trash,
+  Search,
+  Filter,
+  Download,
+  RefreshCw,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+  X,
+  MoreVertical,
+  User,
+  Smartphone,
+  Monitor,
+  Tablet,
+  Globe,
+  MapPin,
+  Clock,
+  Shield,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Enhanced User Management - Super Admin Component
  * Created by MCP 301 Agents for 12-Hour Completion
- * Timestamp: 2025-09-14T17:28:20.448Z
+ * Timestamp: 2025-09-14T22:49:06.399Z
  * Features: Full CRUD, Advanced Table, Real-time Updates, Enterprise Features
  */
 
@@ -48,60 +66,66 @@ export const EnhancedUserManagement: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isLiveUpdate, setIsLiveUpdate] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(new Date());
-  
+
   // Modal States
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
-  
+
   // Loading States
   const [isLoading, setIsLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
   // Mock Data - In real app, this would come from API
-  const mockUsers: UserData[] = useMemo(() => [
-    {
-      id: '1',
-      name: 'John Smith',
-      email: 'john.smith@company.com',
-      role: 'Super Admin',
-      company: 'TransBot AI',
-      status: 'Active',
-      device: 'Desktop',
-      location: 'New York, NY',
-      ip: '192.168.1.100',
-      lastSeen: '2 minutes ago',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
-    },
-    {
-      id: '2',
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@company.com',
-      role: 'Manager',
-      company: 'TransBot AI',
-      status: 'Idle',
-      device: 'Mobile',
-      location: 'Los Angeles, CA',
-      ip: '192.168.1.101',
-      lastSeen: '15 minutes ago',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face'
-    },
-    {
-      id: '3',
-      name: 'Mike Wilson',
-      email: 'mike.wilson@company.com',
-      role: 'Operator',
-      company: 'TransBot AI',
-      status: 'Inactive',
-      device: 'Tablet',
-      location: 'Chicago, IL',
-      ip: '192.168.1.102',
-      lastSeen: '1 hour ago',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face'
-    }
-  ], []);
+  const mockUsers: UserData[] = useMemo(
+    () => [
+      {
+        id: '1',
+        name: 'John Smith',
+        email: 'john.smith@company.com',
+        role: 'Super Admin',
+        company: 'TransBot AI',
+        status: 'Active',
+        device: 'Desktop',
+        location: 'New York, NY',
+        ip: '192.168.1.100',
+        lastSeen: '2 minutes ago',
+        avatar:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '2',
+        name: 'Sarah Johnson',
+        email: 'sarah.johnson@company.com',
+        role: 'Manager',
+        company: 'TransBot AI',
+        status: 'Idle',
+        device: 'Mobile',
+        location: 'Los Angeles, CA',
+        ip: '192.168.1.101',
+        lastSeen: '15 minutes ago',
+        avatar:
+          'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '3',
+        name: 'Mike Wilson',
+        email: 'mike.wilson@company.com',
+        role: 'Operator',
+        company: 'TransBot AI',
+        status: 'Inactive',
+        device: 'Tablet',
+        location: 'Chicago, IL',
+        ip: '192.168.1.102',
+        lastSeen: '1 hour ago',
+        avatar:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+      },
+    ],
+    []
+  );
 
   // Initialize users
   useEffect(() => {
@@ -111,25 +135,26 @@ export const EnhancedUserManagement: React.FC = () => {
   // Real-time Updates
   useEffect(() => {
     if (!isLiveUpdate) return;
-    
+
     const interval = setInterval(() => {
       setLastUpdated(new Date());
       // In real app, this would fetch updated data from API
     }, 10000); // Update every 10 seconds
-    
+
     return () => clearInterval(interval);
   }, [isLiveUpdate]);
 
   // Filtered and Sorted Users
   const filteredUsers = useMemo(() => {
     let filtered = users.filter(user => {
-      const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.company.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch =
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
       const matchesRole = roleFilter === 'all' || user.role === roleFilter;
       const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
-      
+
       return matchesSearch && matchesStatus && matchesRole && matchesDevice;
     });
 
@@ -137,7 +162,9 @@ export const EnhancedUserManagement: React.FC = () => {
     filtered.sort((a, b) => {
       const aValue = a[sortField];
       const bValue = b[sortField];
-      
+
+      if (aValue === undefined || bValue === undefined) return 0;
+
       if (sortDirection === 'asc') {
         return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
       } else {
@@ -157,7 +184,7 @@ export const EnhancedUserManagement: React.FC = () => {
   const bulkActions: BulkAction[] = [
     { type: 'activate', label: 'Activate', icon: <Check className="w-4 h-4" />, color: 'green' },
     { type: 'deactivate', label: 'Deactivate', icon: <X className="w-4 h-4" />, color: 'yellow' },
-    { type: 'delete', label: 'Delete', icon: <Trash className="w-4 h-4" />, color: 'red' }
+    { type: 'delete', label: 'Delete', icon: <Trash className="w-4 h-4" />, color: 'red' },
   ];
 
   // Handlers
@@ -171,10 +198,8 @@ export const EnhancedUserManagement: React.FC = () => {
   };
 
   const handleSelectUser = (userId: string) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
+    setSelectedUsers(prev =>
+      prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
 
@@ -203,19 +228,27 @@ export const EnhancedUserManagement: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Active': return 'bg-green-500';
-      case 'Idle': return 'bg-yellow-500';
-      case 'Inactive': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'Active':
+        return 'bg-green-500';
+      case 'Idle':
+        return 'bg-yellow-500';
+      case 'Inactive':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
   const getDeviceIcon = (device: string) => {
     switch (device) {
-      case 'Desktop': return <Monitor className="w-4 h-4" />;
-      case 'Mobile': return <Smartphone className="w-4 h-4" />;
-      case 'Tablet': return <Tablet className="w-4 h-4" />;
-      default: return <Monitor className="w-4 h-4" />;
+      case 'Desktop':
+        return <Monitor className="w-4 h-4" />;
+      case 'Mobile':
+        return <Smartphone className="w-4 h-4" />;
+      case 'Tablet':
+        return <Tablet className="w-4 h-4" />;
+      default:
+        return <Monitor className="w-4 h-4" />;
     }
   };
 
@@ -230,10 +263,10 @@ export const EnhancedUserManagement: React.FC = () => {
         <div className="flex items-center space-x-4">
           {/* Live Update Toggle */}
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}></div>
-            <span className="text-sm text-gray-400">
-              {isLiveUpdate ? 'Live' : 'Paused'}
-            </span>
+            <div
+              className={`w-2 h-2 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}
+            ></div>
+            <span className="text-sm text-gray-400">{isLiveUpdate ? 'Live' : 'Paused'}</span>
           </div>
           <button
             onClick={() => setIsLiveUpdate(!isLiveUpdate)}
@@ -254,14 +287,14 @@ export const EnhancedUserManagement: React.FC = () => {
               type="text"
               placeholder="Search users..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          
+
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            onChange={e => setStatusFilter(e.target.value)}
             className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Status</option>
@@ -269,10 +302,10 @@ export const EnhancedUserManagement: React.FC = () => {
             <option value="Idle">Idle</option>
             <option value="Inactive">Inactive</option>
           </select>
-          
+
           <select
             value={roleFilter}
-            onChange={(e) => setRoleFilter(e.target.value)}
+            onChange={e => setRoleFilter(e.target.value)}
             className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Roles</option>
@@ -281,10 +314,10 @@ export const EnhancedUserManagement: React.FC = () => {
             <option value="Operator">Operator</option>
             <option value="Customer">Customer</option>
           </select>
-          
+
           <select
             value={deviceFilter}
-            onChange={(e) => setDeviceFilter(e.target.value)}
+            onChange={e => setDeviceFilter(e.target.value)}
             className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Devices</option>
@@ -304,15 +337,15 @@ export const EnhancedUserManagement: React.FC = () => {
             <Download className="w-4 h-4" />
             <span>{isExporting ? 'Exporting...' : 'Export'}</span>
           </button>
-          
+
           <button
             onClick={() => setLastUpdated(new Date())}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
           >
-            <RefreshCw className="w-4 h-4" />
+            <Refresh className="w-4 h-4" />
             <span>Refresh</span>
           </button>
-          
+
           <button
             onClick={() => setShowAddModal(true)}
             className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
@@ -335,7 +368,7 @@ export const EnhancedUserManagement: React.FC = () => {
               {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center space-x-2">
-              {bulkActions.map((action) => (
+              {bulkActions.map(action => (
                 <button
                   key={action.type}
                   onClick={() => handleBulkAction(action.type)}
@@ -359,60 +392,54 @@ export const EnhancedUserManagement: React.FC = () => {
                 <th className="px-4 py-3 text-left">
                   <input
                     type="checkbox"
-                    checked={selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0}
+                    checked={
+                      selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0
+                    }
                     onChange={handleSelectAll}
                     className="rounded border-gray-300"
                   />
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left cursor-pointer hover:bg-white/5 transition-colors"
                   onClick={() => handleSort('name')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>User</span>
                     {sortField === 'name' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left cursor-pointer hover:bg-white/5 transition-colors"
                   onClick={() => handleSort('role')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Role</span>
                     {sortField === 'role' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left cursor-pointer hover:bg-white/5 transition-colors"
                   onClick={() => handleSort('status')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Status</span>
                     {sortField === 'status' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left cursor-pointer hover:bg-white/5 transition-colors"
                   onClick={() => handleSort('device')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Device</span>
                     {sortField === 'device' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
@@ -422,7 +449,7 @@ export const EnhancedUserManagement: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {paginatedUsers.map((user) => (
+              {paginatedUsers.map(user => (
                 <motion.tr
                   key={user.id}
                   initial={{ opacity: 0 }}
@@ -440,7 +467,10 @@ export const EnhancedUserManagement: React.FC = () => {
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <img
-                        src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff`}
+                        src={
+                          user.avatar ||
+                          `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff`
+                        }
                         alt={user.name}
                         className="w-8 h-8 rounded-full"
                       />
@@ -513,11 +543,13 @@ export const EnhancedUserManagement: React.FC = () => {
         <div className="flex items-center justify-between p-4 border-t border-white/10">
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-400">
-              Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredUsers.length)} of {filteredUsers.length} users
+              Showing {startIndex + 1} to{' '}
+              {Math.min(startIndex + itemsPerPage, filteredUsers.length)} of {filteredUsers.length}{' '}
+              users
             </span>
             <select
               value={itemsPerPage}
-              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              onChange={e => setItemsPerPage(Number(e.target.value))}
               className="px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
             >
               <option value={5}>5 per page</option>
@@ -526,7 +558,7 @@ export const EnhancedUserManagement: React.FC = () => {
               <option value={50}>50 per page</option>
             </select>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -535,7 +567,7 @@ export const EnhancedUserManagement: React.FC = () => {
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            
+
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               const page = i + 1;
               return (
@@ -548,7 +580,7 @@ export const EnhancedUserManagement: React.FC = () => {
                 </button>
               );
             })}
-            
+
             <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}

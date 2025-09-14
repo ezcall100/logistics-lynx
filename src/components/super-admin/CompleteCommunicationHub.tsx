@@ -1,16 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  MessageSquare, Send, Phone, Video, Share2, Paperclip, 
-  Smile, MoreVertical, Search, Filter, Settings, Bell,
-  Users, Hash, Lock, Globe, Mic, MicOff, Camera, CameraOff,
-  Volume2, VolumeX, Maximize2, Minimize2, X, Check, Clock
+import {
+  MessageSquare,
+  Send,
+  Phone,
+  Video,
+  Paperclip,
+  Settings,
+  Bell,
+  Users,
+  Mic,
+  MicOff,
+  Camera,
+  CameraOff,
+  Minimize2,
+  X,
+  Check,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Complete Communication Hub - Super Admin Component
  * Created by MCP 301 Agents
- * Timestamp: 2025-09-14T17:58:56.530Z
+ * Timestamp: 2025-09-14T22:49:10.780Z
  * Features: Real-time chat, notifications, alerts, file sharing, voice/video calls
  */
 
@@ -23,8 +34,6 @@ interface Message {
   isRead: boolean;
   avatar?: string;
 }
-
-type TabId = 'chat' | 'notifications' | 'alerts' | 'calls';
 
 interface Notification {
   id: string;
@@ -50,13 +59,11 @@ export const CompleteCommunicationHub: React.FC = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [isCallActive, setIsCallActive] = useState(false);
   const [isVideoEnabled, setIsVideoEnabled] = useState(true);
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -70,7 +77,8 @@ export const CompleteCommunicationHub: React.FC = () => {
         timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         type: 'text',
         isRead: true,
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
+        avatar:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
       },
       {
         id: '2',
@@ -79,7 +87,8 @@ export const CompleteCommunicationHub: React.FC = () => {
         timestamp: new Date(Date.now() - 1000 * 60 * 3).toISOString(),
         type: 'text',
         isRead: true,
-        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face'
+        avatar:
+          'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
       },
       {
         id: '3',
@@ -88,8 +97,9 @@ export const CompleteCommunicationHub: React.FC = () => {
         timestamp: new Date(Date.now() - 1000 * 60 * 1).toISOString(),
         type: 'text',
         isRead: false,
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face'
-      }
+        avatar:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+      },
     ];
 
     const mockNotifications: Notification[] = [
@@ -100,7 +110,7 @@ export const CompleteCommunicationHub: React.FC = () => {
         type: 'success',
         timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
         isRead: false,
-        action: 'View User'
+        action: 'View User',
       },
       {
         id: '2',
@@ -109,7 +119,7 @@ export const CompleteCommunicationHub: React.FC = () => {
         type: 'info',
         timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
         isRead: false,
-        action: 'Update Now'
+        action: 'Update Now',
       },
       {
         id: '3',
@@ -118,16 +128,46 @@ export const CompleteCommunicationHub: React.FC = () => {
         type: 'warning',
         timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
         isRead: true,
-        action: 'Review'
-      }
+        action: 'Review',
+      },
     ];
 
     const mockUsers: User[] = [
-      { id: '1', name: 'John Smith', status: 'online', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face' },
-      { id: '2', name: 'Sarah Johnson', status: 'away', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face' },
-      { id: '3', name: 'Mike Wilson', status: 'online', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face' },
-      { id: '4', name: 'Emily Davis', status: 'busy', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face' },
-      { id: '5', name: 'David Brown', status: 'offline', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face' }
+      {
+        id: '1',
+        name: 'John Smith',
+        status: 'online',
+        avatar:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '2',
+        name: 'Sarah Johnson',
+        status: 'away',
+        avatar:
+          'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '3',
+        name: 'Mike Wilson',
+        status: 'online',
+        avatar:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '4',
+        name: 'Emily Davis',
+        status: 'busy',
+        avatar:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+      },
+      {
+        id: '5',
+        name: 'David Brown',
+        status: 'offline',
+        avatar:
+          'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+      },
     ];
 
     setMessages(mockMessages);
@@ -149,7 +189,7 @@ export const CompleteCommunicationHub: React.FC = () => {
       content: newMessage,
       timestamp: new Date().toISOString(),
       type: 'text',
-      isRead: true
+      isRead: true,
     };
 
     setMessages(prev => [...prev, message]);
@@ -173,7 +213,7 @@ export const CompleteCommunicationHub: React.FC = () => {
       content: `📎 ${file.name}`,
       timestamp: new Date().toISOString(),
       type: 'file',
-      isRead: true
+      isRead: true,
     };
 
     setMessages(prev => [...prev, message]);
@@ -181,20 +221,29 @@ export const CompleteCommunicationHub: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'online': return 'bg-green-500';
-      case 'away': return 'bg-yellow-500';
-      case 'busy': return 'bg-red-500';
-      case 'offline': return 'bg-gray-500';
-      default: return 'bg-gray-500';
+      case 'online':
+        return 'bg-green-500';
+      case 'away':
+        return 'bg-yellow-500';
+      case 'busy':
+        return 'bg-red-500';
+      case 'offline':
+        return 'bg-gray-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
   const getNotificationIcon = (type: string) => {
     switch (type) {
-      case 'success': return <Check className="w-4 h-4 text-green-400" />;
-      case 'warning': return <Bell className="w-4 h-4 text-yellow-400" />;
-      case 'error': return <X className="w-4 h-4 text-red-400" />;
-      default: return <Bell className="w-4 h-4 text-blue-400" />;
+      case 'success':
+        return <Check className="w-4 h-4 text-green-400" />;
+      case 'warning':
+        return <Bell className="w-4 h-4 text-yellow-400" />;
+      case 'error':
+        return <X className="w-4 h-4 text-red-400" />;
+      default:
+        return <Bell className="w-4 h-4 text-blue-400" />;
     }
   };
 
@@ -251,11 +300,11 @@ export const CompleteCommunicationHub: React.FC = () => {
           { id: 'chat', label: 'Chat', icon: MessageSquare },
           { id: 'notifications', label: 'Notifications', icon: Bell },
           { id: 'alerts', label: 'Alerts', icon: Settings },
-          { id: 'calls', label: 'Calls', icon: Phone }
-        ].map((tab) => (
+          { id: 'calls', label: 'Calls', icon: Phone },
+        ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as TabId)}
+            onClick={() => setActiveTab(tab.id as 'chat' | 'notifications' | 'alerts' | 'calls')}
             className={`flex-1 flex items-center justify-center space-x-2 py-3 text-sm font-medium transition-colors ${activeTab === tab.id ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-white'}`}
           >
             <tab.icon className="w-4 h-4" />
@@ -282,25 +331,35 @@ export const CompleteCommunicationHub: React.FC = () => {
                   <span className="text-sm text-gray-400">Online Users</span>
                 </div>
                 <div className="flex items-center space-x-2 mt-2">
-                  {users.filter(user => user.status === 'online').map((user) => (
-                    <div key={user.id} className="relative">
-                      <img
-                        src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff`}
-                        alt={user.name}
-                        className="w-8 h-8 rounded-full"
-                      />
-                      <div className={`absolute -bottom-1 -right-1 w-3 h-3 ${getStatusColor(user.status)} rounded-full border-2 border-gray-900`}></div>
-                    </div>
-                  ))}
+                  {users
+                    .filter(user => user.status === 'online')
+                    .map(user => (
+                      <div key={user.id} className="relative">
+                        <img
+                          src={
+                            user.avatar ||
+                            `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff`
+                          }
+                          alt={user.name}
+                          className="w-8 h-8 rounded-full"
+                        />
+                        <div
+                          className={`absolute -bottom-1 -right-1 w-3 h-3 ${getStatusColor(user.status)} rounded-full border-2 border-gray-900`}
+                        ></div>
+                      </div>
+                    ))}
                 </div>
               </div>
 
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {messages.map((message) => (
+                {messages.map(message => (
                   <div key={message.id} className="flex items-start space-x-3">
                     <img
-                      src={message.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(message.sender)}&background=6366f1&color=fff`}
+                      src={
+                        message.avatar ||
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(message.sender)}&background=6366f1&color=fff`
+                      }
                       alt={message.sender}
                       className="w-8 h-8 rounded-full flex-shrink-0"
                     />
@@ -340,7 +399,7 @@ export const CompleteCommunicationHub: React.FC = () => {
                     <input
                       type="text"
                       value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
+                      onChange={e => setNewMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Type a message..."
                       className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -366,7 +425,7 @@ export const CompleteCommunicationHub: React.FC = () => {
               exit={{ opacity: 0, x: -20 }}
               className="h-full overflow-y-auto p-4 space-y-3"
             >
-              {notifications.map((notification) => (
+              {notifications.map(notification => (
                 <div
                   key={notification.id}
                   className={`p-3 rounded-lg border ${notification.isRead ? 'bg-white/5 border-white/10' : 'bg-blue-500/10 border-blue-500/30'}`}
@@ -424,7 +483,7 @@ export const CompleteCommunicationHub: React.FC = () => {
                   </div>
                   <h3 className="text-lg font-medium text-white mb-2">Call in Progress</h3>
                   <p className="text-sm text-gray-400 mb-6">Connected to team meeting</p>
-                  
+
                   <div className="flex items-center space-x-4">
                     <button
                       onClick={() => setIsMuted(!isMuted)}
@@ -436,7 +495,11 @@ export const CompleteCommunicationHub: React.FC = () => {
                       onClick={() => setIsVideoEnabled(!isVideoEnabled)}
                       className={`p-3 rounded-full ${isVideoEnabled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700'} text-white transition-colors`}
                     >
-                      {isVideoEnabled ? <Camera className="w-5 h-5" /> : <CameraOff className="w-5 h-5" />}
+                      {isVideoEnabled ? (
+                        <Camera className="w-5 h-5" />
+                      ) : (
+                        <CameraOff className="w-5 h-5" />
+                      )}
                     </button>
                     <button
                       onClick={() => setIsCallActive(false)}
@@ -453,7 +516,7 @@ export const CompleteCommunicationHub: React.FC = () => {
                   </div>
                   <h3 className="text-lg font-medium text-white mb-2">Start a Call</h3>
                   <p className="text-sm text-gray-400 mb-6">Connect with your team</p>
-                  
+
                   <div className="flex items-center space-x-4">
                     <button
                       onClick={() => setIsCallActive(true)}
