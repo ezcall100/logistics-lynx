@@ -444,13 +444,13 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev =>
+    setSelectedUsers(prev => 
       prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
 
   const handleSelectAll = () => {
-    setSelectedUsers(prev =>
+    setSelectedUsers(prev => 
       prev.length === filteredUsers.length ? [] : filteredUsers.map(u => u.id)
     );
   };
@@ -488,9 +488,9 @@ const ProfilePage: React.FC = () => {
       prev.map(setting =>
         selectedSettings.includes(setting.id)
           ? {
-              ...setting,
-              value: getDefaultValue(setting.type),
-              lastModified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        ...setting, 
+        value: getDefaultValue(setting.type),
+        lastModified: new Date().toISOString().slice(0, 19).replace('T', ' '),
               modifiedBy: 'Super Admin',
             }
           : setting
@@ -501,13 +501,13 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleSelectSetting = (settingId: number) => {
-    setSelectedSettings(prev =>
+    setSelectedSettings(prev => 
       prev.includes(settingId) ? prev.filter(id => id !== settingId) : [...prev, settingId]
     );
   };
 
   const handleSelectAllSettings = () => {
-    setSelectedSettings(prev =>
+    setSelectedSettings(prev => 
       prev.length === filteredSettings.length ? [] : filteredSettings.map(s => s.id)
     );
   };
@@ -564,18 +564,18 @@ const ProfilePage: React.FC = () => {
     .filter(user => {
       const matchesSearch =
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.company.toLowerCase().includes(searchTerm.toLowerCase());
+                           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           user.company.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'All' || user.status === statusFilter;
       const matchesRole = roleFilter === 'All' || user.role === roleFilter;
       const matchesDevice = deviceFilter === 'All' || user.device === deviceFilter;
-
+      
       return matchesSearch && matchesStatus && matchesRole && matchesDevice;
     })
     .sort((a, b) => {
       const aValue = a[sortField as keyof typeof a];
       const bValue = b[sortField as keyof typeof b];
-
+      
       if (sortDirection === 'asc') {
         return (aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
@@ -593,18 +593,18 @@ const ProfilePage: React.FC = () => {
     .filter(setting => {
       const matchesSearch =
         setting.key.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
-        setting.description.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
-        setting.value.toLowerCase().includes(settingsSearchTerm.toLowerCase());
+                           setting.description.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
+                           setting.value.toLowerCase().includes(settingsSearchTerm.toLowerCase());
       const matchesCategory =
         settingsCategoryFilter === 'All' || setting.category === settingsCategoryFilter;
       const matchesType = settingsTypeFilter === 'All' || setting.type === settingsTypeFilter;
-
+      
       return matchesSearch && matchesCategory && matchesType;
     })
     .sort((a, b) => {
       const aValue = a[settingsSortField as keyof typeof a];
       const bValue = b[settingsSortField as keyof typeof b];
-
+      
       if (settingsSortDirection === 'asc') {
         return (aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
@@ -625,7 +625,7 @@ const ProfilePage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
         </div>
-
+        
         <div className="relative flex items-start space-x-8">
           <div className="relative group">
             <div className="w-32 h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl ring-4 ring-white/20 backdrop-blur-sm">
@@ -647,7 +647,7 @@ const ProfilePage: React.FC = () => {
               </div>
             )}
           </div>
-
+          
           <div className="flex-1 text-white">
             <div className="flex items-start justify-between">
               <div className="space-y-3">
@@ -666,7 +666,7 @@ const ProfilePage: React.FC = () => {
                     OWNER
                   </span>
                 </div>
-
+                
                 {isEditing ? (
                   <input
                     type="text"
@@ -677,7 +677,7 @@ const ProfilePage: React.FC = () => {
                 ) : (
                   <p className="text-xl text-white/90 font-medium">{profileData.jobTitle}</p>
                 )}
-
+                
                 <div className="flex items-center space-x-6 text-white/80">
                   <div className="flex items-center space-x-2">
                     <Mail className="h-4 w-4" />
@@ -707,7 +707,7 @@ const ProfilePage: React.FC = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="flex items-center space-x-3">
                 {isEditing ? (
                   <>
@@ -737,7 +737,7 @@ const ProfilePage: React.FC = () => {
                 )}
               </div>
             </div>
-
+            
             <div className="mt-6 flex items-center space-x-8">
               <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
                 <Shield className="h-4 w-4 text-green-400" />
@@ -1303,7 +1303,7 @@ const ProfilePage: React.FC = () => {
             <span>{isEditing ? 'Cancel' : 'Edit'}</span>
           </button>
         </div>
-
+        
         <form onSubmit={handleProfileUpdate} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -1323,7 +1323,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Job Title
@@ -1341,7 +1341,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Email Address
@@ -1359,7 +1359,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Phone Number
@@ -1378,7 +1378,7 @@ const ProfilePage: React.FC = () => {
               )}
             </div>
           </div>
-
+          
           {isEditing && (
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
@@ -1419,7 +1419,7 @@ const ProfilePage: React.FC = () => {
             <span>{isEditing ? 'Cancel' : 'Edit'}</span>
           </button>
         </div>
-
+        
         <form onSubmit={handleProfileUpdate} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -1439,7 +1439,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Industry
@@ -1457,7 +1457,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Website
@@ -1480,7 +1480,7 @@ const ProfilePage: React.FC = () => {
                 </a>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Support Email
@@ -1498,7 +1498,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Founded
@@ -1516,7 +1516,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               )}
             </div>
-
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Status
@@ -1526,7 +1526,7 @@ const ProfilePage: React.FC = () => {
               </span>
             </div>
           </div>
-
+          
           {isEditing && (
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
@@ -1569,7 +1569,7 @@ const ProfilePage: React.FC = () => {
               </span>
             </div>
           </div>
-
+          
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
@@ -1578,7 +1578,7 @@ const ProfilePage: React.FC = () => {
               {isRealTime ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               <span>{isRealTime ? 'Pause' : 'Resume'}</span>
             </button>
-
+            
             <label className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
               <Upload className="h-4 w-4" />
               <span>Import</span>
@@ -1589,7 +1589,7 @@ const ProfilePage: React.FC = () => {
                 className="hidden"
               />
             </label>
-
+            
             <button
               onClick={handleExportSettings}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -1597,7 +1597,7 @@ const ProfilePage: React.FC = () => {
               <Download className="h-4 w-4" />
               <span>Export</span>
             </button>
-
+            
             <button
               onClick={() => console.log('Add setting modal')}
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
@@ -1607,7 +1607,7 @@ const ProfilePage: React.FC = () => {
             </button>
           </div>
         </div>
-
+        
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           Last updated: {lastUpdated.toLocaleTimeString()}
         </div>
@@ -1631,7 +1631,7 @@ const ProfilePage: React.FC = () => {
               />
             </div>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Category
@@ -1651,7 +1651,7 @@ const ProfilePage: React.FC = () => {
               <option value="Billing">Billing</option>
             </select>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Type
@@ -1668,7 +1668,7 @@ const ProfilePage: React.FC = () => {
               <option value="select">Select</option>
             </select>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Status
@@ -1728,7 +1728,7 @@ const ProfilePage: React.FC = () => {
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('category')}
                 >
@@ -1739,7 +1739,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('key')}
                 >
@@ -1750,7 +1750,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('value')}
                 >
@@ -1761,7 +1761,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('type')}
                 >
@@ -1829,9 +1829,9 @@ const ProfilePage: React.FC = () => {
                       {setting.type === 'boolean' ? (
                         <span
                           className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            setting.value === 'true'
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                              : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                          setting.value === 'true' 
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                            : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
                           }`}
                         >
                           {setting.value}
@@ -1897,7 +1897,7 @@ const ProfilePage: React.FC = () => {
             </tbody>
           </table>
         </div>
-
+        
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -1976,7 +1976,7 @@ const ProfilePage: React.FC = () => {
             <div className="text-sm text-gray-600 dark:text-gray-400">per month</div>
           </div>
         </div>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="flex items-center space-x-2">
             <CheckCircle className="h-5 w-5 text-green-600" />
@@ -1991,7 +1991,7 @@ const ProfilePage: React.FC = () => {
             <span className="text-sm text-gray-700 dark:text-gray-300">Advanced Analytics</span>
           </div>
         </div>
-
+        
         <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium">
           Manage Subscription
         </button>
@@ -2009,7 +2009,7 @@ const ProfilePage: React.FC = () => {
             <span>Add Payment Method</span>
           </button>
         </div>
-
+        
         <div className="space-y-4">
           <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-xl">
             <div className="flex items-center space-x-4">
@@ -2041,7 +2041,7 @@ const ProfilePage: React.FC = () => {
           <FileText className="h-6 w-6 mr-3 text-blue-600" />
           Billing History
         </h3>
-
+        
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -2124,7 +2124,7 @@ const ProfilePage: React.FC = () => {
               </span>
             </div>
           </div>
-
+          
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
@@ -2133,7 +2133,7 @@ const ProfilePage: React.FC = () => {
               {isRealTime ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               <span>{isRealTime ? 'Pause' : 'Resume'}</span>
             </button>
-
+            
             <button
               onClick={handleExport}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -2141,7 +2141,7 @@ const ProfilePage: React.FC = () => {
               <Download className="h-4 w-4" />
               <span>Export</span>
             </button>
-
+            
             <button
               onClick={() => console.log('Add user modal')}
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
@@ -2151,7 +2151,7 @@ const ProfilePage: React.FC = () => {
             </button>
           </div>
         </div>
-
+        
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           Last updated: {lastUpdated.toLocaleTimeString()}
         </div>
@@ -2175,7 +2175,7 @@ const ProfilePage: React.FC = () => {
               />
             </div>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Status
@@ -2191,7 +2191,7 @@ const ProfilePage: React.FC = () => {
               <option value="Inactive">Inactive</option>
             </select>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Role
@@ -2208,7 +2208,7 @@ const ProfilePage: React.FC = () => {
               <option value="Customer">Customer</option>
             </select>
           </div>
-
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Device
@@ -2276,7 +2276,7 @@ const ProfilePage: React.FC = () => {
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('name')}
                 >
@@ -2285,7 +2285,7 @@ const ProfilePage: React.FC = () => {
                     {sortField === 'name' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('email')}
                 >
@@ -2294,7 +2294,7 @@ const ProfilePage: React.FC = () => {
                     {sortField === 'email' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('role')}
                 >
@@ -2303,7 +2303,7 @@ const ProfilePage: React.FC = () => {
                     {sortField === 'role' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('status')}
                 >
@@ -2312,7 +2312,7 @@ const ProfilePage: React.FC = () => {
                     {sortField === 'status' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('device')}
                 >
@@ -2438,7 +2438,7 @@ const ProfilePage: React.FC = () => {
             </tbody>
           </table>
         </div>
-
+        
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -2509,7 +2509,7 @@ const ProfilePage: React.FC = () => {
           <Download className="h-6 w-6 mr-3 text-blue-600" />
           Data Export
         </h3>
-
+        
         <div className="space-y-4">
           <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
@@ -2533,7 +2533,7 @@ const ProfilePage: React.FC = () => {
           <Shield className="h-6 w-6 mr-3 text-blue-600" />
           Privacy Settings
         </h3>
-
+        
         <div className="space-y-6">
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
@@ -2547,7 +2547,7 @@ const ProfilePage: React.FC = () => {
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
           </div>
-
+          
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-gray-100">Activity Tracking</h4>
@@ -2560,7 +2560,7 @@ const ProfilePage: React.FC = () => {
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
           </div>
-
+          
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-gray-100">
@@ -2584,7 +2584,7 @@ const ProfilePage: React.FC = () => {
           <AlertTriangle className="h-6 w-6 mr-3 text-red-600" />
           Data Management
         </h3>
-
+        
         <div className="space-y-4">
           <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl">
             <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">

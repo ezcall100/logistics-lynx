@@ -21,8 +21,6 @@ import {
   MessageCircle,
   Building,
   Activity,
-  GitBranch,
-  Server,
 } from 'lucide-react';
 
 // Import the new modular Communication Hub
@@ -31,10 +29,10 @@ import { CommunicationHub } from '../../../components/CommunicationHub';
 // Import all the real Super Admin components
 import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashboard';
 import UserManagement from '../../../components/super-admin/UserManagement';
-import AllUsers from '../../../components/super-admin/user-management/AllUsers';
-import UserRoles from '../../../components/super-admin/user-management/UserRoles';
-import UserGroups from '../../../components/super-admin/user-management/UserGroups';
-import AccessControl from '../../../components/super-admin/user-management/AccessControl';
+import { AllUsersPage } from '../../../components/super-admin/user-management/AllUsersPage';
+import { UserRolesPage } from '../../../components/super-admin/user-management/UserRolesPage';
+import { UserGroupsPage } from '../../../components/super-admin/user-management/UserGroupsPage';
+import { AccessControlPage } from '../../../components/super-admin/user-management/AccessControlPage';
 import { UserAnalyticsPage } from '../../../components/super-admin/user-management/UserAnalyticsPage';
 import { BillingManagementPage } from '../../../components/super-admin/user-management/BillingManagementPage';
 import { SupportTicketsPage } from '../../../components/super-admin/user-management/SupportTicketsPage';
@@ -63,6 +61,13 @@ import { BusinessAnalytics } from '../../../components/super-admin/analytics/Bus
 import { PerformanceReports } from '../../../components/super-admin/analytics/PerformanceReports';
 import { FinancialReports } from '../../../components/super-admin/analytics/FinancialReports';
 
+// Import Development & DevOps components
+import { CICDPipeline } from '../../../components/super-admin/development-devops/CICDPipeline';
+import { EnvironmentManagement } from '../../../components/super-admin/development-devops/EnvironmentManagement';
+import { DeploymentMonitoring } from '../../../components/super-admin/development-devops/DeploymentMonitoring';
+import { InfrastructureAsCode } from '../../../components/super-admin/development-devops/InfrastructureAsCode';
+import { DevOpsAnalytics } from '../../../components/super-admin/development-devops/DevOpsAnalytics';
+
 // Import Dashboard pages
 import SystemOverview from '../../../components/super-admin/dashboard/SystemOverview';
 import ActiveUsers from '../../../components/super-admin/dashboard/ActiveUsers';
@@ -79,10 +84,6 @@ import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
 
 // Import Real-Time Development Monitor
 import RealTimeDevelopmentMonitor from '../../../components/super-admin/RealTimeDevelopmentMonitor';
-
-// Import DevOps components
-import CICDPipeline from '../../../components/super-admin/devops/CICDPipeline';
-import EnvironmentManagement from '../../../components/super-admin/devops/EnvironmentManagement';
 
 // Placeholder component for Settings Management
 const SettingsManagementPlaceholder = () => (
@@ -262,25 +263,25 @@ const SuperAdminPortal: React.FC = () => {
           id: 'all-users',
           label: 'All Users',
           path: '/super-admin/user-management/AllUsers',
-          component: AllUsers,
+          component: AllUsersPage,
         },
         {
           id: 'user-roles',
           label: 'User Roles',
           path: '/super-admin/user-management/UserRoles',
-          component: UserRoles,
+          component: UserRolesPage,
         },
         {
           id: 'user-groups',
           label: 'User Groups',
           path: '/super-admin/user-management/UserGroups',
-          component: UserGroups,
+          component: UserGroupsPage,
         },
         {
           id: 'access-control',
           label: 'Access Control',
           path: '/super-admin/user-management/AccessControl',
-          component: AccessControl,
+          component: AccessControlPage,
         },
         {
           id: 'user-analytics',
@@ -404,11 +405,11 @@ const SuperAdminPortal: React.FC = () => {
     {
       id: 'development-devops',
       label: 'Development & DevOps',
-      icon: GitBranch,
+      icon: Settings,
       description: 'Development and deployment',
       color: 'text-indigo-500',
       bgColor: 'bg-indigo-50',
-      component: CICDPipeline,
+      component: GlobalSettings,
       subMenus: [
         {
           id: 'ci-cd-pipeline',
@@ -423,10 +424,22 @@ const SuperAdminPortal: React.FC = () => {
           component: EnvironmentManagement,
         },
         {
-          id: 'testing-suite',
-          label: 'Testing Suite',
-          path: '/super-admin/qa-testing/TestingSuite',
-          component: GlobalSettings,
+          id: 'deployment-monitoring',
+          label: 'Deployment Monitoring',
+          path: '/super-admin/development-devops/DeploymentMonitoring',
+          component: DeploymentMonitoring,
+        },
+        {
+          id: 'infrastructure-as-code',
+          label: 'Infrastructure as Code',
+          path: '/super-admin/development-devops/InfrastructureAsCode',
+          component: InfrastructureAsCode,
+        },
+        {
+          id: 'devops-analytics',
+          label: 'DevOps Analytics',
+          path: '/super-admin/development-devops/DevOpsAnalytics',
+          component: DevOpsAnalytics,
         },
       ],
     },

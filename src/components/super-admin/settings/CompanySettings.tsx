@@ -751,7 +751,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     <div className="space-y-6">
       {/* Header with Controls */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
+          <div>
           <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
             <Users className="h-5 w-5 mr-2 text-blue-500" />
             All Users
@@ -759,10 +759,10 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               ({filteredUsers.length} users)
             </span>
           </h4>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-gray-600 dark:text-gray-400 mt-1">
             Manage all users in your organization with advanced controls
-          </p>
-        </div>
+            </p>
+          </div>
         
         <div className="flex items-center gap-3">
           {/* Real-time Toggle */}
@@ -799,8 +799,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Add User
           </button>
         </div>
-      </div>
-
+        </div>
+        
       {/* Filters and Search */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -814,7 +814,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-          </div>
+                </div>
           
           {/* Status Filter */}
           <select
@@ -852,8 +852,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="mobile">Mobile</option>
             <option value="tablet">Tablet</option>
           </select>
-        </div>
-      </div>
+                </div>
+              </div>
 
       {/* Bulk Actions Bar */}
       {selectedUsers.length > 0 && (
@@ -865,7 +865,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <div className="flex items-center justify-between">
             <span className="text-blue-700 dark:text-blue-300 font-medium">
               {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
-            </span>
+                </span>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleBulkActivate}
@@ -1006,8 +1006,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                       {user.email}
                     </td>
                     <td className="px-4 py-3">
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
-                        {user.role}
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
+                  {user.role}
                       </span>
                     </td>
                     <td className="px-4 py-3">
@@ -1022,8 +1022,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                         <DeviceIcon className="h-4 w-4 text-gray-500" />
                         <span className="text-sm text-gray-900 dark:text-white capitalize">
                           {user.device}
-                        </span>
-                      </div>
+                </span>
+              </div>
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                       {user.lastActive}
@@ -1051,7 +1051,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
-                      </div>
+            </div>
                     </td>
                   </tr>
                 );
@@ -2889,13 +2889,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
       {/* Modals */}
       {showAddUserModal && (
-        <AddUserModal
-          isOpen={showAddUserModal}
-          onClose={() => setShowAddUserModal(false)}
+      <AddUserModal
+        isOpen={showAddUserModal}
+        onClose={() => setShowAddUserModal(false)}
           onSave={userData => handleAddUser(userData)}
-          user={newUser}
-          setUser={setNewUser}
-        />
+        user={newUser}
+        setUser={setNewUser}
+      />
       )}
 
       {/* View User Modal */}

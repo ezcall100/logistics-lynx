@@ -148,7 +148,7 @@ const ActiveUsers: React.FC = () => {
 
   // Real-time data simulation
   const updateUserData = useCallback(() => {
-    setUsers(prevUsers =>
+    setUsers(prevUsers => 
       prevUsers.map(user => ({
         ...user,
         lastActive: new Date().toISOString(),
@@ -249,9 +249,9 @@ const ActiveUsers: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (deletingUser) {
-      setUsers(prev => prev.filter(user => user.id !== deletingUser.id));
-      setShowDeleteModal(false);
-      setDeletingUser(null);
+    setUsers(prev => prev.filter(user => user.id !== deletingUser.id));
+    setShowDeleteModal(false);
+    setDeletingUser(null);
     }
   };
 
@@ -277,7 +277,7 @@ const ActiveUsers: React.FC = () => {
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev =>
+    setSelectedUsers(prev => 
       prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
@@ -369,8 +369,8 @@ const ActiveUsers: React.FC = () => {
   const filteredUsers = users.filter(user => {
     const matchesSearch =
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.company.toLowerCase().includes(searchQuery.toLowerCase());
+                         user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         user.company.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
@@ -380,15 +380,15 @@ const ActiveUsers: React.FC = () => {
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     const aValue = a[sortField as keyof typeof a];
     const bValue = b[sortField as keyof typeof b];
-
+    
     if (typeof aValue === 'string' && typeof bValue === 'string') {
       return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
-
+    
     if (typeof aValue === 'number' && typeof bValue === 'number') {
       return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
     }
-
+    
     return 0;
   });
 
@@ -429,7 +429,7 @@ const ActiveUsers: React.FC = () => {
     const now = new Date();
     const time = new Date(timestamp);
     const diffInMinutes = Math.floor((now.getTime() - time.getTime()) / (1000 * 60));
-
+    
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
@@ -625,7 +625,7 @@ const ActiveUsers: React.FC = () => {
             </select>
           </div>
         </div>
-
+        
         {/* Bulk Actions */}
         {selectedUsers.length > 0 && (
           <motion.div
@@ -682,7 +682,7 @@ const ActiveUsers: React.FC = () => {
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('name')}
                 >
@@ -693,7 +693,7 @@ const ActiveUsers: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('status')}
                 >
@@ -707,7 +707,7 @@ const ActiveUsers: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Location
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('device')}
                 >
@@ -721,7 +721,7 @@ const ActiveUsers: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Session
                 </th>
-                <th
+                <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('actions')}
                 >
@@ -806,21 +806,21 @@ const ActiveUsers: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center justify-end space-x-2">
-                      <button
+                      <button 
                         onClick={() => handleViewUser(user)}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
                         title="View Details"
                       >
                         <Eye className="h-4 w-4" />
                       </button>
-                      <button
+                      <button 
                         onClick={() => handleEditUser(user)}
                         className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-50 dark:hover:bg-green-900/20"
                         title="Edit User"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
-                      <button
+                      <button 
                         onClick={() => handleDeleteUser(user)}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
                         title="Delete User"
@@ -828,14 +828,14 @@ const ActiveUsers: React.FC = () => {
                         <Trash2 className="h-4 w-4" />
                       </button>
                       <div className="relative">
-                        <button
+                        <button 
                           onClick={() => handleDropdownToggle(user.id)}
                           className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700/50"
                           title="More Options"
                         >
                           <MoreVertical className="h-4 w-4" />
                         </button>
-
+                        
                         {/* Dropdown Menu */}
                         <AnimatePresence>
                           {openDropdown === user.id && (
@@ -861,9 +861,9 @@ const ActiveUsers: React.FC = () => {
                                   <Edit className="h-4 w-4" />
                                   <span>Edit User</span>
                                 </button>
-
+                                
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-
+                                
                                 <button
                                   onClick={() => handleDropdownAction('activate', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center space-x-2"
@@ -885,9 +885,9 @@ const ActiveUsers: React.FC = () => {
                                   <Pause className="h-4 w-4" />
                                   <span>Suspend User</span>
                                 </button>
-
+                                
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-
+                                
                                 <button
                                   onClick={() => handleDropdownAction('send_email', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
@@ -909,9 +909,9 @@ const ActiveUsers: React.FC = () => {
                                   <Shield className="h-4 w-4" />
                                   <span>Manage Permissions</span>
                                 </button>
-
+                                
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-
+                                
                                 <button
                                   onClick={() => handleDropdownAction('export_user', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
@@ -926,9 +926,9 @@ const ActiveUsers: React.FC = () => {
                                   <FileText className="h-4 w-4" />
                                   <span>View Audit Log</span>
                                 </button>
-
+                                
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-
+                                
                                 <button
                                   onClick={() => handleDropdownAction('delete', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2"
@@ -948,7 +948,7 @@ const ActiveUsers: React.FC = () => {
             </tbody>
           </table>
         </div>
-
+        
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -1045,7 +1045,7 @@ const ActiveUsers: React.FC = () => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-
+              
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -1059,7 +1059,7 @@ const ActiveUsers: React.FC = () => {
                     placeholder="Enter user name"
                   />
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email
@@ -1072,7 +1072,7 @@ const ActiveUsers: React.FC = () => {
                     placeholder="Enter email address"
                   />
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Role
@@ -1088,7 +1088,7 @@ const ActiveUsers: React.FC = () => {
                     <option value="Customer">Customer</option>
                   </select>
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Company
@@ -1101,7 +1101,7 @@ const ActiveUsers: React.FC = () => {
                     placeholder="Enter company name"
                   />
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Status
@@ -1121,7 +1121,7 @@ const ActiveUsers: React.FC = () => {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Device
@@ -1136,7 +1136,7 @@ const ActiveUsers: React.FC = () => {
                     <option value="Tablet">Tablet</option>
                   </select>
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
@@ -1149,7 +1149,7 @@ const ActiveUsers: React.FC = () => {
                     placeholder="Enter location"
                   />
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     IP Address
@@ -1163,7 +1163,7 @@ const ActiveUsers: React.FC = () => {
                   />
                 </div>
               </div>
-
+              
               <div className="flex items-center justify-end space-x-3 mt-6">
                 <button
                   onClick={() => {
@@ -1221,7 +1221,7 @@ const ActiveUsers: React.FC = () => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-
+              
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="h-16 w-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
@@ -1239,7 +1239,7 @@ const ActiveUsers: React.FC = () => {
                     </span>
                   </div>
                 </div>
-
+                
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -1303,7 +1303,7 @@ const ActiveUsers: React.FC = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="flex items-center justify-end space-x-3 mt-6">
                 <button
                   onClick={() => {
@@ -1357,12 +1357,12 @@ const ActiveUsers: React.FC = () => {
                   Delete User
                 </h3>
               </div>
-
+              
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 Are you sure you want to delete <strong>{deletingUser.name}</strong>? This action
                 cannot be undone.
               </p>
-
+              
               <div className="flex items-center justify-end space-x-3">
                 <button
                   onClick={() => {
