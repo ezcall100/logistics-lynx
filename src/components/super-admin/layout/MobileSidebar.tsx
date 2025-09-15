@@ -17,6 +17,9 @@ interface MobileSidebarProps {
     label: string;
     icon: React.ComponentType<{ className?: string }>;
     path?: string;
+    color?: string;
+    description?: string;
+    count?: number;
     subMenus?: Array<{
       id: string;
       label: string;
