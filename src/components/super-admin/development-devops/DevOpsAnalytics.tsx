@@ -4,72 +4,12 @@ import {
   TrendingUp,
   TrendingDown,
   Activity,
-  CheckCircle,
-  XCircle,
-  Clock,
-  AlertTriangle,
-  Search,
-  Filter,
   Download,
   RefreshCw,
-  Plus,
-  Settings,
-  Eye,
-  Edit,
-  Trash2,
-  Copy,
-  ExternalLink,
-  Link,
-  Bell,
-  Star,
-  Heart,
-  MessageCircle,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Zap,
   Shield,
-  Key,
-  Lock,
-  Unlock,
-  Database,
-  Server,
-  Network,
-  HardDrive,
-  Cpu,
-  MemoryStick,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Wifi,
-  WifiOff,
-  Signal,
-  SignalHigh,
-  SignalLow,
-  SignalZero,
-  Globe,
-  Globe2,
-  Building,
-  Calendar,
-  Users,
-  Play,
-  Pause,
-  RotateCcw,
-  Package,
-  Layers,
-  Target,
-  Terminal,
-  Folder,
-  File,
-  Save,
-  Upload,
-  Download as DownloadIcon,
   BarChart3,
-  PieChart,
-  LineChart,
   GitBranch,
-  Code,
-  FileText,
+  Zap,
 } from 'lucide-react';
 
 /**
@@ -153,7 +93,9 @@ export const DevOpsAnalytics: React.FC = () => {
   const [performanceMetrics, setPerformanceMetrics] = useState<PerformanceMetric[]>([]);
   const [reliabilityMetrics, setReliabilityMetrics] = useState<ReliabilityMetric[]>([]);
   const [costMetrics, setCostMetrics] = useState<CostMetric[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'deployments' | 'performance' | 'reliability' | 'cost'>('overview');
+  const [selectedTab, setSelectedTab] = useState<
+    'overview' | 'deployments' | 'performance' | 'reliability' | 'cost'
+  >('overview');
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
 
   useEffect(() => {
@@ -253,7 +195,7 @@ export const DevOpsAnalytics: React.FC = () => {
         id: '8',
         name: 'Monthly Cost',
         category: 'cost',
-        value: 2847.50,
+        value: 2847.5,
         unit: 'USD',
         trend: 'down',
         change: -5.2,
@@ -367,11 +309,11 @@ export const DevOpsAnalytics: React.FC = () => {
         id: '1',
         service: 'Super Admin Portal',
         environment: 'production',
-        monthlyCost: 1247.50,
+        monthlyCost: 1247.5,
         resourceCost: 890.25,
-        computeCost: 567.30,
+        computeCost: 567.3,
         storageCost: 123.45,
-        networkCost: 66.50,
+        networkCost: 66.5,
         trend: 'down',
         budget: 1500,
         utilization: 83.2,
@@ -465,10 +407,14 @@ export const DevOpsAnalytics: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">DevOps Analytics</h1>
-            <p className="text-slate-600 dark:text-slate-400">Performance intelligence and DevOps metrics dashboard</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              DevOps Analytics
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              Performance intelligence and DevOps metrics dashboard
+            </p>
           </div>
-          
+
           <div className="flex gap-3">
             <select
               value={timeRange}
@@ -505,23 +451,34 @@ export const DevOpsAnalytics: React.FC = () => {
                 <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
                   {getCategoryIcon(metric.category)}
                 </div>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(metric.status)}`}>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(metric.status)}`}
+                >
                   {metric.status}
                 </span>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{metric.name}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  {metric.name}
+                </p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-                  {metric.category === 'cost' ? formatCurrency(metric.value) : `${metric.value}${metric.unit}`}
+                  {metric.category === 'cost'
+                    ? formatCurrency(metric.value)
+                    : `${metric.value}${metric.unit}`}
                 </p>
                 <div className="flex items-center space-x-2">
                   {getTrendIcon(metric.trend)}
-                  <span className={`text-sm font-medium ${
-                    metric.trend === 'up' ? 'text-green-600 dark:text-green-400' :
-                    metric.trend === 'down' ? 'text-red-600 dark:text-red-400' :
-                    'text-blue-600 dark:text-blue-400'
-                  }`}>
-                    {metric.change > 0 ? '+' : ''}{metric.change}%
+                  <span
+                    className={`text-sm font-medium ${
+                      metric.trend === 'up'
+                        ? 'text-green-600 dark:text-green-400'
+                        : metric.trend === 'down'
+                          ? 'text-red-600 dark:text-red-400'
+                          : 'text-blue-600 dark:text-blue-400'
+                    }`}
+                  >
+                    {metric.change > 0 ? '+' : ''}
+                    {metric.change}%
                   </span>
                   <span className="text-xs text-gray-500 dark:text-gray-400">vs target</span>
                 </div>
@@ -536,7 +493,9 @@ export const DevOpsAnalytics: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'performance' | 'costs' | 'security')}
+                onClick={() =>
+                  setSelectedTab(tab.id as 'overview' | 'performance' | 'costs' | 'security')
+                }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -573,33 +532,48 @@ export const DevOpsAnalytics: React.FC = () => {
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-3">
                             {getCategoryIcon(metric.category)}
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{metric.name}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {metric.name}
+                            </h3>
                           </div>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(metric.status)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(metric.status)}`}
+                          >
                             {metric.status}
                           </span>
                         </div>
                         <div className="mb-4">
                           <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                            {metric.category === 'cost' ? formatCurrency(metric.value) : `${metric.value}${metric.unit}`}
+                            {metric.category === 'cost'
+                              ? formatCurrency(metric.value)
+                              : `${metric.value}${metric.unit}`}
                           </p>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">{metric.description}</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {metric.description}
+                          </p>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
                             {getTrendIcon(metric.trend)}
-                            <span className={`text-sm font-medium ${
-                              metric.trend === 'up' ? 'text-green-600 dark:text-green-400' :
-                              metric.trend === 'down' ? 'text-red-600 dark:text-red-400' :
-                              'text-blue-600 dark:text-blue-400'
-                            }`}>
-                              {metric.change > 0 ? '+' : ''}{metric.change}%
+                            <span
+                              className={`text-sm font-medium ${
+                                metric.trend === 'up'
+                                  ? 'text-green-600 dark:text-green-400'
+                                  : metric.trend === 'down'
+                                    ? 'text-red-600 dark:text-red-400'
+                                    : 'text-blue-600 dark:text-blue-400'
+                              }`}
+                            >
+                              {metric.change > 0 ? '+' : ''}
+                              {metric.change}%
                             </span>
                           </div>
                           <div className="text-right">
                             <div className="text-xs text-slate-500 dark:text-slate-400">Target</div>
                             <div className="text-sm font-medium text-slate-900 dark:text-white">
-                              {metric.category === 'cost' ? formatCurrency(metric.target) : `${metric.target}${metric.unit}`}
+                              {metric.category === 'cost'
+                                ? formatCurrency(metric.target)
+                                : `${metric.target}${metric.unit}`}
                             </div>
                           </div>
                         </div>
@@ -627,8 +601,12 @@ export const DevOpsAnalytics: React.FC = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{metric.service}</h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">{metric.environment}</p>
+                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                            {metric.service}
+                          </h3>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {metric.environment}
+                          </p>
                         </div>
                         <div className="flex items-center space-x-2">
                           {getTrendIcon(metric.trend)}
@@ -639,20 +617,34 @@ export const DevOpsAnalytics: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Frequency</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.frequency}/day</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Frequency
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.frequency}/day
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Success Rate</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.successRate}%</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Success Rate
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.successRate}%
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Lead Time</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.leadTime}h</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Lead Time
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.leadTime}h
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">MTTR</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.mttr}m</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.mttr}m
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -678,30 +670,54 @@ export const DevOpsAnalytics: React.FC = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{metric.service}</h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">{metric.environment}</p>
+                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                            {metric.service}
+                          </h3>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {metric.environment}
+                          </p>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Availability</div>
-                          <div className="text-xl font-bold text-green-600 dark:text-green-400">{metric.availability}%</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Availability
+                          </div>
+                          <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                            {metric.availability}%
+                          </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Response Time</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.responseTime}ms</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Response Time
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.responseTime}ms
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Throughput</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.throughput}/s</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Throughput
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.throughput}/s
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Error Rate</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.errorRate}%</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Error Rate
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.errorRate}%
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">CPU Usage</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.cpuUsage}%</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            CPU Usage
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.cpuUsage}%
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -727,17 +743,26 @@ export const DevOpsAnalytics: React.FC = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{metric.service}</h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">{metric.environment}</p>
+                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                            {metric.service}
+                          </h3>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {metric.environment}
+                          </p>
                         </div>
                         <div className="flex items-center space-x-2">
                           {getTrendIcon(metric.trend)}
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            metric.severity === 'low' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
-                            metric.severity === 'medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                            metric.severity === 'high' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400' :
-                            'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                          }`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              metric.severity === 'low'
+                                ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                                : metric.severity === 'medium'
+                                  ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                                  : metric.severity === 'high'
+                                    ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400'
+                                    : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                            }`}
+                          >
                             {metric.severity}
                           </span>
                         </div>
@@ -745,19 +770,29 @@ export const DevOpsAnalytics: React.FC = () => {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">Uptime</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.uptime}%</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.uptime}%
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">MTTR</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.mttr}m</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.mttr}m
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">MTBF</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.mtbf}h</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.mtbf}h
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Incidents</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.incidentCount}</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Incidents
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {metric.incidentCount}
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -783,33 +818,51 @@ export const DevOpsAnalytics: React.FC = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{metric.service}</h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">{metric.environment}</p>
+                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                            {metric.service}
+                          </h3>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {metric.environment}
+                          </p>
                         </div>
                         <div className="flex items-center space-x-2">
                           {getTrendIcon(metric.trend)}
                           <div className="text-right">
-                            <div className="text-sm text-slate-500 dark:text-slate-400">Budget Utilization</div>
-                            <div className="text-xl font-bold text-slate-900 dark:text-white">{metric.utilization}%</div>
+                            <div className="text-sm text-slate-500 dark:text-slate-400">
+                              Budget Utilization
+                            </div>
+                            <div className="text-xl font-bold text-slate-900 dark:text-white">
+                              {metric.utilization}%
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Total Cost</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(metric.monthlyCost)}</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            Total Cost
+                          </div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {formatCurrency(metric.monthlyCost)}
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">Compute</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(metric.computeCost)}</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {formatCurrency(metric.computeCost)}
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">Storage</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(metric.storageCost)}</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {formatCurrency(metric.storageCost)}
+                          </div>
                         </div>
                         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="text-sm text-slate-500 dark:text-slate-400">Network</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(metric.networkCost)}</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            {formatCurrency(metric.networkCost)}
+                          </div>
                         </div>
                       </div>
                     </motion.div>

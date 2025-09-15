@@ -4,60 +4,19 @@ import {
   Server,
   Globe,
   Database,
-  Cpu,
   MemoryStick,
-  HardDrive,
   Network,
   Activity,
   TrendingUp,
-  TrendingDown,
   CheckCircle,
-  XCircle,
-  AlertTriangle,
-  Clock,
   Search,
   Filter,
-  Download,
   RefreshCw,
   Plus,
-  Settings,
   Eye,
-  Edit,
-  Trash2,
-  Copy,
-  ExternalLink,
-  Link,
-  Bell,
-  Star,
-  Heart,
-  MessageCircle,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Zap,
-  Shield,
-  Key,
-  Lock,
-  Unlock,
-  FileText,
-  Code,
-  Terminal,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Wifi,
-  WifiOff,
-  Signal,
-  SignalHigh,
-  SignalLow,
-  SignalZero,
-  Globe2,
-  Building,
-  Calendar,
-  Users,
   Play,
   Pause,
-  RotateCcw,
+  Monitor,
 } from 'lucide-react';
 
 /**
@@ -143,10 +102,12 @@ interface HealthIssue {
 
 export const EnvironmentManagement: React.FC = () => {
   const [environments, setEnvironments] = useState<Environment[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'environments' | 'services' | 'deployments' | 'monitoring'>('environments');
+  const [selectedTab, setSelectedTab] = useState<
+    'environments' | 'services' | 'deployments' | 'monitoring'
+  >('environments');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedEnvironment, setSelectedEnvironment] = useState<Environment | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [selectedEnvironment, setSelectedEnvironment] = useState<Environment | null>(null);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     const mockEnvironments: Environment[] = [
@@ -225,7 +186,7 @@ export const EnvironmentManagement: React.FC = () => {
         },
         lastDeployment: '2025-09-14T18:30:00Z',
         uptime: '99.9%',
-        cost: 1247.50,
+        cost: 1247.5,
         tags: ['production', 'critical', 'high-availability'],
       },
       {
@@ -450,10 +411,14 @@ export const EnvironmentManagement: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Environment Management</h1>
-            <p className="text-slate-600 dark:text-slate-400">Multi-environment orchestration and infrastructure management</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              Environment Management
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              Multi-environment orchestration and infrastructure management
+            </p>
           </div>
-          
+
           <div className="flex gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -473,8 +438,8 @@ export const EnvironmentManagement: React.FC = () => {
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
             </button>
-            <button 
-              onClick={() => setShowCreateModal(true)}
+            <button
+              onClick={() => console.log('Create environment modal')}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
             >
               <Plus className="w-4 h-4" />
@@ -492,8 +457,12 @@ export const EnvironmentManagement: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Environments</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{environments.length}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Environments
+                </p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                  {environments.length}
+                </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
                   {environments.filter(e => e.status === 'active').length} active
@@ -513,7 +482,9 @@ export const EnvironmentManagement: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Services</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Services
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {environments.reduce((sum, e) => sum + e.services.length, 0)}
                 </p>
@@ -536,9 +507,15 @@ export const EnvironmentManagement: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Average Uptime</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Average Uptime
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
-                  {Math.round(environments.reduce((sum, e) => sum + parseFloat(e.uptime), 0) / environments.length)}%
+                  {Math.round(
+                    environments.reduce((sum, e) => sum + parseFloat(e.uptime), 0) /
+                      environments.length
+                  )}
+                  %
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <TrendingUp className="w-4 h-4 mr-1" />
@@ -581,7 +558,11 @@ export const EnvironmentManagement: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'environments' | 'configurations' | 'secrets')}
+                onClick={() =>
+                  setSelectedTab(
+                    tab.id as 'overview' | 'environments' | 'configurations' | 'secrets'
+                  )
+                }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -619,18 +600,27 @@ export const EnvironmentManagement: React.FC = () => {
                             <Server className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{environment.name}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {environment.name}
+                            </h3>
                             <p className="text-sm text-slate-600 dark:text-slate-400">
-                              {environment.provider.toUpperCase()} • {environment.region} • {environment.services.length} services
+                              {environment.provider.toUpperCase()} • {environment.region} •{' '}
+                              {environment.services.length} services
                             </p>
                             <div className="flex items-center space-x-4 mt-2">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(environment.status)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(environment.status)}`}
+                              >
                                 {environment.status}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(environment.type)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(environment.type)}`}
+                              >
                                 {environment.type}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getHealthColor(environment.health.overall)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getHealthColor(environment.health.overall)}`}
+                              >
                                 {environment.health.overall}
                               </span>
                               <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -664,7 +654,9 @@ export const EnvironmentManagement: React.FC = () => {
                               <Pause className="w-4 h-4 text-red-600" />
                             </button>
                             <button
-                              onClick={() => setSelectedEnvironment(environment)}
+                              onClick={() =>
+                                console.log('View environment details', environment.id)
+                              }
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
                               title="View Details"
                             >
@@ -673,14 +665,18 @@ export const EnvironmentManagement: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Resource Usage */}
                       <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">Resource Usage</h4>
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">
+                          Resource Usage
+                        </h4>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                           <div className="bg-white dark:bg-slate-800 rounded-lg p-3">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-slate-500 dark:text-slate-400">CPU</span>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                                CPU
+                              </span>
                               <span className="text-xs font-medium text-slate-900 dark:text-white">
                                 {environment.resources.cpu.percentage}%
                               </span>
@@ -694,7 +690,9 @@ export const EnvironmentManagement: React.FC = () => {
                           </div>
                           <div className="bg-white dark:bg-slate-800 rounded-lg p-3">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-slate-500 dark:text-slate-400">Memory</span>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                                Memory
+                              </span>
                               <span className="text-xs font-medium text-slate-900 dark:text-white">
                                 {environment.resources.memory.percentage}%
                               </span>
@@ -708,7 +706,9 @@ export const EnvironmentManagement: React.FC = () => {
                           </div>
                           <div className="bg-white dark:bg-slate-800 rounded-lg p-3">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-slate-500 dark:text-slate-400">Storage</span>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                                Storage
+                              </span>
                               <span className="text-xs font-medium text-slate-900 dark:text-white">
                                 {environment.resources.storage.percentage}%
                               </span>
@@ -722,7 +722,9 @@ export const EnvironmentManagement: React.FC = () => {
                           </div>
                           <div className="bg-white dark:bg-slate-800 rounded-lg p-3">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-slate-500 dark:text-slate-400">Network</span>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                                Network
+                              </span>
                               <span className="text-xs font-medium text-slate-900 dark:text-white">
                                 {environment.resources.network.percentage}%
                               </span>
@@ -767,17 +769,24 @@ export const EnvironmentManagement: React.FC = () => {
                               <div className="flex items-center space-x-3">
                                 {getServiceTypeIcon(service.type)}
                                 <div>
-                                  <h4 className="font-medium text-slate-900 dark:text-white">{service.name}</h4>
+                                  <h4 className="font-medium text-slate-900 dark:text-white">
+                                    {service.name}
+                                  </h4>
                                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                                    {service.type} • v{service.version} • {service.replicas} replicas
+                                    {service.type} • v{service.version} • {service.replicas}{' '}
+                                    replicas
                                   </p>
                                 </div>
                               </div>
                               <div className="flex items-center space-x-4">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(service.status)}`}>
+                                <span
+                                  className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(service.status)}`}
+                                >
                                   {service.status}
                                 </span>
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getHealthColor(service.health)}`}>
+                                <span
+                                  className={`px-2 py-1 rounded-full text-xs font-medium ${getHealthColor(service.health)}`}
+                                >
                                   {service.health}
                                 </span>
                                 <div className="text-right">
@@ -805,7 +814,9 @@ export const EnvironmentManagement: React.FC = () => {
                 >
                   <div className="text-center py-12">
                     <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Deployment History</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      Deployment History
+                    </h3>
                     <p className="text-slate-500 dark:text-slate-400 mb-6">
                       Track and manage deployment history across all environments
                     </p>
@@ -826,21 +837,29 @@ export const EnvironmentManagement: React.FC = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Environment Health</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Environment Health
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Health monitoring dashboard</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Health monitoring dashboard
+                          </p>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Resource Utilization</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Resource Utilization
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <TrendingUp className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Resource utilization charts</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Resource utilization charts
+                          </p>
                         </div>
                       </div>
                     </div>

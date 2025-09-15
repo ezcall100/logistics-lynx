@@ -3,70 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Code,
   FileText,
-  GitBranch,
   CheckCircle,
-  XCircle,
-  Clock,
-  AlertTriangle,
   Activity,
-  TrendingUp,
-  TrendingDown,
   Search,
   Filter,
-  Download,
   RefreshCw,
   Plus,
   Settings,
   Eye,
-  Edit,
-  Trash2,
-  Copy,
-  ExternalLink,
-  Link,
-  Bell,
-  Star,
-  Heart,
-  MessageCircle,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Zap,
-  Shield,
-  Key,
-  Lock,
-  Unlock,
-  Database,
-  Server,
-  Network,
-  HardDrive,
-  Cpu,
-  MemoryStick,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Wifi,
-  WifiOff,
-  Signal,
-  SignalHigh,
-  SignalLow,
-  SignalZero,
-  Globe,
-  Globe2,
-  Building,
-  Calendar,
-  Users,
   Play,
-  Pause,
-  RotateCcw,
+  Server,
   Package,
-  Layers,
-  Target,
   Terminal,
-  Folder,
-  File,
-  Save,
-  Upload,
-  Download as DownloadIcon,
 } from 'lucide-react';
 
 /**
@@ -190,17 +138,20 @@ interface ValidationWarning {
 
 export const InfrastructureAsCode: React.FC = () => {
   const [templates, setTemplates] = useState<InfrastructureTemplate[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'templates' | 'deployments' | 'resources' | 'validation'>('templates');
+  const [selectedTab, setSelectedTab] = useState<
+    'templates' | 'deployments' | 'resources' | 'validation'
+  >('templates');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTemplate, setSelectedTemplate] = useState<InfrastructureTemplate | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [selectedTemplate, setSelectedTemplate] = useState<InfrastructureTemplate | null>(null);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     const mockTemplates: InfrastructureTemplate[] = [
       {
         id: '1',
         name: 'Super Admin Portal Infrastructure',
-        description: 'Complete infrastructure setup for Super Admin portal including VPC, EKS, RDS, and ALB',
+        description:
+          'Complete infrastructure setup for Super Admin portal including VPC, EKS, RDS, and ALB',
         type: 'terraform',
         version: 'v1.2.3',
         status: 'active',
@@ -608,10 +559,14 @@ export const InfrastructureAsCode: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Infrastructure as Code</h1>
-            <p className="text-slate-600 dark:text-slate-400">IaC template management and infrastructure automation</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              Infrastructure as Code
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              IaC template management and infrastructure automation
+            </p>
           </div>
-          
+
           <div className="flex gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -631,8 +586,8 @@ export const InfrastructureAsCode: React.FC = () => {
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
             </button>
-            <button 
-              onClick={() => setShowCreateModal(true)}
+            <button
+              onClick={() => console.log('Create template modal')}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
             >
               <Plus className="w-4 h-4" />
@@ -650,8 +605,12 @@ export const InfrastructureAsCode: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Templates</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{templates.length}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Templates
+                </p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                  {templates.length}
+                </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
                   {templates.filter(t => t.status === 'active').length} active
@@ -671,13 +630,19 @@ export const InfrastructureAsCode: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Resources</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Resources
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {templates.reduce((sum, t) => sum + t.resources.length, 0)}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
-                  {templates.reduce((sum, t) => sum + t.resources.filter(r => r.status === 'created').length, 0)} deployed
+                  {templates.reduce(
+                    (sum, t) => sum + t.resources.filter(r => r.status === 'created').length,
+                    0
+                  )}{' '}
+                  deployed
                 </p>
               </div>
               <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
@@ -694,13 +659,18 @@ export const InfrastructureAsCode: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Valid Templates</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Valid Templates
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {templates.filter(t => t.validation.isValid).length}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
-                  {Math.round((templates.filter(t => t.validation.isValid).length / templates.length) * 100)}% valid
+                  {Math.round(
+                    (templates.filter(t => t.validation.isValid).length / templates.length) * 100
+                  )}
+                  % valid
                 </p>
               </div>
               <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
@@ -717,13 +687,19 @@ export const InfrastructureAsCode: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Deployments</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Deployments
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {templates.reduce((sum, t) => sum + t.deployments.length, 0)}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
-                  {templates.reduce((sum, t) => sum + t.deployments.filter(d => d.status === 'success').length, 0)} successful
+                  {templates.reduce(
+                    (sum, t) => sum + t.deployments.filter(d => d.status === 'success').length,
+                    0
+                  )}{' '}
+                  successful
                 </p>
               </div>
               <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
@@ -739,7 +715,9 @@ export const InfrastructureAsCode: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as 'overview' | 'templates' | 'deployments' | 'resources')}
+                onClick={() =>
+                  setSelectedTab(tab.id as 'templates' | 'deployments' | 'resources' | 'validation')
+                }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -777,16 +755,26 @@ export const InfrastructureAsCode: React.FC = () => {
                             {getTypeIcon(template.type)}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{template.name}</h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">{template.description}</p>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {template.name}
+                            </h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                              {template.description}
+                            </p>
                             <div className="flex items-center space-x-4 mt-2">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(template.status)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(template.status)}`}
+                              >
                                 {template.status}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProviderColor(template.provider)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getProviderColor(template.provider)}`}
+                              >
                                 {template.provider.toUpperCase()}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getEnvironmentColor(template.environment)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getEnvironmentColor(template.environment)}`}
+                              >
                                 {template.environment}
                               </span>
                               <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -827,7 +815,7 @@ export const InfrastructureAsCode: React.FC = () => {
                               <CheckCircle className="w-4 h-4 text-purple-600" />
                             </button>
                             <button
-                              onClick={() => setSelectedTemplate(template)}
+                              onClick={() => console.log('View template details', template.id)}
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
                               title="View Details"
                             >
@@ -836,22 +824,31 @@ export const InfrastructureAsCode: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Resources Summary */}
                       <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">Infrastructure Resources</h4>
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">
+                          Infrastructure Resources
+                        </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                          {template.resources.map((resource, resourceIndex) => (
-                            <div key={resource.id} className="bg-white dark:bg-slate-800 rounded-lg p-3">
+                          {template.resources.map(resource => (
+                            <div
+                              key={resource.id}
+                              className="bg-white dark:bg-slate-800 rounded-lg p-3"
+                            >
                               <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-900 dark:text-white">{resource.name}</span>
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  resource.status === 'created' 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                    : resource.status === 'pending'
-                                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
-                                    : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                                }`}>
+                                <span className="text-sm font-medium text-slate-900 dark:text-white">
+                                  {resource.name}
+                                </span>
+                                <span
+                                  className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    resource.status === 'created'
+                                      ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                                      : resource.status === 'pending'
+                                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                                        : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                                  }`}
+                                >
                                   {resource.status}
                                 </span>
                               </div>
@@ -877,7 +874,9 @@ export const InfrastructureAsCode: React.FC = () => {
                 >
                   <div className="text-center py-12">
                     <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Deployment History</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      Deployment History
+                    </h3>
                     <p className="text-slate-500 dark:text-slate-400 mb-6">
                       Track and manage infrastructure deployment history
                     </p>
@@ -898,7 +897,9 @@ export const InfrastructureAsCode: React.FC = () => {
                 >
                   <div className="text-center py-12">
                     <Server className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Infrastructure Resources</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      Infrastructure Resources
+                    </h3>
                     <p className="text-slate-500 dark:text-slate-400 mb-6">
                       Manage and monitor infrastructure resources across all environments
                     </p>
@@ -919,22 +920,32 @@ export const InfrastructureAsCode: React.FC = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Validation Results</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Validation Results
+                      </h3>
                       <div className="space-y-3">
                         {templates.map(template => (
-                          <div key={template.id} className="bg-white dark:bg-slate-800 rounded-lg p-4">
+                          <div
+                            key={template.id}
+                            className="bg-white dark:bg-slate-800 rounded-lg p-4"
+                          >
                             <div className="flex items-center justify-between">
                               <div>
-                                <h4 className="font-medium text-slate-900 dark:text-white">{template.name}</h4>
+                                <h4 className="font-medium text-slate-900 dark:text-white">
+                                  {template.name}
+                                </h4>
                                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                                  {template.validation.errors.length} errors, {template.validation.warnings.length} warnings
+                                  {template.validation.errors.length} errors,{' '}
+                                  {template.validation.warnings.length} warnings
                                 </p>
                               </div>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                template.validation.isValid 
-                                  ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                  : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                              }`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  template.validation.isValid
+                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                                    : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                                }`}
+                              >
                                 {template.validation.isValid ? 'Valid' : 'Invalid'}
                               </span>
                             </div>
@@ -942,13 +953,17 @@ export const InfrastructureAsCode: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Validation Summary</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Validation Summary
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <CheckCircle className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Validation summary chart</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Validation summary chart
+                          </p>
                         </div>
                       </div>
                     </div>

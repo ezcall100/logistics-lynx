@@ -5,62 +5,16 @@ import {
   CheckCircle,
   XCircle,
   Clock,
-  AlertTriangle,
   TrendingUp,
-  TrendingDown,
   Search,
   Filter,
-  Download,
   RefreshCw,
   Plus,
-  Settings,
   Eye,
-  Edit,
-  Trash2,
-  Copy,
-  ExternalLink,
-  Link,
-  Bell,
-  Star,
-  Heart,
-  MessageCircle,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Zap,
-  Shield,
-  Key,
-  Lock,
-  Unlock,
-  Database,
-  Server,
-  Network,
-  HardDrive,
-  Cpu,
-  MemoryStick,
   FileText,
-  Code,
-  Terminal,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Wifi,
-  WifiOff,
-  Signal,
-  SignalHigh,
-  SignalLow,
-  SignalZero,
-  Globe,
-  Globe2,
-  Building,
-  Calendar,
-  Users,
-  Play,
-  Pause,
-  RotateCcw,
-  GitBranch,
   Package,
   Layers,
+  RotateCcw,
   Target,
 } from 'lucide-react';
 
@@ -151,10 +105,12 @@ interface RollbackInfo {
 
 export const DeploymentMonitoring: React.FC = () => {
   const [deployments, setDeployments] = useState<Deployment[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'deployments' | 'stages' | 'logs' | 'health'>('deployments');
+  const [selectedTab, setSelectedTab] = useState<'deployments' | 'stages' | 'logs' | 'health'>(
+    'deployments'
+  );
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDeployment, setSelectedDeployment] = useState<Deployment | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [selectedDeployment, setSelectedDeployment] = useState<Deployment | null>(null);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     const mockDeployments: Deployment[] = [
@@ -548,10 +504,14 @@ export const DeploymentMonitoring: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Deployment Monitoring</h1>
-            <p className="text-slate-600 dark:text-slate-400">Real-time deployment tracking and monitoring</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              Deployment Monitoring
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              Real-time deployment tracking and monitoring
+            </p>
           </div>
-          
+
           <div className="flex gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -571,8 +531,8 @@ export const DeploymentMonitoring: React.FC = () => {
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
             </button>
-            <button 
-              onClick={() => setShowCreateModal(true)}
+            <button
+              onClick={() => console.log('Create deployment modal')}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
             >
               <Plus className="w-4 h-4" />
@@ -590,8 +550,12 @@ export const DeploymentMonitoring: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Deployments</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{deployments.length}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Total Deployments
+                </p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                  {deployments.length}
+                </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
                   {deployments.filter(d => d.status === 'success').length} successful
@@ -611,7 +575,9 @@ export const DeploymentMonitoring: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Running Deployments</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Running Deployments
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {deployments.filter(d => d.status === 'running').length}
                 </p>
@@ -636,7 +602,11 @@ export const DeploymentMonitoring: React.FC = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Success Rate</p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
-                  {Math.round(deployments.reduce((sum, d) => sum + d.metrics.successRate, 0) / deployments.length)}%
+                  {Math.round(
+                    deployments.reduce((sum, d) => sum + d.metrics.successRate, 0) /
+                      deployments.length
+                  )}
+                  %
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <TrendingUp className="w-4 h-4 mr-1" />
@@ -657,12 +627,17 @@ export const DeploymentMonitoring: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Deployment Time</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Avg Deployment Time
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
-                  {Math.round(deployments.reduce((sum, d) => {
-                    const time = d.duration ? parseInt(d.duration.split('m')[0]) : 0;
-                    return sum + time;
-                  }, 0) / deployments.length)}m
+                  {Math.round(
+                    deployments.reduce((sum, d) => {
+                      const time = d.duration ? parseInt(d.duration.split('m')[0]) : 0;
+                      return sum + time;
+                    }, 0) / deployments.length
+                  )}
+                  m
                 </p>
                 <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
                   <Clock className="w-4 h-4 mr-1" />
@@ -682,7 +657,9 @@ export const DeploymentMonitoring: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'deployments' | 'monitoring' | 'alerts')}
+                onClick={() =>
+                  setSelectedTab(tab.id as 'deployments' | 'stages' | 'logs' | 'health')
+                }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -720,15 +697,22 @@ export const DeploymentMonitoring: React.FC = () => {
                             <Package className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{deployment.name}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {deployment.name}
+                            </h3>
                             <p className="text-sm text-slate-600 dark:text-slate-400">
-                              {deployment.service} • {deployment.commit.substring(0, 7)} • {deployment.branch}
+                              {deployment.service} • {deployment.commit.substring(0, 7)} •{' '}
+                              {deployment.branch}
                             </p>
                             <div className="flex items-center space-x-4 mt-2">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(deployment.status)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(deployment.status)}`}
+                              >
                                 {deployment.status}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getEnvironmentColor(deployment.environment)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getEnvironmentColor(deployment.environment)}`}
+                              >
                                 {deployment.environment}
                               </span>
                               <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
@@ -767,7 +751,7 @@ export const DeploymentMonitoring: React.FC = () => {
                               <XCircle className="w-4 h-4 text-red-600" />
                             </button>
                             <button
-                              onClick={() => setSelectedDeployment(deployment)}
+                              onClick={() => console.log('View deployment details', deployment.id)}
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
                               title="View Details"
                             >
@@ -776,12 +760,16 @@ export const DeploymentMonitoring: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Progress Bar */}
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-slate-900 dark:text-white">Deployment Progress</span>
-                          <span className="text-sm text-slate-500 dark:text-slate-400">{deployment.progress}%</span>
+                          <span className="text-sm font-medium text-slate-900 dark:text-white">
+                            Deployment Progress
+                          </span>
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
+                            {deployment.progress}%
+                          </span>
                         </div>
                         <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
                           <div
@@ -790,10 +778,12 @@ export const DeploymentMonitoring: React.FC = () => {
                           ></div>
                         </div>
                       </div>
-                      
+
                       {/* Deployment Stages */}
                       <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">Deployment Stages</h4>
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">
+                          Deployment Stages
+                        </h4>
                         <div className="flex space-x-2">
                           {deployment.stages.map((stage, stageIndex) => (
                             <div key={stage.id} className="flex items-center space-x-2">
@@ -801,8 +791,12 @@ export const DeploymentMonitoring: React.FC = () => {
                                 {getStatusIcon(stage.status)}
                               </div>
                               <div className="text-xs">
-                                <div className="font-medium text-slate-900 dark:text-white">{stage.name}</div>
-                                <div className="text-slate-500 dark:text-slate-400">{stage.duration || 'In progress...'}</div>
+                                <div className="font-medium text-slate-900 dark:text-white">
+                                  {stage.name}
+                                </div>
+                                <div className="text-slate-500 dark:text-slate-400">
+                                  {stage.duration || 'In progress...'}
+                                </div>
                               </div>
                               {stageIndex < deployment.stages.length - 1 && (
                                 <div className="w-4 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
@@ -826,7 +820,9 @@ export const DeploymentMonitoring: React.FC = () => {
                 >
                   <div className="text-center py-12">
                     <Layers className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Deployment Stages</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      Deployment Stages
+                    </h3>
                     <p className="text-slate-500 dark:text-slate-400 mb-6">
                       Detailed stage execution monitoring and management
                     </p>
@@ -847,7 +843,9 @@ export const DeploymentMonitoring: React.FC = () => {
                 >
                   <div className="text-center py-12">
                     <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Deployment Logs</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      Deployment Logs
+                    </h3>
                     <p className="text-slate-500 dark:text-slate-400 mb-6">
                       Real-time deployment logs and execution details
                     </p>
@@ -868,23 +866,31 @@ export const DeploymentMonitoring: React.FC = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Health Checks</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Health Checks
+                      </h3>
                       <div className="space-y-3">
-                        {deployments[0]?.healthChecks.map((check, index) => (
+                        {deployments[0]?.healthChecks.map(check => (
                           <div key={check.id} className="bg-white dark:bg-slate-800 rounded-lg p-4">
                             <div className="flex items-center justify-between">
                               <div>
-                                <h4 className="font-medium text-slate-900 dark:text-white">{check.name}</h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">{check.endpoint}</p>
+                                <h4 className="font-medium text-slate-900 dark:text-white">
+                                  {check.name}
+                                </h4>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">
+                                  {check.endpoint}
+                                </p>
                               </div>
                               <div className="text-right">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  check.status === 'passing' 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                    : check.status === 'warning'
-                                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
-                                    : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                                }`}>
+                                <span
+                                  className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    check.status === 'passing'
+                                      ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                                      : check.status === 'warning'
+                                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                                        : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                                  }`}
+                                >
                                   {check.status}
                                 </span>
                                 <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -893,19 +899,25 @@ export const DeploymentMonitoring: React.FC = () => {
                               </div>
                             </div>
                             {check.message && (
-                              <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-2">{check.message}</p>
+                              <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-2">
+                                {check.message}
+                              </p>
                             )}
                           </div>
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Deployment Metrics</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Deployment Metrics
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Deployment metrics chart</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Deployment metrics chart
+                          </p>
                         </div>
                       </div>
                     </div>
