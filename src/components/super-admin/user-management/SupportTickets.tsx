@@ -1,50 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   MessageSquare,
   Plus,
   Search,
-  Filter,
   Download,
   RefreshCw,
   Eye,
   Edit,
-  Trash2,
   Mail,
   Phone,
   Clock,
-  User,
-  Tag,
   AlertCircle,
   CheckCircle,
   XCircle,
   Star,
-  ThumbsUp,
-  ThumbsDown,
   MessageCircle,
-  FileText,
   Paperclip,
   Send,
-  Archive,
-  Flag,
-  Users,
-  Calendar,
   TrendingUp,
   TrendingDown,
   Activity,
   BarChart3,
   PieChart,
-  Target,
-  Award,
-  Zap,
-  Shield,
-  Lock,
-  Unlock,
-  Globe,
-  Building,
-  Smartphone,
-  Monitor,
-  Tablet,
 } from 'lucide-react';
 
 /**
@@ -88,24 +66,24 @@ interface TicketMetric {
   color: string;
 }
 
-interface TicketCategory {
-  id: string;
-  name: string;
-  description: string;
-  ticketCount: number;
-  avgResolutionTime: number;
-  color: string;
-}
+// interface TicketCategory {
+//   id: string;
+//   name: string;
+//   description: string;
+//   ticketCount: number;
+//   avgResolutionTime: number;
+//   color: string;
+// }
 
 export const SupportTickets: React.FC = () => {
   const [tickets, setTickets] = useState<SupportTicket[]>([]);
-  const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(null);
+  // const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showTicketModal, setShowTicketModal] = useState(false);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [showTicketModal, setShowTicketModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState<'overview' | 'tickets' | 'analytics'>('overview');
 
   // Mock ticket metrics
@@ -189,23 +167,43 @@ export const SupportTickets: React.FC = () => {
         'Email notifications not being sent',
       ][Math.floor(Math.random() * 10)],
       description: 'Detailed description of the support issue...',
-      status: ['open', 'in-progress', 'resolved', 'closed', 'pending'][Math.floor(Math.random() * 5)] as 'open' | 'in-progress' | 'resolved' | 'closed' | 'pending',
-      priority: ['low', 'medium', 'high', 'urgent'][Math.floor(Math.random() * 4)] as 'low' | 'medium' | 'high' | 'urgent',
-      category: ['Technical', 'Billing', 'Feature Request', 'Account', 'General'][Math.floor(Math.random() * 5)],
+      status: ['open', 'in-progress', 'resolved', 'closed', 'pending'][
+        Math.floor(Math.random() * 5)
+      ] as 'open' | 'in-progress' | 'resolved' | 'closed' | 'pending',
+      priority: ['low', 'medium', 'high', 'urgent'][Math.floor(Math.random() * 4)] as
+        | 'low'
+        | 'medium'
+        | 'high'
+        | 'urgent',
+      category: ['Technical', 'Billing', 'Feature Request', 'Account', 'General'][
+        Math.floor(Math.random() * 5)
+      ],
       userId: `user_${i + 1}`,
       userName: `User ${i + 1}`,
       userEmail: `user${i + 1}@demo-company.com`,
       assignedTo: Math.random() > 0.3 ? `agent_${Math.floor(Math.random() * 10) + 1}` : undefined,
-      assignedToName: Math.random() > 0.3 ? `Agent ${Math.floor(Math.random() * 10) + 1}` : undefined,
+      assignedToName:
+        Math.random() > 0.3 ? `Agent ${Math.floor(Math.random() * 10) + 1}` : undefined,
       createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-      resolvedAt: Math.random() > 0.4 ? new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000).toISOString() : undefined,
-      tags: ['bug', 'feature', 'urgent', 'billing', 'technical'].slice(0, Math.floor(Math.random() * 3) + 1),
+      resolvedAt:
+        Math.random() > 0.4
+          ? new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000).toISOString()
+          : undefined,
+      tags: ['bug', 'feature', 'urgent', 'billing', 'technical'].slice(
+        0,
+        Math.floor(Math.random() * 3) + 1
+      ),
       attachments: Math.floor(Math.random() * 5),
       messages: Math.floor(Math.random() * 10) + 1,
       satisfaction: Math.random() > 0.3 ? Math.floor(Math.random() * 2) + 4 : undefined,
       lastActivity: new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000).toISOString(),
-      source: ['email', 'chat', 'phone', 'web', 'api'][Math.floor(Math.random() * 5)] as 'email' | 'chat' | 'phone' | 'web' | 'api',
+      source: ['email', 'chat', 'phone', 'web', 'api'][Math.floor(Math.random() * 5)] as
+        | 'email'
+        | 'chat'
+        | 'phone'
+        | 'web'
+        | 'api',
     }));
 
     setTickets(mockTickets);
@@ -269,7 +267,7 @@ export const SupportTickets: React.FC = () => {
       case 'phone':
         return Phone;
       case 'web':
-        return Globe;
+        return Activity;
       case 'api':
         return Activity;
       default:
@@ -295,10 +293,11 @@ export const SupportTickets: React.FC = () => {
   };
 
   const filteredTickets = tickets.filter(ticket => {
-    const matchesSearch = ticket.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         ticket.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         ticket.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         ticket.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      ticket.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ticket.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ticket.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ticket.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || ticket.status === statusFilter;
     const matchesPriority = priorityFilter === 'all' || ticket.priority === priorityFilter;
     const matchesCategory = categoryFilter === 'all' || ticket.category === categoryFilter;
@@ -344,7 +343,9 @@ export const SupportTickets: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Support Tickets</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Support Tickets
+              </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Manage customer support tickets and provide exceptional service
               </p>
@@ -359,7 +360,7 @@ export const SupportTickets: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-                onClick={() => setShowCreateModal(true)}
+                onClick={() => console.log('Create modal clicked')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
               >
                 <Plus className="w-4 h-4" />
@@ -373,7 +374,7 @@ export const SupportTickets: React.FC = () => {
         <div className="mb-6">
           <div className="border-b border-gray-200 dark:border-slate-700">
             <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => {
+              {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
                   <button
@@ -408,35 +409,41 @@ export const SupportTickets: React.FC = () => {
                 type="text"
                 placeholder="Search tickets by title, user, or ID..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
               />
             </div>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
             >
-              {statuses.map((status) => (
-                <option key={status.id} value={status.id}>{status.name}</option>
+              {statuses.map(status => (
+                <option key={status.id} value={status.id}>
+                  {status.name}
+                </option>
               ))}
             </select>
             <select
               value={priorityFilter}
-              onChange={(e) => setPriorityFilter(e.target.value)}
+              onChange={e => setPriorityFilter(e.target.value)}
               className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
             >
-              {priorities.map((priority) => (
-                <option key={priority.id} value={priority.id}>{priority.name}</option>
+              {priorities.map(priority => (
+                <option key={priority.id} value={priority.id}>
+                  {priority.name}
+                </option>
               ))}
             </select>
             <select
               value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
+              onChange={e => setCategoryFilter(e.target.value)}
               className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
             >
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>{category.name}</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
               ))}
             </select>
           </div>
@@ -447,7 +454,7 @@ export const SupportTickets: React.FC = () => {
           <>
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-              {ticketMetrics.map((metric) => {
+              {ticketMetrics.map(metric => {
                 const Icon = metric.icon;
                 return (
                   <motion.div
@@ -468,11 +475,15 @@ export const SupportTickets: React.FC = () => {
                         ) : (
                           <Activity className="w-4 h-4 text-gray-500" />
                         )}
-                        <span className={`text-sm font-medium ${
-                          metric.changeType === 'increase' ? 'text-green-600 dark:text-green-400' :
-                          metric.changeType === 'decrease' ? 'text-red-600 dark:text-red-400' :
-                          'text-gray-600 dark:text-gray-400'
-                        }`}>
+                        <span
+                          className={`text-sm font-medium ${
+                            metric.changeType === 'increase'
+                              ? 'text-green-600 dark:text-green-400'
+                              : metric.changeType === 'decrease'
+                                ? 'text-red-600 dark:text-red-400'
+                                : 'text-gray-600 dark:text-gray-400'
+                          }`}
+                        >
                           {Math.abs(metric.change)}%
                         </span>
                       </div>
@@ -483,9 +494,7 @@ export const SupportTickets: React.FC = () => {
                       {metric.id === 'satisfaction' && '/5'}
                       {metric.id === 'response-time' && 'h'}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {metric.title}
-                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                       {metric.period}
                     </div>
@@ -497,7 +506,9 @@ export const SupportTickets: React.FC = () => {
             {/* Recent Tickets */}
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Tickets</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Recent Tickets
+                </h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -524,7 +535,7 @@ export const SupportTickets: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                    {filteredTickets.slice(0, 10).map((ticket) => {
+                    {filteredTickets.slice(0, 10).map(ticket => {
                       const SourceIcon = getSourceIcon(ticket.source);
                       return (
                         <motion.tr
@@ -533,8 +544,7 @@ export const SupportTickets: React.FC = () => {
                           animate={{ opacity: 1 }}
                           className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
                           onClick={() => {
-                            setSelectedTicket(ticket);
-                            setShowTicketModal(true);
+                            console.log('Ticket selected:', ticket);
                           }}
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -558,18 +568,26 @@ export const SupportTickets: React.FC = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}>
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}
+                            >
                               {getStatusIcon(ticket.status)}
-                              <span className="ml-1 capitalize">{ticket.status.replace('-', ' ')}</span>
+                              <span className="ml-1 capitalize">
+                                {ticket.status.replace('-', ' ')}
+                              </span>
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}
+                            >
                               {ticket.priority}
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSourceColor(ticket.source)}`}>
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSourceColor(ticket.source)}`}
+                            >
                               <SourceIcon className="w-3 h-3 mr-1" />
                               {ticket.source}
                             </span>
@@ -625,7 +643,7 @@ export const SupportTickets: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredTickets.map((ticket) => (
+                  {filteredTickets.map(ticket => (
                     <motion.tr
                       key={ticket.id}
                       initial={{ opacity: 0 }}
@@ -641,7 +659,7 @@ export const SupportTickets: React.FC = () => {
                             {ticket.title}
                           </div>
                           <div className="flex flex-wrap gap-1 mt-1">
-                            {ticket.tags.slice(0, 2).map((tag) => (
+                            {ticket.tags.slice(0, 2).map(tag => (
                               <span
                                 key={tag}
                                 className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
@@ -673,13 +691,17 @@ export const SupportTickets: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}
+                        >
                           {getStatusIcon(ticket.status)}
                           <span className="ml-1 capitalize">{ticket.status.replace('-', ' ')}</span>
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}
+                        >
                           {ticket.priority}
                         </span>
                       </td>
@@ -708,18 +730,23 @@ export const SupportTickets: React.FC = () => {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => {
-                              setSelectedTicket(ticket);
-                              setShowTicketModal(true);
+                              console.log('Ticket selected:', ticket);
                             }}
                             className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                             title="View"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Edit">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Edit"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Reply">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Reply"
+                          >
                             <Send className="w-4 h-4" />
                           </button>
                         </div>
@@ -735,7 +762,9 @@ export const SupportTickets: React.FC = () => {
         {selectedTab === 'analytics' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ticket Trends</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Ticket Trends
+              </h3>
               <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                 <div className="text-center">
                   <BarChart3 className="w-12 h-12 mx-auto mb-2" />
@@ -744,7 +773,9 @@ export const SupportTickets: React.FC = () => {
               </div>
             </div>
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Category Distribution</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Category Distribution
+              </h3>
               <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                 <div className="text-center">
                   <PieChart className="w-12 h-12 mx-auto mb-2" />

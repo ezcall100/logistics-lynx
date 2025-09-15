@@ -54,6 +54,23 @@ export default function SignupPage() {
       [name]: value,
     }));
 
+    // Auto-generate subdomain from company name if subdomain is empty
+    if (name === 'company' && !formData.subdomain) {
+      const suggestedSubdomain = value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+        .replace(/\s+/g, '') // Remove spaces
+        .substring(0, 20); // Limit length
+
+      if (suggestedSubdomain) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: value,
+          subdomain: suggestedSubdomain,
+        }));
+      }
+    }
+
     // Clear field error when user starts typing
     if (fieldErrors[name]) {
       setFieldErrors(prev => ({
@@ -77,6 +94,21 @@ export default function SignupPage() {
         return value.trim() ? '' : 'Phone number is required';
       case 'company':
         return value.trim() ? '' : 'Company name is required';
+      case 'subdomain':
+        if (value.trim()) {
+          // Only validate if subdomain is provided
+          const subdomainRegex = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/;
+          if (!subdomainRegex.test(value.toLowerCase())) {
+            return 'Subdomain can only contain lowercase letters, numbers, and hyphens';
+          }
+          if (value.length < 3) {
+            return 'Subdomain must be at least 3 characters long';
+          }
+          if (value.length > 30) {
+            return 'Subdomain must be less than 30 characters';
+          }
+        }
+        return '';
       case 'password':
         if (!value) return 'Password is required';
         if (value.length < 8) return 'Password must be at least 8 characters';
@@ -106,7 +138,7 @@ export default function SignupPage() {
     // Validate all fields
     const errors: Record<string, string> = {};
     Object.keys(formData).forEach(key => {
-      if (key !== 'subdomain' && key !== 'jobTitle') {
+      if (key !== 'jobTitle') {
         const error = validateField(key, formData[key as keyof SignupData] || '');
         if (error) errors[key] = error;
       }
@@ -532,6 +564,44 @@ export default function SignupPage() {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                {/* Subdomain */}
+                <div>
+                  <label htmlFor="subdomain" className="block text-sm font-medium text-white mb-2">
+                    Company Subdomain
+                    <span className="text-gray-400 text-xs ml-1">(Optional - for custom URLs)</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="subdomain"
+                      name="subdomain"
+                      type="text"
+                      value={formData.subdomain}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={`w-full pl-4 pr-20 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                        fieldErrors.subdomain ? 'border-red-500' : 'border-white/20'
+                      }`}
+                      placeholder="yourcompany"
+                    />
+                    <div className="absolute right-12 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                      .transbotai.com
+                    </div>
+                    {formData.subdomain && !fieldErrors.subdomain && (
+                      <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                    )}
+                    {fieldErrors.subdomain && (
+                      <X className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-400" />
+                    )}
+                  </div>
+                  {fieldErrors.subdomain && (
+                    <p className="text-red-400 text-xs mt-1">{fieldErrors.subdomain}</p>
+                  )}
+                  <p className="text-xs text-gray-400 mt-1">
+                    This will create a custom URL like: https://
+                    {formData.subdomain || 'yourcompany'}.transbotai.com
+                  </p>
                 </div>
 
                 {/* Password */}

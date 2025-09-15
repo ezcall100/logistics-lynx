@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
-  BarChart3,
   TrendingUp,
   TrendingDown,
   Users,
@@ -9,27 +8,15 @@ import {
   UserMinus,
   Activity,
   Clock,
-  Globe,
   Smartphone,
   Monitor,
   Tablet,
-  Calendar,
   Download,
-  Filter,
   Search,
-  Eye,
   RefreshCw,
   ArrowUpRight,
   ArrowDownRight,
-  PieChart,
-  LineChart,
   Target,
-  Award,
-  Zap,
-  Shield,
-  CheckCircle,
-  AlertCircle,
-  XCircle,
 } from 'lucide-react';
 
 /**
@@ -86,7 +73,7 @@ export const UserAnalytics: React.FC = () => {
   const [userActivities, setUserActivities] = useState<UserActivity[]>([]);
   const [userSegments, setUserSegments] = useState<UserSegment[]>([]);
   const [geographicData, setGeographicData] = useState<GeographicData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   // Mock analytics metrics
   const analyticsMetrics: AnalyticsMetric[] = [
@@ -158,10 +145,22 @@ export const UserAnalytics: React.FC = () => {
       id: `${i + 1}`,
       userId: `user_${i + 1}`,
       userName: `User ${i + 1}`,
-      action: ['Login', 'Logout', 'Profile Update', 'Password Change', 'Data Export', 'Settings Change'][Math.floor(Math.random() * 6)],
+      action: [
+        'Login',
+        'Logout',
+        'Profile Update',
+        'Password Change',
+        'Data Export',
+        'Settings Change',
+      ][Math.floor(Math.random() * 6)],
       timestamp: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-      device: ['desktop', 'mobile', 'tablet'][Math.floor(Math.random() * 3)] as 'desktop' | 'mobile' | 'tablet',
-      location: ['New York, NY', 'Los Angeles, CA', 'Chicago, IL', 'Houston, TX', 'Phoenix, AZ'][Math.floor(Math.random() * 5)],
+      device: ['desktop', 'mobile', 'tablet'][Math.floor(Math.random() * 3)] as
+        | 'desktop'
+        | 'mobile'
+        | 'tablet',
+      location: ['New York, NY', 'Los Angeles, CA', 'Chicago, IL', 'Houston, TX', 'Phoenix, AZ'][
+        Math.floor(Math.random() * 5)
+      ],
       ipAddress: `192.168.1.${Math.floor(Math.random() * 255)}`,
       sessionDuration: Math.floor(Math.random() * 120) + 5,
     }));
@@ -282,7 +281,9 @@ export const UserAnalytics: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">User Analytics</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                User Analytics
+              </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Comprehensive insights into user behavior, engagement, and growth metrics
               </p>
@@ -306,7 +307,7 @@ export const UserAnalytics: React.FC = () => {
             <div className="flex items-center space-x-2">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Period:</span>
               <div className="flex items-center space-x-1 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-lg p-1">
-                {periods.map((period) => (
+                {periods.map(period => (
                   <button
                     key={period.id}
                     onClick={() => setSelectedPeriod(period.id)}
@@ -324,7 +325,7 @@ export const UserAnalytics: React.FC = () => {
             <div className="flex items-center space-x-2">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">View:</span>
               <div className="flex items-center space-x-1 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-lg p-1">
-                {metrics.map((metric) => (
+                {metrics.map(metric => (
                   <button
                     key={metric.id}
                     onClick={() => setSelectedMetric(metric.id)}
@@ -344,7 +345,7 @@ export const UserAnalytics: React.FC = () => {
 
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-          {analyticsMetrics.map((metric) => {
+          {analyticsMetrics.map(metric => {
             const Icon = metric.icon;
             return (
               <motion.div
@@ -365,11 +366,15 @@ export const UserAnalytics: React.FC = () => {
                     ) : (
                       <Activity className="w-4 h-4 text-gray-500" />
                     )}
-                    <span className={`text-sm font-medium ${
-                      metric.changeType === 'increase' ? 'text-green-600 dark:text-green-400' :
-                      metric.changeType === 'decrease' ? 'text-red-600 dark:text-red-400' :
-                      'text-gray-600 dark:text-gray-400'
-                    }`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        metric.changeType === 'increase'
+                          ? 'text-green-600 dark:text-green-400'
+                          : metric.changeType === 'decrease'
+                            ? 'text-red-600 dark:text-red-400'
+                            : 'text-gray-600 dark:text-gray-400'
+                      }`}
+                    >
                       {Math.abs(metric.change)}%
                     </span>
                   </div>
@@ -379,12 +384,8 @@ export const UserAnalytics: React.FC = () => {
                   {metric.id === 'avg-session' && 'm'}
                   {metric.id === 'retention-rate' && '%'}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {metric.title}
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  {metric.period}
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">{metric.period}</div>
               </motion.div>
             );
           })}
@@ -397,7 +398,9 @@ export const UserAnalytics: React.FC = () => {
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Segments</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    User Segments
+                  </h3>
                   <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium">
                     View All
                   </button>
@@ -405,7 +408,7 @@ export const UserAnalytics: React.FC = () => {
               </div>
               <div className="p-6">
                 <div className="space-y-4">
-                  {userSegments.map((segment) => (
+                  {userSegments.map(segment => (
                     <motion.div
                       key={segment.id}
                       initial={{ opacity: 0, x: -20 }}
@@ -415,14 +418,22 @@ export const UserAnalytics: React.FC = () => {
                       <div className="flex items-center space-x-4">
                         <div className={`w-4 h-4 rounded-full ${segment.color}`}></div>
                         <div>
-                          <div className="font-medium text-gray-900 dark:text-white">{segment.name}</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">{segment.description}</div>
+                          <div className="font-medium text-gray-900 dark:text-white">
+                            {segment.name}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            {segment.description}
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-4">
                         <div className="text-right">
-                          <div className="font-semibold text-gray-900 dark:text-white">{segment.userCount} users</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">{segment.percentage}%</div>
+                          <div className="font-semibold text-gray-900 dark:text-white">
+                            {segment.userCount} users
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            {segment.percentage}%
+                          </div>
                         </div>
                         {getTrendIcon(segment.trend)}
                       </div>
@@ -437,7 +448,9 @@ export const UserAnalytics: React.FC = () => {
           <div>
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Geographic Distribution</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Geographic Distribution
+                </h3>
               </div>
               <div className="p-6">
                 <div className="space-y-3">
@@ -451,12 +464,19 @@ export const UserAnalytics: React.FC = () => {
                     >
                       <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-sm text-gray-900 dark:text-white">{country.country}</span>
+                        <span className="text-sm text-gray-900 dark:text-white">
+                          {country.country}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{country.users}</span>
-                        <span className={`text-xs ${country.growth > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                          {country.growth > 0 ? '+' : ''}{country.growth}%
+                        <span className="text-sm font-medium text-gray-900 dark:text-white">
+                          {country.users}
+                        </span>
+                        <span
+                          className={`text-xs ${country.growth > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
+                        >
+                          {country.growth > 0 ? '+' : ''}
+                          {country.growth}%
                         </span>
                       </div>
                     </motion.div>
@@ -471,10 +491,12 @@ export const UserAnalytics: React.FC = () => {
         <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
           <div className="p-6 border-b border-gray-200 dark:border-slate-700">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent User Activity</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Recent User Activity
+              </h3>
               <div className="flex items-center space-x-2">
                 <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Filter className="w-4 h-4" />
+                  <Search className="w-4 h-4" />
                 </button>
                 <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                   <Search className="w-4 h-4" />
@@ -507,7 +529,7 @@ export const UserAnalytics: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                {userActivities.slice(0, 10).map((activity) => {
+                {userActivities.slice(0, 10).map(activity => {
                   const DeviceIcon = getDeviceIcon(activity.device);
                   return (
                     <motion.tr
@@ -530,14 +552,20 @@ export const UserAnalytics: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDeviceColor(activity.device)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDeviceColor(activity.device)}`}
+                        >
                           <DeviceIcon className="w-3 h-3 mr-1" />
                           {activity.device}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">{activity.location}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">{activity.ipAddress}</div>
+                        <div className="text-sm text-gray-900 dark:text-white">
+                          {activity.location}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {activity.ipAddress}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="text-sm text-gray-900 dark:text-white">

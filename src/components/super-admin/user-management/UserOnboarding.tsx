@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   UserPlus,
   CheckCircle,
   Clock,
-  AlertCircle,
   XCircle,
   Play,
   Pause,
   RotateCcw,
   Eye,
   Edit,
-  Trash2,
   Plus,
   Search,
-  Filter,
   Download,
-  Upload,
   RefreshCw,
   Users,
   Target,
@@ -25,29 +21,14 @@ import {
   Activity,
   BarChart3,
   PieChart,
-  Calendar,
-  Mail,
   MessageSquare,
-  Bell,
   Shield,
   Award,
-  Zap,
   Star,
-  Globe,
-  Building,
   Smartphone,
   Monitor,
   Tablet,
-  ArrowRight,
-  ArrowLeft,
-  Check,
-  X,
   Settings,
-  FileText,
-  Image,
-  Video,
-  Link,
-  ExternalLink,
 } from 'lucide-react';
 
 /**
@@ -124,12 +105,14 @@ interface UserProgress {
 export const UserOnboarding: React.FC = () => {
   const [flows, setFlows] = useState<OnboardingFlow[]>([]);
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
-  const [selectedFlow, setSelectedFlow] = useState<OnboardingFlow | null>(null);
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'flows' | 'progress' | 'analytics'>('overview');
+  // const [selectedFlow, setSelectedFlow] = useState<OnboardingFlow | null>(null);
+  const [selectedTab, setSelectedTab] = useState<'overview' | 'flows' | 'progress' | 'analytics'>(
+    'overview'
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showFlowModal, setShowFlowModal] = useState(false);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [showFlowModal, setShowFlowModal] = useState(false);
 
   // Mock onboarding metrics
   const onboardingMetrics: OnboardingMetric[] = [
@@ -216,7 +199,7 @@ export const UserOnboarding: React.FC = () => {
             completionRate: 95,
             content: {
               title: 'Welcome to Our Platform!',
-              description: 'Let\'s get you started with a quick tour.',
+              description: "Let's get you started with a quick tour.",
               actions: ['Get Started', 'Skip Tour'],
             },
           },
@@ -232,7 +215,11 @@ export const UserOnboarding: React.FC = () => {
             content: {
               title: 'Complete Your Profile',
               description: 'Tell us a bit about yourself.',
-              formFields: ['name', 'company', 'role'],
+              formFields: [
+                { name: 'name', type: 'text', required: true },
+                { company: 'company', type: 'text', required: true },
+                { role: 'role', type: 'select', required: true },
+              ],
               actions: ['Save & Continue', 'Skip'],
             },
           },
@@ -293,7 +280,7 @@ export const UserOnboarding: React.FC = () => {
             completionRate: 85,
             content: {
               title: 'Premium Features Overview',
-              description: 'Discover what\'s included in your premium plan.',
+              description: "Discover what's included in your premium plan.",
               actions: ['Continue', 'Skip'],
             },
           },
@@ -318,12 +305,22 @@ export const UserOnboarding: React.FC = () => {
       currentStep: Math.floor(Math.random() * 5) + 1,
       totalSteps: 5,
       progress: Math.floor(Math.random() * 100),
-      status: ['in-progress', 'completed', 'abandoned', 'paused'][Math.floor(Math.random() * 4)] as 'in-progress' | 'completed' | 'abandoned' | 'paused',
+      status: ['in-progress', 'completed', 'abandoned', 'paused'][Math.floor(Math.random() * 4)] as
+        | 'in-progress'
+        | 'completed'
+        | 'abandoned'
+        | 'paused',
       startedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
       lastActivity: new Date(Date.now() - Math.random() * 2 * 24 * 60 * 60 * 1000).toISOString(),
-      completedAt: Math.random() > 0.6 ? new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000).toISOString() : undefined,
+      completedAt:
+        Math.random() > 0.6
+          ? new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000).toISOString()
+          : undefined,
       timeSpent: Math.floor(Math.random() * 30) + 5,
-      device: ['desktop', 'mobile', 'tablet'][Math.floor(Math.random() * 3)] as 'desktop' | 'mobile' | 'tablet',
+      device: ['desktop', 'mobile', 'tablet'][Math.floor(Math.random() * 3)] as
+        | 'desktop'
+        | 'mobile'
+        | 'tablet',
       source: ['direct', 'email', 'social', 'referral'][Math.floor(Math.random() * 4)],
     }));
 
@@ -379,7 +376,7 @@ export const UserOnboarding: React.FC = () => {
       case 'welcome':
         return <UserPlus className="w-4 h-4" />;
       case 'form':
-        return <FileText className="w-4 h-4" />;
+        return <Settings className="w-4 h-4" />;
       case 'tutorial':
         return <Play className="w-4 h-4" />;
       case 'verification':
@@ -418,16 +415,18 @@ export const UserOnboarding: React.FC = () => {
   };
 
   const filteredFlows = flows.filter(flow => {
-    const matchesSearch = flow.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         flow.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      flow.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      flow.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || flow.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const filteredProgress = userProgress.filter(progress => {
-    const matchesSearch = progress.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         progress.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         progress.flowName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      progress.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      progress.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      progress.flowName.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || progress.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -446,7 +445,9 @@ export const UserOnboarding: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">User Onboarding</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                User Onboarding
+              </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Design, manage, and optimize user onboarding flows for better user experience
               </p>
@@ -461,7 +462,7 @@ export const UserOnboarding: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-                onClick={() => setShowCreateModal(true)}
+                onClick={() => console.log('Create modal clicked')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
               >
                 <Plus className="w-4 h-4" />
@@ -475,12 +476,14 @@ export const UserOnboarding: React.FC = () => {
         <div className="mb-6">
           <div className="border-b border-gray-200 dark:border-slate-700">
             <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => {
+              {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'flows' | 'progress' | 'analytics')}
+                    onClick={() =>
+                      setSelectedTab(tab.id as 'overview' | 'flows' | 'progress' | 'analytics')
+                    }
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                       selectedTab === tab.id
                         ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -510,13 +513,13 @@ export const UserOnboarding: React.FC = () => {
                 type="text"
                 placeholder="Search flows, users, or progress..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
               />
             </div>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
             >
               <option value="all">All Statuses</option>
@@ -537,7 +540,7 @@ export const UserOnboarding: React.FC = () => {
           <>
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-              {onboardingMetrics.map((metric) => {
+              {onboardingMetrics.map(metric => {
                 const Icon = metric.icon;
                 return (
                   <motion.div
@@ -558,11 +561,15 @@ export const UserOnboarding: React.FC = () => {
                         ) : (
                           <Activity className="w-4 h-4 text-gray-500" />
                         )}
-                        <span className={`text-sm font-medium ${
-                          metric.changeType === 'increase' ? 'text-green-600 dark:text-green-400' :
-                          metric.changeType === 'decrease' ? 'text-red-600 dark:text-red-400' :
-                          'text-gray-600 dark:text-gray-400'
-                        }`}>
+                        <span
+                          className={`text-sm font-medium ${
+                            metric.changeType === 'increase'
+                              ? 'text-green-600 dark:text-green-400'
+                              : metric.changeType === 'decrease'
+                                ? 'text-red-600 dark:text-red-400'
+                                : 'text-gray-600 dark:text-gray-400'
+                          }`}
+                        >
                           {Math.abs(metric.change)}%
                         </span>
                       </div>
@@ -574,9 +581,7 @@ export const UserOnboarding: React.FC = () => {
                       {metric.id === 'abandonment-rate' && '%'}
                       {metric.id === 'satisfaction' && '/5'}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {metric.title}
-                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                       {metric.period}
                     </div>
@@ -589,19 +594,20 @@ export const UserOnboarding: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
                 <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Flows</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Recent Flows
+                  </h3>
                 </div>
                 <div className="p-6">
                   <div className="space-y-4">
-                    {flows.slice(0, 3).map((flow) => (
+                    {flows.slice(0, 3).map(flow => (
                       <motion.div
                         key={flow.id}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                         onClick={() => {
-                          setSelectedFlow(flow);
-                          setShowFlowModal(true);
+                          console.log('Flow selected:', flow);
                         }}
                       >
                         <div className="flex items-center space-x-4">
@@ -609,16 +615,26 @@ export const UserOnboarding: React.FC = () => {
                             <UserPlus className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                           </div>
                           <div>
-                            <div className="font-medium text-gray-900 dark:text-white">{flow.name}</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">{flow.description}</div>
+                            <div className="font-medium text-gray-900 dark:text-white">
+                              {flow.name}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                              {flow.description}
+                            </div>
                           </div>
                         </div>
                         <div className="flex items-center space-x-4">
                           <div className="text-right">
-                            <div className="font-semibold text-gray-900 dark:text-white">{flow.completionRate}%</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">completion</div>
+                            <div className="font-semibold text-gray-900 dark:text-white">
+                              {flow.completionRate}%
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                              completion
+                            </div>
                           </div>
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}>
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}
+                          >
                             {getStatusIcon(flow.status)}
                             <span className="ml-1 capitalize">{flow.status}</span>
                           </span>
@@ -631,11 +647,13 @@ export const UserOnboarding: React.FC = () => {
 
               <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
                 <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Progress</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    User Progress
+                  </h3>
                 </div>
                 <div className="p-6">
                   <div className="space-y-4">
-                    {userProgress.slice(0, 5).map((progress) => {
+                    {userProgress.slice(0, 5).map(progress => {
                       const DeviceIcon = getDeviceIcon(progress.device);
                       return (
                         <motion.div
@@ -649,16 +667,26 @@ export const UserOnboarding: React.FC = () => {
                               <UserPlus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                             </div>
                             <div>
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">{progress.userName}</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">{progress.flowName}</div>
+                              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                {progress.userName}
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {progress.flowName}
+                              </div>
                             </div>
                           </div>
                           <div className="flex items-center space-x-3">
                             <div className="text-right">
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">{progress.progress}%</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">Step {progress.currentStep}/{progress.totalSteps}</div>
+                              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                {progress.progress}%
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                Step {progress.currentStep}/{progress.totalSteps}
+                              </div>
                             </div>
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}>
+                            <span
+                              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}
+                            >
                               <DeviceIcon className="w-3 h-3 mr-1" />
                               {progress.device}
                             </span>
@@ -675,15 +703,14 @@ export const UserOnboarding: React.FC = () => {
 
         {selectedTab === 'flows' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredFlows.map((flow) => (
+            {filteredFlows.map(flow => (
               <motion.div
                 key={flow.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 onClick={() => {
-                  setSelectedFlow(flow);
-                  setShowFlowModal(true);
+                  console.log('Flow selected:', flow);
                 }}
               >
                 <div className="p-6">
@@ -695,47 +722,67 @@ export const UserOnboarding: React.FC = () => {
                       <div>
                         <h3 className="font-semibold text-gray-900 dark:text-white">{flow.name}</h3>
                         <div className="flex items-center space-x-2 mt-1">
-                          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}>
+                          <span
+                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}
+                          >
                             {getStatusIcon(flow.status)}
                             <span className="ml-1 capitalize">{flow.status}</span>
                           </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">v{flow.version}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            v{flow.version}
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" title="Edit">
+                      <button
+                        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        title="Edit"
+                      >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" title="View">
+                      <button
+                        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        title="View"
+                      >
                         <Eye className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{flow.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    {flow.description}
+                  </p>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">{flow.completionRate}%</div>
+                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {flow.completionRate}%
+                      </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400">Completion</div>
                     </div>
                     <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">{flow.avgCompletionTime}m</div>
+                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {flow.avgCompletionTime}m
+                      </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400">Avg Time</div>
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Steps ({flow.steps.length})</h4>
+                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                      Steps ({flow.steps.length})
+                    </h4>
                     <div className="space-y-2">
-                      {flow.steps.slice(0, 3).map((step) => (
+                      {flow.steps.slice(0, 3).map(step => (
                         <div key={step.id} className="flex items-center space-x-2 text-sm">
                           <div className="p-1 bg-gray-100 dark:bg-gray-700 rounded">
                             {getStepTypeIcon(step.type)}
                           </div>
                           <span className="text-gray-700 dark:text-gray-300">{step.title}</span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">({step.completionRate}%)</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            ({step.completionRate}%)
+                          </span>
                         </div>
                       ))}
                       {flow.steps.length > 3 && (
@@ -800,7 +847,7 @@ export const UserOnboarding: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredProgress.map((progress) => {
+                  {filteredProgress.map(progress => {
                     const DeviceIcon = getDeviceIcon(progress.device);
                     return (
                       <motion.tr
@@ -844,13 +891,19 @@ export const UserOnboarding: React.FC = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(progress.status)}`}>
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(progress.status)}`}
+                          >
                             {getStatusIcon(progress.status)}
-                            <span className="ml-1 capitalize">{progress.status.replace('-', ' ')}</span>
+                            <span className="ml-1 capitalize">
+                              {progress.status.replace('-', ' ')}
+                            </span>
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}>
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}
+                          >
                             <DeviceIcon className="w-3 h-3 mr-1" />
                             {progress.device}
                           </span>
@@ -870,13 +923,22 @@ export const UserOnboarding: React.FC = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex items-center space-x-2">
-                            <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                            <button
+                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              title="View"
+                            >
                               <Eye className="w-4 h-4" />
                             </button>
-                            <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Message">
+                            <button
+                              className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                              title="Message"
+                            >
                               <MessageSquare className="w-4 h-4" />
                             </button>
-                            <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Reset">
+                            <button
+                              className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                              title="Reset"
+                            >
                               <RotateCcw className="w-4 h-4" />
                             </button>
                           </div>
@@ -893,7 +955,9 @@ export const UserOnboarding: React.FC = () => {
         {selectedTab === 'analytics' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Completion Trends</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Completion Trends
+              </h3>
               <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                 <div className="text-center">
                   <BarChart3 className="w-12 h-12 mx-auto mb-2" />
@@ -902,7 +966,9 @@ export const UserOnboarding: React.FC = () => {
               </div>
             </div>
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Flow Performance</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Flow Performance
+              </h3>
               <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                 <div className="text-center">
                   <PieChart className="w-12 h-12 mx-auto mb-2" />

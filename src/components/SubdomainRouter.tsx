@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import CustomerPortal from '../pages/portals/customer/CustomerPortal';
 import BrokerPortal from '../pages/portals/broker/BrokerPortal';
 import CarrierPortal from '../pages/portals/carrier/CarrierPortal';
@@ -25,6 +26,10 @@ import RatesPortal from '../pages/portals/rates/RatesPortal';
 import YMSPortal from '../pages/portals/yms/YMSPortal';
 import WorkersPortal from '../pages/portals/workers/WorkersPortal';
 import AutonomousPortal from '../pages/portals/autonomous/AutonomousPortal';
+// Import login pages
+import MCPLoginPage from '../pages/login/MCPLoginPage';
+import SuperAdminLoginPage from '../pages/login/SuperAdminLoginPage';
+import CentralizedLoginPage from '../pages/login/CentralizedLoginPage';
 
 interface SubdomainRouterProps {
   children: React.ReactNode;
@@ -33,6 +38,7 @@ interface SubdomainRouterProps {
 const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
   const [currentSubdomain, setCurrentSubdomain] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const detectSubdomain = () => {
@@ -56,6 +62,9 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
     detectSubdomain();
   }, []);
 
+  // Check if current route is a login route
+  const isLoginRoute = location.pathname === '/login';
+
   // Show loading while detecting subdomain
   if (isLoading) {
     return (
@@ -67,6 +76,20 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
         </div>
       </div>
     );
+  }
+
+  // Handle login routes first
+  if (isLoginRoute) {
+    switch (currentSubdomain) {
+      case 'mcp':
+        return <MCPLoginPage />;
+      case 'superadmin':
+        return <SuperAdminLoginPage />;
+      case 'login':
+        return <CentralizedLoginPage />;
+      default:
+        return <CentralizedLoginPage />;
+    }
   }
 
   // Route to specific portal based on subdomain

@@ -571,6 +571,164 @@ app.use((error, req, res, next) => {
   });
 });
 
+// MCP Dashboard Login Route
+app.get('/login', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MCP Dashboard Login - TransBot AI</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0891b2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .login-container {
+                background: rgba(15, 23, 42, 0.8);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(6, 182, 212, 0.2);
+                border-radius: 16px;
+                padding: 2rem;
+                width: 100%;
+                max-width: 400px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+            .logo {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            .logo h1 {
+                color: #06b6d4;
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 0;
+            }
+            .logo p {
+                color: #94a3b8;
+                font-size: 0.875rem;
+                margin: 0.25rem 0 0 0;
+            }
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            .form-group label {
+                display: block;
+                color: #e2e8f0;
+                font-size: 0.875rem;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #475569;
+                border-radius: 8px;
+                background: rgba(30, 41, 59, 0.5);
+                color: #f1f5f9;
+                font-size: 1rem;
+                box-sizing: border-box;
+            }
+            .form-group input:focus {
+                outline: none;
+                border-color: #06b6d4;
+                box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+            }
+            .login-btn {
+                width: 100%;
+                padding: 0.75rem;
+                background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .login-btn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4);
+            }
+            .status {
+                text-align: center;
+                margin-top: 1rem;
+                font-size: 0.75rem;
+                color: #64748b;
+            }
+            .status .dot {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background: #10b981;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="logo">
+                <h1>🤖 MCP Dashboard</h1>
+                <p>Model Context Protocol Command Center</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="admin@transbotai.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Access MCP Dashboard</button>
+            </form>
+            
+            <div class="status">
+                <span class="dot"></span>
+                System Online • 301 Agents Active
+            </div>
+        </div>
+        
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Simulate login process
+                const btn = document.querySelector('.login-btn');
+                btn.textContent = 'Signing In...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    // For demo purposes, redirect to dashboard
+                    // In production, this would validate credentials
+                    window.location.href = '/';
+                }, 1500);
+            });
+        </script>
+    </body>
+    </html>
+  `);
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({

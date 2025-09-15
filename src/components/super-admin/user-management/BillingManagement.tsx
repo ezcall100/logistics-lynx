@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   CreditCard,
   DollarSign,
   TrendingUp,
   TrendingDown,
   Users,
-  Calendar,
   Download,
-  Upload,
   Plus,
   Edit,
   Trash2,
   Eye,
   Search,
-  Filter,
   RefreshCw,
   AlertCircle,
   CheckCircle,
@@ -23,24 +20,12 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Receipt,
-  FileText,
   Mail,
-  Phone,
-  Globe,
-  Building,
-  User,
   CreditCard as CardIcon,
-  Banknote,
-  Wallet,
   PieChart,
   BarChart3,
   Activity,
   Target,
-  Award,
-  Zap,
-  Shield,
-  Lock,
-  Unlock,
 } from 'lucide-react';
 
 /**
@@ -120,13 +105,15 @@ interface PaymentMethod {
 }
 
 export const BillingManagement: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'subscriptions' | 'invoices' | 'payments'>('overview');
+  const [selectedTab, setSelectedTab] = useState<
+    'overview' | 'subscriptions' | 'invoices' | 'payments'
+  >('overview');
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
 
   // Mock billing metrics
   const billingMetrics: BillingMetric[] = [
@@ -206,16 +193,30 @@ export const BillingManagement: React.FC = () => {
       userName: `User ${i + 1}`,
       userEmail: `user${i + 1}@demo-company.com`,
       plan: ['Enterprise', 'Professional', 'Basic', 'Free'][Math.floor(Math.random() * 4)],
-      status: ['active', 'cancelled', 'expired', 'pending'][Math.floor(Math.random() * 4)] as 'active' | 'cancelled' | 'expired' | 'pending',
+      status: ['active', 'cancelled', 'expired', 'pending'][Math.floor(Math.random() * 4)] as
+        | 'active'
+        | 'cancelled'
+        | 'expired'
+        | 'pending',
       amount: [299, 99, 29, 0][Math.floor(Math.random() * 4)],
       currency: 'USD',
-      billingCycle: ['monthly', 'yearly', 'lifetime'][Math.floor(Math.random() * 3)] as 'monthly' | 'yearly' | 'lifetime',
+      billingCycle: ['monthly', 'yearly', 'lifetime'][Math.floor(Math.random() * 3)] as
+        | 'monthly'
+        | 'yearly'
+        | 'lifetime',
       startDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
       endDate: new Date(Date.now() + Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
-      nextBillingDate: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-      paymentMethod: ['Visa ****1234', 'Mastercard ****5678', 'PayPal', 'Bank Transfer'][Math.floor(Math.random() * 4)],
+      nextBillingDate: new Date(
+        Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000
+      ).toISOString(),
+      paymentMethod: ['Visa ****1234', 'Mastercard ****5678', 'PayPal', 'Bank Transfer'][
+        Math.floor(Math.random() * 4)
+      ],
       autoRenew: Math.random() > 0.3,
-      features: ['Unlimited Users', 'Advanced Analytics', 'Priority Support', 'API Access'].slice(0, Math.floor(Math.random() * 4) + 1),
+      features: ['Unlimited Users', 'Advanced Analytics', 'Priority Support', 'API Access'].slice(
+        0,
+        Math.floor(Math.random() * 4) + 1
+      ),
       usage: {
         current: Math.floor(Math.random() * 1000),
         limit: 1000,
@@ -230,27 +231,48 @@ export const BillingManagement: React.FC = () => {
       userName: `User ${Math.floor(Math.random() * 50) + 1}`,
       amount: [299, 99, 29, 0][Math.floor(Math.random() * 4)],
       currency: 'USD',
-      status: ['paid', 'pending', 'failed', 'refunded'][Math.floor(Math.random() * 4)] as 'paid' | 'pending' | 'failed' | 'refunded',
+      status: ['paid', 'pending', 'failed', 'refunded'][Math.floor(Math.random() * 4)] as
+        | 'paid'
+        | 'pending'
+        | 'failed'
+        | 'refunded',
       issueDate: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString(),
       dueDate: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-      paidDate: Math.random() > 0.3 ? new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString() : undefined,
+      paidDate:
+        Math.random() > 0.3
+          ? new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
+          : undefined,
       items: [
-        { description: 'Monthly Subscription', quantity: 1, unitPrice: [299, 99, 29, 0][Math.floor(Math.random() * 4)], total: [299, 99, 29, 0][Math.floor(Math.random() * 4)] },
+        {
+          description: 'Monthly Subscription',
+          quantity: 1,
+          unitPrice: [299, 99, 29, 0][Math.floor(Math.random() * 4)],
+          total: [299, 99, 29, 0][Math.floor(Math.random() * 4)],
+        },
       ],
-      paymentMethod: ['Visa ****1234', 'Mastercard ****5678', 'PayPal', 'Bank Transfer'][Math.floor(Math.random() * 4)],
+      paymentMethod: ['Visa ****1234', 'Mastercard ****5678', 'PayPal', 'Bank Transfer'][
+        Math.floor(Math.random() * 4)
+      ],
       invoiceUrl: `https://billing.demo.com/invoices/inv_${i + 1}`,
     }));
 
     const mockPaymentMethods: PaymentMethod[] = Array.from({ length: 30 }, (_, i) => ({
       id: `pm_${i + 1}`,
       userId: `user_${Math.floor(Math.random() * 50) + 1}`,
-      type: ['card', 'bank', 'paypal', 'crypto'][Math.floor(Math.random() * 4)] as 'card' | 'bank' | 'paypal' | 'crypto',
+      type: ['card', 'bank', 'paypal', 'crypto'][Math.floor(Math.random() * 4)] as
+        | 'card'
+        | 'bank'
+        | 'paypal'
+        | 'crypto',
       last4: String(Math.floor(Math.random() * 9000) + 1000),
       brand: ['Visa', 'Mastercard', 'American Express', 'Discover'][Math.floor(Math.random() * 4)],
       expiryMonth: Math.floor(Math.random() * 12) + 1,
       expiryYear: new Date().getFullYear() + Math.floor(Math.random() * 5),
       isDefault: Math.random() > 0.7,
-      status: ['active', 'expired', 'failed'][Math.floor(Math.random() * 3)] as 'active' | 'expired' | 'failed',
+      status: ['active', 'expired', 'failed'][Math.floor(Math.random() * 3)] as
+        | 'active'
+        | 'expired'
+        | 'failed',
       createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
     }));
 
@@ -324,16 +346,18 @@ export const BillingManagement: React.FC = () => {
   };
 
   const filteredSubscriptions = subscriptions.filter(subscription => {
-    const matchesSearch = subscription.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         subscription.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         subscription.plan.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      subscription.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      subscription.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      subscription.plan.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || subscription.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const filteredInvoices = invoices.filter(invoice => {
-    const matchesSearch = invoice.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         invoice.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      invoice.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      invoice.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || invoice.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -352,7 +376,9 @@ export const BillingManagement: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Billing Management</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Billing Management
+              </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Manage subscriptions, invoices, and payment processing across your platform
               </p>
@@ -367,7 +393,7 @@ export const BillingManagement: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-                onClick={() => setShowCreateModal(true)}
+                onClick={() => console.log('Create modal clicked')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
               >
                 <Plus className="w-4 h-4" />
@@ -381,12 +407,16 @@ export const BillingManagement: React.FC = () => {
         <div className="mb-6">
           <div className="border-b border-gray-200 dark:border-slate-700">
             <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => {
+              {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'subscriptions' | 'invoices' | 'payments')}
+                    onClick={() =>
+                      setSelectedTab(
+                        tab.id as 'overview' | 'subscriptions' | 'invoices' | 'payments'
+                      )
+                    }
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                       selectedTab === tab.id
                         ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -416,13 +446,13 @@ export const BillingManagement: React.FC = () => {
                 type="text"
                 placeholder="Search subscriptions, invoices, or users..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
               />
             </div>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
             >
               <option value="all">All Statuses</option>
@@ -442,7 +472,7 @@ export const BillingManagement: React.FC = () => {
           <>
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-              {billingMetrics.map((metric) => {
+              {billingMetrics.map(metric => {
                 const Icon = metric.icon;
                 return (
                   <motion.div
@@ -463,11 +493,15 @@ export const BillingManagement: React.FC = () => {
                         ) : (
                           <Activity className="w-4 h-4 text-gray-500" />
                         )}
-                        <span className={`text-sm font-medium ${
-                          metric.changeType === 'increase' ? 'text-green-600 dark:text-green-400' :
-                          metric.changeType === 'decrease' ? 'text-red-600 dark:text-red-400' :
-                          'text-gray-600 dark:text-gray-400'
-                        }`}>
+                        <span
+                          className={`text-sm font-medium ${
+                            metric.changeType === 'increase'
+                              ? 'text-green-600 dark:text-green-400'
+                              : metric.changeType === 'decrease'
+                                ? 'text-red-600 dark:text-red-400'
+                                : 'text-gray-600 dark:text-gray-400'
+                          }`}
+                        >
                           {Math.abs(metric.change)}%
                         </span>
                       </div>
@@ -475,9 +509,7 @@ export const BillingManagement: React.FC = () => {
                     <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                       {formatValue(metric.value, metric.format)}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {metric.title}
-                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                       {metric.period}
                     </div>
@@ -489,7 +521,9 @@ export const BillingManagement: React.FC = () => {
             {/* Charts and Additional Overview Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Revenue Trends</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Revenue Trends
+                </h3>
                 <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                   <div className="text-center">
                     <BarChart3 className="w-12 h-12 mx-auto mb-2" />
@@ -498,7 +532,9 @@ export const BillingManagement: React.FC = () => {
                 </div>
               </div>
               <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Subscription Distribution</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Subscription Distribution
+                </h3>
                 <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
                   <div className="text-center">
                     <PieChart className="w-12 h-12 mx-auto mb-2" />
@@ -540,7 +576,7 @@ export const BillingManagement: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredSubscriptions.slice(0, 20).map((subscription) => (
+                  {filteredSubscriptions.slice(0, 20).map(subscription => (
                     <motion.tr
                       key={subscription.id}
                       initial={{ opacity: 0 }}
@@ -558,7 +594,9 @@ export const BillingManagement: React.FC = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPlanColor(subscription.plan)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPlanColor(subscription.plan)}`}
+                        >
                           {subscription.plan}
                         </span>
                         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -567,14 +605,17 @@ export const BillingManagement: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          ${subscription.amount}/{subscription.billingCycle === 'yearly' ? 'year' : 'month'}
+                          ${subscription.amount}/
+                          {subscription.billingCycle === 'yearly' ? 'year' : 'month'}
                         </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">
                           {subscription.currency}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(subscription.status)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(subscription.status)}`}
+                        >
                           {getStatusIcon(subscription.status)}
                           <span className="ml-1 capitalize">{subscription.status}</span>
                         </span>
@@ -589,24 +630,36 @@ export const BillingManagement: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900 dark:text-white">
-                          {subscription.usage.current}/{subscription.usage.limit} {subscription.usage.unit}
+                          {subscription.usage.current}/{subscription.usage.limit}{' '}
+                          {subscription.usage.unit}
                         </div>
                         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
                           <div
                             className="bg-blue-600 h-2 rounded-full"
-                            style={{ width: `${(subscription.usage.current / subscription.usage.limit) * 100}%` }}
+                            style={{
+                              width: `${(subscription.usage.current / subscription.usage.limit) * 100}%`,
+                            }}
                           ></div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                          <button
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            title="View"
+                          >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Edit">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Edit"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Invoice">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Invoice"
+                          >
                             <Receipt className="w-4 h-4" />
                           </button>
                         </div>
@@ -649,7 +702,7 @@ export const BillingManagement: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredInvoices.slice(0, 20).map((invoice) => (
+                  {filteredInvoices.slice(0, 20).map(invoice => (
                     <motion.tr
                       key={invoice.id}
                       initial={{ opacity: 0 }}
@@ -681,7 +734,9 @@ export const BillingManagement: React.FC = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(invoice.status)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(invoice.status)}`}
+                        >
                           {getStatusIcon(invoice.status)}
                           <span className="ml-1 capitalize">{invoice.status}</span>
                         </span>
@@ -703,13 +758,22 @@ export const BillingManagement: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                          <button
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            title="View"
+                          >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Download">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Download"
+                          >
                             <Download className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Send">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Send"
+                          >
                             <Mail className="w-4 h-4" />
                           </button>
                         </div>
@@ -752,7 +816,7 @@ export const BillingManagement: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {paymentMethods.slice(0, 20).map((payment) => (
+                  {paymentMethods.slice(0, 20).map(payment => (
                     <motion.tr
                       key={payment.id}
                       initial={{ opacity: 0 }}
@@ -785,7 +849,9 @@ export const BillingManagement: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}
+                        >
                           {getStatusIcon(payment.status)}
                           <span className="ml-1 capitalize">{payment.status}</span>
                         </span>
@@ -802,13 +868,22 @@ export const BillingManagement: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                          <button
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            title="View"
+                          >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Edit">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Edit"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300" title="Delete">
+                          <button
+                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            title="Delete"
+                          >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>

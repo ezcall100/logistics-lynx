@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Shield,
   Lock,
   Unlock,
   Eye,
-  EyeOff,
   Key,
-  UserCheck,
-  UserX,
   Settings,
   Plus,
   Edit,
   Trash2,
   Search,
-  Filter,
   Download,
   Upload,
-  AlertTriangle,
   CheckCircle,
   Clock,
-  Globe,
   Database,
-  FileText,
   BarChart3,
   Activity,
-  Crown,
-  Users,
-  Building,
-  X,
 } from 'lucide-react';
 
 /**
@@ -84,11 +73,13 @@ export const AccessControl: React.FC = () => {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [accessRules, setAccessRules] = useState<AccessRule[]>([]);
   const [resources, setResources] = useState<Resource[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'permissions' | 'rules' | 'resources' | 'audit'>('permissions');
+  const [selectedTab, setSelectedTab] = useState<'permissions' | 'rules' | 'resources' | 'audit'>(
+    'permissions'
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Permission | AccessRule | Resource | null>(null);
+  // const [showCreateModal, setShowCreateModal] = useState(false);
+  // const [selectedItem, setSelectedItem] = useState<Permission | AccessRule | Resource | null>(null);
 
   // Mock data
   useEffect(() => {
@@ -288,23 +279,26 @@ export const AccessControl: React.FC = () => {
   };
 
   const filteredPermissions = permissions.filter(permission => {
-    const matchesSearch = permission.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         permission.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         permission.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      permission.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      permission.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      permission.category.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = filterCategory === 'all' || permission.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
 
   const filteredRules = accessRules.filter(rule => {
-    const matchesSearch = rule.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         rule.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      rule.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      rule.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesSearch;
   });
 
   const filteredResources = resources.filter(resource => {
-    const matchesSearch = resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         resource.path.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.path.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesSearch;
   });
 
@@ -322,7 +316,9 @@ export const AccessControl: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Access Control</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Access Control
+              </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Manage permissions, access rules, and resource security across your system
               </p>
@@ -337,7 +333,7 @@ export const AccessControl: React.FC = () => {
                 <span>Import</span>
               </button>
               <button
-                onClick={() => setShowCreateModal(true)}
+                onClick={() => console.log('Create modal clicked')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
               >
                 <Plus className="w-4 h-4" />
@@ -351,12 +347,14 @@ export const AccessControl: React.FC = () => {
         <div className="mb-6">
           <div className="border-b border-gray-200 dark:border-slate-700">
             <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => {
+              {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'permissions' | 'rules' | 'resources' | 'audit')}
+                    onClick={() =>
+                      setSelectedTab(tab.id as 'permissions' | 'rules' | 'resources' | 'audit')
+                    }
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                       selectedTab === tab.id
                         ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -384,14 +382,14 @@ export const AccessControl: React.FC = () => {
                 type="text"
                 placeholder="Search permissions, rules, or resources..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
               />
             </div>
             {selectedTab === 'permissions' && (
               <select
                 value={filterCategory}
-                onChange={(e) => setFilterCategory(e.target.value)}
+                onChange={e => setFilterCategory(e.target.value)}
                 className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
               >
                 <option value="all">All Categories</option>
@@ -432,7 +430,7 @@ export const AccessControl: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredPermissions.map((permission) => (
+                  {filteredPermissions.map(permission => (
                     <motion.tr
                       key={permission.id}
                       initial={{ opacity: 0 }}
@@ -455,7 +453,9 @@ export const AccessControl: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(permission.level)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(permission.level)}`}
+                        >
                           {permission.level}
                         </span>
                       </td>
@@ -465,11 +465,13 @@ export const AccessControl: React.FC = () => {
                         </code>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          permission.isActive
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                            : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
-                        }`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            permission.isActive
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                              : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+                          }`}
+                        >
                           {permission.isActive ? (
                             <>
                               <CheckCircle className="w-3 h-3 mr-1" />
@@ -485,13 +487,22 @@ export const AccessControl: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                          <button
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            title="View"
+                          >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Edit">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Edit"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300" title="Delete">
+                          <button
+                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            title="Delete"
+                          >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
@@ -506,7 +517,7 @@ export const AccessControl: React.FC = () => {
           {selectedTab === 'rules' && (
             <div className="p-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredRules.map((rule) => (
+                {filteredRules.map(rule => (
                   <motion.div
                     key={rule.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -519,9 +530,13 @@ export const AccessControl: React.FC = () => {
                           <Shield className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white">{rule.name}</h3>
+                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                            {rule.name}
+                          </h3>
                           <div className="flex items-center space-x-2 mt-1">
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(rule.type)}`}>
+                            <span
+                              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(rule.type)}`}
+                            >
                               {rule.type}
                             </span>
                             <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -531,34 +546,50 @@ export const AccessControl: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" title="Edit">
+                        <button
+                          className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                          title="Edit"
+                        >
                           <Edit className="w-4 h-4" />
                         </button>
-                        <button className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400" title="Delete">
+                        <button
+                          className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400"
+                          title="Delete"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{rule.description}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      {rule.description}
+                    </p>
 
                     <div className="grid grid-cols-3 gap-4 mb-4">
                       <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">{rule.appliedTo.users}</div>
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {rule.appliedTo.users}
+                        </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">Users</div>
                       </div>
                       <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">{rule.appliedTo.roles}</div>
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {rule.appliedTo.roles}
+                        </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">Roles</div>
                       </div>
                       <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">{rule.appliedTo.groups}</div>
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {rule.appliedTo.groups}
+                        </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">Groups</div>
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Conditions</h4>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                        Conditions
+                      </h4>
                       <div className="flex flex-wrap gap-1">
                         {rule.conditions.map((condition, index) => (
                           <span
@@ -621,7 +652,7 @@ export const AccessControl: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredResources.map((resource) => (
+                  {filteredResources.map(resource => (
                     <motion.tr
                       key={resource.id}
                       initial={{ opacity: 0 }}
@@ -647,16 +678,20 @@ export const AccessControl: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getAccessLevelColor(resource.accessLevel)}`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getAccessLevelColor(resource.accessLevel)}`}
+                        >
                           {resource.accessLevel}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          resource.isProtected
-                            ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                            : 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                        }`}>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            resource.isProtected
+                              ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                              : 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                          }`}
+                        >
                           {resource.isProtected ? (
                             <>
                               <Lock className="w-3 h-3 mr-1" />
@@ -671,20 +706,31 @@ export const AccessControl: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">{resource.accessCount} accesses</div>
+                        <div className="text-sm text-gray-900 dark:text-white">
+                          {resource.accessCount} accesses
+                        </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">
                           Last: {new Date(resource.lastAccessed).toLocaleDateString()}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" title="View">
+                          <button
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            title="View"
+                          >
                             <Eye className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Edit">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Edit"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300" title="Analytics">
+                          <button
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            title="Analytics"
+                          >
                             <BarChart3 className="w-4 h-4" />
                           </button>
                         </div>
@@ -700,7 +746,9 @@ export const AccessControl: React.FC = () => {
             <div className="p-6">
               <div className="text-center py-12">
                 <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Audit Log</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Audit Log
+                </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Access control audit logs and security events will be displayed here.
                 </p>

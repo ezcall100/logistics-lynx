@@ -494,7 +494,9 @@ export const DevOpsAnalytics: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() =>
-                  setSelectedTab(tab.id as 'overview' | 'performance' | 'costs' | 'security')
+                  setSelectedTab(
+                    tab.id as 'overview' | 'deployments' | 'performance' | 'reliability' | 'cost'
+                  )
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
