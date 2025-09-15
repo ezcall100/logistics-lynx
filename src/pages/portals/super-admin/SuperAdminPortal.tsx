@@ -21,6 +21,8 @@ import {
   MessageCircle,
   Building,
   Activity,
+  GitBranch,
+  Server,
 } from 'lucide-react';
 
 // Import the new modular Communication Hub
@@ -29,10 +31,10 @@ import { CommunicationHub } from '../../../components/CommunicationHub';
 // Import all the real Super Admin components
 import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashboard';
 import UserManagement from '../../../components/super-admin/UserManagement';
-import { AllUsersPage } from '../../../components/super-admin/user-management/AllUsersPage';
-import { UserRolesPage } from '../../../components/super-admin/user-management/UserRolesPage';
-import { UserGroupsPage } from '../../../components/super-admin/user-management/UserGroupsPage';
-import { AccessControlPage } from '../../../components/super-admin/user-management/AccessControlPage';
+import AllUsers from '../../../components/super-admin/user-management/AllUsers';
+import UserRoles from '../../../components/super-admin/user-management/UserRoles';
+import UserGroups from '../../../components/super-admin/user-management/UserGroups';
+import AccessControl from '../../../components/super-admin/user-management/AccessControl';
 import { UserAnalyticsPage } from '../../../components/super-admin/user-management/UserAnalyticsPage';
 import { BillingManagementPage } from '../../../components/super-admin/user-management/BillingManagementPage';
 import { SupportTicketsPage } from '../../../components/super-admin/user-management/SupportTicketsPage';
@@ -77,6 +79,10 @@ import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
 
 // Import Real-Time Development Monitor
 import RealTimeDevelopmentMonitor from '../../../components/super-admin/RealTimeDevelopmentMonitor';
+
+// Import DevOps components
+import CICDPipeline from '../../../components/super-admin/devops/CICDPipeline';
+import EnvironmentManagement from '../../../components/super-admin/devops/EnvironmentManagement';
 
 // Placeholder component for Settings Management
 const SettingsManagementPlaceholder = () => (
@@ -256,25 +262,25 @@ const SuperAdminPortal: React.FC = () => {
           id: 'all-users',
           label: 'All Users',
           path: '/super-admin/user-management/AllUsers',
-          component: AllUsersPage,
+          component: AllUsers,
         },
         {
           id: 'user-roles',
           label: 'User Roles',
           path: '/super-admin/user-management/UserRoles',
-          component: UserRolesPage,
+          component: UserRoles,
         },
         {
           id: 'user-groups',
           label: 'User Groups',
           path: '/super-admin/user-management/UserGroups',
-          component: UserGroupsPage,
+          component: UserGroups,
         },
         {
           id: 'access-control',
           label: 'Access Control',
           path: '/super-admin/user-management/AccessControl',
-          component: AccessControlPage,
+          component: AccessControl,
         },
         {
           id: 'user-analytics',
@@ -398,23 +404,23 @@ const SuperAdminPortal: React.FC = () => {
     {
       id: 'development-devops',
       label: 'Development & DevOps',
-      icon: Settings,
+      icon: GitBranch,
       description: 'Development and deployment',
       color: 'text-indigo-500',
       bgColor: 'bg-indigo-50',
-      component: GlobalSettings,
+      component: CICDPipeline,
       subMenus: [
         {
           id: 'ci-cd-pipeline',
           label: 'CI/CD Pipeline',
           path: '/super-admin/development-devops/CICDPipeline',
-          component: GlobalSettings,
+          component: CICDPipeline,
         },
         {
           id: 'environment-management',
           label: 'Environment Management',
           path: '/super-admin/development-devops/EnvironmentManagement',
-          component: GlobalSettings,
+          component: EnvironmentManagement,
         },
         {
           id: 'testing-suite',
