@@ -33,7 +33,7 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  User,
+  // User,
   Monitor,
   Smartphone,
   Tablet,

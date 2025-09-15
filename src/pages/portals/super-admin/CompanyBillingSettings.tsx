@@ -60,8 +60,8 @@ const CompanyBillingSettings: React.FC = () => {
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [billingHistory, setBillingHistory] = useState<BillingHistory[]>([]);
   // Modal states for future use
-  const [showAddPayment, setShowAddPayment] = useState(false);
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  // const [showAddPayment, setShowAddPayment] = useState(false);
+  // const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   // Mock billing data - MCP 301 Agents created this
   useEffect(() => {
@@ -219,7 +219,7 @@ const CompanyBillingSettings: React.FC = () => {
               <span className="text-sm text-green-400">Live Billing Data</span>
             </div>
             <button
-              onClick={() => setShowAddPayment(true)}
+              onClick={() => console.log('Add payment method clicked')}
               className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
               <Plus className="w-4 h-4" />
@@ -436,7 +436,7 @@ const CompanyBillingSettings: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-white">Payment Methods</h3>
                   <button
-                    onClick={() => setShowAddPayment(true)}
+                    onClick={() => console.log('Add payment method clicked')}
                     className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2"
                   >
                     <Plus className="w-4 h-4" />

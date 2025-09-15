@@ -6,14 +6,24 @@ import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
  * ResponsiveSidebar - Enhanced Super Admin Component
  * Created by MCP 301 Agents - Design Logic Refactoring
  * Timestamp: 2025-09-14T17:28:33.000Z
- * 
+ *
  * This component provides responsive sidebar functionality with proper
  * mobile navigation, glass-morphism design, and smooth animations.
  */
 interface ResponsiveSidebarProps {
   children?: React.ReactNode;
   className?: string;
-  navigationItems?: any[];
+  navigationItems?: Array<{
+    id: string;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    path?: string;
+    subMenus?: Array<{
+      id: string;
+      label: string;
+      path: string;
+    }>;
+  }>;
   activeTab?: string;
   setActiveTab?: (tab: string) => void;
   expandedMenus?: string[];
@@ -27,17 +37,16 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
   activeTab = '',
   setActiveTab = () => {},
   expandedMenus = [],
-  setExpandedMenus = () => {}
+  setExpandedMenus = () => {},
 }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleMenuToggle = (menuId: string) => {
-    setExpandedMenus(prev =>
-      prev.includes(menuId)
-        ? prev.filter(id => id !== menuId)
-        : [...prev, menuId]
-    );
+    const newMenus = expandedMenus.includes(menuId)
+      ? expandedMenus.filter((id: string) => id !== menuId)
+      : [...expandedMenus, menuId];
+    setExpandedMenus(newMenus);
   };
 
   const handleMenuItemClick = (menuId: string) => {
@@ -48,21 +57,29 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
   return (
     <div className={`responsive-sidebar-container ${className}`}>
       {/* Desktop Sidebar */}
-      <aside className={`hidden lg:block bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
-        sidebarCollapsed ? 'w-16' : 'w-64'
-      }`}>
+      <aside
+        className={`hidden lg:block bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
+          sidebarCollapsed ? 'w-16' : 'w-64'
+        }`}
+      >
         <div className="h-full flex flex-col">
           {/* Sidebar Header */}
           <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
             <div className="flex items-center justify-between">
               {!sidebarCollapsed && (
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                  Navigation
+                </h2>
               )}
               <button
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                 className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
               >
-                {sidebarCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
+                {sidebarCollapsed ? (
+                  <ChevronRight className="h-5 w-5" />
+                ) : (
+                  <ChevronLeft className="h-5 w-5" />
+                )}
               </button>
             </div>
           </div>
@@ -119,7 +136,7 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
                       transition={{ duration: 0.2 }}
                       className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4"
                     >
-                      {item.subMenus.map(subMenu => {
+                      {item.subMenus.map((subMenu: { id: string; label: string; path: string }) => {
                         const isSubActive = activeTab === subMenu.id;
 
                         return (
@@ -157,11 +174,16 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)} />
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50"
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                  Navigation
+                </h2>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -213,24 +235,26 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
                       {/* Sub-menus */}
                       {isExpanded && item.subMenus && (
                         <div className="ml-4 space-y-1">
-                          {item.subMenus.map(subMenu => {
-                            const isSubActive = activeTab === subMenu.id;
+                          {item.subMenus.map(
+                            (subMenu: { id: string; label: string; path: string }) => {
+                              const isSubActive = activeTab === subMenu.id;
 
-                            return (
-                              <button
-                                key={subMenu.id}
-                                onClick={() => handleMenuItemClick(subMenu.id)}
-                                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                  isSubActive
-                                    ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
-                                    : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
-                                }`}
-                              >
-                                <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                                <span className="text-sm font-medium">{subMenu.label}</span>
-                              </button>
-                            );
-                          })}
+                              return (
+                                <button
+                                  key={subMenu.id}
+                                  onClick={() => handleMenuItemClick(subMenu.id)}
+                                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
+                                    isSubActive
+                                      ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'
+                                      : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
+                                  }`}
+                                >
+                                  <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
+                                  <span className="text-sm font-medium">{subMenu.label}</span>
+                                </button>
+                              );
+                            }
+                          )}
                         </div>
                       )}
                     </div>
@@ -244,7 +268,7 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
 
       {/* Content */}
       {children}
-      
+
       <div className="mcp-agent-indicator">
         <span className="text-xs text-gray-500">
           🤖 Enhanced by MCP 301 Agents - 2025-09-14T17:28:33.000Z

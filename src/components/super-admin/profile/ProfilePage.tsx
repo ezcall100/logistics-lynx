@@ -43,7 +43,7 @@ import {
 interface ProfileTab {
   id: string;
   label: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   count?: number;
 }
 
@@ -82,12 +82,12 @@ const ProfilePage: React.FC = () => {
     website: 'https://transbotai.com',
     supportEmail: 'support@transbotai.com',
     industry: 'Transportation Management Software',
-    founded: 'January 2024'
+    founded: 'January 2024',
   });
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   // User Management CRUD State
@@ -103,7 +103,7 @@ const ProfilePage: React.FC = () => {
       location: 'New York, NY',
       ip: '192.168.1.100',
       lastActive: '2 minutes ago',
-      avatar: null
+      avatar: null,
     },
     {
       id: 2,
@@ -116,7 +116,7 @@ const ProfilePage: React.FC = () => {
       location: 'Los Angeles, CA',
       ip: '192.168.1.101',
       lastActive: '15 minutes ago',
-      avatar: null
+      avatar: null,
     },
     {
       id: 3,
@@ -129,11 +129,23 @@ const ProfilePage: React.FC = () => {
       location: 'Chicago, IL',
       ip: '192.168.1.102',
       lastActive: '2 hours ago',
-      avatar: null
-    }
+      avatar: null,
+    },
   ]);
 
-  const [, setSelectedUser] = useState<{ id: number; name: string; email: string; role: string; company: string; status: string; device: string; location: string; ip: string; lastActive: string; avatar: string | null } | null>(null);
+  const [, setSelectedUser] = useState<{
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    company: string;
+    status: string;
+    device: string;
+    location: string;
+    ip: string;
+    lastActive: string;
+    avatar: string | null;
+  } | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
@@ -158,7 +170,7 @@ const ProfilePage: React.FC = () => {
       isRequired: true,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 2,
@@ -170,7 +182,7 @@ const ProfilePage: React.FC = () => {
       isRequired: true,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 3,
@@ -182,7 +194,7 @@ const ProfilePage: React.FC = () => {
       isRequired: true,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 4,
@@ -194,7 +206,7 @@ const ProfilePage: React.FC = () => {
       isRequired: true,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 5,
@@ -206,7 +218,7 @@ const ProfilePage: React.FC = () => {
       isRequired: false,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 6,
@@ -218,7 +230,7 @@ const ProfilePage: React.FC = () => {
       isRequired: false,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 7,
@@ -230,7 +242,7 @@ const ProfilePage: React.FC = () => {
       isRequired: false,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
+      modifiedBy: 'Super Admin',
     },
     {
       id: 8,
@@ -242,11 +254,22 @@ const ProfilePage: React.FC = () => {
       isRequired: true,
       isEditable: true,
       lastModified: '2024-01-15 10:30:00',
-      modifiedBy: 'Super Admin'
-    }
+      modifiedBy: 'Super Admin',
+    },
   ]);
 
-  const [, setSelectedSetting] = useState<{ id: number; name: string; category: string; type: string; value: string; description: string; isRequired: boolean; isEditable: boolean; lastModified: string; modifiedBy: string } | null>(null);
+  const [, setSelectedSetting] = useState<{
+    id: number;
+    category: string;
+    key: string;
+    value: string;
+    type: string;
+    description: string;
+    isRequired: boolean;
+    isEditable: boolean;
+    lastModified: string;
+    modifiedBy: string;
+  } | null>(null);
   const [selectedSettings, setSelectedSettings] = useState<number[]>([]);
   const [settingsSearchTerm, setSettingsSearchTerm] = useState('');
   const [settingsCategoryFilter, setSettingsCategoryFilter] = useState('All');
@@ -266,7 +289,7 @@ const ProfilePage: React.FC = () => {
     { id: 'activity', label: 'Activity Log', icon: Activity, count: 127 },
     { id: 'sessions', label: 'Active Sessions', icon: Monitor, count: 3 },
     { id: 'billing', label: 'Billing', icon: CreditCard },
-    { id: 'data', label: 'Data & Privacy', icon: Database }
+    { id: 'data', label: 'Data & Privacy', icon: Database },
   ];
 
   const recentActivity: ActivityItem[] = [
@@ -277,7 +300,7 @@ const ProfilePage: React.FC = () => {
       timestamp: '2 minutes ago',
       ip: '192.168.1.100',
       device: 'Chrome on Windows',
-      status: 'success'
+      status: 'success',
     },
     {
       id: 2,
@@ -286,7 +309,7 @@ const ProfilePage: React.FC = () => {
       timestamp: '1 hour ago',
       ip: '192.168.1.100',
       device: 'Chrome on Windows',
-      status: 'success'
+      status: 'success',
     },
     {
       id: 3,
@@ -295,7 +318,7 @@ const ProfilePage: React.FC = () => {
       timestamp: '3 hours ago',
       ip: '192.168.1.100',
       device: 'Chrome on Windows',
-      status: 'success'
+      status: 'success',
     },
     {
       id: 4,
@@ -304,7 +327,7 @@ const ProfilePage: React.FC = () => {
       timestamp: '1 day ago',
       ip: '192.168.1.100',
       device: 'Chrome on Windows',
-      status: 'success'
+      status: 'success',
     },
     {
       id: 5,
@@ -313,8 +336,8 @@ const ProfilePage: React.FC = () => {
       timestamp: '2 days ago',
       ip: '192.168.1.100',
       device: 'Chrome on Windows',
-      status: 'success'
-    }
+      status: 'success',
+    },
   ];
 
   const activeSessions: Session[] = [
@@ -325,7 +348,7 @@ const ProfilePage: React.FC = () => {
       location: 'New York, NY',
       ip: '192.168.1.100',
       lastActive: 'Active now',
-      current: true
+      current: true,
     },
     {
       id: 2,
@@ -334,7 +357,7 @@ const ProfilePage: React.FC = () => {
       location: 'New York, NY',
       ip: '192.168.1.101',
       lastActive: '2 hours ago',
-      current: false
+      current: false,
     },
     {
       id: 3,
@@ -343,8 +366,8 @@ const ProfilePage: React.FC = () => {
       location: 'New York, NY',
       ip: '192.168.1.102',
       lastActive: '1 day ago',
-      current: false
-    }
+      current: false,
+    },
   ];
 
   const handleSignOut = () => {
@@ -398,7 +421,6 @@ const ProfilePage: React.FC = () => {
 
   // User Management CRUD Handlers
 
-
   const handleBulkDelete = () => {
     setUsers(prev => prev.filter(user => !selectedUsers.includes(user.id)));
     setSelectedUsers([]);
@@ -406,38 +428,36 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleBulkActivate = () => {
-    setUsers(prev => prev.map(user => 
-      selectedUsers.includes(user.id) ? { ...user, status: 'Active' } : user
-    ));
+    setUsers(prev =>
+      prev.map(user => (selectedUsers.includes(user.id) ? { ...user, status: 'Active' } : user))
+    );
     setSelectedUsers([]);
     setLastUpdated(new Date());
   };
 
   const handleBulkDeactivate = () => {
-    setUsers(prev => prev.map(user => 
-      selectedUsers.includes(user.id) ? { ...user, status: 'Inactive' } : user
-    ));
+    setUsers(prev =>
+      prev.map(user => (selectedUsers.includes(user.id) ? { ...user, status: 'Inactive' } : user))
+    );
     setSelectedUsers([]);
     setLastUpdated(new Date());
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
+    setSelectedUsers(prev =>
+      prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
 
   const handleSelectAll = () => {
-    setSelectedUsers(prev => 
+    setSelectedUsers(prev =>
       prev.length === filteredUsers.length ? [] : filteredUsers.map(u => u.id)
     );
   };
 
   const handleSort = (field: string) => {
     if (sortField === field) {
-      setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+      setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
     } else {
       setSortField(field);
       setSortDirection('asc');
@@ -464,35 +484,37 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleBulkResetSettings = () => {
-    setSettings(prev => prev.map(setting => 
-      selectedSettings.includes(setting.id) ? { 
-        ...setting, 
-        value: getDefaultValue(setting.type),
-        lastModified: new Date().toISOString().slice(0, 19).replace('T', ' '),
-        modifiedBy: 'Super Admin'
-      } : setting
-    ));
+    setSettings(prev =>
+      prev.map(setting =>
+        selectedSettings.includes(setting.id)
+          ? {
+              ...setting,
+              value: getDefaultValue(setting.type),
+              lastModified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+              modifiedBy: 'Super Admin',
+            }
+          : setting
+      )
+    );
     setSelectedSettings([]);
     setLastUpdated(new Date());
   };
 
   const handleSelectSetting = (settingId: number) => {
-    setSelectedSettings(prev => 
-      prev.includes(settingId) 
-        ? prev.filter(id => id !== settingId)
-        : [...prev, settingId]
+    setSelectedSettings(prev =>
+      prev.includes(settingId) ? prev.filter(id => id !== settingId) : [...prev, settingId]
     );
   };
 
   const handleSelectAllSettings = () => {
-    setSelectedSettings(prev => 
+    setSelectedSettings(prev =>
       prev.length === filteredSettings.length ? [] : filteredSettings.map(s => s.id)
     );
   };
 
   const handleSortSettings = (field: string) => {
     if (settingsSortField === field) {
-      setSettingsSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+      setSettingsSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
     } else {
       setSettingsSortField(field);
       setSettingsSortDirection('asc');
@@ -512,7 +534,7 @@ const ProfilePage: React.FC = () => {
 
   const handleImportSettings = (file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = e => {
       try {
         const importedSettings = JSON.parse(e.target?.result as string);
         setSettings(prev => [...prev, ...importedSettings]);
@@ -526,29 +548,34 @@ const ProfilePage: React.FC = () => {
 
   const getDefaultValue = (type: string) => {
     switch (type) {
-      case 'boolean': return 'false';
-      case 'number': return '0';
-      case 'select': return '';
-      default: return '';
+      case 'boolean':
+        return 'false';
+      case 'number':
+        return '0';
+      case 'select':
+        return '';
+      default:
+        return '';
     }
   };
 
   // Filtering and Sorting Logic
   const filteredUsers = users
     .filter(user => {
-      const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.company.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch =
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'All' || user.status === statusFilter;
       const matchesRole = roleFilter === 'All' || user.role === roleFilter;
       const matchesDevice = deviceFilter === 'All' || user.device === deviceFilter;
-      
+
       return matchesSearch && matchesStatus && matchesRole && matchesDevice;
     })
     .sort((a, b) => {
       const aValue = a[sortField as keyof typeof a];
       const bValue = b[sortField as keyof typeof b];
-      
+
       if (sortDirection === 'asc') {
         return (aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
@@ -564,18 +591,20 @@ const ProfilePage: React.FC = () => {
   // Settings Filtering and Sorting Logic
   const filteredSettings = settings
     .filter(setting => {
-      const matchesSearch = setting.key.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
-                           setting.description.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
-                           setting.value.toLowerCase().includes(settingsSearchTerm.toLowerCase());
-      const matchesCategory = settingsCategoryFilter === 'All' || setting.category === settingsCategoryFilter;
+      const matchesSearch =
+        setting.key.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
+        setting.description.toLowerCase().includes(settingsSearchTerm.toLowerCase()) ||
+        setting.value.toLowerCase().includes(settingsSearchTerm.toLowerCase());
+      const matchesCategory =
+        settingsCategoryFilter === 'All' || setting.category === settingsCategoryFilter;
       const matchesType = settingsTypeFilter === 'All' || setting.type === settingsTypeFilter;
-      
+
       return matchesSearch && matchesCategory && matchesType;
     })
     .sort((a, b) => {
       const aValue = a[settingsSortField as keyof typeof a];
       const bValue = b[settingsSortField as keyof typeof b];
-      
+
       if (settingsSortDirection === 'asc') {
         return (aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
@@ -588,7 +617,6 @@ const ProfilePage: React.FC = () => {
   const settingsEndIndex = settingsStartIndex + settingsItemsPerPage;
   const paginatedSettings = filteredSettings.slice(settingsStartIndex, settingsEndIndex);
 
-
   const renderOverview = () => (
     <div className="space-y-8">
       {/* Modern Profile Header - 2025 Style */}
@@ -597,7 +625,7 @@ const ProfilePage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
         </div>
-        
+
         <div className="relative flex items-start space-x-8">
           <div className="relative group">
             <div className="w-32 h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl ring-4 ring-white/20 backdrop-blur-sm">
@@ -619,7 +647,7 @@ const ProfilePage: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           <div className="flex-1 text-white">
             <div className="flex items-start justify-between">
               <div className="space-y-3">
@@ -628,7 +656,7 @@ const ProfilePage: React.FC = () => {
                     <input
                       type="text"
                       value={profileData.fullName}
-                      onChange={(e) => handleInputChange('fullName', e.target.value)}
+                      onChange={e => handleInputChange('fullName', e.target.value)}
                       className="text-3xl font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl px-4 py-2 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
                     />
                   ) : (
@@ -638,18 +666,18 @@ const ProfilePage: React.FC = () => {
                     OWNER
                   </span>
                 </div>
-                
+
                 {isEditing ? (
                   <input
                     type="text"
                     value={profileData.jobTitle}
-                    onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                    onChange={e => handleInputChange('jobTitle', e.target.value)}
                     className="text-xl text-white/90 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/50 w-full max-w-md"
                   />
                 ) : (
                   <p className="text-xl text-white/90 font-medium">{profileData.jobTitle}</p>
                 )}
-                
+
                 <div className="flex items-center space-x-6 text-white/80">
                   <div className="flex items-center space-x-2">
                     <Mail className="h-4 w-4" />
@@ -657,7 +685,7 @@ const ProfilePage: React.FC = () => {
                       <input
                         type="email"
                         value={profileData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={e => handleInputChange('email', e.target.value)}
                         className="bg-white/10 backdrop-blur-sm border border-white/30 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-white/50"
                       />
                     ) : (
@@ -670,7 +698,7 @@ const ProfilePage: React.FC = () => {
                       <input
                         type="tel"
                         value={profileData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onChange={e => handleInputChange('phone', e.target.value)}
                         className="bg-white/10 backdrop-blur-sm border border-white/30 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-white/50"
                       />
                     ) : (
@@ -679,7 +707,7 @@ const ProfilePage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 {isEditing ? (
                   <>
@@ -709,7 +737,7 @@ const ProfilePage: React.FC = () => {
                 )}
               </div>
             </div>
-            
+
             <div className="mt-6 flex items-center space-x-8">
               <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
                 <Shield className="h-4 w-4 text-green-400" />
@@ -798,25 +826,31 @@ const ProfilePage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Company Name
+              </label>
               {isEditing ? (
                 <input
                   type="text"
                   value={profileData.company}
-                  onChange={(e) => handleInputChange('company', e.target.value)}
+                  onChange={e => handleInputChange('company', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium">{profileData.company}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium">
+                  {profileData.company}
+                </p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Industry</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Industry
+              </label>
               {isEditing ? (
                 <input
                   type="text"
                   value={profileData.industry}
-                  onChange={(e) => handleInputChange('industry', e.target.value)}
+                  onChange={e => handleInputChange('industry', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               ) : (
@@ -824,12 +858,14 @@ const ProfilePage: React.FC = () => {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Founded</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Founded
+              </label>
               {isEditing ? (
                 <input
                   type="text"
                   value={profileData.founded}
-                  onChange={(e) => handleInputChange('founded', e.target.value)}
+                  onChange={e => handleInputChange('founded', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               ) : (
@@ -839,27 +875,36 @@ const ProfilePage: React.FC = () => {
           </div>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Website</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Website
+              </label>
               {isEditing ? (
                 <input
                   type="url"
                   value={profileData.website}
-                  onChange={(e) => handleInputChange('website', e.target.value)}
+                  onChange={e => handleInputChange('website', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               ) : (
-                <a href={profileData.website} className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300" target="_blank" rel="noopener noreferrer">
+                <a
+                  href={profileData.website}
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {profileData.website.replace('https://', '')}
                 </a>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Support Email</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Support Email
+              </label>
               {isEditing ? (
                 <input
                   type="email"
                   value={profileData.supportEmail}
-                  onChange={(e) => handleInputChange('supportEmail', e.target.value)}
+                  onChange={e => handleInputChange('supportEmail', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               ) : (
@@ -867,7 +912,9 @@ const ProfilePage: React.FC = () => {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Status
+              </label>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
                 Active
               </span>
@@ -896,7 +943,9 @@ const ProfilePage: React.FC = () => {
       {/* Recent Activity Preview */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Recent Activity</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Recent Activity
+          </h3>
           <button
             onClick={() => setActiveTab('activity')}
             className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -905,14 +954,24 @@ const ProfilePage: React.FC = () => {
           </button>
         </div>
         <div className="space-y-3">
-          {recentActivity.slice(0, 3).map((activity) => (
-            <div key={activity.id} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-              <div className={`w-2 h-2 rounded-full ${
-                activity.status === 'success' ? 'bg-green-500' :
-                activity.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
-              }`}></div>
+          {recentActivity.slice(0, 3).map(activity => (
+            <div
+              key={activity.id}
+              className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  activity.status === 'success'
+                    ? 'bg-green-500'
+                    : activity.status === 'warning'
+                      ? 'bg-yellow-500'
+                      : 'bg-red-500'
+                }`}
+              ></div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{activity.description}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {activity.description}
+                </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timestamp}</p>
               </div>
             </div>
@@ -944,7 +1003,7 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
-          {['All', 'Login', 'Settings', 'Security', 'Data', 'System'].map((filter) => (
+          {['All', 'Login', 'Settings', 'Security', 'Data', 'System'].map(filter => (
             <button
               key={filter}
               className="px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -959,14 +1018,24 @@ const ProfilePage: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
         <div className="p-6">
           <div className="space-y-4">
-            {recentActivity.map((activity) => (
-              <div key={activity.id} className="flex items-start space-x-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <div className={`w-3 h-3 rounded-full mt-2 ${
-                  activity.status === 'success' ? 'bg-green-500' :
-                  activity.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
-                }`}></div>
+            {recentActivity.map(activity => (
+              <div
+                key={activity.id}
+                className="flex items-start space-x-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                <div
+                  className={`w-3 h-3 rounded-full mt-2 ${
+                    activity.status === 'success'
+                      ? 'bg-green-500'
+                      : activity.status === 'warning'
+                        ? 'bg-yellow-500'
+                        : 'bg-red-500'
+                  }`}
+                ></div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{activity.description}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {activity.description}
+                  </p>
                   <div className="flex items-center space-x-4 mt-1">
                     <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timestamp}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">IP: {activity.ip}</p>
@@ -989,7 +1058,9 @@ const ProfilePage: React.FC = () => {
       {/* Sessions Header */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Active Sessions</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Active Sessions
+          </h3>
           <button className="text-red-600 hover:text-red-700 text-sm font-medium">
             Sign Out All Other Sessions
           </button>
@@ -998,18 +1069,29 @@ const ProfilePage: React.FC = () => {
 
       {/* Sessions List */}
       <div className="space-y-4">
-        {activeSessions.map((session) => (
-          <div key={session.id} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+        {activeSessions.map(session => (
+          <div
+            key={session.id}
+            className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                  session.device === 'Desktop' ? 'bg-blue-100 dark:bg-blue-900/30' :
-                  session.device === 'Mobile' ? 'bg-green-100 dark:bg-green-900/30' :
-                  'bg-purple-100 dark:bg-purple-900/30'
-                }`}>
-                  {session.device === 'Desktop' ? <Monitor className="h-6 w-6 text-blue-600" /> :
-                   session.device === 'Mobile' ? <Smartphone className="h-6 w-6 text-green-600" /> :
-                   <Tablet className="h-6 w-6 text-purple-600" />}
+                <div
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                    session.device === 'Desktop'
+                      ? 'bg-blue-100 dark:bg-blue-900/30'
+                      : session.device === 'Mobile'
+                        ? 'bg-green-100 dark:bg-green-900/30'
+                        : 'bg-purple-100 dark:bg-purple-900/30'
+                  }`}
+                >
+                  {session.device === 'Desktop' ? (
+                    <Monitor className="h-6 w-6 text-blue-600" />
+                  ) : session.device === 'Mobile' ? (
+                    <Smartphone className="h-6 w-6 text-green-600" />
+                  ) : (
+                    <Tablet className="h-6 w-6 text-purple-600" />
+                  )}
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
@@ -1021,8 +1103,12 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">{session.browser}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{session.location} • {session.ip}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Last active: {session.lastActive}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {session.location} • {session.ip}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Last active: {session.lastActive}
+                  </p>
                 </div>
               </div>
               {!session.current && (
@@ -1041,12 +1127,16 @@ const ProfilePage: React.FC = () => {
     <div className="space-y-6">
       {/* Security Overview */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Security Overview</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          Security Overview
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="flex items-center space-x-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
             <CheckCircle className="h-6 w-6 text-green-600" />
             <div>
-              <p className="font-medium text-green-900 dark:text-green-100">Two-Factor Authentication</p>
+              <p className="font-medium text-green-900 dark:text-green-100">
+                Two-Factor Authentication
+              </p>
               <p className="text-sm text-green-700 dark:text-green-300">Enabled</p>
             </div>
           </div>
@@ -1080,9 +1170,9 @@ const ProfilePage: React.FC = () => {
             </label>
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 value={passwordData.currentPassword}
-                onChange={(e) => handlePasswordInputChange('currentPassword', e.target.value)}
+                onChange={e => handlePasswordInputChange('currentPassword', e.target.value)}
                 className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter current password"
                 required
@@ -1108,7 +1198,7 @@ const ProfilePage: React.FC = () => {
               <input
                 type="password"
                 value={passwordData.newPassword}
-                onChange={(e) => handlePasswordInputChange('newPassword', e.target.value)}
+                onChange={e => handlePasswordInputChange('newPassword', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter new password"
                 required
@@ -1122,7 +1212,7 @@ const ProfilePage: React.FC = () => {
               <input
                 type="password"
                 value={passwordData.confirmPassword}
-                onChange={(e) => handlePasswordInputChange('confirmPassword', e.target.value)}
+                onChange={e => handlePasswordInputChange('confirmPassword', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Confirm new password"
                 required
@@ -1133,7 +1223,9 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center justify-end space-x-3">
             <button
               type="button"
-              onClick={() => setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' })}
+              onClick={() =>
+                setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' })
+              }
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
             >
               Clear
@@ -1151,13 +1243,17 @@ const ProfilePage: React.FC = () => {
 
       {/* Security Actions */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Security Actions</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          Security Actions
+        </h3>
         <div className="space-y-4">
           <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             <div className="flex items-center space-x-3">
               <Shield className="h-5 w-5 text-green-600" />
               <div className="text-left">
-                <p className="font-medium text-gray-900 dark:text-gray-100">Two-Factor Authentication</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">
+                  Two-Factor Authentication
+                </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Manage 2FA settings</p>
               </div>
             </div>
@@ -1178,7 +1274,9 @@ const ProfilePage: React.FC = () => {
               <Download className="h-5 w-5 text-orange-600" />
               <div className="text-left">
                 <p className="font-medium text-gray-900 dark:text-gray-100">Export Security Data</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Download security logs and data</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Download security logs and data
+                </p>
               </div>
             </div>
             <ChevronRight className="h-4 w-4 text-gray-400" />
@@ -1205,7 +1303,7 @@ const ProfilePage: React.FC = () => {
             <span>{isEditing ? 'Cancel' : 'Edit'}</span>
           </button>
         </div>
-        
+
         <form onSubmit={handleProfileUpdate} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -1216,14 +1314,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="text"
                   value={profileData.fullName}
-                  onChange={(e) => handleInputChange('fullName', e.target.value)}
+                  onChange={e => handleInputChange('fullName', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.fullName}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.fullName}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Job Title
@@ -1232,14 +1332,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="text"
                   value={profileData.jobTitle}
-                  onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                  onChange={e => handleInputChange('jobTitle', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.jobTitle}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.jobTitle}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Email Address
@@ -1248,14 +1350,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="email"
                   value={profileData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  onChange={e => handleInputChange('email', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.email}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.email}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Phone Number
@@ -1264,15 +1368,17 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="tel"
                   value={profileData.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  onChange={e => handleInputChange('phone', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.phone}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.phone}
+                </p>
               )}
             </div>
           </div>
-          
+
           {isEditing && (
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
@@ -1313,7 +1419,7 @@ const ProfilePage: React.FC = () => {
             <span>{isEditing ? 'Cancel' : 'Edit'}</span>
           </button>
         </div>
-        
+
         <form onSubmit={handleProfileUpdate} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -1324,14 +1430,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="text"
                   value={profileData.company}
-                  onChange={(e) => handleInputChange('company', e.target.value)}
+                  onChange={e => handleInputChange('company', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.company}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.company}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Industry
@@ -1340,14 +1448,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="text"
                   value={profileData.industry}
-                  onChange={(e) => handleInputChange('industry', e.target.value)}
+                  onChange={e => handleInputChange('industry', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.industry}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.industry}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Website
@@ -1356,16 +1466,21 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="url"
                   value={profileData.website}
-                  onChange={(e) => handleInputChange('website', e.target.value)}
+                  onChange={e => handleInputChange('website', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <a href={profileData.website} className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium py-3 block" target="_blank" rel="noopener noreferrer">
+                <a
+                  href={profileData.website}
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium py-3 block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {profileData.website.replace('https://', '')}
                 </a>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Support Email
@@ -1374,14 +1489,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="email"
                   value={profileData.supportEmail}
-                  onChange={(e) => handleInputChange('supportEmail', e.target.value)}
+                  onChange={e => handleInputChange('supportEmail', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.supportEmail}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.supportEmail}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Founded
@@ -1390,14 +1507,16 @@ const ProfilePage: React.FC = () => {
                 <input
                   type="text"
                   value={profileData.founded}
-                  onChange={(e) => handleInputChange('founded', e.target.value)}
+                  onChange={e => handleInputChange('founded', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               ) : (
-                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">{profileData.founded}</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium py-3">
+                  {profileData.founded}
+                </p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Status
@@ -1407,7 +1526,7 @@ const ProfilePage: React.FC = () => {
               </span>
             </div>
           </div>
-          
+
           {isEditing && (
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
@@ -1442,13 +1561,15 @@ const ProfilePage: React.FC = () => {
               Settings Management
             </h3>
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${isRealTime ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+              <div
+                className={`w-2 h-2 rounded-full ${isRealTime ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
+              ></div>
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 {isRealTime ? 'Live' : 'Paused'}
               </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
@@ -1457,18 +1578,18 @@ const ProfilePage: React.FC = () => {
               {isRealTime ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               <span>{isRealTime ? 'Pause' : 'Resume'}</span>
             </button>
-            
+
             <label className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
               <Upload className="h-4 w-4" />
               <span>Import</span>
               <input
                 type="file"
                 accept=".json"
-                onChange={(e) => e.target.files?.[0] && handleImportSettings(e.target.files[0])}
+                onChange={e => e.target.files?.[0] && handleImportSettings(e.target.files[0])}
                 className="hidden"
               />
             </label>
-            
+
             <button
               onClick={handleExportSettings}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -1476,7 +1597,7 @@ const ProfilePage: React.FC = () => {
               <Download className="h-4 w-4" />
               <span>Export</span>
             </button>
-            
+
             <button
               onClick={() => console.log('Add setting modal')}
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
@@ -1486,7 +1607,7 @@ const ProfilePage: React.FC = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           Last updated: {lastUpdated.toLocaleTimeString()}
         </div>
@@ -1505,19 +1626,19 @@ const ProfilePage: React.FC = () => {
                 type="text"
                 placeholder="Search settings..."
                 value={settingsSearchTerm}
-                onChange={(e) => setSettingsSearchTerm(e.target.value)}
+                onChange={e => setSettingsSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Category
             </label>
             <select
               value={settingsCategoryFilter}
-              onChange={(e) => setSettingsCategoryFilter(e.target.value)}
+              onChange={e => setSettingsCategoryFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="All">All Categories</option>
@@ -1530,14 +1651,14 @@ const ProfilePage: React.FC = () => {
               <option value="Billing">Billing</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Type
             </label>
             <select
               value={settingsTypeFilter}
-              onChange={(e) => setSettingsTypeFilter(e.target.value)}
+              onChange={e => setSettingsTypeFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="All">All Types</option>
@@ -1547,7 +1668,7 @@ const ProfilePage: React.FC = () => {
               <option value="select">Select</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Status
@@ -1599,12 +1720,15 @@ const ProfilePage: React.FC = () => {
                 <th className="px-6 py-3 text-left">
                   <input
                     type="checkbox"
-                    checked={selectedSettings.length === filteredSettings.length && filteredSettings.length > 0}
+                    checked={
+                      selectedSettings.length === filteredSettings.length &&
+                      filteredSettings.length > 0
+                    }
                     onChange={handleSelectAllSettings}
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('category')}
                 >
@@ -1615,7 +1739,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('key')}
                 >
@@ -1626,7 +1750,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('value')}
                 >
@@ -1637,7 +1761,7 @@ const ProfilePage: React.FC = () => {
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSortSettings('type')}
                 >
@@ -1660,8 +1784,11 @@ const ProfilePage: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-              {paginatedSettings.map((setting) => (
-                <tr key={setting.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              {paginatedSettings.map(setting => (
+                <tr
+                  key={setting.id}
+                  className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <input
                       type="checkbox"
@@ -1671,14 +1798,21 @@ const ProfilePage: React.FC = () => {
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      setting.category === 'General' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' :
-                      setting.category === 'Security' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
-                      setting.category === 'Notifications' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
-                      setting.category === 'Appearance' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400' :
-                      setting.category === 'System' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                      'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        setting.category === 'General'
+                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                          : setting.category === 'Security'
+                            ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                            : setting.category === 'Notifications'
+                              ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                              : setting.category === 'Appearance'
+                                ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400'
+                                : setting.category === 'System'
+                                  ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                  : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
+                      }`}
+                    >
                       {setting.category}
                     </span>
                   </td>
@@ -1687,19 +1821,19 @@ const ProfilePage: React.FC = () => {
                       <code className="text-sm font-mono text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
                         {setting.key}
                       </code>
-                      {setting.isRequired && (
-                        <span className="text-red-500 text-xs">*</span>
-                      )}
+                      {setting.isRequired && <span className="text-red-500 text-xs">*</span>}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
                       {setting.type === 'boolean' ? (
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          setting.value === 'true' 
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                            : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
-                        }`}>
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            setting.value === 'true'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                              : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                          }`}
+                        >
                           {setting.value}
                         </span>
                       ) : (
@@ -1763,7 +1897,7 @@ const ProfilePage: React.FC = () => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -1786,8 +1920,10 @@ const ProfilePage: React.FC = () => {
             <div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 Showing <span className="font-medium">{settingsStartIndex + 1}</span> to{' '}
-                <span className="font-medium">{Math.min(settingsEndIndex, filteredSettings.length)}</span> of{' '}
-                <span className="font-medium">{filteredSettings.length}</span> results
+                <span className="font-medium">
+                  {Math.min(settingsEndIndex, filteredSettings.length)}
+                </span>{' '}
+                of <span className="font-medium">{filteredSettings.length}</span> results
               </p>
             </div>
             <div className="flex items-center space-x-4">
@@ -1795,7 +1931,7 @@ const ProfilePage: React.FC = () => {
                 <span className="text-sm text-gray-700 dark:text-gray-300">Show:</span>
                 <select
                   value={settingsItemsPerPage}
-                  onChange={(e) => setSettingsItemsPerPage(Number(e.target.value))}
+                  onChange={e => setSettingsItemsPerPage(Number(e.target.value))}
                   className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value={5}>5</option>
@@ -1805,7 +1941,7 @@ const ProfilePage: React.FC = () => {
                 </select>
               </div>
               <div className="flex items-center space-x-1">
-                {Array.from({ length: settingsTotalPages }, (_, i) => i + 1).map((page) => (
+                {Array.from({ length: settingsTotalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setSettingsCurrentPage(page)}
@@ -1840,7 +1976,7 @@ const ProfilePage: React.FC = () => {
             <div className="text-sm text-gray-600 dark:text-gray-400">per month</div>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="flex items-center space-x-2">
             <CheckCircle className="h-5 w-5 text-green-600" />
@@ -1855,7 +1991,7 @@ const ProfilePage: React.FC = () => {
             <span className="text-sm text-gray-700 dark:text-gray-300">Advanced Analytics</span>
           </div>
         </div>
-        
+
         <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium">
           Manage Subscription
         </button>
@@ -1873,7 +2009,7 @@ const ProfilePage: React.FC = () => {
             <span>Add Payment Method</span>
           </button>
         </div>
-        
+
         <div className="space-y-4">
           <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-xl">
             <div className="flex items-center space-x-4">
@@ -1881,12 +2017,16 @@ const ProfilePage: React.FC = () => {
                 <CreditCard className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="font-semibold text-gray-900 dark:text-gray-100">•••• •••• •••• 4242</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">
+                  •••• •••• •••• 4242
+                </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Expires 12/25</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Default</span>
+              <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                Default
+              </span>
               <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                 <MoreVertical className="h-4 w-4" />
               </button>
@@ -1901,25 +2041,39 @@ const ProfilePage: React.FC = () => {
           <FileText className="h-6 w-6 mr-3 text-blue-600" />
           Billing History
         </h3>
-        
+
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-600">
-                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">Date</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">Description</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">Amount</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">Status</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">Action</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">
+                  Date
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">
+                  Description
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">
+                  Amount
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">
+                  Status
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b border-gray-100 dark:border-gray-700">
                 <td className="py-3 px-4 text-gray-900 dark:text-gray-100">Jan 15, 2024</td>
-                <td className="py-3 px-4 text-gray-900 dark:text-gray-100">Enterprise Plan - Monthly</td>
+                <td className="py-3 px-4 text-gray-900 dark:text-gray-100">
+                  Enterprise Plan - Monthly
+                </td>
                 <td className="py-3 px-4 text-gray-900 dark:text-gray-100">$299.00</td>
                 <td className="py-3 px-4">
-                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Paid</span>
+                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                    Paid
+                  </span>
                 </td>
                 <td className="py-3 px-4">
                   <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
@@ -1929,10 +2083,14 @@ const ProfilePage: React.FC = () => {
               </tr>
               <tr className="border-b border-gray-100 dark:border-gray-700">
                 <td className="py-3 px-4 text-gray-900 dark:text-gray-100">Dec 15, 2023</td>
-                <td className="py-3 px-4 text-gray-900 dark:text-gray-100">Enterprise Plan - Monthly</td>
+                <td className="py-3 px-4 text-gray-900 dark:text-gray-100">
+                  Enterprise Plan - Monthly
+                </td>
                 <td className="py-3 px-4 text-gray-900 dark:text-gray-100">$299.00</td>
                 <td className="py-3 px-4">
-                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Paid</span>
+                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                    Paid
+                  </span>
                 </td>
                 <td className="py-3 px-4">
                   <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
@@ -1958,13 +2116,15 @@ const ProfilePage: React.FC = () => {
               User Management
             </h3>
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${isRealTime ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+              <div
+                className={`w-2 h-2 rounded-full ${isRealTime ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
+              ></div>
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 {isRealTime ? 'Live' : 'Paused'}
               </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
@@ -1973,7 +2133,7 @@ const ProfilePage: React.FC = () => {
               {isRealTime ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               <span>{isRealTime ? 'Pause' : 'Resume'}</span>
             </button>
-            
+
             <button
               onClick={handleExport}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -1981,7 +2141,7 @@ const ProfilePage: React.FC = () => {
               <Download className="h-4 w-4" />
               <span>Export</span>
             </button>
-            
+
             <button
               onClick={() => console.log('Add user modal')}
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
@@ -1991,7 +2151,7 @@ const ProfilePage: React.FC = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           Last updated: {lastUpdated.toLocaleTimeString()}
         </div>
@@ -2010,19 +2170,19 @@ const ProfilePage: React.FC = () => {
                 type="text"
                 placeholder="Search users..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={e => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Status
             </label>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="All">All Status</option>
@@ -2031,14 +2191,14 @@ const ProfilePage: React.FC = () => {
               <option value="Inactive">Inactive</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Role
             </label>
             <select
               value={roleFilter}
-              onChange={(e) => setRoleFilter(e.target.value)}
+              onChange={e => setRoleFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="All">All Roles</option>
@@ -2048,14 +2208,14 @@ const ProfilePage: React.FC = () => {
               <option value="Customer">Customer</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Device
             </label>
             <select
               value={deviceFilter}
-              onChange={(e) => setDeviceFilter(e.target.value)}
+              onChange={e => setDeviceFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="All">All Devices</option>
@@ -2109,64 +2269,56 @@ const ProfilePage: React.FC = () => {
                 <th className="px-6 py-3 text-left">
                   <input
                     type="checkbox"
-                    checked={selectedUsers.length === filteredUsers.length && filteredUsers.length > 0}
+                    checked={
+                      selectedUsers.length === filteredUsers.length && filteredUsers.length > 0
+                    }
                     onChange={handleSelectAll}
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('name')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Name</span>
-                    {sortField === 'name' && (
-                      <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
-                    )}
+                    {sortField === 'name' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('email')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Email</span>
-                    {sortField === 'email' && (
-                      <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
-                    )}
+                    {sortField === 'email' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('role')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Role</span>
-                    {sortField === 'role' && (
-                      <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
-                    )}
+                    {sortField === 'role' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('status')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Status</span>
-                    {sortField === 'status' && (
-                      <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
-                    )}
+                    {sortField === 'status' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('device')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Device</span>
-                    {sortField === 'device' && (
-                      <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
-                    )}
+                    {sortField === 'device' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
                   </div>
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -2178,8 +2330,11 @@ const ProfilePage: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-              {paginatedUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              {paginatedUsers.map(user => (
+                <tr
+                  key={user.id}
+                  className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <input
                       type="checkbox"
@@ -2191,7 +2346,10 @@ const ProfilePage: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                        {user.name.split(' ').map(n => n[0]).join('')}
+                        {user.name
+                          .split(' ')
+                          .map(n => n[0])
+                          .join('')}
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -2212,20 +2370,30 @@ const ProfilePage: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      user.status === 'Active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                      user.status === 'Idle' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
-                      'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        user.status === 'Active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                          : user.status === 'Idle'
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                            : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                      }`}
+                    >
                       {user.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
-                      {user.device === 'Desktop' ? <Monitor className="h-4 w-4 text-blue-600" /> :
-                       user.device === 'Mobile' ? <Smartphone className="h-4 w-4 text-green-600" /> :
-                       <Tablet className="h-4 w-4 text-purple-600" />}
-                      <span className="text-sm text-gray-900 dark:text-gray-100">{user.device}</span>
+                      {user.device === 'Desktop' ? (
+                        <Monitor className="h-4 w-4 text-blue-600" />
+                      ) : user.device === 'Mobile' ? (
+                        <Smartphone className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <Tablet className="h-4 w-4 text-purple-600" />
+                      )}
+                      <span className="text-sm text-gray-900 dark:text-gray-100">
+                        {user.device}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -2270,7 +2438,7 @@ const ProfilePage: React.FC = () => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -2302,7 +2470,7 @@ const ProfilePage: React.FC = () => {
                 <span className="text-sm text-gray-700 dark:text-gray-300">Show:</span>
                 <select
                   value={itemsPerPage}
-                  onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                  onChange={e => setItemsPerPage(Number(e.target.value))}
                   className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value={5}>5</option>
@@ -2312,7 +2480,7 @@ const ProfilePage: React.FC = () => {
                 </select>
               </div>
               <div className="flex items-center space-x-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
@@ -2341,12 +2509,15 @@ const ProfilePage: React.FC = () => {
           <Download className="h-6 w-6 mr-3 text-blue-600" />
           Data Export
         </h3>
-        
+
         <div className="space-y-4">
           <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Export Your Data</h4>
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              Export Your Data
+            </h4>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Download a copy of all your personal data including profile information, activity logs, and preferences.
+              Download a copy of all your personal data including profile information, activity
+              logs, and preferences.
             </p>
             <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
               <Download className="h-4 w-4" />
@@ -2362,34 +2533,42 @@ const ProfilePage: React.FC = () => {
           <Shield className="h-6 w-6 mr-3 text-blue-600" />
           Privacy Settings
         </h3>
-        
+
         <div className="space-y-6">
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-gray-100">Profile Visibility</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Allow others to see your profile information</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Allow others to see your profile information
+              </p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
           </div>
-          
+
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-gray-100">Activity Tracking</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Track your activity for analytics and improvements</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Track your activity for analytics and improvements
+              </p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
           </div>
-          
+
           <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-gray-100">Marketing Communications</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Receive marketing emails and updates</p>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                Marketing Communications
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Receive marketing emails and updates
+              </p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" className="sr-only peer" />
@@ -2405,12 +2584,15 @@ const ProfilePage: React.FC = () => {
           <AlertTriangle className="h-6 w-6 mr-3 text-red-600" />
           Data Management
         </h3>
-        
+
         <div className="space-y-4">
           <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl">
-            <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">Clear Activity Data</h4>
+            <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">
+              Clear Activity Data
+            </h4>
             <p className="text-sm text-red-700 dark:text-red-300 mb-4">
-              Permanently delete your activity logs and session history. This action cannot be undone.
+              Permanently delete your activity logs and session history. This action cannot be
+              undone.
             </p>
             <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
               Clear Activity Data
@@ -2453,17 +2635,23 @@ const ProfilePage: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Profile & Account</h1>
-          <p className="text-gray-600 dark:text-gray-400">Manage your profile, security, and account settings</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Profile & Account
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage your profile, security, and account settings
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Profile Navigation */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Profile</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                Profile
+              </h2>
               <nav className="space-y-2">
-                {profileTabs.map((tab) => (
+                {profileTabs.map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
@@ -2489,7 +2677,9 @@ const ProfilePage: React.FC = () => {
 
             {/* Account Actions */}
             <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Account Actions</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                Account Actions
+              </h3>
               <div className="space-y-3">
                 <button
                   onClick={() => setShowSignOutModal(true)}
@@ -2549,10 +2739,13 @@ const ProfilePage: React.FC = () => {
               >
                 <div className="flex items-center space-x-3 mb-4">
                   <LogOut className="h-6 w-6 text-red-600" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Sign Out</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Sign Out
+                  </h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Are you sure you want to sign out? You'll need to log in again to access your account.
+                  Are you sure you want to sign out? You'll need to log in again to access your
+                  account.
                 </p>
                 <div className="flex items-center justify-end space-x-3">
                   <button
@@ -2572,7 +2765,6 @@ const ProfilePage: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </div>
   );

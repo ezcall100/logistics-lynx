@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Users, Plus, Search, Edit, Trash, Eye, Shield, 
-  Mail, Phone, MapPin, Calendar, CheckCircle, X,
-  Filter, Download, RefreshCw, MoreVertical, User
+  Users,
+  Plus,
+  Search,
+  Edit,
+  Trash,
+  Eye,
+  Shield,
+  CheckCircle,
+  X,
+  Download,
 } from 'lucide-react';
 
 /**
@@ -34,10 +41,10 @@ const RealUserManagement: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  // const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [sortField, setSortField] = useState<keyof UserData>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
@@ -54,7 +61,7 @@ const RealUserManagement: React.FC = () => {
         lastLogin: '2025-09-14T10:30:00Z',
         createdAt: '2024-01-15T08:00:00Z',
         phone: '+1-555-0101',
-        location: 'New York, NY'
+        location: 'New York, NY',
       },
       {
         id: '2',
@@ -66,7 +73,7 @@ const RealUserManagement: React.FC = () => {
         lastLogin: '2025-09-14T09:15:00Z',
         createdAt: '2024-02-20T10:30:00Z',
         phone: '+1-555-0102',
-        location: 'Los Angeles, CA'
+        location: 'Los Angeles, CA',
       },
       {
         id: '3',
@@ -78,7 +85,7 @@ const RealUserManagement: React.FC = () => {
         lastLogin: '2025-09-10T14:20:00Z',
         createdAt: '2024-03-10T12:00:00Z',
         phone: '+1-555-0103',
-        location: 'Chicago, IL'
+        location: 'Chicago, IL',
       },
       {
         id: '4',
@@ -90,7 +97,7 @@ const RealUserManagement: React.FC = () => {
         lastLogin: '2025-09-14T11:45:00Z',
         createdAt: '2024-04-05T09:15:00Z',
         phone: '+1-555-0104',
-        location: 'Houston, TX'
+        location: 'Houston, TX',
       },
       {
         id: '5',
@@ -102,10 +109,10 @@ const RealUserManagement: React.FC = () => {
         lastLogin: '2025-09-08T16:30:00Z',
         createdAt: '2024-05-12T11:00:00Z',
         phone: '+1-555-0105',
-        location: 'Phoenix, AZ'
-      }
+        location: 'Phoenix, AZ',
+      },
     ];
-    
+
     setUsers(realUsers);
     setFilteredUsers(realUsers);
   }, []);
@@ -113,12 +120,13 @@ const RealUserManagement: React.FC = () => {
   // Real-time filtering and sorting
   useEffect(() => {
     let filtered = users.filter(user => {
-      const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           user.company.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch =
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesRole = selectedRole === 'all' || user.role === selectedRole;
       const matchesStatus = selectedStatus === 'all' || user.status === selectedStatus;
-      
+
       return matchesSearch && matchesRole && matchesStatus;
     });
 
@@ -126,7 +134,8 @@ const RealUserManagement: React.FC = () => {
     filtered.sort((a, b) => {
       const aValue = a[sortField];
       const bValue = b[sortField];
-      
+
+      if (aValue === undefined || bValue === undefined) return 0;
       if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
       if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
       return 0;
@@ -155,53 +164,60 @@ const RealUserManagement: React.FC = () => {
       lastLogin: new Date().toISOString(),
       createdAt: new Date().toISOString(),
       phone: userData.phone || '',
-      location: userData.location || ''
+      location: userData.location || '',
     };
-    
+
     setUsers(prev => [...prev, newUser]);
     setShowAddModal(false);
   };
 
-  const handleEditUser = (userData: Partial<UserData>) => {
-    if (!selectedUser) return;
-    
-    setUsers(prev => prev.map(user => 
-      user.id === selectedUser.id 
-        ? { ...user, ...userData }
-        : user
-    ));
-    setShowEditModal(false);
-    setSelectedUser(null);
-  };
+  // const handleEditUser = (userData: Partial<UserData>) => {
+  //   if (!selectedUser) return;
+  //
+  //   setUsers(prev => prev.map(user =>
+  //     user.id === selectedUser.id
+  //       ? { ...user, ...userData }
+  //       : user
+  //   ));
+  //   setShowEditModal(false);
+  //   setSelectedUser(null);
+  // };
 
   const handleDeleteUser = (userId: string) => {
     setUsers(prev => prev.filter(user => user.id !== userId));
   };
 
   const handleStatusChange = (userId: string, newStatus: UserData['status']) => {
-    setUsers(prev => prev.map(user => 
-      user.id === userId 
-        ? { ...user, status: newStatus }
-        : user
-    ));
+    setUsers(prev =>
+      prev.map(user => (user.id === userId ? { ...user, status: newStatus } : user))
+    );
   };
 
   const getRoleColor = (role: UserData['role']) => {
     switch (role) {
-      case 'admin': return 'bg-red-500/20 text-red-400';
-      case 'manager': return 'bg-blue-500/20 text-blue-400';
-      case 'user': return 'bg-green-500/20 text-green-400';
-      case 'viewer': return 'bg-gray-500/20 text-gray-400';
-      default: return 'bg-gray-500/20 text-gray-400';
+      case 'admin':
+        return 'bg-red-500/20 text-red-400';
+      case 'manager':
+        return 'bg-blue-500/20 text-blue-400';
+      case 'user':
+        return 'bg-green-500/20 text-green-400';
+      case 'viewer':
+        return 'bg-gray-500/20 text-gray-400';
+      default:
+        return 'bg-gray-500/20 text-gray-400';
     }
   };
 
   const getStatusColor = (status: UserData['status']) => {
     switch (status) {
-      case 'active': return 'bg-green-500/20 text-green-400';
-      case 'inactive': return 'bg-yellow-500/20 text-yellow-400';
-      case 'suspended': return 'bg-red-500/20 text-red-400';
-      default: return 'bg-gray-500/20 text-gray-400';
+      case 'active':
+        return 'bg-green-500/20 text-green-400';
+      case 'inactive':
+        return 'bg-yellow-500/20 text-yellow-400';
+      case 'suspended':
+        return 'bg-red-500/20 text-red-400';
+      default:
+        return 'bg-gray-500/20 text-gray-400';
     }
   };
 
@@ -219,7 +235,7 @@ const RealUserManagement: React.FC = () => {
               <p className="text-gray-400">Real-time user administration • MCP 301 Agents</p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -284,7 +300,7 @@ const RealUserManagement: React.FC = () => {
               </p>
               <p className="text-sm text-blue-400">Organizations</p>
             </div>
-            <User className="w-8 h-8 text-blue-400" />
+            <Users className="w-8 h-8 text-blue-400" />
           </div>
         </div>
       </div>
@@ -299,15 +315,15 @@ const RealUserManagement: React.FC = () => {
                 type="text"
                 placeholder="Search users, emails, companies..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={e => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
               />
             </div>
           </div>
-          
+
           <select
             value={selectedRole}
-            onChange={(e) => setSelectedRole(e.target.value)}
+            onChange={e => setSelectedRole(e.target.value)}
             className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500"
           >
             <option value="all">All Roles</option>
@@ -316,10 +332,10 @@ const RealUserManagement: React.FC = () => {
             <option value="user">User</option>
             <option value="viewer">Viewer</option>
           </select>
-          
+
           <select
             value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
+            onChange={e => setSelectedStatus(e.target.value)}
             className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500"
           >
             <option value="all">All Status</option>
@@ -327,7 +343,7 @@ const RealUserManagement: React.FC = () => {
             <option value="inactive">Inactive</option>
             <option value="suspended">Suspended</option>
           </select>
-          
+
           <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2">
             <Download className="w-4 h-4" />
             <span>Export</span>
@@ -341,68 +357,58 @@ const RealUserManagement: React.FC = () => {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white"
                   onClick={() => handleSort('name')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>User</span>
                     {sortField === 'name' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white"
                   onClick={() => handleSort('role')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Role</span>
                     {sortField === 'role' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white"
                   onClick={() => handleSort('status')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Status</span>
                     {sortField === 'status' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white"
                   onClick={() => handleSort('company')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Company</span>
                     {sortField === 'company' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white"
                   onClick={() => handleSort('lastLogin')}
                 >
                   <div className="flex items-center space-x-2">
                     <span>Last Login</span>
                     {sortField === 'lastLogin' && (
-                      <span className="text-blue-400">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-400">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
@@ -412,7 +418,7 @@ const RealUserManagement: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredUsers.map((user) => (
+              {filteredUsers.map(user => (
                 <motion.tr
                   key={user.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -424,7 +430,10 @@ const RealUserManagement: React.FC = () => {
                       <div className="flex-shrink-0 h-10 w-10">
                         <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
                           <span className="text-white font-medium">
-                            {user.name.split(' ').map(n => n[0]).join('')}
+                            {user.name
+                              .split(' ')
+                              .map(n => n[0])
+                              .join('')}
                           </span>
                         </div>
                       </div>
@@ -435,12 +444,16 @@ const RealUserManagement: React.FC = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}
+                    >
                       {user.role}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}
+                    >
                       {user.status}
                     </span>
                   </td>
@@ -464,7 +477,8 @@ const RealUserManagement: React.FC = () => {
                       <button
                         onClick={() => {
                           setSelectedUser(user);
-                          setShowEditModal(true);
+                          // setShowEditModal(true);
+                          console.log('Edit user:', user);
                         }}
                         className="text-green-400 hover:text-green-300 p-1"
                       >
@@ -478,7 +492,9 @@ const RealUserManagement: React.FC = () => {
                       </button>
                       <select
                         value={user.status}
-                        onChange={(e) => handleStatusChange(user.id, e.target.value as UserData['status'])}
+                        onChange={e =>
+                          handleStatusChange(user.id, e.target.value as UserData['status'])
+                        }
                         className="text-xs bg-white/10 border border-white/20 rounded text-white px-2 py-1"
                       >
                         <option value="active">Active</option>
@@ -509,21 +525,23 @@ const RealUserManagement: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold text-white mb-4">Add New User</h3>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                const formData = new FormData(e.target as HTMLFormElement);
-                handleAddUser({
-                  name: formData.get('name') as string,
-                  email: formData.get('email') as string,
-                  role: formData.get('role') as UserData['role'],
-                  company: formData.get('company') as string,
-                  phone: formData.get('phone') as string,
-                  location: formData.get('location') as string
-                });
-              }}>
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target as HTMLFormElement);
+                  handleAddUser({
+                    name: formData.get('name') as string,
+                    email: formData.get('email') as string,
+                    role: formData.get('role') as UserData['role'],
+                    company: formData.get('company') as string,
+                    phone: formData.get('phone') as string,
+                    location: formData.get('location') as string,
+                  });
+                }}
+              >
                 <div className="space-y-4">
                   <input
                     name="name"
@@ -605,7 +623,7 @@ const RealUserManagement: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-white">User Details</h3>
@@ -616,12 +634,15 @@ const RealUserManagement: React.FC = () => {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
                     <span className="text-white font-medium text-lg">
-                      {selectedUser.name.split(' ').map(n => n[0]).join('')}
+                      {selectedUser.name
+                        .split(' ')
+                        .map(n => n[0])
+                        .join('')}
                     </span>
                   </div>
                   <div>
@@ -629,49 +650,55 @@ const RealUserManagement: React.FC = () => {
                     <p className="text-gray-400">{selectedUser.email}</p>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-400">Role</p>
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(selectedUser.role)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(selectedUser.role)}`}
+                    >
                       {selectedUser.role}
                     </span>
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Status</p>
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(selectedUser.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(selectedUser.status)}`}
+                    >
                       {selectedUser.status}
                     </span>
                   </div>
                 </div>
-                
+
                 <div>
                   <p className="text-sm text-gray-400">Company</p>
                   <p className="text-white">{selectedUser.company}</p>
                 </div>
-                
+
                 {selectedUser.phone && (
                   <div>
                     <p className="text-sm text-gray-400">Phone</p>
                     <p className="text-white">{selectedUser.phone}</p>
                   </div>
                 )}
-                
+
                 {selectedUser.location && (
                   <div>
                     <p className="text-sm text-gray-400">Location</p>
                     <p className="text-white">{selectedUser.location}</p>
                   </div>
                 )}
-                
+
                 <div>
                   <p className="text-sm text-gray-400">Last Login</p>
                   <p className="text-white">{new Date(selectedUser.lastLogin).toLocaleString()}</p>
                 </div>
-                
+
                 <div>
                   <p className="text-sm text-gray-400">Member Since</p>
-                  <p className="text-white">{new Date(selectedUser.createdAt).toLocaleDateString()}</p>
+                  <p className="text-white">
+                    {new Date(selectedUser.createdAt).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
             </motion.div>

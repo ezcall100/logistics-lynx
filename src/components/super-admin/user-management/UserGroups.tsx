@@ -8,10 +8,8 @@ import {
   Edit,
   Trash2,
   Search,
-  Filter,
   Download,
   Upload,
-  MoreVertical,
   Eye,
   Settings,
   Mail,
@@ -92,10 +90,10 @@ interface GroupTemplate {
 
 export const UserGroups: React.FC = () => {
   const [groups, setGroups] = useState<UserGroup[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
-  const [selectedGroup, setSelectedGroup] = useState<UserGroup | null>(null);
+  // const [users, setUsers] = useState<User[]>([]);
+  // const [selectedGroup, setSelectedGroup] = useState<UserGroup | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  // const [showEditModal, setShowEditModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -273,12 +271,12 @@ export const UserGroups: React.FC = () => {
       },
     ];
 
-    setUsers(mockUsers);
+    // setUsers(mockUsers);
     setGroups(mockGroups);
   }, []);
 
   const getIcon = (iconName: string) => {
-    const icons: { [key: string]: React.ComponentType<{ className?: string; size?: number }> } = {
+    const icons: { [key: string]: React.ComponentType<{ className?: string }> } = {
       Building,
       Users2,
       UserCog,
@@ -338,8 +336,9 @@ export const UserGroups: React.FC = () => {
   };
 
   const handleEditGroup = (group: UserGroup) => {
-    setSelectedGroup(group);
-    setShowEditModal(true);
+    // setSelectedGroup(group);
+    // setShowEditModal(true);
+    console.log('Edit group:', group);
   };
 
   const handleDeleteGroup = (groupId: string) => {
@@ -352,9 +351,9 @@ export const UserGroups: React.FC = () => {
     console.log('Adding member to group:', groupId);
   };
 
-  const handleRemoveMember = (groupId: string, userId: string) => {
-    console.log('Removing member from group:', groupId, userId);
-  };
+  // const handleRemoveMember = (groupId: string, userId: string) => {
+  //   console.log('Removing member from group:', groupId, userId);
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">

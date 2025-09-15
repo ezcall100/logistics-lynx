@@ -12,7 +12,7 @@ import {
   TrendingUp,
   Code,
   Database,
-  RefreshCw,
+  // RefreshCw,
   Play,
   Pause,
 } from 'lucide-react';

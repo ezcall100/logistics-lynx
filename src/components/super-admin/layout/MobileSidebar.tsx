@@ -5,14 +5,24 @@ import { ChevronRight, X } from 'lucide-react';
  * MobileSidebar - Modular Mobile Sidebar Component
  * Created by MCP 301 Agents - Design Logic Refactoring
  * Timestamp: 2025-09-14T17:28:33.000Z
- * 
+ *
  * This component provides the mobile sidebar navigation for the Super Admin portal
  * with proper responsive design and touch interactions.
  */
 interface MobileSidebarProps {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
-  navigationItems: any[];
+  navigationItems: Array<{
+    id: string;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    path?: string;
+    subMenus?: Array<{
+      id: string;
+      label: string;
+      path: string;
+    }>;
+  }>;
   activeTab: string;
   setActiveTab: (tab: string) => void;
   expandedMenus: string[];
@@ -26,13 +36,16 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
   activeTab,
   setActiveTab,
   expandedMenus,
-  handleMenuToggle
+  handleMenuToggle,
 }) => {
   if (!mobileMenuOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)} />
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50"
+        onClick={() => setMobileMenuOpen(false)}
+      />
       <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -70,9 +83,7 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     }`}
                   >
                     <div className="flex items-center space-x-3">
-                      <item.icon
-                        className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`}
-                      />
+                      <item.icon className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`} />
                       <div className="flex-1 text-left">
                         <div className="font-medium">{item.label}</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
@@ -97,7 +108,7 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                   {/* Sub-menus */}
                   {isExpanded && item.subMenus && (
                     <div className="ml-4 space-y-1">
-                      {item.subMenus.map(subMenu => {
+                      {item.subMenus.map((subMenu: { id: string; label: string; path: string }) => {
                         const isSubActive = activeTab === subMenu.id;
 
                         return (

@@ -8,30 +8,16 @@ import {
   CreditCard,
   Headphones,
   UserCheck,
-  Settings,
   Search,
-  Filter,
-  Download,
-  Upload,
-  MoreVertical,
   Eye,
   Edit,
   Trash2,
-  Mail,
-  Phone,
-  Calendar,
-  MapPin,
-  Building,
   TrendingUp,
-  TrendingDown,
   AlertCircle,
   CheckCircle,
   Clock,
-  Star,
   Activity,
-  Globe,
   Lock,
-  Unlock,
 } from 'lucide-react';
 
 /**
@@ -72,7 +58,7 @@ interface UserStats {
 export const UserManagementDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  // const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -363,7 +349,7 @@ export const UserManagementDashboard: React.FC = () => {
           onClick={() => setShowFilters(!showFilters)}
           className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2"
         >
-          <Filter className="w-4 h-4" />
+          <Search className="w-4 h-4" />
           <span>Filters</span>
         </button>
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">

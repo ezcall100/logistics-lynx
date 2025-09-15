@@ -69,9 +69,9 @@ const CompanyAPISettings: React.FC = () => {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [webhooks, setWebhooks] = useState<Webhook[]>([]);
   // Modal states for future use
-  const [showAddKey, setShowAddKey] = useState(false);
-  const [showAddIntegration, setShowAddIntegration] = useState(false);
-  const [showAddWebhook, setShowAddWebhook] = useState(false);
+  // const [showAddKey, setShowAddKey] = useState(false);
+  // const [showAddIntegration, setShowAddIntegration] = useState(false);
+  // const [showAddWebhook, setShowAddWebhook] = useState(false);
   const [visibleKeys, setVisibleKeys] = useState<Set<string>>(new Set());
 
   // Mock API data - MCP 301 Agents created this
@@ -288,7 +288,7 @@ const CompanyAPISettings: React.FC = () => {
               <span className="text-sm text-green-400">Live API Data</span>
             </div>
             <button
-              onClick={() => setShowAddKey(true)}
+              onClick={() => console.log('Add API key clicked')}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
               <Plus className="w-4 h-4" />
@@ -390,7 +390,7 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-white">API Keys</h3>
                   <button
-                    onClick={() => setShowAddKey(true)}
+                    onClick={() => console.log('Add API key clicked')}
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
                   >
                     <Plus className="w-4 h-4" />
@@ -522,7 +522,7 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-white">Integrations</h3>
                   <button
-                    onClick={() => setShowAddIntegration(true)}
+                    onClick={() => console.log('Add integration clicked')}
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
                   >
                     <Plus className="w-4 h-4" />
@@ -592,7 +592,7 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-white">Webhooks</h3>
                   <button
-                    onClick={() => setShowAddWebhook(true)}
+                    onClick={() => console.log('Add webhook clicked')}
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
                   >
                     <Plus className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Lock, Building, Shield, Check, X } from 'lucide-react';
+import { User, Mail, Lock, Building, Check, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**

@@ -3,14 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Code,
   GitCommit,
-  FileText,
   Zap,
   Activity,
   Clock,
   CheckCircle,
   AlertCircle,
   Loader2,
-  Eye,
   EyeOff,
 } from 'lucide-react';
 

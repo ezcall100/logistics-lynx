@@ -5,24 +5,17 @@ import {
   Edit,
   Trash,
   Search,
-  Filter,
   Download,
-  RefreshCw,
   ChevronLeft,
   ChevronRight,
   Check,
   X,
-  MoreVertical,
-  User,
+  // User,
   Smartphone,
   Monitor,
   Tablet,
-  Globe,
-  MapPin,
-  Clock,
-  Shield,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 /**
  * Enhanced User Management - Super Admin Component
@@ -68,14 +61,14 @@ export const EnhancedUserManagement: React.FC = () => {
   const [lastUpdated, setLastUpdated] = useState(new Date());
 
   // Modal States
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showViewModal, setShowViewModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
+  // const [showAddModal, setShowAddModal] = useState(false);
+  // const [showEditModal, setShowEditModal] = useState(false);
+  // const [showViewModal, setShowViewModal] = useState(false);
+  // const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
 
   // Loading States
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
   // Mock Data - In real app, this would come from API
@@ -342,12 +335,12 @@ export const EnhancedUserManagement: React.FC = () => {
             onClick={() => setLastUpdated(new Date())}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
           >
-            <Refresh className="w-4 h-4" />
+            <Download className="w-4 h-4" />
             <span>Refresh</span>
           </button>
 
           <button
-            onClick={() => setShowAddModal(true)}
+            onClick={() => console.log('Add user clicked')}
             className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
           >
             <Plus className="w-4 h-4" />
@@ -503,8 +496,9 @@ export const EnhancedUserManagement: React.FC = () => {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => {
-                          setSelectedUser(user);
-                          setShowViewModal(true);
+                          // setSelectedUser(user);
+                          // setShowViewModal(true);
+                          console.log('View user:', user);
                         }}
                         className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                         title="View User"
@@ -513,8 +507,9 @@ export const EnhancedUserManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => {
-                          setSelectedUser(user);
-                          setShowEditModal(true);
+                          // setSelectedUser(user);
+                          // setShowEditModal(true);
+                          console.log('Edit user:', user);
                         }}
                         className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                         title="Edit User"
@@ -523,8 +518,9 @@ export const EnhancedUserManagement: React.FC = () => {
                       </button>
                       <button
                         onClick={() => {
-                          setSelectedUser(user);
-                          setShowDeleteModal(true);
+                          // setSelectedUser(user);
+                          // setShowDeleteModal(true);
+                          console.log('Delete user:', user);
                         }}
                         className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                         title="Delete User"

@@ -8,16 +8,9 @@ import {
   Users,
   Settings,
   Eye,
-  Lock,
-  Unlock,
-  CheckCircle,
   XCircle,
-  AlertTriangle,
   Search,
-  Filter,
   Download,
-  Upload,
-  MoreVertical,
   Crown,
   UserCheck,
   UserX,
@@ -72,9 +65,9 @@ interface RoleTemplate {
 export const UserRoles: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [permissions, setPermissions] = useState<Permission[]>([]);
-  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+  // const [selectedRole, setSelectedRole] = useState<Role | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  // const [showEditModal, setShowEditModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [roleTemplates] = useState<RoleTemplate[]>([
@@ -307,7 +300,7 @@ export const UserRoles: React.FC = () => {
   }, []);
 
   const getIcon = (iconName: string) => {
-    const icons: { [key: string]: React.ComponentType<{ className?: string; size?: number }> } = {
+    const icons: { [key: string]: React.ComponentType<{ className?: string }> } = {
       Crown,
       Shield,
       UserCheck,
@@ -359,8 +352,9 @@ export const UserRoles: React.FC = () => {
   };
 
   const handleEditRole = (role: Role) => {
-    setSelectedRole(role);
-    setShowEditModal(true);
+    // setSelectedRole(role);
+    // setShowEditModal(true);
+    console.log('Edit role:', role);
   };
 
   const handleDeleteRole = (roleId: string) => {
@@ -387,7 +381,7 @@ export const UserRoles: React.FC = () => {
                 <span>Export</span>
               </button>
               <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Upload className="w-4 h-4" />
+                <Download className="w-4 h-4" />
                 <span>Import</span>
               </button>
               <button
@@ -578,7 +572,7 @@ export const UserRoles: React.FC = () => {
                         <Eye className="w-4 h-4" />
                       </button>
                       <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <MoreVertical className="w-4 h-4" />
+                        <Settings className="w-4 h-4" />
                       </button>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ import {
   FileText,
   Lock,
   Pause,
-  Play
+  Play,
 } from 'lucide-react';
 
 interface ActiveUser {
@@ -43,6 +43,8 @@ interface ActiveUser {
   location: string;
   device: string;
   ipAddress: string;
+  sessionDuration: string;
+  actions: number;
   avatar?: string;
 }
 
@@ -57,13 +59,13 @@ const mockActiveUsers = [
     email: 'admin@demo.com',
     role: 'Super Admin',
     company: 'DEMO Company A',
-    status: 'active',
+    status: 'active' as 'active' | 'idle' | 'inactive',
     lastActive: '2024-01-15T10:30:00Z',
     location: 'New York, NY',
     device: 'Desktop',
     ipAddress: '192.168.1.100',
     sessionDuration: '2h 15m',
-    actions: 45
+    actions: 45,
   },
   {
     id: 2,
@@ -71,13 +73,13 @@ const mockActiveUsers = [
     email: 'manager@demo.com',
     role: 'Manager',
     company: 'DEMO Company B',
-    status: 'active',
+    status: 'active' as 'active' | 'idle' | 'inactive',
     lastActive: '2024-01-15T10:25:00Z',
     location: 'Los Angeles, CA',
     device: 'Mobile',
     ipAddress: '192.168.1.101',
     sessionDuration: '1h 30m',
-    actions: 32
+    actions: 32,
   },
   {
     id: 3,
@@ -85,13 +87,13 @@ const mockActiveUsers = [
     email: 'operator@demo.com',
     role: 'Operator',
     company: 'DEMO Company C',
-    status: 'idle',
+    status: 'idle' as 'active' | 'idle' | 'inactive',
     lastActive: '2024-01-15T10:20:00Z',
     location: 'Chicago, IL',
     device: 'Tablet',
     ipAddress: '192.168.1.102',
     sessionDuration: '45m',
-    actions: 18
+    actions: 18,
   },
   {
     id: 4,
@@ -99,14 +101,14 @@ const mockActiveUsers = [
     email: 'customer@demo.com',
     role: 'Customer',
     company: 'DEMO Company D',
-    status: 'active',
+    status: 'active' as 'active' | 'idle' | 'inactive',
     lastActive: '2024-01-15T10:15:00Z',
     location: 'Miami, FL',
     device: 'Desktop',
     ipAddress: '192.168.1.103',
     sessionDuration: '3h 20m',
-    actions: 67
-  }
+    actions: 67,
+  },
 ];
 
 const ActiveUsers: React.FC = () => {
@@ -138,20 +140,20 @@ const ActiveUsers: React.FC = () => {
     email: '',
     role: 'User',
     company: '',
-    status: 'active',
+    status: 'active' as 'active' | 'idle' | 'inactive',
     device: 'Desktop',
     location: '',
-    ipAddress: ''
+    ipAddress: '',
   });
 
   // Real-time data simulation
   const updateUserData = useCallback(() => {
-    setUsers(prevUsers => 
+    setUsers(prevUsers =>
       prevUsers.map(user => ({
         ...user,
         lastActive: new Date().toISOString(),
         sessionDuration: `${Math.floor(Math.random() * 4)}h ${Math.floor(Math.random() * 60)}m`,
-        actions: user.actions + Math.floor(Math.random() * 5)
+        actions: user.actions + Math.floor(Math.random() * 5),
       }))
     );
     setLastUpdated(new Date());
@@ -190,10 +192,10 @@ const ActiveUsers: React.FC = () => {
       email: '',
       role: 'User',
       company: '',
-      status: 'active',
+      status: 'active' as 'active' | 'idle' | 'inactive',
       device: 'Desktop',
       location: '',
-      ipAddress: ''
+      ipAddress: '',
     });
     setShowAddModal(true);
   };
@@ -208,7 +210,7 @@ const ActiveUsers: React.FC = () => {
       status: user.status,
       device: user.device,
       location: user.location,
-      ipAddress: user.ipAddress
+      ipAddress: user.ipAddress,
     });
     setShowEditModal(true);
   };
@@ -226,11 +228,9 @@ const ActiveUsers: React.FC = () => {
   const handleSaveUser = () => {
     if (editingUser) {
       // Edit existing user
-      setUsers(prev => prev.map(user => 
-        user.id === editingUser.id 
-          ? { ...user, ...formData }
-          : user
-      ));
+      setUsers(prev =>
+        prev.map(user => (user.id === editingUser.id ? { ...user, ...formData } : user))
+      );
       setShowEditModal(false);
       setEditingUser(null);
     } else {
@@ -240,7 +240,7 @@ const ActiveUsers: React.FC = () => {
         ...formData,
         lastActive: new Date().toISOString(),
         sessionDuration: '0m',
-        actions: 0
+        actions: 0,
       };
       setUsers(prev => [newUser, ...prev]);
       setShowAddModal(false);
@@ -248,26 +248,26 @@ const ActiveUsers: React.FC = () => {
   };
 
   const handleConfirmDelete = () => {
-    setUsers(prev => prev.filter(user => user.id !== deletingUser.id));
-    setShowDeleteModal(false);
-    setDeletingUser(null);
+    if (deletingUser) {
+      setUsers(prev => prev.filter(user => user.id !== deletingUser.id));
+      setShowDeleteModal(false);
+      setDeletingUser(null);
+    }
   };
 
   const handleBulkAction = (action: string) => {
     switch (action) {
       case 'activate':
-        setUsers(prev => prev.map(user => 
-          selectedUsers.includes(user.id) 
-            ? { ...user, status: 'active' }
-            : user
-        ));
+        setUsers(prev =>
+          prev.map(user => (selectedUsers.includes(user.id) ? { ...user, status: 'active' } : user))
+        );
         break;
       case 'deactivate':
-        setUsers(prev => prev.map(user => 
-          selectedUsers.includes(user.id) 
-            ? { ...user, status: 'inactive' }
-            : user
-        ));
+        setUsers(prev =>
+          prev.map(user =>
+            selectedUsers.includes(user.id) ? { ...user, status: 'inactive' } : user
+          )
+        );
         break;
       case 'delete':
         setUsers(prev => prev.filter(user => !selectedUsers.includes(user.id)));
@@ -277,10 +277,8 @@ const ActiveUsers: React.FC = () => {
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
+    setSelectedUsers(prev =>
+      prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
 
@@ -329,21 +327,15 @@ const ActiveUsers: React.FC = () => {
         handleDeleteUser(user);
         break;
       case 'activate': {
-        setUsers(prev => prev.map(u => 
-          u.id === user.id ? { ...u, status: 'active' } : u
-        ));
+        setUsers(prev => prev.map(u => (u.id === user.id ? { ...u, status: 'active' } : u)));
         break;
       }
       case 'deactivate': {
-        setUsers(prev => prev.map(u => 
-          u.id === user.id ? { ...u, status: 'inactive' } : u
-        ));
+        setUsers(prev => prev.map(u => (u.id === user.id ? { ...u, status: 'inactive' } : u)));
         break;
       }
       case 'suspend': {
-        setUsers(prev => prev.map(u => 
-          u.id === user.id ? { ...u, status: 'idle' } : u
-        ));
+        setUsers(prev => prev.map(u => (u.id === user.id ? { ...u, status: 'idle' } : u)));
         break;
       }
       case 'send_email':
@@ -375,9 +367,10 @@ const ActiveUsers: React.FC = () => {
   };
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.company.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.company.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
@@ -387,17 +380,15 @@ const ActiveUsers: React.FC = () => {
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     const aValue = a[sortField as keyof typeof a];
     const bValue = b[sortField as keyof typeof b];
-    
+
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortDirection === 'asc' 
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+      return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
-    
+
     if (typeof aValue === 'number' && typeof bValue === 'number') {
       return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
     }
-    
+
     return 0;
   });
 
@@ -410,19 +401,27 @@ const ActiveUsers: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'idle': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
-      case 'inactive': return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+      case 'active':
+        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
+      case 'idle':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
+      case 'inactive':
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
     }
   };
 
   const getDeviceIcon = (device: string) => {
     switch (device) {
-      case 'Desktop': return <Monitor className="h-4 w-4" />;
-      case 'Mobile': return <Smartphone className="h-4 w-4" />;
-      case 'Tablet': return <Tablet className="h-4 w-4" />;
-      default: return <Globe className="h-4 w-4" />;
+      case 'Desktop':
+        return <Monitor className="h-4 w-4" />;
+      case 'Mobile':
+        return <Smartphone className="h-4 w-4" />;
+      case 'Tablet':
+        return <Tablet className="h-4 w-4" />;
+      default:
+        return <Globe className="h-4 w-4" />;
     }
   };
 
@@ -430,7 +429,7 @@ const ActiveUsers: React.FC = () => {
     const now = new Date();
     const time = new Date(timestamp);
     const diffInMinutes = Math.floor((now.getTime() - time.getTime()) / (1000 * 60));
-    
+
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
@@ -448,7 +447,9 @@ const ActiveUsers: React.FC = () => {
           <div className="flex items-center space-x-3">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Active Users</h1>
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${isRealTimeEnabled ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+              <div
+                className={`w-2 h-2 rounded-full ${isRealTimeEnabled ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
+              ></div>
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 {isRealTimeEnabled ? 'Live' : 'Paused'}
               </span>
@@ -511,7 +512,9 @@ const ActiveUsers: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{activeUsersCount}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {activeUsersCount}
+              </p>
             </div>
             <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
               <UserCheck className="h-6 w-6 text-green-600" />
@@ -533,7 +536,9 @@ const ActiveUsers: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Sessions</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalUsersCount}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {totalUsersCount}
+              </p>
             </div>
             <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
               <Users className="h-6 w-6 text-blue-600" />
@@ -553,7 +558,9 @@ const ActiveUsers: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Session Time</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Avg Session Time
+              </p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">2h 15m</p>
             </div>
             <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
@@ -578,7 +585,7 @@ const ActiveUsers: React.FC = () => {
                 type="text"
                 placeholder="Search users..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               />
             </div>
@@ -587,7 +594,7 @@ const ActiveUsers: React.FC = () => {
             <Filter className="h-4 w-4 text-gray-400" />
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               <option value="all">All Status</option>
@@ -597,7 +604,7 @@ const ActiveUsers: React.FC = () => {
             </select>
             <select
               value={roleFilter}
-              onChange={(e) => setRoleFilter(e.target.value)}
+              onChange={e => setRoleFilter(e.target.value)}
               className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               <option value="all">All Roles</option>
@@ -608,7 +615,7 @@ const ActiveUsers: React.FC = () => {
             </select>
             <select
               value={deviceFilter}
-              onChange={(e) => setDeviceFilter(e.target.value)}
+              onChange={e => setDeviceFilter(e.target.value)}
               className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               <option value="all">All Devices</option>
@@ -618,7 +625,7 @@ const ActiveUsers: React.FC = () => {
             </select>
           </div>
         </div>
-        
+
         {/* Bulk Actions */}
         {selectedUsers.length > 0 && (
           <motion.div
@@ -668,66 +675,60 @@ const ActiveUsers: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   <input
                     type="checkbox"
-                    checked={selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0}
+                    checked={
+                      selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0
+                    }
                     onChange={handleSelectAll}
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('name')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>User</span>
                     {sortField === 'name' && (
-                      <span className="text-blue-500">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('status')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Status</span>
                     {sortField === 'status' && (
-                      <span className="text-blue-500">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Location
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('device')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Device</span>
                     {sortField === 'device' && (
-                      <span className="text-blue-500">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Session
                 </th>
-                <th 
+                <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
                   onClick={() => handleSort('actions')}
                 >
                   <div className="flex items-center space-x-1">
                     <span>Actions</span>
                     {sortField === 'actions' && (
-                      <span className="text-blue-500">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
+                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
@@ -767,9 +768,7 @@ const ActiveUsers: React.FC = () => {
                         <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {user.name}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {user.email}
-                        </div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">{user.email}</div>
                         <div className="text-xs text-gray-400 dark:text-gray-500">
                           {user.role} • {user.company}
                         </div>
@@ -777,7 +776,9 @@ const ActiveUsers: React.FC = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}
+                    >
                       {user.status}
                     </span>
                   </td>
@@ -786,9 +787,7 @@ const ActiveUsers: React.FC = () => {
                       <MapPin className="h-4 w-4 text-gray-400 mr-1" />
                       {user.location}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {user.ipAddress}
-                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{user.ipAddress}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
@@ -807,21 +806,21 @@ const ActiveUsers: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center justify-end space-x-2">
-                      <button 
+                      <button
                         onClick={() => handleViewUser(user)}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
                         title="View Details"
                       >
                         <Eye className="h-4 w-4" />
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleEditUser(user)}
                         className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-50 dark:hover:bg-green-900/20"
                         title="Edit User"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDeleteUser(user)}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
                         title="Delete User"
@@ -829,14 +828,14 @@ const ActiveUsers: React.FC = () => {
                         <Trash2 className="h-4 w-4" />
                       </button>
                       <div className="relative">
-                        <button 
+                        <button
                           onClick={() => handleDropdownToggle(user.id)}
                           className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700/50"
                           title="More Options"
                         >
                           <MoreVertical className="h-4 w-4" />
                         </button>
-                        
+
                         {/* Dropdown Menu */}
                         <AnimatePresence>
                           {openDropdown === user.id && (
@@ -862,9 +861,9 @@ const ActiveUsers: React.FC = () => {
                                   <Edit className="h-4 w-4" />
                                   <span>Edit User</span>
                                 </button>
-                                
+
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                                
+
                                 <button
                                   onClick={() => handleDropdownAction('activate', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center space-x-2"
@@ -886,9 +885,9 @@ const ActiveUsers: React.FC = () => {
                                   <Pause className="h-4 w-4" />
                                   <span>Suspend User</span>
                                 </button>
-                                
+
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                                
+
                                 <button
                                   onClick={() => handleDropdownAction('send_email', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
@@ -910,9 +909,9 @@ const ActiveUsers: React.FC = () => {
                                   <Shield className="h-4 w-4" />
                                   <span>Manage Permissions</span>
                                 </button>
-                                
+
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                                
+
                                 <button
                                   onClick={() => handleDropdownAction('export_user', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
@@ -927,9 +926,9 @@ const ActiveUsers: React.FC = () => {
                                   <FileText className="h-4 w-4" />
                                   <span>View Audit Log</span>
                                 </button>
-                                
+
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                                
+
                                 <button
                                   onClick={() => handleDropdownAction('delete', user)}
                                   className="w-full px-4 py-2 text-left text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2"
@@ -949,7 +948,7 @@ const ActiveUsers: React.FC = () => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
@@ -971,21 +970,18 @@ const ActiveUsers: React.FC = () => {
           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                Showing{' '}
-                <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span>
-                {' '}to{' '}
+                Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span>{' '}
+                to{' '}
                 <span className="font-medium">
                   {Math.min(currentPage * itemsPerPage, sortedUsers.length)}
-                </span>
-                {' '}of{' '}
-                <span className="font-medium">{sortedUsers.length}</span>
-                {' '}results
+                </span>{' '}
+                of <span className="font-medium">{sortedUsers.length}</span> results
               </p>
             </div>
             <div className="flex items-center space-x-2">
               <select
                 value={itemsPerPage}
-                onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                onChange={e => setItemsPerPage(Number(e.target.value))}
                 className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value={5}>5 per page</option>
@@ -994,7 +990,7 @@ const ActiveUsers: React.FC = () => {
                 <option value={50}>50 per page</option>
               </select>
               <div className="flex space-x-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
@@ -1032,7 +1028,7 @@ const ActiveUsers: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -1049,7 +1045,7 @@ const ActiveUsers: React.FC = () => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -1058,12 +1054,12 @@ const ActiveUsers: React.FC = () => {
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Enter user name"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email
@@ -1071,19 +1067,19 @@ const ActiveUsers: React.FC = () => {
                   <input
                     type="email"
                     value={formData.email}
-                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Enter email address"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Role
                   </label>
                   <select
                     value={formData.role}
-                    onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   >
                     <option value="Super Admin">Super Admin</option>
@@ -1092,7 +1088,7 @@ const ActiveUsers: React.FC = () => {
                     <option value="Customer">Customer</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Company
@@ -1100,19 +1096,24 @@ const ActiveUsers: React.FC = () => {
                   <input
                     type="text"
                     value={formData.company}
-                    onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, company: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Enter company name"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Status
                   </label>
                   <select
                     value={formData.status}
-                    onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        status: e.target.value as 'active' | 'idle' | 'inactive',
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   >
                     <option value="active">Active</option>
@@ -1120,14 +1121,14 @@ const ActiveUsers: React.FC = () => {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Device
                   </label>
                   <select
                     value={formData.device}
-                    onChange={(e) => setFormData(prev => ({ ...prev, device: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, device: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   >
                     <option value="Desktop">Desktop</option>
@@ -1135,7 +1136,7 @@ const ActiveUsers: React.FC = () => {
                     <option value="Tablet">Tablet</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
@@ -1143,12 +1144,12 @@ const ActiveUsers: React.FC = () => {
                   <input
                     type="text"
                     value={formData.location}
-                    onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, location: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Enter location"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     IP Address
@@ -1156,13 +1157,13 @@ const ActiveUsers: React.FC = () => {
                   <input
                     type="text"
                     value={formData.ipAddress}
-                    onChange={(e) => setFormData(prev => ({ ...prev, ipAddress: e.target.value }))}
+                    onChange={e => setFormData(prev => ({ ...prev, ipAddress: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Enter IP address"
                   />
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-end space-x-3 mt-6">
                 <button
                   onClick={() => {
@@ -1204,7 +1205,7 @@ const ActiveUsers: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-lg mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -1220,7 +1221,7 @@ const ActiveUsers: React.FC = () => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="h-16 w-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
@@ -1231,12 +1232,14 @@ const ActiveUsers: React.FC = () => {
                       {viewingUser.name}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400">{viewingUser.email}</p>
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(viewingUser.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(viewingUser.status)}`}
+                    >
                       {viewingUser.status}
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -1248,7 +1251,9 @@ const ActiveUsers: React.FC = () => {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Company
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.company}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                      {viewingUser.company}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -1260,25 +1265,33 @@ const ActiveUsers: React.FC = () => {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Location
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.location}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                      {viewingUser.location}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       IP Address
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.ipAddress}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                      {viewingUser.ipAddress}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Session Duration
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.sessionDuration}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                      {viewingUser.sessionDuration}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Actions Count
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.actions}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                      {viewingUser.actions}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -1290,7 +1303,7 @@ const ActiveUsers: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-end space-x-3 mt-6">
                 <button
                   onClick={() => {
@@ -1334,7 +1347,7 @@ const ActiveUsers: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <div className="flex items-center space-x-3 mb-4">
                 <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
@@ -1344,11 +1357,12 @@ const ActiveUsers: React.FC = () => {
                   Delete User
                 </h3>
               </div>
-              
+
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Are you sure you want to delete <strong>{deletingUser.name}</strong>? This action cannot be undone.
+                Are you sure you want to delete <strong>{deletingUser.name}</strong>? This action
+                cannot be undone.
               </p>
-              
+
               <div className="flex items-center justify-end space-x-3">
                 <button
                   onClick={() => {

@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
-import {
-  Search,
-  Bell,
-  Moon,
-  Sun,
-  Menu,
-  Brain,
-  User as UserIcon,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-  X
-} from 'lucide-react';
 
 // Import modular components
 import { SuperAdminHeader } from './SuperAdminHeader';
@@ -26,7 +12,7 @@ import { MobileSidebar } from './MobileSidebar';
  * SuperAdminLayout - Modular Layout Component
  * Created by MCP 301 Agents - Design Logic Refactoring
  * Timestamp: 2025-09-14T17:28:33.000Z
- * 
+ *
  * This component provides the main layout structure for the Super Admin portal
  * with proper separation of concerns and modular architecture.
  */
@@ -34,7 +20,17 @@ interface SuperAdminLayoutProps {
   children?: React.ReactNode;
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  navigationItems: any[];
+  navigationItems: Array<{
+    id: string;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    path?: string;
+    subMenus?: Array<{
+      id: string;
+      label: string;
+      path: string;
+    }>;
+  }>;
   expandedMenus: string[];
   setExpandedMenus: (menus: string[]) => void;
 }
@@ -45,7 +41,7 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
   setActiveTab,
   navigationItems,
   expandedMenus,
-  setExpandedMenus
+  setExpandedMenus,
 }) => {
   const { darkMode, toggleDarkMode } = useTheme();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -55,11 +51,10 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleMenuToggle = (menuId: string) => {
-    setExpandedMenus(prev =>
-      prev.includes(menuId)
-        ? prev.filter(id => id !== menuId)
-        : [...prev, menuId]
-    );
+    const newMenus = expandedMenus.includes(menuId)
+      ? expandedMenus.filter((id: string) => id !== menuId)
+      : [...expandedMenus, menuId];
+    setExpandedMenus(newMenus);
   };
 
   const handleMenuItemClick = (menuId: string, path: string) => {
@@ -68,7 +63,9 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}
+    >
       {/* Header */}
       <SuperAdminHeader
         darkMode={darkMode}
@@ -94,9 +91,7 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
         />
 
         {/* Main Content Area */}
-        <SuperAdminMainContent activeTab={activeTab}>
-          {children}
-        </SuperAdminMainContent>
+        <SuperAdminMainContent activeTab={activeTab}>{children}</SuperAdminMainContent>
 
         {/* Right Sidebar - Communication Hub */}
         <SuperAdminRightSidebar

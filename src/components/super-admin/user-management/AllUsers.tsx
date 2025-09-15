@@ -1,33 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Users,
   Search,
   Filter,
   Download,
   Upload,
   UserPlus,
-  MoreVertical,
   Eye,
   Edit,
   Trash2,
-  Mail,
-  Phone,
-  Calendar,
-  MapPin,
-  Building,
   Shield,
   CheckCircle,
   AlertCircle,
   Clock,
   Lock,
-  Unlock,
-  Star,
-  Activity,
-  TrendingUp,
-  TrendingDown,
   ArrowUpDown,
-  ChevronDown,
   X,
 } from 'lucide-react';
 
@@ -198,6 +185,8 @@ export const AllUsers: React.FC = () => {
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     let aValue = a[sortBy as keyof User];
     let bValue = b[sortBy as keyof User];
+
+    if (aValue === undefined || bValue === undefined) return 0;
 
     if (typeof aValue === 'string') aValue = aValue.toLowerCase();
     if (typeof bValue === 'string') bValue = bValue.toLowerCase();
@@ -639,7 +628,7 @@ export const AllUsers: React.FC = () => {
                           className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
                           title="Email"
                         >
-                          <Mail className="w-4 h-4" />
+                          <Download className="w-4 h-4" />
                         </button>
                         <button
                           className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"

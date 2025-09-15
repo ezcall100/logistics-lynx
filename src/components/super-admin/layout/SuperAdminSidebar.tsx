@@ -6,14 +6,24 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
  * SuperAdminSidebar - Modular Sidebar Component
  * Created by MCP 301 Agents - Design Logic Refactoring
  * Timestamp: 2025-09-14T17:28:33.000Z
- * 
+ *
  * This component provides the sidebar navigation for the Super Admin portal
  * with proper responsive design and glass-morphism styling.
  */
 interface SuperAdminSidebarProps {
   sidebarCollapsed: boolean;
   setSidebarCollapsed: (collapsed: boolean) => void;
-  navigationItems: any[];
+  navigationItems: Array<{
+    id: string;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    path?: string;
+    subMenus?: Array<{
+      id: string;
+      label: string;
+      path: string;
+    }>;
+  }>;
   activeTab: string;
   expandedMenus: string[];
   handleMenuToggle: (menuId: string) => void;
@@ -27,12 +37,14 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
   activeTab,
   expandedMenus,
   handleMenuToggle,
-  handleMenuItemClick
+  handleMenuItemClick,
 }) => {
   return (
-    <aside className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
-      sidebarCollapsed ? 'w-16' : 'w-64'
-    }`}>
+    <aside
+      className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
+        sidebarCollapsed ? 'w-16' : 'w-64'
+      }`}
+    >
       <div className="h-full flex flex-col">
         {/* Sidebar Header */}
         <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-slate-700/50">
@@ -44,7 +56,11 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
             >
-              {sidebarCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
+              {sidebarCollapsed ? (
+                <ChevronRight className="h-5 w-5" />
+              ) : (
+                <ChevronLeft className="h-5 w-5" />
+              )}
             </button>
           </div>
         </div>
@@ -86,9 +102,9 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
                             >
                               {item.label}
                             </span>
-                            {(item as any).badge && (
+                            {(item as { badge?: string }).badge && (
                               <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                                {(item as any).badge}
+                                {(item as { badge?: string }).badge}
                               </span>
                             )}
                           </div>
@@ -122,7 +138,7 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
                     transition={{ duration: 0.2 }}
                     className="ml-2 sm:ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-2 sm:pl-4"
                   >
-                    {item.subMenus.map(subMenu => {
+                    {item.subMenus.map((subMenu: { id: string; label: string; path: string }) => {
                       const isSubActive = activeTab === subMenu.id;
 
                       return (
