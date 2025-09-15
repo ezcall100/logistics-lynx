@@ -24,8 +24,7 @@ import {
   Truck,
   Shield,
   Layers,
-  Database,
-  Banknote,
+  Server,
   Code,
   HelpCircle,
   DollarSign,
@@ -122,43 +121,21 @@ export function HorizontalMegaMenu() {
       ]
     },
     {
-      title: 'Portals',
+      title: 'Technology',
       items: [
-        // Core TMS Portals (10)
-        { id: 'customer-portal', label: 'Customer Portal', href: '/portals/customer', icon: Users, description: 'Customer self-service' },
-        { id: 'broker-portal', label: 'Broker Portal', href: '/portals/broker', icon: Briefcase, description: 'Freight brokerage management' },
-        { id: 'carrier-portal', label: 'Carrier Portal', href: '/portals/carrier', icon: Rocket, description: 'Carrier operations' },
-        { id: 'driver-portal', label: 'Driver Portal', href: '/portals/driver', icon: User, description: 'Mobile driver interface' },
-        { id: 'shipper-portal', label: 'Shipper Portal', href: '/portals/shipper', icon: Package, description: 'Shipment management' },
-        { id: 'analytics-portal', label: 'Analytics Portal', href: '/portals/analytics', icon: BarChart3, description: 'Business intelligence' },
-        { id: 'autonomous-portal', label: 'Autonomous Portal', href: '/portals/autonomous', icon: Rocket, description: 'Autonomous vehicle management' },
-        { id: 'yms-portal', label: 'Yard Management Portal', href: '/portals/yms', icon: Globe, description: 'Yard management system' },
-        { id: 'directory-portal', label: 'Directory Portal', href: '/portals/directory', icon: Users, description: 'Industry directory' },
-        { id: 'rates-portal', label: 'Rates Portal', href: '/portals/rates', icon: TrendingUp, description: 'Rate management' },
-        
-        // Business Operations Portals (15)
-        { id: 'marketplace-portal', label: 'Marketplace Portal', href: '/portals/marketplace', icon: Globe, description: 'Trading marketplace' },
-        { id: 'financial-portal', label: 'Financial Portal', href: '/portals/financials', icon: TrendingUp, description: 'Financial management' },
-        { id: 'load-board-portal', label: 'Load Board Portal', href: '/portals/load-board', icon: Package, description: 'Load board management' },
-        { id: 'crm-portal', label: 'CRM Portal', href: '/portals/crm', icon: Users, description: 'Customer relationship management' },
-        { id: 'partner-portal', label: 'Partner Portal', href: '/portals/partner', icon: Users, description: 'Partner management' },
-        { id: 'developer-portal', label: 'Developer Portal', href: '/portals/developer', icon: Target, description: 'API and integration tools' },
-        { id: 'admin-portal', label: 'Admin Portal', href: '/portals/admin', icon: Users, description: 'System administration' },
-        { id: 'super-admin-portal', label: 'Super Admin Portal', href: '/portals/super-admin', icon: Shield, description: 'Master system control' },
-        { id: 'mcp-agent-admin', label: 'MCP Agent Admin', href: '/admin/mcp-agents', icon: Bot, description: 'Manage AI agents' },
-        { id: 'human-developer-admin', label: 'Human Developer Admin', href: '/admin/human-developers', icon: Users, description: 'Manage human developers' },
-        { id: 'portals-overview', label: 'Portals Overview', href: '/portals', icon: Layers, description: 'Overview of all portals' },
-        { id: 'workers-portal', label: 'Workers Portal', href: '/portals/workers', icon: Users, description: 'Workforce management' },
-        { id: 'edi-portal', label: 'EDI Portal', href: '/portals/edi', icon: Database, description: 'Electronic data interchange' },
-        { id: 'owner-operator-portal', label: 'Owner-Operator Portal', href: '/portals/owner-operator', icon: Truck, description: 'Independent trucking business' },
-        { id: 'factoring-portal', label: 'Factoring Portal', href: '/portals/factoring', icon: Banknote, description: 'Invoice factoring and cash flow' },
-        { id: 'warehouse-portal', label: 'Warehouse Portal', href: '/portals/warehouse', icon: Package, description: 'Warehouse management and inventory control' },
-        { id: 'fleet-portal', label: 'Fleet Portal', href: '/portals/fleet', icon: Truck, description: 'Fleet management and vehicle tracking' },
-        { id: 'dispatch-portal', label: 'Dispatch Portal', href: '/portals/dispatch', icon: Truck, description: 'Load dispatch and driver coordination' },
-        { id: 'maintenance-portal', label: 'Maintenance Portal', href: '/portals/maintenance', icon: Shield, description: 'Vehicle maintenance and service management' },
-        { id: 'fuel-portal', label: 'Fuel Portal', href: '/portals/fuel', icon: TrendingUp, description: 'Fuel management and efficiency optimization' },
-        { id: 'insurance-portal', label: 'Insurance Portal', href: '/portals/insurance', icon: Shield, description: 'Insurance management and claims processing' },
-        { id: 'compliance-portal', label: 'Compliance Portal', href: '/portals/compliance', icon: Shield, description: 'Regulatory compliance monitoring' }
+        { id: 'technology-overview', label: 'Technology Overview', href: '/technology', icon: Code, description: 'Complete technology stack overview' },
+        { id: 'ai-technology', label: 'AI Technology', href: '/technology/ai', icon: Brain, description: 'Advanced AI and machine learning' },
+        { id: 'blockchain', label: 'Blockchain', href: '/technology/blockchain', icon: Shield, description: 'Secure blockchain technology' },
+        { id: 'cloud-infrastructure', label: 'Cloud Infrastructure', href: '/technology/cloud', icon: Globe, description: 'Scalable cloud architecture' },
+        { id: 'api-platform', label: 'API Platform', href: '/technology/api', icon: Code, description: 'Developer-friendly APIs' },
+        { id: 'data-analytics', label: 'Data Analytics', href: '/technology/analytics', icon: BarChart3, description: 'Advanced data processing' },
+        { id: 'security', label: 'Security', href: '/technology/security', icon: Shield, description: 'Enterprise-grade security' },
+        { id: 'integration', label: 'Integration', href: '/technology/integration', icon: Layers, description: 'Seamless system integration' },
+        { id: 'automation', label: 'Automation', href: '/technology/automation', icon: Zap, description: 'Intelligent automation' },
+        { id: 'mobile-technology', label: 'Mobile Technology', href: '/technology/mobile', icon: Globe, description: 'Mobile-first solutions' },
+        { id: 'iot-sensors', label: 'IoT & Sensors', href: '/technology/iot', icon: Target, description: 'Internet of Things integration' },
+        { id: 'edge-computing', label: 'Edge Computing', href: '/technology/edge', icon: Server, description: 'Real-time edge processing' },
+        { id: 'microservices', label: 'Microservices', href: '/technology/microservices', icon: Layers, description: 'Scalable microservices architecture' }
       ]
     },
     {
@@ -171,7 +148,7 @@ export function HorizontalMegaMenu() {
         { id: 'leadership', label: 'Leadership', href: '/leadership', icon: Users, description: 'Meet our leadership team' },
         { id: 'investors', label: 'Investors', href: '/investors', icon: TrendingUp, description: 'Investor information' },
         { id: 'partners', label: 'Partners', href: '/partners', icon: Globe, description: 'Strategic partnerships' },
-        { id: 'security', label: 'Security', href: '/security', icon: Shield, description: 'Security and compliance' }
+        { id: 'security', label: 'Security', href: '/security', icon: Shield, description: 'Security and compliance' },
       ]
     },
     {
@@ -190,7 +167,7 @@ export function HorizontalMegaMenu() {
   const mainMenuItems = [
     { id: 'solutions', label: 'Solutions', icon: Briefcase },
     { id: 'ai-agents', label: 'AI Agents', icon: Bot },
-    { id: 'portals', label: 'Portals', icon: Globe },
+    { id: 'technology', label: 'Technology', icon: Code },
     { id: 'company', label: 'Company', icon: Users },
     { id: 'resources', label: 'Resources', icon: BarChart3 },
     { id: 'pricing', label: 'Pricing', href: '/pricing', icon: TrendingUp }
@@ -307,7 +284,7 @@ export function HorizontalMegaMenu() {
                       const menuToSection: { [key: string]: string } = {
                         'solutions': 'Solutions',
                         'ai-agents': 'AI Agents',
-                        'portals': 'Portals',
+                        'technology': 'Technology',
                         'company': 'Company',
                         'resources': 'Resources'
                       }
@@ -327,7 +304,7 @@ export function HorizontalMegaMenu() {
                           <p className="text-slate-600 max-w-2xl mx-auto">
                             {section.title === 'Solutions' && 'Complete transportation and logistics solutions powered by AI'}
                             {section.title === 'AI Agents' && 'Intelligent AI agents that automate and optimize your operations'}
-                            {section.title === 'Portals' && 'Comprehensive portal ecosystem for all stakeholders'}
+                            {section.title === 'Technology' && 'Cutting-edge technology stack powering our logistics platform'}
                             {section.title === 'Company' && 'Learn more about Trans Bot AI and our mission'}
                             {section.title === 'Resources' && 'Knowledge base, support, and learning resources'}
                           </p>
@@ -365,22 +342,22 @@ export function HorizontalMegaMenu() {
                           </div>
                         )}
 
-                        {/* Special handling for Portals with organized categories */}
-                        {section.title === 'Portals' ? (
+                        {/* Special handling for Technology with organized categories */}
+                        {section.title === 'Technology' ? (
                           <div className="space-y-8">
-                            {/* Core TMS Portals */}
+                            {/* Core Technologies */}
                             <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6 rounded-2xl border border-blue-200">
                               <div className="flex items-center mb-6">
                                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
-                                  <Rocket className="w-6 h-6 text-white" />
+                                  <Code className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                  <h3 className="text-xl font-bold text-blue-900">Core TMS Portals</h3>
-                                  <p className="text-blue-700 text-sm">Essential transportation management portals</p>
+                                  <h3 className="text-xl font-bold text-blue-900">Core Technologies</h3>
+                                  <p className="text-blue-700 text-sm">Fundamental technology components</p>
                                 </div>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {section.items.slice(0, 11).map((item, itemIndex) => (
+                                {section.items.slice(0, 6).map((item, itemIndex) => (
                                   <motion.button
                                     key={item.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -408,19 +385,19 @@ export function HorizontalMegaMenu() {
                               </div>
                             </div>
 
-                            {/* Business Operations Portals */}
+                            {/* Advanced Technologies */}
                             <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
                               <div className="flex items-center mb-6">
                                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mr-4">
-                                  <Briefcase className="w-6 h-6 text-white" />
+                                  <Zap className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                  <h3 className="text-xl font-bold text-purple-900">Business Operations</h3>
-                                  <p className="text-purple-700 text-sm">Business and administrative portals</p>
+                                  <h3 className="text-xl font-bold text-purple-900">Advanced Technologies</h3>
+                                  <p className="text-purple-700 text-sm">Cutting-edge technology solutions</p>
                                 </div>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {section.items.slice(11, 17).map((item, itemIndex) => (
+                                {section.items.slice(6).map((item, itemIndex) => (
                                   <motion.button
                                     key={item.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -447,46 +424,6 @@ export function HorizontalMegaMenu() {
                                 ))}
                               </div>
                             </div>
-
-                            {/* Admin & Specialized Portals */}
-                            <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 p-6 rounded-2xl border border-emerald-200">
-                              <div className="flex items-center mb-6">
-                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
-                                  <Shield className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                  <h3 className="text-xl font-bold text-emerald-900">Admin & Specialized</h3>
-                                  <p className="text-emerald-700 text-sm">Administrative and specialized portals</p>
-                                </div>
-                              </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {section.items.slice(17).map((item, itemIndex) => (
-                                  <motion.button
-                                    key={item.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
-                                    whileHover={{ y: -2, scale: 1.02 }}
-                                    onClick={() => handleNavigation(item.href)}
-                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all duration-300 text-left"
-                                  >
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 rounded-lg flex items-center justify-center transition-all duration-300">
-                                        <item.icon className="w-5 h-5 text-emerald-600" />
-                                      </div>
-                                      <div className="flex-1">
-                                        <h4 className="font-semibold text-emerald-900 group-hover:text-emerald-700 transition-colors text-sm">
-                                          {item.label}
-                                        </h4>
-                                        <p className="text-xs text-emerald-600 leading-relaxed">
-                                          {item.description}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </motion.button>
-                                ))}
-                              </div>
-                            </div>
                           </div>
                         ) : (
                           /* Regular Items for other sections */
@@ -494,7 +431,6 @@ export function HorizontalMegaMenu() {
                             <h3 className="text-xl font-semibold text-slate-800 mb-6">
                               {section.title === 'Solutions' && 'All Solutions'}
                               {section.title === 'AI Agents' && 'All AI Agents'}
-                              {section.title === 'Portals' && 'All Portals'}
                               {section.title === 'Company' && 'Company Information'}
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

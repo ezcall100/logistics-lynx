@@ -242,7 +242,7 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
                             (subMenu: { id: string; label: string; path: string }) => {
                               const isSubActive = activeTab === subMenu.id;
 
-                              return (
+  return (
                                 <button
                                   key={subMenu.id}
                                   onClick={() => handleMenuItemClick(subMenu.id)}

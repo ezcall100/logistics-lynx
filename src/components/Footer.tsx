@@ -48,19 +48,15 @@ export function Footer() {
         { name: 'Transportation Management', path: '/solutions/transportation', icon: Truck, description: 'Complete TMS solution' },
         { name: 'Route Optimization', path: '/solutions/route-optimization', icon: Zap, description: 'AI-powered route planning' },
         { name: 'Load Matching', path: '/solutions/load-matching', icon: TrendingUp, description: 'Smart load-carrier matching' },
-        { name: 'Predictive Analytics', path: '/solutions/predictive-analytics', icon: TrendingUp, description: 'Forecast and optimize' },
         { name: 'Fleet Management', path: '/solutions/fleet-management', icon: Truck, description: 'Comprehensive fleet control' },
         { name: 'Warehouse Management', path: '/solutions/warehouse-management', icon: MapPin, description: 'Smart warehouse operations' },
         { name: 'Last Mile Delivery', path: '/solutions/last-mile-delivery', icon: Clock, description: 'Optimized final delivery' },
-        { name: 'Yard Management', path: '/solutions/yard-management', icon: MapPin, description: 'Optimize yard operations' },
-        { name: 'Financial Management', path: '/solutions/financial-management', icon: TrendingUp, description: 'Streamline financial operations' },
+        { name: 'Predictive Analytics', path: '/solutions/predictive-analytics', icon: TrendingUp, description: 'Forecast and optimize' },
         { name: 'Load Board', path: '/solutions/load-board', icon: TrendingUp, description: 'Connect shippers with carriers' },
-        { name: 'CRM Solution', path: '/solutions/crm-solution', icon: Users, description: 'Customer relationship management' },
         { name: 'Shipper Solutions', path: '/solutions/shipper-solutions', icon: Users, description: 'Solutions for shippers' },
         { name: 'Carrier Solutions', path: '/solutions/carrier-solutions', icon: Truck, description: 'Solutions for carriers' },
         { name: 'Broker Solutions', path: '/solutions/broker-solutions', icon: Users, description: 'Solutions for brokers' },
-        { name: 'Owner Operator Solutions', path: '/solutions/owner-operator-solutions', icon: Users, description: 'Solutions for owner operators' },
-        { name: 'Driver Solutions', path: '/solutions/driver-solutions', icon: Users, description: 'Solutions for drivers' }
+        { name: 'Owner Operator Solutions', path: '/solutions/owner-operator-solutions', icon: Users, description: 'Solutions for owner operators' }
       ]
     },
     {
@@ -80,6 +76,25 @@ export function Footer() {
         { name: 'Smart Warehouse', path: '/agents/smart-warehouse', icon: MapPin, description: 'Intelligent warehouse operations' },
         { name: 'Customer Experience', path: '/agents/customer-experience', icon: Users, description: 'Enhance customer satisfaction' },
         { name: 'Risk Assessment', path: '/agents/risk-assessment', icon: Shield, description: 'Assess and mitigate risks' }
+      ]
+    },
+    {
+      title: 'Technology',
+      path: '/technology',
+      icon: Globe,
+      subpages: [
+        { name: 'AI Technology', path: '/technology/ai', icon: Brain, description: 'Advanced AI and machine learning' },
+        { name: 'Blockchain', path: '/technology/blockchain', icon: Shield, description: 'Secure blockchain technology' },
+        { name: 'Cloud Infrastructure', path: '/technology/cloud', icon: Globe, description: 'Scalable cloud architecture' },
+        { name: 'API Platform', path: '/technology/api', icon: Zap, description: 'Developer-friendly APIs' },
+        { name: 'Data Analytics', path: '/technology/analytics', icon: TrendingUp, description: 'Advanced data processing' },
+        { name: 'Security', path: '/technology/security', icon: Shield, description: 'Enterprise-grade security' },
+        { name: 'Integration', path: '/technology/integration', icon: Users, description: 'Seamless system integration' },
+        { name: 'Automation', path: '/technology/automation', icon: Zap, description: 'Intelligent automation' },
+        { name: 'Mobile Technology', path: '/technology/mobile', icon: Globe, description: 'Mobile-first solutions' },
+        { name: 'IoT & Sensors', path: '/technology/iot', icon: MapPin, description: 'Internet of Things integration' },
+        { name: 'Edge Computing', path: '/technology/edge', icon: Clock, description: 'Real-time edge processing' },
+        { name: 'Microservices', path: '/technology/microservices', icon: Users, description: 'Scalable microservices architecture' }
       ]
     },
     {
@@ -238,7 +253,7 @@ export function Footer() {
 
             {/* Navigation Sections */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
                 {menuSections.map((section, index) => (
                   <motion.div
                     key={section.title}

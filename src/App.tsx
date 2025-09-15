@@ -20,7 +20,7 @@ import { HumanDeveloperAdmin } from './pages/portals/admin/HumanDeveloperAdmin';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import LoginPage from './pages/auth/LoginPage';
+import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
 import SolutionsPage from './pages/SolutionsPage';
 import PricingPage from './pages/PricingPage';
@@ -33,7 +33,7 @@ import LeadershipPage from './pages/company/LeadershipPage';
 import PressPage from './pages/company/PressPage';
 import InvestorsPage from './pages/company/InvestorsPage';
 import PartnersPage from './pages/company/PartnersPage';
-import SecurityPage from './pages/company/SecurityPage';
+import CompanySecurityPage from './pages/company/SecurityPage';
 import IndustriesPage from './pages/IndustriesPage';
 import PortalsPage from './pages/PortalsPage';
 import AIAgentsPage from './pages/AIAgentsPage';
@@ -100,6 +100,19 @@ import CarrierSolutions from './pages/solutions/CarrierSolutions';
 import BrokerSolutions from './pages/solutions/BrokerSolutions';
 import OwnerOperatorSolutions from './pages/solutions/OwnerOperatorSolutions';
 import DriverSolutions from './pages/solutions/DriverSolutions';
+import TechnologyPage from './pages/TechnologyPage';
+import AITechnologyPage from './pages/technology/AITechnologyPage';
+import BlockchainPage from './pages/technology/BlockchainPage';
+import CloudInfrastructurePage from './pages/technology/CloudInfrastructurePage';
+import APIPlatformPage from './pages/technology/APIPlatformPage';
+import DataAnalyticsPage from './pages/technology/DataAnalyticsPage';
+import SecurityPage from './pages/technology/SecurityPage';
+import IntegrationPage from './pages/technology/IntegrationPage';
+import AutomationPage from './pages/technology/AutomationPage';
+import MobileTechnologyPage from './pages/technology/MobileTechnologyPage';
+import IoTSensorsPage from './pages/technology/IoTSensorsPage';
+import EdgeComputingPage from './pages/technology/EdgeComputingPage';
+import MicroservicesPage from './pages/technology/MicroservicesPage';
 // import MCPProgressDashboard from './pages/MCPProgressDashboard'; // Using port 3002 instead
 
 function App() {
@@ -909,7 +922,7 @@ function App() {
                   path="/company/security"
                   element={
                     <>
-                      <SecurityPage />
+                      <CompanySecurityPage />
                       <Footer />
                     </>
                   }
@@ -1009,6 +1022,123 @@ function App() {
                   element={
                     <>
                       <AIAgentsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology"
+                  element={
+                    <>
+                      <TechnologyPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/ai"
+                  element={
+                    <>
+                      <AITechnologyPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/blockchain"
+                  element={
+                    <>
+                      <BlockchainPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/cloud"
+                  element={
+                    <>
+                      <CloudInfrastructurePage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/api"
+                  element={
+                    <>
+                      <APIPlatformPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/analytics"
+                  element={
+                    <>
+                      <DataAnalyticsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/security"
+                  element={
+                    <>
+                      <SecurityPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/integration"
+                  element={
+                    <>
+                      <IntegrationPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/automation"
+                  element={
+                    <>
+                      <AutomationPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/mobile"
+                  element={
+                    <>
+                      <MobileTechnologyPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/iot"
+                  element={
+                    <>
+                      <IoTSensorsPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/edge"
+                  element={
+                    <>
+                      <EdgeComputingPage />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="/technology/microservices"
+                  element={
+                    <>
+                      <MicroservicesPage />
                       <Footer />
                     </>
                   }

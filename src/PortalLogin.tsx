@@ -31,7 +31,7 @@ const PortalLogin: React.FC = () => {
         email: email,
         name: email === 'admin@logisticslynx.com' ? 'System Administrator' : 'Super Administrator',
         role: email === 'admin@logisticslynx.com' ? 'admin' : 'superadmin',
-        company: 'Logistics Lynx',
+        company: 'Trans Bot AI',
         permissions: ['*'],
         isActive: true,
         lastLogin: new Date().toISOString()
@@ -74,7 +74,7 @@ const PortalLogin: React.FC = () => {
               </div>
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Logistics Lynx Portal
+              Trans Bot AI Portal
             </h1>
             <p className="text-gray-600">
               Sign in to access your portal dashboard

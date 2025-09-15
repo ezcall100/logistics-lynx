@@ -79,7 +79,7 @@ const LoginPage: React.FC = () => {
             
             <div className="space-y-4">
               <h1 className="text-4xl font-bold text-gray-900">
-                Logistics Lynx
+                Trans Bot AI
               </h1>
               <p className="text-xl text-gray-600 max-w-md mx-auto">
                 The most advanced transportation management system with AI-powered optimization
@@ -120,7 +120,7 @@ const LoginPage: React.FC = () => {
                 Welcome Back
               </h2>
               <p className="text-gray-600">
-                Sign in to your Logistics Lynx account
+                Sign in to your Trans Bot AI account
               </p>
             </div>
 

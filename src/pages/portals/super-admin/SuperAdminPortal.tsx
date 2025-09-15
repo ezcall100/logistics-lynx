@@ -29,15 +29,37 @@ import { CommunicationHub } from '../../../components/CommunicationHub';
 // Import all the real Super Admin components
 import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashboard';
 import UserManagement from '../../../components/super-admin/UserManagement';
+import { AllUsersPage } from '../../../components/super-admin/user-management/AllUsersPage';
+import { UserRolesPage } from '../../../components/super-admin/user-management/UserRolesPage';
+import { UserGroupsPage } from '../../../components/super-admin/user-management/UserGroupsPage';
+import { AccessControlPage } from '../../../components/super-admin/user-management/AccessControlPage';
+import { UserAnalyticsPage } from '../../../components/super-admin/user-management/UserAnalyticsPage';
+import { BillingManagementPage } from '../../../components/super-admin/user-management/BillingManagementPage';
+import { SupportTicketsPage } from '../../../components/super-admin/user-management/SupportTicketsPage';
+import { UserOnboardingPage } from '../../../components/super-admin/user-management/UserOnboardingPage';
 import PortalManagement from '../../../components/super-admin/PortalManagement';
-import BillingManagement from '../../../components/super-admin/BillingManagement';
 import BusinessIntelligenceCenter from '../../../components/super-admin/BusinessIntelligenceCenter';
 import GlobalSettings from '../../../components/super-admin/GlobalSettings';
 import SecurityCompliance from '../../../components/super-admin/SecurityCompliance';
 import SystemHealthMonitor from '../../../components/super-admin/SystemHealthMonitor';
 import MCPAgentOrchestrationCenter from '../../../components/super-admin/MCPAgentOrchestrationCenter';
 import SecurityWarRoom from '../../../components/super-admin/SecurityWarRoom';
-import { RoleBasedAccessControl } from '../../../components/super-admin/RoleBasedAccessControl';
+
+// Import System Administration components
+import { DatabaseManagement } from '../../../components/super-admin/system-administration/DatabaseManagement';
+import { APIManagement } from '../../../components/super-admin/system-administration/APIManagement';
+import { ServerMonitoring } from '../../../components/super-admin/system-administration/ServerMonitoring';
+import { SecuritySettings } from '../../../components/super-admin/system-administration/SecuritySettings';
+import { SystemSettings } from '../../../components/super-admin/system-administration/SystemSettings';
+
+// Import MCP Agents components
+import { MCPOverview } from '../../../components/super-admin/mcp-agents/MCPOverview';
+import { AgentWorkflows } from '../../../components/super-admin/mcp-agents/AgentWorkflows';
+
+// Import Analytics & Reports components
+import { BusinessAnalytics } from '../../../components/super-admin/analytics/BusinessAnalytics';
+import { PerformanceReports } from '../../../components/super-admin/analytics/PerformanceReports';
+import { FinancialReports } from '../../../components/super-admin/analytics/FinancialReports';
 
 // Import Dashboard pages
 import SystemOverview from '../../../components/super-admin/dashboard/SystemOverview';
@@ -234,49 +256,49 @@ const SuperAdminPortal: React.FC = () => {
           id: 'all-users',
           label: 'All Users',
           path: '/super-admin/user-management/AllUsers',
-          component: UserManagement,
+          component: AllUsersPage,
         },
         {
           id: 'user-roles',
           label: 'User Roles',
           path: '/super-admin/user-management/UserRoles',
-          component: UserManagement,
+          component: UserRolesPage,
         },
         {
           id: 'user-groups',
           label: 'User Groups',
           path: '/super-admin/user-management/UserGroups',
-          component: UserManagement,
+          component: UserGroupsPage,
         },
         {
           id: 'access-control',
           label: 'Access Control',
           path: '/super-admin/user-management/AccessControl',
-          component: RoleBasedAccessControl,
+          component: AccessControlPage,
         },
         {
           id: 'user-analytics',
           label: 'User Analytics',
           path: '/super-admin/user-management/UserAnalytics',
-          component: UserManagement,
+          component: UserAnalyticsPage,
         },
         {
           id: 'billing-management',
           label: 'Billing Management',
           path: '/super-admin/user-management/BillingManagement',
-          component: BillingManagement,
+          component: BillingManagementPage,
         },
         {
           id: 'support-tickets',
           label: 'Support Tickets',
           path: '/super-admin/user-management/SupportTickets',
-          component: UserManagement,
+          component: SupportTicketsPage,
         },
         {
           id: 'user-onboarding',
           label: 'User Onboarding',
           path: '/super-admin/user-management/UserOnboarding',
-          component: UserManagement,
+          component: UserOnboardingPage,
         },
       ],
     },
@@ -293,31 +315,31 @@ const SuperAdminPortal: React.FC = () => {
           id: 'database-management',
           label: 'Database Management',
           path: '/super-admin/system-administration/DatabaseManagement',
-          component: GlobalSettings,
+          component: DatabaseManagement,
         },
         {
           id: 'api-management',
           label: 'API Management',
           path: '/super-admin/system-administration/APIManagement',
-          component: GlobalSettings,
+          component: APIManagement,
         },
         {
           id: 'server-monitoring',
           label: 'Server Monitoring',
           path: '/super-admin/system-administration/ServerMonitoring',
-          component: SystemHealthMonitor,
+          component: ServerMonitoring,
         },
         {
           id: 'security-settings',
           label: 'Security Settings',
           path: '/super-admin/system-administration/SecuritySettings',
-          component: SecurityCompliance,
+          component: SecuritySettings,
         },
         {
           id: 'system-settings',
           label: 'System Settings',
           path: '/super-admin/system-administration/SystemSettings',
-          component: GlobalSettings,
+          component: SystemSettings,
         },
       ],
     },
@@ -333,20 +355,14 @@ const SuperAdminPortal: React.FC = () => {
         {
           id: 'mcp-overview',
           label: 'MCP Overview',
-          path: '/super-admin/mcp/MCPOverview',
-          component: MCPAgentOrchestrationCenter,
-        },
-        {
-          id: 'agent-management',
-          label: 'Agent Management',
-          path: '/super-admin/mcp-agents/AgentManagement',
-          component: MCPAgentOrchestrationCenter,
+          path: '/super-admin/mcp-agents/MCPOverview',
+          component: MCPOverview,
         },
         {
           id: 'agent-workflows',
           label: 'Agent Workflows',
-          path: '/super-admin/agent-workflows/AgentWorkflows',
-          component: MCPAgentOrchestrationCenter,
+          path: '/super-admin/mcp-agents/AgentWorkflows',
+          component: AgentWorkflows,
         },
       ],
     },
@@ -363,19 +379,19 @@ const SuperAdminPortal: React.FC = () => {
           id: 'business-analytics',
           label: 'Business Analytics',
           path: '/super-admin/analytics-reports/BusinessAnalytics',
-          component: BusinessIntelligenceCenter,
+          component: BusinessAnalytics,
         },
         {
           id: 'performance-reports',
           label: 'Performance Reports',
           path: '/super-admin/analytics-reports/PerformanceReports',
-          component: BusinessIntelligenceCenter,
+          component: PerformanceReports,
         },
         {
           id: 'financial-reports',
           label: 'Financial Reports',
           path: '/super-admin/analytics-reports/FinancialReports',
-          component: BusinessIntelligenceCenter,
+          component: FinancialReports,
         },
       ],
     },

@@ -100,7 +100,7 @@ const SignupPage: React.FC = () => {
               </div>
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Join Logistics Lynx
+              Join Trans Bot AI
             </h1>
             <p className="text-gray-600">
               Create your account and start optimizing your logistics operations
