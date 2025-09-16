@@ -83,7 +83,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState('company-profile');
   const [activeUserManagementTab, setActiveUserManagementTab] = useState('all-users');
   const [isEditing, setIsEditing] = useState(false);
-  
+
   // Advanced All Users State Management
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -96,7 +96,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isRealTime, setIsRealTime] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(new Date());
-  
+
   const [companyInfo, setCompanyInfo] = useState({
     name: 'TransBot Logistics',
     logo: '',
@@ -180,7 +180,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   // Auto-refresh functionality
   useEffect(() => {
     if (!isRealTime) return;
-    
+
     const interval = setInterval(() => {
       setLastUpdated(new Date());
       // In a real app, you would fetch fresh data here
@@ -259,8 +259,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
   const handleEditUser = (userData: NewUser) => {
     if (!selectedUser) return;
-    const updatedUsers = users.map(user => 
-      user.id === selectedUser.id 
+    const updatedUsers = users.map(user =>
+      user.id === selectedUser.id
         ? { ...user, ...userData, lastActive: new Date().toISOString() }
         : user
     );
@@ -309,8 +309,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleBulkActivate = () => {
-    const updatedUsers = users.map(user => 
-      selectedUsers.includes(user.id) 
+    const updatedUsers = users.map(user =>
+      selectedUsers.includes(user.id)
         ? { ...user, status: 'active' as const, lastActive: new Date().toISOString() }
         : user
     );
@@ -320,8 +320,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleBulkDeactivate = () => {
-    const updatedUsers = users.map(user => 
-      selectedUsers.includes(user.id) 
+    const updatedUsers = users.map(user =>
+      selectedUsers.includes(user.id)
         ? { ...user, status: 'inactive' as const, lastActive: new Date().toISOString() }
         : user
     );
@@ -331,7 +331,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
   };
 
   const handleSelectUser = (userId: number) => {
-    setSelectedUsers(prev => 
+    setSelectedUsers(prev =>
       prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
     );
   };
@@ -401,22 +401,22 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     .filter(user => {
       const matchesSearch =
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.company.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-    const matchesRole = roleFilter === 'all' || user.role === roleFilter;
-    const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
-    
-    return matchesSearch && matchesStatus && matchesRole && matchesDevice;
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
+      const matchesRole = roleFilter === 'all' || user.role === roleFilter;
+      const matchesDevice = deviceFilter === 'all' || user.device === deviceFilter;
+
+      return matchesSearch && matchesStatus && matchesRole && matchesDevice;
     })
     .sort((a, b) => {
       const aValue = a[sortField as keyof CompanyUser] || '';
       const bValue = b[sortField as keyof CompanyUser] || '';
-    
-    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-    return 0;
-  });
+
+      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -751,7 +751,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
     <div className="space-y-6">
       {/* Header with Controls */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div>
+        <div>
           <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
             <Users className="h-5 w-5 mr-2 text-blue-500" />
             All Users
@@ -759,18 +759,18 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               ({filteredUsers.length} users)
             </span>
           </h4>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Manage all users in your organization with advanced controls
-            </p>
-          </div>
-        
+          </p>
+        </div>
+
         <div className="flex items-center gap-3">
           {/* Real-time Toggle */}
           <button
             onClick={() => setIsRealTime(!isRealTime)}
             className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
-              isRealTime 
-                ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' 
+              isRealTime
+                ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
                 : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
             }`}
           >
@@ -780,7 +780,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <div className="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             )}
           </button>
-          
+
           {/* Export Button */}
           <button
             onClick={handleExport}
@@ -789,7 +789,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <Download className="h-4 w-4 mr-2" />
             Export
           </button>
-          
+
           {/* Add User Button */}
           <button
             onClick={() => setShowAddUserModal(true)}
@@ -799,8 +799,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Add User
           </button>
         </div>
-        </div>
-        
+      </div>
+
       {/* Filters and Search */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -814,8 +814,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-                </div>
-          
+          </div>
+
           {/* Status Filter */}
           <select
             value={statusFilter}
@@ -827,7 +827,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="idle">Idle</option>
             <option value="inactive">Inactive</option>
           </select>
-          
+
           {/* Role Filter */}
           <select
             value={roleFilter}
@@ -840,7 +840,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="Operator">Operator</option>
             <option value="Customer">Customer</option>
           </select>
-          
+
           {/* Device Filter */}
           <select
             value={deviceFilter}
@@ -852,8 +852,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             <option value="mobile">Mobile</option>
             <option value="tablet">Tablet</option>
           </select>
-                </div>
-              </div>
+        </div>
+      </div>
 
       {/* Bulk Actions Bar */}
       {selectedUsers.length > 0 && (
@@ -865,7 +865,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           <div className="flex items-center justify-between">
             <span className="text-blue-700 dark:text-blue-300 font-medium">
               {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
-                </span>
+            </span>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleBulkActivate}
@@ -1006,8 +1006,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                       {user.email}
                     </td>
                     <td className="px-4 py-3">
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
-                  {user.role}
+                      <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs rounded-full">
+                        {user.role}
                       </span>
                     </td>
                     <td className="px-4 py-3">
@@ -1022,8 +1022,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                         <DeviceIcon className="h-4 w-4 text-gray-500" />
                         <span className="text-sm text-gray-900 dark:text-white capitalize">
                           {user.device}
-                </span>
-              </div>
+                        </span>
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                       {user.lastActive}
@@ -1051,7 +1051,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
-            </div>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -1077,14 +1077,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </select>
           <span className="text-sm text-gray-700 dark:text-gray-300">per page</span>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-700 dark:text-gray-300">
             Showing {startIndex + 1} to {Math.min(endIndex, filteredUsers.length)} of{' '}
             {filteredUsers.length} results
           </span>
         </div>
-        
+
         <div className="flex items-center space-x-1">
           <button
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -1093,7 +1093,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          
+
           {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
             const page = i + 1;
             return (
@@ -1110,7 +1110,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               </button>
             );
           })}
-          
+
           <button
             onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
@@ -1140,7 +1140,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Manage user roles and permissions
           </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add role')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1288,12 +1288,12 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 text-xs rounded-full ${
-                      role.permissions === 'All' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                        role.permissions === 'All'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
                           : role.permissions.includes('/') &&
                               parseInt(role.permissions.split('/')[0]) > 10
-                        ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
                       }`}
                     >
                       {role.permissions}
@@ -1302,9 +1302,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 text-xs rounded-full ${
-                      role.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                        role.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
                       }`}
                     >
                       {role.status}
@@ -1340,7 +1340,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1379,7 +1379,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Organize users into groups for easier management
           </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add group')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1531,9 +1531,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 text-xs rounded-full ${
-                      group.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                        group.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
                       }`}
                     >
                       {group.status}
@@ -1569,7 +1569,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1608,7 +1608,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Manage role-based access control and permissions
           </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Add permission')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -1767,9 +1767,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 text-xs rounded-full ${
-                      item.status === 'active' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                        item.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
                       }`}
                     >
                       {item.status}
@@ -1805,7 +1805,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -1844,7 +1844,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             Track user activity and system usage
           </p>
         </div>
-        <button 
+        <button
           onClick={() => console.log('Export analytics')}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
         >
@@ -2040,7 +2040,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
@@ -2086,7 +2086,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           Add Plan
         </button>
       </div>
-      
+
       {/* Billing Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
@@ -2105,7 +2105,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Billing Plans */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Billing Plans</h5>
@@ -2174,7 +2174,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           New Ticket
         </button>
       </div>
-      
+
       {/* Ticket Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[
@@ -2194,7 +2194,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Recent Tickets */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Recent Tickets</h5>
@@ -2291,7 +2291,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           Add Step
         </button>
       </div>
-      
+
       {/* Onboarding Progress */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
@@ -2310,7 +2310,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Onboarding Steps */}
       <div className="space-y-4">
         <h5 className="font-medium text-gray-900 dark:text-white">Onboarding Steps</h5>
@@ -2330,8 +2330,8 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                 </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                <div 
-                  className="bg-cyan-600 h-2 rounded-full transition-all duration-300" 
+                <div
+                  className="bg-cyan-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${step.progress}%` }}
                 ></div>
               </div>
@@ -2376,25 +2376,25 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
               <div className="flex items-center space-x-3">
                 <div
                   className={`p-2 rounded-lg ${
-                  activeUserManagementTab === tab.id
-                    ? 'bg-green-100 dark:bg-green-800'
-                    : 'bg-gray-100 dark:bg-gray-600'
+                    activeUserManagementTab === tab.id
+                      ? 'bg-green-100 dark:bg-green-800'
+                      : 'bg-gray-100 dark:bg-gray-600'
                   }`}
                 >
                   <tab.icon
                     className={`h-5 w-5 ${
-                    activeUserManagementTab === tab.id
-                      ? 'text-green-600 dark:text-green-300'
-                      : 'text-gray-600 dark:text-gray-300'
+                      activeUserManagementTab === tab.id
+                        ? 'text-green-600 dark:text-green-300'
+                        : 'text-gray-600 dark:text-gray-300'
                     }`}
                   />
                 </div>
                 <div className="flex-1">
                   <h4
                     className={`font-medium text-sm ${
-                    activeUserManagementTab === tab.id
-                      ? 'text-green-900 dark:text-green-100'
-                      : 'text-gray-900 dark:text-white'
+                      activeUserManagementTab === tab.id
+                        ? 'text-green-900 dark:text-green-100'
+                        : 'text-gray-900 dark:text-white'
                     }`}
                   >
                     {tab.label}
@@ -2402,9 +2402,9 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   {tab.count && (
                     <p
                       className={`text-xs ${
-                      activeUserManagementTab === tab.id
-                        ? 'text-green-600 dark:text-green-400'
-                        : 'text-gray-500 dark:text-gray-400'
+                        activeUserManagementTab === tab.id
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-gray-500 dark:text-gray-400'
                       }`}
                     >
                       {tab.count} items
@@ -2889,13 +2889,13 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
 
       {/* Modals */}
       {showAddUserModal && (
-      <AddUserModal
-        isOpen={showAddUserModal}
-        onClose={() => setShowAddUserModal(false)}
+        <AddUserModal
+          isOpen={showAddUserModal}
+          onClose={() => setShowAddUserModal(false)}
           onSave={userData => handleAddUser(userData)}
-        user={newUser}
-        setUser={setNewUser}
-      />
+          user={newUser}
+          setUser={setNewUser}
+        />
       )}
 
       {/* View User Modal */}
@@ -2924,7 +2924,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-6">
                 {/* User Profile */}
                 <div className="flex items-center space-x-4">
@@ -2951,7 +2951,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* User Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -2996,7 +2996,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <p className="text-gray-900 dark:text-white">{selectedUser.lastActive}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     onClick={() => setShowViewUserModal(false)}
@@ -3044,11 +3044,11 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <form
                 onSubmit={e => {
-                e.preventDefault();
-                handleEditUser(newUser);
+                  e.preventDefault();
+                  handleEditUser(newUser);
                 }}
                 className="space-y-4"
               >
@@ -3065,7 +3065,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email
@@ -3079,7 +3079,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Role
@@ -3096,7 +3096,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="Customer">Customer</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Company
@@ -3110,7 +3110,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Status
@@ -3130,7 +3130,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Device
@@ -3150,7 +3150,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     <option value="tablet">Tablet</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Location
@@ -3163,7 +3163,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     placeholder="Enter location"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     IP Address
@@ -3176,7 +3176,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     placeholder="Enter IP address"
                   />
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     type="button"
@@ -3222,7 +3222,7 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
@@ -3235,14 +3235,14 @@ const CompanySettings: React.FC<CompanySettingsProps> = ({ onClose }) => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                   <p className="text-sm text-gray-700 dark:text-gray-300">
                     Are you sure you want to delete <strong>{selectedUser.name}</strong>? This will
                     permanently remove the user and all associated data.
                   </p>
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
@@ -3288,7 +3288,7 @@ const AddUserModal: React.FC<{
             <X className="h-6 w-6" />
           </button>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -3386,7 +3386,7 @@ const AddUserModal: React.FC<{
             />
           </div>
         </div>
-        
+
         <div className="flex justify-end space-x-3 mt-6">
           <button
             onClick={onClose}

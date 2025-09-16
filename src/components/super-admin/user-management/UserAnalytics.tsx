@@ -12,6 +12,7 @@ import {
   Monitor,
   Tablet,
   Download,
+  Filter,
   Search,
   RefreshCw,
   ArrowUpRight,
@@ -496,7 +497,7 @@ export const UserAnalytics: React.FC = () => {
               </h3>
               <div className="flex items-center space-x-2">
                 <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Search className="w-4 h-4" />
+                  <Filter className="w-4 h-4" />
                 </button>
                 <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                   <Search className="w-4 h-4" />

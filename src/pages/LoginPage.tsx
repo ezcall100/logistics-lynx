@@ -18,26 +18,7 @@ export default function LoginPage() {
 
     const success = await login(email, password);
     if (success) {
-      // Get user role and redirect to appropriate portal
-      const userRole = localStorage.getItem('userRole') || 'user';
-
-      switch (userRole) {
-        case 'super-admin':
-          // Redirect to Super Admin Portal (Port 3005)
-          window.location.href = 'http://localhost:3005';
-          break;
-        case 'mcp-admin':
-          // Redirect to MCP Dashboard (Port 3002)
-          window.location.href = 'http://localhost:3002';
-          break;
-        case 'admin':
-          // Redirect to Admin Portal (Port 3005)
-          window.location.href = 'http://localhost:3005';
-          break;
-        default:
-          // Regular user - stay on main website (Port 3000)
-          navigate('/');
-      }
+      navigate('/dashboard');
     } else {
       setError('Invalid email or password');
     }

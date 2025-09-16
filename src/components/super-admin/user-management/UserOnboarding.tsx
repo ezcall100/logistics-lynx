@@ -29,6 +29,7 @@ import {
   Monitor,
   Tablet,
   Settings,
+  FileText,
 } from 'lucide-react';
 
 /**
@@ -216,9 +217,9 @@ export const UserOnboarding: React.FC = () => {
               title: 'Complete Your Profile',
               description: 'Tell us a bit about yourself.',
               formFields: [
-                { name: 'name', type: 'text', required: true },
-                { company: 'company', type: 'text', required: true },
-                { role: 'role', type: 'select', required: true },
+                { name: 'name', type: 'text' },
+                { name: 'company', type: 'text' },
+                { name: 'role', type: 'select' },
               ],
               actions: ['Save & Continue', 'Skip'],
             },
@@ -376,7 +377,7 @@ export const UserOnboarding: React.FC = () => {
       case 'welcome':
         return <UserPlus className="w-4 h-4" />;
       case 'form':
-        return <Settings className="w-4 h-4" />;
+        return <FileText className="w-4 h-4" />;
       case 'tutorial':
         return <Play className="w-4 h-4" />;
       case 'verification':

@@ -46,7 +46,9 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
   expandedMenus,
   setExpandedMenus,
 }) => {
-  const { darkMode, toggleDarkMode } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
+  const toggleDarkMode = toggleTheme;
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');

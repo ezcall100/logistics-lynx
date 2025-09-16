@@ -103,7 +103,7 @@ interface HealthIssue {
 export const EnvironmentManagement: React.FC = () => {
   const [environments, setEnvironments] = useState<Environment[]>([]);
   const [selectedTab, setSelectedTab] = useState<
-    'environments' | 'services' | 'deployments' | 'monitoring'
+    'overview' | 'environments' | 'configurations' | 'secrets'
   >('environments');
   const [searchQuery, setSearchQuery] = useState('');
   // const [selectedEnvironment, setSelectedEnvironment] = useState<Environment | null>(null);
@@ -560,7 +560,7 @@ export const EnvironmentManagement: React.FC = () => {
                 key={tab.id}
                 onClick={() =>
                   setSelectedTab(
-                    tab.id as 'environments' | 'services' | 'deployments' | 'monitoring'
+                    tab.id as 'overview' | 'environments' | 'configurations' | 'secrets'
                   )
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
@@ -743,7 +743,7 @@ export const EnvironmentManagement: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'services' && (
+              {selectedTab === 'configurations' && (
                 <motion.div
                   key="services"
                   initial={{ opacity: 0, y: 20 }}
@@ -804,7 +804,7 @@ export const EnvironmentManagement: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'deployments' && (
+              {selectedTab === 'secrets' && (
                 <motion.div
                   key="deployments"
                   initial={{ opacity: 0, y: 20 }}
@@ -827,7 +827,7 @@ export const EnvironmentManagement: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'monitoring' && (
+              {selectedTab === 'overview' && (
                 <motion.div
                   key="monitoring"
                   initial={{ opacity: 0, y: 20 }}

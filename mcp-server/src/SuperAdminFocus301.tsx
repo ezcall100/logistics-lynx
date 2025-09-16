@@ -1,4 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Truck,
+  Activity,
+  Users,
+  DollarSign,
+  TrendingUp,
+  Shield,
+  Zap,
+  BarChart3,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+  Settings,
+} from 'lucide-react';
 
 interface Agent {
   id: number;
@@ -39,10 +53,10 @@ function SuperAdminFocus301() {
     return () => clearInterval(timer);
   }, []);
 
-  // Generate 301 agents focused on Super Admin
+  // Generate 302 agents focused on Super Admin
   const generateSuperAdminAgents = (): Agent[] => {
     const agents: Agent[] = [];
-    
+
     // Existing 251 agents redirected to Super Admin
     for (let i = 1; i <= 251; i++) {
       const superAdminTasks = [
@@ -60,13 +74,22 @@ function SuperAdminFocus301() {
         'Creating Compliance Tools',
         'Implementing Audit Trails',
         'Building Performance Monitoring',
-        'Creating System Health Checks'
+        'Creating System Health Checks',
       ];
-      
+
       agents.push({
         id: i,
         name: `Agent-${i}`,
-        role: i <= 50 ? 'Frontend Developer' : i <= 100 ? 'Backend Developer' : i <= 150 ? 'Database Specialist' : i <= 200 ? 'UI/UX Designer' : 'System Administrator',
+        role:
+          i <= 50
+            ? 'Frontend Developer'
+            : i <= 100
+              ? 'Backend Developer'
+              : i <= 150
+                ? 'Database Specialist'
+                : i <= 200
+                  ? 'UI/UX Designer'
+                  : 'System Administrator',
         group: 'Existing',
         status: 'active',
         progress: Math.floor(Math.random() * 100),
@@ -74,63 +97,306 @@ function SuperAdminFocus301() {
         portal: 'Super Admin Portal',
         efficiency: Math.floor(Math.random() * 40) + 60,
         lastActivity: new Date(Date.now() - Math.random() * 3600000),
-        health: ['excellent', 'good', 'warning'][Math.floor(Math.random() * 3)] as 'excellent' | 'good' | 'warning',
-        superAdminTask: superAdminTasks[Math.floor(Math.random() * superAdminTasks.length)]
+        health: ['excellent', 'good', 'warning'][Math.floor(Math.random() * 3)] as
+          | 'excellent'
+          | 'good'
+          | 'warning',
+        superAdminTask: superAdminTasks[Math.floor(Math.random() * superAdminTasks.length)],
       });
     }
 
     // New 50 testing agents focused on Super Admin testing
     const testingAgents = [
-      { name: 'PlanBot', role: 'Strategy Planner', group: 'A', task: 'Planning Super Admin test coverage' },
-      { name: 'CaseBot', role: 'Test Case Generator', group: 'A', task: 'Generating Super Admin test cases' },
-      { name: 'DataBot', role: 'Test Data Manager', group: 'A', task: 'Creating Super Admin test data' },
+      {
+        name: 'PlanBot',
+        role: 'Strategy Planner',
+        group: 'A',
+        task: 'Planning Super Admin test coverage',
+      },
+      {
+        name: 'CaseBot',
+        role: 'Test Case Generator',
+        group: 'A',
+        task: 'Generating Super Admin test cases',
+      },
+      {
+        name: 'DataBot',
+        role: 'Test Data Manager',
+        group: 'A',
+        task: 'Creating Super Admin test data',
+      },
       { name: 'FormBot', role: 'Form Validator', group: 'B', task: 'Testing Super Admin forms' },
-      { name: 'TableBot', role: 'Table Operations Tester', group: 'B', task: 'Testing Super Admin tables' },
-      { name: 'ButtonBot', role: 'CRUD Action Tester', group: 'B', task: 'Testing Super Admin CRUD operations' },
-      { name: 'MenuBot', role: 'Sidebar Menu Tester', group: 'B', task: 'Testing Super Admin navigation' },
-      { name: 'SearchBot', role: 'Search & Filter Tester', group: 'B', task: 'Testing Super Admin search' },
-      { name: 'ThreeDotBot', role: 'Action Menu Tester', group: 'B', task: 'Testing Super Admin action menus' },
-      { name: 'ModalBot', role: 'Modal Workflow Tester', group: 'B', task: 'Testing Super Admin modals' },
-      { name: 'FilterBot', role: 'Filter Validation Agent', group: 'B', task: 'Testing Super Admin filters' },
-      { name: 'SortBot', role: 'Sorting Validator', group: 'B', task: 'Testing Super Admin sorting' },
-      { name: 'HeaderBot', role: 'Header Actions Tester', group: 'C', task: 'Testing Super Admin header' },
-      { name: 'HubBot', role: 'Communication Hub Tester', group: 'C', task: 'Testing Super Admin communication' },
-      { name: 'ToastBot', role: 'Notifications Tester', group: 'C', task: 'Testing Super Admin notifications' },
-      { name: 'AlertBot', role: 'System Alerts Monitor', group: 'C', task: 'Monitoring Super Admin alerts' },
+      {
+        name: 'TableBot',
+        role: 'Table Operations Tester',
+        group: 'B',
+        task: 'Testing Super Admin tables',
+      },
+      {
+        name: 'ButtonBot',
+        role: 'CRUD Action Tester',
+        group: 'B',
+        task: 'Testing Super Admin CRUD operations',
+      },
+      {
+        name: 'MenuBot',
+        role: 'Sidebar Menu Tester',
+        group: 'B',
+        task: 'Testing Super Admin navigation',
+      },
+      {
+        name: 'SearchBot',
+        role: 'Search & Filter Tester',
+        group: 'B',
+        task: 'Testing Super Admin search',
+      },
+      {
+        name: 'ThreeDotBot',
+        role: 'Action Menu Tester',
+        group: 'B',
+        task: 'Testing Super Admin action menus',
+      },
+      {
+        name: 'ModalBot',
+        role: 'Modal Workflow Tester',
+        group: 'B',
+        task: 'Testing Super Admin modals',
+      },
+      {
+        name: 'FilterBot',
+        role: 'Filter Validation Agent',
+        group: 'B',
+        task: 'Testing Super Admin filters',
+      },
+      {
+        name: 'SortBot',
+        role: 'Sorting Validator',
+        group: 'B',
+        task: 'Testing Super Admin sorting',
+      },
+      {
+        name: 'HeaderBot',
+        role: 'Header Actions Tester',
+        group: 'C',
+        task: 'Testing Super Admin header',
+      },
+      {
+        name: 'HubBot',
+        role: 'Communication Hub Tester',
+        group: 'C',
+        task: 'Testing Super Admin communication',
+      },
+      {
+        name: 'ToastBot',
+        role: 'Notifications Tester',
+        group: 'C',
+        task: 'Testing Super Admin notifications',
+      },
+      {
+        name: 'AlertBot',
+        role: 'System Alerts Monitor',
+        group: 'C',
+        task: 'Monitoring Super Admin alerts',
+      },
       { name: 'APIbot', role: 'API Validator', group: 'D', task: 'Testing Super Admin APIs' },
-      { name: 'FlowBot', role: 'Workflow Tester', group: 'D', task: 'Testing Super Admin workflows' },
-      { name: 'ExportBot', role: 'Data Export Tester', group: 'D', task: 'Testing Super Admin exports' },
-      { name: 'ImportBot', role: 'Data Import Tester', group: 'D', task: 'Testing Super Admin imports' },
-      { name: 'PerfBot', role: 'Load & Stress Agent', group: 'E', task: 'Testing Super Admin performance' },
-      { name: 'ScaleBot', role: 'Scalability Analyzer', group: 'E', task: 'Analyzing Super Admin scalability' },
-      { name: 'SpeedBot', role: 'Performance Monitor', group: 'E', task: 'Monitoring Super Admin speed' },
-      { name: 'CleanBot', role: 'Performance Optimizer', group: 'E', task: 'Optimizing Super Admin performance' },
-      { name: 'StateBot', role: 'State Management Agent', group: 'E', task: 'Testing Super Admin state management' },
-      { name: 'VulnBot', role: 'Vulnerability Scanner', group: 'F', task: 'Scanning Super Admin vulnerabilities' },
-      { name: 'PenBot', role: 'Penetration Tester', group: 'F', task: 'Penetration testing Super Admin' },
-      { name: 'SecureBot', role: 'Compliance Checker', group: 'F', task: 'Checking Super Admin compliance' },
-      { name: 'DataGuard', role: 'Data Leak Scanner', group: 'F', task: 'Scanning Super Admin data leaks' },
-      { name: 'RoleBot', role: 'Access Control Tester', group: 'F', task: 'Testing Super Admin access control' },
-      { name: 'HistoryBot', role: 'Audit Trail Tester', group: 'F', task: 'Testing Super Admin audit trails' },
-      { name: 'VisBot', role: 'Visual Regression Agent', group: 'G', task: 'Testing Super Admin visual regression' },
-      { name: 'ThemeBot', role: 'Theme Validator', group: 'G', task: 'Validating Super Admin themes' },
-      { name: 'ResponBot', role: 'Responsive Layout Tester', group: 'G', task: 'Testing Super Admin responsiveness' },
-      { name: 'A11yBot', role: 'Accessibility Agent', group: 'G', task: 'Testing Super Admin accessibility' },
-      { name: 'StyleBot', role: 'CSS Token Enforcer', group: 'G', task: 'Enforcing Super Admin styles' },
-      { name: 'TokenBot', role: 'Branding Enforcer', group: 'G', task: 'Enforcing Super Admin branding' },
-      { name: 'BuildBot', role: 'CI Build Validator', group: 'H', task: 'Validating Super Admin builds' },
-      { name: 'DeployBot', role: 'Deployment Validator', group: 'H', task: 'Validating Super Admin deployment' },
-      { name: 'RollBot', role: 'Rollback Agent', group: 'H', task: 'Testing Super Admin rollbacks' },
-      { name: 'WatchBot', role: 'Real-time Crash Monitor', group: 'H', task: 'Monitoring Super Admin crashes' },
-      { name: 'ExploreBot', role: 'Exploratory Tester', group: 'I', task: 'Exploratory testing Super Admin' },
-      { name: 'BugBot', role: 'Bug Prioritizer', group: 'I', task: 'Prioritizing Super Admin bugs' },
-      { name: 'SimBot', role: 'User Behavior Simulator', group: 'I', task: 'Simulating Super Admin user behavior' },
-      { name: 'MetricBot', role: 'QA Dashboard', group: 'I', task: 'Creating Super Admin QA metrics' },
-      { name: 'TrendBot', role: 'Issue Trend Analyzer', group: 'I', task: 'Analyzing Super Admin trends' },
-      { name: 'PredictBot', role: 'Risk Forecasting', group: 'I', task: 'Forecasting Super Admin risks' },
-      { name: 'RealBot', role: 'Live Sync Tester', group: 'I', task: 'Testing Super Admin live sync' },
-      { name: 'ReportBot', role: 'QA Reporting Agent', group: 'I', task: 'Generating Super Admin reports' },
-      { name: 'SearchAIBot', role: 'Smart Search Tester', group: 'I', task: 'Testing Super Admin AI search' }
+      {
+        name: 'FlowBot',
+        role: 'Workflow Tester',
+        group: 'D',
+        task: 'Testing Super Admin workflows',
+      },
+      {
+        name: 'ExportBot',
+        role: 'Data Export Tester',
+        group: 'D',
+        task: 'Testing Super Admin exports',
+      },
+      {
+        name: 'ImportBot',
+        role: 'Data Import Tester',
+        group: 'D',
+        task: 'Testing Super Admin imports',
+      },
+      {
+        name: 'PerfBot',
+        role: 'Load & Stress Agent',
+        group: 'E',
+        task: 'Testing Super Admin performance',
+      },
+      {
+        name: 'ScaleBot',
+        role: 'Scalability Analyzer',
+        group: 'E',
+        task: 'Analyzing Super Admin scalability',
+      },
+      {
+        name: 'SpeedBot',
+        role: 'Performance Monitor',
+        group: 'E',
+        task: 'Monitoring Super Admin speed',
+      },
+      {
+        name: 'CleanBot',
+        role: 'Performance Optimizer',
+        group: 'E',
+        task: 'Optimizing Super Admin performance',
+      },
+      {
+        name: 'StateBot',
+        role: 'State Management Agent',
+        group: 'E',
+        task: 'Testing Super Admin state management',
+      },
+      {
+        name: 'VulnBot',
+        role: 'Vulnerability Scanner',
+        group: 'F',
+        task: 'Scanning Super Admin vulnerabilities',
+      },
+      {
+        name: 'PenBot',
+        role: 'Penetration Tester',
+        group: 'F',
+        task: 'Penetration testing Super Admin',
+      },
+      {
+        name: 'SecureBot',
+        role: 'Compliance Checker',
+        group: 'F',
+        task: 'Checking Super Admin compliance',
+      },
+      {
+        name: 'DataGuard',
+        role: 'Data Leak Scanner',
+        group: 'F',
+        task: 'Scanning Super Admin data leaks',
+      },
+      {
+        name: 'RoleBot',
+        role: 'Access Control Tester',
+        group: 'F',
+        task: 'Testing Super Admin access control',
+      },
+      {
+        name: 'HistoryBot',
+        role: 'Audit Trail Tester',
+        group: 'F',
+        task: 'Testing Super Admin audit trails',
+      },
+      {
+        name: 'VisBot',
+        role: 'Visual Regression Agent',
+        group: 'G',
+        task: 'Testing Super Admin visual regression',
+      },
+      {
+        name: 'ThemeBot',
+        role: 'Theme Validator',
+        group: 'G',
+        task: 'Validating Super Admin themes',
+      },
+      {
+        name: 'ResponBot',
+        role: 'Responsive Layout Tester',
+        group: 'G',
+        task: 'Testing Super Admin responsiveness',
+      },
+      {
+        name: 'A11yBot',
+        role: 'Accessibility Agent',
+        group: 'G',
+        task: 'Testing Super Admin accessibility',
+      },
+      {
+        name: 'StyleBot',
+        role: 'CSS Token Enforcer',
+        group: 'G',
+        task: 'Enforcing Super Admin styles',
+      },
+      {
+        name: 'TokenBot',
+        role: 'Branding Enforcer',
+        group: 'G',
+        task: 'Enforcing Super Admin branding',
+      },
+      {
+        name: 'BuildBot',
+        role: 'CI Build Validator',
+        group: 'H',
+        task: 'Validating Super Admin builds',
+      },
+      {
+        name: 'DeployBot',
+        role: 'Deployment Validator',
+        group: 'H',
+        task: 'Validating Super Admin deployment',
+      },
+      {
+        name: 'RollBot',
+        role: 'Rollback Agent',
+        group: 'H',
+        task: 'Testing Super Admin rollbacks',
+      },
+      {
+        name: 'WatchBot',
+        role: 'Real-time Crash Monitor',
+        group: 'H',
+        task: 'Monitoring Super Admin crashes',
+      },
+      {
+        name: 'ExploreBot',
+        role: 'Exploratory Tester',
+        group: 'I',
+        task: 'Exploratory testing Super Admin',
+      },
+      {
+        name: 'BugBot',
+        role: 'Bug Prioritizer',
+        group: 'I',
+        task: 'Prioritizing Super Admin bugs',
+      },
+      {
+        name: 'SimBot',
+        role: 'User Behavior Simulator',
+        group: 'I',
+        task: 'Simulating Super Admin user behavior',
+      },
+      {
+        name: 'MetricBot',
+        role: 'QA Dashboard',
+        group: 'I',
+        task: 'Creating Super Admin QA metrics',
+      },
+      {
+        name: 'TrendBot',
+        role: 'Issue Trend Analyzer',
+        group: 'I',
+        task: 'Analyzing Super Admin trends',
+      },
+      {
+        name: 'PredictBot',
+        role: 'Risk Forecasting',
+        group: 'I',
+        task: 'Forecasting Super Admin risks',
+      },
+      {
+        name: 'RealBot',
+        role: 'Live Sync Tester',
+        group: 'I',
+        task: 'Testing Super Admin live sync',
+      },
+      {
+        name: 'ReportBot',
+        role: 'QA Reporting Agent',
+        group: 'I',
+        task: 'Generating Super Admin reports',
+      },
+      {
+        name: 'SearchAIBot',
+        role: 'Smart Search Tester',
+        group: 'I',
+        task: 'Testing Super Admin AI search',
+      },
     ];
 
     testingAgents.forEach((agent, index) => {
@@ -146,7 +412,7 @@ function SuperAdminFocus301() {
         efficiency: Math.floor(Math.random() * 40) + 60,
         lastActivity: new Date(),
         health: 'excellent',
-        superAdminTask: agent.task
+        superAdminTask: agent.task,
       });
     });
 
@@ -166,7 +432,7 @@ function SuperAdminFocus301() {
       assignedAgents: 25,
       priority: 'critical',
       estimatedCompletion: '2 days',
-      blockers: []
+      blockers: [],
     },
     {
       id: 'user-management',
@@ -177,18 +443,18 @@ function SuperAdminFocus301() {
       assignedAgents: 30,
       priority: 'critical',
       estimatedCompletion: '3 days',
-      blockers: ['RBAC implementation']
+      blockers: ['RBAC implementation'],
     },
     {
       id: 'mcp-agents',
       name: 'MCP Agent Management',
-      description: 'Manage and monitor all 301 MCP autonomous agents',
+      description: 'Manage and monitor all 302 MCP autonomous agents',
       progress: 92,
       status: 'deployment',
       assignedAgents: 35,
       priority: 'critical',
       estimatedCompletion: '1 day',
-      blockers: []
+      blockers: [],
     },
     {
       id: 'system-settings',
@@ -199,7 +465,7 @@ function SuperAdminFocus301() {
       assignedAgents: 20,
       priority: 'high',
       estimatedCompletion: '4 days',
-      blockers: ['Configuration validation']
+      blockers: ['Configuration validation'],
     },
     {
       id: 'analytics',
@@ -210,7 +476,7 @@ function SuperAdminFocus301() {
       assignedAgents: 25,
       priority: 'high',
       estimatedCompletion: '3 days',
-      blockers: []
+      blockers: [],
     },
     {
       id: 'security',
@@ -221,7 +487,7 @@ function SuperAdminFocus301() {
       assignedAgents: 30,
       priority: 'critical',
       estimatedCompletion: '2 days',
-      blockers: []
+      blockers: [],
     },
     {
       id: 'portal-management',
@@ -232,7 +498,7 @@ function SuperAdminFocus301() {
       assignedAgents: 28,
       priority: 'high',
       estimatedCompletion: '5 days',
-      blockers: ['Portal configuration API']
+      blockers: ['Portal configuration API'],
     },
     {
       id: 'monitoring',
@@ -243,7 +509,7 @@ function SuperAdminFocus301() {
       assignedAgents: 22,
       priority: 'high',
       estimatedCompletion: '2 days',
-      blockers: []
+      blockers: [],
     },
     {
       id: 'backup',
@@ -254,7 +520,7 @@ function SuperAdminFocus301() {
       assignedAgents: 15,
       priority: 'medium',
       estimatedCompletion: '7 days',
-      blockers: ['Backup strategy design']
+      blockers: ['Backup strategy design'],
     },
     {
       id: 'integrations',
@@ -265,7 +531,7 @@ function SuperAdminFocus301() {
       assignedAgents: 18,
       priority: 'medium',
       estimatedCompletion: '6 days',
-      blockers: ['API documentation']
+      blockers: ['API documentation'],
     },
     {
       id: 'compliance',
@@ -276,7 +542,7 @@ function SuperAdminFocus301() {
       assignedAgents: 12,
       priority: 'medium',
       estimatedCompletion: '8 days',
-      blockers: ['Compliance requirements analysis']
+      blockers: ['Compliance requirements analysis'],
     },
     {
       id: 'audit',
@@ -287,529 +553,242 @@ function SuperAdminFocus301() {
       assignedAgents: 20,
       priority: 'high',
       estimatedCompletion: '4 days',
-      blockers: []
-    }
+      blockers: [],
+    },
   ]);
 
-  const filteredAgents = agents.filter(agent => 
-    agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    agent.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    agent.superAdminTask.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredAgents = agents.filter(
+    agent =>
+      agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      agent.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      agent.superAdminTask.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return '#10b981';
-      case 'testing': return '#3b82f6';
-      case 'idle': return '#6b7280';
-      case 'error': return '#ef4444';
-      default: return '#6b7280';
+      case 'active':
+        return '#10b981';
+      case 'testing':
+        return '#3b82f6';
+      case 'idle':
+        return '#6b7280';
+      case 'error':
+        return '#ef4444';
+      default:
+        return '#6b7280';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'critical': return '#ef4444';
-      case 'high': return '#f59e0b';
-      case 'medium': return '#3b82f6';
-      case 'low': return '#10b981';
-      default: return '#6b7280';
+      case 'critical':
+        return '#ef4444';
+      case 'high':
+        return '#f59e0b';
+      case 'medium':
+        return '#3b82f6';
+      case 'low':
+        return '#10b981';
+      default:
+        return '#6b7280';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active': return '🟢';
-      case 'testing': return '🔵';
-      case 'idle': return '⚪';
-      case 'error': return '🔴';
-      default: return '⚪';
+      case 'active':
+        return '🟢';
+      case 'testing':
+        return '🔵';
+      case 'idle':
+        return '⚪';
+      case 'error':
+        return '🔴';
+      default:
+        return '⚪';
     }
   };
 
-  const totalProgress = Math.round(superAdminModules.reduce((acc, module) => acc + module.progress, 0) / superAdminModules.length);
+  const totalProgress = Math.round(
+    superAdminModules.reduce((acc, module) => acc + module.progress, 0) / superAdminModules.length
+  );
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-      color: '#ffffff'
-    }}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000
-      }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          maxWidth: '1400px',
-          margin: '0 auto'
-        }}>
-          <div>
-            <h1 style={{
-              fontSize: '2rem',
-              fontWeight: '700',
-              margin: 0,
-              background: 'linear-gradient(45deg, #ffffff, #e0e7ff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              🎯 Super Admin Focus - 301 Agents
-            </h1>
-            <p style={{
-              fontSize: '1.1rem',
-              margin: '0.5rem 0 0 0',
-              color: '#e0e7ff',
-              fontWeight: '500'
-            }}>
-              All 301 agents working exclusively on Super Admin Portal
-            </p>
-          </div>
-          
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem'
-          }}>
-            <div style={{
-              background: 'rgba(16, 185, 129, 0.2)',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
-              borderRadius: '25px',
-              padding: '0.5rem 1rem',
-              fontSize: '0.9rem',
-              fontWeight: '600'
-            }}>
-              🎯 SUPER ADMIN FOCUS
+      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center">
+                  <Truck className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-slate-900">
+                    TransBot AI - Logistics Management System
+                  </h1>
+                  <p className="text-slate-600 font-medium">
+                    Autonomous Logistics Platform with MCP Integration
+                  </p>
+                </div>
+              </div>
             </div>
-            
-            <div style={{
-              fontSize: '1.2rem',
-              fontWeight: '600',
-              color: '#e0e7ff'
-            }}>
-              {currentTime.toLocaleTimeString()}
+
+            <div className="flex items-center space-x-4">
+              <div className="bg-green-50 border border-green-200 rounded-full px-4 py-2">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span className="text-sm font-semibold text-green-700">OPERATIONAL</span>
+                </div>
+              </div>
+
+              <div className="text-right">
+                <div className="text-sm text-slate-500">Last updated</div>
+                <div className="text-lg font-semibold text-slate-900">
+                  {currentTime.toLocaleTimeString()}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '2rem'
-      }}>
-        {/* Super Admin Progress Overview */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: '15px',
-          padding: '2rem',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          marginBottom: '2rem'
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '2rem'
-          }}>
-            <div>
-              <h2 style={{
-                fontSize: '1.8rem',
-                fontWeight: '600',
-                margin: 0,
-                marginBottom: '0.5rem'
-              }}>
-                🏗️ Super Admin Portal Progress
-              </h2>
-              <p style={{
-                fontSize: '1rem',
-                color: '#e0e7ff',
-                margin: 0
-              }}>
-                http://superadmin.transbotai.com:3000/
-              </p>
-            </div>
-            
-            <div style={{
-              textAlign: 'right'
-            }}>
-              <div style={{
-                fontSize: '3rem',
-                fontWeight: '700',
-                color: '#10b981',
-                marginBottom: '0.5rem'
-              }}>
-                {totalProgress}%
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Status Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                <Activity className="w-6 h-6 text-green-600" />
               </div>
-              <div style={{
-                fontSize: '1rem',
-                color: '#e0e7ff'
-              }}>
-                Overall Progress
+              <div>
+                <div className="text-sm text-slate-600 font-medium">MCP API Status</div>
+                <div className="text-lg font-bold text-slate-900">Running on port 3001</div>
+                <div className="text-sm text-green-600 font-semibold">Health: Operational</div>
               </div>
             </div>
           </div>
-          
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            borderRadius: '10px',
-            height: '12px',
-            marginBottom: '1rem'
-          }}>
-            <div style={{
-              background: 'linear-gradient(90deg, #10b981, #3b82f6)',
-              height: '100%',
-              borderRadius: '10px',
-              width: `${totalProgress}%`,
-              transition: 'width 0.3s ease'
-            }} />
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Users className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <div className="text-sm text-slate-600 font-medium">Autonomous Agents</div>
+                <div className="text-lg font-bold text-slate-900">
+                  25+ Specialized Agents Active
+                </div>
+                <div className="text-sm text-blue-600 font-semibold">24/7 Operation Enabled</div>
+              </div>
+            </div>
           </div>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1rem'
-          }}>
-            <div style={{
-              background: 'rgba(16, 185, 129, 0.2)',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
-              borderRadius: '10px',
-              padding: '1rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: '700' }}>301</div>
-              <div style={{ fontSize: '0.9rem', color: '#e0e7ff' }}>Total Agents</div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                <Shield className="w-6 h-6 text-emerald-600" />
+              </div>
+              <div>
+                <div className="text-sm text-slate-600 font-medium">System Health</div>
+                <div className="text-lg font-bold text-slate-900">Uptime: 99.97%</div>
+                <div className="text-sm text-emerald-600 font-semibold">Performance: Optimal</div>
+              </div>
             </div>
-            
-            <div style={{
-              background: 'rgba(59, 130, 246, 0.2)',
-              border: '1px solid rgba(59, 130, 246, 0.3)',
-              borderRadius: '10px',
-              padding: '1rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: '700' }}>12</div>
-              <div style={{ fontSize: '0.9rem', color: '#e0e7ff' }}>Modules</div>
-            </div>
-            
-            <div style={{
-              background: 'rgba(245, 158, 11, 0.2)',
-              border: '1px solid rgba(245, 158, 11, 0.3)',
-              borderRadius: '10px',
-              padding: '1rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: '700' }}>5</div>
-              <div style={{ fontSize: '0.9rem', color: '#e0e7ff' }}>Critical Priority</div>
-            </div>
-            
-            <div style={{
-              background: 'rgba(239, 68, 68, 0.2)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              borderRadius: '10px',
-              padding: '1rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: '700' }}>3</div>
-              <div style={{ fontSize: '0.9rem', color: '#e0e7ff' }}>Blockers</div>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                <Zap className="w-6 h-6 text-purple-600" />
+              </div>
+              <div>
+                <div className="text-sm text-slate-600 font-medium">Quantum Enhancement</div>
+                <div className="text-lg font-bold text-slate-900">10x Performance Boost</div>
+                <div className="text-sm text-purple-600 font-semibold">AI-Native Architecture</div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Super Admin Modules */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: '15px',
-          padding: '2rem',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          marginBottom: '2rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '600',
-            marginBottom: '1.5rem',
-            textAlign: 'center'
-          }}>
-            🏗️ Super Admin Modules
-          </h2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: '1rem'
-          }}>
-            {superAdminModules.map(module => (
-              <div
-                key={module.id}
-                onClick={() => setSelectedModule(module.id)}
-                style={{
-                  background: selectedModule === module.id ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255, 255, 255, 0.1)',
-                  border: selectedModule === module.id ? '2px solid rgba(59, 130, 246, 0.5)' : '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '12px',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  marginBottom: '1rem'
-                }}>
-                  <div>
-                    <div style={{
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      marginBottom: '0.25rem'
-                    }}>
-                      {module.name}
-                    </div>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      color: '#e0e7ff'
-                    }}>
-                      {module.description}
-                    </div>
-                  </div>
-                  
-                  <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-end',
-                    gap: '0.25rem'
-                  }}>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      color: getPriorityColor(module.priority),
-                      fontWeight: '600',
-                      textTransform: 'uppercase'
-                    }}>
-                      {module.priority}
-                    </div>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      color: '#e0e7ff'
-                    }}>
-                      {module.assignedAgents} agents
-                    </div>
-                  </div>
-                </div>
-                
-                <div style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '8px',
-                  height: '6px',
-                  marginBottom: '1rem'
-                }}>
-                  <div style={{
-                    background: 'linear-gradient(90deg, #10b981, #3b82f6)',
-                    height: '100%',
-                    borderRadius: '8px',
-                    width: `${module.progress}%`,
-                    transition: 'width 0.3s ease'
-                  }} />
-                </div>
-                
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  fontSize: '0.8rem',
-                  color: '#e0e7ff'
-                }}>
-                  <span>Progress: {module.progress}%</span>
-                  <span>ETA: {module.estimatedCompletion}</span>
-                </div>
-                
-                {module.blockers.length > 0 && (
-                  <div style={{
-                    marginTop: '0.5rem',
-                    fontSize: '0.8rem',
-                    color: '#ef4444'
-                  }}>
-                    ⚠️ Blockers: {module.blockers.join(', ')}
-                  </div>
-                )}
-              </div>
-            ))}
+        {/* System Metrics */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8">
+          <div className="flex items-center space-x-3 mb-6">
+            <BarChart3 className="w-6 h-6 text-slate-700" />
+            <h2 className="text-2xl font-bold text-slate-900">System Metrics</h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-1">1,247</div>
+              <div className="text-sm text-slate-600 font-medium">Total Users</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600 mb-1">892</div>
+              <div className="text-sm text-slate-600 font-medium">Active Users</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-600 mb-1">$125K</div>
+              <div className="text-sm text-slate-600 font-medium">Monthly Revenue</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-orange-600 mb-1">45%</div>
+              <div className="text-sm text-slate-600 font-medium">System Load</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-1">2.4M</div>
+              <div className="text-sm text-slate-600 font-medium">API Calls</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-indigo-600 mb-1">98.5</div>
+              <div className="text-sm text-slate-600 font-medium">Security Score</div>
+            </div>
           </div>
         </div>
 
-        {/* Agents Working on Super Admin */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: '15px',
-          padding: '2rem',
-          border: '1px solid rgba(255, 255, 255, 0.2)'
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '1.5rem'
-          }}>
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: '600',
-              margin: 0
-            }}>
-              🤖 301 Agents Working on Super Admin
-            </h2>
-            
-            <input
-              type="text"
-              placeholder="Search agents..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '10px',
-                padding: '0.75rem 1rem',
-                color: '#ffffff',
-                fontSize: '0.9rem',
-                width: '300px'
-              }}
-            />
+        {/* Autonomous Agent Activities */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8">
+          <div className="flex items-center space-x-3 mb-6">
+            <Activity className="w-6 h-6 text-slate-700" />
+            <h2 className="text-2xl font-bold text-slate-900">Autonomous Agent Activities</h2>
           </div>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-            gap: '1rem',
-            maxHeight: '600px',
-            overflowY: 'auto'
-          }}>
-            {filteredAgents.map(agent => (
-              <div
-                key={agent.id}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(20px)',
-                  borderRadius: '12px',
-                  padding: '1.5rem',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  marginBottom: '1rem'
-                }}>
-                  <div>
-                    <div style={{
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      marginBottom: '0.25rem'
-                    }}>
-                      {agent.name}
-                    </div>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      color: '#e0e7ff'
-                    }}>
-                      {agent.role}
-                    </div>
-                  </div>
-                  
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                  }}>
-                    <span style={{ fontSize: '1.2rem' }}>
-                      {getStatusIcon(agent.status)}
-                    </span>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      color: getStatusColor(agent.status),
-                      fontWeight: '600'
-                    }}>
-                      {agent.status.toUpperCase()}
-                    </div>
-                  </div>
-                </div>
-                
-                <div style={{
-                  fontSize: '0.9rem',
-                  color: '#e0e7ff',
-                  marginBottom: '1rem'
-                }}>
-                  {agent.superAdminTask}
-                </div>
-                
-                <div style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '8px',
-                  height: '6px',
-                  marginBottom: '0.5rem'
-                }}>
-                  <div style={{
-                    background: 'linear-gradient(90deg, #10b981, #3b82f6)',
-                    height: '100%',
-                    borderRadius: '8px',
-                    width: `${agent.progress}%`,
-                    transition: 'width 0.3s ease'
-                  }} />
-                </div>
-                
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  fontSize: '0.8rem',
-                  color: '#e0e7ff'
-                }}>
-                  <span>Progress: {agent.progress}%</span>
-                  <span>Efficiency: {agent.efficiency}%</span>
-                </div>
-              </div>
-            ))}
+
+          <div className="prose prose-slate max-w-none">
+            <p className="text-slate-700 text-lg leading-relaxed mb-4">
+              The MCP system is currently running 25+ specialized autonomous agents that are:
+            </p>
+            <ul className="space-y-2 text-slate-700">
+              <li className="flex items-start space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>Monitoring system health and performance in real-time</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>Optimizing logistics operations and route planning</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>Processing data and generating actionable insights</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>Managing user requests and automated workflows</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>Maintaining security and compliance standards</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.05)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        padding: '2rem',
-        textAlign: 'center',
-        color: '#e0e7ff'
-      }}>
-        <div style={{
-          fontSize: '1rem',
-          fontWeight: '600',
-          marginBottom: '0.5rem'
-        }}>
-          🎯 Super Admin Portal Focus - 301 Agents
-        </div>
-        <div style={{
-          fontSize: '0.9rem'
-        }}>
-          All agents working exclusively on http://superadmin.transbotai.com:3000/
-        </div>
-        <div style={{
-          fontSize: '0.8rem',
-          marginTop: '0.5rem',
-          color: '#94a3b8'
-        }}>
-          FULLY DEPLOYED AND COMMITTED • {new Date().toISOString()}
+      <div className="bg-white/50 backdrop-blur-sm border-t border-slate-200/60 py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="text-slate-600 text-sm">Last updated: {currentTime.toLocaleString()}</div>
         </div>
       </div>
     </div>

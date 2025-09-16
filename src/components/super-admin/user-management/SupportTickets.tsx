@@ -23,6 +23,7 @@ import {
   Activity,
   BarChart3,
   PieChart,
+  Globe,
 } from 'lucide-react';
 
 /**
@@ -70,8 +71,6 @@ interface TicketMetric {
 //   id: string;
 //   name: string;
 //   description: string;
-//   ticketCount: number;
-//   avgResolutionTime: number;
 //   color: string;
 // }
 
@@ -267,7 +266,7 @@ export const SupportTickets: React.FC = () => {
       case 'phone':
         return Phone;
       case 'web':
-        return Activity;
+        return Globe;
       case 'api':
         return Activity;
       default:

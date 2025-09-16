@@ -93,9 +93,9 @@ export const DevOpsAnalytics: React.FC = () => {
   const [performanceMetrics, setPerformanceMetrics] = useState<PerformanceMetric[]>([]);
   const [reliabilityMetrics, setReliabilityMetrics] = useState<ReliabilityMetric[]>([]);
   const [costMetrics, setCostMetrics] = useState<CostMetric[]>([]);
-  const [selectedTab, setSelectedTab] = useState<
-    'overview' | 'deployments' | 'performance' | 'reliability' | 'cost'
-  >('overview');
+  const [selectedTab, setSelectedTab] = useState<'overview' | 'performance' | 'costs' | 'security'>(
+    'overview'
+  );
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
 
   useEffect(() => {
@@ -494,9 +494,7 @@ export const DevOpsAnalytics: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() =>
-                  setSelectedTab(
-                    tab.id as 'overview' | 'deployments' | 'performance' | 'reliability' | 'cost'
-                  )
+                  setSelectedTab(tab.id as 'overview' | 'performance' | 'costs' | 'security')
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
@@ -585,7 +583,7 @@ export const DevOpsAnalytics: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'deployments' && (
+              {selectedTab === 'performance' && (
                 <motion.div
                   key="deployments"
                   initial={{ opacity: 0, y: 20 }}
@@ -727,7 +725,7 @@ export const DevOpsAnalytics: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'reliability' && (
+              {selectedTab === 'costs' && (
                 <motion.div
                   key="reliability"
                   initial={{ opacity: 0, y: 20 }}
@@ -802,7 +800,7 @@ export const DevOpsAnalytics: React.FC = () => {
                 </motion.div>
               )}
 
-              {selectedTab === 'cost' && (
+              {selectedTab === 'security' && (
                 <motion.div
                   key="cost"
                   initial={{ opacity: 0, y: 20 }}

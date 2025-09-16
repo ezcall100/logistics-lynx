@@ -191,7 +191,9 @@ const mockData = {
 };
 
 const SuperAdminPortal: React.FC = () => {
-  const { darkMode, toggleDarkMode } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
+  const toggleDarkMode = toggleTheme;
   const [activeTab, setActiveTab] = useState('system-overview');
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

@@ -70,7 +70,9 @@ export const MCPOverview: React.FC = () => {
   const [agents, setAgents] = useState<MCPAgent[]>([]);
   const [tasks, setTasks] = useState<MCPTask[]>([]);
   const [metrics, setMetrics] = useState<MCPMetric[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'agents' | 'tasks' | 'performance' | 'analytics'>('overview');
+  const [selectedTab, setSelectedTab] = useState<
+    'overview' | 'agents' | 'tasks' | 'performance' | 'analytics'
+  >('overview');
   const [searchQuery, setSearchQuery] = useState('');
   // const [autoRefresh, setAutoRefresh] = useState(true);
 
@@ -201,11 +203,46 @@ export const MCPOverview: React.FC = () => {
     ];
 
     const mockMetrics: MCPMetric[] = [
-      { name: 'Total Agents', value: 301, unit: 'agents', trend: 'up', threshold: 350, status: 'normal' },
-      { name: 'Active Agents', value: 287, unit: 'agents', trend: 'up', threshold: 300, status: 'normal' },
-      { name: 'Tasks Completed Today', value: 1247, unit: 'tasks', trend: 'up', threshold: 1000, status: 'normal' },
-      { name: 'Average Performance', value: 91.2, unit: '%', trend: 'up', threshold: 85, status: 'normal' },
-      { name: 'System Efficiency', value: 94.8, unit: '%', trend: 'up', threshold: 90, status: 'normal' },
+      {
+        name: 'Total Agents',
+        value: 302,
+        unit: 'agents',
+        trend: 'up',
+        threshold: 350,
+        status: 'normal',
+      },
+      {
+        name: 'Active Agents',
+        value: 288,
+        unit: 'agents',
+        trend: 'up',
+        threshold: 300,
+        status: 'normal',
+      },
+      {
+        name: 'Tasks Completed Today',
+        value: 1247,
+        unit: 'tasks',
+        trend: 'up',
+        threshold: 1000,
+        status: 'normal',
+      },
+      {
+        name: 'Average Performance',
+        value: 91.2,
+        unit: '%',
+        trend: 'up',
+        threshold: 85,
+        status: 'normal',
+      },
+      {
+        name: 'System Efficiency',
+        value: 94.8,
+        unit: '%',
+        trend: 'up',
+        threshold: 90,
+        status: 'normal',
+      },
       { name: 'Error Rate', value: 0.8, unit: '%', trend: 'down', threshold: 2, status: 'normal' },
     ];
 
@@ -280,9 +317,11 @@ export const MCPOverview: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">MCP Overview</h1>
-            <p className="text-slate-600 dark:text-slate-400">Intelligent agent orchestration and management center</p>
+            <p className="text-slate-600 dark:text-slate-400">
+              Intelligent agent orchestration and management center
+            </p>
           </div>
-          
+
           <div className="flex gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -341,13 +380,20 @@ export const MCPOverview: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Agents</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Active Agents
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {metrics.find(m => m.name === 'Active Agents')?.value}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
                   <CheckCircle className="w-4 h-4 mr-1" />
-                  {Math.round((metrics.find(m => m.name === 'Active Agents')?.value || 0) / (metrics.find(m => m.name === 'Total Agents')?.value || 1) * 100)}% online
+                  {Math.round(
+                    ((metrics.find(m => m.name === 'Active Agents')?.value || 0) /
+                      (metrics.find(m => m.name === 'Total Agents')?.value || 1)) *
+                      100
+                  )}
+                  % online
                 </p>
               </div>
               <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
@@ -364,7 +410,9 @@ export const MCPOverview: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Tasks Completed</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Tasks Completed
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {metrics.find(m => m.name === 'Tasks Completed Today')?.value.toLocaleString()}
                 </p>
@@ -387,7 +435,9 @@ export const MCPOverview: React.FC = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">System Efficiency</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  System Efficiency
+                </p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {metrics.find(m => m.name === 'System Efficiency')?.value}%
                 </p>
@@ -409,7 +459,7 @@ export const MCPOverview: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as any)}
+                onClick={() => setSelectedTab(tab.id)}
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -435,7 +485,9 @@ export const MCPOverview: React.FC = () => {
                 >
                   {/* Agent Status Grid */}
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Agent Status Overview</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      Agent Status Overview
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {agents.slice(0, 6).map((agent, index) => (
                         <motion.div
@@ -449,30 +501,42 @@ export const MCPOverview: React.FC = () => {
                             <div className="flex items-center space-x-3">
                               {getAgentTypeIcon(agent.type)}
                               <div>
-                                <h4 className="font-semibold text-slate-900 dark:text-white">{agent.name}</h4>
-                                <p className="text-sm text-slate-600 dark:text-slate-400">{agent.currentTask}</p>
+                                <h4 className="font-semibold text-slate-900 dark:text-white">
+                                  {agent.name}
+                                </h4>
+                                <p className="text-sm text-slate-600 dark:text-slate-400">
+                                  {agent.currentTask}
+                                </p>
                               </div>
                             </div>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}>
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}
+                            >
                               {agent.status}
                             </span>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">Performance</span>
+                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                                Performance
+                              </span>
                               <span className="text-sm font-medium text-slate-900 dark:text-white">
                                 {agent.performance}%
                               </span>
                             </div>
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">Tasks Completed</span>
+                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                                Tasks Completed
+                              </span>
                               <span className="text-sm font-medium text-slate-900 dark:text-white">
                                 {agent.tasksCompleted.toLocaleString()}
                               </span>
                             </div>
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">Workload</span>
+                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                                Workload
+                              </span>
                               <span className="text-sm font-medium text-slate-900 dark:text-white">
                                 {agent.workload}%
                               </span>
@@ -485,7 +549,9 @@ export const MCPOverview: React.FC = () => {
 
                   {/* System Metrics */}
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">System Metrics</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      System Metrics
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {metrics.map((metric, index) => (
                         <motion.div
@@ -496,7 +562,9 @@ export const MCPOverview: React.FC = () => {
                           className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4"
                         >
                           <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">{metric.name}</h4>
+                            <h4 className="font-medium text-slate-900 dark:text-white">
+                              {metric.name}
+                            </h4>
                             <div className="flex items-center space-x-1">
                               {metric.trend === 'up' ? (
                                 <TrendingUp className="w-4 h-4 text-green-500" />
@@ -513,10 +581,15 @@ export const MCPOverview: React.FC = () => {
                           <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
                             <div
                               className={`h-2 rounded-full ${
-                                metric.status === 'critical' ? 'bg-red-500' :
-                                metric.status === 'warning' ? 'bg-yellow-500' : 'bg-green-500'
+                                metric.status === 'critical'
+                                  ? 'bg-red-500'
+                                  : metric.status === 'warning'
+                                    ? 'bg-yellow-500'
+                                    : 'bg-green-500'
                               }`}
-                              style={{ width: `${Math.min((metric.value / metric.threshold) * 100, 100)}%` }}
+                              style={{
+                                width: `${Math.min((metric.value / metric.threshold) * 100, 100)}%`,
+                              }}
                             ></div>
                           </div>
                         </motion.div>
@@ -548,8 +621,12 @@ export const MCPOverview: React.FC = () => {
                             {getAgentTypeIcon(agent.type)}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{agent.name}</h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">{agent.currentTask}</p>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {agent.name}
+                            </h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                              {agent.currentTask}
+                            </p>
                             <div className="flex items-center space-x-4 mt-2">
                               <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
                                 v{agent.version}
@@ -564,7 +641,9 @@ export const MCPOverview: React.FC = () => {
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}
+                          >
                             {agent.status}
                           </span>
                           <div className="text-right">
@@ -604,8 +683,12 @@ export const MCPOverview: React.FC = () => {
                             <Activity className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{task.title}</h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">{task.description}</p>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                              {task.title}
+                            </h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                              {task.description}
+                            </p>
                             <div className="flex items-center space-x-4 mt-2">
                               <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
                                 {task.agent}
@@ -620,10 +703,14 @@ export const MCPOverview: React.FC = () => {
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}
+                          >
                             {task.priority}
                           </span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(task.status)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(task.status)}`}
+                          >
                             {task.status}
                           </span>
                           <div className="text-right">
@@ -652,21 +739,29 @@ export const MCPOverview: React.FC = () => {
                   {/* Performance Charts */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Agent Performance</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Agent Performance
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <BarChart3 className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Performance analytics chart</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Performance analytics chart
+                          </p>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Task Completion Rate</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Task Completion Rate
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <PieChart className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Task completion analytics</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Task completion analytics
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -674,20 +769,31 @@ export const MCPOverview: React.FC = () => {
 
                   {/* Performance Metrics */}
                   <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Performance Metrics</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      Performance Metrics
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {['Efficiency', 'Reliability', 'Workload', 'Response Time'].map((metric, index) => (
-                        <div key={metric} className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">{metric}</h4>
-                            <TrendingUp className="w-5 h-5 text-green-500" />
+                      {['Efficiency', 'Reliability', 'Workload', 'Response Time'].map(
+                        (metric, index) => (
+                          <div key={metric} className="bg-white dark:bg-slate-800 rounded-lg p-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <h4 className="font-medium text-slate-900 dark:text-white">
+                                {metric}
+                              </h4>
+                              <TrendingUp className="w-5 h-5 text-green-500" />
+                            </div>
+                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                              <div
+                                className="h-2 rounded-full bg-green-500"
+                                style={{ width: `${85 + index * 3}%` }}
+                              ></div>
+                            </div>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+                              {85 + index * 3}%
+                            </p>
                           </div>
-                          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                            <div className="h-2 rounded-full bg-green-500" style={{ width: `${85 + index * 3}%` }}></div>
-                          </div>
-                          <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">{85 + index * 3}%</p>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -704,21 +810,29 @@ export const MCPOverview: React.FC = () => {
                   {/* Analytics Dashboard */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Agent Activity</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        Agent Activity
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <LineChart className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Real-time agent activity chart</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            Real-time agent activity chart
+                          </p>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">System Health</h3>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        System Health
+                      </h3>
                       <div className="h-64 flex items-center justify-center">
                         <div className="text-center">
                           <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">System health monitoring</p>
+                          <p className="text-slate-500 dark:text-slate-400">
+                            System health monitoring
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -726,7 +840,9 @@ export const MCPOverview: React.FC = () => {
 
                   {/* Analytics Summary */}
                   <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Analytics Summary</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      Analytics Summary
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {[
                         { name: 'Total Tasks', value: '15,247', trend: '+12%' },
@@ -735,13 +851,19 @@ export const MCPOverview: React.FC = () => {
                         { name: 'System Uptime', value: '99.9%', trend: 'Stable' },
                         { name: 'Error Rate', value: '0.8%', trend: '-0.2%' },
                         { name: 'Resource Usage', value: '67%', trend: '+5%' },
-                      ].map((item) => (
+                      ].map(item => (
                         <div key={item.name} className="bg-white dark:bg-slate-800 rounded-lg p-4">
                           <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">{item.name}</h4>
-                            <span className="text-sm text-green-600 dark:text-green-400">{item.trend}</span>
+                            <h4 className="font-medium text-slate-900 dark:text-white">
+                              {item.name}
+                            </h4>
+                            <span className="text-sm text-green-600 dark:text-green-400">
+                              {item.trend}
+                            </span>
                           </div>
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white">{item.value}</div>
+                          <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                            {item.value}
+                          </div>
                         </div>
                       ))}
                     </div>

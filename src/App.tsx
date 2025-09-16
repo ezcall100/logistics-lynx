@@ -56,6 +56,7 @@ import DeveloperPortal from './pages/portals/developer/DeveloperPortal';
 import AdminPortal from './pages/portals/admin/AdminPortal';
 import SuperAdminPortal from './pages/portals/super-admin/SuperAdminPortal';
 import MCPAgentsPortal from './pages/portals/mcp-agents/MCPAgentsPortal';
+import { MCPDashboard } from './pages/MCPDashboard';
 import AutonomousPortal from './pages/portals/autonomous/AutonomousPortal';
 import BrokerPortal from './pages/portals/broker/BrokerPortal';
 import CarrierPortal from './pages/portals/carrier/CarrierPortal';
@@ -165,6 +166,7 @@ function App() {
                 <Route path="/super-admin" element={<SuperAdminPortal />} />
                 <Route path="/super-admin/*" element={<SuperAdminPortal />} />
                 <Route path="/mcp-agents/*" element={<MCPAgentsPortal />} />
+                <Route path="/mcp-dashboard" element={<MCPDashboard />} />
                 <Route path="/get-started" element={<GetStartedPage />} />
                 <Route path="/admin/subdomains" element={<SubdomainManagement />} />
                 <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />
