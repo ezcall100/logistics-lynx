@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   BarChart3,
@@ -295,17 +295,23 @@ const EnhancedBusinessAnalytics: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
-            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
           </div>
         </div>
       </div>
@@ -313,22 +319,24 @@ const EnhancedBusinessAnalytics: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Business Analytics
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Comprehensive analytics and insights for business performance
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <select
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="7d">Last 7 Days</option>
             <option value="30d">Last 30 Days</option>
@@ -338,73 +346,75 @@ const EnhancedBusinessAnalytics: React.FC = () => {
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setShowDetailedView(!showDetailedView)}
-            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowDetailedView(!showDetailedView)}
+            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            {showDetailedView ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showDetailedView ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{showDetailedView ? 'Simple View' : 'Detailed View'}</span>
           </button>
         </div>
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {filteredMetrics.map((metric, index) => {
           const Icon = metric.icon;
           const ChangeIcon = getChangeIcon(metric.changeType);
           
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-lg ${metric.bgColor}`}>
                   <Icon className={`h-6 w-6 ${metric.color}`} />
                 </div>
                 <div className={`flex items-center space-x-1 text-sm ${getChangeColor(metric.changeType)}`}>
-                  <ChangeIcon className="h-4 w-4" />
+                  <ChangeIcon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{Math.abs(metric.change)}%</span>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.title}
                 </h3>
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.value}
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.description}
                 </p>
               </div>
 
               {showDetailedView && (
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <span>Trend ({metric.period})</span>
                     <span>Last updated: {new Date().toLocaleTimeString()}</span>
                   </div>
-                  <div className="h-16 bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
-                    <div className="flex items-end justify-between h-full">
+                  <div className="h-16 bg-gray-50 dark:bg-gray-700 rounded-lg p-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-end justify-between h-full responsive-container sm:flex-col md:flex-row lg:grid">
                       {metric.trend.map((value, i) => (
                         <div
                           key={i}
-                          className="bg-blue-500 rounded-sm"
+                          className="bg-blue-500 rounded-sm responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{
                             height: `${(value / Math.max(...metric.trend)) * 100}%`,
                             width: `${100 / metric.trend.length}%`,
@@ -421,118 +431,118 @@ const EnhancedBusinessAnalytics: React.FC = () => {
       </div>
 
       {/* Charts and Insights */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* User Growth Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               User Growth
             </h2>
-            <div className="flex items-center space-x-2">
-              <BarChart3 className="h-5 w-5 text-gray-400" />
-              <span className="text-sm text-gray-500">Line Chart</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <BarChart3 className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Line Chart</span>
             </div>
           </div>
           
-          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-            <div className="flex items-end justify-between h-full">
+          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-end justify-between h-full responsive-container sm:flex-col md:flex-row lg:grid">
               {chartData[0]?.data.map((point, i) => (
-                <div key={i} className="flex flex-col items-center space-y-2">
+                <div key={i} className="flex flex-col items-center space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="bg-blue-500 rounded-sm w-8"
+                    className="bg-blue-500 rounded-sm w-8 responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{
                       height: `${(point.y / Math.max(...chartData[0].data.map(d => d.y))) * 200}px`,
                     }}
                   />
-                  <span className="text-xs text-gray-500">{point.x}</span>
+                  <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{point.x}</span>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="mt-4 flex items-center justify-between text-sm">
-            <span className="text-gray-500">Total Growth: +{((chartData[0]?.data[chartData[0].data.length - 1].y - chartData[0]?.data[0].y) / chartData[0]?.data[0].y * 100).toFixed(1)}%</span>
-            <span className="text-blue-600 font-medium">Trending Up</span>
+          <div className="mt-4 flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Total Growth: +{((chartData[0]?.data[chartData[0].data.length - 1].y - chartData[0]?.data[0].y) / chartData[0]?.data[0].y * 100).toFixed(1)}%</span>
+            <span className="text-blue-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Trending Up</span>
           </div>
         </div>
 
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Revenue Growth
             </h2>
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-5 w-5 text-gray-400" />
-              <span className="text-sm text-gray-500">Bar Chart</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Bar Chart</span>
             </div>
           </div>
           
-          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-            <div className="flex items-end justify-between h-full">
+          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-end justify-between h-full responsive-container sm:flex-col md:flex-row lg:grid">
               {chartData[1]?.data.map((point, i) => (
-                <div key={i} className="flex flex-col items-center space-y-2">
+                <div key={i} className="flex flex-col items-center space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="bg-green-500 rounded-sm w-8"
+                    className="bg-green-500 rounded-sm w-8 responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{
                       height: `${(point.y / Math.max(...chartData[1].data.map(d => d.y))) * 200}px`,
                     }}
                   />
-                  <span className="text-xs text-gray-500">{point.x}</span>
+                  <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{point.x}</span>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="mt-4 flex items-center justify-between text-sm">
-            <span className="text-gray-500">Total Growth: +{((chartData[1]?.data[chartData[1].data.length - 1].y - chartData[1]?.data[0].y) / chartData[1]?.data[0].y * 100).toFixed(1)}%</span>
-            <span className="text-green-600 font-medium">Trending Up</span>
+          <div className="mt-4 flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Total Growth: +{((chartData[1]?.data[chartData[1].data.length - 1].y - chartData[1]?.data[0].y) / chartData[1]?.data[0].y * 100).toFixed(1)}%</span>
+            <span className="text-green-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Trending Up</span>
           </div>
         </div>
       </div>
 
       {/* User Segments and Device Usage */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* User Segments */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               User Segments
             </h2>
-            <div className="flex items-center space-x-2">
-              <PieChart className="h-5 w-5 text-gray-400" />
-              <span className="text-sm text-gray-500">Distribution</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <PieChart className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Distribution</span>
             </div>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {userSegments.map((segment) => (
-              <div key={segment.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div className="flex items-center space-x-3">
+              <div key={segment.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div 
-                    className="w-4 h-4 rounded-full"
+                    className="w-4 h-4 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ backgroundColor: segment.color }}
                   />
                   <div>
-                    <div className="font-medium text-gray-900 dark:text-white">
+                    <div className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {segment.name}
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {segment.count.toLocaleString()} users
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-semibold text-gray-900 dark:text-white">
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {segment.percentage}%
                   </div>
                   <div className={`text-sm flex items-center space-x-1 ${
                     segment.trend > 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {segment.trend > 0 ? (
-                      <ArrowUpRight className="h-3 w-3" />
+                      <ArrowUpRight className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                     ) : (
-                      <ArrowDownRight className="h-3 w-3" />
+                      <ArrowDownRight className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                     <span>{Math.abs(segment.trend)}%</span>
                   </div>
@@ -543,41 +553,43 @@ const EnhancedBusinessAnalytics: React.FC = () => {
         </div>
 
         {/* Device Usage */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Device Usage
             </h2>
-            <div className="flex items-center space-x-2">
-              <Globe className="h-5 w-5 text-gray-400" />
-              <span className="text-sm text-gray-500">Platforms</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Globe className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Platforms</span>
             </div>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {deviceUsage.map((device) => {
               const DeviceIcon = device.icon;
               
               return (
-                <div key={device.device} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="flex items-center space-x-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                <div key={device.device} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <DeviceIcon className={`h-5 w-5 ${device.color}`} />
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-white">
+                      <div className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {device.device}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                         {device.count.toLocaleString()} users
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-semibold text-gray-900 dark:text-white">
+                  <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {device.percentage}%
                     </div>
-                    <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2 mt-1">
+                    <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="h-2 rounded-full"
+                        className="h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{
                           width: `${device.percentage}%`,
                           backgroundColor: device.color,
@@ -593,40 +605,40 @@ const EnhancedBusinessAnalytics: React.FC = () => {
       </div>
 
       {/* Performance Insights */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Performance Insights
           </h2>
-          <div className="flex items-center space-x-2">
-            <Zap className="h-5 w-5 text-gray-400" />
-            <span className="text-sm text-gray-500">Key Metrics</span>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Zap className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Key Metrics</span>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-            <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-600">98.5%</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Uptime</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="text-2xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">98.5%</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Uptime</div>
           </div>
           
-          <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <Activity className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-blue-600">45ms</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Avg Response</div>
+          <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <Activity className="h-8 w-8 text-blue-600 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="text-2xl font-bold text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">45ms</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Avg Response</div>
           </div>
           
-          <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-            <Award className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-600">4.8/5</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">User Rating</div>
+          <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <Award className="h-8 w-8 text-purple-600 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="text-2xl font-bold text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid">4.8/5</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">User Rating</div>
           </div>
           
-          <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-            <Target className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-orange-600">92%</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Goal Achievement</div>
+          <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <Target className="h-8 w-8 text-orange-600 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="text-2xl font-bold text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid">92%</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Goal Achievement</div>
           </div>
         </div>
       </div>

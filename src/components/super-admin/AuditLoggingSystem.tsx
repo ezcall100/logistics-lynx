@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   FileText,
@@ -184,34 +184,34 @@ const AuditLoggingSystem: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'success':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'failed':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'warning':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'info':
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'authentication':
-        return <Key className="w-4 h-4" />;
+        return <Key className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'authorization':
-        return <Shield className="w-4 h-4" />;
+        return <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'data_access':
-        return <Database className="w-4 h-4" />;
+        return <Database className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'system_change':
-        return <Server className="w-4 h-4" />;
+        return <Server className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'security':
-        return <Shield className="w-4 h-4" />;
+        return <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'deployment':
-        return <Globe className="w-4 h-4" />;
+        return <Globe className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -266,44 +266,50 @@ const AuditLoggingSystem: React.FC = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Comprehensive Audit Logging System</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Comprehensive Audit Logging System</h1>
+          <p className="text-gray-600 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Complete audit trail for all system activities with real-time monitoring
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={exportAuditLogs}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg flex items-center space-x-2 hover:bg-green-700"
-          >
-            <Download className="w-4 h-4" />
+            className="px-4 py-2 bg-green-600 text-white rounded-lg flex items-center space-x-2 hover:bg-green-700 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
+            <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export CSV</span>
           </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700">
-            <RefreshCw className="w-4 h-4" />
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <RefreshCw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Refresh</span>
           </button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Events</p>
-              <p className="text-3xl font-bold text-gray-900">{stats.totalEvents}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Events</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{stats.totalEvents}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <FileText className="w-6 h-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <FileText className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -312,15 +318,15 @@ const AuditLoggingSystem: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Events Today</p>
-              <p className="text-3xl font-bold text-green-600">{stats.eventsToday}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Events Today</p>
+              <p className="text-3xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{stats.eventsToday}</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <Calendar className="w-6 h-6 text-green-600" />
+            <div className="p-3 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Calendar className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -329,15 +335,15 @@ const AuditLoggingSystem: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Failed Attempts</p>
-              <p className="text-3xl font-bold text-red-600">{stats.failedAttempts}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Failed Attempts</p>
+              <p className="text-3xl font-bold text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">{stats.failedAttempts}</p>
             </div>
-            <div className="p-3 bg-red-100 rounded-lg">
-              <AlertCircle className="w-6 h-6 text-red-600" />
+            <div className="p-3 bg-red-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <AlertCircle className="w-6 h-6 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -346,39 +352,39 @@ const AuditLoggingSystem: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Critical Events</p>
-              <p className="text-3xl font-bold text-orange-600">{stats.criticalEvents}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Critical Events</p>
+              <p className="text-3xl font-bold text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid">{stats.criticalEvents}</p>
             </div>
-            <div className="p-3 bg-orange-100 rounded-lg">
-              <Shield className="w-6 h-6 text-orange-600" />
+            <div className="p-3 bg-orange-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Shield className="w-6 h-6 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="md:col-span-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="md:col-span-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 placeholder="Search audit events..."
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
           </div>
           <select
             value={filterCategory}
             onChange={e => setFilterCategory(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Categories</option>
             <option value="authentication">Authentication</option>
@@ -391,7 +397,7 @@ const AuditLoggingSystem: React.FC = () => {
           <select
             value={filterSeverity}
             onChange={e => setFilterSeverity(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Severities</option>
             <option value="critical">Critical</option>
@@ -402,7 +408,7 @@ const AuditLoggingSystem: React.FC = () => {
           <select
             value={filterStatus}
             onChange={e => setFilterStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Status</option>
             <option value="success">Success</option>
@@ -414,18 +420,18 @@ const AuditLoggingSystem: React.FC = () => {
       </div>
 
       {/* Audit Events Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+          <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
             <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Timestamp</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">User</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Action</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Resource</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Severity</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Status</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
+              <tr className="border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Timestamp</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">User</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Action</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Resource</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Severity</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Status</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -435,32 +441,32 @@ const AuditLoggingSystem: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="border-b border-gray-100 hover:bg-gray-50"
+                  className="border-b border-gray-100 hover:bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <td className="py-4 px-4 text-sm text-gray-600">
+                  <td className="py-4 px-4 text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                     {new Date(event.timestamp).toLocaleString()}
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center space-x-2">
-                      <User className="w-4 h-4 text-gray-400" />
-                      <span className="font-medium text-gray-900">{event.userName}</span>
+                  <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <User className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                      <span className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{event.userName}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center space-x-2">
+                  <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {getCategoryIcon(event.category)}
-                      <span className="text-gray-900">{event.action}</span>
+                      <span className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{event.action}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-sm text-gray-600">{event.resource}</td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{event.resource}</td>
+                  <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium border ${getSeverityColor(event.severity)}`}
                     >
                       {event.severity.toUpperCase()}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div
                       className={`flex items-center space-x-2 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(event.status)}`}
                     >
@@ -468,12 +474,12 @@ const AuditLoggingSystem: React.FC = () => {
                       <span>{event.status.toUpperCase()}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setSelectedEvent(event)}
-                      className="p-2 text-gray-500 hover:text-blue-600"
+                      onClick={() = aria-label="Button"> setSelectedEvent(event)}
+                      className="p-2 text-gray-500 hover:text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Eye className="w-4 h-4" />
+                      <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   </td>
                 </motion.tr>
@@ -488,45 +494,45 @@ const AuditLoggingSystem: React.FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setSelectedEvent(null)}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-xl p-6 max-w-4xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+            className="bg-white rounded-xl p-6 max-w-4xl w-full mx-4 max-h-[80vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={e => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">Audit Event Details</h3>
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Audit Event Details</h3>
               <button
-                onClick={() => setSelectedEvent(null)}
-                className="p-2 text-gray-500 hover:text-gray-700"
+                onClick={() = aria-label="Button"> setSelectedEvent(null)}
+                className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Event Information</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Action:</span>
-                      <span className="font-medium">{selectedEvent.action}</span>
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Event Information</h4>
+                  <div className="space-y-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Action:</span>
+                      <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedEvent.action}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Resource:</span>
-                      <span className="font-medium">{selectedEvent.resource}</span>
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Resource:</span>
+                      <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedEvent.resource}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">User:</span>
-                      <span className="font-medium">{selectedEvent.userName}</span>
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">User:</span>
+                      <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedEvent.userName}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Timestamp:</span>
-                      <span className="font-medium">
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Timestamp:</span>
+                      <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                         {new Date(selectedEvent.timestamp).toLocaleString()}
                       </span>
                     </div>
@@ -534,22 +540,22 @@ const AuditLoggingSystem: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Security Information</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">IP Address:</span>
-                      <span className="font-mono">{selectedEvent.ipAddress}</span>
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Security Information</h4>
+                  <div className="space-y-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">IP Address:</span>
+                      <span className="font-mono responsive-container sm:flex-col md:flex-row lg:grid">{selectedEvent.ipAddress}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Severity:</span>
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Severity:</span>
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-medium border ${getSeverityColor(selectedEvent.severity)}`}
                       >
                         {selectedEvent.severity.toUpperCase()}
                       </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Status:</span>
+                    <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Status:</span>
                       <div
                         className={`flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(selectedEvent.status)}`}
                       >
@@ -561,17 +567,17 @@ const AuditLoggingSystem: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Details</h4>
-                  <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Details</h4>
+                  <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedEvent.details}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">User Agent</h4>
-                  <p className="text-xs text-gray-500 bg-gray-50 p-3 rounded-lg font-mono">
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">User Agent</h4>
+                  <p className="text-xs text-gray-500 bg-gray-50 p-3 rounded-lg font-mono responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedEvent.userAgent}
                   </p>
                 </div>

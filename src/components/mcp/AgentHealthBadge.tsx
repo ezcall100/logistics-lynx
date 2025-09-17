@@ -93,11 +93,17 @@ export const AgentHealthBadge: React.FC<AgentHealthBadgeProps> = ({
   const Icon = config.icon;
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div
       className={`inline-flex items-center ${sizeStyles.gap} ${sizeStyles.padding} ${config.bgColor} ${config.borderColor} border rounded-full`}
     >
       {/* Status Dot */}
-      <div className="relative">
+      <div className="relative responsive-container">
         <div className={`${sizeStyles.dot} ${config.color} rounded-full`}></div>
         {animated && status === 'active' && (
           <motion.div
@@ -124,9 +130,9 @@ export const AgentHealthBadge: React.FC<AgentHealthBadgeProps> = ({
       )}
 
       {/* Tooltip on hover */}
-      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs rounded opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs rounded opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 responsive-container">
         {config.description}
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-900 dark:border-t-slate-100"></div>
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-900 dark:border-t-slate-100 responsive-container"></div>
       </div>
     </div>
   );

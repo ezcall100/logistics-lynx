@@ -71,6 +71,12 @@ export const AgentStatusCard: React.FC<AgentStatusCardProps> = ({
   const colors = colorClasses[color];
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -79,13 +85,13 @@ export const AgentStatusCard: React.FC<AgentStatusCardProps> = ({
     >
       {/* Status Indicator */}
       {status && (
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <div className={`w-3 h-3 rounded-full ${statusColors[status]} animate-pulse`}></div>
         </div>
       )}
 
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-4">
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <div
             className={`p-3 rounded-2xl ${colors.bg} group-hover:scale-110 transition-transform duration-300`}
           >
@@ -105,18 +111,18 @@ export const AgentStatusCard: React.FC<AgentStatusCardProps> = ({
           )}
         </div>
 
-        <div className="space-y-2">
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+        <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="text-3xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             {value.toLocaleString()}
           </div>
-          <div className="text-sm font-medium text-slate-600 dark:text-slate-400">{label}</div>
-          {subtitle && <div className="text-xs text-slate-500 dark:text-slate-500">{subtitle}</div>}
+          <div className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">{label}</div>
+          {subtitle && <div className="text-xs text-slate-500 dark:text-slate-500 responsive-container sm:flex-col md:flex-row lg:grid">{subtitle}</div>}
         </div>
 
         {/* Progress Bar for Status Cards */}
         {status && (
-          <div className="mt-4">
-            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+          <div className="mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${value}%` }}
@@ -137,7 +143,7 @@ export const AgentStatusCard: React.FC<AgentStatusCardProps> = ({
       </div>
 
       {/* Hover Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none responsive-container sm:flex-col md:flex-row lg:grid"></div>
     </motion.div>
   );
 };

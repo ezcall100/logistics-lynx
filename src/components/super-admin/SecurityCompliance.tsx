@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
@@ -365,22 +365,22 @@ const SecurityCompliance: React.FC = () => {
   const getSeverityIcon = (severity: string) => {
     switch (severity) {
       case 'critical':
-        return <XCircle className="w-4 h-4" />;
+        return <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'high':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'medium':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'low':
-        return <Info className="w-4 h-4" />;
+        return <Info className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Info className="w-4 h-4" />;
+        return <Info className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Security Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {[
           {
             title: 'Total Events',
@@ -416,33 +416,33 @@ const SecurityCompliance: React.FC = () => {
           },
         ].map(stat => (
           <Card key={stat.title}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
+            <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-xl ${stat.bgColor}`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
-                <div className="text-green-600 text-sm font-medium">{stat.change}</div>
+                <div className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{stat.change}</div>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-gray-600 text-sm">{stat.title}</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{stat.value}</div>
+              <div className="text-gray-600 text-sm responsive-container sm:flex-col md:flex-row lg:grid">{stat.title}</div>
             </CardContent>
           </Card>
         ))}
       </div>
 
       {/* Security Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
           <CardHeader>
             <CardTitle>Security Events Trend</CardTitle>
             <CardDescription>Security events over time</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <LineChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Security events trend</p>
-                <p className="text-sm text-gray-400">Real-time security monitoring</p>
+            <div className="h-64 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <LineChart className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Security events trend</p>
+                <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Real-time security monitoring</p>
               </div>
             </div>
           </CardContent>
@@ -454,11 +454,11 @@ const SecurityCompliance: React.FC = () => {
             <CardDescription>Types of security threats</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <PieChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Threat distribution</p>
-                <p className="text-sm text-gray-400">Breakdown of security threats</p>
+            <div className="h-64 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <PieChart className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Threat distribution</p>
+                <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Breakdown of security threats</p>
               </div>
             </div>
           </CardContent>
@@ -472,30 +472,30 @@ const SecurityCompliance: React.FC = () => {
           <CardDescription>Latest security events and alerts</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
+          <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
             {securityEvents.slice(0, 5).map(event => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200"
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`w-10 h-10 rounded-lg flex items-center justify-center ${getSeverityColor(event.severity)}`}
                   >
                     {getSeverityIcon(event.severity)}
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{event.description}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{event.description}</p>
+                    <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                       {event.type.replace('_', ' ')} • {event.ipAddress}
                       {event.userName && ` • ${event.userName}`}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-500">
+                <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     {formatRelativeTime(event.createdAt)}
                   </span>
                   {!event.resolved && (
@@ -517,24 +517,24 @@ const SecurityCompliance: React.FC = () => {
   );
 
   const renderSecurityEvents = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Filters and Search */}
       <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
+        <CardContent className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
               <Input
                 placeholder="Search security events..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-4 h-4" />}
+                leftIcon={<Search className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <select
                 value={severityFilter}
                 onChange={e => setSeverityFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Severities</option>
                 <option value="critical">Critical</option>
@@ -545,14 +545,14 @@ const SecurityCompliance: React.FC = () => {
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Status</option>
                 <option value="resolved">Resolved</option>
                 <option value="unresolved">Unresolved</option>
               </select>
               <Button variant="outline">
-                <Filter className="w-4 h-4 mr-2" />
+                <Filter className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 More Filters
               </Button>
             </div>
@@ -562,44 +562,44 @@ const SecurityCompliance: React.FC = () => {
 
       {/* Security Events Table */}
       <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+            <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+              <thead className="bg-gray-50 border-b responsive-container sm:flex-col md:flex-row lg:grid">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Event
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Severity
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     User/Company
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     IP Address
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Time
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
                 {filteredEvents.map(event => (
-                  <tr key={event.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={event.id} className="hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <div className="text-sm font-medium text-gray-900">{event.description}</div>
-                        <div className="text-sm text-gray-500">{event.type.replace('_', ' ')}</div>
+                        <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{event.description}</div>
+                        <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{event.type.replace('_', ' ')}</div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getSeverityColor(event.severity)}`}
                       >
@@ -607,18 +607,18 @@ const SecurityCompliance: React.FC = () => {
                         {event.severity}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
                         {event.userName && <div>{event.userName}</div>}
                         {event.companyName && (
-                          <div className="text-gray-500">{event.companyName}</div>
+                          <div className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{event.companyName}</div>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       {event.ipAddress}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
                           event.resolved
@@ -627,20 +627,20 @@ const SecurityCompliance: React.FC = () => {
                         }`}
                       >
                         {event.resolved ? (
-                          <CheckCircle className="w-4 h-4" />
+                          <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <XCircle className="w-4 h-4" />
+                          <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                         {event.resolved ? 'Resolved' : 'Open'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatRelativeTime(event.createdAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <Button size="sm" variant="ghost">
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         {!event.resolved && (
                           <Button
@@ -652,7 +652,7 @@ const SecurityCompliance: React.FC = () => {
                           </Button>
                         )}
                         <Button size="sm" variant="ghost">
-                          <MoreVertical className="w-4 h-4" />
+                          <MoreVertical className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                       </div>
                     </td>
@@ -667,8 +667,8 @@ const SecurityCompliance: React.FC = () => {
   );
 
   const renderCompliance = () => (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {complianceCategories.map(category => {
           const categoryChecks = complianceChecks.filter(check => check.category === category);
           const passedChecks = categoryChecks.filter(check => check.status === 'pass').length;
@@ -676,14 +676,20 @@ const SecurityCompliance: React.FC = () => {
           const score = totalChecks > 0 ? (passedChecks / totalChecks) * 100 : 0;
 
           return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <Card key={category}>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-2xl font-bold text-gray-900">{score.toFixed(0)}%</div>
-                  <ShieldCheck className="w-8 h-8 text-primary-500" />
+              <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{score.toFixed(0)}%</div>
+                  <ShieldCheck className="w-8 h-8 text-primary-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
-                <div className="text-sm font-medium text-gray-900">{category}</div>
-                <div className="text-xs text-gray-500">
+                <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{category}</div>
+                <div className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {passedChecks}/{totalChecks} checks passed
                 </div>
               </CardContent>
@@ -698,15 +704,15 @@ const SecurityCompliance: React.FC = () => {
           <CardDescription>Detailed compliance status and requirements</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {complianceChecks.map(check => (
               <div
                 key={check.id}
-                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h4 className="font-medium text-gray-900">{check.name}</h4>
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center gap-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{check.name}</h4>
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${
                         check.status === 'pass'
@@ -719,23 +725,23 @@ const SecurityCompliance: React.FC = () => {
                       }`}
                     >
                       {check.status === 'pass' ? (
-                        <CheckCircle className="w-4 h-4" />
+                        <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : check.status === 'fail' ? (
-                        <XCircle className="w-4 h-4" />
+                        <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : check.status === 'warning' ? (
-                        <AlertTriangle className="w-4 h-4" />
+                        <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : (
-                        <Clock className="w-4 h-4" />
+                        <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       )}
                       {check.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{check.description}</p>
-                  <p className="text-sm text-gray-500">{check.details}</p>
+                  <p className="text-sm text-gray-600 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{check.description}</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{check.details}</p>
                 </div>
-                <div className="ml-4 text-right">
-                  <div className="text-sm text-gray-500">Last check</div>
-                  <div className="text-sm font-medium">{formatRelativeTime(check.lastCheck)}</div>
+                <div className="ml-4 text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Last check</div>
+                  <div className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{formatRelativeTime(check.lastCheck)}</div>
                 </div>
               </div>
             ))}
@@ -746,24 +752,26 @@ const SecurityCompliance: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Security & Compliance</h2>
-          <p className="text-gray-600">Monitor security events and compliance status</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Security & Compliance</h2>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Monitor security events and compliance status</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+            <Download className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Export Report
           </Button>
           <Button variant="outline">
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <RefreshCw className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Run Scan
           </Button>
           <Button>
-            <Settings className="w-4 h-4 mr-2" />
+            <Settings className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Security Settings
           </Button>
         </div>
@@ -771,9 +779,9 @@ const SecurityCompliance: React.FC = () => {
 
       {/* Navigation Tabs */}
       <Card>
-        <CardContent className="p-0">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {[
                 { id: 'overview', label: 'Overview', icon: BarChart3 },
                 { id: 'events', label: 'Security Events', icon: Shield },
@@ -782,14 +790,14 @@ const SecurityCompliance: React.FC = () => {
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
                       ? 'border-primary-500 text-primary-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <tab.icon className="w-4 h-4" />
+                  <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {tab.label}
                 </button>
               ))}
@@ -811,10 +819,10 @@ const SecurityCompliance: React.FC = () => {
           {activeTab === 'events' && renderSecurityEvents()}
           {activeTab === 'compliance' && renderCompliance()}
           {activeTab === 'threats' && (
-            <div className="text-center py-12">
-              <AlertTriangle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Threat Intelligence</h3>
-              <p className="text-gray-500">Threat intelligence dashboard coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <AlertTriangle className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Threat Intelligence</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Threat intelligence dashboard coming soon</p>
             </div>
           )}
         </motion.div>

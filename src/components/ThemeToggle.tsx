@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import { Sun, Moon } from 'lucide-react'
 
@@ -32,15 +33,21 @@ export function ThemeToggle() {
   }
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg hover:scale-105 transition-all duration-200"
+      className="p-2 rounded-lg bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg hover:scale-105 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
       aria-label="Toggle theme"
-    >
+     aria-label="Button">
       {isDark ? (
-        <Sun className="w-5 h-5 text-amber-500" />
+        <Sun className="w-5 h-5 text-amber-500 responsive-container sm:flex-col md:flex-row lg:grid" />
       ) : (
-        <Moon className="w-5 h-5 text-slate-600" />
+        <Moon className="w-5 h-5 text-slate-600 responsive-container sm:flex-col md:flex-row lg:grid" />
       )}
     </button>
   )

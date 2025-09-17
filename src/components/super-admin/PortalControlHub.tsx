@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, 
@@ -1149,7 +1149,13 @@ const PortalControlHub: React.FC = () => {
       );
     }, 3000);
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, [autoRefresh]);
 
   const getStatusColor = (status: string) => {
@@ -1249,28 +1255,30 @@ const PortalControlHub: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 p-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
               🌐 Portal Control Hub
             </h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-gray-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
               Centralized management of all TMS portals and services
             </p>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                 {autoRefresh ? 'Live Updates' : 'Paused'}
               </span>
             </div>
             <button 
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
               <span>{autoRefresh ? 'Pause' : 'Resume'}</span>
@@ -1279,19 +1287,19 @@ const PortalControlHub: React.FC = () => {
         </div>
 
         {/* Metrics Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Total Portals</p>
-                <p className="text-3xl font-bold text-white">{metrics.totalPortals}</p>
-                <p className="text-xs text-gray-400">{metrics.activePortals} active</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Total Portals</p>
+                <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{metrics.totalPortals}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{metrics.activePortals} active</p>
               </div>
-              <Globe className="w-8 h-8 text-emerald-400" />
+              <Globe className="w-8 h-8 text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1299,15 +1307,15 @@ const PortalControlHub: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Total Users</p>
-                <p className="text-3xl font-bold text-white">{metrics.totalUsers.toLocaleString()}</p>
-                <p className="text-xs text-gray-400">Across all portals</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Total Users</p>
+                <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{metrics.totalUsers.toLocaleString()}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Across all portals</p>
               </div>
-              <Users className="w-8 h-8 text-blue-400" />
+              <Users className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1315,15 +1323,15 @@ const PortalControlHub: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">System Health</p>
-                <p className="text-3xl font-bold text-white">{metrics.systemHealth}%</p>
-                <p className="text-xs text-gray-400">Average uptime</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">System Health</p>
+                <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{metrics.systemHealth}%</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Average uptime</p>
               </div>
-              <Shield className="w-8 h-8 text-purple-400" />
+              <Shield className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1331,36 +1339,36 @@ const PortalControlHub: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Critical Alerts</p>
-                <p className="text-3xl font-bold text-red-400">{metrics.criticalAlerts}</p>
-                <p className="text-xs text-gray-400">Require attention</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Critical Alerts</p>
+                <p className="text-3xl font-bold text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{metrics.criticalAlerts}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Require attention</p>
               </div>
-              <AlertTriangle className="w-8 h-8 text-red-400" />
+              <AlertTriangle className="w-8 h-8 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-between mb-8 gap-4">
-        <div className="flex items-center space-x-4">
-          <div className="relative">
+      <div className="flex flex-wrap items-center justify-between mb-8 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="text"
               placeholder="Search portals..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Categories</option>
             <option value="core">Core</option>
@@ -1373,7 +1381,7 @@ const PortalControlHub: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Status</option>
             <option value="online">Online</option>
@@ -1385,7 +1393,7 @@ const PortalControlHub: React.FC = () => {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="name">Sort by Name</option>
             <option value="users">Sort by Users</option>
@@ -1395,45 +1403,45 @@ const PortalControlHub: React.FC = () => {
           </select>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() => setViewMode('grid')}
+            onClick={() = aria-label="Button"> setViewMode('grid')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'grid' 
                 ? 'bg-emerald-600 text-white' 
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <BarChart3 className="w-4 h-4" />
+            <BarChart3 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() => setViewMode('list')}
+            onClick={() = aria-label="Button"> setViewMode('list')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'list' 
                 ? 'bg-emerald-600 text-white' 
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <PieChart className="w-4 h-4" />
+            <PieChart className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() => setViewMode('analytics')}
+            onClick={() = aria-label="Button"> setViewMode('analytics')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'analytics' 
                 ? 'bg-emerald-600 text-white' 
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <LineChart className="w-4 h-4" />
+            <LineChart className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="mb-8">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-          <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Quick Actions</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {quickActions.map((action, index) => (
               <motion.button
                 key={action.id}
@@ -1446,13 +1454,13 @@ const PortalControlHub: React.FC = () => {
                   action.color === 'purple' ? 'from-purple-500/20 to-purple-600/20' :
                   'from-orange-500/20 to-orange-600/20'} backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:scale-105 transition-transform`}
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-10 h-10 bg-${action.color}-600 rounded-lg flex items-center justify-center`}>
-                    <action.icon className="w-5 h-5 text-white" />
+                    <action.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <div className="text-left">
-                    <h4 className="text-white font-medium">{action.name}</h4>
-                    <p className="text-xs text-gray-400">{action.description}</p>
+                  <div className="text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{action.name}</h4>
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{action.description}</p>
                   </div>
                 </div>
               </motion.button>
@@ -1462,27 +1470,27 @@ const PortalControlHub: React.FC = () => {
       </div>
 
       {/* Portals Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {sortedPortals.map((portal, index) => (
           <motion.div
             key={portal.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={() => setSelectedPortal(portal)}
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Globe className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold">{portal.name}</h3>
-                  <p className="text-xs text-gray-400">{portal.category}</p>
+                  <h3 className="text-white font-bold responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</h3>
+                  <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{portal.category}</p>
                 </div>
               </div>
-              <div className="flex flex-col items-end space-y-1">
+              <div className="flex flex-col items-end space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`px-2 py-1 rounded-full text-xs ${getStatusColor(portal.status)}`}>
                   {portal.status}
                 </div>
@@ -1492,71 +1500,71 @@ const PortalControlHub: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-sm text-gray-300 mb-4">{portal.description}</p>
+            <p className="text-sm text-gray-300 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">{portal.description}</p>
 
             {/* Rating and Tags */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center space-x-1">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="text-sm text-white font-medium">{portal.rating}</span>
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Star className="w-4 h-4 text-yellow-400 fill-current responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="text-sm text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{portal.rating}</span>
                 </div>
-                <span className="text-xs text-gray-400">({portal.activeUsers.toLocaleString()} users)</span>
+                <span className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">({portal.activeUsers.toLocaleString()} users)</span>
               </div>
-              <div className="flex space-x-1">
+              <div className="flex space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                 {portal.tags?.slice(0, 2).map((tag, index) => (
-                  <span key={index} className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full">
+                  <span key={index} className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Users</span>
-                <span className="text-white">{portal.users.toLocaleString()}</span>
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Users</span>
+                <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.users.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Active Users</span>
-                <span className="text-white">{portal.activeUsers.toLocaleString()}</span>
+              <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Users</span>
+                <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.activeUsers.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Uptime</span>
-                <span className="text-white">{portal.uptime}%</span>
+              <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Uptime</span>
+                <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.uptime}%</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Response Time</span>
-                <span className="text-white">{portal.responseTime}ms</span>
+              <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Response Time</span>
+                <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.responseTime}ms</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Health</span>
+              <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Health</span>
                 <span className={`font-medium ${getHealthColor(portal.health)}`}>{portal.health}%</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400">CPU</p>
-                    <p className="text-sm text-white">{portal.cpu}%</p>
+            <div className="mt-4 pt-4 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU</p>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.cpu}%</p>
                   </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400">Memory</p>
-                    <p className="text-sm text-white">{portal.memory}%</p>
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory</p>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.memory}%</p>
                   </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400">Alerts</p>
-                    <p className="text-sm text-white">{portal.alerts}</p>
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Alerts</p>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.alerts}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <button className="p-1 hover:bg-white/20 rounded transition-colors">
-                    <Eye className="w-4 h-4 text-gray-400" />
+                <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="p-1 hover:bg-white/20 rounded transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Eye className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
-                  <button className="p-1 hover:bg-white/20 rounded transition-colors">
-                    <Settings className="w-4 h-4 text-gray-400" />
+                  <button className="p-1 hover:bg-white/20 rounded transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Settings className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
               </div>
@@ -1569,32 +1577,32 @@ const PortalControlHub: React.FC = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 pt-4 border-t border-white/20"
+                  className="mt-4 pt-4 border-t border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <label className="text-xs text-gray-400">Features</label>
-                      <div className="flex flex-wrap gap-1 mt-1">
+                      <label className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Features</label>
+                      <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         {portal.features.slice(0, 3).map((feature, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-emerald-600/20 text-emerald-300 rounded text-xs">
+                          <span key={idx} className="px-2 py-1 bg-emerald-600/20 text-emerald-300 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                             {feature}
                           </span>
                         ))}
                         {portal.features.length > 3 && (
-                          <span className="px-2 py-1 bg-gray-600/20 text-gray-300 rounded text-xs">
+                          <span className="px-2 py-1 bg-gray-600/20 text-gray-300 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                             +{portal.features.length - 3} more
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 text-xs">
+                    <div className="grid grid-cols-2 gap-4 text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <span className="text-gray-400">Revenue</span>
-                        <p className="text-white font-medium">${portal.revenue.toLocaleString()}</p>
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Revenue</span>
+                        <p className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">${portal.revenue.toLocaleString()}</p>
                       </div>
                       <div>
-                        <span className="text-gray-400">Growth</span>
-                        <p className="text-green-400 font-medium">+{portal.growth}%</p>
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Growth</span>
+                        <p className="text-green-400 font-medium responsive-container sm:flex-col md:flex-row lg:grid">+{portal.growth}%</p>
                       </div>
                     </div>
                   </div>
@@ -1612,7 +1620,7 @@ const PortalControlHub: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={() => setSelectedPortal(null)}
           >
             <motion.div
@@ -1620,54 +1628,54 @@ const PortalControlHub: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl w-full border border-white/20 max-h-[90vh] overflow-y-auto"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl w-full border border-white/20 max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
-                    <Globe className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Globe className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">{selectedPortal.name}</h3>
-                    <p className="text-gray-300">{selectedPortal.description}</p>
+                    <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.name}</h3>
+                    <p className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.description}</p>
                   </div>
                 </div>
                 <button
-                  onClick={() => setSelectedPortal(null)}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() = aria-label="Button"> setSelectedPortal(null)}
+                  className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container sm:flex-col md:flex-row lg:grid">
                 {/* Left Column - Basic Info */}
-                <div className="space-y-6">
+                <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Portal Information</h4>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Status</span>
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Portal Information</h4>
+                    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Status</span>
                         <div className={`px-3 py-1 rounded-full text-sm ${getStatusColor(selectedPortal.status)}`}>
                           {selectedPortal.status}
                         </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Category</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Category</span>
                         <div className={`px-3 py-1 rounded-full text-sm ${getCategoryColor(selectedPortal.category)}`}>
                           {selectedPortal.category}
                         </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Version</span>
-                        <span className="text-white">{selectedPortal.version}</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Version</span>
+                        <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.version}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Location</span>
-                        <span className="text-white">{selectedPortal.location}</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Location</span>
+                        <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.location}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Priority</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Priority</span>
                         <span className={`font-medium ${getPriorityColor(selectedPortal.priority)}`}>
                           {selectedPortal.priority}
                         </span>
@@ -1676,52 +1684,52 @@ const PortalControlHub: React.FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Performance Metrics</h4>
-                    <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Performance Metrics</h4>
+                    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">CPU Usage</span>
-                          <span className="text-white">{selectedPortal.cpu}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU Usage</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.cpu}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div 
-                            className="bg-blue-400 h-2 rounded-full"
+                            className="bg-blue-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedPortal.cpu}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Memory Usage</span>
-                          <span className="text-white">{selectedPortal.memory}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory Usage</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.memory}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div 
-                            className="bg-green-400 h-2 rounded-full"
+                            className="bg-green-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedPortal.memory}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Storage Usage</span>
-                          <span className="text-white">{selectedPortal.storage}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Storage Usage</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.storage}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div 
-                            className="bg-purple-400 h-2 rounded-full"
+                            className="bg-purple-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedPortal.storage}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Bandwidth Usage</span>
-                          <span className="text-white">{selectedPortal.bandwidth}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Bandwidth Usage</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedPortal.bandwidth}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div 
-                            className="bg-orange-400 h-2 rounded-full"
+                            className="bg-orange-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedPortal.bandwidth}%` }}
                           ></div>
                         </div>
@@ -1731,14 +1739,14 @@ const PortalControlHub: React.FC = () => {
                 </div>
 
                 {/* Right Column - Features & Actions */}
-                <div className="space-y-6">
+                <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Features</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Features</h4>
+                    <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedPortal.features.map((feature, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-emerald-600/20 text-emerald-300 rounded-full text-sm"
+                          className="px-3 py-1 bg-emerald-600/20 text-emerald-300 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {feature}
                         </span>
@@ -1747,12 +1755,12 @@ const PortalControlHub: React.FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Integrations</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Integrations</h4>
+                    <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedPortal.integrations.map((integration, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm"
+                          className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {integration}
                         </span>
@@ -1761,23 +1769,23 @@ const PortalControlHub: React.FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Business Metrics</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-white/5 rounded-lg p-3">
-                        <p className="text-xs text-gray-400">Monthly Revenue</p>
-                        <p className="text-lg font-bold text-white">${selectedPortal.revenue.toLocaleString()}</p>
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Business Metrics</h4>
+                    <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="bg-white/5 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Monthly Revenue</p>
+                        <p className="text-lg font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">${selectedPortal.revenue.toLocaleString()}</p>
                       </div>
-                      <div className="bg-white/5 rounded-lg p-3">
-                        <p className="text-xs text-gray-400">Growth Rate</p>
-                        <p className="text-lg font-bold text-green-400">+{selectedPortal.growth}%</p>
+                      <div className="bg-white/5 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Growth Rate</p>
+                        <p className="text-lg font-bold text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">+{selectedPortal.growth}%</p>
                       </div>
-                      <div className="bg-white/5 rounded-lg p-3">
-                        <p className="text-xs text-gray-400">Monthly Cost</p>
-                        <p className="text-lg font-bold text-white">${selectedPortal.cost.toLocaleString()}</p>
+                      <div className="bg-white/5 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Monthly Cost</p>
+                        <p className="text-lg font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">${selectedPortal.cost.toLocaleString()}</p>
                       </div>
-                      <div className="bg-white/5 rounded-lg p-3">
-                        <p className="text-xs text-gray-400">ROI</p>
-                        <p className="text-lg font-bold text-green-400">
+                      <div className="bg-white/5 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">ROI</p>
+                        <p className="text-lg font-bold text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           {Math.round((selectedPortal.revenue / selectedPortal.cost) * 100)}%
                         </p>
                       </div>
@@ -1785,22 +1793,22 @@ const PortalControlHub: React.FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-4">Portal Actions</h4>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                        <Play className="w-4 h-4" />
+                    <h4 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Portal Actions</h4>
+                    <div className="grid grid-cols-2 gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <button className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>Start Portal</span>
                       </button>
-                      <button className="bg-yellow-600 hover:bg-yellow-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                        <Pause className="w-4 h-4" />
+                      <button className="bg-yellow-600 hover:bg-yellow-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>Pause Portal</span>
                       </button>
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                        <RotateCcw className="w-4 h-4" />
+                      <button className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <RotateCcw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>Restart Portal</span>
                       </button>
-                      <button className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                        <Settings className="w-4 h-4" />
+                      <button className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>Configure</span>
                       </button>
                     </div>

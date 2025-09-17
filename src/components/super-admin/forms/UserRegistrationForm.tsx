@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { User, Mail, Lock, Building, Check, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -71,7 +71,9 @@ export const UserRegistrationForm: React.FC<{
     setIsSubmitting(true);
     try {
       await onSubmit(formData);
-    } finally {
+    } catch (error) {
+    console.error('Error:', error);
+  } finally {
       setIsSubmitting(false);
     }
   };
@@ -84,31 +86,37 @@ export const UserRegistrationForm: React.FC<{
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-2xl mx-auto p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg"
+      className="max-w-2xl mx-auto p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
     >
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-white flex items-center space-x-2">
-          <User className="w-6 h-6 text-blue-400" />
+      <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-2xl font-bold text-white flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <User className="w-6 h-6 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           <span>Register New User</span>
         </h2>
-        <button onClick={onCancel} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-          <X className="w-5 h-5 text-gray-400" />
+        <button onClick={onCancel} className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <X className="w-5 h-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Personal Information */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Personal Information
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">First Name *</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">First Name *</label>
               <input
                 type="text"
                 value={formData.firstName}
@@ -116,11 +124,11 @@ export const UserRegistrationForm: React.FC<{
                 className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.firstName ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter first name"
               />
-              {errors.firstName && <p className="mt-1 text-sm text-red-400">{errors.firstName}</p>}
+              {errors.firstName && <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.firstName}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Last Name *</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Last Name *</label>
               <input
                 type="text"
                 value={formData.lastName}
@@ -128,14 +136,14 @@ export const UserRegistrationForm: React.FC<{
                 className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.lastName ? 'border-red-500' : 'border-white/20'}`}
                 placeholder="Enter last name"
               />
-              {errors.lastName && <p className="mt-1 text-sm text-red-400">{errors.lastName}</p>}
+              {errors.lastName && <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.lastName}</p>}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Email Address *</label>
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="email"
                 value={formData.email}
@@ -144,32 +152,32 @@ export const UserRegistrationForm: React.FC<{
                 placeholder="Enter email address"
               />
             </div>
-            {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
+            {errors.email && <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.email}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Phone Number</label>
             <input
               type="tel"
               value={formData.phone}
               onChange={e => handleInputChange('phone', e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               placeholder="Enter phone number"
             />
           </div>
         </div>
 
         {/* Account Information */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Account Information
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Password *</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Password *</label>
+              <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <input
                   type="password"
                   value={formData.password}
@@ -178,15 +186,15 @@ export const UserRegistrationForm: React.FC<{
                   placeholder="Enter password"
                 />
               </div>
-              {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
+              {errors.password && <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.password}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Confirm Password *
               </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <input
                   type="password"
                   value={formData.confirmPassword}
@@ -196,22 +204,22 @@ export const UserRegistrationForm: React.FC<{
                 />
               </div>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-400">{errors.confirmPassword}</p>
+                <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.confirmPassword}</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Company Information */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Company Information
           </h3>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Company *</label>
-            <div className="relative">
-              <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Company *</label>
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 value={formData.company}
@@ -220,16 +228,16 @@ export const UserRegistrationForm: React.FC<{
                 placeholder="Enter company name"
               />
             </div>
-            {errors.company && <p className="mt-1 text-sm text-red-400">{errors.company}</p>}
+            {errors.company && <p className="mt-1 text-sm text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errors.company}</p>}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Role</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Role</label>
               <select
                 value={formData.role}
                 onChange={e => handleInputChange('role', e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="Customer">Customer</option>
                 <option value="Operator">Operator</option>
@@ -239,23 +247,23 @@ export const UserRegistrationForm: React.FC<{
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Department</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Department</label>
               <input
                 type="text"
                 value={formData.department}
                 onChange={e => handleInputChange('department', e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                 placeholder="Enter department"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Timezone</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Timezone</label>
             <select
               value={formData.timezone}
               onChange={e => handleInputChange('timezone', e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <option value="UTC">UTC</option>
               <option value="America/New_York">Eastern Time</option>
@@ -267,27 +275,27 @@ export const UserRegistrationForm: React.FC<{
         </div>
 
         {/* Form Actions */}
-        <div className="flex items-center justify-end space-x-4 pt-6 border-t border-white/10">
+        <div className="flex items-center justify-end space-x-4 pt-6 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             type="button"
             onClick={onCancel}
-            className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
-          >
+            className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center space-x-2"
-          >
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             {isSubmitting ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
                 <span>Creating User...</span>
               </>
             ) : (
               <>
-                <Check className="w-4 h-4" />
+                <Check className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Create User</span>
               </>
             )}

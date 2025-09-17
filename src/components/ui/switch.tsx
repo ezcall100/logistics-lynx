@@ -15,10 +15,16 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     };
 
     return (
-      <label className="inline-flex items-center cursor-pointer">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <label className="inline-flex items-center cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid">
         <input
           type="checkbox"
-          className="sr-only peer"
+          className="sr-only peer responsive-container sm:flex-col md:flex-row lg:grid"
           ref={ref}
           onChange={handleChange}
           {...props}

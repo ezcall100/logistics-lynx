@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Plus, 
   Building2, 
@@ -83,7 +83,13 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
       document.addEventListener('mousedown', handleClickOutside);
     }
 
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
   // Handle escape key
@@ -95,7 +101,9 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
   const handleActionClick = (action: FABAction) => {
@@ -108,17 +116,19 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
   };
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div
       ref={fabRef}
       className={`fixed z-50 ${isMobile ? 'bottom-20 right-4' : 'bottom-6 right-6'}`}
     >
       {/* Action Items */}
       {isOpen && (
-        <div className="absolute bottom-20 right-0 space-y-3">
+        <div className="absolute bottom-20 right-0 space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {actions.map((action, index) => (
             <div
               key={action.id}
-              className="flex items-center space-x-3 animate-fade-in"
+              className="flex items-center space-x-3 animate-fade-in responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 animationDelay: `${index * 50}ms`,
                 animationFillMode: 'both',
@@ -132,12 +142,12 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
                   ${hoveredAction === action.id ? 'scale-105 opacity-100' : 'opacity-0 scale-95'}
                 `}
               >
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-text-primary whitespace-nowrap">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-text-primary whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                     {action.label}
                   </span>
                   {action.shortcut && (
-                    <kbd className="px-1.5 py-0.5 text-xs bg-surface border border-border/50 rounded text-text-tertiary">
+                    <kbd className="px-1.5 py-0.5 text-xs bg-surface border border-border/50 rounded text-text-tertiary responsive-container sm:flex-col md:flex-row lg:grid">
                       {action.shortcut}
                     </kbd>
                   )}
@@ -146,7 +156,7 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
 
               {/* Action Button */}
               <button
-                onClick={() => handleActionClick(action)}
+                onClick={() = aria-label="Button"> handleActionClick(action)}
                 onMouseEnter={() => setHoveredAction(action.id)}
                 onMouseLeave={() => setHoveredAction(null)}
                 className={`
@@ -157,7 +167,7 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
                 `}
                 aria-label={action.label}
               >
-                <action.icon className="w-5 h-5" />
+                <action.icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           ))}
@@ -175,17 +185,17 @@ const EnterpriseFAB: React.FC<EnterpriseFABProps> = ({ onAction, isMobile = fals
           ${isOpen ? 'rotate-45 scale-110' : 'hover:scale-105'}
         `}
         aria-label={isOpen ? 'Close actions' : 'Open actions'}
-      >
+       aria-label="Button">
         {isOpen ? (
-          <X className="w-6 h-6" />
+          <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
         ) : (
-          <Plus className="w-6 h-6" />
+          <Plus className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
         )}
       </button>
 
       {/* Pulse Animation */}
       {!isOpen && (
-        <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-primary-500 via-accent-500 to-info-500 rounded-full animate-ping opacity-20"></div>
+        <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-primary-500 via-accent-500 to-info-500 rounded-full animate-ping opacity-20 responsive-container sm:flex-col md:flex-row lg:grid"></div>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Plus, 
@@ -127,6 +127,12 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div className={`fixed ${getPositionStyles()} z-50`}>
       {/* Quick Actions Menu */}
       <AnimatePresence>
@@ -136,7 +142,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="mb-4 space-y-3"
+            className="mb-4 space-y-3 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {quickActions.map((action, index) => (
               <motion.button
@@ -146,14 +152,14 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                 transition={{ delay: index * 0.1 }}
                 onClick={action.action}
                 disabled={isLoading}
-                className="flex items-center space-x-3 bg-white rounded-lg shadow-lg border border-gray-200 p-3 hover:shadow-xl transition-all duration-200 min-w-[200px]"
+                className="flex items-center space-x-3 bg-white rounded-lg shadow-lg border border-gray-200 p-3 hover:shadow-xl transition-all duration-200 min-w-[200px] responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <div className={`w-10 h-10 bg-gradient-to-br ${action.color} rounded-lg flex items-center justify-center`}>
-                  <action.icon className="w-5 h-5 text-white" />
+                  <action.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
-                <div className="text-left">
-                  <p className="text-sm font-medium text-gray-900">{action.label}</p>
-                  <p className="text-xs text-gray-500">Quick action</p>
+                <div className="text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</p>
+                  <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Quick action</p>
                 </div>
               </motion.button>
             ))}
@@ -180,7 +186,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               exit={{ opacity: 0, rotate: 180 }}
               transition={{ duration: 0.2 }}
             >
-              <Loader className="w-6 h-6 text-white animate-spin" />
+              <Loader className="w-6 h-6 text-white animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
             </motion.div>
           ) : isOpen ? (
             <motion.div
@@ -190,7 +196,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               exit={{ opacity: 0, rotate: 180 }}
               transition={{ duration: 0.2 }}
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </motion.div>
           ) : (
             <motion.div
@@ -200,7 +206,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               exit={{ opacity: 0, rotate: 180 }}
               transition={{ duration: 0.2 }}
             >
-              <Plus className="w-6 h-6 text-white" />
+              <Plus className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -213,11 +219,11 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg border border-gray-200 p-3 min-w-[200px]"
+            className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg border border-gray-200 p-3 min-w-[200px] responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center space-x-2">
-              <Loader className="w-4 h-4 text-blue-600 animate-spin" />
-              <span className="text-sm text-gray-700">Processing...</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Loader className="w-4 h-4 text-blue-600 animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Processing...</span>
             </div>
           </motion.div>
         )}

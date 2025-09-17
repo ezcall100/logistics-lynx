@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -152,46 +152,52 @@ const AccountSettings: React.FC = () => {
   ];
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <UnifiedPortalLayout>
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
-              <p className="text-gray-600">Manage your account information and preferences</p>
+              <h1 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Account Settings</h1>
+              <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage your account information and preferences</p>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {isEditing ? (
                 <>
                   <button
                     onClick={handleCancel}
-                    className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    <X className="w-4 h-4" />
+                    className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
+                    <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Cancel</span>
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={isLoading}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                  >
+                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     {isLoading ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
                     ) : (
-                      <Save className="w-4 h-4" />
+                      <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                     <span>{isLoading ? 'Saving...' : 'Save Changes'}</span>
                   </button>
                 </>
               ) : (
                 <button
-                  onClick={() => setIsEditing(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  onClick={() = aria-label="Button"> setIsEditing(true)}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <span>Edit Settings</span>
                 </button>
@@ -205,20 +211,20 @@ const AccountSettings: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'bg-white text-blue-700 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>{tab.label}</span>
               </button>
             ))}
@@ -231,69 +237,69 @@ const AccountSettings: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           {activeTab === 'profile' && (
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900">Profile Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Profile Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Full Name</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.name}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.name}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Email Address</label>
                   {isEditing ? (
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.email}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.email}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Phone Number</label>
                   {isEditing ? (
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.phone}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.phone}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Location</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.location}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.location}</p>
                   )}
                 </div>
               </div>
@@ -301,80 +307,80 @@ const AccountSettings: React.FC = () => {
           )}
 
           {activeTab === 'security' && (
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900">Security Settings</h3>
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Security Settings</h3>
               
               {/* Password Change */}
-              <div className="border border-gray-200 rounded-lg p-6">
-                <h4 className="text-md font-medium text-gray-900 mb-4">Change Password</h4>
-                <div className="space-y-4">
+              <div className="border border-gray-200 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h4 className="text-md font-medium text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Change Password</h4>
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
-                    <div className="relative">
+                    <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Current Password</label>
+                    <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type={showCurrentPassword ? 'text' : 'password'}
                         name="currentPassword"
                         value={passwordData.currentPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                       <button
                         type="button"
-                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() = aria-label="Button"> setShowCurrentPassword(!showCurrentPassword)}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showCurrentPassword ? (
-                          <EyeOff className="w-4 h-4 text-gray-400" />
+                          <EyeOff className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <Eye className="w-4 h-4 text-gray-400" />
+                          <Eye className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                       </button>
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                    <div className="relative">
+                    <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">New Password</label>
+                    <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type={showNewPassword ? 'text' : 'password'}
                         name="newPassword"
                         value={passwordData.newPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                       <button
                         type="button"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() = aria-label="Button"> setShowNewPassword(!showNewPassword)}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showNewPassword ? (
-                          <EyeOff className="w-4 h-4 text-gray-400" />
+                          <EyeOff className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <Eye className="w-4 h-4 text-gray-400" />
+                          <Eye className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                       </button>
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                    <div className="relative">
+                    <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Confirm New Password</label>
+                    <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type={showConfirmPassword ? 'text' : 'password'}
                         name="confirmPassword"
                         value={passwordData.confirmPassword}
                         onChange={handlePasswordChange}
-                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() = aria-label="Button"> setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showConfirmPassword ? (
-                          <EyeOff className="w-4 h-4 text-gray-400" />
+                          <EyeOff className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <Eye className="w-4 h-4 text-gray-400" />
+                          <Eye className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                       </button>
                     </div>
@@ -383,12 +389,12 @@ const AccountSettings: React.FC = () => {
                   <button
                     onClick={handlePasswordSave}
                     disabled={isLoading}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                  >
+                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     {isLoading ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
                     ) : (
-                      <Key className="w-4 h-4" />
+                      <Key className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                     <span>{isLoading ? 'Updating...' : 'Update Password'}</span>
                   </button>
@@ -396,14 +402,14 @@ const AccountSettings: React.FC = () => {
               </div>
 
               {/* Two-Factor Authentication */}
-              <div className="border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center justify-between">
+              <div className="border border-gray-200 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <h4 className="text-md font-medium text-gray-900">Two-Factor Authentication</h4>
-                    <p className="text-sm text-gray-600">Add an extra layer of security to your account</p>
+                    <h4 className="text-md font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Two-Factor Authentication</h4>
+                    <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Add an extra layer of security to your account</p>
                   </div>
                   <button
-                    onClick={() => setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }))}
+                    onClick={() = aria-label="Button"> setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }))}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       securityData.twoFactorEnabled ? 'bg-blue-600' : 'bg-gray-200'
                     }`}
@@ -418,23 +424,23 @@ const AccountSettings: React.FC = () => {
               </div>
 
               {/* Login History */}
-              <div className="border border-gray-200 rounded-lg p-6">
-                <h4 className="text-md font-medium text-gray-900 mb-4">Recent Login Activity</h4>
-                <div className="space-y-3">
+              <div className="border border-gray-200 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h4 className="text-md font-medium text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Recent Login Activity</h4>
+                <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   {securityData.loginHistory.map((login, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                          <Smartphone className="w-4 h-4 text-blue-600" />
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Smartphone className="w-4 h-4 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{login.device}</p>
-                          <p className="text-xs text-gray-500">{login.location}</p>
+                          <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{login.device}</p>
+                          <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{login.location}</p>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <p className="text-sm text-gray-900">{login.date}</p>
-                        <p className="text-xs text-gray-500">{login.ip}</p>
+                      <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{login.date}</p>
+                        <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{login.ip}</p>
                       </div>
                     </div>
                   ))}
@@ -444,17 +450,17 @@ const AccountSettings: React.FC = () => {
           )}
 
           {activeTab === 'preferences' && (
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900">Preferences</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Preferences</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Timezone</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Timezone</label>
                   {isEditing ? (
                     <select
                       name="timezone"
                       value={formData.timezone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="EST (UTC-5)">EST (UTC-5)</option>
                       <option value="PST (UTC-8)">PST (UTC-8)</option>
@@ -462,18 +468,18 @@ const AccountSettings: React.FC = () => {
                       <option value="MST (UTC-7)">MST (UTC-7)</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.timezone}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.timezone}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Language</label>
                   {isEditing ? (
                     <select
                       name="language"
                       value={formData.language}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="English">English</option>
                       <option value="Spanish">Spanish</option>
@@ -481,53 +487,53 @@ const AccountSettings: React.FC = () => {
                       <option value="German">German</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.language}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.language}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Date Format</label>
                   {isEditing ? (
                     <select
                       name="dateFormat"
                       value={formData.dateFormat}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="MM/DD/YYYY">MM/DD/YYYY</option>
                       <option value="DD/MM/YYYY">DD/MM/YYYY</option>
                       <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.dateFormat}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.dateFormat}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Time Format</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Time Format</label>
                   {isEditing ? (
                     <select
                       name="timeFormat"
                       value={formData.timeFormat}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="12-hour">12-hour</option>
                       <option value="24-hour">24-hour</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.timeFormat}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.timeFormat}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Currency</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Currency</label>
                   {isEditing ? (
                     <select
                       name="currency"
                       value={formData.currency}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="USD">USD ($)</option>
                       <option value="EUR">EUR (€)</option>
@@ -535,7 +541,7 @@ const AccountSettings: React.FC = () => {
                       <option value="CAD">CAD (C$)</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.currency}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.currency}</p>
                   )}
                 </div>
               </div>
@@ -543,14 +549,14 @@ const AccountSettings: React.FC = () => {
           )}
 
           {activeTab === 'notifications' && (
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900">Notification Preferences</h3>
-              <div className="space-y-4">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Notification Preferences</h3>
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {Object.entries(formData.notifications).map(([key, value]) => (
-                  <div key={key} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                  <div key={key} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <p className="text-sm font-medium text-gray-900 capitalize">{key} Notifications</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-sm font-medium text-gray-900 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{key} Notifications</p>
+                      <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                         {key === 'email' && 'Receive notifications via email'}
                         {key === 'push' && 'Receive push notifications in browser'}
                         {key === 'sms' && 'Receive SMS notifications'}
@@ -560,7 +566,7 @@ const AccountSettings: React.FC = () => {
                       </p>
                     </div>
                     <button
-                      onClick={() => handleNotificationChange(key)}
+                      onClick={() = aria-label="Button"> handleNotificationChange(key)}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                         value ? 'bg-blue-600' : 'bg-gray-200'
                       }`}

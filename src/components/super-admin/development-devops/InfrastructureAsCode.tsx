@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Code,
@@ -499,17 +499,17 @@ export const InfrastructureAsCode: React.FC = () => {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'terraform':
-        return <Code className="w-4 h-4 text-purple-500" />;
+        return <Code className="w-4 h-4 text-purple-500 responsive-container" />;
       case 'cloudformation':
-        return <FileText className="w-4 h-4 text-blue-500" />;
+        return <FileText className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'kubernetes':
-        return <Package className="w-4 h-4 text-cyan-500" />;
+        return <Package className="w-4 h-4 text-cyan-500 responsive-container" />;
       case 'docker':
-        return <Package className="w-4 h-4 text-blue-500" />;
+        return <Package className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'ansible':
-        return <Terminal className="w-4 h-4 text-red-500" />;
+        return <Terminal className="w-4 h-4 text-red-500 responsive-container" />;
       default:
-        return <Code className="w-4 h-4 text-gray-500" />;
+        return <Code className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
@@ -554,70 +554,76 @@ export const InfrastructureAsCode: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">
               Infrastructure as Code
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">
               IaC template management and infrastructure automation
             </p>
           </div>
 
-          <div className="flex gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="flex gap-3 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search templates..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
             <button
-              onClick={() => console.log('Create template modal')}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
+              onClick={() = aria-label="Button"> console.log('Create template modal')}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 responsive-container" />
               <span>Create Template</span>
             </button>
           </div>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Total Templates
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {templates.length}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {templates.filter(t => t.status === 'active').length} active
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -626,18 +632,18 @@ export const InfrastructureAsCode: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Total Resources
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {templates.reduce((sum, t) => sum + t.resources.length, 0)}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {templates.reduce(
                     (sum, t) => sum + t.resources.filter(r => r.status === 'created').length,
                     0
@@ -645,8 +651,8 @@ export const InfrastructureAsCode: React.FC = () => {
                   deployed
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                <Server className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+                <Server className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -655,26 +661,26 @@ export const InfrastructureAsCode: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Valid Templates
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {templates.filter(t => t.validation.isValid).length}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {Math.round(
                     (templates.filter(t => t.validation.isValid).length / templates.length) * 100
                   )}
                   % valid
                 </p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -683,18 +689,18 @@ export const InfrastructureAsCode: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Total Deployments
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {templates.reduce((sum, t) => sum + t.deployments.length, 0)}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {templates.reduce(
                     (sum, t) => sum + t.deployments.filter(d => d.status === 'success').length,
                     0
@@ -702,20 +708,20 @@ export const InfrastructureAsCode: React.FC = () => {
                   successful
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                <Activity className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+                <Activity className="w-6 h-6 text-orange-600 dark:text-orange-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() =>
+                onClick={() = aria-label="Button">
                   setSelectedTab(tab.id as 'templates' | 'deployments' | 'resources' | 'validation')
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
@@ -724,14 +730,14 @@ export const InfrastructureAsCode: React.FC = () => {
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             <AnimatePresence mode="wait">
               {selectedTab === 'templates' && (
                 <motion.div
@@ -739,7 +745,7 @@ export const InfrastructureAsCode: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {templates.map((template, index) => (
                     <motion.div
@@ -747,21 +753,21 @@ export const InfrastructureAsCode: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                      <div className="flex items-center justify-between mb-4 responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
                             {getTypeIcon(template.type)}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                               {template.name}
                             </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                               {template.description}
                             </p>
-                            <div className="flex items-center space-x-4 mt-2">
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
                               <span
                                 className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(template.status)}`}
                               >
@@ -777,67 +783,67 @@ export const InfrastructureAsCode: React.FC = () => {
                               >
                                 {template.environment}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 v{template.version}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {template.resources.length}
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Resources
                             </div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-2 responsive-container">
                             <button
-                              onClick={() => handleTemplateAction(template.id, 'plan')}
-                              className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'plan')}
+                              className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/20 rounded-lg transition-colors responsive-container"
                               title="Generate Plan"
                             >
-                              <Eye className="w-4 h-4 text-blue-600" />
+                              <Eye className="w-4 h-4 text-blue-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() => handleTemplateAction(template.id, 'deploy')}
-                              className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'deploy')}
+                              className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                               title="Deploy Template"
                             >
-                              <Play className="w-4 h-4 text-green-600" />
+                              <Play className="w-4 h-4 text-green-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() => handleTemplateAction(template.id, 'validate')}
-                              className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'validate')}
+                              className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/20 rounded-lg transition-colors responsive-container"
                               title="Validate Template"
                             >
-                              <CheckCircle className="w-4 h-4 text-purple-600" />
+                              <CheckCircle className="w-4 h-4 text-purple-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() => console.log('View template details', template.id)}
-                              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> console.log('View template details', template.id)}
+                              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                               title="View Details"
                             >
-                              <Settings className="w-4 h-4 text-gray-600" />
+                              <Settings className="w-4 h-4 text-gray-600 responsive-container" />
                             </button>
                           </div>
                         </div>
                       </div>
 
                       {/* Resources Summary */}
-                      <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">
+                      <div className="mt-4 responsive-container">
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3 responsive-container">
                           Infrastructure Resources
                         </h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 responsive-container">
                           {template.resources.map(resource => (
                             <div
                               key={resource.id}
-                              className="bg-white dark:bg-slate-800 rounded-lg p-3"
+                              className="bg-white dark:bg-slate-800 rounded-lg p-3 responsive-container"
                             >
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-900 dark:text-white">
+                              <div className="flex items-center justify-between mb-2 responsive-container">
+                                <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                                   {resource.name}
                                 </span>
                                 <span
@@ -852,7 +858,7 @@ export const InfrastructureAsCode: React.FC = () => {
                                   {resource.status}
                                 </span>
                               </div>
-                              <div className="text-xs text-slate-500 dark:text-slate-400">
+                              <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {resource.type} • {resource.provider}
                               </div>
                             </div>
@@ -870,17 +876,17 @@ export const InfrastructureAsCode: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="text-center py-12">
-                    <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                  <div className="text-center py-12 responsive-container">
+                    <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 responsive-container">
                       Deployment History
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 mb-6">
+                    <p className="text-slate-500 dark:text-slate-400 mb-6 responsive-container">
                       Track and manage infrastructure deployment history
                     </p>
-                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
                       View Deployment Logs
                     </button>
                   </div>
@@ -893,17 +899,17 @@ export const InfrastructureAsCode: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="text-center py-12">
-                    <Server className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                  <div className="text-center py-12 responsive-container">
+                    <Server className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 responsive-container">
                       Infrastructure Resources
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 mb-6">
+                    <p className="text-slate-500 dark:text-slate-400 mb-6 responsive-container">
                       Manage and monitor infrastructure resources across all environments
                     </p>
-                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
                       View Resource Details
                     </button>
                   </div>
@@ -916,25 +922,25 @@ export const InfrastructureAsCode: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Validation Results
                       </h3>
-                      <div className="space-y-3">
+                      <div className="space-y-3 responsive-container">
                         {templates.map(template => (
                           <div
                             key={template.id}
-                            className="bg-white dark:bg-slate-800 rounded-lg p-4"
+                            className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container"
                           >
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between responsive-container">
                               <div>
-                                <h4 className="font-medium text-slate-900 dark:text-white">
+                                <h4 className="font-medium text-slate-900 dark:text-white responsive-container">
                                   {template.name}
                                 </h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">
+                                <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                                   {template.validation.errors.length} errors,{' '}
                                   {template.validation.warnings.length} warnings
                                 </p>
@@ -954,14 +960,14 @@ export const InfrastructureAsCode: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Validation Summary
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <CheckCircle className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <CheckCircle className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             Validation summary chart
                           </p>
                         </div>

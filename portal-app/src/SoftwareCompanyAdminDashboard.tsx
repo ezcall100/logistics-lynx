@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Bot, Bell, User, LogOut, Settings, Search, Plus, 
@@ -114,23 +114,23 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
   ];
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Platform KPIs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Companies</p>
-              <p className="text-3xl font-bold text-gray-900">{companies.length}</p>
-              <p className="text-sm text-green-600 mt-1">+2 this month</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Companies</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{companies.length}</p>
+              <p className="text-sm text-green-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">+2 this month</p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-xl">
-              <Building2 className="w-8 h-8 text-blue-600" />
+            <div className="bg-blue-100 p-4 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+              <Building2 className="w-8 h-8 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -139,16 +139,16 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Users</p>
-              <p className="text-3xl font-bold text-gray-900">{companies.reduce((sum, c) => sum + c.users, 0)}</p>
-              <p className="text-sm text-green-600 mt-1">+15 this month</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Users</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{companies.reduce((sum, c) => sum + c.users, 0)}</p>
+              <p className="text-sm text-green-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">+15 this month</p>
             </div>
-            <div className="bg-green-100 p-4 rounded-xl">
-              <Users className="w-8 h-8 text-green-600" />
+            <div className="bg-green-100 p-4 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-8 h-8 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -157,16 +157,16 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Monthly Revenue</p>
-              <p className="text-3xl font-bold text-gray-900">${companies.reduce((sum, c) => sum + c.revenue, 0).toLocaleString()}</p>
-              <p className="text-sm text-green-600 mt-1">+12% from last month</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Monthly Revenue</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">${companies.reduce((sum, c) => sum + c.revenue, 0).toLocaleString()}</p>
+              <p className="text-sm text-green-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">+12% from last month</p>
             </div>
-            <div className="bg-purple-100 p-4 rounded-xl">
-              <DollarSign className="w-8 h-8 text-purple-600" />
+            <div className="bg-purple-100 p-4 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+              <DollarSign className="w-8 h-8 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -175,16 +175,16 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Active Portals</p>
-              <p className="text-3xl font-bold text-gray-900">24</p>
-              <p className="text-sm text-green-600 mt-1">All systems operational</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Active Portals</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">24</p>
+              <p className="text-sm text-green-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">All systems operational</p>
             </div>
-            <div className="bg-orange-100 p-4 rounded-xl">
-              <Globe className="w-8 h-8 text-orange-600" />
+            <div className="bg-orange-100 p-4 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+              <Globe className="w-8 h-8 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -195,23 +195,23 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white rounded-xl shadow-sm border border-gray-200"
+        className="bg-white rounded-xl shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-900">Recent Companies</h3>
+        <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Recent Companies</h3>
         </div>
-        <div className="p-6">
-          <div className="space-y-4">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {companies.map((company) => (
-              <div key={company.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
-                <div className="flex items-center space-x-4">
-                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-lg">
-                    <Building2 className="w-6 h-6 text-white" />
+              <div key={company.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Building2 className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">{company.name}</h4>
-                    <p className="text-sm text-gray-500">{company.subdomain}.transbotai.com</p>
-                    <div className="flex items-center space-x-4 mt-1">
+                    <h4 className="font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.name}</h4>
+                    <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.subdomain}.transbotai.com</p>
+                    <div className="flex items-center space-x-4 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         company.status === 'active' ? 'bg-green-100 text-green-800' :
                         company.status === 'trial' ? 'bg-yellow-100 text-yellow-800' :
@@ -219,14 +219,14 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
                       }`}>
                         {company.status}
                       </span>
-                      <span className="text-xs text-gray-500">{company.plan} plan</span>
-                      <span className="text-xs text-gray-500">{company.users} users</span>
+                      <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.plan} plan</span>
+                      <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.users} users</span>
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">${company.revenue.toLocaleString()}/mo</p>
-                  <p className="text-xs text-gray-500">{company.lastActivity}</p>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">${company.revenue.toLocaleString()}/mo</p>
+                  <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.lastActivity}</p>
                 </div>
               </div>
             ))}
@@ -237,67 +237,67 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
   );
 
   const renderCompanies = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Companies Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Company Management</h2>
-          <p className="text-gray-600">Manage all companies using the Trans Bot AI platform</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Company Management</h2>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage all companies using the Trans Bot AI platform</p>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           <span>Add Company</span>
         </button>
       </div>
 
       {/* Companies Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900">All Companies</h3>
-            <div className="flex items-center space-x-2">
-              <div className="relative">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">All Companies</h3>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                 <input
                   type="text"
                   placeholder="Search companies..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
-              <button className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg">
-                <Filter className="w-4 h-4" />
+              <button className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
+        <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+          <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+            <thead className="bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Users</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Activity</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Company</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Plan</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Users</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Revenue</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Last Activity</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
               {companies.map((company) => (
-                <tr key={company.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg mr-3">
-                        <Building2 className="w-5 h-5 text-white" />
+                <tr key={company.id} className="hover:bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg mr-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <Building2 className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
                       <div>
-                        <div className="text-sm font-medium text-gray-900">{company.name}</div>
-                        <div className="text-sm text-gray-500">{company.subdomain}.transbotai.com</div>
+                        <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.name}</div>
+                        <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.subdomain}.transbotai.com</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       company.plan === 'enterprise' ? 'bg-purple-100 text-purple-800' :
                       company.plan === 'professional' ? 'bg-blue-100 text-blue-800' :
@@ -306,7 +306,7 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
                       {company.plan}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       company.status === 'active' ? 'bg-green-100 text-green-800' :
                       company.status === 'trial' ? 'bg-yellow-100 text-yellow-800' :
@@ -315,19 +315,19 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
                       {company.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{company.users}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${company.revenue.toLocaleString()}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{company.lastActivity}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <Eye className="w-4 h-4" />
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.users}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">${company.revenue.toLocaleString()}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.lastActivity}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <button className="text-blue-600 hover:text-blue-900 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
-                      <button className="text-green-600 hover:text-green-900">
-                        <Edit className="w-4 h-4" />
+                      <button className="text-green-600 hover:text-green-900 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 className="w-4 h-4" />
+                      <button className="text-red-600 hover:text-red-900 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                     </div>
                   </td>
@@ -347,91 +347,97 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
       case 'companies':
         return renderCompanies();
       case 'portals':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Portal Management</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Portal Management</h2></div>;
       case 'users':
-        return <div className="p-6"><h2 className="text-2xl font-bold">User Management</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">User Management</h2></div>;
       case 'billing':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Billing & Plans</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Billing & Plans</h2></div>;
       case 'analytics':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Platform Analytics</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Platform Analytics</h2></div>;
       case 'reports':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Reports</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Reports</h2></div>;
       case 'settings':
-        return <div className="p-6"><h2 className="text-2xl font-bold">System Settings</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">System Settings</h2></div>;
       default:
         return renderOverview();
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Top Header */}
-      <header className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
-        <div className="flex items-center justify-between px-6 py-4">
+      <header className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Left side - Logo and Menu Toggle */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+              onClick={() = aria-label="Button"> setSidebarOpen(!sidebarOpen)}
+              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {sidebarOpen ? <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Menu className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
             </button>
             
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-xl shadow-lg">
-                <Bot className="w-7 h-7 text-white" />
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-xl shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <Bot className="w-7 h-7 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Trans Bot AI</h1>
-                <p className="text-sm text-gray-500 font-medium">Software Company Admin</p>
+                <h1 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Trans Bot AI</h1>
+                <p className="text-sm text-gray-500 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Software Company Admin</p>
               </div>
             </div>
           </div>
 
           {/* Center - Search Bar */}
-          <div className="flex-1 max-w-2xl mx-8 hidden md:block">
-            <div className="relative">
+          <div className="flex-1 max-w-2xl mx-8 hidden md:block responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <input
                 type="text"
                 placeholder="Search companies, users, portals..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
 
           {/* Right side - Actions and Profile */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {/* Notifications */}
-            <div className="relative">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                onClick={() = aria-label="Button"> setShowNotifications(!showNotifications)}
+                className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <Bell className="w-6 h-6" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                <Bell className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                   {notifications.length}
                 </span>
               </button>
 
               {/* Notifications Dropdown */}
               {showNotifications && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
-                  <div className="p-4 border-b border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-900">Platform Notifications</h3>
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="p-4 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Platform Notifications</h3>
                   </div>
-                  <div className="max-h-64 overflow-y-auto">
+                  <div className="max-h-64 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
                     {notifications.map((notification) => (
-                      <div key={notification.id} className="p-4 border-b border-gray-100 hover:bg-gray-50">
-                        <div className="flex items-start space-x-3">
+                      <div key={notification.id} className="p-4 border-b border-gray-100 hover:bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div className={`w-2 h-2 rounded-full mt-2 ${
                             notification.type === 'success' ? 'bg-green-500' :
                             notification.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
                           }`} />
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900">{notification.title}</p>
-                            <p className="text-sm text-gray-600">{notification.message}</p>
-                            <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+                          <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{notification.title}</p>
+                            <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{notification.message}</p>
+                            <p className="text-xs text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{notification.time}</p>
                           </div>
                         </div>
                       </div>
@@ -442,45 +448,45 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
             </div>
 
             {/* Profile Dropdown */}
-            <div className="relative">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                className="flex items-center space-x-3 text-gray-700 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                onClick={() = aria-label="Button"> setShowProfileDropdown(!showProfileDropdown)}
+                className="flex items-center space-x-3 text-gray-700 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="text-right">
-                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                  <div className="text-xs text-gray-500">Super Admin</div>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{user.name}</div>
+                  <div className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Super Admin</div>
                 </div>
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-sm font-bold">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-white text-sm font-bold responsive-container sm:flex-col md:flex-row lg:grid">
                     {user.name?.charAt(0) || 'U'}
                   </span>
                 </div>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
+                <ChevronDown className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
 
               {/* Profile Dropdown Menu */}
               {showProfileDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
-                  <div className="py-2">
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <User className="w-4 h-4 mr-3" />
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <User className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                       Profile
                     </a>
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <Settings className="w-4 h-4 mr-3" />
+                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Settings className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                       Settings
                     </a>
-                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <Shield className="w-4 h-4 mr-3" />
+                    <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Shield className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                       Security
                     </a>
-                    <hr className="my-2" />
+                    <hr className="my-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <button
                       onClick={onLogout}
-                      className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                    >
-                      <LogOut className="w-4 h-4 mr-3" />
+                      className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 responsive-container sm:flex-col md:flex-row lg:grid"
+                     aria-label="Button">
+                      <LogOut className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                       Sign Out
                     </button>
                   </div>
@@ -491,20 +497,20 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
         </div>
       </header>
 
-      <div className="flex pt-20">
+      <div className="flex pt-20 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Sidebar */}
         <motion.aside
           initial={false}
           animate={{ width: sidebarOpen ? 280 : 0 }}
-          className="bg-white shadow-lg min-h-screen fixed left-0 top-20 z-40 overflow-hidden"
+          className="bg-white shadow-lg min-h-screen fixed left-0 top-20 z-40 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="p-4">
+          <div className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {/* Main Navigation */}
-            <nav className="space-y-2">
+            <nav className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => setActiveMenu(item.id)}
+                  onClick={() = aria-label="Button"> setActiveMenu(item.id)}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                     activeMenu === item.id
                       ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600'
@@ -512,44 +518,44 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
                   }`}
                 >
                   <item.icon className={`w-5 h-5 ${activeMenu === item.id ? 'text-blue-600' : item.color}`} />
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</span>
                 </button>
               ))}
             </nav>
 
             {/* Quick Actions */}
-            <div className="mt-8 pt-4 border-t border-gray-200">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Quick Actions</h3>
-              <div className="space-y-2">
+            <div className="mt-8 pt-4 border-t border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 responsive-container sm:flex-col md:flex-row lg:grid">Quick Actions</h3>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 {quickActions.map((action, index) => (
                   <button
                     key={index}
-                    className="w-full flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                  >
+                    className="w-full flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     <div className={`w-8 h-8 ${action.color} rounded-lg flex items-center justify-center`}>
-                      <action.icon className="w-4 h-4 text-white" />
+                      <action.icon className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                    <span className="text-sm">{action.label}</span>
+                    <span className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* System Status */}
-            <div className="mt-8 pt-4 border-t border-gray-200">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Platform Status</h3>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg">
-                  <span className="text-sm text-green-700">All Systems</span>
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <div className="mt-8 pt-4 border-t border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 responsive-container sm:flex-col md:flex-row lg:grid">Platform Status</h3>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-green-700 responsive-container sm:flex-col md:flex-row lg:grid">All Systems</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                 </div>
-                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg">
-                  <span className="text-sm text-green-700">Database</span>
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-green-700 responsive-container sm:flex-col md:flex-row lg:grid">Database</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                 </div>
-                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg">
-                  <span className="text-sm text-green-700">API Services</span>
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="flex items-center justify-between px-4 py-2 bg-green-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-green-700 responsive-container sm:flex-col md:flex-row lg:grid">API Services</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                 </div>
               </div>
             </div>
@@ -558,7 +564,7 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
 
         {/* Main Content */}
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-280' : 'ml-0'}`}>
-          <div className="p-6">
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {renderContent()}
           </div>
         </main>
@@ -569,10 +575,10 @@ const SoftwareCompanyAdminDashboard: React.FC<SoftwareCompanyAdminDashboardProps
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.6 }}
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-6 right-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-          <Plus className="w-6 h-6" />
+        <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <Plus className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
         </button>
       </motion.div>
     </div>

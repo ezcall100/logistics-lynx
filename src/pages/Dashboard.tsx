@@ -76,75 +76,81 @@ const Dashboard: React.FC = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Animated Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="w-full h-full bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"></div>
+      <div className="absolute inset-0 opacity-20 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="w-full h-full bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 responsive-container sm:flex-col md:flex-row lg:grid"></div>
       </div>
       
       {/* Header */}
-      <div className="relative z-10 text-center pt-16 pb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 mb-6 shadow-2xl">
-          <Brain className="w-10 h-10 text-white" />
+      <div className="relative z-10 text-center pt-16 pb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 mb-6 shadow-2xl responsive-container sm:flex-col md:flex-row lg:grid">
+          <Brain className="w-10 h-10 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
-        <h1 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-4 tracking-tight">
+        <h1 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-4 tracking-tight responsive-container sm:flex-col md:flex-row lg:grid">
           Trans Bot AI
         </h1>
-        <p className="text-2xl text-gray-300 font-light mb-2">
+        <p className="text-2xl text-gray-300 font-light mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           Intelligent Logistics Management System
         </p>
-        <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
-          <div className="flex items-center space-x-1">
-            <CheckCircle className="w-4 h-4 text-green-400" />
+        <div className="flex items-center justify-center space-x-4 text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CheckCircle className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>25 Portals Active</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <CheckCircle className="w-4 h-4 text-green-400" />
+          <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CheckCircle className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>250 AI Agents</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <CheckCircle className="w-4 h-4 text-green-400" />
+          <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CheckCircle className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>6 Languages</span>
           </div>
         </div>
       </div>
 
       {/* Portal Grid */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pb-20 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {portals.map((portal, index) => (
             <div 
               key={index}
-              className="group relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 cursor-pointer"
+              className="group relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {/* Gradient Overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${portal.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`}></div>
               
               {/* Status Indicator */}
-              <div className="absolute top-4 right-4">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+              <div className="absolute top-4 right-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50 responsive-container sm:flex-col md:flex-row lg:grid"></div>
               </div>
               
               {/* Icon */}
-              <div className="relative z-10 mb-4">
+              <div className="relative z-10 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${portal.color} flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-500/25 transition-all duration-500`}>
                   <portal.icon className={`w-8 h-8 ${portal.iconColor} group-hover:scale-110 transition-transform duration-300`} />
                 </div>
               </div>
               
               {/* Content */}
-              <div className="relative z-10">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+              <div className="relative z-10 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300 responsive-container sm:flex-col md:flex-row lg:grid">
                   {portal.title}
                 </h3>
-                <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                <p className="text-gray-300 text-sm mb-4 leading-relaxed responsive-container sm:flex-col md:flex-row lg:grid">
                   {portal.description}
                 </p>
                 
                 {/* Action Button */}
-                <div className="flex items-center text-cyan-400 text-sm font-medium group-hover:text-cyan-300 transition-colors duration-300">
+                <div className="flex items-center text-cyan-400 text-sm font-medium group-hover:text-cyan-300 transition-colors duration-300 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>Access Portal</span>
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
               </div>
             </div>
@@ -153,45 +159,45 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Floating Action Button */}
-      <div className="fixed bottom-8 right-8 z-20">
-        <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center shadow-2xl hover:shadow-cyan-500/50 cursor-pointer hover:scale-110 transition-all duration-300 group">
-          <Zap className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-300" />
+      <div className="fixed bottom-8 right-8 z-20 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center shadow-2xl hover:shadow-cyan-500/50 cursor-pointer hover:scale-110 transition-all duration-300 group responsive-container sm:flex-col md:flex-row lg:grid">
+          <Zap className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-300 responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
       </div>
 
       {/* Status Bar */}
-      <div className="fixed bottom-4 left-4 z-20">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl px-4 py-3 shadow-xl">
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-              <span className="text-white text-sm font-medium">System Online</span>
+      <div className="fixed bottom-4 left-4 z-20 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl px-4 py-3 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-white text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">System Online</span>
             </div>
-            <div className="w-px h-4 bg-white/20"></div>
-            <div className="text-gray-300 text-xs">
-              <span className="text-cyan-400 font-semibold">99.9%</span> Uptime
+            <div className="w-px h-4 bg-white/20 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <div className="text-gray-300 text-xs responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-cyan-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">99.9%</span> Uptime
             </div>
           </div>
         </div>
       </div>
 
       {/* Performance Metrics */}
-      <div className="fixed top-4 right-4 z-20">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-xl">
-          <div className="flex items-center space-x-4 text-sm">
-            <div className="text-center">
-              <div className="text-cyan-400 font-bold text-lg">25</div>
-              <div className="text-gray-300 text-xs">Portals</div>
+      <div className="fixed top-4 right-4 z-20 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-cyan-400 font-bold text-lg responsive-container sm:flex-col md:flex-row lg:grid">25</div>
+              <div className="text-gray-300 text-xs responsive-container sm:flex-col md:flex-row lg:grid">Portals</div>
             </div>
-            <div className="w-px h-8 bg-white/20"></div>
-            <div className="text-center">
-              <div className="text-green-400 font-bold text-lg">250</div>
-              <div className="text-gray-300 text-xs">AI Agents</div>
+            <div className="w-px h-8 bg-white/20 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-green-400 font-bold text-lg responsive-container sm:flex-col md:flex-row lg:grid">250</div>
+              <div className="text-gray-300 text-xs responsive-container sm:flex-col md:flex-row lg:grid">AI Agents</div>
             </div>
-            <div className="w-px h-8 bg-white/20"></div>
-            <div className="text-center">
-              <div className="text-purple-400 font-bold text-lg">6</div>
-              <div className="text-gray-300 text-xs">Languages</div>
+            <div className="w-px h-8 bg-white/20 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-purple-400 font-bold text-lg responsive-container sm:flex-col md:flex-row lg:grid">6</div>
+              <div className="text-gray-300 text-xs responsive-container sm:flex-col md:flex-row lg:grid">Languages</div>
             </div>
           </div>
         </div>

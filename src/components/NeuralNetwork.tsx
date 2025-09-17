@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
@@ -52,7 +53,13 @@ export function NeuralNetwork() {
       })
     }, 100)
 
-    return () => clearInterval(interval)
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval)
   }, [])
 
   const getRandomTask = () => {
@@ -70,18 +77,22 @@ export function NeuralNetwork() {
   }
 
   return (
-    <div className="relative w-full h-96 bg-dark-darker rounded-2xl overflow-hidden">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="relative w-full h-96 bg-dark-darker rounded-2xl overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Neural Network Background */}
-      <div className="absolute inset-0 bg-transbot-neural opacity-30"></div>
+      <div className="absolute inset-0 bg-transbot-neural opacity-30 responsive-container sm:flex-col md:flex-row lg:grid"></div>
       
       {/* Agent Connections */}
-      <svg className="absolute inset-0 w-full h-full">
+      <svg className="absolute inset-0 w-full h-full responsive-container sm:flex-col md:flex-row lg:grid">
         {agents.map(agent => 
           agent.connections.map(connectionId => {
             const targetAgent = agents[connectionId]
             if (!targetAgent) return null
             
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <motion.line
                 key={`${agent.id}-${connectionId}`}
                 x1={`${agent.x}%`}
@@ -125,23 +136,23 @@ export function NeuralNetwork() {
       ))}
 
       {/* Agent Counter */}
-      <div className="absolute top-4 left-4 bg-holographic-glass p-4 rounded-xl">
-        <div className="text-2xl font-bold gradient-text-cyan">
+      <div className="absolute top-4 left-4 bg-holographic-glass p-4 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="text-2xl font-bold gradient-text-cyan responsive-container sm:flex-col md:flex-row lg:grid">
           {activeAgents}/250
         </div>
-        <div className="text-sm text-transbot-text-primary/80">
+        <div className="text-sm text-transbot-text-primary/80 responsive-container sm:flex-col md:flex-row lg:grid">
           AI Agents Active
         </div>
       </div>
 
       {/* Task Display */}
-      <div className="absolute bottom-4 right-4 bg-holographic-glass p-4 rounded-xl max-w-xs">
-        <div className="text-sm text-transbot-text-primary/80 mb-2">Current Tasks:</div>
+      <div className="absolute bottom-4 right-4 bg-holographic-glass p-4 rounded-xl max-w-xs responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="text-sm text-transbot-text-primary/80 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Current Tasks:</div>
         {agents
           .filter(agent => agent.status === 'processing')
           .slice(0, 3)
           .map(agent => (
-            <div key={agent.id} className="text-xs text-transbot-cyan mb-1">
+            <div key={agent.id} className="text-xs text-transbot-cyan mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
               Agent {agent.id}: {agent.task}
             </div>
           ))

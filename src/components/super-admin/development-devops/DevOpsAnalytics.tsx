@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   TrendingUp,
@@ -358,30 +358,30 @@ export const DevOpsAnalytics: React.FC = () => {
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'up':
-        return <TrendingUp className="w-4 h-4 text-green-500" />;
+        return <TrendingUp className="w-4 h-4 text-green-500 responsive-container" />;
       case 'down':
-        return <TrendingDown className="w-4 h-4 text-red-500" />;
+        return <TrendingDown className="w-4 h-4 text-red-500 responsive-container" />;
       case 'stable':
-        return <Activity className="w-4 h-4 text-blue-500" />;
+        return <Activity className="w-4 h-4 text-blue-500 responsive-container" />;
       default:
-        return <Activity className="w-4 h-4 text-gray-500" />;
+        return <Activity className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'deployment':
-        return <GitBranch className="w-4 h-4 text-blue-500" />;
+        return <GitBranch className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'performance':
-        return <Activity className="w-4 h-4 text-green-500" />;
+        return <Activity className="w-4 h-4 text-green-500 responsive-container" />;
       case 'reliability':
-        return <Shield className="w-4 h-4 text-purple-500" />;
+        return <Shield className="w-4 h-4 text-purple-500 responsive-container" />;
       case 'efficiency':
-        return <Zap className="w-4 h-4 text-yellow-500" />;
+        return <Zap className="w-4 h-4 text-yellow-500 responsive-container" />;
       case 'cost':
-        return <TrendingUp className="w-4 h-4 text-orange-500" />;
+        return <TrendingUp className="w-4 h-4 text-orange-500 responsive-container" />;
       default:
-        return <BarChart3 className="w-4 h-4 text-gray-500" />;
+        return <BarChart3 className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
@@ -402,53 +402,59 @@ export const DevOpsAnalytics: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">
               DevOps Analytics
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">
               Performance intelligence and DevOps metrics dashboard
             </p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 responsive-container">
             <select
               value={timeRange}
               onChange={e => setTimeRange(e.target.value as '7d' | '30d' | '90d' | '1y')}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
             >
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
               <option value="90d">Last 90 days</option>
               <option value="1y">Last year</option>
             </select>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Download className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Download className="w-4 h-4 responsive-container" />
               <span>Export</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
           </div>
         </div>
 
         {/* Key Metrics Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           {metrics.slice(0, 4).map((metric, index) => (
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+              className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
                   {getCategoryIcon(metric.category)}
                 </div>
                 <span
@@ -458,15 +464,15 @@ export const DevOpsAnalytics: React.FC = () => {
                 </span>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 responsive-container">
                   {metric.name}
                 </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">
                   {metric.category === 'cost'
                     ? formatCurrency(metric.value)
                     : `${metric.value}${metric.unit}`}
                 </p>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container">
                   {getTrendIcon(metric.trend)}
                   <span
                     className={`text-sm font-medium ${
@@ -480,7 +486,7 @@ export const DevOpsAnalytics: React.FC = () => {
                     {metric.change > 0 ? '+' : ''}
                     {metric.change}%
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">vs target</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 responsive-container">vs target</span>
                 </div>
               </div>
             </motion.div>
@@ -488,12 +494,12 @@ export const DevOpsAnalytics: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() =>
+                onClick={() = aria-label="Button">
                   setSelectedTab(tab.id as 'overview' | 'performance' | 'costs' | 'security')
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
@@ -502,14 +508,14 @@ export const DevOpsAnalytics: React.FC = () => {
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             <AnimatePresence mode="wait">
               {selectedTab === 'overview' && (
                 <motion.div
@@ -517,22 +523,22 @@ export const DevOpsAnalytics: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
                   {/* All Metrics Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
                     {metrics.map((metric, index) => (
                       <motion.div
                         key={metric.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                        className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                       >
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-3">
+                        <div className="flex items-center justify-between mb-4 responsive-container">
+                          <div className="flex items-center space-x-3 responsive-container">
                             {getCategoryIcon(metric.category)}
-                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                               {metric.name}
                             </h3>
                           </div>
@@ -542,18 +548,18 @@ export const DevOpsAnalytics: React.FC = () => {
                             {metric.status}
                           </span>
                         </div>
-                        <div className="mb-4">
-                          <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                        <div className="mb-4 responsive-container">
+                          <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.category === 'cost'
                               ? formatCurrency(metric.value)
                               : `${metric.value}${metric.unit}`}
                           </p>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {metric.description}
                           </p>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
+                        <div className="flex items-center justify-between responsive-container">
+                          <div className="flex items-center space-x-2 responsive-container">
                             {getTrendIcon(metric.trend)}
                             <span
                               className={`text-sm font-medium ${
@@ -568,9 +574,9 @@ export const DevOpsAnalytics: React.FC = () => {
                               {metric.change}%
                             </span>
                           </div>
-                          <div className="text-right">
-                            <div className="text-xs text-slate-500 dark:text-slate-400">Target</div>
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                          <div className="text-right responsive-container">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">Target</div>
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {metric.category === 'cost'
                                 ? formatCurrency(metric.target)
                                 : `${metric.target}${metric.unit}`}
@@ -589,7 +595,7 @@ export const DevOpsAnalytics: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-6"
+                  className="space-y-6 responsive-container"
                 >
                   {deploymentMetrics.map((metric, index) => (
                     <motion.div
@@ -597,52 +603,52 @@ export const DevOpsAnalytics: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-4 responsive-container">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                             {metric.service}
                           </h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {metric.environment}
                           </p>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           {getTrendIcon(metric.trend)}
-                          <span className="text-sm text-slate-500 dark:text-slate-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Last: {new Date(metric.lastDeployment).toLocaleDateString()}
                           </span>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Frequency
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.frequency}/day
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Success Rate
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.successRate}%
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Lead Time
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.leadTime}h
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">MTTR</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">MTTR</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.mttr}m
                           </div>
                         </div>
@@ -658,7 +664,7 @@ export const DevOpsAnalytics: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-6"
+                  className="space-y-6 responsive-container"
                 >
                   {performanceMetrics.map((metric, index) => (
                     <motion.div
@@ -666,56 +672,56 @@ export const DevOpsAnalytics: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-4 responsive-container">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                             {metric.service}
                           </h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {metric.environment}
                           </p>
                         </div>
-                        <div className="text-right">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="text-right responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Availability
                           </div>
-                          <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                          <div className="text-xl font-bold text-green-600 dark:text-green-400 responsive-container">
                             {metric.availability}%
                           </div>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Response Time
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.responseTime}ms
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Throughput
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.throughput}/s
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Error Rate
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.errorRate}%
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             CPU Usage
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.cpuUsage}%
                           </div>
                         </div>
@@ -731,7 +737,7 @@ export const DevOpsAnalytics: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-6"
+                  className="space-y-6 responsive-container"
                 >
                   {reliabilityMetrics.map((metric, index) => (
                     <motion.div
@@ -739,18 +745,18 @@ export const DevOpsAnalytics: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-4 responsive-container">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                             {metric.service}
                           </h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {metric.environment}
                           </p>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           {getTrendIcon(metric.trend)}
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -767,30 +773,30 @@ export const DevOpsAnalytics: React.FC = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Uptime</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">Uptime</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.uptime}%
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">MTTR</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">MTTR</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.mttr}m
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">MTBF</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">MTBF</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.mtbf}h
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Incidents
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {metric.incidentCount}
                           </div>
                         </div>
@@ -806,7 +812,7 @@ export const DevOpsAnalytics: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-6"
+                  className="space-y-6 responsive-container"
                 >
                   {costMetrics.map((metric, index) => (
                     <motion.div
@@ -814,53 +820,53 @@ export const DevOpsAnalytics: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-4 responsive-container">
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                             {metric.service}
                           </h3>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {metric.environment}
                           </p>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           {getTrendIcon(metric.trend)}
-                          <div className="text-right">
-                            <div className="text-sm text-slate-500 dark:text-slate-400">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                               Budget Utilization
                             </div>
-                            <div className="text-xl font-bold text-slate-900 dark:text-white">
+                            <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                               {metric.utilization}%
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             Total Cost
                           </div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {formatCurrency(metric.monthlyCost)}
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Compute</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">Compute</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {formatCurrency(metric.computeCost)}
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Storage</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">Storage</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {formatCurrency(metric.storageCost)}
                           </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="text-sm text-slate-500 dark:text-slate-400">Network</div>
-                          <div className="text-xl font-bold text-slate-900 dark:text-white">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container">Network</div>
+                          <div className="text-xl font-bold text-slate-900 dark:text-white responsive-container">
                             {formatCurrency(metric.networkCost)}
                           </div>
                         </div>

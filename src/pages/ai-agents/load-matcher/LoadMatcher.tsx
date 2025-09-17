@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { 
@@ -16,7 +17,7 @@ import {
 } from 'lucide-react'
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
-export default function LoadMatcher() {
+const LoadMatcher = React.memo(function LoadMatcher() {
   const [isMatching, setIsMatching] = useState(false)
   const [matchingResults, setMatchingResults] = useState<any>(null)
   const [agentStatus, setAgentStatus] = useState('Learning')
@@ -101,57 +102,63 @@ export default function LoadMatcher() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-teal/5 via-white to-transbot-purple/5">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-transbot-teal/5 via-white to-transbot-purple/5 responsive-container">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-20 px-6 lg:px-8 responsive-container">
+        <div className="max-w-7xl mx-auto responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <div className="inline-flex items-center gap-2 bg-transbot-teal/10 text-transbot-teal px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Network className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 bg-transbot-teal/10 text-transbot-teal px-4 py-2 rounded-full text-sm font-medium mb-6 responsive-container">
+              <Network className="w-4 h-4 responsive-container" />
               AI Agent: Load Matcher
             </div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Intelligent
-              <span className="bg-gradient-primary bg-clip-text text-transparent"> Load Matching</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent responsive-container"> Load Matching</span>
             </h1>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8 responsive-container">
               Our AI-powered Load Matcher connects shippers with the perfect carriers, 
               optimizing rates, timing, and capacity utilization for maximum efficiency.
             </p>
             
             {/* Agent Status */}
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
+            <div className="flex items-center justify-center gap-4 mb-8 responsive-container">
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20 responsive-container">
                 <div className={`w-2 h-2 rounded-full ${agentStatus === 'Learning' ? 'bg-transbot-warning animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-sky animate-pulse' : 'bg-transbot-teal'}`}></div>
-                <span className="text-sm font-medium text-transbot-text-primary">{agentStatus}</span>
+                <span className="text-sm font-medium text-transbot-text-primary responsive-container">{agentStatus}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
-                <Zap className="w-4 h-4 text-transbot-teal" />
-                <span className="text-sm font-medium text-transbot-text-primary">{efficiency}% Efficiency</span>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20 responsive-container">
+                <Zap className="w-4 h-4 text-transbot-teal responsive-container" />
+                <span className="text-sm font-medium text-transbot-text-primary responsive-container">{efficiency}% Efficiency</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={startMatching}
                 disabled={isMatching}
-                className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
               >
                 {isMatching ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container"></div>
                     Matching Loads...
                   </>
                 ) : (
                   <>
-                    <Play className="w-5 h-5" />
+                    <Play className="w-5 h-5 responsive-container" />
                     Start Matching
                   </>
                 )}
@@ -160,9 +167,9 @@ export default function LoadMatcher() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetMatching}
-                className="border-2 border-transbot-teal text-transbot-teal px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300"
+                className="border-2 border-transbot-teal text-transbot-teal px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300 responsive-container"
               >
-                <RotateCcw className="w-5 h-5" />
+                <RotateCcw className="w-5 h-5 responsive-container" />
                 Reset
               </motion.button>
             </div>
@@ -173,7 +180,7 @@ export default function LoadMatcher() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 responsive-container"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -181,11 +188,11 @@ export default function LoadMatcher() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-transbot-border/20 shadow-transbot"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-transbot-border/20 shadow-transbot responsive-container"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-3`} />
-                <div className="text-3xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-transbot-text-secondary">{stat.label}</div>
+                <div className="text-3xl font-bold text-transbot-text-primary mb-1 responsive-container">{stat.value}</div>
+                <div className="text-sm text-transbot-text-secondary responsive-container">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -194,89 +201,89 @@ export default function LoadMatcher() {
 
       {/* Matching Results */}
       {matchingResults && (
-        <section className="py-20 px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-20 px-6 lg:px-8 responsive-container">
+          <div className="max-w-7xl mx-auto responsive-container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot mb-12"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot mb-12 responsive-container"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <CheckCircle className="w-6 h-6 text-transbot-teal" />
-                <h2 className="text-2xl font-bold text-transbot-text-primary">Matching Complete!</h2>
+              <div className="flex items-center gap-3 mb-6 responsive-container">
+                <CheckCircle className="w-6 h-6 text-transbot-teal responsive-container" />
+                <h2 className="text-2xl font-bold text-transbot-text-primary responsive-container">Matching Complete!</h2>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-sky mb-1">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-sky mb-1 responsive-container">
                     {matchingResults.matchedLoads}/{matchingResults.totalLoads}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Loads Matched</div>
-                  <div className="text-xs text-transbot-teal">↑ {matchingResults.matchRate}% match rate</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Loads Matched</div>
+                  <div className="text-xs text-transbot-teal responsive-container">↑ {matchingResults.matchRate}% match rate</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-teal mb-1">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-teal mb-1 responsive-container">
                     ${matchingResults.averageRate}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Avg Rate/Mile</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Avg Rate/Mile</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-purple mb-1">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-purple mb-1 responsive-container">
                     ${matchingResults.totalValue.toLocaleString()}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Total Value</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Total Value</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-warning mb-1">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-warning mb-1 responsive-container">
                     {matchingResults.matchRate}%
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Match Rate</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Match Rate</div>
                 </div>
               </div>
 
               {/* Top Matches */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4">Top Matches</h3>
-                <div className="space-y-3">
-                  {matchingResults.matches.map((match: any) => (
-                    <div key={match.id} className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                          <Truck className="w-5 h-5 text-white" />
+              <div className="mb-6 responsive-container">
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4 responsive-container">Top Matches</h3>
+                <div className="space-y-3 responsive-container">
+                  {matchingResults.matches.map((match: unknown) => (
+                    <div key={match.id} className="flex items-center justify-between p-4 bg-transbot-neutral-light rounded-lg responsive-container">
+                      <div className="flex items-center gap-4 responsive-container">
+                        <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center responsive-container">
+                          <Truck className="w-5 h-5 text-white responsive-container" />
                         </div>
                         <div>
-                          <div className="font-semibold text-transbot-text-primary">{match.load}</div>
-                          <div className="text-sm text-transbot-text-secondary">{match.carrier}</div>
+                          <div className="font-semibold text-transbot-text-primary responsive-container">{match.load}</div>
+                          <div className="text-sm text-transbot-text-secondary responsive-container">{match.carrier}</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-semibold text-transbot-text-primary">${match.rate}/mi</div>
-                        <div className="text-sm text-transbot-text-secondary">{match.distance} mi</div>
-                        <div className="text-xs text-transbot-teal">{match.matchScore}% match</div>
+                      <div className="text-right responsive-container">
+                        <div className="font-semibold text-transbot-text-primary responsive-container">${match.rate}/mi</div>
+                        <div className="text-sm text-transbot-text-secondary responsive-container">{match.distance} mi</div>
+                        <div className="text-xs text-transbot-teal responsive-container">{match.matchScore}% match</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 responsive-container">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => trackUserInteraction('load_matches_exported', { format: 'csv' })}
-                  className="bg-transbot-teal text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+                  className="bg-transbot-teal text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 responsive-container"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 responsive-container" />
                   Export Matches
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => trackUserInteraction('load_matches_visualized', { type: 'network' })}
-                  className="border-2 border-transbot-teal text-transbot-teal px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300"
+                  className="border-2 border-transbot-teal text-transbot-teal px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-teal hover:text-white transition-all duration-300 responsive-container"
                 >
-                  <Network className="w-4 h-4" />
+                  <Network className="w-4 h-4 responsive-container" />
                   View Network
                 </motion.button>
               </div>
@@ -286,47 +293,47 @@ export default function LoadMatcher() {
       )}
 
       {/* Features Section */}
-      <section className="py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6 lg:px-8 responsive-container">
+        <div className="max-w-7xl mx-auto responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Advanced Load Matching Features
             </h2>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto responsive-container">
               Powered by machine learning algorithms and real-time market data 
               to deliver the most profitable and efficient load matches.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8 responsive-container">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 responsive-container"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-6 h-6 text-white" />
+                <div className="flex items-start gap-4 responsive-container">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 responsive-container">
+                    <feature.icon className="w-6 h-6 text-white responsive-container" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                  <div className="flex-1 responsive-container">
+                    <h3 className="text-xl font-bold text-transbot-text-primary mb-3 responsive-container">
                       {feature.title}
                     </h3>
-                    <p className="text-transbot-text-secondary mb-4">
+                    <p className="text-transbot-text-secondary mb-4 responsive-container">
                       {feature.description}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 responsive-container">
                       {feature.benefits.map((benefit, benefitIndex) => (
-                        <li key={benefitIndex} className="flex items-center gap-2 text-sm text-transbot-text-secondary">
-                          <CheckCircle className="w-4 h-4 text-transbot-teal flex-shrink-0" />
+                        <li key={benefitIndex} className="flex items-center gap-2 text-sm text-transbot-text-secondary responsive-container">
+                          <CheckCircle className="w-4 h-4 text-transbot-teal flex-shrink-0 responsive-container" />
                           {benefit}
                         </li>
                       ))}

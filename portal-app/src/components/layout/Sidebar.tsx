@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bot, Home, Building2, ToggleLeft, Users, CreditCard, 
@@ -74,13 +74,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
       BarChart3, Settings, Shield, Database, Globe, Zap
     };
     const IconComponent = icons[iconName] || Home;
-    return <IconComponent className="w-5 h-5" />;
+    return <IconComponent className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
   };
 
   const isActive = (path: string) => currentPath === path;
   const isExpanded = (menuId: string) => expandedMenus.includes(menuId);
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <>
       {/* Mobile Overlay */}
       <AnimatePresence>
@@ -89,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={onClose}
           />
         )}
@@ -103,40 +109,40 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
           opacity: isOpen ? 1 : 0
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="portal-sidebar fixed left-0 top-16 bottom-0 w-80 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-r border-gray-200/30 dark:border-slate-700/30 shadow-2xl z-50 lg:translate-x-0 lg:opacity-100 transition-all duration-300"
+        className="portal-sidebar fixed left-0 top-16 bottom-0 w-80 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-r border-gray-200/30 dark:border-slate-700/30 shadow-2xl z-50 lg:translate-x-0 lg:opacity-100 transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Sidebar Header */}
-          <div className="p-6 border-b border-gray-200/30 dark:border-slate-700/30">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 p-3 rounded-2xl shadow-lg">
-                <Bot className="w-6 h-6 text-white" />
+          <div className="p-6 border-b border-gray-200/30 dark:border-slate-700/30 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 p-3 rounded-2xl shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <Bot className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100">Navigation</h2>
-                <p className="text-sm text-gray-600 dark:text-slate-400 font-medium">Platform Management</p>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
+                <p className="text-sm text-gray-600 dark:text-slate-400 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Platform Management</p>
               </div>
             </div>
           </div>
 
           {/* Navigation Menu */}
-          <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+          <nav className="flex-1 overflow-y-auto p-4 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {menuItems.map((item) => (
               <div key={item.id}>
                 {item.children ? (
                   <div>
                     <button
-                      onClick={() => toggleMenu(item.id)}
-                      className="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 group hover:scale-[1.02]"
+                      onClick={() = aria-label="Button"> toggleMenu(item.id)}
+                      className="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 group hover:scale-[1.02] responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         {getIcon(item.icon)}
-                        <span className="font-medium">{item.label}</span>
+                        <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</span>
                       </div>
                       {isExpanded(item.id) ? (
-                        <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+                        <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : (
-                        <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+                        <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                       )}
                     </button>
                     
@@ -147,12 +153,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="ml-6 mt-1 space-y-1 overflow-hidden"
+                          className="ml-6 mt-1 space-y-1 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {item.children.map((child) => (
                             <button
                               key={child.id}
-                              onClick={() => onNavigate(child.path!)}
+                              onClick={() = aria-label="Button"> onNavigate(child.path!)}
                               className={`w-full flex items-center space-x-3 px-4 py-2.5 text-sm rounded-lg transition-all duration-200 hover:scale-[1.02] ${
                                 isActive(child.path!)
                                   ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-500 shadow-sm'
@@ -169,7 +175,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
                   </div>
                 ) : (
                   <button
-                    onClick={() => onNavigate(item.path!)}
+                    onClick={() = aria-label="Button"> onNavigate(item.path!)}
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
                       isActive(item.path!)
                         ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-l-4 border-blue-500 shadow-sm'
@@ -177,7 +183,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
                     }`}
                   >
                     {getIcon(item.icon)}
-                    <span className="font-medium">{item.label}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</span>
                   </button>
                 )}
               </div>
@@ -185,14 +191,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, currentPath, onNavig
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="p-4 border-t border-gray-200/30">
-            <div className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 p-4 rounded-2xl shadow-sm border border-gray-200/30">
-              <div className="flex items-center space-x-3 mb-2">
-                <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-sm font-semibold text-gray-900">System Status</span>
+          <div className="p-4 border-t border-gray-200/30 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 p-4 rounded-2xl shadow-sm border border-gray-200/30 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-pulse shadow-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                <span className="text-sm font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">System Status</span>
               </div>
-              <p className="text-xs text-gray-700 font-medium">All systems operational</p>
-              <p className="text-xs text-gray-600 mt-1">Uptime: 99.9%</p>
+              <p className="text-xs text-gray-700 font-medium responsive-container sm:flex-col md:flex-row lg:grid">All systems operational</p>
+              <p className="text-xs text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Uptime: 99.9%</p>
             </div>
           </div>
         </div>

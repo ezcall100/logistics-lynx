@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
@@ -222,12 +222,18 @@ const EnhancedUserRoles: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="space-y-4">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -236,130 +242,134 @@ const EnhancedUserRoles: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             User Roles
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Manage user roles and permissions across the system
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setShowCreateRole(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowCreateRole(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Add Role</span>
           </button>
         </div>
       </div>
 
       {/* Search */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           <input
             type="text"
             placeholder="Search roles..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </div>
       </div>
 
       {/* Roles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {filteredRoles.map((role, index) => {
           const isExpanded = expandedRoles.includes(role.id);
           
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={role.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-lg ${role.bgColor}`}>
                   <Shield className={`h-6 w-6 ${role.color}`} />
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {role.isSystem && (
-                    <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                    <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                       System
                     </span>
                   )}
                   <button
-                    onClick={() => toggleRoleExpansion(role.id)}
-                    className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                    onClick={() = aria-label="Button"> toggleRoleExpansion(role.id)}
+                    className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    {isExpanded ? <Eye className="h-4 w-4" /> : <MoreVertical className="h-4 w-4" />}
+                    {isExpanded ? <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   </button>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {role.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {role.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-gray-400" />
-                    <span className="text-sm text-gray-500 dark:text-gray-500">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Users className="h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="text-sm text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.userCount} users
                     </span>
                   </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-500">
+                  <span className="text-sm text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     {role.permissions.length} permissions
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {!role.isSystem && (
                     <button
-                      onClick={() => setShowEditRole(role.id)}
-                      className="p-1 text-gray-400 hover:text-green-600 transition-colors"
+                      onClick={() = aria-label="Button"> setShowEditRole(role.id)}
+                      className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Edit Role"
                     >
-                      <Edit className="h-4 w-4" />
+                      <Edit className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   )}
                   {!role.isSystem && (
                     <button
-                      onClick={() => handleDeleteRole(role.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      onClick={() = aria-label="Button"> handleDeleteRole(role.id)}
+                      className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete Role"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   )}
                 </div>
                 <button
-                  onClick={() => toggleRoleExpansion(role.id)}
-                  className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
+                  onClick={() = aria-label="Button"> toggleRoleExpansion(role.id)}
+                  className="text-sm text-blue-600 hover:text-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {isExpanded ? 'Hide Details' : 'View Details'}
                 </button>
@@ -371,27 +381,27 @@ const EnhancedUserRoles: React.FC = () => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                    className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <div className="space-y-3">
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         Permissions
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.permissions.map((permission) => (
-                          <div key={permission} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded">
+                          <div key={permission} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                             <div>
-                              <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                                 {permission}
                               </span>
-                              <p className="text-xs text-gray-500 dark:text-gray-500">
+                              <p className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                                 {getPermissionCategory(permission)}
                               </p>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-500">
+                      <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                         Last updated: {new Date(role.updatedAt).toLocaleString()}
                       </div>
                     </div>
@@ -410,60 +420,60 @@ const EnhancedUserRoles: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   Create New Role
                 </h3>
                 <button
-                  onClick={() => setShowCreateRole(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateRole(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Role Name *
                   </label>
                   <input
                     type="text"
                     value={newRole.name || ''}
                     onChange={(e) => setNewRole({ ...newRole, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     placeholder="Enter role name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Description *
                   </label>
                   <textarea
                     value={newRole.description || ''}
                     onChange={(e) => setNewRole({ ...newRole, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     rows={3}
                     placeholder="Enter role description"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     Permissions
                   </label>
-                  <div className="space-y-3 max-h-60 overflow-y-auto">
+                  <div className="space-y-3 max-h-60 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
                     {permissions.map((permission) => (
-                      <div key={permission.id} className="flex items-center space-x-3">
+                      <div key={permission.id} className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         <input
                           type="checkbox"
                           checked={newRole.permissions?.includes(permission.id) || false}
@@ -475,17 +485,17 @@ const EnhancedUserRoles: React.FC = () => {
                               setNewRole({ ...newRole, permissions: currentPermissions.filter(p => p !== permission.id) });
                             }
                           }}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                         />
-                        <div className="flex-1">
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {permission.name}
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-500">
+                          <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                             {permission.description}
                           </div>
                         </div>
-                        <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded">
+                        <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                           {permission.category}
                         </span>
                       </div>
@@ -494,17 +504,17 @@ const EnhancedUserRoles: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setShowCreateRole(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateRole(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateRole}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   Create Role
                 </button>
               </div>

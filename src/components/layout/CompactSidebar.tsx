@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, 
@@ -121,6 +121,12 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
 
   return (
     <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <>
       {/* Mobile overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -128,7 +134,7 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={onToggle}
           />
         )}
@@ -143,48 +149,48 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
           variant === 'compact' ? 'w-16' : 'w-80'
         }`}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between p-4 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
             {variant === 'expanded' && (
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Truck className="w-5 h-5 text-white" />
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-gray-900">Logistics Lynx</h1>
-                  <p className="text-xs text-gray-500">Portal Dashboard</p>
+                  <h1 className="text-lg font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Logistics Lynx</h1>
+                  <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Portal Dashboard</p>
                 </div>
               </div>
             )}
             {variant === 'compact' && (
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Truck className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             )}
             <button
               onClick={onToggle}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <X className="w-5 h-5 text-gray-500" />
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+             aria-label="Button">
+              <X className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
           {/* User Profile */}
           {variant === 'expanded' && (
-            <div className="p-4 border-b border-gray-200">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+            <div className="p-4 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                   {user?.avatar ? (
-                    <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full" />
+                    <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" / alt="Image">
                   ) : (
-                    <User className="w-5 h-5 text-white" />
+                    <User className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{user?.name}</p>
-                  <p className="text-xs text-gray-500 truncate">{user?.company}</p>
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+                <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-900 truncate responsive-container sm:flex-col md:flex-row lg:grid">{user?.name}</p>
+                  <p className="text-xs text-gray-500 truncate responsive-container sm:flex-col md:flex-row lg:grid">{user?.company}</p>
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {user?.role}
                   </span>
                 </div>
@@ -193,24 +199,24 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
           )}
 
           {/* Navigation */}
-          <div className="flex-1 overflow-y-auto">
-            <nav className="p-4 space-y-2">
+          <div className="flex-1 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
+            <nav className="p-4 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {menuSections.map((section) => (
                 <div key={section.id}>
                   {variant === 'expanded' ? (
                     <div>
                       <button
-                        onClick={() => toggleSection(section.id)}
-                        className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                        onClick={() = aria-label="Button"> toggleSection(section.id)}
+                        className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <div className="flex items-center space-x-3">
-                          <section.icon className="w-5 h-5" />
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <section.icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>{section.title}</span>
                         </div>
                         {expandedSections.includes(section.id) ? (
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                       </button>
                       <AnimatePresence>
@@ -219,19 +225,19 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="ml-8 mt-1 space-y-1"
+                            className="ml-8 mt-1 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             {section.items.map((item) => (
                               <button
                                 key={item.path}
-                                onClick={() => navigate(item.path)}
+                                onClick={() = aria-label="Button"> navigate(item.path)}
                                 className={`w-full flex items-center space-x-3 px-3 py-2 text-sm rounded-lg transition-colors ${
                                   isActive(item.path)
                                     ? 'bg-blue-100 text-blue-700'
                                     : 'text-gray-600 hover:bg-gray-100'
                                 }`}
                               >
-                                <item.icon className="w-4 h-4" />
+                                <item.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                 <span>{item.name}</span>
                               </button>
                             ))}
@@ -240,14 +246,14 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                       </AnimatePresence>
                     </div>
                   ) : (
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-center p-2">
-                        <section.icon className="w-5 h-5 text-gray-500" />
+                    <div className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center justify-center p-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <section.icon className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
                       {section.items.map((item) => (
                         <button
                           key={item.path}
-                          onClick={() => navigate(item.path)}
+                          onClick={() = aria-label="Button"> navigate(item.path)}
                           className={`w-full flex items-center justify-center p-2 rounded-lg transition-colors ${
                             isActive(item.path)
                               ? 'bg-blue-100 text-blue-700'
@@ -255,7 +261,7 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                           }`}
                           title={item.name}
                         >
-                          <item.icon className="w-4 h-4" />
+                          <item.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                       ))}
                     </div>
@@ -266,39 +272,39 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
           </div>
 
           {/* Footer Actions */}
-          <div className="p-4 border-t border-gray-200 space-y-2">
+          <div className="p-4 border-t border-gray-200 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {variant === 'expanded' ? (
               <>
-                <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                  <Settings className="w-4 h-4" />
+                <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Settings</span>
                 </button>
-                <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                  <HelpCircle className="w-4 h-4" />
+                <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <HelpCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Help</span>
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
+                  className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
+                  <LogOut className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Sign Out</span>
                 </button>
               </>
             ) : (
               <>
-                <button className="w-full flex items-center justify-center p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors" title="Settings">
-                  <Settings className="w-4 h-4" />
+                <button className="w-full flex items-center justify-center p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" title="Settings" aria-label="Button">
+                  <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
-                <button className="w-full flex items-center justify-center p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors" title="Help">
-                  <HelpCircle className="w-4 h-4" />
+                <button className="w-full flex items-center justify-center p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" title="Help" aria-label="Button">
+                  <HelpCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center justify-center p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-center p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   title="Sign Out"
-                >
-                  <LogOut className="w-4 h-4" />
+                 aria-label="Button">
+                  <LogOut className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </>
             )}

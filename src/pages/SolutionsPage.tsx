@@ -14,7 +14,7 @@ import {
   TrendingUp
 } from 'lucide-react'
 
-export default function SolutionsPage() {
+const SolutionsPage = React.memo(function SolutionsPage() {
   const solutions = [
     {
       icon: Truck,
@@ -103,23 +103,29 @@ export default function SolutionsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light responsive-container">
       {/* Hero Section */}
-      <section className="pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="pt-20 pb-16 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Comprehensive{' '}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-primary bg-clip-text text-transparent responsive-container">
                 Logistics Solutions
               </span>
             </h1>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed responsive-container">
               Transform your logistics operations with our AI-powered platform designed for modern supply chains
             </p>
           </motion.div>
@@ -127,9 +133,9 @@ export default function SolutionsPage() {
       </section>
 
       {/* Solutions Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-20 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 responsive-container">
             {solutions.map((solution, index) => (
               <motion.div
                 key={solution.title}
@@ -137,35 +143,35 @@ export default function SolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300"
+                className="group p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20 hover:shadow-transbot-lg transition-all duration-300 responsive-container"
               >
-                <div className="p-4 rounded-xl bg-transbot-sky/10 w-fit mb-6 group-hover:bg-transbot-sky/20 transition-colors duration-300">
-                  <solution.icon className="w-8 h-8 text-transbot-sky" />
+                <div className="p-4 rounded-xl bg-transbot-sky/10 w-fit mb-6 group-hover:bg-transbot-sky/20 transition-colors duration-300 responsive-container">
+                  <solution.icon className="w-8 h-8 text-transbot-sky responsive-container" />
                 </div>
                 
-                <h3 className="text-2xl font-bold text-transbot-text-primary mb-4">
+                <h3 className="text-2xl font-bold text-transbot-text-primary mb-4 responsive-container">
                   {solution.title}
                 </h3>
                 
-                <p className="text-transbot-text-secondary mb-6 leading-relaxed">
+                <p className="text-transbot-text-secondary mb-6 leading-relaxed responsive-container">
                   {solution.description}
                 </p>
 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-6 responsive-container">
                   {solution.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-transbot-teal" />
-                      <span className="text-sm text-transbot-text-secondary">{feature}</span>
+                    <div key={idx} className="flex items-center gap-2 responsive-container">
+                      <CheckCircle className="w-4 h-4 text-transbot-teal responsive-container" />
+                      <span className="text-sm text-transbot-text-secondary responsive-container">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 <a
                   href={solution.path}
-                  className="inline-flex items-center gap-2 text-transbot-sky hover:text-transbot-navy font-semibold transition-colors duration-200"
+                  className="inline-flex items-center gap-2 text-transbot-sky hover:text-transbot-navy font-semibold transition-colors duration-200 responsive-container"
                 >
                   Learn More
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 responsive-container" />
                 </a>
               </motion.div>
             ))}
@@ -174,24 +180,24 @@ export default function SolutionsPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-20 bg-white/50 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4 responsive-container">
               Proven Results
             </h2>
-            <p className="text-xl text-transbot-text-secondary">
+            <p className="text-xl text-transbot-text-secondary responsive-container">
               See the measurable impact of our solutions
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 responsive-container">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={benefit.title}
@@ -199,14 +205,14 @@ export default function SolutionsPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-6"
+                className="text-center p-6 responsive-container"
               >
-                <div className="p-4 rounded-full bg-gradient-primary w-fit mx-auto mb-4">
-                  <benefit.icon className="w-8 h-8 text-white" />
+                <div className="p-4 rounded-full bg-gradient-primary w-fit mx-auto mb-4 responsive-container">
+                  <benefit.icon className="w-8 h-8 text-white responsive-container" />
                 </div>
-                <div className="text-4xl font-bold text-transbot-sky mb-2">{benefit.stat}</div>
-                <h3 className="text-xl font-bold text-transbot-text-primary mb-2">{benefit.title}</h3>
-                <p className="text-transbot-text-secondary">{benefit.description}</p>
+                <div className="text-4xl font-bold text-transbot-sky mb-2 responsive-container">{benefit.stat}</div>
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-2 responsive-container">{benefit.title}</h3>
+                <p className="text-transbot-text-secondary responsive-container">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -214,24 +220,24 @@ export default function SolutionsPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4 responsive-container">
               What Our Customers Say
             </h2>
-            <p className="text-xl text-transbot-text-secondary">
+            <p className="text-xl text-transbot-text-secondary responsive-container">
               Real results from real companies
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 responsive-container">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.name}
@@ -239,19 +245,19 @@ export default function SolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20"
+                className="p-8 bg-white rounded-2xl shadow-transbot border border-transbot-border/20 responsive-container"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-4 responsive-container">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current responsive-container" />
                   ))}
                 </div>
-                <p className="text-transbot-text-secondary mb-6 italic text-lg">
+                <p className="text-transbot-text-secondary mb-6 italic text-lg responsive-container">
                   "{testimonial.content}"
                 </p>
                 <div>
-                  <div className="font-semibold text-transbot-text-primary text-lg">{testimonial.name}</div>
-                  <div className="text-transbot-text-secondary">{testimonial.role}</div>
+                  <div className="font-semibold text-transbot-text-primary text-lg responsive-container">{testimonial.name}</div>
+                  <div className="text-transbot-text-secondary responsive-container">{testimonial.role}</div>
                 </div>
               </motion.div>
             ))}
@@ -260,26 +266,26 @@ export default function SolutionsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <section className="py-20 bg-gradient-primary responsive-container">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-8 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-white">
+            <h2 className="text-4xl font-bold text-white responsive-container">
               Ready to Transform Your Operations?
             </h2>
-            <p className="text-xl text-white/90">
+            <p className="text-xl text-white/90 responsive-container">
               Discover how our solutions can optimize your logistics and drive growth
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
+              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot responsive-container" aria-label="Button">
                 Get Custom Demo
               </button>
-              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200 responsive-container" aria-label="Button">
                 View Case Studies
               </button>
             </div>

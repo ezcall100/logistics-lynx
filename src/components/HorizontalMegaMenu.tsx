@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
@@ -38,7 +39,7 @@ interface MenuItem {
   id: string
   label: string
   href: string
-  icon?: any
+  icon?: unknown
   description?: string
   children?: MenuItem[]
   featured?: boolean
@@ -60,7 +61,13 @@ export function HorizontalMegaMenu() {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const handleNavigation = async (path: string) => {
@@ -174,6 +181,8 @@ export function HorizontalMegaMenu() {
   ]
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <>
       {/* Header */}
       <motion.header
@@ -185,39 +194,39 @@ export function HorizontalMegaMenu() {
             : 'bg-white/90 backdrop-blur-md'
         }`}
       >
-        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
+          <div className="flex items-center justify-between h-16 responsive-container">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-2 lg:space-x-3 cursor-pointer"
+              className="flex items-center space-x-2 lg:space-x-3 cursor-pointer responsive-container"
               onClick={() => handleNavigation('/')}
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Brain className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center responsive-container">
+                <Brain className="w-5 h-5 lg:w-6 lg:h-6 text-white responsive-container" />
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="hidden sm:block responsive-container">
+                <h1 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent responsive-container">
                   Trans Bot AI
                 </h1>
-                <p className="text-xs text-slate-500 -mt-1 hidden lg:block">Intelligent Logistics</p>
+                <p className="text-xs text-slate-500 -mt-1 hidden lg:block responsive-container">Intelligent Logistics</p>
               </div>
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 responsive-container">
               {mainMenuItems.map((item) => (
-                <div key={item.id} className="relative">
+                <div key={item.id} className="relative responsive-container">
                   <button
-                    onClick={() => item.href ? handleNavigation(item.href) : setActiveMenu(activeMenu === item.id ? null : item.id)}
+                    onClick={() = aria-label="Button"> item.href ? handleNavigation(item.href) : setActiveMenu(activeMenu === item.id ? null : item.id)}
                     className={`flex items-center space-x-1 px-2 xl:px-3 py-2 rounded-lg font-medium transition-all duration-200 ${
                       activeMenu === item.id
                         ? 'text-blue-600 bg-blue-50'
                         : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                     }`}
                   >
-                    <item.icon className="w-4 h-4" />
-                    <span className="text-sm xl:text-base">{item.label}</span>
+                    <item.icon className="w-4 h-4 responsive-container" />
+                    <span className="text-sm xl:text-base responsive-container">{item.label}</span>
                     {!item.href && <ChevronDown className={`w-4 h-4 transition-transform ${activeMenu === item.id ? 'rotate-180' : ''}`} />}
                   </button>
                 </div>
@@ -225,32 +234,32 @@ export function HorizontalMegaMenu() {
             </nav>
 
             {/* Search & Actions */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 responsive-container">
               {/* Search */}
-              <div className="hidden md:block relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <div className="hidden md:block relative responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 responsive-container" />
                 <input
                   type="text"
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
-                  className="pl-10 pr-4 py-2 w-32 lg:w-48 xl:w-56 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 w-32 lg:w-48 xl:w-56 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container"
                 />
               </div>
 
               {/* Auth Buttons */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container">
                 <button
-                  onClick={() => handleNavigation('/login')}
-                  className="flex items-center space-x-1 px-3 lg:px-4 py-2 text-slate-700 hover:text-blue-600 transition-colors"
+                  onClick={() = aria-label="Button"> handleNavigation('/login')}
+                  className="flex items-center space-x-1 px-3 lg:px-4 py-2 text-slate-700 hover:text-blue-600 transition-colors responsive-container"
                 >
-                  <LogIn className="w-4 h-4" />
-                  <span className="hidden sm:block">Sign In</span>
+                  <LogIn className="w-4 h-4 responsive-container" />
+                  <span className="hidden sm:block responsive-container">Sign In</span>
                 </button>
                 <button
-                  onClick={() => handleNavigation('/signup')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 lg:px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm lg:text-base"
+                  onClick={() = aria-label="Button"> handleNavigation('/signup')}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 lg:px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm lg:text-base responsive-container"
                 >
                   Get Started
                 </button>
@@ -258,10 +267,10 @@ export function HorizontalMegaMenu() {
 
               {/* Mobile Menu Button */}
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                onClick={() = aria-label="Button"> setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors responsive-container"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-6 h-6 responsive-container" /> : <Menu className="w-6 h-6 responsive-container" />}
               </button>
             </div>
           </div>
@@ -274,10 +283,10 @@ export function HorizontalMegaMenu() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl max-h-[80vh] overflow-y-auto"
+              className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl max-h-[80vh] overflow-y-auto responsive-container"
             >
-              <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-                <div className="max-w-7xl mx-auto">
+              <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 responsive-container">
+                <div className="max-w-7xl mx-auto responsive-container">
                   {megaMenuSections
                     .filter(section => {
                       // Map activeMenu to section titles
@@ -296,12 +305,12 @@ export function HorizontalMegaMenu() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="space-y-8"
+                        className="space-y-8 responsive-container"
                       >
                         {/* Section Header */}
-                        <div className="text-center mb-8">
-                          <h2 className="text-3xl font-bold text-slate-900 mb-2">{section.title}</h2>
-                          <p className="text-slate-600 max-w-2xl mx-auto">
+                        <div className="text-center mb-8 responsive-container">
+                          <h2 className="text-3xl font-bold text-slate-900 mb-2 responsive-container">{section.title}</h2>
+                          <p className="text-slate-600 max-w-2xl mx-auto responsive-container">
                             {section.title === 'Solutions' && 'Complete transportation and logistics solutions powered by AI'}
                             {section.title === 'AI Agents' && 'Intelligent AI agents that automate and optimize your operations'}
                             {section.title === 'Technology' && 'Cutting-edge technology stack powering our logistics platform'}
@@ -312,29 +321,29 @@ export function HorizontalMegaMenu() {
 
                         {/* Featured Item */}
                         {section.featured && (
-                          <div className="mb-12">
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">Featured Solution</h3>
+                          <div className="mb-12 responsive-container">
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4 responsive-container">Featured Solution</h3>
                             {section.featured.map((item) => (
                               <motion.div
                                 key={item.id}
                                 whileHover={{ scale: 1.02, y: -2 }}
-                                className="relative p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 rounded-2xl border-2 border-blue-200 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300"
+                                className="relative p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 rounded-2xl border-2 border-blue-200 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 responsive-container"
                                 onClick={() => handleNavigation(item.href)}
                               >
-                                <div className="flex items-center space-x-6">
-                                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
-                                    <item.icon className="w-8 h-8 text-white" />
+                                <div className="flex items-center space-x-6 responsive-container">
+                                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg responsive-container">
+                                    <item.icon className="w-8 h-8 text-white responsive-container" />
                                   </div>
-                                  <div className="flex-1">
-                                    <h4 className="text-2xl font-bold text-slate-900 mb-2">{item.label}</h4>
-                                    <p className="text-lg text-slate-700 mb-4">{item.description}</p>
-                                    <div className="flex items-center text-blue-600 font-semibold">
+                                  <div className="flex-1 responsive-container">
+                                    <h4 className="text-2xl font-bold text-slate-900 mb-2 responsive-container">{item.label}</h4>
+                                    <p className="text-lg text-slate-700 mb-4 responsive-container">{item.description}</p>
+                                    <div className="flex items-center text-blue-600 font-semibold responsive-container">
                                       <span>Explore Solution</span>
-                                      <ArrowRight className="w-5 h-5 ml-2" />
+                                      <ArrowRight className="w-5 h-5 ml-2 responsive-container" />
                                     </div>
                                   </div>
-                                  <div className="absolute top-4 right-4">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                  <div className="absolute top-4 right-4 responsive-container">
+                                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse responsive-container"></div>
                                   </div>
                                 </div>
                               </motion.div>
@@ -344,19 +353,19 @@ export function HorizontalMegaMenu() {
 
                         {/* Special handling for Technology with organized categories */}
                         {section.title === 'Technology' ? (
-                          <div className="space-y-8">
+                          <div className="space-y-8 responsive-container">
                             {/* Core Technologies */}
-                            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6 rounded-2xl border border-blue-200">
-                              <div className="flex items-center mb-6">
-                                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
-                                  <Code className="w-6 h-6 text-white" />
+                            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6 rounded-2xl border border-blue-200 responsive-container">
+                              <div className="flex items-center mb-6 responsive-container">
+                                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4 responsive-container">
+                                  <Code className="w-6 h-6 text-white responsive-container" />
                                 </div>
                                 <div>
-                                  <h3 className="text-xl font-bold text-blue-900">Core Technologies</h3>
-                                  <p className="text-blue-700 text-sm">Fundamental technology components</p>
+                                  <h3 className="text-xl font-bold text-blue-900 responsive-container">Core Technologies</h3>
+                                  <p className="text-blue-700 text-sm responsive-container">Fundamental technology components</p>
                                 </div>
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 responsive-container">
                                 {section.items.slice(0, 6).map((item, itemIndex) => (
                                   <motion.button
                                     key={item.id}
@@ -365,17 +374,17 @@ export function HorizontalMegaMenu() {
                                     transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
                                     whileHover={{ y: -2, scale: 1.02 }}
                                     onClick={() => handleNavigation(item.href)}
-                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 text-left"
+                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 text-left responsive-container"
                                   >
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 rounded-lg flex items-center justify-center transition-all duration-300">
-                                        <item.icon className="w-5 h-5 text-blue-600" />
+                                    <div className="flex items-center space-x-3 responsive-container">
+                                      <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 rounded-lg flex items-center justify-center transition-all duration-300 responsive-container">
+                                        <item.icon className="w-5 h-5 text-blue-600 responsive-container" />
                                       </div>
-                                      <div className="flex-1">
-                                        <h4 className="font-semibold text-blue-900 group-hover:text-blue-700 transition-colors text-sm">
+                                      <div className="flex-1 responsive-container">
+                                        <h4 className="font-semibold text-blue-900 group-hover:text-blue-700 transition-colors text-sm responsive-container">
                                           {item.label}
                                         </h4>
-                                        <p className="text-xs text-blue-600 leading-relaxed">
+                                        <p className="text-xs text-blue-600 leading-relaxed responsive-container">
                                           {item.description}
                                         </p>
                                       </div>
@@ -386,17 +395,17 @@ export function HorizontalMegaMenu() {
                             </div>
 
                             {/* Advanced Technologies */}
-                            <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
-                              <div className="flex items-center mb-6">
-                                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mr-4">
-                                  <Zap className="w-6 h-6 text-white" />
+                            <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 p-6 rounded-2xl border border-purple-200 responsive-container">
+                              <div className="flex items-center mb-6 responsive-container">
+                                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mr-4 responsive-container">
+                                  <Zap className="w-6 h-6 text-white responsive-container" />
                                 </div>
                                 <div>
-                                  <h3 className="text-xl font-bold text-purple-900">Advanced Technologies</h3>
-                                  <p className="text-purple-700 text-sm">Cutting-edge technology solutions</p>
+                                  <h3 className="text-xl font-bold text-purple-900 responsive-container">Advanced Technologies</h3>
+                                  <p className="text-purple-700 text-sm responsive-container">Cutting-edge technology solutions</p>
                                 </div>
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 responsive-container">
                                 {section.items.slice(6).map((item, itemIndex) => (
                                   <motion.button
                                     key={item.id}
@@ -405,17 +414,17 @@ export function HorizontalMegaMenu() {
                                     transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
                                     whileHover={{ y: -2, scale: 1.02 }}
                                     onClick={() => handleNavigation(item.href)}
-                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all duration-300 text-left"
+                                    className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all duration-300 text-left responsive-container"
                                   >
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 group-hover:from-purple-200 group-hover:to-purple-300 rounded-lg flex items-center justify-center transition-all duration-300">
-                                        <item.icon className="w-5 h-5 text-purple-600" />
+                                    <div className="flex items-center space-x-3 responsive-container">
+                                      <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 group-hover:from-purple-200 group-hover:to-purple-300 rounded-lg flex items-center justify-center transition-all duration-300 responsive-container">
+                                        <item.icon className="w-5 h-5 text-purple-600 responsive-container" />
                                       </div>
-                                      <div className="flex-1">
-                                        <h4 className="font-semibold text-purple-900 group-hover:text-purple-700 transition-colors text-sm">
+                                      <div className="flex-1 responsive-container">
+                                        <h4 className="font-semibold text-purple-900 group-hover:text-purple-700 transition-colors text-sm responsive-container">
                                           {item.label}
                                         </h4>
-                                        <p className="text-xs text-purple-600 leading-relaxed">
+                                        <p className="text-xs text-purple-600 leading-relaxed responsive-container">
                                           {item.description}
                                         </p>
                                       </div>
@@ -428,12 +437,12 @@ export function HorizontalMegaMenu() {
                         ) : (
                           /* Regular Items for other sections */
                           <div>
-                            <h3 className="text-xl font-semibold text-slate-800 mb-6">
+                            <h3 className="text-xl font-semibold text-slate-800 mb-6 responsive-container">
                               {section.title === 'Solutions' && 'All Solutions'}
                               {section.title === 'AI Agents' && 'All AI Agents'}
                               {section.title === 'Company' && 'Company Information'}
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 responsive-container">
                               {section.items.map((item, itemIndex) => (
                                 <motion.button
                                   key={item.id}
@@ -442,17 +451,17 @@ export function HorizontalMegaMenu() {
                                   transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
                                   whileHover={{ y: -4, scale: 1.02 }}
                                   onClick={() => handleNavigation(item.href)}
-                                  className="group p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-left"
+                                  className="group p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-left responsive-container"
                                 >
-                                  <div className="flex flex-col items-center text-center space-y-4">
-                                    <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 rounded-xl flex items-center justify-center transition-all duration-300">
-                                      <item.icon className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors" />
+                                  <div className="flex flex-col items-center text-center space-y-4 responsive-container">
+                                    <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 rounded-xl flex items-center justify-center transition-all duration-300 responsive-container">
+                                      <item.icon className="w-6 h-6 text-slate-600 group-hover:text-blue-600 transition-colors responsive-container" />
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
+                                      <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-1 responsive-container">
                                         {item.label}
                                       </h4>
-                                      <p className="text-sm text-slate-500 leading-relaxed">
+                                      <p className="text-sm text-slate-500 leading-relaxed responsive-container">
                                         {item.description}
                                       </p>
                                     </div>
@@ -471,24 +480,24 @@ export function HorizontalMegaMenu() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="mt-8 pt-8 border-t border-slate-200"
+                  className="mt-8 pt-8 border-t border-slate-200 responsive-container"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between responsive-container">
                     <div>
-                      <h4 className="text-lg font-semibold text-slate-900">Ready to Transform Your Logistics?</h4>
-                      <p className="text-slate-600">Join thousands of companies already using Trans Bot AI</p>
+                      <h4 className="text-lg font-semibold text-slate-900 responsive-container">Ready to Transform Your Logistics?</h4>
+                      <p className="text-slate-600 responsive-container">Join thousands of companies already using Trans Bot AI</p>
                     </div>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 responsive-container">
                       <button
-                        onClick={() => handleNavigation('/get-started')}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
+                        onClick={() = aria-label="Button"> handleNavigation('/get-started')}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center space-x-2 responsive-container"
                       >
                         <span>Get Started</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4 responsive-container" />
                       </button>
                       <button
-                        onClick={() => handleNavigation('/demo')}
-                        className="border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
+                        onClick={() = aria-label="Button"> handleNavigation('/demo')}
+                        className="border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors responsive-container"
                       >
                         Watch Demo
                       </button>
@@ -509,52 +518,52 @@ export function HorizontalMegaMenu() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/50 z-40 md:hidden responsive-container"
               onClick={() => setIsMenuOpen(false)}
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              className="fixed top-16 right-0 bottom-0 w-80 sm:w-96 bg-white shadow-xl z-50 md:hidden overflow-y-auto"
+              className="fixed top-16 right-0 bottom-0 w-80 sm:w-96 bg-white shadow-xl z-50 md:hidden overflow-y-auto responsive-container"
             >
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-6 responsive-container">
                 {/* Search */}
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <div className="relative responsive-container">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 responsive-container" />
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container"
                   />
                 </div>
 
                 {/* Navigation */}
-                <nav className="space-y-4">
+                <nav className="space-y-4 responsive-container">
                   {mainMenuItems.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => item.href ? handleNavigation(item.href) : null}
-                      className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
+                      onClick={() = aria-label="Button"> item.href ? handleNavigation(item.href) : null}
+                      className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-colors responsive-container"
                     >
-                      <item.icon className="w-5 h-5 text-slate-400" />
-                      <span className="font-medium text-slate-900">{item.label}</span>
+                      <item.icon className="w-5 h-5 text-slate-400 responsive-container" />
+                      <span className="font-medium text-slate-900 responsive-container">{item.label}</span>
                     </button>
                   ))}
                 </nav>
 
                 {/* Auth Buttons */}
-                <div className="pt-6 border-t border-slate-200 space-y-3">
+                <div className="pt-6 border-t border-slate-200 space-y-3 responsive-container">
                   <button
-                    onClick={() => handleNavigation('/login')}
-                    className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-slate-300 rounded-lg font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                    onClick={() = aria-label="Button"> handleNavigation('/login')}
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-slate-300 rounded-lg font-medium text-slate-700 hover:bg-slate-50 transition-colors responsive-container"
                   >
-                    <LogIn className="w-4 h-4" />
+                    <LogIn className="w-4 h-4 responsive-container" />
                     <span>Sign In</span>
                   </button>
                   <button
-                    onClick={() => handleNavigation('/signup')}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                    onClick={() = aria-label="Button"> handleNavigation('/signup')}
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 responsive-container"
                   >
                     Get Started
                   </button>
@@ -568,7 +577,7 @@ export function HorizontalMegaMenu() {
       {/* Click outside to close mega menu */}
       {activeMenu && (
         <div
-          className="fixed inset-0 z-30"
+          className="fixed inset-0 z-30 responsive-container"
           onClick={() => setActiveMenu(null)}
         />
       )}

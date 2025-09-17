@@ -5,7 +5,7 @@
  * Timestamp: 2025-09-14T19:00:00.000Z
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MCPAgent } from '../../types/mcp';
 import {
@@ -153,11 +153,19 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
-    <div className="relative" ref={menuRef}>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="relative responsive-container sm:flex-col md:flex-row lg:grid" ref={menuRef}>
       {/* Trigger */}
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
 
@@ -169,19 +177,19 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-50"
+            className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {/* Header */}
-            <div className="p-3 border-b border-slate-200 dark:border-slate-700">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
-                  <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <div className="p-3 border-b border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-slate-900 dark:text-white text-sm">
+                  <h4 className="font-medium text-slate-900 dark:text-white text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                     {agent.name}
                   </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {agent.role} • {agent.portal}
                   </p>
                 </div>
@@ -189,13 +197,15 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
             </div>
 
             {/* Actions */}
-            <div className="p-2">
+            <div className="p-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {actions.map(action => {
                 const Icon = action.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <button
                     key={action.id}
-                    onClick={() => handleAction(action)}
+                    onClick={() = aria-label="Button"> handleAction(action)}
                     disabled={action.disabled}
                     className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors ${
                       action.disabled
@@ -205,10 +215,10 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
                           : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
-                    <div className="flex-1 text-left">
-                      <div className="font-medium">{action.label}</div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400">
+                    <Icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {action.description}
                       </div>
                     </div>
@@ -227,40 +237,40 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-md w-full mx-4"
+              className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-md w-full mx-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-red-100 dark:bg-red-900/20 rounded-lg flex items-center justify-center">
-                  <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <div className="flex items-center gap-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-10 h-10 bg-red-100 dark:bg-red-900/20 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white">Confirm Action</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <h3 className="font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Confirm Action</h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     This action cannot be undone
                   </p>
                 </div>
               </div>
 
-              <p className="text-slate-700 dark:text-slate-300 mb-6">
+              <p className="text-slate-700 dark:text-slate-300 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 Are you sure you want to perform this action on <strong>{agent.name}</strong>?
               </p>
 
-              <div className="flex gap-3 justify-end">
+              <div className="flex gap-3 justify-end responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
                   onClick={cancelAction}
-                  className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 rounded-lg transition-colors"
-                >
+                  className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   Cancel
                 </button>
                 <button
-                  onClick={() => confirmAction(showConfirm)}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> confirmAction(showConfirm)}
+                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Confirm
                 </button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Brain,
@@ -286,19 +286,19 @@ export const MCPOverview: React.FC = () => {
   const getAgentTypeIcon = (type: string) => {
     switch (type) {
       case 'testing':
-        return <CheckCircle className="w-5 h-5 text-green-600" />;
+        return <CheckCircle className="w-5 h-5 text-green-600 responsive-container" />;
       case 'development':
-        return <Code className="w-5 h-5 text-blue-600" />;
+        return <Code className="w-5 h-5 text-blue-600 responsive-container" />;
       case 'security':
-        return <Shield className="w-5 h-5 text-red-600" />;
+        return <Shield className="w-5 h-5 text-red-600 responsive-container" />;
       case 'analytics':
-        return <BarChart3 className="w-5 h-5 text-purple-600" />;
+        return <BarChart3 className="w-5 h-5 text-purple-600 responsive-container" />;
       case 'automation':
-        return <Zap className="w-5 h-5 text-yellow-600" />;
+        return <Zap className="w-5 h-5 text-yellow-600 responsive-container" />;
       case 'monitoring':
-        return <Monitor className="w-5 h-5 text-indigo-600" />;
+        return <Monitor className="w-5 h-5 text-indigo-600 responsive-container" />;
       default:
-        return <Brain className="w-5 h-5 text-gray-600" />;
+        return <Brain className="w-5 h-5 text-gray-600 responsive-container" />;
     }
   };
 
@@ -311,63 +311,69 @@ export const MCPOverview: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">MCP Overview</h1>
-            <p className="text-slate-600 dark:text-slate-400">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">MCP Overview</h1>
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">
               Intelligent agent orchestration and management center
             </p>
           </div>
 
-          <div className="flex gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="flex gap-3 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search agents..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2">
-              <Plus className="w-4 h-4" />
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Plus className="w-4 h-4 responsive-container" />
               <span>Deploy Agent</span>
             </button>
           </div>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Agents</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Agents</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {metrics.find(m => m.name === 'Total Agents')?.value}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />
                   +12 this week
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -376,18 +382,18 @@ export const MCPOverview: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Active Agents
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {metrics.find(m => m.name === 'Active Agents')?.value}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {Math.round(
                     ((metrics.find(m => m.name === 'Active Agents')?.value || 0) /
                       (metrics.find(m => m.name === 'Total Agents')?.value || 1)) *
@@ -396,8 +402,8 @@ export const MCPOverview: React.FC = () => {
                   % online
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+                <Activity className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -406,23 +412,23 @@ export const MCPOverview: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Tasks Completed
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {metrics.find(m => m.name === 'Tasks Completed Today')?.value.toLocaleString()}
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />
+                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />
                   Today
                 </p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -431,35 +437,35 @@ export const MCPOverview: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   System Efficiency
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {metrics.find(m => m.name === 'System Efficiency')?.value}%
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />
                   Excellent
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                <Zap className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+                <Zap className="w-6 h-6 text-orange-600 dark:text-orange-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() =>
+                onClick={() = aria-label="Button">
                   setSelectedTab(
                     tab.id as 'overview' | 'agents' | 'tasks' | 'performance' | 'analytics'
                   )
@@ -470,14 +476,14 @@ export const MCPOverview: React.FC = () => {
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             <AnimatePresence mode="wait">
               {selectedTab === 'overview' && (
                 <motion.div
@@ -485,30 +491,30 @@ export const MCPOverview: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
                   {/* Agent Status Grid */}
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                       Agent Status Overview
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
                       {agents.slice(0, 6).map((agent, index) => (
                         <motion.div
                           key={agent.id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 cursor-pointer"
+                          className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 cursor-pointer responsive-container"
                         >
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center space-x-3">
+                          <div className="flex items-center justify-between mb-4 responsive-container">
+                            <div className="flex items-center space-x-3 responsive-container">
                               {getAgentTypeIcon(agent.type)}
                               <div>
-                                <h4 className="font-semibold text-slate-900 dark:text-white">
+                                <h4 className="font-semibold text-slate-900 dark:text-white responsive-container">
                                   {agent.name}
                                 </h4>
-                                <p className="text-sm text-slate-600 dark:text-slate-400">
+                                <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                                   {agent.currentTask}
                                 </p>
                               </div>
@@ -520,28 +526,28 @@ export const MCPOverview: React.FC = () => {
                             </span>
                           </div>
 
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                          <div className="space-y-2 responsive-container">
+                            <div className="flex items-center justify-between responsive-container">
+                              <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                                 Performance
                               </span>
-                              <span className="text-sm font-medium text-slate-900 dark:text-white">
+                              <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                                 {agent.performance}%
                               </span>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                            <div className="flex items-center justify-between responsive-container">
+                              <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                                 Tasks Completed
                               </span>
-                              <span className="text-sm font-medium text-slate-900 dark:text-white">
+                              <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                                 {agent.tasksCompleted.toLocaleString()}
                               </span>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm text-slate-600 dark:text-slate-400">
+                            <div className="flex items-center justify-between responsive-container">
+                              <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                                 Workload
                               </span>
-                              <span className="text-sm font-medium text-slate-900 dark:text-white">
+                              <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                                 {agent.workload}%
                               </span>
                             </div>
@@ -553,36 +559,36 @@ export const MCPOverview: React.FC = () => {
 
                   {/* System Metrics */}
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                       System Metrics
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
                       {metrics.map((metric, index) => (
                         <motion.div
                           key={metric.name}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4"
+                          className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 responsive-container"
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">
+                          <div className="flex items-center justify-between mb-2 responsive-container">
+                            <h4 className="font-medium text-slate-900 dark:text-white responsive-container">
                               {metric.name}
                             </h4>
-                            <div className="flex items-center space-x-1">
+                            <div className="flex items-center space-x-1 responsive-container">
                               {metric.trend === 'up' ? (
-                                <TrendingUp className="w-4 h-4 text-green-500" />
+                                <TrendingUp className="w-4 h-4 text-green-500 responsive-container" />
                               ) : metric.trend === 'down' ? (
-                                <TrendingDown className="w-4 h-4 text-red-500" />
+                                <TrendingDown className="w-4 h-4 text-red-500 responsive-container" />
                               ) : (
-                                <Activity className="w-4 h-4 text-blue-500" />
+                                <Activity className="w-4 h-4 text-blue-500 responsive-container" />
                               )}
                             </div>
                           </div>
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                          <div className="text-2xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">
                             {metric.value} {metric.unit}
                           </div>
-                          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 responsive-container">
                             <div
                               className={`h-2 rounded-full ${
                                 metric.status === 'critical'
@@ -609,7 +615,7 @@ export const MCPOverview: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {agents.map((agent, index) => (
                     <motion.div
@@ -617,44 +623,44 @@ export const MCPOverview: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                      <div className="flex items-center justify-between responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
                             {getAgentTypeIcon(agent.type)}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                               {agent.name}
                             </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                               {agent.currentTask}
                             </p>
-                            <div className="flex items-center space-x-4 mt-2">
-                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
+                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                                 v{agent.version}
                               </span>
-                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                                 {agent.location}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {new Date(agent.lastActivity).toLocaleString()}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}
                           >
                             {agent.status}
                           </span>
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {agent.performance}%
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Performance
                             </div>
                           </div>
@@ -671,7 +677,7 @@ export const MCPOverview: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {tasks.map((task, index) => (
                     <motion.div
@@ -679,34 +685,34 @@ export const MCPOverview: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                            <Activity className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                      <div className="flex items-center justify-between responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                            <Activity className="w-5 h-5 text-purple-600 dark:text-purple-400 responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                               {task.title}
                             </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                               {task.description}
                             </p>
-                            <div className="flex items-center space-x-4 mt-2">
-                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
+                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                                 {task.agent}
                               </span>
-                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                                 {task.estimatedTime}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {new Date(task.updatedAt).toLocaleString()}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}
                           >
@@ -717,11 +723,11 @@ export const MCPOverview: React.FC = () => {
                           >
                             {task.status}
                           </span>
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {task.progress}%
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Progress
                             </div>
                           </div>
@@ -738,32 +744,32 @@ export const MCPOverview: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
                   {/* Performance Charts */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Agent Performance
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <BarChart3 className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <BarChart3 className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             Performance analytics chart
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Task Completion Rate
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <PieChart className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <PieChart className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             Task completion analytics
                           </p>
                         </div>
@@ -772,27 +778,27 @@ export const MCPOverview: React.FC = () => {
                   </div>
 
                   {/* Performance Metrics */}
-                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                       Performance Metrics
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container">
                       {['Efficiency', 'Reliability', 'Workload', 'Response Time'].map(
                         (metric, index) => (
-                          <div key={metric} className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="font-medium text-slate-900 dark:text-white">
+                          <div key={metric} className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                            <div className="flex items-center justify-between mb-2 responsive-container">
+                              <h4 className="font-medium text-slate-900 dark:text-white responsive-container">
                                 {metric}
                               </h4>
-                              <TrendingUp className="w-5 h-5 text-green-500" />
+                              <TrendingUp className="w-5 h-5 text-green-500 responsive-container" />
                             </div>
-                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 responsive-container">
                               <div
-                                className="h-2 rounded-full bg-green-500"
+                                className="h-2 rounded-full bg-green-500 responsive-container"
                                 style={{ width: `${85 + index * 3}%` }}
                               ></div>
                             </div>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 responsive-container">
                               {85 + index * 3}%
                             </p>
                           </div>
@@ -809,32 +815,32 @@ export const MCPOverview: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
                   {/* Analytics Dashboard */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Agent Activity
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <LineChart className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <LineChart className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             Real-time agent activity chart
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         System Health
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             System health monitoring
                           </p>
                         </div>
@@ -843,11 +849,11 @@ export const MCPOverview: React.FC = () => {
                   </div>
 
                   {/* Analytics Summary */}
-                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                       Analytics Summary
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
                       {[
                         { name: 'Total Tasks', value: '15,247', trend: '+12%' },
                         { name: 'Success Rate', value: '98.7%', trend: '+0.3%' },
@@ -856,16 +862,16 @@ export const MCPOverview: React.FC = () => {
                         { name: 'Error Rate', value: '0.8%', trend: '-0.2%' },
                         { name: 'Resource Usage', value: '67%', trend: '+5%' },
                       ].map(item => (
-                        <div key={item.name} className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">
+                        <div key={item.name} className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="flex items-center justify-between mb-2 responsive-container">
+                            <h4 className="font-medium text-slate-900 dark:text-white responsive-container">
                               {item.name}
                             </h4>
-                            <span className="text-sm text-green-600 dark:text-green-400">
+                            <span className="text-sm text-green-600 dark:text-green-400 responsive-container">
                               {item.trend}
                             </span>
                           </div>
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                          <div className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">
                             {item.value}
                           </div>
                         </div>

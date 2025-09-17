@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -48,12 +49,20 @@ export function NeuralBackground() {
 
     // Regenerate network every 30 seconds
     const interval = setInterval(generateNodes, 30000);
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      <svg className="w-full h-full opacity-5">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+      <svg className="w-full h-full opacity-5 responsive-container sm:flex-col md:flex-row lg:grid">
         <defs>
           <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#0284C7" />
@@ -84,6 +93,8 @@ export function NeuralBackground() {
           if (!fromNode || !toNode) return null;
 
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.line
               key={`connection-${index}`}
               x1={`${fromNode.x}%`}
@@ -224,11 +235,11 @@ export function NeuralBackground() {
       </svg>
 
       {/* Holographic Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transbot-sky/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transbot-sky/5 to-transparent pointer-events-none responsive-container sm:flex-col md:flex-row lg:grid" />
 
       {/* Scanning Lines */}
       <motion.div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none responsive-container sm:flex-col md:flex-row lg:grid"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.3, 0] }}
         transition={{
@@ -238,7 +249,7 @@ export function NeuralBackground() {
         }}
       >
         <motion.div
-          className="w-full h-px bg-gradient-to-r from-transparent via-transbot-sky to-transparent"
+          className="w-full h-px bg-gradient-to-r from-transparent via-transbot-sky to-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           initial={{ y: 0 }}
           animate={{ y: '100vh' }}
           transition={{

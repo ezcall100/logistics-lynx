@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Bot,
@@ -330,17 +330,23 @@ const EnhancedMCPOverview: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -349,35 +355,37 @@ const EnhancedMCPOverview: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             MCP Agent Overview
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Monitor and manage 301 MCP agents across the system
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setShowDetailedView(!showDetailedView)}
-            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowDetailedView(!showDetailedView)}
+            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            {showDetailedView ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showDetailedView ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{showDetailedView ? 'Simple View' : 'Detailed View'}</span>
           </button>
         </div>
@@ -385,79 +393,79 @@ const EnhancedMCPOverview: React.FC = () => {
 
       {/* System Metrics */}
       {systemMetrics && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-lg bg-blue-50">
-                <Bot className="h-6 w-6 text-blue-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-3 rounded-lg bg-blue-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Bot className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.totalAgents}
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.activeAgents} active
                 </div>
               </div>
             </div>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               Total Agents
             </h3>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-lg bg-green-50">
-                <CheckCircle className="h-6 w-6 text-green-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-3 rounded-lg bg-green-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="h-6 w-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.completedTasks.toLocaleString()}
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.totalTasks.toLocaleString()} total
                 </div>
               </div>
             </div>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               Tasks Completed
             </h3>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-lg bg-purple-50">
-                <Activity className="h-6 w-6 text-purple-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-3 rounded-lg bg-purple-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Activity className="h-6 w-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.systemHealth}%
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.averageResponseTime}ms avg
                 </div>
               </div>
             </div>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               System Health
             </h3>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-lg bg-orange-50">
-                <Clock className="h-6 w-6 text-orange-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-3 rounded-lg bg-orange-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Clock className="h-6 w-6 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {systemMetrics.totalUptime}%
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   Uptime
                 </div>
               </div>
             </div>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               System Uptime
             </h3>
           </div>
@@ -465,24 +473,24 @@ const EnhancedMCPOverview: React.FC = () => {
       )}
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="lg:col-span-2">
-            <div className="relative">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="lg:col-span-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <input
                 type="text"
                 placeholder="Search agents..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
               />
-              <Bot className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Bot className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -493,7 +501,7 @@ const EnhancedMCPOverview: React.FC = () => {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Types</option>
             <option value="orchestrator">Orchestrator</option>
@@ -506,66 +514,68 @@ const EnhancedMCPOverview: React.FC = () => {
       </div>
 
       {/* Agents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {filteredAgents.map((agent, index) => {
           const TypeIcon = getTypeIcon(agent.type);
           
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={agent.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 rounded-lg bg-blue-50">
-                    <TypeIcon className="h-6 w-6 text-blue-600" />
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="p-3 rounded-lg bg-blue-50 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <TypeIcon className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                    <h3 className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.name}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.type} • v{agent.version}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(agent.status)}`}>
                     {agent.status}
                   </span>
-                  <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                    <MoreVertical className="h-4 w-4" />
+                  <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
               </div>
 
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {agent.description}
               </p>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     Performance
                   </span>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="bg-blue-500 h-2 rounded-full"
+                        className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{ width: `${agent.performance}%` }}
                       />
                     </div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.performance}%
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     Health
                   </span>
                   <span className={`text-sm font-medium ${getHealthColor(agent.health)}`}>
@@ -573,60 +583,60 @@ const EnhancedMCPOverview: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     Tasks
                   </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {agent.tasksCompleted} completed, {agent.tasksInProgress} in progress
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     Uptime
                   </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {agent.uptime}%
                   </span>
                 </div>
               </div>
 
               {showDetailedView && (
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <div className="grid grid-cols-2 gap-4 text-xs">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="grid grid-cols-2 gap-4 text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400 mb-1">CPU</div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+                      <div className="text-gray-500 dark:text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">CPU</div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-red-500 h-1 rounded-full"
+                          className="bg-red-500 h-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${agent.resources.cpu}%` }}
                         />
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400 mb-1">Memory</div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+                      <div className="text-gray-500 dark:text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Memory</div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-blue-500 h-1 rounded-full"
+                          className="bg-blue-500 h-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${agent.resources.memory}%` }}
                         />
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400 mb-1">Storage</div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+                      <div className="text-gray-500 dark:text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Storage</div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-green-500 h-1 rounded-full"
+                          className="bg-green-500 h-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${agent.resources.storage}%` }}
                         />
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400 mb-1">Network</div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+                      <div className="text-gray-500 dark:text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Network</div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-purple-500 h-1 rounded-full"
+                          className="bg-purple-500 h-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${agent.resources.network}%` }}
                         />
                       </div>
@@ -635,37 +645,37 @@ const EnhancedMCPOverview: React.FC = () => {
                 </div>
               )}
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {agent.status === 'active' ? (
                     <button
-                      onClick={() => handleAgentAction(agent.id, 'stop')}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'stop')}
+                      className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Stop Agent"
                     >
-                      <Square className="h-4 w-4" />
+                      <Square className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleAgentAction(agent.id, 'start')}
-                      className="p-1 text-gray-400 hover:text-green-600 transition-colors"
+                      onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'start')}
+                      className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Start Agent"
                     >
-                      <Play className="h-4 w-4" />
+                      <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   )}
                   <button
-                    onClick={() => handleAgentAction(agent.id, 'restart')}
-                    className="p-1 text-gray-400 hover:text-yellow-600 transition-colors"
+                    onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'restart')}
+                    className="p-1 text-gray-400 hover:text-yellow-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     title="Restart Agent"
                   >
-                    <RefreshCw className="h-4 w-4" />
+                    <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
-                  <button className="p-1 text-gray-400 hover:text-blue-600 transition-colors">
-                    <Settings className="h-4 w-4" />
+                  <button className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Settings className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-500">
+                <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {new Date(agent.lastActivity).toLocaleTimeString()}
                 </div>
               </div>
@@ -675,54 +685,54 @@ const EnhancedMCPOverview: React.FC = () => {
       </div>
 
       {/* Active Tasks */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Active Tasks
           </h2>
-          <span className="text-sm text-gray-500 dark:text-gray-500">
+          <span className="text-sm text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
             {tasks.length} tasks
           </span>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {tasks.map((task) => (
             <div
               key={task.id}
-              className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`w-3 h-3 rounded-full ${
                   task.status === 'running' ? 'bg-blue-500 animate-pulse' :
                   task.status === 'completed' ? 'bg-green-500' :
                   task.status === 'failed' ? 'bg-red-500' : 'bg-gray-400'
                 }`} />
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">
+                  <h3 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {task.name}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {task.description}
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getPriorityColor(task.priority)}`}>
                   {task.priority}
                 </span>
-                <div className="text-right">
-                  <div className="text-sm font-medium text-gray-900 dark:text-white">
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {task.progress}%
                   </div>
-                  <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2 mt-1">
+                  <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div
-                      className="bg-blue-500 h-2 rounded-full"
+                      className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ width: `${task.progress}%` }}
                     />
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-500">
+                <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {new Date(task.startedAt).toLocaleTimeString()}
                 </div>
               </div>

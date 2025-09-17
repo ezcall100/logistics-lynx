@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -105,48 +105,54 @@ const UserProfile: React.FC = () => {
   ];
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <UnifiedPortalLayout>
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-4xl mx-auto space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">User Profile</h1>
-              <p className="text-gray-600">Manage your personal information and preferences</p>
+              <h1 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">User Profile</h1>
+              <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage your personal information and preferences</p>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {isEditing ? (
                 <>
                   <button
                     onClick={handleCancel}
-                    className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    <X className="w-4 h-4" />
+                    className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
+                    <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Cancel</span>
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={isLoading}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                  >
+                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     {isLoading ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
                     ) : (
-                      <Save className="w-4 h-4" />
+                      <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                     <span>{isLoading ? 'Saving...' : 'Save Changes'}</span>
                   </button>
                 </>
               ) : (
                 <button
-                  onClick={() => setIsEditing(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  onClick={() = aria-label="Button"> setIsEditing(true)}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Edit className="w-4 h-4" />
+                  <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Edit Profile</span>
                 </button>
               )}
@@ -154,41 +160,41 @@ const UserProfile: React.FC = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Profile Card */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-1 bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            className="lg:col-span-1 bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="text-center">
-              <div className="relative inline-block">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="relative inline-block responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {user?.avatar ? (
-                    <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full" />
+                    <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" / alt="Image">
                   ) : (
-                    <User className="w-12 h-12 text-white" />
+                    <User className="w-12 h-12 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                 </div>
                 {isEditing && (
-                  <button className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
-                    <Camera className="w-4 h-4" />
+                  <button className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Camera className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 )}
               </div>
               
-              <h2 className="text-xl font-bold text-gray-900 mb-2">{formData.name}</h2>
-              <p className="text-gray-600 mb-1">{formData.role}</p>
-              <p className="text-sm text-gray-500 mb-4">{formData.company}</p>
+              <h2 className="text-xl font-bold text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{formData.name}</h2>
+              <p className="text-gray-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{formData.role}</p>
+              <p className="text-sm text-gray-500 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">{formData.company}</p>
               
-              <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex items-center justify-center space-x-2">
-                  <Calendar className="w-4 h-4" />
+              <div className="space-y-2 text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Calendar className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Joined {formData.joinDate}</span>
                 </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <Clock className="w-4 h-4" />
+                <div className="flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Last active {formData.lastActive}</span>
                 </div>
               </div>
@@ -200,101 +206,101 @@ const UserProfile: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {/* Basic Information */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Basic Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Full Name</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.name}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.name}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Email Address</label>
                   {isEditing ? (
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.email}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.email}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Phone Number</label>
                   {isEditing ? (
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.phone}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.phone}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Location</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   ) : (
-                    <p className="text-gray-900">{formData.location}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.location}</p>
                   )}
                 </div>
               </div>
               
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+              <div className="mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Bio</label>
                 {isEditing ? (
                   <textarea
                     name="bio"
                     value={formData.bio}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   />
                 ) : (
-                  <p className="text-gray-900">{formData.bio}</p>
+                  <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.bio}</p>
                 )}
               </div>
             </div>
 
             {/* Preferences */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Preferences</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Preferences</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Timezone</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Timezone</label>
                   {isEditing ? (
                     <select
                       name="timezone"
                       value={formData.timezone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="EST (UTC-5)">EST (UTC-5)</option>
                       <option value="PST (UTC-8)">PST (UTC-8)</option>
@@ -302,18 +308,18 @@ const UserProfile: React.FC = () => {
                       <option value="MST (UTC-7)">MST (UTC-7)</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.timezone}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.timezone}</p>
                   )}
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Language</label>
                   {isEditing ? (
                     <select
                       name="language"
                       value={formData.language}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="English">English</option>
                       <option value="Spanish">Spanish</option>
@@ -321,21 +327,21 @@ const UserProfile: React.FC = () => {
                       <option value="German">German</option>
                     </select>
                   ) : (
-                    <p className="text-gray-900">{formData.language}</p>
+                    <p className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{formData.language}</p>
                   )}
                 </div>
               </div>
             </div>
 
             {/* Notifications */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Notification Preferences</h3>
-              <div className="space-y-4">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Notification Preferences</h3>
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {Object.entries(formData.notifications).map(([key, value]) => (
-                  <div key={key} className="flex items-center justify-between">
+                  <div key={key} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <p className="text-sm font-medium text-gray-900 capitalize">{key} Notifications</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-sm font-medium text-gray-900 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{key} Notifications</p>
+                      <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                         {key === 'email' && 'Receive notifications via email'}
                         {key === 'push' && 'Receive push notifications in browser'}
                         {key === 'sms' && 'Receive SMS notifications'}
@@ -343,7 +349,7 @@ const UserProfile: React.FC = () => {
                       </p>
                     </div>
                     <button
-                      onClick={() => handleNotificationChange(key)}
+                      onClick={() = aria-label="Button"> handleNotificationChange(key)}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                         value ? 'bg-blue-600' : 'bg-gray-200'
                       }`}
@@ -366,17 +372,17 @@ const UserProfile: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Stats</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Performance Stats</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {stats.map((stat) => (
-              <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <stat.icon className="w-6 h-6 text-white" />
+              <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <stat.icon className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                <p className="text-sm text-gray-600">{stat.label}</p>
+                <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{stat.value}</p>
+                <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{stat.label}</p>
               </div>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -153,40 +153,40 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
   // const getStatusIcon = (status: string) => {
   //   switch (status) {
   //     case 'active':
-  //       return <CheckCircle className="w-4 h-4" />;
+  //       return <CheckCircle className="w-4 h-4 responsive-container" />;
   //     case 'inactive':
-  //       return <Clock className="w-4 h-4" />;
+  //       return <Clock className="w-4 h-4 responsive-container" />;
   //     case 'pending':
-  //       return <AlertCircle className="w-4 h-4" />;
+  //       return <AlertCircle className="w-4 h-4 responsive-container" />;
   //     case 'suspended':
-  //       return <Lock className="w-4 h-4" />;
+  //       return <Lock className="w-4 h-4 responsive-container" />;
   //     default:
-  //       return <Clock className="w-4 h-4" />;
+  //       return <Clock className="w-4 h-4 responsive-container" />;
   //     }
   // };
 
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Users</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Users</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">
                 {stats?.totalUsers.toLocaleString()}
               </p>
-              <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                <TrendingUp className="w-4 h-4 mr-1" />+{stats?.growthRate}% from last month
+              <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                <TrendingUp className="w-4 h-4 mr-1 responsive-container" />+{stats?.growthRate}% from last month
               </p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-              <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+              <Users className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -195,21 +195,21 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Users</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">
                 {stats?.activeUsers.toLocaleString()}
               </p>
-              <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                <CheckCircle className="w-4 h-4 mr-1" />
+              <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                 {Math.round(((stats?.activeUsers || 0) / (stats?.totalUsers || 1)) * 100)}% of total
               </p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-              <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+              <Activity className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -218,19 +218,19 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">New Users</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats?.newUsers}</p>
-              <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                <UserPlus className="w-4 h-4 mr-1" />
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">New Users</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">{stats?.newUsers}</p>
+              <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                <UserPlus className="w-4 h-4 mr-1 responsive-container" />
                 This month
               </p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-              <UserPlus className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+              <UserPlus className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -239,49 +239,49 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Suspended</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Suspended</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">
                 {stats?.suspendedUsers}
               </p>
-              <p className="text-sm text-red-600 dark:text-red-400 flex items-center mt-1">
-                <Lock className="w-4 h-4 mr-1" />
+              <p className="text-sm text-red-600 dark:text-red-400 flex items-center mt-1 responsive-container">
+                <Lock className="w-4 h-4 mr-1 responsive-container" />
                 Needs attention
               </p>
             </div>
-            <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg">
-              <Lock className="w-6 h-6 text-red-600 dark:text-red-400" />
+            <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container">
+              <Lock className="w-6 h-6 text-red-600 dark:text-red-400 responsive-container" />
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Recent Activity & Top Roles */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">
             Recent Activity
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-3 responsive-container">
             {stats?.recentActivity.map((activity, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-lg responsive-container"
               >
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                     {activity.action}
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">{activity.user}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 responsive-container">{activity.user}</p>
                 </div>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{activity.time}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400 responsive-container">{activity.time}</span>
               </div>
             ))}
           </div>
@@ -290,19 +290,19 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg"
+          className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg responsive-container"
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Roles</h3>
-          <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">Top Roles</h3>
+          <div className="space-y-3 responsive-container">
             {stats?.topRoles.map((role, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+              <div key={index} className="flex items-center justify-between responsive-container">
+                <div className="flex items-center space-x-3 responsive-container">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full responsive-container"></div>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                     {role.role}
                   </span>
                 </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">{role.count} users</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container">{role.count} users</span>
               </div>
             ))}
           </div>
@@ -313,8 +313,14 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
 
 
         {/* Content */}

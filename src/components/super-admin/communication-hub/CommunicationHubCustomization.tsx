@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageCircle,
@@ -241,56 +241,66 @@ const CommunicationHubCustomization: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="flex items-center space-x-2">
-          <RefreshCw className="h-6 w-6 animate-spin text-blue-500" />
-          <span className="text-gray-600 dark:text-gray-300">Loading customization settings...</span>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="flex items-center justify-center h-96 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <RefreshCw className="h-6 w-6 animate-spin text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+          <span className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Loading customization settings...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Communication Hub Customization</h1>
-          <p className="text-gray-600 dark:text-gray-300">Customize the appearance and behavior of the Communication Hub</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Communication Hub Customization</h1>
+          <p className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Customize the appearance and behavior of the Communication Hub</p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={handleRefresh}
             disabled={isLoading}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-            <Save className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Save className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Save Changes</span>
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="flex space-x-1">
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                 className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-sm'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
-                <Icon className="h-4 w-4" />
-                <span className="font-medium">{tab.label}</span>
+                <Icon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{tab.label}</span>
               </button>
             );
           })}
@@ -298,11 +308,11 @@ const CommunicationHubCustomization: React.FC = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
         {activeTab === 'themes' && (
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Theme Customization</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Theme Customization</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {themes.map((theme) => (
                 <motion.div
                   key={theme.id}
@@ -317,42 +327,42 @@ const CommunicationHubCustomization: React.FC = () => {
                   onClick={() => handleThemeChange(theme.id)}
                 >
                   {theme.isActive && (
-                    <div className="absolute top-2 right-2">
-                      <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="absolute top-2 right-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="w-2 h-2 bg-white rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                       </div>
                     </div>
                   )}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">{theme.name}</h4>
+                  <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <h4 className="font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">{theme.name}</h4>
                       {theme.isDefault && (
-                        <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-full">
+                        <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                           Default
                         </span>
                       )}
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
+                    <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="w-4 h-4 rounded"
+                          className="w-4 h-4 rounded responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ backgroundColor: theme.primaryColor }}
                         ></div>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Primary</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Primary</span>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="w-4 h-4 rounded"
+                          className="w-4 h-4 rounded responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ backgroundColor: theme.secondaryColor }}
                         ></div>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Secondary</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Secondary</span>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="w-4 h-4 rounded border border-gray-300"
+                          className="w-4 h-4 rounded border border-gray-300 responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ backgroundColor: theme.backgroundColor }}
                         ></div>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Background</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Background</span>
                       </div>
                     </div>
                   </div>
@@ -363,12 +373,14 @@ const CommunicationHubCustomization: React.FC = () => {
         )}
 
         {activeTab === 'layouts' && (
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Layout Customization</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Layout Customization</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {layouts.map((layout) => {
                 const Icon = layout.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.div
                     key={layout.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -382,25 +394,25 @@ const CommunicationHubCustomization: React.FC = () => {
                     onClick={() => handleLayoutChange(layout.id)}
                   >
                     {layout.isActive && (
-                      <div className="absolute top-2 right-2">
-                        <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <div className="absolute top-2 right-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="w-2 h-2 bg-white rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                         </div>
                       </div>
                     )}
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">{layout.name}</h4>
+                    <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">{layout.name}</h4>
                         {layout.isDefault && (
-                          <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                             Default
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                        <Icon className="h-8 w-8 text-gray-600 dark:text-gray-400" />
+                      <div className="flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                        <Icon className="h-8 w-8 text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{layout.description}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{layout.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -410,46 +422,48 @@ const CommunicationHubCustomization: React.FC = () => {
         )}
 
         {activeTab === 'channels' && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Channel Configuration</h3>
-              <button className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <Plus className="h-4 w-4" />
+          <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Channel Configuration</h3>
+              <button className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Add Channel</span>
               </button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {channels.map((channel, index) => {
                 const Icon = channel.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.div
                     key={channel.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+                    className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-2">
-                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                          <Move className="h-4 w-4" />
+                    <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Move className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">{channel.position}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{channel.position}</span>
                       </div>
                       <div
-                        className="p-2 rounded-lg"
+                        className="p-2 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{ backgroundColor: `${channel.color}20`, color: channel.color }}
                       >
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
                       <div>
-                        <h4 className="font-medium text-gray-900 dark:text-gray-100">{channel.name}</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{channel.description}</p>
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">{channel.name}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{channel.description}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() => handleChannelToggle(channel.id)}
+                        onClick={() = aria-label="Button"> handleChannelToggle(channel.id)}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                           channel.enabled ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                         }`}
@@ -460,11 +474,11 @@ const CommunicationHubCustomization: React.FC = () => {
                           }`}
                         />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <Edit className="h-4 w-4" />
+                      <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Edit className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <Copy className="h-4 w-4" />
+                      <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                        <Copy className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                     </div>
                   </motion.div>
@@ -475,18 +489,18 @@ const CommunicationHubCustomization: React.FC = () => {
         )}
 
         {activeTab === 'notifications' && (
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Notification Settings</h3>
-            <div className="space-y-4">
+          <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Notification Settings</h3>
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {Object.entries(notifications).map(([key, value]) => (
-                <div key={key} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                      <Bell className="h-5 w-5 text-blue-600" />
+                <div key={key} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Bell className="h-5 w-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-gray-100 capitalize">{key} Notifications</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <h4 className="font-medium text-gray-900 dark:text-gray-100 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{key} Notifications</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {key === 'email' && 'Receive email notifications for new messages'}
                         {key === 'push' && 'Receive push notifications on mobile devices'}
                         {key === 'sms' && 'Receive SMS notifications for urgent messages'}
@@ -497,7 +511,7 @@ const CommunicationHubCustomization: React.FC = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleNotificationToggle(key)}
+                    onClick={() = aria-label="Button"> handleNotificationToggle(key)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       value ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}
@@ -515,25 +529,25 @@ const CommunicationHubCustomization: React.FC = () => {
         )}
 
         {activeTab === 'permissions' && (
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Permission Settings</h3>
-            <div className="space-y-4">
+          <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Permission Settings</h3>
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {Object.entries(mockCustomizationData.permissions).map(([role, permissions]) => (
-                <div key={role} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100 capitalize">{role} Role</h4>
-                    <div className="flex items-center space-x-2">
-                      <Lock className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                <div key={role} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="font-medium text-gray-900 dark:text-gray-100 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{role} Role</h4>
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Lock className="h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                      <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {permissions.length} permissions
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {permissions.map((permission) => (
                       <span
                         key={permission}
-                        className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-full"
+                        className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {permission}
                       </span>

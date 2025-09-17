@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   CheckCircle,
@@ -170,7 +170,13 @@ const SystemVerificationDashboard: React.FC = () => {
         setLastSystemCheck(new Date().toISOString());
       }, 10000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isAutoRefresh]);
 
@@ -198,36 +204,38 @@ const SystemVerificationDashboard: React.FC = () => {
       case 'running':
       case 'active':
       case 'passed':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'stopped':
       case 'inactive':
       case 'failed':
       case 'error':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'pending':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">System Verification Dashboard</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">System Verification Dashboard</h1>
+          <p className="text-gray-600 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time port monitoring and system health verification
           </p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600">All Systems Operational</span>
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
           </div>
           <button
-            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}
           >
             <RefreshCw className={`w-4 h-4 ${isAutoRefresh ? 'animate-spin' : ''}`} />
@@ -240,25 +248,25 @@ const SystemVerificationDashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6"
+        className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-green-100 rounded-lg">
-              <Shield className="w-6 h-6 text-green-600" />
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-3 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Shield className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                 🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                 All ports verified and operational - 302 agents active
               </p>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-sm text-gray-500">Last System Check</div>
-            <div className="font-medium text-gray-900">
+          <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Last System Check</div>
+            <div className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
               {new Date(lastSystemCheck).toLocaleString()}
             </div>
           </div>
@@ -266,16 +274,16 @@ const SystemVerificationDashboard: React.FC = () => {
       </motion.div>
 
       {/* Port Status Grid */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Port Status & Verification</h2>
-          <div className="flex items-center space-x-2">
-            <Server className="w-5 h-5 text-gray-500" />
-            <span className="text-sm text-gray-500">All ports operational</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Port Status & Verification</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Server className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">All ports operational</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {portStatuses.map((port, index) => (
             <motion.div
               key={port.port}
@@ -284,26 +292,26 @@ const SystemVerificationDashboard: React.FC = () => {
               transition={{ delay: index * 0.1 }}
               className={`border rounded-lg p-4 ${getStatusColor(port.status)}`}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {getStatusIcon(port.status)}
-                  <span className="font-medium">Port {port.port}</span>
+                  <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">Port {port.port}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs bg-white/50 px-2 py-1 rounded">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-xs bg-white/50 px-2 py-1 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                     {port.responseTime}ms
                   </span>
-                  <button className="p-1 text-gray-500 hover:text-gray-700">
-                    <ExternalLink className="w-3 h-3" />
+                  <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <ExternalLink className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="font-medium text-gray-900">{port.component}</h3>
-                <p className="text-sm text-gray-600">{port.purpose}</p>
-                <p className="text-xs font-mono text-gray-500">{port.url}</p>
-                <p className="text-xs text-gray-400">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{port.component}</h3>
+                <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{port.purpose}</p>
+                <p className="text-xs font-mono text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{port.url}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Last checked: {new Date(port.lastChecked).toLocaleTimeString()}
                 </p>
               </div>
@@ -313,12 +321,12 @@ const SystemVerificationDashboard: React.FC = () => {
       </div>
 
       {/* System Components */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           Core Autonomous System Components
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {systemComponents.map((component, index) => (
             <motion.div
               key={component.name}
@@ -327,26 +335,26 @@ const SystemVerificationDashboard: React.FC = () => {
               transition={{ delay: index * 0.1 }}
               className={`border rounded-lg p-4 ${getStatusColor(component.status)}`}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {getStatusIcon(component.status)}
-                  <span className="font-medium">{component.name}</span>
+                  <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{component.name}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs bg-white/50 px-2 py-1 rounded">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-xs bg-white/50 px-2 py-1 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                     Port {component.linkedPort}
                   </span>
                   {component.agents && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                       {component.agents} agents
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600">{component.function}</p>
-                <p className="text-xs text-gray-400">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{component.function}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Last activity: {new Date(component.lastActivity).toLocaleTimeString()}
                 </p>
               </div>
@@ -356,10 +364,10 @@ const SystemVerificationDashboard: React.FC = () => {
       </div>
 
       {/* Verification Checklist */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Final Verification Checklist</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Final Verification Checklist</h2>
 
-        <div className="space-y-3">
+        <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {verificationSteps.map((step, index) => (
             <motion.div
               key={index}
@@ -368,11 +376,11 @@ const SystemVerificationDashboard: React.FC = () => {
               transition={{ delay: index * 0.1 }}
               className={`flex items-center justify-between p-3 rounded-lg border ${getStatusColor(step.result)}`}
             >
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 {getStatusIcon(step.result)}
-                <span className="font-medium">{step.step}</span>
+                <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{step.step}</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <span
                   className={`px-2 py-1 rounded text-xs font-medium ${
                     step.result === 'passed'
@@ -391,19 +399,19 @@ const SystemVerificationDashboard: React.FC = () => {
       </div>
 
       {/* System Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Ports</p>
-              <p className="text-3xl font-bold text-gray-900">{portStatuses.length}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Ports</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{portStatuses.length}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <Server className="w-6 h-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Server className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -412,15 +420,15 @@ const SystemVerificationDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Active Agents</p>
-              <p className="text-3xl font-bold text-green-600">302</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</p>
+              <p className="text-3xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">302</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <Users className="w-6 h-6 text-green-600" />
+            <div className="p-3 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -429,15 +437,15 @@ const SystemVerificationDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">System Uptime</p>
-              <p className="text-3xl font-bold text-purple-600">99.97%</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">System Uptime</p>
+              <p className="text-3xl font-bold text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid">99.97%</p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="w-6 h-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -446,15 +454,15 @@ const SystemVerificationDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Verification Status</p>
-              <p className="text-3xl font-bold text-indigo-600">100%</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Verification Status</p>
+              <p className="text-3xl font-bold text-indigo-600 responsive-container sm:flex-col md:flex-row lg:grid">100%</p>
             </div>
-            <div className="p-3 bg-indigo-100 rounded-lg">
-              <CheckCircle className="w-6 h-6 text-indigo-600" />
+            <div className="p-3 bg-indigo-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <CheckCircle className="w-6 h-6 text-indigo-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -464,51 +472,51 @@ const SystemVerificationDashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6"
+        className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="text-center">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Shield className="w-6 h-6 text-blue-600" />
+        <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-center space-x-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Shield className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
               🎯 COMMANDER'S VIEW: MISSION ACCOMPLISHED
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Fully mapped and synchronized ports</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>24/7 real-time monitoring</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>302 autonomous agents actively building</span>
               </div>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Live dashboards for accountability</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Seamless GitHub, Supabase, n8n integration</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Battle-ready system operational</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 p-3 bg-white/50 rounded-lg">
-            <p className="text-sm text-gray-700">
+          <div className="mt-4 p-3 bg-white/50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <p className="text-sm text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>
                 No simulations. No fake logs. Only verifiable, continuous, autonomous development.
               </strong>

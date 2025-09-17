@@ -66,20 +66,26 @@ export function CinematicDemo() {
   ]
 
   return (
-    <section id="demo" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <section id="demo" className="py-20 px-4 sm:px-6 lg:px-8 responsive-container">
+      <div className="max-w-7xl mx-auto responsive-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 responsive-container"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-transbot-text-primary mb-6">
-            The <span className="text-accent">Lead-to-Ledger</span> Journey
+          <h2 className="text-4xl sm:text-5xl font-bold text-transbot-text-primary mb-6 responsive-container">
+            The <span className="text-accent responsive-container">Lead-to-Ledger</span> Journey
           </h2>
-          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto">
+          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto responsive-container">
             Experience the complete freight lifecycle in one seamless flow. 
             From first contact to final payment, see how Trans Bot AI orchestrates every step.
           </p>
@@ -91,13 +97,13 @@ export function CinematicDemo() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative mb-16"
+          className="relative mb-16 responsive-container"
         >
           {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary via-accent to-secondary transform -translate-y-1/2 hidden lg:block" />
+          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary via-accent to-secondary transform -translate-y-1/2 hidden lg:block responsive-container" />
           
           {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 responsive-container">
             {journeySteps.map((step, index) => (
               <motion.div
                 key={step.id}
@@ -116,26 +122,26 @@ export function CinematicDemo() {
                 }`}>
                   {/* Icon */}
                   <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${step.color} flex items-center justify-center`}>
-                    <step.icon className="w-8 h-8 text-transbot-text-primary" />
+                    <step.icon className="w-8 h-8 text-transbot-text-primary responsive-container" />
                   </div>
                   
                   {/* Step Number */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent text-primary rounded-full flex items-center justify-center font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent text-primary rounded-full flex items-center justify-center font-bold text-sm responsive-container">
                     {index + 1}
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-lg font-semibold text-transbot-text-primary mb-2 group-hover:text-accent transition-colors responsive-container">
                     {step.title}
                   </h3>
-                  <p className="text-transbot-text-primary/70 text-sm mb-4">
+                  <p className="text-transbot-text-primary/70 text-sm mb-4 responsive-container">
                     {step.description}
                   </p>
                   
                   {/* Progress Indicator */}
-                  <div className="w-full h-1 bg-white/80 rounded-full overflow-hidden">
+                  <div className="w-full h-1 bg-white/80 rounded-full overflow-hidden responsive-container">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-secondary to-accent"
+                      className="h-full bg-gradient-to-r from-secondary to-accent responsive-container"
                       initial={{ width: 0 }}
                       whileInView={{ width: activeStep >= index ? '100%' : '0%' }}
                       transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
@@ -154,53 +160,53 @@ export function CinematicDemo() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl mb-16"
+          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl mb-16 responsive-container"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center responsive-container">
             {/* Details */}
             <div>
-              <div className="flex items-center space-x-4 mb-6">
+              <div className="flex items-center space-x-4 mb-6 responsive-container">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${journeySteps[activeStep].color} flex items-center justify-center`}>
                   {React.createElement(journeySteps[activeStep].icon, { className: "w-6 h-6 text-transbot-text-primary" })}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-transbot-text-primary">
+                  <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container">
                     {journeySteps[activeStep].title}
                   </h3>
-                  <p className="text-transbot-text-primary/70">
+                  <p className="text-transbot-text-primary/70 responsive-container">
                     Step {activeStep + 1} of {journeySteps.length}
                   </p>
                 </div>
               </div>
               
-              <p className="text-transbot-text-primary/80 mb-6">
+              <p className="text-transbot-text-primary/80 mb-6 responsive-container">
                 {journeySteps[activeStep].description}
               </p>
               
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container">
                 {journeySteps[activeStep].details.map((detail, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="flex items-center space-x-3"
+                    className="flex items-center space-x-3 responsive-container"
                   >
-                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                    <span className="text-transbot-text-primary/70">{detail}</span>
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 responsive-container" />
+                    <span className="text-transbot-text-primary/70 responsive-container">{detail}</span>
                   </motion.div>
                 ))}
               </div>
             </div>
             
             {/* Visual Representation */}
-            <div className="relative">
-              <div className="aspect-video bg-gradient-to-br from-primary to-primary/50 rounded-2xl flex items-center justify-center">
-                <div className="text-center">
+            <div className="relative responsive-container">
+              <div className="aspect-video bg-gradient-to-br from-primary to-primary/50 rounded-2xl flex items-center justify-center responsive-container">
+                <div className="text-center responsive-container">
                   <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${journeySteps[activeStep].color} flex items-center justify-center`}>
                     {React.createElement(journeySteps[activeStep].icon, { className: "w-10 h-10 text-transbot-text-primary" })}
                   </div>
-                  <div className="text-transbot-text-primary/60 text-sm">
+                  <div className="text-transbot-text-primary/60 text-sm responsive-container">
                     Interactive Demo Coming Soon
                   </div>
                 </div>
@@ -215,12 +221,12 @@ export function CinematicDemo() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl text-center"
+          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl text-center responsive-container"
         >
-          <h3 className="text-2xl font-bold text-transbot-text-primary mb-4">
+          <h3 className="text-2xl font-bold text-transbot-text-primary mb-4 responsive-container">
             Watch the Complete Journey
           </h3>
-          <p className="text-transbot-text-primary/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-transbot-text-primary/70 mb-8 max-w-2xl mx-auto responsive-container">
             See how Trans Bot AI transforms the entire freight lifecycle from prospect to profit. 
             This 3-minute demo shows the power of unified logistics intelligence.
           </p>
@@ -228,9 +234,9 @@ export function CinematicDemo() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center space-x-2 mx-auto text-lg px-8 py-4"
+            className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center space-x-2 mx-auto text-lg px-8 py-4 responsive-container"
           >
-            <Play className="w-5 h-5" />
+            <Play className="w-5 h-5 responsive-container" />
             <span>Play Full Demo</span>
           </motion.button>
         </motion.div>
@@ -241,23 +247,23 @@ export function CinematicDemo() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-16 responsive-container"
         >
-          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-transbot-text-primary mb-4">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl max-w-2xl mx-auto responsive-container">
+            <h3 className="text-2xl font-bold text-transbot-text-primary mb-4 responsive-container">
               Ready to Transform Your Logistics?
             </h3>
-            <p className="text-transbot-text-primary/70 mb-6">
+            <p className="text-transbot-text-primary/70 mb-6 responsive-container">
               Experience the Lead-to-Ledger journey for yourself. 
               See how Trans Bot AI can revolutionize your operations.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center space-x-2 mx-auto"
+              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 flex items-center space-x-2 mx-auto responsive-container"
             >
               <span>Start Your Journey</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 responsive-container" />
             </motion.button>
           </div>
         </motion.div>

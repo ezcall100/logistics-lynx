@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Activity,
@@ -189,7 +189,13 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
         );
       }, 5000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isAutoRefresh]);
 
@@ -211,43 +217,45 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
     switch (status) {
       case 'active':
       case 'working':
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'idle':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Autonomous Development Dashboard</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Autonomous Development Dashboard</h1>
+          <p className="text-gray-600 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time monitoring of 302 MCP agents with full transparency
           </p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600">System Active</span>
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">System Active</span>
           </div>
           <button
-            onClick={() => setShowAccountability(!showAccountability)}
+            onClick={() = aria-label="Button"> setShowAccountability(!showAccountability)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${showAccountability ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}
           >
-            <Shield className="w-4 h-4" />
+            <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>{showAccountability ? 'Accountability ON' : 'Accountability OFF'}</span>
           </button>
           <button
-            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}
           >
-            {isAutoRefresh ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            {isAutoRefresh ? <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{isAutoRefresh ? 'Auto Refresh ON' : 'Auto Refresh OFF'}</span>
           </button>
         </div>
@@ -257,47 +265,47 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4"
+        className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <Zap className="w-5 h-5 text-green-600" />
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-2 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Zap className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM</h3>
+              <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                 302 agents working 24/7 with zero human intervention
               </p>
             </div>
           </div>
-          <div className="flex items-center space-x-4 text-sm">
-            <div className="flex items-center space-x-1">
-              <CheckCircle className="w-4 h-4 text-green-500" />
-              <span className="text-green-700">Verified Real-Mode</span>
+          <div className="flex items-center space-x-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-green-700 responsive-container sm:flex-col md:flex-row lg:grid">Verified Real-Mode</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <Activity className="w-4 h-4 text-blue-500" />
-              <span className="text-blue-700">Live Updates</span>
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Activity className="w-4 h-4 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-blue-700 responsive-container sm:flex-col md:flex-row lg:grid">Live Updates</span>
             </div>
           </div>
         </div>
       </motion.div>
 
       {/* System Status Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Agents</p>
-              <p className="text-3xl font-bold text-gray-900">{systemStatus.totalAgents}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Agents</p>
+              <p className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{systemStatus.totalAgents}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <Users className="w-6 h-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -306,15 +314,15 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Active Agents</p>
-              <p className="text-3xl font-bold text-green-600">{systemStatus.activeAgents}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</p>
+              <p className="text-3xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{systemStatus.activeAgents}</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <Activity className="w-6 h-6 text-green-600" />
+            <div className="p-3 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Activity className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -323,15 +331,15 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">Completed Tasks</p>
-              <p className="text-3xl font-bold text-purple-600">{systemStatus.completedTasks}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Completed Tasks</p>
+              <p className="text-3xl font-bold text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid">{systemStatus.completedTasks}</p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <CheckCircle className="w-6 h-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <CheckCircle className="w-6 h-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -340,61 +348,61 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600">System Uptime</p>
-              <p className="text-3xl font-bold text-indigo-600">{systemStatus.uptime}</p>
+              <p className="text-sm font-medium text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">System Uptime</p>
+              <p className="text-3xl font-bold text-indigo-600 responsive-container sm:flex-col md:flex-row lg:grid">{systemStatus.uptime}</p>
             </div>
-            <div className="p-3 bg-indigo-100 rounded-lg">
-              <Clock className="w-6 h-6 text-indigo-600" />
+            <div className="p-3 bg-indigo-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Clock className="w-6 h-6 text-indigo-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Agent Status Grid */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Agent Status</h2>
-          <div className="flex items-center space-x-2">
-            <RefreshCw className="w-4 h-4 text-gray-500" />
-            <span className="text-sm text-gray-500">Last updated: Just now</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Agent Status</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <RefreshCw className="w-4 h-4 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Last updated: Just now</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {agents.map((agent, index) => (
             <motion.div
               key={agent.id}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`p-2 rounded-lg ${getStatusColor(agent.status)}`}>
                     {getStatusIcon(agent.status)}
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900">{agent.name}</h3>
-                    <p className="text-sm text-gray-500">{agent.type}</p>
+                    <h3 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</h3>
+                    <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{agent.type}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600">{agent.currentTask}</p>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{agent.currentTask}</p>
+                <div className="w-full bg-gray-200 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ width: `${agent.progress}%` }}
                   ></div>
                 </div>
-                <p className="text-xs text-gray-500">{agent.progress.toFixed(0)}% complete</p>
-                <p className="text-xs text-gray-400">Last activity: {agent.lastActivity}</p>
+                <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{agent.progress.toFixed(0)}% complete</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last activity: {agent.lastActivity}</p>
               </div>
             </motion.div>
           ))}
@@ -402,28 +410,28 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
       </div>
 
       {/* Task Progress */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Task Progress</h2>
-          <div className="flex items-center space-x-2">
-            <BarChart3 className="w-4 h-4 text-gray-500" />
-            <span className="text-sm text-gray-500">Real-time updates</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Task Progress</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <BarChart3 className="w-4 h-4 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Real-time updates</span>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {tasks.map((task, index) => (
             <motion.div
               key={task.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="border border-gray-200 rounded-lg p-4"
+              className="border border-gray-200 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <h3 className="font-medium text-gray-900">{task.name}</h3>
-                  <p className="text-sm text-gray-500">Assigned to: {task.assignedAgent}</p>
+                  <h3 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{task.name}</h3>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Assigned to: {task.assignedAgent}</p>
                 </div>
                 <div
                   className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(task.status)}`}
@@ -432,20 +440,20 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-blue-600 h-2 rounded-full transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   style={{ width: `${task.progress}%` }}
                 ></div>
               </div>
 
               {task.changes.length > 0 && (
-                <div className="mt-3">
-                  <p className="text-sm font-medium text-gray-700 mb-2">Recent Changes:</p>
-                  <ul className="space-y-1">
+                <div className="mt-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Recent Changes:</p>
+                  <ul className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {task.changes.map((change, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2">
-                        <CheckCircle className="w-3 h-3 text-green-500" />
+                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <CheckCircle className="w-3 h-3 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>{change}</span>
                       </li>
                     ))}
@@ -458,16 +466,16 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
       </div>
 
       {/* System Alerts */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Real-Time System Alerts</h2>
-          <div className="flex items-center space-x-2">
-            <Activity className="w-5 h-5 text-gray-500" />
-            <span className="text-sm text-gray-500">Live monitoring</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Real-Time System Alerts</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Activity className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Live monitoring</span>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {systemAlerts.map((alert, index) => (
             <motion.div
               key={alert.id}
@@ -496,18 +504,18 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
                 }`}
               >
                 {alert.type === 'success' ? (
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <CheckCircle className="w-4 h-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : alert.type === 'warning' ? (
-                  <AlertTriangle className="w-4 h-4 text-yellow-600" />
+                  <AlertTriangle className="w-4 h-4 text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : alert.type === 'error' ? (
-                  <XCircle className="w-4 h-4 text-red-600" />
+                  <XCircle className="w-4 h-4 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Activity className="w-4 h-4 text-blue-600" />
+                  <Activity className="w-4 h-4 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900">{alert.message}</p>
-                <p className="text-xs text-gray-500">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{alert.message}</p>
+                <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {new Date(alert.timestamp).toLocaleString()}
                 </p>
               </div>
@@ -517,137 +525,137 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
       </div>
 
       {/* System Integration Status */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">System Integration Status</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">System Integration Status</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <GitBranch className="w-5 h-5 text-green-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-2 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <GitBranch className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">GitHub</p>
-                <p className="text-sm text-green-600">Connected & Syncing</p>
+                <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">GitHub</p>
+                <p className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Connected & Syncing</p>
               </div>
             </div>
-            <button className="p-1 text-gray-500 hover:text-gray-700">
-              <ExternalLink className="w-4 h-4" />
+            <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Database className="w-5 h-5 text-blue-600" />
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <Database className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Supabase</p>
-                <p className="text-sm text-blue-600">Real-time Logs</p>
+                <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Supabase</p>
+                <p className="text-sm text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">Real-time Logs</p>
               </div>
             </div>
-            <button className="p-1 text-gray-500 hover:text-gray-700">
-              <ExternalLink className="w-4 h-4" />
+            <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Webhook className="w-5 h-5 text-purple-600" />
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-2 bg-purple-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <Webhook className="w-5 h-5 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">N8N</p>
-                <p className="text-sm text-purple-600">Workflows Active</p>
+                <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">N8N</p>
+                <p className="text-sm text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid">Workflows Active</p>
               </div>
             </div>
-            <button className="p-1 text-gray-500 hover:text-gray-700">
-              <ExternalLink className="w-4 h-4" />
+            <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <FileText className="w-5 h-5 text-orange-600" />
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="p-2 bg-orange-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <FileText className="w-5 h-5 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <p className="font-medium text-gray-900">Log Files</p>
-                <p className="text-sm text-orange-600">Real-time tracking</p>
+                <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Log Files</p>
+                <p className="text-sm text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid">Real-time tracking</p>
               </div>
             </div>
-            <button className="p-1 text-gray-500 hover:text-gray-700">
-              <Eye className="w-4 h-4" />
+            <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Access Points */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">System Access Points</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">System Access Points</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <Shield className="w-5 h-5 text-gray-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-gray-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Shield className="w-5 h-5 text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Super Admin Portal</p>
-                  <p className="text-sm text-gray-500">http://localhost:3000/super-admin</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Super Admin Portal</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">http://localhost:3000/super-admin</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <ExternalLink className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <GitCommit className="w-5 h-5 text-green-600" />
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <GitCommit className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">GitHub Repository</p>
-                  <p className="text-sm text-gray-500">Private repo with all commits</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">GitHub Repository</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Private repo with all commits</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <ExternalLink className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <FileText className="w-5 h-5 text-blue-600" />
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <FileText className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Accountability Dashboard</p>
-                  <p className="text-sm text-gray-500">accountability-dashboard.json</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Accountability Dashboard</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">accountability-dashboard.json</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <Eye className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <FileText className="w-5 h-5 text-orange-600" />
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-orange-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <FileText className="w-5 h-5 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Agent Log File</p>
-                  <p className="text-sm text-gray-500">logs/real-autonomous-development.log</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Agent Log File</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">logs/real-autonomous-development.log</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <Eye className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>

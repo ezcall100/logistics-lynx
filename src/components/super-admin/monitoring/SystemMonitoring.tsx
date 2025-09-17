@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Activity,
@@ -301,7 +301,13 @@ const SystemMonitoring: React.FC = () => {
     if (autoRefresh) {
       interval = setInterval(fetchMonitoringData, 30000); // Update every 30 seconds
     }
-    return () => {
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => {
       if (interval) clearInterval(interval);
     };
   }, [autoRefresh, fetchMonitoringData]);
@@ -452,12 +458,14 @@ const SystemMonitoring: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -473,22 +481,24 @@ const SystemMonitoring: React.FC = () => {
   });
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             System Monitoring
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time system monitoring and alerting
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <select
             value={selectedTimeRange}
             onChange={(e) => setSelectedTimeRange(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="1h">Last Hour</option>
             <option value="24h">Last 24 Hours</option>
@@ -496,21 +506,21 @@ const SystemMonitoring: React.FC = () => {
             <option value="30d">Last 30 Days</option>
           </select>
           <button
-            onClick={() => setAutoRefresh(!autoRefresh)}
+            onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
             className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
               autoRefresh
                 ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
                 : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
             }`}
           >
-            {autoRefresh ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            {autoRefresh ? <Pause className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{autoRefresh ? 'Auto Refresh ON' : 'Auto Refresh OFF'}</span>
           </button>
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
@@ -518,18 +528,20 @@ const SystemMonitoring: React.FC = () => {
       </div>
 
       {/* System Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {metrics.map((metric, index) => {
           const MetricIcon = getMetricIcon(metric.category);
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-200"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-lg ${
                   metric.status === 'healthy' ? 'bg-green-50 dark:bg-green-900/20' :
                   metric.status === 'warning' ? 'bg-yellow-50 dark:bg-yellow-900/20' :
@@ -547,21 +559,21 @@ const SystemMonitoring: React.FC = () => {
                   'text-gray-600'
                 }`}>
                   {metric.trend === 'up' ? (
-                    <TrendingUp className="h-4 w-4" />
+                    <TrendingUp className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : metric.trend === 'down' ? (
-                    <TrendingDown className="h-4 w-4" />
+                    <TrendingDown className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : null}
                 </div>
               </div>
-              <div className="mb-2">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.value}{metric.unit}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.name}
                 </div>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div
                   className={`h-2 rounded-full transition-all duration-300 ${
                     metric.status === 'healthy' ? 'bg-green-500' :
@@ -571,7 +583,7 @@ const SystemMonitoring: React.FC = () => {
                   style={{ width: `${Math.min(metric.value, 100)}%` }}
                 ></div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                 <span>Warning: {metric.threshold.warning}{metric.unit}</span>
                 <span>Critical: {metric.threshold.critical}{metric.unit}</span>
               </div>
@@ -581,22 +593,22 @@ const SystemMonitoring: React.FC = () => {
       </div>
 
       {/* Alerts and Rules */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Active Alerts */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Active Alerts
             </h2>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <select
                 value={filters.severity || ''}
                 onChange={(e) => setFilters({ ...filters, severity: e.target.value || undefined })}
-                className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">All Severities</option>
                 <option value="critical">Critical</option>
@@ -607,7 +619,7 @@ const SystemMonitoring: React.FC = () => {
               <select
                 value={filters.status || ''}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value || undefined })}
-                className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">All Status</option>
                 <option value="active">Active</option>
@@ -616,10 +628,12 @@ const SystemMonitoring: React.FC = () => {
               </select>
             </div>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredAlerts.map((alert) => {
               const AlertIcon = getAlertIcon(alert.type);
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <div
                   key={alert.id}
                   className={`p-4 rounded-lg border-l-4 ${
@@ -629,49 +643,49 @@ const SystemMonitoring: React.FC = () => {
                     'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
                   }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-3">
+                  <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <AlertIcon className={`h-5 w-5 mt-0.5 ${
                         alert.severity === 'critical' ? 'text-red-600' :
                         alert.severity === 'high' ? 'text-orange-600' :
                         alert.severity === 'medium' ? 'text-yellow-600' :
                         'text-blue-600'
                       }`} />
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <div className="font-medium text-gray-900 dark:text-white">
+                      <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {alert.title}
                           </div>
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(alert.severity)}`}>
                             {alert.severity.toUpperCase()}
                           </span>
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           {alert.description}
                         </div>
-                        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
+                        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span>{alert.source}</span>
                           <span>{new Date(alert.timestamp).toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-1">
+                    <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {alert.status === 'active' && (
                         <button
-                          onClick={() => handleAcknowledgeAlert(alert.id)}
-                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleAcknowledgeAlert(alert.id)}
+                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                           title="Acknowledge"
                         >
-                          <CheckCircle className="h-4 w-4" />
+                          <CheckCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                       )}
                       {alert.status === 'acknowledged' && (
                         <button
-                          onClick={() => handleResolveAlert(alert.id)}
-                          className="p-1 text-gray-400 hover:text-green-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleResolveAlert(alert.id)}
+                          className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                           title="Resolve"
                         >
-                          <XCircle className="h-4 w-4" />
+                          <XCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                       )}
                     </div>
@@ -686,61 +700,61 @@ const SystemMonitoring: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Monitoring Rules
             </h2>
             <button
-              onClick={() => setShowCreateRule(true)}
-              className="flex items-center space-x-2 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+              onClick={() = aria-label="Button"> setShowCreateRule(true)}
+              className="flex items-center space-x-2 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>New Rule</span>
             </button>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {rules.map((rule) => (
               <div
                 key={rule.id}
-                className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow"
+                className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <h3 className="font-medium text-gray-900 dark:text-white">
+                <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {rule.name}
                     </h3>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(rule.severity)}`}>
                       {rule.severity.toUpperCase()}
                     </span>
                     {rule.enabled ? (
-                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <CheckCircle className="h-4 w-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                     ) : (
-                      <XCircle className="h-4 w-4 text-gray-400" />
+                      <XCircle className="h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                   </div>
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setEditingRule(rule)}
-                      className="p-1 text-gray-400 hover:text-green-600 transition-colors"
+                      onClick={() = aria-label="Button"> setEditingRule(rule)}
+                      className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Edit"
                     >
-                      <Edit className="h-4 w-4" />
+                      <Edit className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                     <button
-                      onClick={() => handleDeleteRule(rule.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      onClick={() = aria-label="Button"> handleDeleteRule(rule.id)}
+                      className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {rule.description}
                 </p>
-                <div className="text-xs text-gray-500 dark:text-gray-500">
+                <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {rule.metric} {rule.condition} {rule.threshold} | Actions: {rule.actions.join(', ')}
                 </div>
               </div>
@@ -756,62 +770,62 @@ const SystemMonitoring: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   Create Monitoring Rule
                 </h3>
                 <button
-                  onClick={() => setShowCreateRule(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateRule(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Rule Name
                   </label>
                   <input
                     type="text"
                     value={newRule.name || ''}
                     onChange={(e) => setNewRule({ ...newRule, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     placeholder="Enter rule name"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Description
                   </label>
                   <textarea
                     value={newRule.description || ''}
                     onChange={(e) => setNewRule({ ...newRule, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     rows={3}
                     placeholder="Enter rule description"
                   />
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       Metric
                     </label>
                     <select
                       value={newRule.metric || ''}
                       onChange={(e) => setNewRule({ ...newRule, metric: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="">Select Metric</option>
                       <option value="cpu_usage">CPU Usage</option>
@@ -824,13 +838,13 @@ const SystemMonitoring: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       Condition
                     </label>
                     <select
                       value={newRule.condition || 'greater_than'}
                       onChange={(e) => setNewRule({ ...newRule, condition: e.target.value as any })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="greater_than">Greater Than</option>
                       <option value="less_than">Less Than</option>
@@ -840,28 +854,28 @@ const SystemMonitoring: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       Threshold
                     </label>
                     <input
                       type="number"
                       value={newRule.threshold || 0}
                       onChange={(e) => setNewRule({ ...newRule, threshold: Number(e.target.value) })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       placeholder="0"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       Severity
                     </label>
                     <select
                       value={newRule.severity || 'medium'}
                       onChange={(e) => setNewRule({ ...newRule, severity: e.target.value as any })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <option value="low">Low</option>
                       <option value="medium">Medium</option>
@@ -872,17 +886,17 @@ const SystemMonitoring: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setShowCreateRule(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateRule(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateRule}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   Create Rule
                 </button>
               </div>

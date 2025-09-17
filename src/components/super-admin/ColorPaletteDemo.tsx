@@ -3,7 +3,7 @@
  * Demonstrates the comprehensive color system implementation
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Palette,
@@ -92,34 +92,40 @@ const ColorPaletteDemo: React.FC = () => {
   ] as const;
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div
       className={`min-h-screen transition-colors duration-300 ${
         isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
       }`}
     >
       {/* Header */}
-      <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Palette className="w-8 h-8 text-super-admin-primary-500" />
+      <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Palette className="w-8 h-8 text-super-admin-primary-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             <div>
-              <h1 className="text-2xl font-bold">Super Admin Color Palette</h1>
-              <p className="text-gray-400">
+              <h1 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Super Admin Color Palette</h1>
+              <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Comprehensive color system for consistent, accessible design
               </p>
             </div>
           </div>
           <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="flex items-center space-x-2 px-4 py-2 bg-super-admin-primary-500 hover:bg-super-admin-primary-600 text-white rounded-lg transition-colors"
+            onClick={() = aria-label="Button"> setIsDarkMode(!isDarkMode)}
+            className="flex items-center space-x-2 px-4 py-2 bg-super-admin-primary-500 hover:bg-super-admin-primary-600 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            {isDarkMode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            {isDarkMode ? <EyeOff className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
           </button>
         </div>
       </div>
 
-      <div className="p-6 space-y-8">
+      <div className="p-6 space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Color Sections */}
         {colorSections.map((section, index) => (
           <motion.div
@@ -127,23 +133,23 @@ const ColorPaletteDemo: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="mb-6">
-              <h2 className="text-xl font-bold mb-2">{section.title}</h2>
-              <p className="text-gray-400 mb-2">{section.description}</p>
-              <p className="text-sm text-gray-500">{section.usage}</p>
+            <div className="mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-xl font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{section.title}</h2>
+              <p className="text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{section.description}</p>
+              <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{section.usage}</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {Object.entries(section.colors).map(([shade, color]) => (
-                <div key={shade} className="text-center">
+                <div key={shade} className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="w-full h-16 rounded-lg border border-white/20 mb-2"
+                    className="w-full h-16 rounded-lg border border-white/20 mb-2 responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ backgroundColor: color }}
                   />
-                  <div className="text-xs font-mono text-gray-400">{shade}</div>
-                  <div className="text-xs font-mono text-gray-500">{color}</div>
+                  <div className="text-xs font-mono text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{shade}</div>
+                  <div className="text-xs font-mono text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{color}</div>
                 </div>
               ))}
             </div>
@@ -155,18 +161,20 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Status Colors</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Status Colors</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {statusExamples.map(example => {
               const Icon = example.icon;
               const statusColor = getStatusColor(example.status);
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <div key={example.status} className={`p-4 rounded-lg border ${statusColor}`}>
-                  <div className="flex items-center space-x-3">
-                    <Icon className="w-5 h-5" />
-                    <span className="font-medium">{example.label}</span>
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{example.label}</span>
                   </div>
                 </div>
               );
@@ -179,20 +187,22 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Priority Colors</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Priority Colors</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {priorityExamples.map(example => {
               const priorityColor = getPriorityColor(example.priority);
               return (
-                <div key={example.priority} className="p-4 rounded-lg border border-white/20">
-                  <div className="flex items-center space-x-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                <div key={example.priority} className="p-4 rounded-lg border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div
-                      className="w-3 h-3 rounded-full"
+                      className="w-3 h-3 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ backgroundColor: priorityColor }}
                     />
-                    <span className="font-medium">{example.label}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{example.label}</span>
                   </div>
                 </div>
               );
@@ -205,10 +215,10 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Trend Indicators</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Trend Indicators</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {trendExamples.map(example => {
               const Icon = example.icon;
               const trendColor =
@@ -219,10 +229,12 @@ const ColorPaletteDemo: React.FC = () => {
                     : 'text-super-admin-neutral-500';
 
               return (
-                <div key={example.trend} className="p-4 rounded-lg border border-white/20">
-                  <div className="flex items-center space-x-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                <div key={example.trend} className="p-4 rounded-lg border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <Icon className={`w-5 h-5 ${trendColor}`} />
-                    <span className="font-medium">{example.label}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{example.label}</span>
                   </div>
                 </div>
               );
@@ -235,18 +247,18 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Data Visualization Colors</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Data Visualization Colors</h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {chartColors.map((color, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
                 <div
-                  className="w-full h-16 rounded-lg border border-white/20 mb-2"
+                  className="w-full h-16 rounded-lg border border-white/20 mb-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   style={{ backgroundColor: color }}
                 />
-                <div className="text-xs font-mono text-gray-400">Chart {index + 1}</div>
-                <div className="text-xs font-mono text-gray-500">{color}</div>
+                <div className="text-xs font-mono text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Chart {index + 1}</div>
+                <div className="text-xs font-mono text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{color}</div>
               </div>
             ))}
           </div>
@@ -257,39 +269,39 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Glassmorphism Effects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Glassmorphism Effects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div
-              className="p-6 rounded-lg border backdrop-blur-sm"
+              className="p-6 rounded-lg border backdrop-blur-sm responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: glass.light,
                 borderColor: glass.border,
               }}
             >
-              <h3 className="font-bold mb-2">Light Glass</h3>
-              <p className="text-sm text-gray-400">Subtle transparency effect</p>
+              <h3 className="font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Light Glass</h3>
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Subtle transparency effect</p>
             </div>
             <div
-              className="p-6 rounded-lg border backdrop-blur-sm"
+              className="p-6 rounded-lg border backdrop-blur-sm responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: glass.medium,
                 borderColor: glass.border,
               }}
             >
-              <h3 className="font-bold mb-2">Medium Glass</h3>
-              <p className="text-sm text-gray-400">Moderate transparency effect</p>
+              <h3 className="font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Medium Glass</h3>
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Moderate transparency effect</p>
             </div>
             <div
-              className="p-6 rounded-lg border backdrop-blur-sm"
+              className="p-6 rounded-lg border backdrop-blur-sm responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: glass.dark,
                 borderColor: glass.border,
               }}
             >
-              <h3 className="font-bold mb-2">Dark Glass</h3>
-              <p className="text-sm text-gray-400">Strong transparency effect</p>
+              <h3 className="font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Dark Glass</h3>
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Strong transparency effect</p>
             </div>
           </div>
         </motion.div>
@@ -299,19 +311,19 @@ const ColorPaletteDemo: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+          className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-xl font-bold mb-6">Usage Examples</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h2 className="text-xl font-bold mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Usage Examples</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {/* Primary Button */}
             <button
-              className="px-4 py-2 rounded-lg font-medium transition-colors"
+              className="px-4 py-2 rounded-lg font-medium transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: combinations.primary.background,
                 color: combinations.primary.text,
                 borderColor: combinations.primary.border,
               }}
-              onMouseEnter={e => {
+              onMouseEnter={e = aria-label="Button"> {
                 e.currentTarget.style.backgroundColor = combinations.primary.hover;
               }}
               onMouseLeave={e => {
@@ -323,13 +335,13 @@ const ColorPaletteDemo: React.FC = () => {
 
             {/* Secondary Button */}
             <button
-              className="px-4 py-2 rounded-lg font-medium transition-colors"
+              className="px-4 py-2 rounded-lg font-medium transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: combinations.secondary.background,
                 color: combinations.secondary.text,
                 borderColor: combinations.secondary.border,
               }}
-              onMouseEnter={e => {
+              onMouseEnter={e = aria-label="Button"> {
                 e.currentTarget.style.backgroundColor = combinations.secondary.hover;
               }}
               onMouseLeave={e => {
@@ -341,13 +353,13 @@ const ColorPaletteDemo: React.FC = () => {
 
             {/* Success Button */}
             <button
-              className="px-4 py-2 rounded-lg font-medium transition-colors"
+              className="px-4 py-2 rounded-lg font-medium transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: combinations.success.background,
                 color: combinations.success.text,
                 borderColor: combinations.success.border,
               }}
-              onMouseEnter={e => {
+              onMouseEnter={e = aria-label="Button"> {
                 e.currentTarget.style.backgroundColor = combinations.success.hover;
               }}
               onMouseLeave={e => {
@@ -359,13 +371,13 @@ const ColorPaletteDemo: React.FC = () => {
 
             {/* Error Button */}
             <button
-              className="px-4 py-2 rounded-lg font-medium transition-colors"
+              className="px-4 py-2 rounded-lg font-medium transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: combinations.error.background,
                 color: combinations.error.text,
                 borderColor: combinations.error.border,
               }}
-              onMouseEnter={e => {
+              onMouseEnter={e = aria-label="Button"> {
                 e.currentTarget.style.backgroundColor = combinations.error.hover;
               }}
               onMouseLeave={e => {

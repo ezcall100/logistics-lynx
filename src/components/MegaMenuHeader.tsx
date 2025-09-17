@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -38,14 +39,14 @@ import {
 interface SubPage {
   name: string
   path: string
-  icon?: any
+  icon?: unknown
   description?: string
 }
 
 interface MenuSection {
   title: string
   path: string
-  icon: any
+  icon: unknown
   description: string
   subpages: SubPage[]
 }
@@ -170,37 +171,43 @@ export function MegaMenuHeader() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-transbot-border shadow-transbot">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-transbot-border shadow-transbot responsive-container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
+        <div className="flex items-center justify-between h-16 responsive-container">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 responsive-container"
           >
-            <div className="p-2 rounded-xl bg-gradient-primary">
-              <Brain className="w-6 h-6 text-white" />
+            <div className="p-2 rounded-xl bg-gradient-primary responsive-container">
+              <Brain className="w-6 h-6 text-white responsive-container" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-transbot-text-primary">Trans Bot AI</h1>
-              <p className="text-xs text-transbot-text-secondary">Intelligent Logistics</p>
+              <h1 className="text-xl font-bold text-transbot-text-primary responsive-container">Trans Bot AI</h1>
+              <p className="text-xs text-transbot-text-secondary responsive-container">Intelligent Logistics</p>
             </div>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8 responsive-container">
             {menuSections.map((section) => (
               <div
                 key={section.title}
-                className="relative"
+                className="relative responsive-container"
                 onMouseEnter={() => setActiveDropdown(section.title)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="flex items-center gap-2 text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium">
-                  <section.icon className="w-4 h-4" />
+                <button className="flex items-center gap-2 text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium responsive-container" aria-label="Button">
+                  <section.icon className="w-4 h-4 responsive-container" />
                   {section.title}
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 responsive-container" />
                 </button>
 
                 {/* Mega Menu Dropdown */}
@@ -211,35 +218,35 @@ export function MegaMenuHeader() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-96 bg-white rounded-xl shadow-transbot-lg border border-transbot-border p-6"
+                      className="absolute top-full left-0 mt-2 w-96 bg-white rounded-xl shadow-transbot-lg border border-transbot-border p-6 responsive-container"
                     >
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 pb-3 border-b border-transbot-border">
-                          <div className="p-2 rounded-lg bg-transbot-sky/10">
-                            <section.icon className="w-5 h-5 text-transbot-sky" />
+                      <div className="space-y-4 responsive-container">
+                        <div className="flex items-center gap-3 pb-3 border-b border-transbot-border responsive-container">
+                          <div className="p-2 rounded-lg bg-transbot-sky/10 responsive-container">
+                            <section.icon className="w-5 h-5 text-transbot-sky responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-transbot-text-primary">{section.title}</h3>
-                            <p className="text-sm text-transbot-text-secondary">{section.description}</p>
+                            <h3 className="font-semibold text-transbot-text-primary responsive-container">{section.title}</h3>
+                            <p className="text-sm text-transbot-text-secondary responsive-container">{section.description}</p>
                           </div>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-3 responsive-container">
                           {section.subpages.map((subpage) => (
                             <a
                               key={subpage.name}
                               href={subpage.path}
-                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-transbot-neutral-light transition-colors duration-200 group"
+                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-transbot-neutral-light transition-colors duration-200 group responsive-container"
                             >
-                              <div className="p-1.5 rounded-md bg-transbot-border group-hover:bg-transbot-sky/10 transition-colors duration-200">
-                                {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary group-hover:text-transbot-sky" />}
+                              <div className="p-1.5 rounded-md bg-transbot-border group-hover:bg-transbot-sky/10 transition-colors duration-200 responsive-container">
+                                {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary group-hover:text-transbot-sky responsive-container" />}
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-transbot-text-primary group-hover:text-transbot-sky">
+                              <div className="flex-1 min-w-0 responsive-container">
+                                <p className="text-sm font-medium text-transbot-text-primary group-hover:text-transbot-sky responsive-container">
                                   {subpage.name}
                                 </p>
                                 {subpage.description && (
-                                  <p className="text-xs text-transbot-text-secondary mt-1 line-clamp-2">
+                                  <p className="text-xs text-transbot-text-secondary mt-1 line-clamp-2 responsive-container">
                                     {subpage.description}
                                   </p>
                                 )}
@@ -256,21 +263,21 @@ export function MegaMenuHeader() {
           </nav>
 
           {/* Action Buttons */}
-          <div className="hidden lg:flex items-center gap-4">
-            <button className="text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium">
+          <div className="hidden lg:flex items-center gap-4 responsive-container">
+            <button className="text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium responsive-container" aria-label="Button">
               Login
             </button>
-            <button className="px-6 py-2 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 shadow-transbot">
+            <button className="px-6 py-2 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 shadow-transbot responsive-container" aria-label="Button">
               Get Demo
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light transition-colors duration-200"
+            onClick={() = aria-label="Button"> setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light transition-colors duration-200 responsive-container"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6 responsive-container" /> : <Menu className="w-6 h-6 responsive-container" />}
           </button>
         </div>
       </div>
@@ -283,40 +290,40 @@ export function MegaMenuHeader() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-transbot-border"
+            className="lg:hidden bg-white border-t border-transbot-border responsive-container"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-              <div className="space-y-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 responsive-container">
+              <div className="space-y-4 responsive-container">
                 {menuSections.map((section) => (
-                  <div key={section.title} className="space-y-2">
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-transbot-neutral-light">
-                      <section.icon className="w-5 h-5 text-transbot-sky" />
+                  <div key={section.title} className="space-y-2 responsive-container">
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-transbot-neutral-light responsive-container">
+                      <section.icon className="w-5 h-5 text-transbot-sky responsive-container" />
                       <div>
-                        <h3 className="font-semibold text-transbot-text-primary">{section.title}</h3>
-                        <p className="text-sm text-transbot-text-secondary">{section.description}</p>
+                        <h3 className="font-semibold text-transbot-text-primary responsive-container">{section.title}</h3>
+                        <p className="text-sm text-transbot-text-secondary responsive-container">{section.description}</p>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 gap-2 ml-8">
+                    <div className="grid grid-cols-1 gap-2 ml-8 responsive-container">
                       {section.subpages.map((subpage) => (
                         <a
                           key={subpage.name}
                           href={subpage.path}
-                          className="flex items-center gap-3 p-2 rounded-lg hover:bg-transbot-neutral-light transition-colors duration-200"
+                          className="flex items-center gap-3 p-2 rounded-lg hover:bg-transbot-neutral-light transition-colors duration-200 responsive-container"
                         >
-                          {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary" />}
-                          <span className="text-sm text-transbot-text-primary">{subpage.name}</span>
+                          {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary responsive-container" />}
+                          <span className="text-sm text-transbot-text-primary responsive-container">{subpage.name}</span>
                         </a>
                       ))}
                     </div>
                   </div>
                 ))}
                 
-                <div className="pt-4 border-t border-transbot-border space-y-3">
-                  <button className="w-full text-left p-3 text-transbot-text-primary hover:bg-transbot-neutral-light rounded-lg transition-colors duration-200">
+                <div className="pt-4 border-t border-transbot-border space-y-3 responsive-container">
+                  <button className="w-full text-left p-3 text-transbot-text-primary hover:bg-transbot-neutral-light rounded-lg transition-colors duration-200 responsive-container" aria-label="Button">
                     Login
                   </button>
-                  <button className="w-full p-3 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200">
+                  <button className="w-full p-3 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 responsive-container" aria-label="Button">
                     Get Demo
                   </button>
                 </div>

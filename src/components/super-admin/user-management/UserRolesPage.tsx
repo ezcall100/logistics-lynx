@@ -12,7 +12,7 @@
 //  Logged: logs/real-autonomous-development.log
 // REAL DEVELOPMENT WORK by Cursor AI at 2025-09-17 08:01:14 - Fixing forms and validation
 // Modified by Cursor AI at 2025-09-17 07:02:27 - Starting actual improvements
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
@@ -618,13 +618,21 @@ export const UserRolesPage: React.FC = () => {
       }
 
       if (sortOrder === 'asc') {
-        return (aValue as string | number) < (bValue as string | number)
+        return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      aValue as string | number) < (bValue as string | number)
           ? -1
           : (aValue as string | number) > (bValue as string | number)
             ? 1
             : 0;
       } else {
-        return (aValue as string | number) > (bValue as string | number)
+        return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      aValue as string | number) > (bValue as string | number)
           ? -1
           : (aValue as string | number) < (bValue as string | number)
             ? 1
@@ -635,17 +643,17 @@ export const UserRolesPage: React.FC = () => {
   const getRoleIcon = (iconName: string) => {
     switch (iconName) {
       case 'crown':
-        return <Crown className="w-5 h-5" />;
+        return <Crown className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'shield':
-        return <Shield className="w-5 h-5" />;
+        return <Shield className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'users':
-        return <Users className="w-5 h-5" />;
+        return <Users className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'user':
-        return <Users className="w-5 h-5" />;
+        return <Users className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'building':
-        return <Building className="w-5 h-5" />;
+        return <Building className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Shield className="w-5 h-5" />;
+        return <Shield className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -716,34 +724,38 @@ export const UserRolesPage: React.FC = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
+    return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showDropdown]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Enhanced Header Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Total Roles
                 </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.total}</p>
-                <p className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <Shield className="w-3 h-3 mr-1" />
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{stats.total}</p>
+                <p className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Shield className="w-3 h-3 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Active: {stats.active}
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+                <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </motion.div>
@@ -752,23 +764,23 @@ export const UserRolesPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Total Users
                 </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {stats.totalUsers}
                 </p>
-                <p className="text-xs text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <Users className="w-3 h-3 mr-1" />
+                <p className="text-xs text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Users className="w-3 h-3 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Assigned
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                <Users className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+                <Users className="w-5 h-5 text-green-600 dark:text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </motion.div>
@@ -777,23 +789,23 @@ export const UserRolesPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Permissions
                 </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {stats.totalPermissions}
                 </p>
-                <p className="text-xs text-purple-600 dark:text-purple-400 flex items-center mt-1">
-                  <Lock className="w-3 h-3 mr-1" />
+                <p className="text-xs text-purple-600 dark:text-purple-400 flex items-center mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Lock className="w-3 h-3 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Available
                 </p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
-                <Lock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+                <Lock className="w-5 h-5 text-purple-600 dark:text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </motion.div>
@@ -802,62 +814,62 @@ export const UserRolesPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Default Roles
                 </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.default}</p>
-                <p className="text-xs text-amber-600 dark:text-amber-400 flex items-center mt-1">
-                  <Star className="w-3 h-3 mr-1" />
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{stats.default}</p>
+                <p className="text-xs text-amber-600 dark:text-amber-400 flex items-center mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Star className="w-3 h-3 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   System
                 </p>
               </div>
-              <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-xl">
-                <Star className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+              <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid">
+                <Star className="w-5 h-5 text-amber-600 dark:text-amber-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Enhanced Search and Controls */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 mb-8 shadow-xl">
-          <div className="flex flex-col lg:flex-row gap-4 mb-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 mb-8 shadow-xl responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex flex-col lg:flex-row gap-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 placeholder="Search roles by name, description, or tags..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setShowFilters(!showFilters)}
+                onClick={() = aria-label="Button"> setShowFilters(!showFilters)}
                 className={`px-4 py-3 border rounded-xl transition-all duration-200 flex items-center space-x-2 ${
                   showFilters
                     ? 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/20 dark:border-blue-700 dark:text-blue-400'
                     : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <Filter className="w-4 h-4" />
+                <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Filters</span>
                 {showFilters ? (
-                  <ChevronUp className="w-4 h-4" />
+                  <ChevronUp className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </button>
 
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="name">Sort by Name</option>
                 <option value="userCount">Sort by User Count</option>
@@ -867,28 +879,28 @@ export const UserRolesPage: React.FC = () => {
               </select>
 
               <button
-                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200"
+                onClick={() = aria-label="Button"> setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {sortOrder === 'asc' ? 'â†‘' : 'â†“'}
               </button>
 
               <button
-                onClick={() => setViewMode(viewMode === 'cards' ? 'table' : 'cards')}
-                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200"
+                onClick={() = aria-label="Button"> setViewMode(viewMode === 'cards' ? 'table' : 'cards')}
+                className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {viewMode === 'cards' ? (
-                  <Table className="w-4 h-4" />
+                  <Table className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Grid3X3 className="w-4 h-4" />
+                  <Grid3X3 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </button>
 
               <button
-                onClick={() => setShowCreateModal(true)}
-                className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg"
+                onClick={() = aria-label="Button"> setShowCreateModal(true)}
+                className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Create Role</span>
               </button>
             </div>
@@ -901,12 +913,12 @@ export const UserRolesPage: React.FC = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <select
                   value={filterStatus}
                   onChange={e => setFilterStatus(e.target.value)}
-                  className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                  className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
@@ -916,7 +928,7 @@ export const UserRolesPage: React.FC = () => {
                 <select
                   value={filterCategory}
                   onChange={e => setFilterCategory(e.target.value)}
-                  className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                  className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <option value="all">All Categories</option>
                   {categories.map(category => (
@@ -926,13 +938,13 @@ export const UserRolesPage: React.FC = () => {
                   ))}
                 </select>
 
-                <div className="flex gap-2">
-                  <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-                    <Download className="w-4 h-4" />
+                <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Export</span>
                   </button>
-                  <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-                    <Upload className="w-4 h-4" />
+                  <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Upload className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Import</span>
                   </button>
                 </div>
@@ -946,47 +958,47 @@ export const UserRolesPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4 mb-6"
+            className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <span className="text-blue-700 dark:text-blue-300 font-medium">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-blue-700 dark:text-blue-300 font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedRoles.length} role{selectedRoles.length > 1 ? 's' : ''} selected
                 </span>
                 <button
-                  onClick={() => setSelectedRoles([])}
-                  className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  onClick={() = aria-label="Button"> setSelectedRoles([])}
+                  className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => handleBulkAction('activate')}
-                  className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                  onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                  className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <UserCheck className="w-4 h-4 inline mr-1" />
+                  <UserCheck className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Activate
                 </button>
                 <button
-                  onClick={() => handleBulkAction('deactivate')}
-                  className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
+                  onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                  className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <UserX className="w-4 h-4 inline mr-1" />
+                  <UserX className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Deactivate
                 </button>
                 <button
-                  onClick={() => handleBulkAction('export')}
-                  className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                  onClick={() = aria-label="Button"> handleBulkAction('export')}
+                  className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Download className="w-4 h-4 inline mr-1" />
+                  <Download className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Export
                 </button>
                 <button
-                  onClick={() => handleBulkAction('delete')}
-                  className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
+                  onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                  className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Trash2 className="w-4 h-4 inline mr-1" />
+                  <Trash2 className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Delete
                 </button>
               </div>
@@ -996,7 +1008,7 @@ export const UserRolesPage: React.FC = () => {
 
         {/* Roles Display - Cards or Table */}
         {viewMode === 'cards' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredRoles.map((role, index) => (
               <motion.div
                 key={role.id}
@@ -1009,8 +1021,8 @@ export const UserRolesPage: React.FC = () => {
                     : 'border-white/20 dark:border-slate-700/30'
                 }`}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
+                <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <input
                       type="checkbox"
                       checked={selectedRoles.includes(role.id)}
@@ -1021,91 +1033,91 @@ export const UserRolesPage: React.FC = () => {
                           setSelectedRoles(prev => prev.filter(id => id !== role.id));
                         }
                       }}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                     <div className={`p-3 rounded-xl ${getRoleColor(role.color)}`}>
                       {getRoleIcon(role.icon)}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center space-x-2">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <span>{role.name}</span>
-                        {role.isDefault && <Star className="w-4 h-4 text-amber-500" />}
-                        {!role.isActive && <Ban className="w-4 h-4 text-red-500" />}
+                        {role.isDefault && <Star className="w-4 h-4 text-amber-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
+                        {!role.isActive && <Ban className="w-4 h-4 text-red-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
                       </h3>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                      <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.description}
                       </p>
                     </div>
                   </div>
-                  <div className="relative">
+                  <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setShowDropdown(showDropdown === role.id ? null : role.id)}
-                      className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200"
+                      onClick={() = aria-label="Button"> setShowDropdown(showDropdown === role.id ? null : role.id)}
+                      className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                       title="More Actions"
                     >
-                      <MoreVertical className="w-4 h-4" />
+                      <MoreVertical className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
 
                     {showDropdown === role.id && (
-                      <div className="absolute right-0 top-10 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10">
-                        <div className="py-1">
+                      <div className="absolute right-0 top-10 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="py-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               openViewModal(role);
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Eye className="w-4 h-4" />
+                            <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>View Details</span>
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               openEditModal(role);
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Edit className="w-4 h-4" />
+                            <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Edit Role</span>
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               duplicateRole(role);
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Copy className="w-4 h-4" />
+                            <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Duplicate Role</span>
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Download className="w-4 h-4" />
+                            <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Export Role</span>
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Settings className="w-4 h-4" />
+                            <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Role Settings</span>
                           </button>
-                          <div className="border-t border-slate-200 dark:border-slate-700 my-1"></div>
+                          <div className="border-t border-slate-200 dark:border-slate-700 my-1 responsive-container sm:flex-col md:flex-row lg:grid"></div>
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               openDeleteModal(role);
                               setShowDropdown(null);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2"
+                            className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Delete Role</span>
                           </button>
                         </div>
@@ -1114,46 +1126,46 @@ export const UserRolesPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Users</span>
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Users</span>
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.userCount}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Permissions</span>
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Permissions</span>
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.permissions.length}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Priority</span>
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Priority</span>
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.priority}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Last Used</span>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Used</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {new Date(role.lastUsed).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
 
                 {role.tags.length > 0 && (
-                  <div className="mt-3">
-                    <div className="flex flex-wrap gap-1">
+                  <div className="mt-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex flex-wrap gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.tags.slice(0, 3).map((tag, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full"
+                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {tag}
                         </span>
                       ))}
                       {role.tags.length > 3 && (
-                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                           +{role.tags.length - 3}
                         </span>
                       )}
@@ -1161,20 +1173,20 @@ export const UserRolesPage: React.FC = () => {
                   </div>
                 )}
 
-                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                  <div className="flex items-center justify-between">
+                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                     <span
                       className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getRoleColor(role.color)}`}
                     >
                       {role.isDefault ? 'Default' : 'Custom'}
                     </span>
-                    <div className="flex items-center space-x-1">
+                    <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {role.isActive ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : (
-                        <XCircle className="w-4 h-4 text-red-500" />
+                        <XCircle className="w-4 h-4 text-red-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                       )}
-                      <span className="text-xs text-slate-500 dark:text-slate-400">
+                      <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </div>
@@ -1185,12 +1197,12 @@ export const UserRolesPage: React.FC = () => {
           </div>
         ) : (
           /* Table View */
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl overflow-hidden mb-8">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-slate-50 dark:bg-slate-700/50">
+          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl overflow-hidden mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+              <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+                <thead className="bg-slate-50 dark:bg-slate-700/50 responsive-container sm:flex-col md:flex-row lg:grid">
                   <tr>
-                    <th className="px-6 py-4 text-left">
+                    <th className="px-6 py-4 text-left responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={
@@ -1203,42 +1215,42 @@ export const UserRolesPage: React.FC = () => {
                             setSelectedRoles([]);
                           }
                         }}
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Role
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Users
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Permissions
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Priority
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Status
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Last Used
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                   {filteredRoles.map((role, index) => (
                     <motion.tr
                       key={role.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors"
+                      className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         <input
                           type="checkbox"
                           checked={selectedRoles.includes(role.id)}
@@ -1249,35 +1261,35 @@ export const UserRolesPage: React.FC = () => {
                               setSelectedRoles(prev => prev.filter(id => id !== role.id));
                             }
                           }}
-                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                         />
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center space-x-3">
+                      <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div className={`p-2 rounded-lg ${getRoleColor(role.color)}`}>
                             {getRoleIcon(role.icon)}
                           </div>
                           <div>
-                            <div className="text-sm font-medium text-slate-900 dark:text-white flex items-center space-x-2">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                               <span>{role.name}</span>
-                              {role.isDefault && <Star className="w-3 h-3 text-amber-500" />}
+                              {role.isDefault && <Star className="w-3 h-3 text-amber-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
                             </div>
-                            <div className="text-sm text-slate-500 dark:text-slate-400">
+                            <div className="text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                               {role.description}
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white">
+                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.userCount}
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white">
+                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.permissions.length}
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white">
+                      <td className="px-6 py-4 text-sm text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {role.priority}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         <span
                           className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                             role.isActive
@@ -1288,81 +1300,81 @@ export const UserRolesPage: React.FC = () => {
                           {role.isActive ? 'Active' : 'Inactive'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                      <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {new Date(role.lastUsed).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="relative">
+                      <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                           <button
-                            onClick={() =>
+                            onClick={() = aria-label="Button">
                               setShowDropdown(showDropdown === role.id ? null : role.id)
                             }
-                            className="p-1 text-slate-400 hover:text-slate-600 rounded transition-colors"
+                            className="p-1 text-slate-400 hover:text-slate-600 rounded transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             title="More Actions"
                           >
-                            <MoreVertical className="w-4 h-4" />
+                            <MoreVertical className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           </button>
 
                           {showDropdown === role.id && (
-                            <div className="absolute right-0 top-8 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10">
-                              <div className="py-1">
+                            <div className="absolute right-0 top-8 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10 responsive-container sm:flex-col md:flex-row lg:grid">
+                              <div className="py-1 responsive-container sm:flex-col md:flex-row lg:grid">
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     openViewModal(role);
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Eye className="w-4 h-4" />
+                                  <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>View Details</span>
                                 </button>
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     openEditModal(role);
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Edit className="w-4 h-4" />
+                                  <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Edit Role</span>
                                 </button>
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     duplicateRole(role);
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Copy className="w-4 h-4" />
+                                  <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Duplicate Role</span>
                                 </button>
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Download className="w-4 h-4" />
+                                  <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Export Role</span>
                                 </button>
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Settings className="w-4 h-4" />
+                                  <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Role Settings</span>
                                 </button>
-                                <div className="border-t border-slate-200 dark:border-slate-700 my-1"></div>
+                                <div className="border-t border-slate-200 dark:border-slate-700 my-1 responsive-container sm:flex-col md:flex-row lg:grid"></div>
                                 <button
-                                  onClick={() => {
+                                  onClick={() = aria-label="Button"> {
                                     openDeleteModal(role);
                                     setShowDropdown(null);
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <Trash2 className="w-4 h-4" />
+                                  <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Delete Role</span>
                                 </button>
                               </div>
@@ -1385,23 +1397,23 @@ export const UserRolesPage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     Create New Role
                   </h2>
                   <button
-                    onClick={() => setShowCreateModal(false)}
-                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
 
@@ -1410,29 +1422,29 @@ export const UserRolesPage: React.FC = () => {
                     e.preventDefault();
                     handleCreateRole();
                   }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Role Name *
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Color
                       </label>
                       <select
                         value={formData.color}
                         onChange={e => setFormData(prev => ({ ...prev, color: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <option value="blue">Blue</option>
                         <option value="green">Green</option>
@@ -1445,13 +1457,13 @@ export const UserRolesPage: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Icon
                       </label>
                       <select
                         value={formData.icon}
                         onChange={e => setFormData(prev => ({ ...prev, icon: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <option value="shield">Shield</option>
                         <option value="crown">Crown</option>
@@ -1461,7 +1473,7 @@ export const UserRolesPage: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Priority
                       </label>
                       <input
@@ -1472,13 +1484,13 @@ export const UserRolesPage: React.FC = () => {
                         onChange={e =>
                           setFormData(prev => ({ ...prev, priority: parseInt(e.target.value) }))
                         }
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Description *
                     </label>
                     <textarea
@@ -1487,32 +1499,32 @@ export const UserRolesPage: React.FC = () => {
                         setFormData(prev => ({ ...prev, description: e.target.value }))
                       }
                       rows={3}
-                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Notes
                     </label>
                     <textarea
                       value={formData.notes}
                       onChange={e => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                       rows={2}
-                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Permissions
                     </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-slate-200 dark:border-slate-600 rounded-lg p-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-slate-200 dark:border-slate-600 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       {permissions.map(permission => (
                         <label
                           key={permission.id}
-                          className="flex items-center space-x-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded"
+                          className="flex items-center space-x-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <input
                             type="checkbox"
@@ -1530,13 +1542,13 @@ export const UserRolesPage: React.FC = () => {
                                 }));
                               }
                             }}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                           />
-                          <div className="flex-1">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                          <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {permission.name}
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                               {permission.description}
                             </div>
                           </div>
@@ -1550,49 +1562,49 @@ export const UserRolesPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <label className="flex items-center">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <label className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData.isDefault}
                         onChange={e =>
                           setFormData(prev => ({ ...prev, isDefault: e.target.checked }))
                         }
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300">
+                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">
                         Default Role
                       </span>
                     </label>
-                    <label className="flex items-center">
+                    <label className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData.isActive}
                         onChange={e =>
                           setFormData(prev => ({ ...prev, isActive: e.target.checked }))
                         }
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300">
+                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">
                         Active
                       </span>
                     </label>
                   </div>
 
-                  <div className="flex justify-end space-x-3 pt-4">
+                  <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() => setShowCreateModal(false)}
-                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                      onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
-                    >
-                      <Save className="w-4 h-4" />
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
+                     aria-label="Button">
+                      <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>{isLoading ? 'Creating...' : 'Create Role'}</span>
                     </button>
                   </div>
@@ -1609,21 +1621,21 @@ export const UserRolesPage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Edit Role</h2>
+                <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Edit Role</h2>
                   <button
-                    onClick={() => setShowEditModal(false)}
-                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    onClick={() = aria-label="Button"> setShowEditModal(false)}
+                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
 
@@ -1632,29 +1644,29 @@ export const UserRolesPage: React.FC = () => {
                     e.preventDefault();
                     handleUpdateRole();
                   }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Role Name *
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Color
                       </label>
                       <select
                         value={formData.color}
                         onChange={e => setFormData(prev => ({ ...prev, color: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <option value="blue">Blue</option>
                         <option value="green">Green</option>
@@ -1667,13 +1679,13 @@ export const UserRolesPage: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Icon
                       </label>
                       <select
                         value={formData.icon}
                         onChange={e => setFormData(prev => ({ ...prev, icon: e.target.value }))}
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <option value="shield">Shield</option>
                         <option value="crown">Crown</option>
@@ -1683,7 +1695,7 @@ export const UserRolesPage: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Priority
                       </label>
                       <input
@@ -1694,13 +1706,13 @@ export const UserRolesPage: React.FC = () => {
                         onChange={e =>
                           setFormData(prev => ({ ...prev, priority: parseInt(e.target.value) }))
                         }
-                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                        className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Description *
                     </label>
                     <textarea
@@ -1709,32 +1721,32 @@ export const UserRolesPage: React.FC = () => {
                         setFormData(prev => ({ ...prev, description: e.target.value }))
                       }
                       rows={3}
-                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Notes
                     </label>
                     <textarea
                       value={formData.notes}
                       onChange={e => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                       rows={2}
-                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Permissions
                     </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-slate-200 dark:border-slate-600 rounded-lg p-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-slate-200 dark:border-slate-600 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       {permissions.map(permission => (
                         <label
                           key={permission.id}
-                          className="flex items-center space-x-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded"
+                          className="flex items-center space-x-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <input
                             type="checkbox"
@@ -1752,13 +1764,13 @@ export const UserRolesPage: React.FC = () => {
                                 }));
                               }
                             }}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                           />
-                          <div className="flex-1">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                          <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {permission.name}
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                               {permission.description}
                             </div>
                           </div>
@@ -1772,49 +1784,49 @@ export const UserRolesPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <label className="flex items-center">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <label className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData.isDefault}
                         onChange={e =>
                           setFormData(prev => ({ ...prev, isDefault: e.target.checked }))
                         }
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300">
+                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">
                         Default Role
                       </span>
                     </label>
-                    <label className="flex items-center">
+                    <label className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData.isActive}
                         onChange={e =>
                           setFormData(prev => ({ ...prev, isActive: e.target.checked }))
                         }
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300">
+                      <span className="ml-2 text-sm text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">
                         Active
                       </span>
                     </label>
                   </div>
 
-                  <div className="flex justify-end space-x-3 pt-4">
+                  <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() => setShowEditModal(false)}
-                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                      onClick={() = aria-label="Button"> setShowEditModal(false)}
+                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
-                    >
-                      <Save className="w-4 h-4" />
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
+                     aria-label="Button">
+                      <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>{isLoading ? 'Updating...' : 'Update Role'}</span>
                     </button>
                   </div>
@@ -1831,56 +1843,56 @@ export const UserRolesPage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md"
+                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">Delete Role</h2>
+                <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Delete Role</h2>
                   <button
-                    onClick={() => setShowDeleteModal(false)}
-                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
 
-                <div className="mb-6">
-                  <div className="flex items-center space-x-3 mb-4">
+                <div className="mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className={`p-3 rounded-xl ${getRoleColor(deletingRole.color)}`}>
                       {getRoleIcon(deletingRole.icon)}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white">
+                      <h3 className="font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {deletingRole.name}
                       </h3>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                      <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {deletingRole.description}
                       </p>
                     </div>
                   </div>
-                  <p className="text-slate-600 dark:text-slate-400">
+                  <p className="text-slate-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Are you sure you want to delete this role? This action cannot be undone and will
                     affect {deletingRole.userCount} users.
                   </p>
                 </div>
 
-                <div className="flex justify-end space-x-3">
+                <div className="flex justify-end space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() => setShowDeleteModal(false)}
-                    className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleDeleteRole}
                     disabled={isLoading}
-                    className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
+                    className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     {isLoading ? 'Deleting...' : 'Delete Role'}
                   </button>
                 </div>
@@ -1896,78 +1908,78 @@ export const UserRolesPage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+                className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     Role Details
                   </h2>
                   <button
-                    onClick={() => setShowViewModal(false)}
-                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    onClick={() = aria-label="Button"> setShowViewModal(false)}
+                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
 
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
+                <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className={`p-4 rounded-xl ${getRoleColor(viewingRole.color)}`}>
                       {getRoleIcon(viewingRole.icon)}
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white flex items-center space-x-2">
+                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <span>{viewingRole.name}</span>
-                        {viewingRole.isDefault && <Star className="w-5 h-5 text-amber-500" />}
-                        {!viewingRole.isActive && <Ban className="w-5 h-5 text-red-500" />}
+                        {viewingRole.isDefault && <Star className="w-5 h-5 text-amber-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
+                        {!viewingRole.isActive && <Ban className="w-5 h-5 text-red-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
                       </h3>
-                      <p className="text-slate-500 dark:text-slate-400">
+                      <p className="text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {viewingRole.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           User Count
                         </label>
-                        <p className="text-slate-900 dark:text-white">{viewingRole.userCount}</p>
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{viewingRole.userCount}</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Permission Count
                         </label>
-                        <p className="text-slate-900 dark:text-white">
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {viewingRole.permissions.length}
                         </p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Priority
                         </label>
-                        <p className="text-slate-900 dark:text-white">{viewingRole.priority}</p>
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{viewingRole.priority}</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Created By
                         </label>
-                        <p className="text-slate-900 dark:text-white">{viewingRole.createdBy}</p>
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{viewingRole.createdBy}</p>
                       </div>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Status
                         </label>
-                        <p className="text-slate-900 dark:text-white">
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           <span
                             className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                               viewingRole.isActive
@@ -1980,24 +1992,24 @@ export const UserRolesPage: React.FC = () => {
                         </p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Last Used
                         </label>
-                        <p className="text-slate-900 dark:text-white">
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(viewingRole.lastUsed).toLocaleString()}
                         </p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Usage Count
                         </label>
-                        <p className="text-slate-900 dark:text-white">{viewingRole.usageCount}</p>
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{viewingRole.usageCount}</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           Created
                         </label>
-                        <p className="text-slate-900 dark:text-white">
+                        <p className="text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(viewingRole.createdAt).toLocaleString()}
                         </p>
                       </div>
@@ -2006,10 +2018,10 @@ export const UserRolesPage: React.FC = () => {
 
                   {viewingRole.notes && (
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         Notes
                       </label>
-                      <p className="text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-700 p-3 rounded-lg">
+                      <p className="text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-700 p-3 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                         {viewingRole.notes}
                       </p>
                     </div>
@@ -2017,14 +2029,14 @@ export const UserRolesPage: React.FC = () => {
 
                   {viewingRole.tags.length > 0 && (
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         Tags
                       </label>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         {viewingRole.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm rounded-full"
+                            className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             {tag}
                           </span>
@@ -2034,30 +2046,32 @@ export const UserRolesPage: React.FC = () => {
                   )}
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       Permissions
                     </label>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {permissions.map(permission => {
                         const isEnabled =
                           viewingRole.permissions.includes(permission.id) ||
                           viewingRole.permissions.includes('all');
                         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                           <div
                             key={permission.id}
-                            className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg"
+                            className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                               {isEnabled ? (
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                               ) : (
-                                <XCircle className="w-4 h-4 text-slate-400" />
+                                <XCircle className="w-4 h-4 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                               )}
                               <div>
-                                <div className="text-sm font-medium text-slate-900 dark:text-white">
+                                <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                                   {permission.name}
                                 </div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">
+                                <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">
                                   {permission.description}
                                 </div>
                               </div>
@@ -2073,19 +2087,19 @@ export const UserRolesPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setShowViewModal(false)}
-                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                      onClick={() = aria-label="Button"> setShowViewModal(false)}
+                      className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Close
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={() = aria-label="Button"> {
                         setShowViewModal(false);
                         openEditModal(viewingRole);
                       }}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Edit Role
                     </button>

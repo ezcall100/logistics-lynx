@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -938,43 +939,49 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">Portal Theme Manager</h1>
-              <p className="text-gray-300 text-lg">
+              <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Portal Theme Manager</h1>
+              <p className="text-gray-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
                 Design unique UI experiences for each portal with custom branding and domain
                 management
               </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setIsPreviewMode(!isPreviewMode)}
+                onClick={() = aria-label="Button"> setIsPreviewMode(!isPreviewMode)}
                 className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
                   isPreviewMode
                     ? 'bg-green-600 text-white'
                     : 'bg-white/10 text-gray-300 hover:bg-white/20'
                 }`}
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Preview Mode</span>
               </button>
               <button
                 onClick={handleSaveTheme}
                 disabled={isSaving || Object.keys(themeChanges).length === 0}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+               aria-label="Button">
                 {isSaving ? (
-                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <RefreshCw className="w-4 h-4 animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Save className="w-4 h-4" />
+                  <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
                 <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
               </button>
@@ -982,28 +989,28 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Portal Selector */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-white font-semibold mb-4">Select Portal</h3>
-              <div className="space-y-2">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Select Portal</h3>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 {portalThemes.map(portal => (
                   <button
                     key={portal.id}
-                    onClick={() => setSelectedPortal(portal.id)}
+                    onClick={() = aria-label="Button"> setSelectedPortal(portal.id)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                       selectedPortal === portal.id
                         ? 'bg-blue-600 text-white'
                         : 'bg-white/10 text-gray-300 hover:bg-white/20'
                     }`}
                   >
-                    <div className="font-medium">{portal.name}</div>
-                    <div className="text-sm opacity-75">{portal.description}</div>
+                    <div className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</div>
+                    <div className="text-sm opacity-75 responsive-container sm:flex-col md:flex-row lg:grid">{portal.description}</div>
                   </button>
                 ))}
               </div>
@@ -1014,12 +1021,12 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3"
+            className="lg:col-span-3 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
               {/* Tab Navigation */}
-              <div className="border-b border-white/20">
-                <div className="flex">
+              <div className="border-b border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex responsive-container sm:flex-col md:flex-row lg:grid">
                   {[
                     { id: 'design', label: 'Design', icon: Palette },
                     { id: 'domain', label: 'Domain', icon: Globe },
@@ -1028,7 +1035,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                   ].map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() =>
+                      onClick={() = aria-label="Button">
                         setActiveTab(tab.id as 'domain' | 'design' | 'access' | 'preview')
                       }
                       className={`flex items-center space-x-2 px-6 py-4 transition-colors ${
@@ -1037,7 +1044,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                           : 'text-gray-300 hover:bg-white/10'
                       }`}
                     >
-                      <tab.icon className="w-4 h-4" />
+                      <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>{tab.label}</span>
                     </button>
                   ))}
@@ -1045,7 +1052,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
               </div>
 
               {/* Tab Content */}
-              <div className="p-6">
+              <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <AnimatePresence mode="wait">
                   {activeTab === 'design' && (
                     <motion.div
@@ -1053,7 +1060,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <DesignTab
                         theme={currentTheme as unknown as Record<string, unknown>}
@@ -1069,7 +1076,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <DomainTab
                         domainConfig={currentTheme.domainConfig}
@@ -1084,7 +1091,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <AccessTab accessControl={currentTheme.accessControl} />
                     </motion.div>
@@ -1096,7 +1103,7 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <PreviewTab theme={{ ...currentTheme, ...themeChanges }} />
                     </motion.div>
@@ -1124,11 +1131,13 @@ function DesignTab({
   const currentTheme = { ...theme, ...changes };
 
   return (
-    <div className="space-y-8">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Color Palette */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Color Palette</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Color Palette</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {[
             { key: 'primaryColor', label: 'Primary', description: 'Main brand color' },
             { key: 'secondaryColor', label: 'Secondary', description: 'Supporting color' },
@@ -1137,20 +1146,20 @@ function DesignTab({
             { key: 'textColor', label: 'Text', description: 'Primary text color' },
             { key: 'borderColor', label: 'Border', description: 'Border color' },
           ].map(color => (
-            <div key={color.key} className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">{color.label}</label>
-              <div className="flex items-center space-x-3">
+            <div key={color.key} className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <label className="text-sm font-medium text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">{color.label}</label>
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <input
                   type="color"
                   value={(currentTheme.theme as Record<string, string>)[color.key]}
                   onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
-                  className="w-12 h-12 rounded-lg border-2 border-white/20 cursor-pointer"
+                  className="w-12 h-12 rounded-lg border-2 border-white/20 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
                 />
                 <input
                   type="text"
                   value={(currentTheme.theme as Record<string, string>)[color.key]}
                   onChange={e => onThemeChange(`theme.${color.key}`, e.target.value)}
-                  className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                   placeholder={color.description}
                 />
               </div>
@@ -1161,15 +1170,15 @@ function DesignTab({
 
       {/* Layout Settings */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Layout Settings</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Layout Settings</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Header Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Header Style</label>
               <select
                 value={(currentTheme.layout as Record<string, string>).headerStyle}
                 onChange={e => onThemeChange('layout.headerStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="minimal">Minimal</option>
                 <option value="detailed">Detailed</option>
@@ -1177,11 +1186,11 @@ function DesignTab({
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Sidebar Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Sidebar Style</label>
               <select
                 value={(currentTheme.layout as Record<string, string>).sidebarStyle}
                 onChange={e => onThemeChange('layout.sidebarStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="collapsible">Collapsible</option>
                 <option value="fixed">Fixed</option>
@@ -1189,15 +1198,15 @@ function DesignTab({
               </select>
             </div>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">
                 Navigation Style
               </label>
               <select
                 value={(currentTheme.layout as Record<string, string>).navigationStyle}
                 onChange={e => onThemeChange('layout.navigationStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="tabs">Tabs</option>
                 <option value="breadcrumbs">Breadcrumbs</option>
@@ -1205,11 +1214,11 @@ function DesignTab({
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Footer Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Footer Style</label>
               <select
                 value={(currentTheme.layout as Record<string, string>).footerStyle}
                 onChange={e => onThemeChange('layout.footerStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="minimal">Minimal</option>
                 <option value="detailed">Detailed</option>
@@ -1222,15 +1231,15 @@ function DesignTab({
 
       {/* Component Styles */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Component Styles</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Component Styles</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Button Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Button Style</label>
               <select
                 value={(currentTheme.components as Record<string, string>).buttonStyle}
                 onChange={e => onThemeChange('components.buttonStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="rounded">Rounded</option>
                 <option value="square">Square</option>
@@ -1238,11 +1247,11 @@ function DesignTab({
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Card Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Card Style</label>
               <select
                 value={(currentTheme.components as Record<string, string>).cardStyle}
                 onChange={e => onThemeChange('components.cardStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="elevated">Elevated</option>
                 <option value="flat">Flat</option>
@@ -1250,13 +1259,13 @@ function DesignTab({
               </select>
             </div>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Input Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Input Style</label>
               <select
                 value={(currentTheme.components as Record<string, string>).inputStyle}
                 onChange={e => onThemeChange('components.inputStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="filled">Filled</option>
                 <option value="outlined">Outlined</option>
@@ -1264,11 +1273,11 @@ function DesignTab({
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Table Style</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Table Style</label>
               <select
                 value={(currentTheme.components as Record<string, string>).tableStyle}
                 onChange={e => onThemeChange('components.tableStyle', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="striped">Striped</option>
                 <option value="bordered">Bordered</option>
@@ -1281,37 +1290,37 @@ function DesignTab({
 
       {/* Branding */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Branding</h3>
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Branding</h3>
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Company Name</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Company Name</label>
               <input
                 type="text"
                 value={(currentTheme.branding as Record<string, string>).companyName}
                 onChange={e => onThemeChange('branding.companyName', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                 placeholder="Enter company name"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-300 mb-2 block">Tagline</label>
+              <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Tagline</label>
               <input
                 type="text"
                 value={(currentTheme.branding as Record<string, string>).tagline}
                 onChange={e => onThemeChange('branding.tagline', e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                 placeholder="Enter tagline"
               />
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-300 mb-2 block">Custom CSS</label>
+            <label className="text-sm font-medium text-gray-300 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Custom CSS</label>
             <textarea
               value={(currentTheme.branding as Record<string, string>).customCSS || ''}
               onChange={e => onThemeChange('branding.customCSS', e.target.value)}
               rows={6}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm responsive-container sm:flex-col md:flex-row lg:grid"
               placeholder="/* Custom CSS styles */"
             />
           </div>
@@ -1322,7 +1331,7 @@ function DesignTab({
 }
 
 // Domain Tab Component
-function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDomainUpdate: any }) {
+function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: unknown; onDomainUpdate: unknown }) {
   const [newDomain, setNewDomain] = useState('');
 
   const handleAddDomain = () => {
@@ -1341,19 +1350,21 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDoma
   };
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Subdomain */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Subdomain Configuration</h3>
-        <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-          <div className="flex items-center justify-between">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Subdomain Configuration</h3>
+        <div className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <div className="text-white font-medium">{domainConfig.subdomain}</div>
-              <div className="text-gray-400 text-sm">Primary subdomain for this portal</div>
+              <div className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{domainConfig.subdomain}</div>
+              <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Primary subdomain for this portal</div>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="w-5 h-5 text-green-400" />
-              <span className="text-green-400 text-sm">Active</span>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <CheckCircle className="w-5 h-5 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-green-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Active</span>
             </div>
           </div>
         </div>
@@ -1361,20 +1372,20 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDoma
 
       {/* Custom Domains */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Custom Domains</h3>
-        <div className="space-y-4">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Custom Domains</h3>
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {domainConfig.customDomains.map((domain: string, index: number) => (
-            <div key={index} className="bg-white/5 rounded-lg p-4 border border-white/10">
-              <div className="flex items-center justify-between">
+            <div key={index} className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <div className="text-white font-medium">{domain}</div>
-                  <div className="text-gray-400 text-sm">Custom domain</div>
+                  <div className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{domain}</div>
+                  <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Custom domain</div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <CheckCircle className="w-5 h-5 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <button
-                    onClick={() => handleRemoveDomain(domain)}
-                    className="text-red-400 hover:text-red-300 text-sm"
+                    onClick={() = aria-label="Button"> handleRemoveDomain(domain)}
+                    className="text-red-400 hover:text-red-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Remove
                   </button>
@@ -1383,18 +1394,18 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDoma
             </div>
           ))}
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="text"
               value={newDomain}
               onChange={e => setNewDomain(e.target.value)}
               placeholder="Enter custom domain (e.g., portal.company.com)"
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
             <button
               onClick={handleAddDomain}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+             aria-label="Button">
               Add Domain
             </button>
           </div>
@@ -1403,39 +1414,39 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: any; onDoma
 
       {/* SSL & CDN */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Security & Performance</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-white font-medium">SSL Certificate</span>
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Security & Performance</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">SSL Certificate</span>
               <div
                 className={`w-3 h-3 rounded-full ${domainConfig.sslEnabled ? 'bg-green-400' : 'bg-red-400'}`}
               />
             </div>
-            <div className="text-gray-400 text-sm">
+            <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
               {domainConfig.sslEnabled ? 'SSL enabled' : 'SSL disabled'}
             </div>
             <button
-              onClick={() => onDomainUpdate({ sslEnabled: !domainConfig.sslEnabled })}
-              className="mt-2 text-blue-400 hover:text-blue-300 text-sm"
+              onClick={() = aria-label="Button"> onDomainUpdate({ sslEnabled: !domainConfig.sslEnabled })}
+              className="mt-2 text-blue-400 hover:text-blue-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {domainConfig.sslEnabled ? 'Disable' : 'Enable'} SSL
             </button>
           </div>
 
-          <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-white font-medium">CDN</span>
+          <div className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">CDN</span>
               <div
                 className={`w-3 h-3 rounded-full ${domainConfig.cdnEnabled ? 'bg-green-400' : 'bg-red-400'}`}
               />
             </div>
-            <div className="text-gray-400 text-sm">
+            <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
               {domainConfig.cdnEnabled ? 'CDN enabled' : 'CDN disabled'}
             </div>
             <button
-              onClick={() => onDomainUpdate({ cdnEnabled: !domainConfig.cdnEnabled })}
-              className="mt-2 text-blue-400 hover:text-blue-300 text-sm"
+              onClick={() = aria-label="Button"> onDomainUpdate({ cdnEnabled: !domainConfig.cdnEnabled })}
+              className="mt-2 text-blue-400 hover:text-blue-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {domainConfig.cdnEnabled ? 'Disable' : 'Enable'} CDN
             </button>
@@ -1457,14 +1468,16 @@ function AccessTab({
   };
 }) {
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Roles */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">User Roles</h3>
-        <div className="space-y-2">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">User Roles</h3>
+        <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {accessControl.roles.map((role: string, index: number) => (
-            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10">
-              <div className="text-white font-medium">{role}</div>
+            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{role}</div>
             </div>
           ))}
         </div>
@@ -1472,11 +1485,11 @@ function AccessTab({
 
       {/* Permissions */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Permissions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Permissions</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {accessControl.permissions.map((permission: string, index: number) => (
-            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10">
-              <div className="text-white font-medium">{permission}</div>
+            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{permission}</div>
             </div>
           ))}
         </div>
@@ -1484,11 +1497,11 @@ function AccessTab({
 
       {/* Features */}
       <div>
-        <h3 className="text-xl font-semibold text-white mb-4">Available Features</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <h3 className="text-xl font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Available Features</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {accessControl.features.map((feature: string, index: number) => (
-            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10">
-              <div className="text-white font-medium">{feature}</div>
+            <div key={index} className="bg-white/5 rounded-lg p-3 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{feature}</div>
             </div>
           ))}
         </div>
@@ -1500,18 +1513,20 @@ function AccessTab({
 // Preview Tab Component
 function PreviewTab({ theme }: { theme: PortalTheme }) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-white">Live Preview</h3>
-        <div className="flex items-center space-x-2">
-          <Monitor className="w-4 h-4 text-gray-400" />
-          <Smartphone className="w-4 h-4 text-gray-400" />
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Live Preview</h3>
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <Monitor className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+          <Smartphone className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
       </div>
 
-      <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+      <div className="bg-white rounded-lg overflow-hidden shadow-2xl responsive-container sm:flex-col md:flex-row lg:grid">
         <div
-          className="p-6"
+          className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"
           style={{
             backgroundColor: theme.theme.backgroundColor,
             color: theme.theme.textColor,
@@ -1519,35 +1534,35 @@ function PreviewTab({ theme }: { theme: PortalTheme }) {
         >
           {/* Header Preview */}
           <div
-            className="mb-6 p-4 rounded-lg"
+            className="mb-6 p-4 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             style={{
               backgroundColor: theme.theme.primaryColor,
               color: 'white',
             }}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <h1 className="text-xl font-bold">{theme.branding.companyName}</h1>
-                <p className="text-sm opacity-90">{theme.branding.tagline}</p>
+                <h1 className="text-xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{theme.branding.companyName}</h1>
+                <p className="text-sm opacity-90 responsive-container sm:flex-col md:flex-row lg:grid">{theme.branding.tagline}</p>
               </div>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  className="px-4 py-2 rounded-lg text-sm font-medium"
+                  className="px-4 py-2 rounded-lg text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
                   style={{
                     backgroundColor: theme.theme.accentColor,
                     color: 'white',
                   }}
-                >
+                 aria-label="Button">
                   Dashboard
                 </button>
                 <button
-                  className="px-4 py-2 rounded-lg text-sm font-medium"
+                  className="px-4 py-2 rounded-lg text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
                   style={{
                     backgroundColor: 'transparent',
                     color: 'white',
                     border: `1px solid ${theme.theme.borderColor}`,
                   }}
-                >
+                 aria-label="Button">
                   Settings
                 </button>
               </div>
@@ -1555,51 +1570,51 @@ function PreviewTab({ theme }: { theme: PortalTheme }) {
           </div>
 
           {/* Content Preview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <div
-              className="p-4 rounded-lg"
+              className="p-4 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${theme.theme.borderColor}`,
               }}
             >
-              <h3 className="font-semibold mb-2" style={{ color: theme.theme.textColor }}>
+              <h3 className="font-semibold mb-2 responsive-container sm:flex-col md:flex-row lg:grid" style={{ color: theme.theme.textColor }}>
                 Sample Card
               </h3>
-              <p className="text-sm mb-4" style={{ color: theme.theme.textColor }}>
+              <p className="text-sm mb-4 responsive-container sm:flex-col md:flex-row lg:grid" style={{ color: theme.theme.textColor }}>
                 This is a preview of how your portal will look with the selected theme.
               </p>
               <button
-                className="px-4 py-2 rounded-lg text-sm font-medium"
+                className="px-4 py-2 rounded-lg text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
                 style={{
                   backgroundColor: theme.theme.primaryColor,
                   color: 'white',
                 }}
-              >
+               aria-label="Button">
                 Action Button
               </button>
             </div>
 
             <div
-              className="p-4 rounded-lg"
+              className="p-4 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               style={{
                 backgroundColor: 'white',
                 border: `1px solid ${theme.theme.borderColor}`,
               }}
             >
-              <h3 className="font-semibold mb-2" style={{ color: theme.theme.textColor }}>
+              <h3 className="font-semibold mb-2 responsive-container sm:flex-col md:flex-row lg:grid" style={{ color: theme.theme.textColor }}>
                 Another Card
               </h3>
-              <p className="text-sm mb-4" style={{ color: theme.theme.textColor }}>
+              <p className="text-sm mb-4 responsive-container sm:flex-col md:flex-row lg:grid" style={{ color: theme.theme.textColor }}>
                 All components will use your custom color scheme and styling.
               </p>
               <button
-                className="px-4 py-2 rounded-lg text-sm font-medium"
+                className="px-4 py-2 rounded-lg text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
                 style={{
                   backgroundColor: theme.theme.secondaryColor,
                   color: 'white',
                 }}
-              >
+               aria-label="Button">
                 Secondary Button
               </button>
             </div>

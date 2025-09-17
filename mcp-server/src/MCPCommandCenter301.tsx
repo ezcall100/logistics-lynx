@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 interface Agent {
   id: number;
@@ -45,7 +45,13 @@ function MCPCommandCenter301() {
   // Update time every second
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(timer);
   }, []);
 
   // Generate 301 agents with the new testing framework
@@ -301,6 +307,8 @@ function MCPCommandCenter301() {
   };
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -392,7 +400,7 @@ function MCPCommandCenter301() {
           ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => setSelectedView(tab.id as any)}
+              onClick={() = aria-label="Button"> setSelectedView(tab.id as any)}
               style={{
                 background: selectedView === tab.id ? 'rgba(59, 130, 246, 0.3)' : 'transparent',
                 border: selectedView === tab.id ? '1px solid rgba(59, 130, 246, 0.5)' : '1px solid rgba(255, 255, 255, 0.2)',

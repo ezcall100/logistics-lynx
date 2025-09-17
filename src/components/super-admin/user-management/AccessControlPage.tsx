@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield,
@@ -205,28 +205,28 @@ export const AccessControlPage: React.FC = () => {
   const getEventTypeIcon = (type: string) => {
     switch (type) {
       case 'access_denied':
-        return <Lock className="w-4 h-4" />;
+        return <Lock className="w-4 h-4 responsive-container" />;
       case 'suspicious_activity':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container" />;
       case 'policy_violation':
-        return <Shield className="w-4 h-4" />;
+        return <Shield className="w-4 h-4 responsive-container" />;
       case 'login_attempt':
-        return <Key className="w-4 h-4" />;
+        return <Key className="w-4 h-4 responsive-container" />;
       default:
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container" />;
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'open':
-        return <Clock className="w-4 h-4 text-yellow-500" />;
+        return <Clock className="w-4 h-4 text-yellow-500 responsive-container" />;
       case 'investigating':
-        return <Eye className="w-4 h-4 text-blue-500" />;
+        return <Eye className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'resolved':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-green-500 responsive-container" />;
       default:
-        return <Clock className="w-4 h-4 text-gray-500" />;
+        return <Clock className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
@@ -237,58 +237,64 @@ export const AccessControlPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Access Control</h1>
-            <p className="text-slate-600 dark:text-slate-400">Security matrix and real-time access monitoring</p>
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">Access Control</h1>
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">Security matrix and real-time access monitoring</p>
           </div>
           
-          <div className="flex gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="flex gap-3 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Download className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Download className="w-4 h-4 responsive-container" />
               <span>Export</span>
             </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2">
-              <Plus className="w-4 h-4" />
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Plus className="w-4 h-4 responsive-container" />
               <span>Add Rule</span>
             </button>
           </div>
         </div>
 
         {/* Security Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Rules</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{accessRules.length}</p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />+2 this week
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Rules</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">{accessRules.length}</p>
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />+2 this week
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -297,18 +303,18 @@ export const AccessControlPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Security Events</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{securityEvents.length}</p>
-                <p className="text-sm text-red-600 dark:text-red-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />+5 today
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Security Events</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">{securityEvents.length}</p>
+                <p className="text-sm text-red-600 dark:text-red-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />+5 today
                 </p>
               </div>
-              <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg">
-                <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400" />
+              <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container">
+                <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -317,21 +323,21 @@ export const AccessControlPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Users</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {userAccess.filter(u => u.isActive).length}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {Math.round((userAccess.filter(u => u.isActive).length / userAccess.length) * 100)}% active
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+                <Users className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -340,83 +346,83 @@ export const AccessControlPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Blocked Attempts</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Blocked Attempts</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {securityEvents.filter(e => e.type === 'access_denied').length}
                 </p>
-                <p className="text-sm text-orange-600 dark:text-orange-400 flex items-center mt-1">
-                  <Lock className="w-4 h-4 mr-1" />
+                <p className="text-sm text-orange-600 dark:text-orange-400 flex items-center mt-1 responsive-container">
+                  <Lock className="w-4 h-4 mr-1 responsive-container" />
                   Last 24h
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                <Lock className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+                <Lock className="w-6 h-6 text-orange-600 dark:text-orange-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id)}
+                onClick={() = aria-label="Button"> setSelectedTab(tab.id)}
                 className={`flex-1 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             {selectedTab === 'rules' && (
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {accessRules.map((rule, index) => (
                   <motion.div
                     key={rule.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
+                    <div className="flex items-center justify-between responsive-container">
+                      <div className="flex items-center space-x-4 responsive-container">
                         <div className={`p-2 rounded-lg ${rule.effect === 'allow' ? 'bg-green-100 dark:bg-green-900/20' : 'bg-red-100 dark:bg-red-900/20'}`}>
                           {rule.effect === 'allow' ? (
-                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 responsive-container" />
                           ) : (
-                            <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
+                            <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 responsive-container" />
                           )}
                         </div>
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{rule.name}</h3>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">{rule.description}</p>
-                          <div className="flex items-center space-x-4 mt-2">
-                            <span className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400 px-2 py-1 rounded">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">{rule.name}</h3>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">{rule.description}</p>
+                          <div className="flex items-center space-x-4 mt-2 responsive-container">
+                            <span className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400 px-2 py-1 rounded responsive-container">
                               {rule.resource}
                             </span>
-                            <span className="text-xs bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-400 px-2 py-1 rounded">
+                            <span className="text-xs bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-400 px-2 py-1 rounded responsive-container">
                               {rule.action}
                             </span>
-                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                               Priority: {rule.priority}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                           rule.isActive 
                             ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
@@ -424,8 +430,8 @@ export const AccessControlPage: React.FC = () => {
                         }`}>
                           {rule.isActive ? 'Active' : 'Inactive'}
                         </span>
-                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors">
-                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors responsive-container" aria-label="Button">
+                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400 responsive-container" />
                         </button>
                       </div>
                     </div>
@@ -435,42 +441,42 @@ export const AccessControlPage: React.FC = () => {
             )}
 
             {selectedTab === 'events' && (
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {securityEvents.map((event, index) => (
                   <motion.div
                     key={event.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
+                    <div className="flex items-center justify-between responsive-container">
+                      <div className="flex items-center space-x-4 responsive-container">
+                        <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container">
                           {getEventTypeIcon(event.type)}
                         </div>
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{event.description}</h3>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">{event.description}</h3>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                             User: {event.user} • Resource: {event.resource}
                           </p>
-                          <div className="flex items-center space-x-4 mt-2">
+                          <div className="flex items-center space-x-4 mt-2 responsive-container">
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(event.severity)}`}>
                               {event.severity.toUpperCase()}
                             </span>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               {new Date(event.timestamp).toLocaleString()}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container">
                         {getStatusIcon(event.status)}
-                        <span className="text-sm text-slate-600 dark:text-slate-400 capitalize">
+                        <span className="text-sm text-slate-600 dark:text-slate-400 capitalize responsive-container">
                           {event.status}
                         </span>
-                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors">
-                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors responsive-container" aria-label="Button">
+                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400 responsive-container" />
                         </button>
                       </div>
                     </div>
@@ -480,39 +486,39 @@ export const AccessControlPage: React.FC = () => {
             )}
 
             {selectedTab === 'users' && (
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {userAccess.map((user, index) => (
                   <motion.div
                     key={user.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                    className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                          <User className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className="flex items-center justify-between responsive-container">
+                      <div className="flex items-center space-x-4 responsive-container">
+                        <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                          <User className="w-5 h-5 text-blue-600 dark:text-blue-400 responsive-container" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{user.user}</h3>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">
+                          <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">{user.user}</h3>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                             Role: {user.role} • Device: {user.device}
                           </p>
-                          <div className="flex items-center space-x-4 mt-2">
-                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                          <div className="flex items-center space-x-4 mt-2 responsive-container">
+                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                               {user.ipAddress}
                             </span>
-                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                            <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                               {user.location}
                             </span>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Last access: {new Date(user.lastAccess).toLocaleString()}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                           user.isActive 
                             ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
@@ -520,8 +526,8 @@ export const AccessControlPage: React.FC = () => {
                         }`}>
                           {user.isActive ? 'Active' : 'Inactive'}
                         </span>
-                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors">
-                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                        <button className="p-2 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors responsive-container" aria-label="Button">
+                          <MoreVertical className="w-4 h-4 text-slate-500 dark:text-slate-400 responsive-container" />
                         </button>
                       </div>
                     </div>

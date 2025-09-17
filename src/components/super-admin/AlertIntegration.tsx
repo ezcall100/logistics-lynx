@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageSquare,
@@ -78,13 +78,13 @@ const AlertIntegration: React.FC = () => {
   const getChannelIcon = (type: string) => {
     switch (type) {
       case 'slack':
-        return <MessageSquare className="w-4 h-4" />;
+        return <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'discord':
-        return <MessageSquare className="w-4 h-4" />;
+        return <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'email':
-        return <MessageSquare className="w-4 h-4" />;
+        return <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <MessageSquare className="w-4 h-4" />;
+        return <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -104,76 +104,82 @@ const AlertIntegration: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'inactive':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Bell className="w-5 h-5 text-blue-600" />
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <Bell className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Alert Integration</h2>
-            <p className="text-sm text-gray-500">Real-time notifications</p>
+            <h2 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Alert Integration</h2>
+            <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Real-time notifications</p>
           </div>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() => _setShowAddChannel(true)}
-            className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            onClick={() = aria-label="Button"> _setShowAddChannel(true)}
+            className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
-          <button className="p-2 text-gray-500 hover:text-gray-700">
-            <Settings className="w-4 h-4" />
+          <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
         </div>
       </div>
 
       {/* Alert Channels */}
-      <div className="mb-8">
-        <h3 className="text-sm font-medium text-gray-700 mb-4">Alert Channels</h3>
-        <div className="space-y-3">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-sm font-medium text-gray-700 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Alert Channels</h3>
+        <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {channels.map(channel => (
             <motion.div
               key={channel.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gray-100 rounded-lg">{getChannelIcon(channel.type)}</div>
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-gray-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">{getChannelIcon(channel.type)}</div>
                 <div>
-                  <h4 className="font-medium text-gray-900">{channel.name}</h4>
-                  <p className="text-sm text-gray-500 capitalize">{channel.type}</p>
+                  <h4 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{channel.name}</h4>
+                  <p className="text-sm text-gray-500 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{channel.type}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div
                   className={`flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(channel.status)}`}
                 >
                   {getStatusIcon(channel.status)}
                   <span>{channel.status.toUpperCase()}</span>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">{channel.messageCount}</p>
-                  <p className="text-xs text-gray-500">messages</p>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{channel.messageCount}</p>
+                  <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">messages</p>
                 </div>
-                <div className="flex space-x-2">
-                  <button className="p-1 text-gray-500 hover:text-gray-700">
-                    <Edit className="w-4 h-4" />
+                <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
-                  <button className="p-1 text-gray-500 hover:text-red-600">
-                    <Trash2 className="w-4 h-4" />
+                  <button className="p-1 text-gray-500 hover:text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
               </div>
@@ -184,39 +190,39 @@ const AlertIntegration: React.FC = () => {
 
       {/* Alert Rules */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-medium text-gray-700">Alert Rules</h3>
+        <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-sm font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Alert Rules</h3>
           <button
-            onClick={() => _setShowAddRule(true)}
-            className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+            onClick={() = aria-label="Button"> _setShowAddRule(true)}
+            className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {rules.map(rule => (
             <motion.div
               key={rule.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h4 className="font-medium text-gray-900">{rule.name}</h4>
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h4 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{rule.name}</h4>
                   <div
                     className={`w-2 h-2 rounded-full ${rule.enabled ? 'bg-green-500' : 'bg-gray-400'}`}
                   ></div>
                 </div>
-                <p className="text-sm text-gray-600 mb-1">{rule.condition}</p>
-                <p className="text-sm text-gray-500">{rule.action}</p>
+                <p className="text-sm text-gray-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{rule.condition}</p>
+                <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{rule.action}</p>
               </div>
-              <div className="flex space-x-2">
-                <button className="p-1 text-gray-500 hover:text-gray-700">
-                  <Edit className="w-4 h-4" />
+              <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <button className="p-1 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
-                <button className="p-1 text-gray-500 hover:text-red-600">
-                  <Trash2 className="w-4 h-4" />
+                <button className="p-1 text-gray-500 hover:text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>

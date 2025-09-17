@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Brain,
@@ -313,17 +313,17 @@ export const AgentWorkflows: React.FC = () => {
   const getStepStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-green-500 responsive-container" />;
       case 'running':
-        return <Activity className="w-4 h-4 text-blue-500" />;
+        return <Activity className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'failed':
-        return <AlertTriangle className="w-4 h-4 text-red-500" />;
+        return <AlertTriangle className="w-4 h-4 text-red-500 responsive-container" />;
       case 'pending':
-        return <Clock className="w-4 h-4 text-gray-500" />;
+        return <Clock className="w-4 h-4 text-gray-500 responsive-container" />;
       case 'skipped':
-        return <Pause className="w-4 h-4 text-yellow-500" />;
+        return <Pause className="w-4 h-4 text-yellow-500 responsive-container" />;
       default:
-        return <Clock className="w-4 h-4 text-gray-500" />;
+        return <Clock className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
@@ -340,62 +340,68 @@ export const AgentWorkflows: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Agent Workflows</h1>
-            <p className="text-slate-600 dark:text-slate-400">Intelligent workflow automation and orchestration</p>
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">Agent Workflows</h1>
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">Intelligent workflow automation and orchestration</p>
           </div>
           
-          <div className="flex gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="flex gap-3 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search workflows..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
             <button 
-              onClick={() => console.log('Create modal')}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
+              onClick={() = aria-label="Button"> console.log('Create modal')}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 responsive-container" />
               <span>Create Workflow</span>
             </button>
           </div>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Workflows</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">{workflows.length}</p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Workflows</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">{workflows.length}</p>
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {workflows.filter(w => w.status === 'active').length} active
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -404,21 +410,21 @@ export const AgentWorkflows: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Running Executions</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Running Executions</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {executions.filter(e => e.status === 'running').length}
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <Activity className="w-4 h-4 mr-1" />
+                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <Activity className="w-4 h-4 mr-1 responsive-container" />
                   Active
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+                <Activity className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -427,21 +433,21 @@ export const AgentWorkflows: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Success Rate</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Success Rate</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {Math.round(workflows.reduce((sum, w) => sum + w.successRate, 0) / workflows.length)}%
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />
                   Excellent
                 </p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -450,47 +456,47 @@ export const AgentWorkflows: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Executions</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Executions</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {workflows.reduce((sum, w) => sum + w.totalRuns, 0).toLocaleString()}
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <Zap className="w-4 h-4 mr-1" />
+                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <Zap className="w-4 h-4 mr-1 responsive-container" />
                   All Time
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                <Zap className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+                <Zap className="w-6 h-6 text-orange-600 dark:text-orange-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as any)}
+                onClick={() = aria-label="Button"> setSelectedTab(tab.id as any)}
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             <AnimatePresence mode="wait">
               {selectedTab === 'workflows' && (
                 <motion.div
@@ -498,7 +504,7 @@ export const AgentWorkflows: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {workflows.map((workflow, index) => (
                     <motion.div
@@ -506,81 +512,81 @@ export const AgentWorkflows: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                            <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <div className="flex items-center justify-between mb-4 responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                            <Brain className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{workflow.name}</h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">{workflow.description}</p>
-                            <div className="flex items-center space-x-4 mt-2">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">{workflow.name}</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">{workflow.description}</p>
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(workflow.status)}`}>
                                 {workflow.status}
                               </span>
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(workflow.priority)}`}>
                                 {workflow.priority}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {workflow.totalRuns} runs
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <div className="text-right mr-4">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                        <div className="flex items-center space-x-2 responsive-container">
+                          <div className="text-right mr-4 responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {workflow.successRate}%
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Success Rate
                             </div>
                           </div>
                           <button
-                            onClick={() => handleWorkflowAction(workflow.id, 'start')}
-                            className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors"
+                            onClick={() = aria-label="Button"> handleWorkflowAction(workflow.id, 'start')}
+                            className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                             title="Start Workflow"
                           >
-                            <Play className="w-4 h-4 text-green-600" />
+                            <Play className="w-4 h-4 text-green-600 responsive-container" />
                           </button>
                           <button
-                            onClick={() => handleWorkflowAction(workflow.id, 'pause')}
-                            className="p-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/20 rounded-lg transition-colors"
+                            onClick={() = aria-label="Button"> handleWorkflowAction(workflow.id, 'pause')}
+                            className="p-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/20 rounded-lg transition-colors responsive-container"
                             title="Pause Workflow"
                           >
-                            <Pause className="w-4 h-4 text-yellow-600" />
+                            <Pause className="w-4 h-4 text-yellow-600 responsive-container" />
                           </button>
                           <button
-                            onClick={() => console.log('Selected workflow:', workflow.id)}
-                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
+                            onClick={() = aria-label="Button"> console.log('Selected workflow:', workflow.id)}
+                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                             title="View Details"
                           >
-                            <Eye className="w-4 h-4 text-gray-600" />
+                            <Eye className="w-4 h-4 text-gray-600 responsive-container" />
                           </button>
                         </div>
                       </div>
                       
                       {/* Workflow Steps */}
-                      <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">Workflow Steps</h4>
-                        <div className="space-y-2">
+                      <div className="mt-4 responsive-container">
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3 responsive-container">Workflow Steps</h4>
+                        <div className="space-y-2 responsive-container">
                           {workflow.steps.map((step) => (
-                            <div key={step.id} className="flex items-center space-x-3 p-3 bg-white dark:bg-slate-800 rounded-lg">
-                              <div className="flex-shrink-0">
+                            <div key={step.id} className="flex items-center space-x-3 p-3 bg-white dark:bg-slate-800 rounded-lg responsive-container">
+                              <div className="flex-shrink-0 responsive-container">
                                 {getStepStatusIcon(step.status)}
                               </div>
-                              <div className="flex-1">
-                                <div className="flex items-center justify-between">
-                                  <span className="text-sm font-medium text-slate-900 dark:text-white">{step.name}</span>
-                                  <span className="text-xs text-slate-500 dark:text-slate-400">{step.duration}</span>
+                              <div className="flex-1 responsive-container">
+                                <div className="flex items-center justify-between responsive-container">
+                                  <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">{step.name}</span>
+                                  <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">{step.duration}</span>
                                 </div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">
+                                <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                   {step.agent} • {step.type}
                                 </div>
                                 {step.output && (
-                                  <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                                  <div className="text-xs text-slate-600 dark:text-slate-400 mt-1 responsive-container">
                                     {step.output}
                                   </div>
                                 )}
@@ -600,7 +606,7 @@ export const AgentWorkflows: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {executions.map((execution, index) => (
                     <motion.div
@@ -608,53 +614,53 @@ export const AgentWorkflows: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                            <Activity className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                      <div className="flex items-center justify-between responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                            <Activity className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{execution.workflowName}</h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">{execution.workflowName}</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                               Started: {new Date(execution.startTime).toLocaleString()}
                             </p>
-                            <div className="flex items-center space-x-4 mt-2">
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(execution.status)}`}>
                                 {execution.status}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {execution.triggeredBy}
                               </span>
                               {execution.duration && (
-                                <span className="text-xs text-slate-500 dark:text-slate-400">
+                                <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                   Duration: {execution.duration}
                                 </span>
                               )}
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {execution.progress}%
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Progress
                             </div>
                           </div>
-                          <div className="w-16 h-16 relative">
-                            <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                          <div className="w-16 h-16 relative responsive-container">
+                            <svg className="w-16 h-16 transform -rotate-90 responsive-container" viewBox="0 0 36 36">
                               <path
-                                className="text-slate-200 dark:text-slate-700"
+                                className="text-slate-200 dark:text-slate-700 responsive-container"
                                 stroke="currentColor"
                                 strokeWidth="3"
                                 fill="none"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <path
-                                className="text-blue-600"
+                                className="text-blue-600 responsive-container"
                                 stroke="currentColor"
                                 strokeWidth="3"
                                 fill="none"
@@ -676,17 +682,17 @@ export const AgentWorkflows: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="text-center py-12">
-                    <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Workflow Templates</h3>
-                    <p className="text-slate-500 dark:text-slate-400 mb-6">
+                  <div className="text-center py-12 responsive-container">
+                    <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 responsive-container">Workflow Templates</h3>
+                    <p className="text-slate-500 dark:text-slate-400 mb-6 responsive-container">
                       Pre-built workflow templates for common automation tasks
                     </p>
                     <button 
-                      onClick={() => console.log('Create modal')}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      onClick={() = aria-label="Button"> console.log('Create modal')}
+                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
                     >
                       Browse Templates
                     </button>
@@ -700,46 +706,46 @@ export const AgentWorkflows: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Execution Trends</h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <BarChart3 className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Execution trends chart</p>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">Execution Trends</h3>
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <BarChart3 className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">Execution trends chart</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Success Rates</h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">Success rate analytics</p>
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">Success Rates</h3>
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">Success rate analytics</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Analytics Summary */}
-                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Workflow Analytics</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">Workflow Analytics</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container">
                       {[
                         { name: 'Avg Execution Time', value: '12m 34s', trend: '-2m 15s' },
                         { name: 'Success Rate', value: '97.3%', trend: '+1.2%' },
                         { name: 'Failed Executions', value: '23', trend: '-5' },
                         { name: 'Active Workflows', value: '8', trend: '+2' },
                       ].map((item) => (
-                        <div key={item.name} className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-slate-900 dark:text-white">{item.name}</h4>
-                            <span className="text-sm text-green-600 dark:text-green-400">{item.trend}</span>
+                        <div key={item.name} className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                          <div className="flex items-center justify-between mb-2 responsive-container">
+                            <h4 className="font-medium text-slate-900 dark:text-white responsive-container">{item.name}</h4>
+                            <span className="text-sm text-green-600 dark:text-green-400 responsive-container">{item.trend}</span>
                           </div>
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white">{item.value}</div>
+                          <div className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{item.value}</div>
                         </div>
                       ))}
                     </div>

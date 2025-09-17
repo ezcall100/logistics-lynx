@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 
 interface Portal {
@@ -467,7 +468,13 @@ function MCPProgressDashboard() {
       }));
     }, 3000); // Update every 3 seconds for more responsive updates
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, []); // Empty dependency array to prevent infinite loops
 
   const getStatusColor = (status: string) => {
@@ -496,6 +503,8 @@ function MCPProgressDashboard() {
   const activePortals = portals.filter(p => p.status !== 'complete').length;
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div
       style={{
         minHeight: '100vh',
@@ -781,6 +790,8 @@ function MCPProgressDashboard() {
             {portals.map(portal => {
               const statusColors = getStatusColor(portal.status);
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <div
                   key={portal.id}
                   style={{

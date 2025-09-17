@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   CreditCard,
@@ -520,17 +520,17 @@ const BillingManagement: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">
+            <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <h2 className="text-xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                   {editingBilling ? 'Edit Billing Information' : 'Add New Billing'}
                 </h2>
                 <Button
@@ -542,21 +542,21 @@ const BillingManagement: React.FC = () => {
                     resetForm();
                   }}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </Button>
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Company</label>
                   <select
                     value={formData.companyId}
                     onChange={e =>
                       setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {companies.map(company => (
                       <option key={company.id} value={company.id}>
@@ -566,11 +566,11 @@ const BillingManagement: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Plan</label>
                   <select
                     value={formData.plan}
                     onChange={e => setFormData(prev => ({ ...prev, plan: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {availablePlans.map(plan => (
                       <option key={plan.id} value={plan.name}>
@@ -581,22 +581,22 @@ const BillingManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Billing Cycle
                   </label>
                   <select
                     value={formData.billingCycle}
                     onChange={e => setFormData(prev => ({ ...prev, billingCycle: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <option value="monthly">Monthly</option>
                     <option value="yearly">Yearly</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Payment Method
                   </label>
                   <select
@@ -604,7 +604,7 @@ const BillingManagement: React.FC = () => {
                     onChange={e =>
                       setFormData(prev => ({ ...prev, paymentMethod: e.target.value }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <option value="Credit Card">Credit Card</option>
                     <option value="Bank Transfer">Bank Transfer</option>
@@ -613,11 +613,11 @@ const BillingManagement: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Status</label>
                   <select
                     value={formData.status}
                     onChange={e => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <option value="active">Active</option>
                     <option value="trial">Trial</option>
@@ -627,7 +627,7 @@ const BillingManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Input
                   label="Amount"
                   type="number"
@@ -638,11 +638,11 @@ const BillingManagement: React.FC = () => {
                   placeholder="0.00"
                 />
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Currency</label>
                   <select
                     value={formData.currency}
                     onChange={e => setFormData(prev => ({ ...prev, currency: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -653,10 +653,10 @@ const BillingManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
-                <div className="grid grid-cols-2 gap-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Features</label>
+                <div className="grid grid-cols-2 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {availableFeatures.map(feature => (
-                    <label key={feature} className="flex items-center gap-2">
+                    <label key={feature} className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData.features.includes(feature)}
@@ -673,9 +673,9 @@ const BillingManagement: React.FC = () => {
                             }));
                           }
                         }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="text-sm text-gray-700 capitalize">
+                      <span className="text-sm text-gray-700 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                         {feature.replace('_', ' ')}
                       </span>
                     </label>
@@ -684,7 +684,7 @@ const BillingManagement: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
+            <div className="p-6 border-t border-gray-200 flex justify-end gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -693,14 +693,14 @@ const BillingManagement: React.FC = () => {
                   resetForm();
                 }}
               >
-                <X className="w-4 h-4 mr-2" />
+                <X className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Cancel
               </Button>
               <Button
                 onClick={editingBilling ? handleUpdateBilling : handleCreateBilling}
                 loading={loading}
               >
-                <Save className="w-4 h-4 mr-2" />
+                <Save className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 {editingBilling ? 'Update Billing' : 'Create Billing'}
               </Button>
             </div>
@@ -711,9 +711,9 @@ const BillingManagement: React.FC = () => {
   );
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Revenue Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {[
           {
             title: 'Total Revenue',
@@ -749,15 +749,15 @@ const BillingManagement: React.FC = () => {
           },
         ].map(stat => (
           <Card key={stat.title}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
+            <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-xl ${stat.bgColor}`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
-                <div className="text-green-600 text-sm font-medium">{stat.change}</div>
+                <div className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{stat.change}</div>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-gray-600 text-sm">{stat.title}</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{stat.value}</div>
+              <div className="text-gray-600 text-sm responsive-container sm:flex-col md:flex-row lg:grid">{stat.title}</div>
             </CardContent>
           </Card>
         ))}
@@ -770,29 +770,29 @@ const BillingManagement: React.FC = () => {
           <CardDescription>Monthly recurring revenue and growth</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-64 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <LineChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-500">Revenue analytics chart</p>
-              <p className="text-sm text-gray-400">Interactive revenue trends and projections</p>
+          <div className="h-64 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <LineChart className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Revenue analytics chart</p>
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Interactive revenue trends and projections</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Plan Distribution */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
           <CardHeader>
             <CardTitle>Plan Distribution</CardTitle>
             <CardDescription>Subscription plans breakdown</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <PieChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Plan distribution chart</p>
-                <p className="text-sm text-gray-400">Visual breakdown of subscription plans</p>
+            <div className="h-64 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <PieChart className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Plan distribution chart</p>
+                <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Visual breakdown of subscription plans</p>
               </div>
             </div>
           </CardContent>
@@ -804,11 +804,11 @@ const BillingManagement: React.FC = () => {
             <CardDescription>Payment method distribution</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Payment methods chart</p>
-                <p className="text-sm text-gray-400">Distribution of payment methods</p>
+            <div className="h-64 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Payment methods chart</p>
+                <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Distribution of payment methods</p>
               </div>
             </div>
           </CardContent>
@@ -818,24 +818,24 @@ const BillingManagement: React.FC = () => {
   );
 
   const renderSubscriptions = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Filters and Search */}
       <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
+        <CardContent className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
               <Input
                 placeholder="Search subscriptions..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-4 h-4" />}
+                leftIcon={<Search className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -846,7 +846,7 @@ const BillingManagement: React.FC = () => {
               <select
                 value={planFilter}
                 onChange={e => setPlanFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Plans</option>
                 {availablePlans.map(plan => (
@@ -856,7 +856,7 @@ const BillingManagement: React.FC = () => {
                 ))}
               </select>
               <Button variant="outline">
-                <Filter className="w-4 h-4 mr-2" />
+                <Filter className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 More Filters
               </Button>
             </div>
@@ -867,22 +867,22 @@ const BillingManagement: React.FC = () => {
       {/* Bulk Actions */}
       {bulkSelected.length > 0 && (
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">
+          <CardContent className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                 {bulkSelected.length} subscriptions selected
               </span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('activate')}>
-                  <CheckCircle className="w-4 h-4 mr-2" />
+                  <CheckCircle className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Activate
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('suspend')}>
-                  <AlertTriangle className="w-4 h-4 mr-2" />
+                  <AlertTriangle className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Suspend
                 </Button>
                 <Button size="sm" variant="destructive" onClick={() => handleBulkAction('delete')}>
-                  <Trash2 className="w-4 h-4 mr-2" />
+                  <Trash2 className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Delete
                 </Button>
               </div>
@@ -893,12 +893,12 @@ const BillingManagement: React.FC = () => {
 
       {/* Subscriptions Table */}
       <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+            <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+              <thead className="bg-gray-50 border-b responsive-container sm:flex-col md:flex-row lg:grid">
                 <tr>
-                  <th className="px-6 py-4 text-left">
+                  <th className="px-6 py-4 text-left responsive-container sm:flex-col md:flex-row lg:grid">
                     <input
                       type="checkbox"
                       checked={
@@ -911,36 +911,36 @@ const BillingManagement: React.FC = () => {
                           setBulkSelected([]);
                         }
                       }}
-                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Company
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Plan
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Amount
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Next Billing
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Payment Method
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
                 {filteredBilling.map(billing => (
-                  <tr key={billing.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={billing.id} className="hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(billing.id)}
@@ -951,23 +951,23 @@ const BillingManagement: React.FC = () => {
                             setBulkSelected(prev => prev.filter(id => id !== billing.id));
                           }
                         }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
-                          <Building2 className="w-5 h-5 text-white" />
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Building2 className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-900">
+                          <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                             {billing.companyName}
                           </div>
-                          <div className="text-sm text-gray-500">{billing.subscriptionId}</div>
+                          <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{billing.subscriptionId}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                           billing.plan === 'Enterprise'
@@ -982,7 +982,7 @@ const BillingManagement: React.FC = () => {
                         {billing.plan}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(billing.status)}`}
                       >
@@ -990,32 +990,32 @@ const BillingManagement: React.FC = () => {
                         {billing.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatCurrency(billing.amount)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatRelativeTime(billing.nextBillingDate)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       {billing.paymentMethod}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <Button size="sm" variant="ghost">
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button size="sm" variant="ghost" onClick={() => openEditModal(billing)}>
-                          <Edit className="w-4 h-4" />
+                          <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDeleteBilling(billing.id)}
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button size="sm" variant="ghost">
-                          <MoreVertical className="w-4 h-4" />
+                          <MoreVertical className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                       </div>
                     </td>
@@ -1030,24 +1030,30 @@ const BillingManagement: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Billing & Subscriptions</h2>
-          <p className="text-gray-600">Manage revenue, subscriptions, and payment processing</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Billing & Subscriptions</h2>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage revenue, subscriptions, and payment processing</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+            <Download className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Export
           </Button>
           <Button variant="outline">
-            <Upload className="w-4 h-4 mr-2" />
+            <Upload className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Import
           </Button>
           <Button onClick={() => setShowBillingModal(true)}>
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Add Subscription
           </Button>
         </div>
@@ -1055,9 +1061,9 @@ const BillingManagement: React.FC = () => {
 
       {/* Navigation Tabs */}
       <Card>
-        <CardContent className="p-0">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {[
                 { id: 'overview', label: 'Overview', icon: BarChart3 },
                 { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
@@ -1066,14 +1072,14 @@ const BillingManagement: React.FC = () => {
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
                       ? 'border-primary-500 text-primary-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <tab.icon className="w-4 h-4" />
+                  <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {tab.label}
                 </button>
               ))}
@@ -1094,17 +1100,17 @@ const BillingManagement: React.FC = () => {
           {activeTab === 'overview' && renderOverview()}
           {activeTab === 'subscriptions' && renderSubscriptions()}
           {activeTab === 'invoices' && (
-            <div className="text-center py-12">
-              <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Invoice Management</h3>
-              <p className="text-gray-500">Invoice management system coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Invoice Management</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Invoice management system coming soon</p>
             </div>
           )}
           {activeTab === 'analytics' && (
-            <div className="text-center py-12">
-              <TrendingUp className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Billing Analytics</h3>
-              <p className="text-gray-500">Advanced billing analytics coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Billing Analytics</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Advanced billing analytics coming soon</p>
             </div>
           )}
         </motion.div>

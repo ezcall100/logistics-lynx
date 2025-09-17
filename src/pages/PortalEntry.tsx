@@ -17,13 +17,19 @@ const PortalEntry: React.FC = () => {
   }, [isAuthenticated, user, navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
         </div>
-        <h1 className="text-xl font-semibold text-gray-900 mb-2">Loading Portal...</h1>
-        <p className="text-gray-600">Redirecting to your dashboard</p>
+        <h1 className="text-xl font-semibold text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Loading Portal...</h1>
+        <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Redirecting to your dashboard</p>
       </div>
     </div>
   );

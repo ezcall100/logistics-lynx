@@ -18,6 +18,12 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLa
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <button
       onClick={handleToggle}
       className={`
@@ -25,8 +31,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLa
         ${className}
       `}
       aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
-    >
-      <div className="relative w-full h-full flex items-center justify-center">
+     aria-label="Button">
+      <div className="relative w-full h-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Sun Icon */}
         <Sun
           size={20}
@@ -47,7 +53,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLa
       </div>
 
       {showLabel && (
-        <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+        <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
           {darkMode ? 'Light' : 'Dark'}
         </span>
       )}

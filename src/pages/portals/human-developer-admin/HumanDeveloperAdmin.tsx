@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -186,55 +187,61 @@ function HumanDeveloperAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 responsive-container">
       {/* Modern Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
+      <header className="bg-white shadow-sm border-b border-gray-200 responsive-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
+          <div className="flex justify-between items-center h-16 responsive-container">
+            <div className="flex items-center responsive-container">
               <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                onClick={() = aria-label="Button"> setSidebarOpen(!sidebarOpen)}
+                className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 responsive-container"
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6 responsive-container" />
               </button>
-              <div className="ml-4 flex items-center">
-                <div className="flex-shrink-0 flex items-center">
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-                    <UserCog className="h-5 w-5 text-white" />
+              <div className="ml-4 flex items-center responsive-container">
+                <div className="flex-shrink-0 flex items-center responsive-container">
+                  <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center responsive-container">
+                    <UserCog className="h-5 w-5 text-white responsive-container" />
                   </div>
-                  <div className="ml-3">
-                    <h1 className="text-xl font-semibold text-gray-900">TransBot AI</h1>
-                    <p className="text-sm text-gray-500">Human Developer Admin</p>
+                  <div className="ml-3 responsive-container">
+                    <h1 className="text-xl font-semibold text-gray-900 responsive-container">TransBot AI</h1>
+                    <p className="text-sm text-gray-500 responsive-container">Human Developer Admin</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <div className="flex items-center space-x-4 responsive-container">
+              <div className="relative responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
                 <input
                   type="text"
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container"
                 />
               </div>
 
-              <button className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                <Bell className="h-6 w-6" />
+              <button className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg responsive-container" aria-label="Button">
+                <Bell className="h-6 w-6 responsive-container" />
                 {notifications.length > 0 && (
-                  <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                  <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full responsive-container"></span>
                 )}
               </button>
 
-              <div className="flex items-center space-x-3">
-                <img className="h-8 w-8 rounded-full" src={user.avatar} alt={user.name} />
-                <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-900">{user.name}</p>
-                  <p className="text-xs text-gray-500">{user.role}</p>
+              <div className="flex items-center space-x-3 responsive-container">
+                <img className="h-8 w-8 rounded-full responsive-container" src={user.avatar} alt={user.name} / alt="Image">
+                <div className="hidden md:block responsive-container">
+                  <p className="text-sm font-medium text-gray-900 responsive-container">{user.name}</p>
+                  <p className="text-xs text-gray-500 responsive-container">{user.role}</p>
                 </div>
               </div>
             </div>
@@ -242,7 +249,7 @@ function HumanDeveloperAdmin() {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex responsive-container">
         {/* Modern Sidebar */}
         <AnimatePresence>
           {sidebarOpen && (
@@ -251,44 +258,44 @@ function HumanDeveloperAdmin() {
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-gray-200"
+              className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-gray-200 responsive-container"
             >
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                  <div className="flex items-center">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-                      <UserCog className="h-5 w-5 text-white" />
+              <div className="flex flex-col h-full responsive-container">
+                <div className="flex items-center justify-between p-4 border-b border-gray-200 responsive-container">
+                  <div className="flex items-center responsive-container">
+                    <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center responsive-container">
+                      <UserCog className="h-5 w-5 text-white responsive-container" />
                     </div>
-                    <span className="ml-3 text-lg font-semibold text-gray-900">TransBot AI</span>
+                    <span className="ml-3 text-lg font-semibold text-gray-900 responsive-container">TransBot AI</span>
                   </div>
                   <button
-                    onClick={() => setSidebarOpen(false)}
-                    className="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+                    onClick={() = aria-label="Button"> setSidebarOpen(false)}
+                    className="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 responsive-container"
                   >
-                    <X className="h-5 w-5" />
+                    <X className="h-5 w-5 responsive-container" />
                   </button>
                 </div>
 
-                <nav className="flex-1 px-4 py-6 space-y-2">
+                <nav className="flex-1 px-4 py-6 space-y-2 responsive-container">
                   {navigationItems.map(item => (
                     <button
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      onClick={() = aria-label="Button"> setActiveTab(item.id)}
                       className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                         activeTab === item.id
                           ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }`}
                     >
-                      <item.icon className="mr-3 h-5 w-5" />
+                      <item.icon className="mr-3 h-5 w-5 responsive-container" />
                       {item.label}
                     </button>
                   ))}
                 </nav>
 
-                <div className="p-4 border-t border-gray-200">
-                  <button className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <LogOut className="mr-3 h-5 w-5" />
+                <div className="p-4 border-t border-gray-200 responsive-container">
+                  <button className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors responsive-container" aria-label="Button">
+                    <LogOut className="mr-3 h-5 w-5 responsive-container" />
                     Sign out
                   </button>
                 </div>
@@ -298,31 +305,31 @@ function HumanDeveloperAdmin() {
         </AnimatePresence>
 
         {/* Main Content */}
-        <main className="flex-1 ml-0 lg:ml-0">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 ml-0 lg:ml-0 responsive-container">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
             {/* Welcome Section */}
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">Dashboard</h2>
-              <p className="mt-2 text-lg text-gray-600">
+            <div className="mb-8 responsive-container">
+              <h2 className="text-3xl font-bold text-gray-900 responsive-container">Dashboard</h2>
+              <p className="mt-2 text-lg text-gray-600 responsive-container">
                 Welcome back, {user.name}! Here's what's happening with your human developer admin.
               </p>
             </div>
 
             {/* Metrics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
               {metrics.map(metric => (
                 <motion.div
                   key={metric.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow responsive-container"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between responsive-container">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">{metric.title}</p>
-                      <p className="text-2xl font-bold text-gray-900 mt-1">{metric.value}</p>
-                      <div className="flex items-center mt-2">
+                      <p className="text-sm font-medium text-gray-600 responsive-container">{metric.title}</p>
+                      <p className="text-2xl font-bold text-gray-900 mt-1 responsive-container">{metric.value}</p>
+                      <div className="flex items-center mt-2 responsive-container">
                         <span
                           className={`text-sm font-medium ${
                             metric.changeType === 'increase' ? 'text-green-600' : 'text-red-600'
@@ -330,7 +337,7 @@ function HumanDeveloperAdmin() {
                         >
                           {metric.change}
                         </span>
-                        <span className="text-sm text-gray-500 ml-1">from last month</span>
+                        <span className="text-sm text-gray-500 ml-1 responsive-container">from last month</span>
                       </div>
                     </div>
                     <div className={`p-3 rounded-lg ${metric.bgColor}`}>
@@ -342,9 +349,9 @@ function HumanDeveloperAdmin() {
             </div>
 
             {/* Content Tabs */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-8">
-              <div className="border-b border-gray-200">
-                <nav className="flex space-x-8 px-6">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-8 responsive-container">
+              <div className="border-b border-gray-200 responsive-container">
+                <nav className="flex space-x-8 px-6 responsive-container">
                   {['Overview', 'Analytics', 'Management'].map(tab => (
                     <button
                       key={tab}
@@ -353,7 +360,7 @@ function HumanDeveloperAdmin() {
                           ? 'border-blue-500 text-blue-600'
                           : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                       }`}
-                      onClick={() => setActiveTab(tab.toLowerCase())}
+                      onClick={() = aria-label="Button"> setActiveTab(tab.toLowerCase())}
                     >
                       {tab}
                     </button>
@@ -361,25 +368,25 @@ function HumanDeveloperAdmin() {
                 </nav>
               </div>
 
-              <div className="p-6">
+              <div className="p-6 responsive-container">
                 {activeTab === 'overview' && (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
                     {/* Performance Overview */}
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">
                         Performance Overview
                       </h3>
-                      <p className="text-sm text-gray-600 mb-6">
+                      <p className="text-sm text-gray-600 mb-6 responsive-container">
                         Key performance indicators for Human Developer Admin
                       </p>
-                      <div className="space-y-4">
+                      <div className="space-y-4 responsive-container">
                         {performanceData.map((item, index) => (
                           <div key={index}>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-600">{item.label}</span>
-                              <span className="font-medium text-gray-900">{item.value}%</span>
+                            <div className="flex justify-between text-sm mb-1 responsive-container">
+                              <span className="text-gray-600 responsive-container">{item.label}</span>
+                              <span className="font-medium text-gray-900 responsive-container">{item.value}%</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full bg-gray-200 rounded-full h-2 responsive-container">
                               <div
                                 className={`h-2 rounded-full ${item.color}`}
                                 style={{ width: `${item.value}%` }}
@@ -392,21 +399,23 @@ function HumanDeveloperAdmin() {
 
                     {/* Recent Activity */}
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
-                      <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">Recent Activity</h3>
+                      <div className="space-y-4 responsive-container">
                         {recentActivity.map(activity => {
                           const StatusIcon = getStatusIcon(activity.type);
                           return (
-                            <div key={activity.id} className="flex items-start space-x-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                            <div key={activity.id} className="flex items-start space-x-3 responsive-container">
                               <div className={`p-2 rounded-lg ${getStatusColor(activity.type)}`}>
-                                <StatusIcon className="h-4 w-4" />
+                                <StatusIcon className="h-4 w-4 responsive-container" />
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">
+                              <div className="flex-1 min-w-0 responsive-container">
+                                <p className="text-sm font-medium text-gray-900 responsive-container">
                                   {activity.action}
                                 </p>
-                                <p className="text-sm text-gray-600">{activity.details}</p>
-                                <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
+                                <p className="text-sm text-gray-600 responsive-container">{activity.details}</p>
+                                <p className="text-xs text-gray-500 mt-1 responsive-container">{activity.time}</p>
                               </div>
                             </div>
                           );
@@ -417,22 +426,22 @@ function HumanDeveloperAdmin() {
                 )}
 
                 {activeTab === 'analytics' && (
-                  <div className="text-center py-12">
-                    <BarChart3 className="mx-auto h-12 w-12 text-gray-400" />
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">Analytics Dashboard</h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                  <div className="text-center py-12 responsive-container">
+                    <BarChart3 className="mx-auto h-12 w-12 text-gray-400 responsive-container" />
+                    <h3 className="mt-2 text-sm font-medium text-gray-900 responsive-container">Analytics Dashboard</h3>
+                    <p className="mt-1 text-sm text-gray-500 responsive-container">
                       Advanced analytics and reporting features coming soon.
                     </p>
                   </div>
                 )}
 
                 {activeTab === 'management' && (
-                  <div className="text-center py-12">
-                    <UserCog className="mx-auto h-12 w-12 text-gray-400" />
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">
+                  <div className="text-center py-12 responsive-container">
+                    <UserCog className="mx-auto h-12 w-12 text-gray-400 responsive-container" />
+                    <h3 className="mt-2 text-sm font-medium text-gray-900 responsive-container">
                       Human Developer Admin Management
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-gray-500 responsive-container">
                       Management tools and controls for human developer admin.
                     </p>
                   </div>
@@ -451,9 +460,9 @@ function HumanDeveloperAdmin() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.5 }}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 responsive-container"
       >
-        <Plus className="h-6 w-6" />
+        <Plus className="h-6 w-6 responsive-container" />
       </motion.button>
 
       {/* Sidebar Overlay */}
@@ -462,7 +471,7 @@ function HumanDeveloperAdmin() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75"
+          className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 responsive-container"
           onClick={() => setSidebarOpen(false)}
         />
       )}

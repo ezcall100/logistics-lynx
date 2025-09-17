@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 interface Portal {
   id: string;
@@ -821,7 +821,13 @@ function MCPProgressDashboard() {
       });
     }, 3000); // Update every 3 seconds for real-time feel
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, [isAgentsRunning]);
 
   const getStatusColor = (status: string) => {
@@ -1007,6 +1013,8 @@ function MCPProgressDashboard() {
   const activePortals = portals.filter(p => p.status !== 'complete').length;
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <>
       <style>
         {`
@@ -1151,7 +1159,7 @@ function MCPProgressDashboard() {
                     fontSize: '0.9rem',
                     transition: 'all 0.2s ease',
                   }}
-                  onMouseOver={e => {
+                  onMouseOver={e = aria-label="Button"> {
                     e.currentTarget.style.background = 'rgba(239, 68, 68, 0.25)';
                   }}
                   onMouseOut={e => {
@@ -1173,7 +1181,7 @@ function MCPProgressDashboard() {
                     fontSize: '0.9rem',
                     transition: 'all 0.2s ease',
                   }}
-                  onMouseOver={e => {
+                  onMouseOver={e = aria-label="Button"> {
                     e.currentTarget.style.background = 'rgba(59, 130, 246, 0.25)';
                   }}
                   onMouseOut={e => {
@@ -1204,7 +1212,7 @@ function MCPProgressDashboard() {
                     boxShadow:
                       agentControlMode === 'on' ? '0 0 10px rgba(16, 185, 129, 0.3)' : 'none',
                   }}
-                  onMouseOver={e => {
+                  onMouseOver={e = aria-label="Button"> {
                     e.currentTarget.style.background = 'rgba(16, 185, 129, 0.25)';
                   }}
                   onMouseOut={e => {
@@ -1234,7 +1242,7 @@ function MCPProgressDashboard() {
                     boxShadow:
                       agentControlMode === 'off' ? '0 0 10px rgba(239, 68, 68, 0.3)' : 'none',
                   }}
-                  onMouseOver={e => {
+                  onMouseOver={e = aria-label="Button"> {
                     e.currentTarget.style.background = 'rgba(239, 68, 68, 0.25)';
                   }}
                   onMouseOut={e => {
@@ -1264,7 +1272,7 @@ function MCPProgressDashboard() {
                     boxShadow:
                       agentControlMode === 'auto' ? '0 0 10px rgba(168, 85, 247, 0.3)' : 'none',
                   }}
-                  onMouseOver={e => {
+                  onMouseOver={e = aria-label="Button"> {
                     e.currentTarget.style.background = 'rgba(168, 85, 247, 0.25)';
                   }}
                   onMouseOut={e => {
@@ -1845,6 +1853,8 @@ function MCPProgressDashboard() {
                         const isEven = index % 2 === 0;
 
                         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                           <div
                             key={agent.id}
                             style={{
@@ -2689,6 +2699,8 @@ function MCPProgressDashboard() {
                 const healthColor = getHealthColor(portal.health);
 
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <div
                     key={portal.id}
                     style={{

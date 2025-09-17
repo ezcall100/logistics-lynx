@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2,
@@ -440,17 +440,17 @@ const CompanyManagement: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">
+            <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <h2 className="text-xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                   {editingCompany ? 'Edit Company' : 'Add New Company'}
                 </h2>
                 <Button
@@ -462,13 +462,13 @@ const CompanyManagement: React.FC = () => {
                     resetForm();
                   }}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </Button>
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Input
                   label="Company Name"
                   value={formData.name}
@@ -483,13 +483,13 @@ const CompanyManagement: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Plan</label>
                   <select
                     value={formData.plan}
                     onChange={e => setFormData(prev => ({ ...prev, plan: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <option value="Basic">Basic</option>
                     <option value="Standard">Standard</option>
@@ -516,7 +516,7 @@ const CompanyManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   API Calls Limit
                 </label>
                 <Input
@@ -528,9 +528,9 @@ const CompanyManagement: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-3">
-                <h3 className="text-lg font-medium text-gray-900">Contact Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Contact Information</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Input
                     label="Email"
                     type="email"
@@ -541,7 +541,7 @@ const CompanyManagement: React.FC = () => {
                         contact: { ...prev.contact, email: e.target.value },
                       }))
                     }
-                    leftIcon={<Mail className="w-4 h-4" />}
+                    leftIcon={<Mail className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   />
                   <Input
                     label="Phone"
@@ -552,7 +552,7 @@ const CompanyManagement: React.FC = () => {
                         contact: { ...prev.contact, phone: e.target.value },
                       }))
                     }
-                    leftIcon={<Phone className="w-4 h-4" />}
+                    leftIcon={<Phone className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   />
                 </div>
                 <Input
@@ -564,19 +564,19 @@ const CompanyManagement: React.FC = () => {
                       contact: { ...prev.contact, address: e.target.value },
                     }))
                   }
-                  leftIcon={<MapPin className="w-4 h-4" />}
+                  leftIcon={<MapPin className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                 />
               </div>
 
-              <div className="space-y-3">
-                <h3 className="text-lg font-medium text-gray-900">Settings</h3>
-                <div className="space-y-2">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Settings</h3>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {[
                     { key: 'customBranding', label: 'Custom Branding' },
                     { key: 'ssoEnabled', label: 'SSO Enabled' },
                     { key: 'auditLogs', label: 'Audit Logs' },
                   ].map(setting => (
-                    <label key={setting.key} className="flex items-center gap-2">
+                    <label key={setting.key} className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={formData[setting.key as keyof CompanyFormData] as boolean}
@@ -586,16 +586,16 @@ const CompanyManagement: React.FC = () => {
                             [setting.key]: e.target.checked,
                           }))
                         }
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
-                      <span className="text-sm text-gray-700">{setting.label}</span>
+                      <span className="text-sm text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">{setting.label}</span>
                     </label>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
+            <div className="p-6 border-t border-gray-200 flex justify-end gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -604,14 +604,14 @@ const CompanyManagement: React.FC = () => {
                   resetForm();
                 }}
               >
-                <X className="w-4 h-4 mr-2" />
+                <X className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Cancel
               </Button>
               <Button
                 onClick={editingCompany ? handleUpdateCompany : handleCreateCompany}
                 loading={loading}
               >
-                <Save className="w-4 h-4 mr-2" />
+                <Save className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 {editingCompany ? 'Update Company' : 'Create Company'}
               </Button>
             </div>
@@ -622,24 +622,30 @@ const CompanyManagement: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Company Management</h2>
-          <p className="text-gray-600">Manage client companies and their configurations</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Company Management</h2>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage client companies and their configurations</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+            <Download className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Export
           </Button>
           <Button variant="outline">
-            <Upload className="w-4 h-4 mr-2" />
+            <Upload className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Import
           </Button>
           <Button onClick={() => setShowCompanyModal(true)}>
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Add Company
           </Button>
         </div>
@@ -647,21 +653,21 @@ const CompanyManagement: React.FC = () => {
 
       {/* Filters and Search */}
       <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
+        <CardContent className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
               <Input
                 placeholder="Search companies..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-4 h-4" />}
+                leftIcon={<Search className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Status</option>
                 <option value="Active">Active</option>
@@ -672,7 +678,7 @@ const CompanyManagement: React.FC = () => {
               <select
                 value={planFilter}
                 onChange={e => setPlanFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Plans</option>
                 <option value="Basic">Basic</option>
@@ -681,7 +687,7 @@ const CompanyManagement: React.FC = () => {
                 <option value="Enterprise">Enterprise</option>
               </select>
               <Button variant="outline">
-                <Filter className="w-4 h-4 mr-2" />
+                <Filter className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 More Filters
               </Button>
             </div>
@@ -692,12 +698,12 @@ const CompanyManagement: React.FC = () => {
       {/* Bulk Actions */}
       {bulkSelected.length > 0 && (
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">
+          <CardContent className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                 {bulkSelected.length} companies selected
               </span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('activate')}>
                   Activate
                 </Button>
@@ -705,7 +711,7 @@ const CompanyManagement: React.FC = () => {
                   Suspend
                 </Button>
                 <Button size="sm" variant="destructive" onClick={() => handleBulkAction('delete')}>
-                  <Trash2 className="w-4 h-4 mr-2" />
+                  <Trash2 className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Delete
                 </Button>
               </div>
@@ -716,12 +722,12 @@ const CompanyManagement: React.FC = () => {
 
       {/* Companies Table */}
       <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+            <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+              <thead className="bg-gray-50 border-b responsive-container sm:flex-col md:flex-row lg:grid">
                 <tr>
-                  <th className="px-6 py-4 text-left">
+                  <th className="px-6 py-4 text-left responsive-container sm:flex-col md:flex-row lg:grid">
                     <input
                       type="checkbox"
                       checked={
@@ -735,39 +741,39 @@ const CompanyManagement: React.FC = () => {
                           setBulkSelected([]);
                         }
                       }}
-                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Company
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Users
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Plan
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Revenue
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Growth
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Last Active
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
                 {filteredCompanies.map(company => (
-                  <tr key={company.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={company.id} className="hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(company.id)}
@@ -778,24 +784,24 @@ const CompanyManagement: React.FC = () => {
                             setBulkSelected(prev => prev.filter(id => id !== company.id));
                           }
                         }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container sm:flex-col md:flex-row lg:grid"
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
-                          <Building2 className="w-5 h-5 text-white" />
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Building2 className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{company.name}</div>
-                          <div className="text-sm text-gray-500">{company.domain}</div>
+                          <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.name}</div>
+                          <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.domain}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatNumber(company.users)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                           company.plan === 'Enterprise'
@@ -810,7 +816,7 @@ const CompanyManagement: React.FC = () => {
                         {company.plan}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(company.status)}`}
                       >
@@ -818,32 +824,32 @@ const CompanyManagement: React.FC = () => {
                         {company.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatCurrency(company.revenue)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">
                       +{company.growth}%
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                       {formatRelativeTime(company.lastActive)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <Button size="sm" variant="ghost">
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button size="sm" variant="ghost" onClick={() => openEditModal(company)}>
-                          <Edit className="w-4 h-4" />
+                          <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDeleteCompany(company.id)}
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                         <Button size="sm" variant="ghost">
-                          <MoreVertical className="w-4 h-4" />
+                          <MoreVertical className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </Button>
                       </div>
                     </td>

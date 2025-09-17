@@ -37,30 +37,36 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
   };
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
           Tasks
         </h3>
         <button 
-          onClick={() => setShowAddTask(!showAddTask)}
-          className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          onClick={() = aria-label="Button"> setShowAddTask(!showAddTask)}
+          className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <Plus className="h-3 w-3 inline mr-1" />
+          <Plus className="h-3 w-3 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
           Add Task
         </button>
       </div>
 
       {/* Tasks List */}
-      <div className="space-y-2">
+      <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
         {tasks.map(task => (
           <div
             key={task.id}
-            className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50"
+            className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center space-x-2 mb-2">
+            <div className="flex items-center space-x-2 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => onToggleTaskCompletion(task.id)}
+                onClick={() = aria-label="Button"> onToggleTaskCompletion(task.id)}
                 className={`p-1 rounded transition-colors ${
                   task.completed 
                     ? 'text-green-600' 
@@ -68,9 +74,9 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
                 }`}
               >
                 {task.completed ? (
-                  <CheckSquare className="h-4 w-4" />
+                  <CheckSquare className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Square className="h-4 w-4" />
+                  <Square className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </button>
               <span
@@ -83,11 +89,11 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
                 {task.title}
               </span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <span className={`text-xs px-2 py-1 rounded ${getPriorityColor(task.priority)}`}>
                 {task.priority}
               </span>
-              <span className="text-xs text-gray-500">{task.due}</span>
+              <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{task.due}</span>
             </div>
           </div>
         ))}
@@ -95,23 +101,23 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
 
       {/* Add Task Form */}
       {showAddTask && (
-        <div className="mt-4 p-4 bg-gray-50 dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600">
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+        <div className="mt-4 p-4 bg-gray-50 dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
             Add New Task
           </h4>
-          <div className="space-y-3">
+          <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="text"
               placeholder="Task title"
               value={newTask.title}
               onChange={(e) => handleInputChange('title', e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-slate-50 dark:bg-slate-600"
+              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-slate-50 dark:bg-slate-600 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <select
                 value={newTask.priority}
                 onChange={(e) => handleInputChange('priority', e.target.value)}
-                className="px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-white dark:bg-slate-600"
+                className="px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-white dark:bg-slate-600 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="low">Low Priority</option>
                 <option value="medium">Medium Priority</option>
@@ -122,20 +128,20 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
                 placeholder="Due date"
                 value={newTask.due}
                 onChange={(e) => handleInputChange('due', e.target.value)}
-                className="px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-white dark:bg-slate-600"
+                className="px-3 py-2 text-sm border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-300 bg-white dark:bg-slate-600 responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
                 onClick={onAddTask}
                 disabled={!newTask.title.trim()}
-                className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-              >
+                className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+               aria-label="Button">
                 Add Task
               </button>
               <button
-                onClick={() => setShowAddTask(false)}
-                className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
+                onClick={() = aria-label="Button"> setShowAddTask(false)}
+                className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Cancel
               </button>

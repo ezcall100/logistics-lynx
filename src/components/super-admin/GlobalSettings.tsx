@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Settings,
@@ -374,7 +374,7 @@ const GlobalSettings: React.FC = () => {
   };
 
   const renderGeneralSettings = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Maintenance Mode Toggle */}
       <Card>
         <CardHeader>
@@ -382,18 +382,18 @@ const GlobalSettings: React.FC = () => {
           <CardDescription>Control system-wide maintenance and access</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <div className={`p-2 rounded-lg ${maintenanceMode ? 'bg-red-100' : 'bg-green-100'}`}>
                 {maintenanceMode ? (
-                  <PowerOff className="w-5 h-5 text-red-600" />
+                  <PowerOff className="w-5 h-5 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Power className="w-5 h-5 text-green-600" />
+                  <Power className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </div>
               <div>
-                <div className="font-medium text-gray-900">Maintenance Mode</div>
-                <div className="text-sm text-gray-600">
+                <div className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Maintenance Mode</div>
+                <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                   {maintenanceMode ? 'System is in maintenance mode' : 'System is operational'}
                 </div>
               </div>
@@ -416,13 +416,13 @@ const GlobalSettings: React.FC = () => {
           <CardDescription>Monitor system services and performance</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {systemHealth.map(health => (
               <div
                 key={health.service}
-                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`w-3 h-3 rounded-full ${
                       health.status === 'healthy'
@@ -435,13 +435,13 @@ const GlobalSettings: React.FC = () => {
                     }`}
                   />
                   <div>
-                    <div className="font-medium text-gray-900">{health.service}</div>
-                    <div className="text-sm text-gray-600">{health.details}</div>
+                    <div className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{health.service}</div>
+                    <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{health.details}</div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-sm font-medium text-gray-900">{health.uptime}% uptime</div>
-                  <div className="text-sm text-gray-600">{health.responseTime}ms avg</div>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{health.uptime}% uptime</div>
+                  <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{health.responseTime}ms avg</div>
                 </div>
               </div>
             ))}
@@ -452,23 +452,23 @@ const GlobalSettings: React.FC = () => {
       {/* Settings */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
               <CardTitle>General Settings</CardTitle>
               <CardDescription>Configure general application settings</CardDescription>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <Input
                 placeholder="Search settings..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-64"
-                leftIcon={<Search className="w-4 h-4" />}
+                className="w-64 responsive-container sm:flex-col md:flex-row lg:grid"
+                leftIcon={<Search className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               />
               <select
                 value={categoryFilter}
                 onChange={e => setCategoryFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Categories</option>
                 {settingCategories.map(category => (
@@ -481,28 +481,28 @@ const GlobalSettings: React.FC = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredSettings.map(setting => (
               <div
                 key={setting.id}
-                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <div className="font-medium text-gray-900">{setting.name}</div>
-                    {setting.required && <span className="text-red-500 text-xs">*</span>}
-                    {setting.sensitive && <Lock className="w-4 h-4 text-gray-400" />}
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{setting.name}</div>
+                    {setting.required && <span className="text-red-500 text-xs responsive-container sm:flex-col md:flex-row lg:grid">*</span>}
+                    {setting.sensitive && <Lock className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{setting.description}</div>
-                  <div className="text-xs text-gray-500 mt-1">
+                  <div className="text-sm text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{setting.description}</div>
+                  <div className="text-xs text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     Last modified: {formatRelativeTime(setting.lastModified)} by{' '}
                     {setting.modifiedBy}
                   </div>
                 </div>
-                <div className="ml-4">
+                <div className="ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {setting.type === 'boolean' ? (
                     <button
-                      onClick={() => handleUpdateSetting(setting.id, !setting.value)}
+                      onClick={() = aria-label="Button"> handleUpdateSetting(setting.id, !setting.value)}
                       className={cn(
                         'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
                         setting.value ? 'bg-primary-600' : 'bg-gray-200'
@@ -519,7 +519,7 @@ const GlobalSettings: React.FC = () => {
                     <select
                       value={setting.value as string}
                       onChange={e => handleUpdateSetting(setting.id, e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       {setting.options?.map(option => (
                         <option key={option} value={option}>
@@ -537,8 +537,8 @@ const GlobalSettings: React.FC = () => {
                           setting.type === 'number' ? parseFloat(e.target.value) : e.target.value
                         )
                       }
-                      className="w-48"
-                      rightIcon={setting.sensitive ? <Eye className="w-4 h-4" /> : undefined}
+                      className="w-48 responsive-container sm:flex-col md:flex-row lg:grid"
+                      rightIcon={setting.sensitive ? <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : undefined}
                     />
                   )}
                 </div>
@@ -551,26 +551,26 @@ const GlobalSettings: React.FC = () => {
   );
 
   const renderMaintenanceWindows = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h3 className="text-lg font-medium text-gray-900">Maintenance Windows</h3>
-          <p className="text-gray-600">Schedule and manage system maintenance</p>
+          <h3 className="text-lg font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Maintenance Windows</h3>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Schedule and manage system maintenance</p>
         </div>
         <Button onClick={() => alert('Maintenance scheduling feature coming soon')}>
-          <Plus className="w-4 h-4 mr-2" />
+          <Plus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
           Schedule Maintenance
         </Button>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
         {maintenanceWindows.map(window => (
           <Card key={window.id}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h4 className="font-medium text-gray-900">{window.name}</h4>
+            <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center gap-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{window.name}</h4>
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(window.status)}`}
                     >
@@ -578,19 +578,19 @@ const GlobalSettings: React.FC = () => {
                       {window.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{window.description}</p>
-                  <div className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-600 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{window.description}</p>
+                  <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>Start: {formatRelativeTime(window.startTime)}</div>
                     <div>End: {formatRelativeTime(window.endTime)}</div>
                     <div>Affected Services: {window.affectedServices.join(', ')}</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Button size="sm" variant="outline">
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </Button>
                   <Button size="sm" variant="outline">
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </Button>
                 </div>
               </div>
@@ -602,55 +602,55 @@ const GlobalSettings: React.FC = () => {
   );
 
   const renderBackups = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h3 className="text-lg font-medium text-gray-900">Backup Management</h3>
-          <p className="text-gray-600">Manage system backups and recovery</p>
+          <h3 className="text-lg font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Backup Management</h3>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Manage system backups and recovery</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button variant="outline" onClick={() => alert('Backup creation feature coming soon')}>
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Create Backup
           </Button>
           <Button variant="outline">
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <RefreshCw className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Restore
           </Button>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
         {backups.map(backup => (
           <Card key={backup.id}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h4 className="font-medium text-gray-900">{backup.name}</h4>
+            <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center gap-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{backup.name}</h4>
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(backup.status)}`}
                     >
                       {getStatusIcon(backup.status)}
                       {backup.status}
                     </span>
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                       {backup.type}
                     </span>
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div>Size: {backup.size} GB</div>
                     <div>Created: {formatRelativeTime(backup.createdAt)}</div>
                     <div>Expires: {formatRelativeTime(backup.expiresAt)}</div>
                     <div>Location: {backup.location}</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Button size="sm" variant="outline">
-                    <Download className="w-4 h-4" />
+                    <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </Button>
                   <Button size="sm" variant="outline">
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </Button>
                 </div>
               </div>
@@ -662,24 +662,30 @@ const GlobalSettings: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Global Settings</h2>
-          <p className="text-gray-600">System-wide configuration and maintenance controls</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Global Settings</h2>
+          <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">System-wide configuration and maintenance controls</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+            <Download className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Export Config
           </Button>
           <Button variant="outline">
-            <Upload className="w-4 h-4 mr-2" />
+            <Upload className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Import Config
           </Button>
           <Button>
-            <Save className="w-4 h-4 mr-2" />
+            <Save className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
             Save All Changes
           </Button>
         </div>
@@ -687,20 +693,20 @@ const GlobalSettings: React.FC = () => {
 
       {/* Navigation Tabs */}
       <Card>
-        <CardContent className="p-0">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+        <CardContent className="p-0 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {settingCategories.map(category => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveTab(category.id)}
+                  onClick={() = aria-label="Button"> setActiveTab(category.id)}
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === category.id
                       ? 'border-primary-500 text-primary-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <category.icon className="w-4 h-4" />
+                  <category.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {category.name}
                 </button>
               ))}
@@ -720,46 +726,46 @@ const GlobalSettings: React.FC = () => {
         >
           {activeTab === 'general' && renderGeneralSettings()}
           {activeTab === 'security' && (
-            <div className="text-center py-12">
-              <Shield className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Security Settings</h3>
-              <p className="text-gray-500">Security configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Shield className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Security Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Security configuration panel coming soon</p>
             </div>
           )}
           {activeTab === 'database' && (
-            <div className="text-center py-12">
-              <Database className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Database Settings</h3>
-              <p className="text-gray-500">Database configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Database className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Database Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Database configuration panel coming soon</p>
             </div>
           )}
           {activeTab === 'email' && (
-            <div className="text-center py-12">
-              <Mail className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Email Settings</h3>
-              <p className="text-gray-500">Email configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Mail className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Email Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Email configuration panel coming soon</p>
             </div>
           )}
           {activeTab === 'notifications' && (
-            <div className="text-center py-12">
-              <Bell className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Notification Settings</h3>
-              <p className="text-gray-500">Notification configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Bell className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Notification Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Notification configuration panel coming soon</p>
             </div>
           )}
           {activeTab === 'api' && (
-            <div className="text-center py-12">
-              <Zap className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">API Settings</h3>
-              <p className="text-gray-500">API configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Zap className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">API Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">API configuration panel coming soon</p>
             </div>
           )}
           {activeTab === 'backup' && renderBackups()}
           {activeTab === 'monitoring' && (
-            <div className="text-center py-12">
-              <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Monitoring Settings</h3>
-              <p className="text-gray-500">Monitoring configuration panel coming soon</p>
+            <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Monitoring Settings</h3>
+              <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Monitoring configuration panel coming soon</p>
             </div>
           )}
         </motion.div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -78,17 +78,17 @@ const AgentWorkflows: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'running':
-        return <Play className="h-4 w-4 text-green-600" />;
+        return <Play className="h-4 w-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'paused':
-        return <Pause className="h-4 w-4 text-yellow-600" />;
+        return <Pause className="h-4 w-4 text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertCircle className="h-4 w-4 text-red-600" />;
+        return <AlertCircle className="h-4 w-4 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'completed':
-        return <CheckCircle className="h-4 w-4 text-green-600" />;
+        return <CheckCircle className="h-4 w-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'pending':
-        return <Clock className="h-4 w-4 text-gray-600" />;
+        return <Clock className="h-4 w-4 text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-600" />;
+        return <Clock className="h-4 w-4 text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -119,19 +119,25 @@ const AgentWorkflows: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold">Agent Workflows</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Agent Workflows</h1>
+          <p className="text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
             Create and manage automated workflows for your agents
           </p>
         </div>
         <Button 
           onClick={() => setShowCreateForm(true)}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           Create Workflow
         </Button>
       </div>
@@ -141,8 +147,8 @@ const AgentWorkflows: React.FC = () => {
           <CardHeader>
             <CardTitle>Create New Workflow</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
+          <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <Label htmlFor="workflowName">Workflow Name</Label>
               <Input
                 id="workflowName"
@@ -154,7 +160,7 @@ const AgentWorkflows: React.FC = () => {
                 placeholder="Enter workflow name"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <Label htmlFor="workflowDescription">Description</Label>
               <Textarea
                 id="workflowDescription"
@@ -167,7 +173,7 @@ const AgentWorkflows: React.FC = () => {
                 rows={3}
               />
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <Button onClick={handleCreateWorkflow}>
                 Create Workflow
               </Button>
@@ -182,21 +188,21 @@ const AgentWorkflows: React.FC = () => {
         </Card>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
         {workflows.map((workflow) => (
           <Card key={workflow.id}>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <Workflow className="h-5 w-5" />
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Workflow className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <div>
-                    <CardTitle className="text-lg">{workflow.name}</CardTitle>
-                    <p className="text-sm text-muted-foreground">
+                    <CardTitle className="text-lg responsive-container sm:flex-col md:flex-row lg:grid">{workflow.name}</CardTitle>
+                    <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                       {workflow.description}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Badge 
                     className={
                       workflow.status === 'running' 
@@ -208,14 +214,14 @@ const AgentWorkflows: React.FC = () => {
                   >
                     {workflow.status}
                   </Badge>
-                  <div className="flex space-x-1">
+                  <div className="flex space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {workflow.status === 'running' ? (
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => handleWorkflowAction(workflow.id, 'paused')}
                       >
-                        <Pause className="h-4 w-4" />
+                        <Pause className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </Button>
                     ) : (
                       <Button
@@ -223,49 +229,49 @@ const AgentWorkflows: React.FC = () => {
                         size="sm"
                         onClick={() => handleWorkflowAction(workflow.id, 'running')}
                       >
-                        <Play className="h-4 w-4" />
+                        <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </Button>
                     )}
                     <Button variant="outline" size="sm">
-                      <Edit className="h-4 w-4" />
+                      <Edit className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
                     <Button variant="outline" size="sm">
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
                   </div>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <p className="text-sm text-muted-foreground">Last Run</p>
-                  <p className="font-medium">{workflow.lastRun}</p>
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">Last Run</p>
+                  <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{workflow.lastRun}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Next Run</p>
-                  <p className="font-medium">{workflow.nextRun}</p>
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">Next Run</p>
+                  <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{workflow.nextRun}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Success Rate</p>
-                  <p className="font-medium">{workflow.successRate}%</p>
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">Success Rate</p>
+                  <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{workflow.successRate}%</p>
                 </div>
               </div>
               
-              <div className="space-y-2">
-                <h4 className="font-medium">Workflow Steps</h4>
-                <div className="space-y-2">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h4 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">Workflow Steps</h4>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {workflow.steps.map((step) => (
-                    <div key={step.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
+                    <div key={step.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         {getStatusIcon(step.status)}
-                        <span className="font-medium">{step.name}</span>
+                        <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{step.name}</span>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <span className={`text-sm ${getStatusColor(step.status)}`}>
                           {step.status}
                         </span>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                           {step.duration}
                         </span>
                       </div>

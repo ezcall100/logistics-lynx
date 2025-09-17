@@ -98,6 +98,12 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
     switch (activeCrmTab) {
       case 'ai-assistant':
         return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <AiAssistantPanel
             messages={aiMessages}
             newMessage={newAiMessage}
@@ -109,6 +115,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'chat':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <ChatPanel
             messages={chatMessages}
             newMessage={newChatMessage}
@@ -120,6 +128,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'email':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <EmailPanel
             emails={emailList}
             newEmail={newEmail}
@@ -133,6 +143,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'tasks':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <TasksPanel
             tasks={tasks}
             newTask={newTask}
@@ -146,6 +158,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'phone':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <PhonePanel
             calls={recentCalls}
             onStartCall={startVideoCall}
@@ -154,6 +168,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'text':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <SmsPanel
             messages={smsMessages}
             newSms={newSms}
@@ -167,6 +183,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'video':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <VideoPanel
             meetings={videoMeetings}
             onStartVideoCall={startVideoCall}
@@ -175,6 +193,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'calendar':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <CalendarPanel
             events={calendarEvents}
             newEvent={newEvent}
@@ -187,6 +207,8 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'notes':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <NotesPanel
             notes={notes}
             newNote={newNote}
@@ -199,8 +221,10 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       default:
         return (
-          <div className="flex items-center justify-center h-64">
-            <p className="text-gray-500 dark:text-gray-400">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="flex items-center justify-center h-64 responsive-container sm:flex-col md:flex-row lg:grid">
+            <p className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               Select a communication channel to get started
             </p>
           </div>
@@ -209,9 +233,11 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-gray-800">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="flex flex-col h-full bg-white dark:bg-gray-800 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Communication Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
+      <div className="border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
         <CommunicationTabs
           tabs={communicationTabs}
           activeTab={activeCrmTab}
@@ -220,7 +246,7 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       </div>
 
       {/* Communication Content */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCrmTab}
@@ -228,7 +254,7 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
-            className="h-full p-4 overflow-y-auto bg-gray-50 dark:bg-gray-900"
+            className="h-full p-4 overflow-y-auto bg-gray-50 dark:bg-gray-900 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {renderActivePanel()}
           </motion.div>

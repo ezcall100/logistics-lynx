@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bot, ChevronDown, ChevronRight, Building2, Users, Settings, 
@@ -159,7 +159,7 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
       Menu, X, Bell, Star, Clock, TrendingUp, Plus, Minus
     };
     const IconComponent = icons[iconName] || HelpCircle;
-    return <IconComponent className="w-5 h-5" />;
+    return <IconComponent className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
   };
 
   const toggleMenu = (menuId: string) => {
@@ -190,6 +190,12 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
 
   return (
     <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <>
       {/* Mobile Overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -197,7 +203,7 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={onClose}
           />
         )}
@@ -215,49 +221,49 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
           isCollapsed ? 'w-16' : 'w-80'
         }`}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Sidebar Header */}
-          <div className="p-4 border-b border-gray-200/30 dark:border-slate-700/30">
-            <div className="flex items-center justify-between">
+          <div className="p-4 border-b border-gray-200/30 dark:border-slate-700/30 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               {!isCollapsed && (
-                <div className="flex items-center space-x-3">
-                  <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 p-2 rounded-xl shadow-lg">
-                    <Bot className="w-6 h-6 text-white" />
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 p-2 rounded-xl shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Bot className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100">Navigation</h2>
-                    <p className="text-xs text-gray-600 dark:text-slate-400">Platform Management</p>
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
+                    <p className="text-xs text-gray-600 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Platform Management</p>
                   </div>
                 </div>
               )}
               
               {/* Collapse Toggle */}
               <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                onClick={() = aria-label="Button"> setIsCollapsed(!isCollapsed)}
+                className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
               >
-                {isCollapsed ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />}
+                {isCollapsed ? <ArrowRight className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <ArrowLeft className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               </button>
             </div>
 
           </div>
 
           {/* Navigation Menu */}
-          <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+          <nav className="flex-1 overflow-y-auto p-4 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredMenuItems.map((item) => (
               <div key={item.id}>
                 {item.children ? (
                   <div>
                     <button
-                      onClick={() => handleItemClick(item)}
+                      onClick={() = aria-label="Button"> handleItemClick(item)}
                       onMouseEnter={() => setHoveredItem(item.id)}
                       onMouseLeave={() => setHoveredItem(null)}
                       className={`w-full flex items-center justify-between px-3 py-3 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 group hover:scale-[1.02] ${
                         isExpanded(item.id) ? 'bg-blue-50 dark:bg-blue-900/20' : ''
                       }`}
                     >
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div className={`p-2 rounded-lg transition-colors ${
                           isExpanded(item.id) 
                             ? 'bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-400' 
@@ -266,8 +272,8 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                           {getIcon(item.icon)}
                         </div>
                         {!isCollapsed && (
-                          <div className="flex-1 text-left">
-                            <span className="font-medium">{item.label}</span>
+                          <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                            <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</span>
                             {item.badge && (
                               <span className={`ml-2 px-2 py-0.5 text-xs rounded-full ${
                                 item.badge === 'Live' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
@@ -282,16 +288,16 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                         )}
                       </div>
                       {!isCollapsed && (
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           {item.shortcut && (
-                            <span className="text-xs text-gray-400 dark:text-slate-500 font-mono">
+                            <span className="text-xs text-gray-400 dark:text-slate-500 font-mono responsive-container sm:flex-col md:flex-row lg:grid">
                               {item.shortcut}
                             </span>
                           )}
                           {isExpanded(item.id) ? (
-                            <ChevronUp className="w-4 h-4 text-gray-500 dark:text-slate-400" />
+                            <ChevronUp className="w-4 h-4 text-gray-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                           ) : (
-                            <ChevronDown className="w-4 h-4 text-gray-500 dark:text-slate-400" />
+                            <ChevronDown className="w-4 h-4 text-gray-500 dark:text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                           )}
                         </div>
                       )}
@@ -305,17 +311,17 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="ml-4 mt-1 space-y-1 border-l border-gray-200 dark:border-slate-600 pl-4"
+                          className="ml-4 mt-1 space-y-1 border-l border-gray-200 dark:border-slate-600 pl-4 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {item.children.map((subItem) => (
                             <button
                               key={subItem.id}
-                              onClick={() => handleSubItemClick(subItem)}
+                              onClick={() = aria-label="Button"> handleSubItemClick(subItem)}
                               className={`w-full flex items-center justify-between px-3 py-2 text-sm text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition-all duration-200 group ${
                                 currentPath === subItem.path ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : ''
                               }`}
                             >
-                              <div className="flex items-center space-x-3">
+                              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                                 <div className={`p-1.5 rounded-md transition-colors ${
                                   currentPath === subItem.path 
                                     ? 'bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-400' 
@@ -323,8 +329,8 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                                 }`}>
                                   {getIcon(subItem.icon)}
                                 </div>
-                                <div className="flex-1 text-left">
-                                  <span className="font-medium">{subItem.label}</span>
+                                <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{subItem.label}</span>
                                   {subItem.badge && (
                                     <span className={`ml-2 px-1.5 py-0.5 text-xs rounded-full ${
                                       subItem.badge === 'Alert' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
@@ -334,7 +340,7 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                                     </span>
                                   )}
                                   {subItem.description && (
-                                    <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5">
+                                    <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                                       {subItem.description}
                                     </p>
                                   )}
@@ -348,7 +354,7 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                   </div>
                 ) : (
                   <button
-                    onClick={() => handleItemClick(item)}
+                    onClick={() = aria-label="Button"> handleItemClick(item)}
                     className={`w-full flex items-center space-x-3 px-3 py-3 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-xl transition-all duration-200 group hover:scale-[1.02] ${
                       currentPath === item.path ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : ''
                     }`}
@@ -361,8 +367,8 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                       {getIcon(item.icon)}
                     </div>
                     {!isCollapsed && (
-                      <div className="flex-1 text-left">
-                        <span className="font-medium">{item.label}</span>
+                      <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</span>
                         {item.badge && (
                           <span className={`ml-2 px-2 py-0.5 text-xs rounded-full ${
                             item.badge === 'Live' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
@@ -374,12 +380,12 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
                           </span>
                         )}
                         {item.shortcut && (
-                          <span className="ml-2 text-xs text-gray-400 dark:text-slate-500 font-mono">
+                          <span className="ml-2 text-xs text-gray-400 dark:text-slate-500 font-mono responsive-container sm:flex-col md:flex-row lg:grid">
                             {item.shortcut}
                           </span>
                         )}
                         {item.description && (
-                          <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5">
+                          <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                             {item.description}
                           </p>
                         )}
@@ -393,13 +399,13 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
 
           {/* Sidebar Footer */}
           {!isCollapsed && (
-            <div className="p-4 border-t border-gray-200/30 dark:border-slate-700/30">
-              <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl p-3 text-white">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium">All Systems Operational</span>
+            <div className="p-4 border-t border-gray-200/30 dark:border-slate-700/30 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl p-3 text-white responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                  <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
                 </div>
-                <p className="text-xs text-green-100 mt-1">Last updated 2 minutes ago</p>
+                <p className="text-xs text-green-100 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Last updated 2 minutes ago</p>
               </div>
             </div>
           )}

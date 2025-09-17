@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
@@ -87,39 +88,47 @@ export function SubdomainManagement() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'pending': return <Clock className="w-4 h-4" />
-      case 'under_review': return <Eye className="w-4 h-4" />
-      case 'approved': return <CheckCircle className="w-4 h-4" />
-      case 'rejected': return <XCircle className="w-4 h-4" />
-      default: return <Clock className="w-4 h-4" />
+      case 'pending': return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'under_review': return <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'approved': return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'rejected': return <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      default: return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
     }
   }
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-8 h-8 border-2 border-transbot-sky border-t-transparent rounded-full animate-spin" />
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="flex items-center justify-center min-h-screen responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="w-8 h-8 border-2 border-transbot-sky border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 p-6">
-      <div className="max-w-7xl mx-auto">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-transbot-text-primary mb-2">
+        <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h1 className="text-3xl font-bold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Subdomain Management
           </h1>
-          <p className="text-transbot-text-secondary">
+          <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
             Manage user applications and subdomain configurations
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-1 mb-6">
+        <div className="flex space-x-1 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() => setActiveTab('applications')}
+            onClick={() = aria-label="Button"> setActiveTab('applications')}
             className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
               activeTab === 'applications'
                 ? 'bg-transbot-sky text-white shadow-lg'
@@ -129,7 +138,7 @@ export function SubdomainManagement() {
             Applications ({applications.length})
           </button>
           <button
-            onClick={() => setActiveTab('subdomains')}
+            onClick={() = aria-label="Button"> setActiveTab('subdomains')}
             className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
               activeTab === 'subdomains'
                 ? 'bg-transbot-sky text-white shadow-lg'
@@ -141,21 +150,21 @@ export function SubdomainManagement() {
         </div>
 
         {/* Search and Filter */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary" />
+        <div className="flex flex-col md:flex-row gap-4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex-1 relative responsive-container sm:flex-col md:flex-row lg:grid">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid" />
             <input
               type="text"
               placeholder="Search applications..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
+            className="px-4 py-3 bg-white/80 border border-slate-200/50 rounded-xl text-transbot-text-primary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Status</option>
             <option value="pending">Pending</option>
@@ -167,24 +176,24 @@ export function SubdomainManagement() {
 
         {/* Applications Tab */}
         {activeTab === 'applications' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredApplications.map((application) => (
               <motion.div
                 key={application.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/50 p-6 hover:shadow-xl transition-all duration-300"
+                className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/50 p-6 hover:shadow-xl transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-                      <Building className="w-6 h-6 text-white" />
+                <div className="flex items-start justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Building className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-transbot-text-primary">
+                      <h3 className="font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">
                         {application.companyName}
                       </h3>
-                      <p className="text-sm text-transbot-text-secondary">
+                      <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
                         {application.industry}
                       </p>
                     </div>
@@ -195,55 +204,55 @@ export function SubdomainManagement() {
                   </span>
                 </div>
 
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                    <Mail className="w-4 h-4" />
+                <div className="space-y-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Mail className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>{application.email}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                    <Users className="w-4 h-4" />
+                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Users className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>{application.companySize}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                    <Calendar className="w-4 h-4" />
+                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Calendar className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>{new Date(application.submittedAt).toLocaleDateString()}</span>
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <h4 className="font-medium text-transbot-text-primary mb-2">Requested Portals:</h4>
-                  <div className="flex flex-wrap gap-1">
+                <div className="mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h4 className="font-medium text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Requested Portals:</h4>
+                  <div className="flex flex-wrap gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {application.requestedPortals.slice(0, 3).map(portal => (
-                      <span key={portal} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                      <span key={portal} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                         {portal}
                       </span>
                     ))}
                     {application.requestedPortals.length > 3 && (
-                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                         +{application.requestedPortals.length - 3} more
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() => setSelectedApplication(application)}
-                    className="flex-1 bg-slate-100 text-slate-700 py-2 px-4 rounded-lg font-medium hover:bg-slate-200 transition-colors"
+                    onClick={() = aria-label="Button"> setSelectedApplication(application)}
+                    className="flex-1 bg-slate-100 text-slate-700 py-2 px-4 rounded-lg font-medium hover:bg-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     View Details
                   </button>
                   {application.status === 'pending' && (
                     <>
                       <button
-                        onClick={() => handleApproveApplication(application.id)}
-                        className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors"
+                        onClick={() = aria-label="Button"> handleApproveApplication(application.id)}
+                        className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Approve
                       </button>
                       <button
-                        onClick={() => handleRejectApplication(application.id)}
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-red-600 transition-colors"
+                        onClick={() = aria-label="Button"> handleRejectApplication(application.id)}
+                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Reject
                       </button>
@@ -257,24 +266,24 @@ export function SubdomainManagement() {
 
         {/* Subdomains Tab */}
         {activeTab === 'subdomains' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {subdomains.map((subdomain) => (
               <motion.div
                 key={subdomain.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/50 p-6 hover:shadow-xl transition-all duration-300"
+                className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/50 p-6 hover:shadow-xl transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-white" />
+                <div className="flex items-start justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Globe className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-transbot-text-primary">
+                      <h3 className="font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">
                         {subdomain.subdomain}.transbotai.com
                       </h3>
-                      <p className="text-sm text-transbot-text-secondary">
+                      <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
                         {subdomain.companyName}
                       </p>
                     </div>
@@ -289,46 +298,46 @@ export function SubdomainManagement() {
                   </span>
                 </div>
 
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                    <Calendar className="w-4 h-4" />
+                <div className="space-y-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Calendar className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Created: {new Date(subdomain.createdAt).toLocaleDateString()}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                    <Users className="w-4 h-4" />
+                  <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Users className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Plan: {subdomain.plan}</span>
                   </div>
                   {subdomain.customDomain && (
-                    <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary">
-                      <Globe className="w-4 h-4" />
+                    <div className="flex items-center space-x-2 text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Globe className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>Custom: {subdomain.customDomain}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="mb-4">
-                  <h4 className="font-medium text-transbot-text-primary mb-2">Active Portals:</h4>
-                  <div className="flex flex-wrap gap-1">
+                <div className="mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h4 className="font-medium text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Active Portals:</h4>
+                  <div className="flex flex-wrap gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {subdomain.portals.slice(0, 3).map(portal => (
-                      <span key={portal} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">
+                      <span key={portal} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                         {portal}
                       </span>
                     ))}
                     {subdomain.portals.length > 3 && (
-                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                         +{subdomain.portals.length - 3} more
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="flex space-x-2">
-                  <button className="flex-1 bg-slate-100 text-slate-700 py-2 px-4 rounded-lg font-medium hover:bg-slate-200 transition-colors">
-                    <Settings className="w-4 h-4 inline mr-2" />
+                <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="flex-1 bg-slate-100 text-slate-700 py-2 px-4 rounded-lg font-medium hover:bg-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Settings className="w-4 h-4 inline mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                     Manage
                   </button>
-                  <button className="bg-transbot-sky text-white py-2 px-4 rounded-lg font-medium hover:bg-transbot-sky/80 transition-colors">
-                    <Globe className="w-4 h-4 inline mr-2" />
+                  <button className="bg-transbot-sky text-white py-2 px-4 rounded-lg font-medium hover:bg-transbot-sky/80 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Globe className="w-4 h-4 inline mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                     Visit
                   </button>
                 </div>
@@ -339,58 +348,58 @@ export function SubdomainManagement() {
 
         {/* Application Detail Modal */}
         {selectedApplication && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-transbot-text-primary">
+              <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h2 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">
                     Application Details
                   </h2>
                   <button
-                    onClick={() => setSelectedApplication(null)}
-                    className="text-transbot-text-secondary hover:text-transbot-text-primary"
+                    onClick={() = aria-label="Button"> setSelectedApplication(null)}
+                    className="text-transbot-text-secondary hover:text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <XCircle className="w-6 h-6" />
+                    <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <h3 className="font-semibold text-transbot-text-primary mb-2">Company Information</h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <h3 className="font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Company Information</h3>
+                    <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <label className="text-sm text-transbot-text-secondary">Company Name</label>
-                        <p className="font-medium">{selectedApplication.companyName}</p>
+                        <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Company Name</label>
+                        <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.companyName}</p>
                       </div>
                       <div>
-                        <label className="text-sm text-transbot-text-secondary">Industry</label>
-                        <p className="font-medium">{selectedApplication.industry}</p>
+                        <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Industry</label>
+                        <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.industry}</p>
                       </div>
                       <div>
-                        <label className="text-sm text-transbot-text-secondary">Company Size</label>
-                        <p className="font-medium">{selectedApplication.companySize}</p>
+                        <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Company Size</label>
+                        <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.companySize}</p>
                       </div>
                       <div>
-                        <label className="text-sm text-transbot-text-secondary">Contact Email</label>
-                        <p className="font-medium">{selectedApplication.email}</p>
+                        <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Contact Email</label>
+                        <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.email}</p>
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-transbot-text-primary mb-2">Use Case</h3>
-                    <p className="text-transbot-text-secondary">{selectedApplication.useCase}</p>
+                    <h3 className="font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Use Case</h3>
+                    <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.useCase}</p>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-transbot-text-primary mb-2">Requested Portals</h3>
-                    <div className="grid grid-cols-2 gap-2">
+                    <h3 className="font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Requested Portals</h3>
+                    <div className="grid grid-cols-2 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedApplication.requestedPortals.map(portal => (
-                        <span key={portal} className="px-3 py-2 bg-blue-100 text-blue-600 text-sm rounded-lg">
+                        <span key={portal} className="px-3 py-2 bg-blue-100 text-blue-600 text-sm rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                           {portal}
                         </span>
                       ))}
@@ -399,23 +408,23 @@ export function SubdomainManagement() {
 
                   {selectedApplication.customDomain && (
                     <div>
-                      <h3 className="font-semibold text-transbot-text-primary mb-2">Custom Domain</h3>
-                      <p className="text-transbot-text-secondary">{selectedApplication.customDomain}</p>
+                      <h3 className="font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Custom Domain</h3>
+                      <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">{selectedApplication.customDomain}</p>
                     </div>
                   )}
 
-                  <div className="flex space-x-4 pt-4 border-t">
+                  <div className="flex space-x-4 pt-4 border-t responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedApplication.status === 'pending' && (
                       <>
                         <button
-                          onClick={() => handleApproveApplication(selectedApplication.id)}
-                          className="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleApproveApplication(selectedApplication.id)}
+                          className="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           Approve Application
                         </button>
                         <button
-                          onClick={() => handleRejectApplication(selectedApplication.id)}
-                          className="flex-1 bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleRejectApplication(selectedApplication.id)}
+                          className="flex-1 bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           Reject Application
                         </button>

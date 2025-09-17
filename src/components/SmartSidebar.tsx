@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -99,29 +100,35 @@ export function SmartSidebar() {
 
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.aside
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-64"
+      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-64 responsive-container sm:flex-col md:flex-row lg:grid"
     >
-      <div className="h-full bg-white/95 backdrop-blur-xl border-r border-transbot-border/20 shadow-transbot">
+      <div className="h-full bg-white/95 backdrop-blur-xl border-r border-transbot-border/20 shadow-transbot responsive-container sm:flex-col md:flex-row lg:grid">
         
         {/* Header */}
-        <div className="p-4 border-b border-transbot-border/20">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
+        <div className="p-4 border-b border-transbot-border/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Brain className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h2 className="font-bold text-transbot-text-primary">Navigation</h2>
-              <p className="text-xs text-transbot-text-secondary">Quick Access</p>
+              <h2 className="font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
+              <p className="text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Quick Access</p>
             </div>
           </div>
         </div>
 
         {/* Navigation Sections */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {mainSections.map((section, sectionIndex) => (
             <motion.div
               key={section.id}
@@ -142,11 +149,11 @@ export function SmartSidebar() {
                 <section.icon className={`w-5 h-5 ${
                   activeSection === section.id ? 'text-white' : `text-${section.color}`
                 }`} />
-                <span className="font-medium">{section.name}</span>
+                <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{section.name}</span>
                 {activeSection === section.id ? (
-                  <ChevronDown className="w-4 h-4 ml-auto" />
+                  <ChevronDown className="w-4 h-4 ml-auto responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 ml-auto" />
+                  <ChevronRight className="w-4 h-4 ml-auto responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </motion.button>
 
@@ -158,7 +165,7 @@ export function SmartSidebar() {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="mt-2 ml-4 space-y-1"
+                    className="mt-2 ml-4 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                                          {section.items.map((item, itemIndex) => (
                        <motion.button
@@ -168,10 +175,10 @@ export function SmartSidebar() {
                          transition={{ delay: itemIndex * 0.05 }}
                          whileHover={{ scale: 1.02 }}
                          onClick={() => handleNavigation(item.path)}
-                         className="w-full flex items-center gap-3 p-2 rounded-lg text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5 transition-all duration-200"
+                         className="w-full flex items-center gap-3 p-2 rounded-lg text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                        >
-                         <item.icon className="w-4 h-4" />
-                         <span className="text-sm">{item.name}</span>
+                         <item.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                         <span className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
                        </motion.button>
                      ))}
                   </motion.div>

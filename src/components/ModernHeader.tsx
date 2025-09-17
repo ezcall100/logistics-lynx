@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -40,14 +41,14 @@ import {
 interface SubPage {
   name: string
   path: string
-  icon?: any
+  icon?: unknown
   description?: string
 }
 
 interface MenuSection {
   title: string
   path: string
-  icon: any
+  icon: unknown
   description: string
   subpages: SubPage[]
 }
@@ -172,40 +173,46 @@ export function ModernHeader() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-transbot-border/30 shadow-transbot">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-transbot-border/30 shadow-transbot responsive-container">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
+        <div className="flex items-center justify-between h-16 responsive-container">
           {/* Logo - Compact Design */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 responsive-container"
           >
-            <div className="relative">
-              <div className="p-2.5 rounded-xl bg-gradient-primary shadow-transbot">
-                <Brain className="w-6 h-6 text-white" />
+            <div className="relative responsive-container">
+              <div className="p-2.5 rounded-xl bg-gradient-primary shadow-transbot responsive-container">
+                <Brain className="w-6 h-6 text-white responsive-container" />
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-transbot-teal rounded-full animate-pulse"></div>
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-transbot-teal rounded-full animate-pulse responsive-container"></div>
             </div>
-            <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-transbot-text-primary leading-tight">Trans Bot AI</h1>
-              <p className="text-xs text-transbot-text-secondary font-medium leading-tight">Intelligent Logistics</p>
+            <div className="flex flex-col responsive-container">
+              <h1 className="text-xl font-bold text-transbot-text-primary leading-tight responsive-container">Trans Bot AI</h1>
+              <p className="text-xs text-transbot-text-secondary font-medium leading-tight responsive-container">Intelligent Logistics</p>
             </div>
           </motion.div>
 
           {/* Desktop Navigation - Compact */}
-          <nav className="hidden lg:flex items-center space-x-0">
+          <nav className="hidden lg:flex items-center space-x-0 responsive-container">
             {menuSections.map((section) => (
               <div
                 key={section.title}
-                className="relative"
+                className="relative responsive-container"
                 onMouseEnter={() => setActiveDropdown(section.title)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="flex items-center gap-1.5 px-3 py-2 text-transbot-text-secondary hover:text-transbot-sky transition-all duration-200 font-medium rounded-lg hover:bg-transbot-neutral-light/50 group">
-                  <section.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-                  <span className="text-sm">{section.title}</span>
-                  <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform duration-200" />
+                <button className="flex items-center gap-1.5 px-3 py-2 text-transbot-text-secondary hover:text-transbot-sky transition-all duration-200 font-medium rounded-lg hover:bg-transbot-neutral-light/50 group responsive-container" aria-label="Button">
+                  <section.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-200 responsive-container" />
+                  <span className="text-sm responsive-container">{section.title}</span>
+                  <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform duration-200 responsive-container" />
                 </button>
 
                 {/* Modern Dropdown */}
@@ -216,40 +223,40 @@ export function ModernHeader() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-[480px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-transbot-xl border border-transbot-border/20 p-6"
+                      className="absolute top-full left-0 mt-2 w-[480px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-transbot-xl border border-transbot-border/20 p-6 responsive-container"
                     >
-                      <div className="space-y-6">
-                        <div className="flex items-center gap-4 pb-4 border-b border-transbot-border/30">
-                          <div className="p-3 rounded-xl bg-gradient-primary/10">
-                            <section.icon className="w-6 h-6 text-transbot-sky" />
+                      <div className="space-y-6 responsive-container">
+                        <div className="flex items-center gap-4 pb-4 border-b border-transbot-border/30 responsive-container">
+                          <div className="p-3 rounded-xl bg-gradient-primary/10 responsive-container">
+                            <section.icon className="w-6 h-6 text-transbot-sky responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-bold text-transbot-text-primary text-lg">{section.title}</h3>
-                            <p className="text-sm text-transbot-text-secondary">{section.description}</p>
+                            <h3 className="font-bold text-transbot-text-primary text-lg responsive-container">{section.title}</h3>
+                            <p className="text-sm text-transbot-text-secondary responsive-container">{section.description}</p>
                           </div>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-3 responsive-container">
                           {section.subpages.map((subpage) => (
                             <a
                               key={subpage.name}
                               href={subpage.path}
-                              className="flex items-start gap-3 p-4 rounded-xl hover:bg-transbot-neutral-light/50 transition-all duration-200 group border border-transparent hover:border-transbot-border/30"
+                              className="flex items-start gap-3 p-4 rounded-xl hover:bg-transbot-neutral-light/50 transition-all duration-200 group border border-transparent hover:border-transbot-border/30 responsive-container"
                             >
-                              <div className="p-2 rounded-lg bg-transbot-border/20 group-hover:bg-transbot-sky/10 transition-colors duration-200">
-                                {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary group-hover:text-transbot-sky" />}
+                              <div className="p-2 rounded-lg bg-transbot-border/20 group-hover:bg-transbot-sky/10 transition-colors duration-200 responsive-container">
+                                {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary group-hover:text-transbot-sky responsive-container" />}
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-transbot-text-primary group-hover:text-transbot-sky mb-1">
+                              <div className="flex-1 min-w-0 responsive-container">
+                                <p className="text-sm font-semibold text-transbot-text-primary group-hover:text-transbot-sky mb-1 responsive-container">
                                   {subpage.name}
                                 </p>
                                 {subpage.description && (
-                                  <p className="text-xs text-transbot-text-secondary line-clamp-2">
+                                  <p className="text-xs text-transbot-text-secondary line-clamp-2 responsive-container">
                                     {subpage.description}
                                   </p>
                                 )}
                               </div>
-                              <ArrowRight className="w-3 h-3 text-transbot-text-secondary group-hover:text-transbot-sky opacity-0 group-hover:opacity-100 transition-all duration-200" />
+                              <ArrowRight className="w-3 h-3 text-transbot-text-secondary group-hover:text-transbot-sky opacity-0 group-hover:opacity-100 transition-all duration-200 responsive-container" />
                             </a>
                           ))}
                         </div>
@@ -262,23 +269,23 @@ export function ModernHeader() {
           </nav>
 
           {/* Search & Actions - Compact */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3 responsive-container">
             {/* Search - Compact */}
-            <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-transbot-text-secondary" />
+            <div className="relative responsive-container">
+              <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-transbot-text-secondary responsive-container" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="pl-9 pr-3 py-2 w-48 bg-transbot-neutral-light/50 border border-transbot-border/30 rounded-lg text-sm text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky/50 transition-all duration-200"
+                className="pl-9 pr-3 py-2 w-48 bg-transbot-neutral-light/50 border border-transbot-border/30 rounded-lg text-sm text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky/50 transition-all duration-200 responsive-container"
               />
             </div>
 
             {/* Action Buttons - Compact */}
-            <div className="flex items-center gap-2">
-              <button className="px-3 py-2 text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium text-sm">
+            <div className="flex items-center gap-2 responsive-container">
+              <button className="px-3 py-2 text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 font-medium text-sm responsive-container" aria-label="Button">
                 Login
               </button>
-              <button className="px-4 py-2 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 shadow-transbot text-sm">
+              <button className="px-4 py-2 bg-gradient-primary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 shadow-transbot text-sm responsive-container" aria-label="Button">
                 Get Demo
               </button>
             </div>
@@ -286,10 +293,10 @@ export function ModernHeader() {
 
           {/* Mobile Menu Button - Compact */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light/50 transition-colors duration-200"
+            onClick={() = aria-label="Button"> setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light/50 transition-colors duration-200 responsive-container"
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5 responsive-container" /> : <Menu className="w-5 h-5 responsive-container" />}
           </button>
         </div>
       </div>
@@ -302,52 +309,52 @@ export function ModernHeader() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-transbot-border/20"
+            className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-transbot-border/20 responsive-container"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 responsive-container">
               {/* Mobile Search */}
-              <div className="relative mb-6">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-transbot-text-secondary" />
+              <div className="relative mb-6 responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-transbot-text-secondary responsive-container" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full pl-10 pr-4 py-3 bg-transbot-neutral-light/50 border border-transbot-border/30 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky/50"
+                  className="w-full pl-10 pr-4 py-3 bg-transbot-neutral-light/50 border border-transbot-border/30 rounded-xl text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky/50 responsive-container"
                 />
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {menuSections.map((section) => (
-                  <div key={section.title} className="space-y-3">
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-transbot-neutral-light/30">
-                      <div className="p-2 rounded-lg bg-transbot-sky/10">
-                        <section.icon className="w-5 h-5 text-transbot-sky" />
+                  <div key={section.title} className="space-y-3 responsive-container">
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-transbot-neutral-light/30 responsive-container">
+                      <div className="p-2 rounded-lg bg-transbot-sky/10 responsive-container">
+                        <section.icon className="w-5 h-5 text-transbot-sky responsive-container" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-transbot-text-primary">{section.title}</h3>
-                        <p className="text-sm text-transbot-text-secondary">{section.description}</p>
+                        <h3 className="font-bold text-transbot-text-primary responsive-container">{section.title}</h3>
+                        <p className="text-sm text-transbot-text-secondary responsive-container">{section.description}</p>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 gap-2 ml-6">
+                    <div className="grid grid-cols-1 gap-2 ml-6 responsive-container">
                       {section.subpages.map((subpage) => (
                         <a
                           key={subpage.name}
                           href={subpage.path}
-                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-transbot-neutral-light/50 transition-colors duration-200"
+                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-transbot-neutral-light/50 transition-colors duration-200 responsive-container"
                         >
-                          {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary" />}
-                          <span className="text-sm text-transbot-text-primary font-medium">{subpage.name}</span>
+                          {subpage.icon && <subpage.icon className="w-4 h-4 text-transbot-text-secondary responsive-container" />}
+                          <span className="text-sm text-transbot-text-primary font-medium responsive-container">{subpage.name}</span>
                         </a>
                       ))}
                     </div>
                   </div>
                 ))}
                 
-                <div className="pt-6 border-t border-transbot-border/30 space-y-3">
-                  <button className="w-full text-left p-4 text-transbot-text-primary hover:bg-transbot-neutral-light/50 rounded-xl transition-colors duration-200 font-medium">
+                <div className="pt-6 border-t border-transbot-border/30 space-y-3 responsive-container">
+                  <button className="w-full text-left p-4 text-transbot-text-primary hover:bg-transbot-neutral-light/50 rounded-xl transition-colors duration-200 font-medium responsive-container" aria-label="Button">
                     Login
                   </button>
-                  <button className="w-full p-4 bg-gradient-primary text-white font-semibold rounded-xl hover:opacity-90 transition-all duration-200">
+                  <button className="w-full p-4 bg-gradient-primary text-white font-semibold rounded-xl hover:opacity-90 transition-all duration-200 responsive-container" aria-label="Button">
                     Get Demo
                   </button>
                 </div>

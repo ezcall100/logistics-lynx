@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -199,6 +200,12 @@ export function ComprehensiveSidebar() {
   const isActive = (path: string) => location.pathname === path
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.aside
       initial={{ x: -300 }}
       animate={{ x: 0 }}
@@ -207,22 +214,22 @@ export function ComprehensiveSidebar() {
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
-      <div className="h-full bg-white/90 backdrop-blur-md border-r border-slate-200/50 shadow-lg">
+      <div className="h-full bg-white/90 backdrop-blur-md border-r border-slate-200/50 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
         
         {/* Trans Bot AI Logo & Branding */}
-        <div className="px-6 pt-20 pb-5 border-b border-slate-200/50">
-          <div className="flex items-center justify-between">
+        <div className="px-6 pt-20 pb-5 border-b border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <motion.div 
-              className="flex items-center gap-4 cursor-pointer flex-1"
+              className="flex items-center gap-4 cursor-pointer flex-1 responsive-container sm:flex-col md:flex-row lg:grid"
               whileHover={{ scale: 1.02 }}
               onClick={() => navigate('/')}
             >
-              <div className="relative">
-                <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center shadow-transbot">
-                  <Brain className="w-8 h-8 text-white" />
+              <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center shadow-transbot responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Brain className="w-8 h-8 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <motion.div
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-transbot-teal rounded-full"
+                  className="absolute -top-1 -right-1 w-4 h-4 bg-transbot-teal rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                   animate={{ 
                     scale: [1, 1.2, 1],
                     opacity: [0.7, 1, 0.7]
@@ -234,11 +241,11 @@ export function ComprehensiveSidebar() {
                 />
               </div>
               
-              <div className="flex-1">
-                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent responsive-container sm:flex-col md:flex-row lg:grid">
                   Trans Bot AI
                 </h1>
-                <p className="text-xs text-transbot-text-secondary font-medium">
+                <p className="text-xs text-transbot-text-secondary font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                   Intelligent Logistics Platform
                 </p>
               </div>
@@ -249,25 +256,25 @@ export function ComprehensiveSidebar() {
 
 
         {/* Portal Status */}
-        <div className="p-4 border-b border-slate-200/50">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse"></div>
-              <span className="text-xs font-medium text-transbot-text-primary">25 Portals Active</span>
+        <div className="p-4 border-b border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-xs font-medium text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">25 Portals Active</span>
             </div>
-            <div className="text-xs text-transbot-text-secondary">MCP Controlled</div>
+            <div className="text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">MCP Controlled</div>
           </div>
         </div>
 
         {/* Navigation Sections */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {navigationSections.map((section) => (
             <motion.div
               key={section.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-1"
+              className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {/* Section Header */}
               <motion.button
@@ -280,11 +287,11 @@ export function ComprehensiveSidebar() {
                     : 'text-transbot-text-primary hover:bg-blue-50 hover:text-blue-600'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <section.icon className={`w-5 h-5 ${section.color}`} />
                   <span>{section.name}</span>
                   {section.items && (
-                    <span className="text-xs bg-transbot-sky/10 text-transbot-sky px-2 py-1 rounded-full">
+                    <span className="text-xs bg-transbot-sky/10 text-transbot-sky px-2 py-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                       {section.items.length}
                     </span>
                   )}
@@ -304,7 +311,7 @@ export function ComprehensiveSidebar() {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="ml-4 space-y-1"
+                    className="ml-4 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {section.items.map((item, index) => (
                       <motion.button
@@ -320,10 +327,10 @@ export function ComprehensiveSidebar() {
                             : 'text-transbot-text-secondary hover:text-blue-600 hover:bg-blue-50'
                         }`}
                       >
-                        <item.icon className="w-4 h-4" />
-                        <span className="flex-1 text-left">{item.name}</span>
+                        <item.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                        <span className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
                         {item.path.includes('portal') && (
-                          <div className="w-2 h-2 bg-transbot-teal rounded-full"></div>
+                          <div className="w-2 h-2 bg-transbot-teal rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                         )}
                       </motion.button>
                     ))}
@@ -335,10 +342,10 @@ export function ComprehensiveSidebar() {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-slate-200/50">
-          <div className="flex items-center justify-between text-xs text-transbot-text-secondary">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse"></div>
+        <div className="p-4 border-t border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
               <span>MCP Agents Active</span>
             </div>
             <span>250 Agents</span>

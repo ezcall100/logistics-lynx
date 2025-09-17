@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CustomerPortal from '../pages/portals/customer/CustomerPortal';
 import BrokerPortal from '../pages/portals/broker/BrokerPortal';
 import CarrierPortal from '../pages/portals/carrier/CarrierPortal';
@@ -61,11 +61,17 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
   // Show loading while detecting subdomain
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold text-white mb-2">TransBot AI</h2>
-          <p className="text-gray-300">Loading portal...</p>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <h2 className="text-2xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">TransBot AI</h2>
+          <p className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Loading portal...</p>
         </div>
       </div>
     );

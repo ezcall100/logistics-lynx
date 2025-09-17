@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bot,
@@ -440,18 +440,24 @@ const MCPAgentsPortal: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-indigo-50/20">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-indigo-50/20 responsive-container">
       {/* Header */}
-      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
-        <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 sm:space-x-4">
+      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40 responsive-container">
+        <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 responsive-container">
+          <div className="flex justify-between items-center responsive-container">
+            <div className="flex items-center space-x-2 sm:space-x-4 responsive-container">
               {/* Mobile Menu Button */}
               <button
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
               >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 responsive-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -461,64 +467,64 @@ const MCPAgentsPortal: React.FC = () => {
                 </svg>
               </button>
 
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                  <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+              <div className="flex items-center space-x-2 sm:space-x-3 responsive-container">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                  <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-white responsive-container" />
                 </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <div className="hidden sm:block responsive-container">
+                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                     TransBot AI
                   </h1>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">
                     MCP 251 Agents Portal
                   </p>
                 </div>
-                <div className="sm:hidden">
-                  <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <div className="sm:hidden responsive-container">
+                  <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                     MCP Agents
                   </h1>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-1 sm:space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2 responsive-container">
               {/* Search Bar */}
-              <div className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <div className="relative hidden md:block responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
                 <input
                   type="text"
                   placeholder="Search agents, tasks, logs..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
+                  className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm responsive-container"
                 />
               </div>
 
               {/* Action Icons */}
-              <div className="flex items-center space-x-1">
-                <button className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors">
-                  <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5" />
+              <div className="flex items-center space-x-1 responsive-container">
+                <button className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                  <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5 responsive-container" />
                 </button>
-                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors">
-                  <Bell className="h-5 w-5" />
+                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                  <Bell className="h-5 w-5 responsive-container" />
                 </button>
-                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors">
-                  <Settings className="h-5 w-5" />
+                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                  <Settings className="h-5 w-5 responsive-container" />
                 </button>
               </div>
 
               {/* User Profile */}
-              <div className="flex items-center space-x-2 pl-2 border-l border-gray-200 dark:border-slate-700">
+              <div className="flex items-center space-x-2 pl-2 border-l border-gray-200 dark:border-slate-700 responsive-container">
                 <img
                   src={user.avatar}
                   alt={user.name}
-                  className="h-8 w-8 rounded-full border-2 border-white shadow-sm"
-                />
-                <div className="hidden sm:block">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  className="h-8 w-8 rounded-full border-2 border-white shadow-sm responsive-container"
+                / alt="Image">
+                <div className="hidden sm:block responsive-container">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                     {user.name}
                   </p>
-                  <p className="text-xs text-gray-500">{user.role}</p>
+                  <p className="text-xs text-gray-500 responsive-container">{user.role}</p>
                 </div>
               </div>
             </div>
@@ -526,43 +532,45 @@ const MCPAgentsPortal: React.FC = () => {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex responsive-container">
         {/* Sidebar */}
         <aside
           className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 fixed md:relative h-screen z-30`}
         >
-          <div className="p-4">
-            <div className="flex items-center justify-between mb-6">
+          <div className="p-4 responsive-container">
+            <div className="flex items-center justify-between mb-6 responsive-container">
               {!sidebarCollapsed && (
-                <div className="flex items-center space-x-3">
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                    <Menu className="h-4 w-4 text-white" />
+                <div className="flex items-center space-x-3 responsive-container">
+                  <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center responsive-container">
+                    <Menu className="h-4 w-4 text-white responsive-container" />
                   </div>
-                  <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Navigation</h2>
+                  <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 responsive-container">Navigation</h2>
                 </div>
               )}
               <button
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="hidden md:block p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                className="hidden md:block p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
               >
                 {sidebarCollapsed ? (
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 responsive-container" />
                 ) : (
-                  <ChevronDown className="h-4 w-4" />
+                  <ChevronDown className="h-4 w-4 responsive-container" />
                 )}
               </button>
             </div>
 
-            <nav className="space-y-2">
+            <nav className="space-y-2 responsive-container">
               {menuItems.map(item => {
                 const Icon = item.icon;
                 const isActive = activeMenuItem === item.id;
                 const isExpanded = expandedMenus.includes(item.id);
 
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <div key={item.id}>
                     <button
-                      onClick={() => {
+                      onClick={() = aria-label="Button"> {
                         if (item.subMenus) {
                           handleMenuToggle(item.id);
                         } else {
@@ -578,7 +586,7 @@ const MCPAgentsPortal: React.FC = () => {
                       <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`} />
                       {!sidebarCollapsed && (
                         <>
-                          <span className="font-medium">{item.label}</span>
+                          <span className="font-medium responsive-container">{item.label}</span>
                           {item.subMenus && (
                             <ChevronRight
                               className={`h-4 w-4 ml-auto transition-transform ${isExpanded ? 'rotate-90' : ''}`}
@@ -595,35 +603,37 @@ const MCPAgentsPortal: React.FC = () => {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="ml-6 mt-2 space-y-1"
+                          className="ml-6 mt-2 space-y-1 responsive-container"
                         >
                           {item.subMenus.map(subItem => {
                             const SubIcon = subItem.icon;
                             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                               <div key={subItem.id}>
                                 <button
-                                  onClick={() => handleMenuItemClick(subItem.id, subItem.path)}
-                                  className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100"
+                                  onClick={() = aria-label="Button"> handleMenuItemClick(subItem.id, subItem.path)}
+                                  className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100 responsive-container"
                                 >
                                   <SubIcon className={`h-4 w-4 ${subItem.color}`} />
                                   <span>{subItem.label}</span>
                                   {subItem.subSubMenus && (
-                                    <ChevronRight className="h-3 w-3 ml-auto" />
+                                    <ChevronRight className="h-3 w-3 ml-auto responsive-container" />
                                   )}
                                 </button>
 
                                 {/* Sub-sub-menus */}
                                 {subItem.subSubMenus && (
-                                  <div className="ml-6 mt-1 space-y-1">
+                                  <div className="ml-6 mt-1 space-y-1 responsive-container">
                                     {subItem.subSubMenus.map(subSubItem => (
                                       <button
                                         key={subSubItem.id}
-                                        onClick={() =>
+                                        onClick={() = aria-label="Button">
                                           handleMenuItemClick(subSubItem.id, subSubItem.path)
                                         }
-                                        className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300"
+                                        className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300 responsive-container"
                                       >
-                                        <div className="h-2 w-2 bg-gray-300 rounded-full"></div>
+                                        <div className="h-2 w-2 bg-gray-300 rounded-full responsive-container"></div>
                                         <span>{subSubItem.label}</span>
                                       </button>
                                     ))}
@@ -641,17 +651,17 @@ const MCPAgentsPortal: React.FC = () => {
             </nav>
 
             {/* MCP Status Widget */}
-            <div className="mt-8 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
-              <div className="flex items-center space-x-3">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                  <Shield className="h-4 w-4 text-white" />
+            <div className="mt-8 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl responsive-container">
+              <div className="flex items-center space-x-3 responsive-container">
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center responsive-container">
+                  <Shield className="h-4 w-4 text-white responsive-container" />
                 </div>
                 {!sidebarCollapsed && (
-                  <div className="flex-1">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  <div className="flex-1 responsive-container">
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 responsive-container">
                       MCP 251 Agents
                     </p>
-                    <p className="text-xs text-gray-500">24/7 Active</p>
+                    <p className="text-xs text-gray-500 responsive-container">24/7 Active</p>
                   </div>
                 )}
               </div>
@@ -660,40 +670,40 @@ const MCPAgentsPortal: React.FC = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6 responsive-container">
           {/* Dashboard Header */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 responsive-container">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                   MCP Agents Dashboard
                 </h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1 responsive-container">
                   Monitor and manage all 251 MCP agents across the system.
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">Live</span>
+              <div className="flex items-center space-x-2 responsive-container">
+                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse responsive-container"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">Live</span>
               </div>
             </div>
           </div>
 
           {/* MCP Connection Status */}
-          <div className="bg-gradient-to-r from-purple-50/80 to-indigo-50/80 border border-purple-200/50 rounded-lg px-3 py-2 shadow-sm">
-            <div className="flex items-center space-x-2">
-              <div className="h-2 w-2 bg-purple-400 rounded-full animate-pulse"></div>
-              <span className="text-xs font-medium text-purple-700">
+          <div className="bg-gradient-to-r from-purple-50/80 to-indigo-50/80 border border-purple-200/50 rounded-lg px-3 py-2 shadow-sm responsive-container">
+            <div className="flex items-center space-x-2 responsive-container">
+              <div className="h-2 w-2 bg-purple-400 rounded-full animate-pulse responsive-container"></div>
+              <span className="text-xs font-medium text-purple-700 responsive-container">
                 Connecting to MCP agents...
               </span>
-              <div className="flex space-x-1 ml-auto">
-                <div className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce"></div>
+              <div className="flex space-x-1 ml-auto responsive-container">
+                <div className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce responsive-container"></div>
                 <div
-                  className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce"
+                  className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce responsive-container"
                   style={{ animationDelay: '0.1s' }}
                 ></div>
                 <div
-                  className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce"
+                  className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce responsive-container"
                   style={{ animationDelay: '0.2s' }}
                 ></div>
               </div>
@@ -701,7 +711,7 @@ const MCPAgentsPortal: React.FC = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 responsive-container">
             {[
               {
                 label: 'Active Agents',
@@ -728,6 +738,8 @@ const MCPAgentsPortal: React.FC = () => {
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
@@ -735,12 +747,12 @@ const MCPAgentsPortal: React.FC = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50hover:shadow-xl transition-all duration-300`}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between responsive-container">
                     <div>
-                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300 responsive-container">
                         {stat.label}
                       </p>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1 responsive-container">
                         {stat.value}
                       </p>
                       <p
@@ -787,27 +799,29 @@ const MCPAgentsPortal: React.FC = () => {
           </div>
 
           {/* Agents Grid */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-            <div className="flex items-center justify-between mb-6">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+            <div className="flex items-center justify-between mb-6 responsive-container">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                   MCP Agents Overview
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-sm responsive-container">
                   Real-time status of all 251 agents
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
-                <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                  <Plus className="h-4 w-4 mr-2 inline" />
+              <div className="flex items-center space-x-2 responsive-container">
+                <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors responsive-container" aria-label="Button">
+                  <Plus className="h-4 w-4 mr-2 inline responsive-container" />
                   Add Agent
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 responsive-container">
               {agents.slice(0, 12).map((agent, index) => {
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.div
                     key={agent.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -816,37 +830,37 @@ const MCPAgentsPortal: React.FC = () => {
                     className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md cursor-pointer ${getStatusColor(agent.status)}`}
                     onClick={() => console.log('Agent clicked:', agent.id)}
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center space-x-2">
-                        <Bot className="h-5 w-5" />
-                        <span className="font-semibold text-sm">{agent.name}</span>
+                    <div className="flex items-center justify-between mb-3 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Bot className="h-5 w-5 responsive-container" />
+                        <span className="font-semibold text-sm responsive-container">{agent.name}</span>
                       </div>
-                      <CheckCircle className="h-4 w-4" />
+                      <CheckCircle className="h-4 w-4 responsive-container" />
                     </div>
 
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs">
+                    <div className="space-y-2 responsive-container">
+                      <div className="flex justify-between text-xs responsive-container">
                         <span>Type:</span>
-                        <span className="font-medium">{agent.type}</span>
+                        <span className="font-medium responsive-container">{agent.type}</span>
                       </div>
-                      <div className="flex justify-between text-xs">
+                      <div className="flex justify-between text-xs responsive-container">
                         <span>Performance:</span>
-                        <span className="font-medium">{agent.performance}%</span>
+                        <span className="font-medium responsive-container">{agent.performance}%</span>
                       </div>
-                      <div className="flex justify-between text-xs">
+                      <div className="flex justify-between text-xs responsive-container">
                         <span>Tasks:</span>
-                        <span className="font-medium">{agent.tasksCompleted}</span>
+                        <span className="font-medium responsive-container">{agent.tasksCompleted}</span>
                       </div>
-                      <div className="flex justify-between text-xs">
+                      <div className="flex justify-between text-xs responsive-container">
                         <span>Location:</span>
-                        <span className="font-medium">{agent.location}</span>
+                        <span className="font-medium responsive-container">{agent.location}</span>
                       </div>
                     </div>
 
                     {agent.currentTask && (
-                      <div className="mt-3 p-2 bg-white/50 rounded-lg">
-                        <p className="text-xs text-gray-600 dark:text-gray-300">Current Task:</p>
-                        <p className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                      <div className="mt-3 p-2 bg-white/50 rounded-lg responsive-container">
+                        <p className="text-xs text-gray-600 dark:text-gray-300 responsive-container">Current Task:</p>
+                        <p className="text-xs font-medium text-gray-800 dark:text-gray-200 responsive-container">
                           {agent.currentTask}
                         </p>
                       </div>
@@ -856,8 +870,8 @@ const MCPAgentsPortal: React.FC = () => {
               })}
             </div>
 
-            <div className="mt-6 text-center">
-              <button className="px-6 py-2 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 transition-colors">
+            <div className="mt-6 text-center responsive-container">
+              <button className="px-6 py-2 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 transition-colors responsive-container" aria-label="Button">
                 View All 251 Agents
               </button>
             </div>

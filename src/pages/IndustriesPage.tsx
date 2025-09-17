@@ -42,30 +42,36 @@ const IndustriesPage: React.FC = () => {
   ]
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-white mb-6">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="container mx-auto px-4 py-16 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="text-center mb-16 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h1 className="text-5xl font-bold text-white mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
               Industry Solutions
             </h1>
-            <p className="text-xl text-purple-200 max-w-3xl mx-auto">
+            <p className="text-xl text-purple-200 max-w-3xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
               Tailored logistics solutions for every industry, powered by AI and designed for your specific needs
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {industries.map((industry, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 group">
-                <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div key={index} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 group responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300 responsive-container sm:flex-col md:flex-row lg:grid">
                   {industry.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{industry.name}</h3>
-                <p className="text-purple-200 mb-6">{industry.description}</p>
-                <ul className="space-y-2">
+                <h3 className="text-2xl font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">{industry.name}</h3>
+                <p className="text-purple-200 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">{industry.description}</p>
+                <ul className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {industry.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-purple-100 flex items-center">
-                      <svg className="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <li key={featureIndex} className="text-purple-100 flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <svg className="w-4 h-4 text-green-400 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       {feature}
@@ -76,13 +82,13 @@ const IndustriesPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-16 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">Don't See Your Industry?</h2>
-              <p className="text-purple-200 mb-6">
+          <div className="mt-16 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-3xl font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Don't See Your Industry?</h2>
+              <p className="text-purple-200 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 Our AI-powered platform adapts to any industry. Contact us to discuss your specific requirements.
               </p>
-              <button className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
+              <button className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                 Contact Our Experts
               </button>
             </div>

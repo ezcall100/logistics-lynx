@@ -44,7 +44,7 @@ const TabsTrigger = React.forwardRef<
       className
     )}
     {...props}
-  />
+  / aria-label="Button">
 ));
 TabsTrigger.displayName = 'TabsTrigger';
 

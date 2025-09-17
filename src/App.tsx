@@ -173,8 +173,18 @@ class ErrorBoundary extends React.Component {
 }
 
 const App = React.memo(() => {
-  const memoizedRoutes = useMemo(() => (
-    <Routes>
+  return (
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AuthProvider>
+          <SubdomainRouter>
+            <Router>
+              <div className="min-h-screen relative responsive-container">
+                <NeuralBackground />
+                <HorizontalMegaMenu />
+                <AdvancedFAB />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
                 <Route
                   path="/"
                   element={
@@ -1257,16 +1267,15 @@ const App = React.memo(() => {
                 {/* MCP Dashboard routes removed - causing errors */}
                 {/* Catch-all route for 404 errors */}
                 <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </div>
-          </Router>
-        </SubdomainRouter>
-      </AuthProvider>
-    </ThemeProvider>
-  </ErrorBoundary>
-  ), []);
-
-  return memoizedRoutes;
+                  </Routes>
+                </Suspense>
+              </div>
+            </Router>
+          </SubdomainRouter>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
 }, []);
 
 export default App;

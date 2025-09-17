@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * TMS Registration Flow - Complete User Onboarding System
  * Comprehensive Registration with Full Logic Flow A-Z
@@ -302,63 +303,63 @@ function RegistrationFlow() {
 
   // Render Welcome Step
   const renderWelcomeStep = () => (
-    <div className="text-center space-y-6">
-      <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto">
-        <Truck className="w-10 h-10 text-white" />
+    <div className="text-center space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
+        <Truck className="w-10 h-10 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
       </div>
       <div>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome to TMS</h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400">Transportation Management System</p>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Welcome to TMS</h2>
+        <p className="text-lg text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Transportation Management System</p>
       </div>
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">What is TMS?</h3>
-        <p className="text-blue-800 dark:text-blue-200 text-sm">
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">What is TMS?</h3>
+        <p className="text-blue-800 dark:text-blue-200 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
           TMS is a comprehensive transportation management system that helps shippers, brokers,
           carriers, and owner operators manage their logistics operations efficiently.
         </p>
       </div>
 
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Who Can Use TMS?</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Package className="w-4 h-4 text-white" />
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Who Can Use TMS?</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Package className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Shipper</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Companies that ship goods</p>
+              <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Shipper</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Companies that ship goods</p>
             </div>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Users className="w-4 h-4 text-white" />
+          <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Broker</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Broker</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Freight brokers connecting shippers and carriers
               </p>
             </div>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Truck className="w-4 h-4 text-white" />
+          <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Truck className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Carrier</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Carrier</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Trucking companies with large fleets
               </p>
             </div>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <User className="w-4 h-4 text-white" />
+          <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
+              <User className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Owner Operator</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Owner Operator</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Small fleet owners (1-5 trucks)
               </p>
             </div>
@@ -366,119 +367,119 @@ function RegistrationFlow() {
         </div>
       </div>
 
-      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-purple-900 dark:text-purple-100 mb-4">
+      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-purple-900 dark:text-purple-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Service Providers
         </h3>
-        <p className="text-purple-800 dark:text-purple-200 text-sm mb-4">
+        <p className="text-purple-800 dark:text-purple-200 text-sm mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Companies that provide support services to the transportation industry
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-blue-500 rounded flex items-center justify-center">
-              <Package className="w-2 h-2 text-white" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-blue-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Package className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">Warehousing & 3PL</span>
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">Warehousing & 3PL</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-green-500 rounded flex items-center justify-center">
-              <Ship className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-green-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Ship className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">Freight Forwarding</span>
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">Freight Forwarding</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-purple-500 rounded flex items-center justify-center">
-              <CreditCard className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-purple-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <CreditCard className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">Insurance Services</span>
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">Insurance Services</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-orange-500 rounded flex items-center justify-center">
-              <Truck className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-orange-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Truck className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">Fleet Services</span>
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">Fleet Services</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-red-500 rounded flex items-center justify-center">
-              <BarChart3 className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-red-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <BarChart3 className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">
               Technology Solutions
             </span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-indigo-500 rounded flex items-center justify-center">
-              <Users className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-indigo-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">
               Consulting Services
             </span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-teal-500 rounded flex items-center justify-center">
-              <Link className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-teal-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Link className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">Customs Brokerage</span>
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">Customs Brokerage</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-yellow-500 rounded flex items-center justify-center">
-              <CarIcon className="w-2 h-2 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-4 h-4 bg-yellow-500 rounded flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <CarIcon className="w-2 h-2 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
-            <span className="text-sm text-purple-800 dark:text-purple-200">
+            <span className="text-sm text-purple-800 dark:text-purple-200 responsive-container sm:flex-col md:flex-row lg:grid">
               Truck Maintenance & Repair
             </span>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border">
-          <Package className="w-8 h-8 text-blue-500" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border responsive-container sm:flex-col md:flex-row lg:grid">
+          <Package className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white">Load Management</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Track and manage shipments</p>
+            <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Load Management</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Track and manage shipments</p>
           </div>
         </div>
-        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border">
-          <Truck className="w-8 h-8 text-green-500" />
+        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border responsive-container sm:flex-col md:flex-row lg:grid">
+          <Truck className="w-8 h-8 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white">Fleet Management</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Manage vehicles and drivers</p>
+            <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Fleet Management</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Manage vehicles and drivers</p>
           </div>
         </div>
-        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border">
-          <DollarSign className="w-8 h-8 text-purple-500" />
+        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border responsive-container sm:flex-col md:flex-row lg:grid">
+          <DollarSign className="w-8 h-8 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white">Financial Management</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Handle billing and payments</p>
+            <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Financial Management</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Handle billing and payments</p>
           </div>
         </div>
-        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border">
-          <Users className="w-8 h-8 text-orange-500" />
+        <div className="flex items-center space-x-3 p-4 bg-white dark:bg-slate-800 rounded-lg border responsive-container sm:flex-col md:flex-row lg:grid">
+          <Users className="w-8 h-8 text-orange-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white">Network Management</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Connect with partners</p>
+            <h4 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Network Management</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Connect with partners</p>
           </div>
         </div>
       </div>
 
       {/* Service Provider Notice */}
-      <div className="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-        <div className="flex items-start space-x-3">
-          <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span className="text-white text-sm font-bold">!</span>
+      <div className="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-white text-sm font-bold responsive-container sm:flex-col md:flex-row lg:grid">!</span>
           </div>
           <div>
-            <h3 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-1">
+            <h3 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
               Are you a Service Provider?
             </h3>
-            <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3">
+            <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
               If you provide support services to the transportation industry (warehousing,
               insurance, maintenance, etc.), we have a specialized registration process for you.
             </p>
             <button
-              onClick={() => setCurrentStep('service-provider-welcome')}
-              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium"
+              onClick={() = aria-label="Button"> setCurrentStep('service-provider-welcome')}
+              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
             >
               Continue as Service Provider →
             </button>
@@ -490,29 +491,29 @@ function RegistrationFlow() {
 
   // Render Service Provider Welcome Step
   const renderServiceProviderWelcomeStep = () => (
-    <div className="space-y-6">
-      <div className="text-center">
-        <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Users className="w-10 h-10 text-white" />
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <Users className="w-10 h-10 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           Service Provider Registration
         </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-lg text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Specialized registration for transportation industry service providers
         </p>
       </div>
 
-      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-purple-900 dark:text-purple-100 mb-4">
+      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-purple-900 dark:text-purple-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           What Services Do You Provide?
         </h3>
-        <p className="text-sm text-purple-800 dark:text-purple-200 mb-4">
+        <p className="text-sm text-purple-800 dark:text-purple-200 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Select all the services you offer. You can choose multiple services and designate one as
           primary.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {[
             {
               id: 'warehousing_3pl',
@@ -575,6 +576,12 @@ function RegistrationFlow() {
             const isPrimary = registrationData.primaryServiceProviderService === service.id;
 
             return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <label
                 key={service.id}
                 className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
@@ -605,31 +612,31 @@ function RegistrationFlow() {
                       }));
                     }
                   }}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
+                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid"
                 />
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-1">
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div
                       className={`w-6 h-6 ${service.color} rounded flex items-center justify-center`}
                     >
-                      <service.icon className="w-3 h-3 text-white" />
+                      <service.icon className="w-3 h-3 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                    <span className="font-medium text-gray-900 dark:text-white text-sm">
+                    <span className="font-medium text-gray-900 dark:text-white text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                       {service.title}
                     </span>
                     {isPrimary && (
-                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
+                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                         Primary
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {service.description}
                   </p>
                   {isSelected && (
                     <button
                       type="button"
-                      onClick={e => {
+                      onClick={e = aria-label="Button"> {
                         e.preventDefault();
                         setRegistrationData(prev => ({
                           ...prev,
@@ -652,13 +659,13 @@ function RegistrationFlow() {
           })}
         </div>
 
-        <div className="mt-4 p-3 bg-white dark:bg-slate-800 rounded-lg">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-4 p-3 bg-white dark:bg-slate-800 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
             <strong>Selected Services:</strong> {registrationData.serviceProviderServices.length} of
             8 services selected
           </p>
           {registrationData.primaryServiceProviderService && (
-            <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+            <p className="text-sm text-green-600 dark:text-green-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Primary Service:</strong>{' '}
               {
                 [
@@ -675,11 +682,11 @@ function RegistrationFlow() {
             </p>
           )}
           {registrationData.serviceProviderServices.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {registrationData.serviceProviderServices.map(service => (
                 <span
                   key={service}
-                  className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs"
+                  className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {
                     [
@@ -700,44 +707,44 @@ function RegistrationFlow() {
         </div>
       </div>
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-3">
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
           Why Register as a Service Provider?
         </h3>
-        <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
-          <li className="flex items-start space-x-2">
-            <span className="text-blue-500 mt-1">•</span>
+        <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
+          <li className="flex items-start space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-blue-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">•</span>
             <span>Access to our Business Directory to connect with transportation companies</span>
           </li>
-          <li className="flex items-start space-x-2">
-            <span className="text-blue-500 mt-1">•</span>
+          <li className="flex items-start space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-blue-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">•</span>
             <span>Specialized tools and features for service providers</span>
           </li>
-          <li className="flex items-start space-x-2">
-            <span className="text-blue-500 mt-1">•</span>
+          <li className="flex items-start space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-blue-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">•</span>
             <span>Integration capabilities with TMS systems</span>
           </li>
-          <li className="flex items-start space-x-2">
-            <span className="text-blue-500 mt-1">•</span>
+          <li className="flex items-start space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-blue-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">•</span>
             <span>Marketing opportunities to reach potential clients</span>
           </li>
         </ul>
       </div>
 
-      <div className="flex justify-center space-x-4">
+      <div className="flex justify-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <button
-          onClick={() => setCurrentStep('welcome')}
-          className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          onClick={() = aria-label="Button"> setCurrentStep('welcome')}
+          className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           ← Back to Main Registration
         </button>
         <button
-          onClick={() => {
+          onClick={() = aria-label="Button"> {
             setRegistrationData(prev => ({ ...prev, companyType: 'service_provider' }));
             setCurrentStep('company-info');
           }}
           disabled={registrationData.serviceProviderServices.length === 0}
-          className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed responsive-container sm:flex-col md:flex-row lg:grid"
         >
           Continue as Service Provider →
         </button>
@@ -747,32 +754,32 @@ function RegistrationFlow() {
 
   // Render Company Info Step
   const renderCompanyInfoStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           Company Information
         </h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Tell us about your company to get started
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Company Name *
           </label>
           <input
             type="text"
             value={registrationData.companyName}
             onChange={e => setRegistrationData(prev => ({ ...prev, companyName: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="Enter company name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Company Type *
           </label>
           <select
@@ -788,7 +795,7 @@ function RegistrationFlow() {
                   | 'service_provider',
               }))
             }
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="shipper">Shipper - Companies that ship goods</option>
             <option value="broker">
@@ -803,13 +810,13 @@ function RegistrationFlow() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Industry
           </label>
           <select
             value={registrationData.industry}
             onChange={e => setRegistrationData(prev => ({ ...prev, industry: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="">Select industry</option>
             {getIndustryOptions(registrationData.companyType).map(industry => (
@@ -821,7 +828,7 @@ function RegistrationFlow() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Company Size
           </label>
           <select
@@ -832,7 +839,7 @@ function RegistrationFlow() {
                 companySize: e.target.value as '1-10' | '11-50' | '51-200' | '201-1000' | '1000+',
               }))
             }
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="1-10">1-10 employees</option>
             <option value="11-50">11-50 employees</option>
@@ -843,24 +850,24 @@ function RegistrationFlow() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Website
           </label>
           <input
             type="url"
             value={registrationData.website}
             onChange={e => setRegistrationData(prev => ({ ...prev, website: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="https://yourcompany.com"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Subdomain
           </label>
-          <div className="flex">
-            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-50 border border-r-0 border-gray-300 dark:border-gray-600 rounded-l-lg dark:bg-gray-600 dark:text-gray-400">
+          <div className="flex responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-50 border border-r-0 border-gray-300 dark:border-gray-600 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               https://
             </span>
             <input
@@ -872,81 +879,81 @@ function RegistrationFlow() {
                   subdomain: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''),
                 }))
               }
-              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-r-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-r-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               placeholder="yourcompany"
             />
-            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-50 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-lg dark:bg-gray-600 dark:text-gray-400">
+            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-50 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-lg dark:bg-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               .transbotai.com
             </span>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Choose a unique subdomain for your TMS portal (letters, numbers, and hyphens only)
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Phone Number *
           </label>
           <input
             type="tel"
             value={registrationData.phone}
             onChange={e => setRegistrationData(prev => ({ ...prev, phone: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="+1 (555) 123-4567"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           Address *
         </label>
         <input
           type="text"
           value={registrationData.address}
           onChange={e => setRegistrationData(prev => ({ ...prev, address: e.target.value }))}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           placeholder="123 Main Street"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             City *
           </label>
           <input
             type="text"
             value={registrationData.city}
             onChange={e => setRegistrationData(prev => ({ ...prev, city: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="City"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             State *
           </label>
           <input
             type="text"
             value={registrationData.state}
             onChange={e => setRegistrationData(prev => ({ ...prev, state: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="State"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             ZIP Code *
           </label>
           <input
             type="text"
             value={registrationData.zipCode}
             onChange={e => setRegistrationData(prev => ({ ...prev, zipCode: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="12345"
           />
         </div>
@@ -955,27 +962,27 @@ function RegistrationFlow() {
       {/* Company Type Specific Fields */}
       {(registrationData.companyType === 'carrier' ||
         registrationData.companyType === 'broker') && (
-        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-4">
+        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
             Regulatory Information
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
+              <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 MC Number
               </label>
               <input
                 type="text"
                 value={registrationData.mcNumber}
                 onChange={e => setRegistrationData(prev => ({ ...prev, mcNumber: e.target.value }))}
-                className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                 placeholder="e.g., MC-123456"
               />
             </div>
 
             {registrationData.companyType === 'carrier' && (
               <div>
-                <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
+                <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   DOT Number
                 </label>
                 <input
@@ -984,7 +991,7 @@ function RegistrationFlow() {
                   onChange={e =>
                     setRegistrationData(prev => ({ ...prev, dotNumber: e.target.value }))
                   }
-                  className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   placeholder="e.g., 123456"
                 />
               </div>
@@ -992,7 +999,7 @@ function RegistrationFlow() {
 
             {registrationData.companyType === 'broker' && (
               <div>
-                <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
+                <label className="block text-sm font-medium text-blue-800 dark:text-blue-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   Broker License
                 </label>
                 <input
@@ -1001,7 +1008,7 @@ function RegistrationFlow() {
                   onChange={e =>
                     setRegistrationData(prev => ({ ...prev, brokerLicense: e.target.value }))
                   }
-                  className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                   placeholder="e.g., BL-123456"
                 />
               </div>
@@ -1012,13 +1019,13 @@ function RegistrationFlow() {
 
       {(registrationData.companyType === 'carrier' ||
         registrationData.companyType === 'owner_operator') && (
-        <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-          <h3 className="text-lg font-semibold text-green-900 dark:text-green-100 mb-4">
+        <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-green-900 dark:text-green-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
             Fleet Information
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-green-800 dark:text-green-200 mb-2">
+              <label className="block text-sm font-medium text-green-800 dark:text-green-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Fleet Size
               </label>
               <select
@@ -1026,7 +1033,7 @@ function RegistrationFlow() {
                 onChange={e =>
                   setRegistrationData(prev => ({ ...prev, fleetSize: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">Select fleet size</option>
                 {registrationData.companyType === 'owner_operator' ? (
@@ -1050,7 +1057,7 @@ function RegistrationFlow() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-green-800 dark:text-green-200 mb-2">
+              <label className="block text-sm font-medium text-green-800 dark:text-green-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Operating Radius
               </label>
               <select
@@ -1058,7 +1065,7 @@ function RegistrationFlow() {
                 onChange={e =>
                   setRegistrationData(prev => ({ ...prev, operatingRadius: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">Select operating radius</option>
                 <option value="local">Local (within 100 miles)</option>
@@ -1072,26 +1079,26 @@ function RegistrationFlow() {
       )}
 
       {registrationData.companyType === 'service_provider' && (
-        <div className="mt-6 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-          <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-4">
+        <div className="mt-6 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
             Service Provider Information
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2">
+              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Service License Number
               </label>
               <input
                 type="text"
                 value={registrationData.mcNumber}
                 onChange={e => setRegistrationData(prev => ({ ...prev, mcNumber: e.target.value }))}
-                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                 placeholder="e.g., SL-123456"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2">
+              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Years in Business
               </label>
               <select
@@ -1099,7 +1106,7 @@ function RegistrationFlow() {
                 onChange={e =>
                   setRegistrationData(prev => ({ ...prev, fleetSize: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">Select years in business</option>
                 <option value="0-1">0-1 years</option>
@@ -1111,7 +1118,7 @@ function RegistrationFlow() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2">
+              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Service Coverage Area
               </label>
               <select
@@ -1119,7 +1126,7 @@ function RegistrationFlow() {
                 onChange={e =>
                   setRegistrationData(prev => ({ ...prev, operatingRadius: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">Select coverage area</option>
                 <option value="local">Local (within 100 miles)</option>
@@ -1130,7 +1137,7 @@ function RegistrationFlow() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2">
+              <label className="block text-sm font-medium text-purple-800 dark:text-purple-200 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Number of Clients
               </label>
               <select
@@ -1138,7 +1145,7 @@ function RegistrationFlow() {
                 onChange={e =>
                   setRegistrationData(prev => ({ ...prev, dotNumber: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="">Select number of clients</option>
                 <option value="1-10">1-10 clients</option>
@@ -1155,29 +1162,29 @@ function RegistrationFlow() {
 
   // Render Role Selection Step
   const renderRoleSelectionStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Role Selection</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Role Selection</h2>
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Your role is automatically set based on your company type
         </p>
       </div>
 
       {/* Auto-selected Role based on Company Type */}
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-            <User className="w-5 h-5 text-white" />
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <User className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 responsive-container sm:flex-col md:flex-row lg:grid">
               {registrationData.companyType === 'service_provider'
                 ? 'Service Provider'
                 : registrationData.companyType
                     .replace('_', ' ')
                     .replace(/\b\w/g, l => l.toUpperCase())}
             </h3>
-            <p className="text-sm text-blue-700 dark:text-blue-200">
+            <p className="text-sm text-blue-700 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               {registrationData.companyType === 'service_provider'
                 ? (() => {
                     const serviceName = registrationData.primaryServiceProviderService
@@ -1202,15 +1209,15 @@ function RegistrationFlow() {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Select Required Functions
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           Choose the TMS functions you need for your business operations. You can change these later
           in settings.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {[
             {
               id: 'load_management',
@@ -1322,6 +1329,8 @@ function RegistrationFlow() {
             const isSelected = registrationData.requestedFunctions.includes(functionItem.id);
 
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <label
                 key={functionItem.id}
                 className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
@@ -1348,21 +1357,21 @@ function RegistrationFlow() {
                       }));
                     }
                   }}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid"
                 />
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <functionItem.icon className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                    <span className="font-medium text-gray-900 dark:text-white">
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <functionItem.icon className="w-4 h-4 text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {functionItem.name}
                     </span>
                     {isRecommended && (
-                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
+                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                         Recommended
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {functionItem.description}
                   </p>
                 </div>
@@ -1371,17 +1380,17 @@ function RegistrationFlow() {
           })}
         </div>
 
-        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
             <strong>Selected Functions:</strong> {registrationData.requestedFunctions.length} of 15
             functions selected
           </p>
           {registrationData.requestedFunctions.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {registrationData.requestedFunctions.map(func => (
                 <span
                   key={func}
-                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs"
+                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {func.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                 </span>
@@ -1395,77 +1404,77 @@ function RegistrationFlow() {
 
   // Render Approval Pending Step
   const renderApprovalPendingStep = () => (
-    <div className="text-center space-y-6">
-      <div className="w-20 h-20 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto">
-        <Clock className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />
+    <div className="text-center space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="w-20 h-20 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
+        <Clock className="w-10 h-10 text-yellow-600 dark:text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />
       </div>
       <div>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Approval Pending</h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Approval Pending</h2>
+        <p className="text-lg text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Your registration is under review
         </p>
       </div>
-      <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+      <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           What happens next?
         </h3>
-        <div className="space-y-3 text-left">
-          <div className="flex items-center space-x-3">
-            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">1</span>
+        <div className="space-y-3 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-white text-xs font-bold responsive-container sm:flex-col md:flex-row lg:grid">1</span>
             </div>
-            <p className="text-yellow-800 dark:text-yellow-200 text-sm">
+            <p className="text-yellow-800 dark:text-yellow-200 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
               Our team reviews your company information
             </p>
           </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">2</span>
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-white text-xs font-bold responsive-container sm:flex-col md:flex-row lg:grid">2</span>
             </div>
-            <p className="text-yellow-800 dark:text-yellow-200 text-sm">
+            <p className="text-yellow-800 dark:text-yellow-200 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
               We verify your business credentials
             </p>
           </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">3</span>
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-white text-xs font-bold responsive-container sm:flex-col md:flex-row lg:grid">3</span>
             </div>
-            <p className="text-yellow-800 dark:text-yellow-200 text-sm">
+            <p className="text-yellow-800 dark:text-yellow-200 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
               You receive an approval email with login credentials
             </p>
           </div>
         </div>
       </div>
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
           Registration Details
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <p className="text-blue-800 dark:text-blue-200">
+            <p className="text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Company:</strong> {registrationData.companyName}
             </p>
-            <p className="text-blue-800 dark:text-blue-200">
+            <p className="text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Role:</strong> {registrationData.primaryRole.replace('_', ' ')}
             </p>
           </div>
           <div>
-            <p className="text-blue-800 dark:text-blue-200">
+            <p className="text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Email:</strong> {registrationData.email}
             </p>
-            <p className="text-blue-800 dark:text-blue-200">
+            <p className="text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Functions:</strong> {registrationData.requestedFunctions.length} selected
             </p>
           </div>
         </div>
       </div>
 
-      <div className="text-center">
+      <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
         <a
           href="/"
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
           Return to Website
         </a>
       </div>
@@ -1474,87 +1483,87 @@ function RegistrationFlow() {
 
   // Render User Details Step
   const renderUserDetailsStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">User Details</h2>
-        <p className="text-gray-600 dark:text-gray-400">Tell us about yourself</p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">User Details</h2>
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Tell us about yourself</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             First Name *
           </label>
           <input
             type="text"
             value={registrationData.firstName}
             onChange={e => setRegistrationData(prev => ({ ...prev, firstName: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="Enter your first name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Last Name *
           </label>
           <input
             type="text"
             value={registrationData.lastName}
             onChange={e => setRegistrationData(prev => ({ ...prev, lastName: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="Enter your last name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Email Address *
           </label>
           <input
             type="email"
             value={registrationData.email}
             onChange={e => setRegistrationData(prev => ({ ...prev, email: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="Enter your email address"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Phone Number *
           </label>
           <input
             type="tel"
             value={registrationData.userPhone}
             onChange={e => setRegistrationData(prev => ({ ...prev, userPhone: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="+1 (555) 123-4567"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Job Title
           </label>
           <input
             type="text"
             value={registrationData.jobTitle}
             onChange={e => setRegistrationData(prev => ({ ...prev, jobTitle: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="e.g., Logistics Manager, Operations Director"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Department
           </label>
           <input
             type="text"
             value={registrationData.department}
             onChange={e => setRegistrationData(prev => ({ ...prev, department: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
             placeholder="e.g., Operations, Sales, IT"
           />
         </div>
@@ -1564,24 +1573,24 @@ function RegistrationFlow() {
 
   // Render Lines of Business Step
   const renderLinesOfBusinessStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Lines of Business</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Lines of Business</h2>
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Select the transportation services your company provides
         </p>
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Select Your Transportation Services
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           Choose all the services you offer. You can select multiple services and designate one as
           primary.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {[
             {
               id: 'ftl',
@@ -1638,6 +1647,8 @@ function RegistrationFlow() {
             const isPrimary = registrationData.primaryLineOfBusiness === service.id;
 
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <label
                 key={service.id}
                 className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
@@ -1666,32 +1677,32 @@ function RegistrationFlow() {
                       }));
                     }
                   }}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid"
                 />
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <service.icon className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                    <span className="font-medium text-gray-900 dark:text-white">
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <service.icon className="w-4 h-4 text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {service.name}
                     </span>
                     {isRecommended && (
-                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
+                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                         Recommended
                       </span>
                     )}
                     {isPrimary && (
-                      <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
+                      <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                         Primary
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {service.description}
                   </p>
                   {isSelected && (
                     <button
                       type="button"
-                      onClick={e => {
+                      onClick={e = aria-label="Button"> {
                         e.preventDefault();
                         setRegistrationData(prev => ({
                           ...prev,
@@ -1714,13 +1725,13 @@ function RegistrationFlow() {
           })}
         </div>
 
-        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+          <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
             <strong>Selected Services:</strong> {registrationData.linesOfBusiness.length} of 7
             services selected
           </p>
           {registrationData.primaryLineOfBusiness && (
-            <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+            <p className="text-sm text-green-600 dark:text-green-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
               <strong>Primary Service:</strong>{' '}
               {
                 [
@@ -1736,11 +1747,11 @@ function RegistrationFlow() {
             </p>
           )}
           {registrationData.linesOfBusiness.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {registrationData.linesOfBusiness.map(service => (
                 <span
                   key={service}
-                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs"
+                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {
                     [
@@ -1764,15 +1775,15 @@ function RegistrationFlow() {
 
   // Render Subscription Step
   const renderSubscriptionStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Choose Your Plan</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Choose Your Plan</h2>
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Select the subscription plan that best fits your needs
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
         {[
           {
             id: 'free',
@@ -1839,7 +1850,7 @@ function RegistrationFlow() {
         ].map(plan => (
           <button
             key={plan.id}
-            onClick={() =>
+            onClick={() = aria-label="Button">
               setRegistrationData(prev => ({
                 ...prev,
                 subscriptionType: plan.id as SubscriptionType,
@@ -1852,31 +1863,31 @@ function RegistrationFlow() {
             } ${plan.popular ? 'ring-2 ring-yellow-400' : ''}`}
           >
             {plan.popular && (
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-yellow-400 text-yellow-900 px-3 py-1 text-xs font-medium rounded-full">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="bg-yellow-400 text-yellow-900 px-3 py-1 text-xs font-medium rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                   Most Popular
                 </span>
               </div>
             )}
 
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
-              <div className="flex items-baseline">
-                <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            <div className="mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{plan.name}</h3>
+              <div className="flex items-baseline responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {plan.price}
                 </span>
-                <span className="text-gray-600 dark:text-gray-400 ml-1">/{plan.period}</span>
+                <span className="text-gray-600 dark:text-gray-400 ml-1 responsive-container sm:flex-col md:flex-row lg:grid">/{plan.period}</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{plan.description}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">{plan.description}</p>
             </div>
 
-            <ul className="space-y-2">
+            <ul className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {plan.features.map((feature, index) => (
                 <li
                   key={index}
-                  className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                  className="flex items-center text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {feature}
                 </li>
               ))}
@@ -1885,9 +1896,9 @@ function RegistrationFlow() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Billing Cycle
           </label>
           <select
@@ -1898,7 +1909,7 @@ function RegistrationFlow() {
                 billingCycle: e.target.value as 'monthly' | 'yearly',
               }))
             }
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly (Save 20%)</option>
@@ -1906,7 +1917,7 @@ function RegistrationFlow() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Payment Method
           </label>
           <select
@@ -1917,7 +1928,7 @@ function RegistrationFlow() {
                 paymentMethod: e.target.value as 'credit_card' | 'bank_transfer' | 'invoice',
               }))
             }
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="credit_card">Credit Card</option>
             <option value="bank_transfer">Bank Transfer</option>
@@ -1930,24 +1941,24 @@ function RegistrationFlow() {
 
   // Render Verification Step
   const renderVerificationStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Verification</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Verification</h2>
+        <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           Verify your information and complete the registration
         </p>
       </div>
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-4">
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           Registration Summary
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
+            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
               Company Information
             </h4>
-            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <p>
                 <strong>Company:</strong> {registrationData.companyName}
               </p>
@@ -1973,8 +1984,8 @@ function RegistrationFlow() {
           </div>
 
           <div>
-            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">User Information</h4>
-            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">User Information</h4>
+            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <p>
                 <strong>Name:</strong> {registrationData.firstName} {registrationData.lastName}
               </p>
@@ -1994,19 +2005,19 @@ function RegistrationFlow() {
           </div>
 
           <div>
-            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Role & Functions</h4>
-            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Role & Functions</h4>
+            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <p>
                 <strong>Primary Role:</strong> {registrationData.primaryRole.replace('_', ' ')}
               </p>
               <p>
                 <strong>Functions:</strong> {registrationData.requestedFunctions.length} selected
               </p>
-              <div className="flex flex-wrap gap-1 mt-1">
+              <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                 {registrationData.requestedFunctions.map(func => (
                   <span
                     key={func}
-                    className="px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded text-xs"
+                    className="px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {func.replace('_', ' ')}
                   </span>
@@ -2017,10 +2028,10 @@ function RegistrationFlow() {
 
           {registrationData.companyType === 'service_provider' ? (
             <div>
-              <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
+              <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Service Provider Services
               </h4>
-              <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+              <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
                 <p>
                   <strong>Services:</strong> {registrationData.serviceProviderServices.length}{' '}
                   selected
@@ -2042,11 +2053,11 @@ function RegistrationFlow() {
                     }
                   </p>
                 )}
-                <div className="flex flex-wrap gap-1 mt-1">
+                <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {registrationData.serviceProviderServices.map(service => (
                     <span
                       key={service}
-                      className="px-2 py-1 bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 rounded text-xs"
+                      className="px-2 py-1 bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       {
                         [
@@ -2067,10 +2078,10 @@ function RegistrationFlow() {
             </div>
           ) : (
             <div>
-              <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
+              <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Lines of Business
               </h4>
-              <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+              <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
                 <p>
                   <strong>Services:</strong> {registrationData.linesOfBusiness.length} selected
                 </p>
@@ -2090,11 +2101,11 @@ function RegistrationFlow() {
                     }
                   </p>
                 )}
-                <div className="flex flex-wrap gap-1 mt-1">
+                <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {registrationData.linesOfBusiness.map(service => (
                     <span
                       key={service}
-                      className="px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded text-xs"
+                      className="px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       {
                         [
@@ -2115,8 +2126,8 @@ function RegistrationFlow() {
           )}
 
           <div>
-            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Subscription</h4>
-            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
+            <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Subscription</h4>
+            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
               <p>
                 <strong>Plan:</strong> {registrationData.subscriptionType}
               </p>
@@ -2131,63 +2142,63 @@ function RegistrationFlow() {
         </div>
       </div>
 
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
           Verification Checklist
         </h3>
-        <div className="space-y-3">
-          <label className="flex items-center space-x-3">
+        <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <label className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="checkbox"
               checked={registrationData.emailVerified}
               onChange={e =>
                 setRegistrationData(prev => ({ ...prev, emailVerified: e.target.checked }))
               }
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
               I confirm that my email address is correct and I will receive notifications
             </span>
           </label>
 
-          <label className="flex items-center space-x-3">
+          <label className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="checkbox"
               checked={registrationData.phoneVerified}
               onChange={e =>
                 setRegistrationData(prev => ({ ...prev, phoneVerified: e.target.checked }))
               }
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
               I confirm that my phone number is correct and I can be reached
             </span>
           </label>
 
-          <label className="flex items-center space-x-3">
+          <label className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="checkbox"
               checked={registrationData.documentsUploaded}
               onChange={e =>
                 setRegistrationData(prev => ({ ...prev, documentsUploaded: e.target.checked }))
               }
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
               I will provide required business documents during the approval process
             </span>
           </label>
 
-          <label className="flex items-center space-x-3">
+          <label className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="checkbox"
               checked={registrationData.complianceChecked}
               onChange={e =>
                 setRegistrationData(prev => ({ ...prev, complianceChecked: e.target.checked }))
               }
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
               I agree to comply with all applicable regulations and terms of service
             </span>
           </label>
@@ -2219,8 +2230,10 @@ function RegistrationFlow() {
         return renderApprovalPendingStep();
       default:
         return (
-          <div className="text-center">
-            <p className="text-gray-600 dark:text-gray-400">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               Step {currentStep} is under development.
             </p>
           </div>
@@ -2229,29 +2242,31 @@ function RegistrationFlow() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Truck className="w-5 h-5 text-white" />
+      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-4xl mx-auto px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   TMS Registration
                 </h1>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Get started with TMS</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Get started with TMS</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Step {currentStepIndex + 1} of {steps.length}
               </div>
               <a
                 href="/"
-                className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 ← Back to Website
               </a>
@@ -2261,11 +2276,11 @@ function RegistrationFlow() {
       </header>
 
       {/* Progress Bar */}
-      <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex items-center space-x-2">
+      <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-4xl mx-auto px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {steps.map((step, index) => (
-              <div key={step.id} className="flex items-center">
+              <div key={step.id} className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     index <= currentStepIndex
@@ -2289,7 +2304,7 @@ function RegistrationFlow() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-6 py-8">
+      <main className="max-w-4xl mx-auto px-6 py-8 responsive-container sm:flex-col md:flex-row lg:grid">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep}
@@ -2304,17 +2319,17 @@ function RegistrationFlow() {
 
         {/* Navigation */}
         {currentStep !== 'approval-pending' && (
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-center justify-between mt-8 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
               onClick={handlePrevious}
               disabled={currentStepIndex === 0}
-              className="flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowLeft className="w-4 h-4" />
+              className="flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed responsive-container sm:flex-col md:flex-row lg:grid"
+             aria-label="Button">
+              <ArrowLeft className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>Previous</span>
             </button>
 
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {currentStep === 'verification' ? (
                 <button
                   onClick={handleSubmit}
@@ -2325,22 +2340,22 @@ function RegistrationFlow() {
                     !registrationData.documentsUploaded ||
                     !registrationData.complianceChecked
                   }
-                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   {isLoading ? (
-                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <RefreshCw className="w-4 h-4 animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : (
-                    <CheckCircle className="w-4 h-4" />
+                    <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                   <span>Submit Registration</span>
                 </button>
               ) : (
                 <button
                   onClick={handleNext}
-                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                >
+                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   <span>Next</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               )}
             </div>

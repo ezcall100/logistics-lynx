@@ -19,7 +19,13 @@ export const SuperAdminMainContent: React.FC<SuperAdminMainContentProps> = ({
   children
 }) => {
   return (
-    <main className="flex-1 p-3 sm:p-4 md:p-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <main className="flex-1 p-3 sm:p-4 md:p-6 responsive-container">
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
@@ -27,7 +33,7 @@ export const SuperAdminMainContent: React.FC<SuperAdminMainContentProps> = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="h-full"
+          className="h-full responsive-container"
         >
           {children}
         </motion.div>

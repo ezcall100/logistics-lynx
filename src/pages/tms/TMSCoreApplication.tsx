@@ -5,7 +5,7 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
@@ -108,83 +108,83 @@ const TMSCoreApplication: React.FC = () => {
   ];
 
   const renderDashboard = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Loads</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Loads</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {dashboardStats.totalLoads}
               </p>
             </div>
-            <Truck className="w-8 h-8 text-blue-500" />
+            <Truck className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Loads</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Loads</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {dashboardStats.activeLoads}
               </p>
             </div>
-            <Activity className="w-8 h-8 text-green-500" />
+            <Activity className="w-8 h-8 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Revenue</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Revenue</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 ${dashboardStats.totalRevenue.toLocaleString()}
               </p>
             </div>
-            <DollarSign className="w-8 h-8 text-yellow-500" />
+            <DollarSign className="w-8 h-8 text-yellow-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {dashboardStats.activeUsers}
               </p>
             </div>
-            <Users className="w-8 h-8 text-purple-500" />
+            <Users className="w-8 h-8 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
 
       {/* Recent Loads */}
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm">
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Loads</h3>
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Recent Loads</h3>
         </div>
-        <div className="p-6">
-          <div className="space-y-4">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {recentLoads.map(load => (
               <div
                 key={load.id}
-                className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center space-x-4">
-                  <Truck className="w-8 h-8 text-blue-500" />
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Truck className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
+                    <p className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {load.origin} → {load.destination}
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       Pickup: {load.pickupDate} | Delivery: {load.deliveryDate}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-medium text-gray-900 dark:text-white">
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     ${load.value.toLocaleString()}
                   </p>
                   <span
@@ -213,26 +213,38 @@ const TMSCoreApplication: React.FC = () => {
         return renderDashboard();
       case 'loads':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Loads Management</h2>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Loads Management</h2>
           </div>
         );
       case 'carriers':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Carriers</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Carriers</h2>
           </div>
         );
       case 'analytics':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Analytics</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Analytics</h2>
           </div>
         );
       case 'settings':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Settings</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Settings</h2>
           </div>
         );
       default:
@@ -241,39 +253,43 @@ const TMSCoreApplication: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Sidebar */}
       <div
         className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white dark:bg-slate-800 shadow-sm transition-all duration-300 flex flex-col`}
       >
         {/* Logo */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <Truck className="w-5 h-5 text-white" />
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             {!sidebarCollapsed && (
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">TMS Core</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">TMS Core</h1>
             )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
+        <nav className="flex-1 p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <ul className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {navigationItems.map(item => {
               const Icon = item.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <li key={item.id}>
                   <button
-                    onClick={() => setActiveTab(item.id)}
+                    onClick={() = aria-label="Button"> setActiveTab(item.id)}
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       activeTab === item.id
                         ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     {!sidebarCollapsed && <span>{item.label}</span>}
                   </button>
                 </li>
@@ -283,10 +299,10 @@ const TMSCoreApplication: React.FC = () => {
         </nav>
 
         {/* User Profile */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                 {currentUser.name
                   .split(' ')
                   .map(n => n[0])
@@ -294,11 +310,11 @@ const TMSCoreApplication: React.FC = () => {
               </span>
             </div>
             {!sidebarCollapsed && (
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+              <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate responsive-container sm:flex-col md:flex-row lg:grid">
                   {currentUser.name}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                <p className="text-xs text-gray-500 dark:text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                   {currentUser.role}
                 </p>
               </div>
@@ -308,45 +324,45 @@ const TMSCoreApplication: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
-        <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-          <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+        <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700"
+                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {sidebarCollapsed ? (
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : (
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                 </button>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white capitalize">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                   {activeTab}
                 </h2>
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
                   onClick={toggleTheme}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700"
-                >
-                  {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
+                  {theme === 'dark' ? <Sun className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Moon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
                 </button>
 
                 <button
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative"
+                  onClick={() = aria-label="Button"> setShowNotifications(!showNotifications)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                  <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></span>
                 </button>
 
-                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     {currentUser.name
                       .split(' ')
                       .map(n => n[0])
@@ -359,7 +375,7 @@ const TMSCoreApplication: React.FC = () => {
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto responsive-container sm:flex-col md:flex-row lg:grid">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}

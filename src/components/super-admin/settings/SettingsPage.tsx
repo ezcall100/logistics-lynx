@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -59,52 +59,58 @@ const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-        <div className="flex items-center justify-between">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Settings</h1>
+          <p className="text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
             Manage your account and system preferences
           </p>
         </div>
-        <Button onClick={handleSave} className="flex items-center gap-2">
-          <Save className="h-4 w-4" />
+        <Button onClick={handleSave} className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <Save className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           Save Changes
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="personal" className="flex items-center gap-2">
-            <User className="h-4 w-4" />
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <TabsList className="grid w-full grid-cols-5 responsive-container sm:flex-col md:flex-row lg:grid">
+          <TabsTrigger value="personal" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <User className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Personal
           </TabsTrigger>
-          <TabsTrigger value="company" className="flex items-center gap-2">
-            <Building2 className="h-4 w-4" />
+          <TabsTrigger value="company" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Building2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Company
           </TabsTrigger>
-          <TabsTrigger value="security" className="flex items-center gap-2">
-            <Shield className="h-4 w-4" />
+          <TabsTrigger value="security" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Shield className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Security
           </TabsTrigger>
-          <TabsTrigger value="notifications" className="flex items-center gap-2">
-            <Bell className="h-4 w-4" />
+          <TabsTrigger value="notifications" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Bell className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Notifications
           </TabsTrigger>
-          <TabsTrigger value="appearance" className="flex items-center gap-2">
-            <Palette className="h-4 w-4" />
+          <TabsTrigger value="appearance" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Palette className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Appearance
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="personal" className="space-y-4">
+        <TabsContent value="personal" className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <Card>
             <CardHeader>
               <CardTitle>Personal Information</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
+            <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
                     id="firstName"
@@ -115,7 +121,7 @@ const SettingsPage: React.FC = () => {
                     }))}
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="lastName">Last Name</Label>
                   <Input
                     id="lastName"
@@ -127,7 +133,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
           </div>
-              <div className="space-y-2">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -139,7 +145,7 @@ const SettingsPage: React.FC = () => {
                   }))}
                 />
           </div>
-              <div className="space-y-2">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Label htmlFor="phone">Phone</Label>
                 <Input
                   id="phone"
@@ -154,13 +160,13 @@ const SettingsPage: React.FC = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="company" className="space-y-4">
+        <TabsContent value="company" className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <Card>
             <CardHeader>
               <CardTitle>Company Information</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
+            <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Label htmlFor="companyName">Company Name</Label>
                 <Input
                   id="companyName"
@@ -171,7 +177,7 @@ const SettingsPage: React.FC = () => {
                   }))}
                 />
             </div>
-              <div className="space-y-2">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <Label htmlFor="address">Address</Label>
                 <Input
                   id="address"
@@ -182,8 +188,8 @@ const SettingsPage: React.FC = () => {
                   }))}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="companyPhone">Phone</Label>
                   <Input
                     id="companyPhone"
@@ -194,7 +200,7 @@ const SettingsPage: React.FC = () => {
                     }))}
                   />
           </div>
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="companyEmail">Email</Label>
                   <Input
                     id="companyEmail"
@@ -211,16 +217,16 @@ const SettingsPage: React.FC = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="security" className="space-y-4">
+        <TabsContent value="security" className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <Card>
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
+            <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label>Two-Factor Authentication</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                     Add an extra layer of security to your account
                   </p>
                     </div>
@@ -233,10 +239,10 @@ const SettingsPage: React.FC = () => {
                 />
                     </div>
               <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label>Login Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                     Get notified when someone logs into your account
                   </p>
                     </div>
@@ -252,16 +258,16 @@ const SettingsPage: React.FC = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="notifications" className="space-y-4">
+        <TabsContent value="notifications" className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <Card>
             <CardHeader>
               <CardTitle>Notification Preferences</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
+            <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label>Email Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                     Receive notifications via email
                   </p>
                     </div>
@@ -273,10 +279,10 @@ const SettingsPage: React.FC = () => {
                   }))}
                 />
         </div>
-          <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label>Push Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                     Receive push notifications in your browser
                   </p>
             </div>
@@ -292,16 +298,16 @@ const SettingsPage: React.FC = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="appearance" className="space-y-4">
+        <TabsContent value="appearance" className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <Card>
             <CardHeader>
               <CardTitle>Appearance Settings</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
+            <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-0.5 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label>Compact Mode</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                     Use a more compact interface layout
                   </p>
           </div>

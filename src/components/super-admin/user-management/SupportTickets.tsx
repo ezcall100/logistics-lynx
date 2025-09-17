@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageSquare,
@@ -228,17 +228,17 @@ export const SupportTickets: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'open':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container" />;
       case 'in-progress':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container" />;
       case 'resolved':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container" />;
       case 'closed':
-        return <XCircle className="w-4 h-4" />;
+        return <XCircle className="w-4 h-4 responsive-container" />;
       case 'pending':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container" />;
       default:
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container" />;
     }
   };
 
@@ -336,33 +336,39 @@ export const SupportTickets: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-8 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container">
                 Support Tickets
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 responsive-container">
                 Manage customer support tickets and provide exceptional service
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <RefreshCw className="w-4 h-4" />
+            <div className="flex items-center space-x-3 responsive-container">
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <RefreshCw className="w-4 h-4 responsive-container" />
                 <span>Refresh</span>
               </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <Download className="w-4 h-4 responsive-container" />
                 <span>Export</span>
               </button>
               <button
-                onClick={() => console.log('Create modal clicked')}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                onClick={() = aria-label="Button"> console.log('Create modal clicked')}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 responsive-container"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 responsive-container" />
                 <span>New Ticket</span>
               </button>
             </div>
@@ -370,25 +376,27 @@ export const SupportTickets: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200 dark:border-slate-700">
-            <nav className="-mb-px flex space-x-8">
+        <div className="mb-6 responsive-container">
+          <div className="border-b border-gray-200 dark:border-slate-700 responsive-container">
+            <nav className="-mb-px flex space-x-8 responsive-container">
               {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <button
                     key={tab.id}
-                    onClick={() => setSelectedTab(tab.id as 'overview' | 'tickets' | 'analytics')}
+                    onClick={() = aria-label="Button"> setSelectedTab(tab.id as 'overview' | 'tickets' | 'analytics')}
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                       selectedTab === tab.id
                         ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-slate-600'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 responsive-container" />
                     <span>{tab.label}</span>
                     {tab.count !== undefined && (
-                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs">
+                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs responsive-container">
                         {tab.count}
                       </span>
                     )}
@@ -400,22 +408,22 @@ export const SupportTickets: React.FC = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="mb-6 responsive-container">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container">
+            <div className="relative flex-1 responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search tickets by title, user, or ID..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm responsive-container"
               />
             </div>
             <select
               value={statusFilter}
               onChange={e => setStatusFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
+              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700 responsive-container"
             >
               {statuses.map(status => (
                 <option key={status.id} value={status.id}>
@@ -426,7 +434,7 @@ export const SupportTickets: React.FC = () => {
             <select
               value={priorityFilter}
               onChange={e => setPriorityFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
+              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700 responsive-container"
             >
               {priorities.map(priority => (
                 <option key={priority.id} value={priority.id}>
@@ -437,7 +445,7 @@ export const SupportTickets: React.FC = () => {
             <select
               value={categoryFilter}
               onChange={e => setCategoryFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
+              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700 responsive-container"
             >
               {categories.map(category => (
                 <option key={category.id} value={category.id}>
@@ -452,27 +460,29 @@ export const SupportTickets: React.FC = () => {
         {selectedTab === 'overview' && (
           <>
             {/* Key Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8 responsive-container">
               {ticketMetrics.map(metric => {
                 const Icon = metric.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.div
                     key={metric.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow responsive-container"
                   >
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-4 responsive-container">
                       <div className={`p-2 rounded-lg ${metric.color} bg-opacity-10`}>
                         <Icon className={`w-5 h-5 ${metric.color.replace('bg-', 'text-')}`} />
                       </div>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1 responsive-container">
                         {metric.changeType === 'increase' ? (
-                          <TrendingUp className="w-4 h-4 text-green-500" />
+                          <TrendingUp className="w-4 h-4 text-green-500 responsive-container" />
                         ) : metric.changeType === 'decrease' ? (
-                          <TrendingDown className="w-4 h-4 text-red-500" />
+                          <TrendingDown className="w-4 h-4 text-red-500 responsive-container" />
                         ) : (
-                          <Activity className="w-4 h-4 text-gray-500" />
+                          <Activity className="w-4 h-4 text-gray-500 responsive-container" />
                         )}
                         <span
                           className={`text-sm font-medium ${
@@ -487,14 +497,14 @@ export const SupportTickets: React.FC = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1 responsive-container">
                       {metric.value}
                       {metric.id === 'avg-resolution' && 'h'}
                       {metric.id === 'satisfaction' && '/5'}
                       {metric.id === 'response-time' && 'h'}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">{metric.title}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 responsive-container">
                       {metric.period}
                     </div>
                   </motion.div>
@@ -503,99 +513,101 @@ export const SupportTickets: React.FC = () => {
             </div>
 
             {/* Recent Tickets */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-              <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
+              <div className="p-6 border-b border-gray-200 dark:border-slate-700 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container">
                   Recent Tickets
                 </h3>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-slate-700/50">
+              <div className="overflow-x-auto responsive-container">
+                <table className="w-full responsive-container">
+                  <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         Ticket
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         User
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         Priority
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         Source
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                         Created
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                     {filteredTickets.slice(0, 10).map(ticket => {
                       const SourceIcon = getSourceIcon(ticket.source);
                       return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                         <motion.tr
                           key={ticket.id}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
+                          className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer responsive-container"
                           onClick={() => {
                             console.log('Ticket selected:', ticket);
                           }}
                         >
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
                             <div>
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                              <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                                 {ticket.id}
                               </div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
+                              <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs responsive-container">
                                 {ticket.title}
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
                             <div>
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                              <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                                 {ticket.userName}
                               </div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                              <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                                 {ticket.userEmail}
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
                             <span
                               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}
                             >
                               {getStatusIcon(ticket.status)}
-                              <span className="ml-1 capitalize">
+                              <span className="ml-1 capitalize responsive-container">
                                 {ticket.status.replace('-', ' ')}
                               </span>
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
                             <span
                               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}
                             >
                               {ticket.priority}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
                             <span
                               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSourceColor(ticket.source)}`}
                             >
-                              <SourceIcon className="w-3 h-3 mr-1" />
+                              <SourceIcon className="w-3 h-3 mr-1 responsive-container" />
                               {ticket.source}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 dark:text-white">
+                          <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                            <div className="text-sm text-gray-900 dark:text-white responsive-container">
                               {new Date(ticket.createdAt).toLocaleDateString()}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                            <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                               {new Date(ticket.createdAt).toLocaleTimeString()}
                             </div>
                           </td>
@@ -610,143 +622,143 @@ export const SupportTickets: React.FC = () => {
         )}
 
         {selectedTab === 'tickets' && (
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Ticket
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       User
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Priority
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Assigned To
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Messages
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {filteredTickets.map(ticket => (
                     <motion.tr
                       key={ticket.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                             {ticket.id}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs responsive-container">
                             {ticket.title}
                           </div>
-                          <div className="flex flex-wrap gap-1 mt-1">
+                          <div className="flex flex-wrap gap-1 mt-1 responsive-container">
                             {ticket.tags.slice(0, 2).map(tag => (
                               <span
                                 key={tag}
-                                className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+                                className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 responsive-container"
                               >
                                 {tag}
                               </span>
                             ))}
                             {ticket.tags.length > 2 && (
-                              <span className="text-xs text-gray-500 dark:text-gray-400">
+                              <span className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                                 +{ticket.tags.length - 2}
                               </span>
                             )}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                             {ticket.userName}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                             {ticket.userEmail}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <span className="text-sm text-gray-900 dark:text-white responsive-container">
                           {ticket.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}
                         >
                           {getStatusIcon(ticket.status)}
-                          <span className="ml-1 capitalize">{ticket.status.replace('-', ' ')}</span>
+                          <span className="ml-1 capitalize responsive-container">{ticket.status.replace('-', ' ')}</span>
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}
                         >
                           {ticket.priority}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {ticket.assignedToName || 'Unassigned'}
                         </div>
                         {ticket.assignedTo && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                             {ticket.assignedTo}
                           </div>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center space-x-2">
-                          <MessageCircle className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
+                          <MessageCircle className="w-4 h-4 text-gray-400 responsive-container" />
+                          <span className="text-sm text-gray-900 dark:text-white responsive-container">
                             {ticket.messages}
                           </span>
                           {ticket.attachments > 0 && (
-                            <Paperclip className="w-4 h-4 text-gray-400" />
+                            <Paperclip className="w-4 h-4 text-gray-400 responsive-container" />
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               console.log('Ticket selected:', ticket);
                             }}
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
                           >
-                            <Eye className="w-4 h-4" />
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
+                           aria-label="Button">
+                            <Edit className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Reply"
-                          >
-                            <Send className="w-4 h-4" />
+                           aria-label="Button">
+                            <Send className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>
@@ -759,25 +771,25 @@ export const SupportTickets: React.FC = () => {
         )}
 
         {selectedTab === 'analytics' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6 responsive-container">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">
                 Ticket Trends
               </h3>
-              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                <div className="text-center">
-                  <BarChart3 className="w-12 h-12 mx-auto mb-2" />
+              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400 responsive-container">
+                <div className="text-center responsive-container">
+                  <BarChart3 className="w-12 h-12 mx-auto mb-2 responsive-container" />
                   <p>Ticket trends chart will be displayed here</p>
                 </div>
               </div>
             </div>
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6 responsive-container">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">
                 Category Distribution
               </h3>
-              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                <div className="text-center">
-                  <PieChart className="w-12 h-12 mx-auto mb-2" />
+              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400 responsive-container">
+                <div className="text-center responsive-container">
+                  <PieChart className="w-12 h-12 mx-auto mb-2 responsive-container" />
                   <p>Category distribution chart will be displayed here</p>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from '../../../components/common/ThemeToggle';
@@ -769,18 +770,24 @@ function CustomerPortal() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
       {/* Enhanced Header - Responsive */}
-      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
-        <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 sm:space-x-4">
+      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40 responsive-container">
+        <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 responsive-container">
+          <div className="flex justify-between items-center responsive-container">
+            <div className="flex items-center space-x-2 sm:space-x-4 responsive-container">
               {/* Mobile Menu Button */}
               <button
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
               >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 responsive-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -790,183 +797,183 @@ function CustomerPortal() {
                 </svg>
               </button>
 
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                  <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+              <div className="flex items-center space-x-2 sm:space-x-3 responsive-container">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                  <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white responsive-container" />
                 </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <div className="hidden sm:block responsive-container">
+                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                     TransBot AI
                   </h1>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">
                     Customer Portal
                   </p>
                 </div>
-                <div className="sm:hidden">
-                  <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <div className="sm:hidden responsive-container">
+                  <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                     TransBot
                   </h1>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-1 sm:space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2 responsive-container">
               {/* Search Bar - Responsive */}
-              <div className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <div className="relative hidden md:block responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
                 <input
                   type="text"
                   placeholder="Search customers, orders, reports..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
+                  className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm responsive-container"
                 />
               </div>
               {/* Mobile Search Button */}
-              <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
-                <Search className="h-5 w-5" />
+              <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container" aria-label="Button">
+                <Search className="h-5 w-5 responsive-container" />
               </button>
 
               {/* Action Icons - Responsive */}
-              <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-1 responsive-container">
                 {/* Refresh Button */}
                 <button
-                  onClick={() => window.location.reload()}
-                  className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  onClick={() = aria-label="Button"> window.location.reload()}
+                  className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Refresh"
                 >
-                  <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5 responsive-container" />
                 </button>
 
                 {/* Download Button - Hidden on mobile */}
                 <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Download Reports"
-                >
-                  <Download className="h-5 w-5" />
+                 aria-label="Button">
+                  <Download className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* Upload Button - Hidden on mobile */}
                 <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Upload Data"
-                >
-                  <Upload className="h-5 w-5" />
+                 aria-label="Button">
+                  <Upload className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* Share Button - Hidden on mobile */}
                 <button
-                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="hidden sm:block p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Share Dashboard"
-                >
-                  <Share2 className="h-5 w-5" />
+                 aria-label="Button">
+                  <Share2 className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* Bookmark Button */}
                 <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Bookmark"
-                >
-                  <Bookmark className="h-5 w-5" />
+                 aria-label="Button">
+                  <Bookmark className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* History Button */}
                 <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Recent Activity"
-                >
-                  <History className="h-5 w-5" />
+                 aria-label="Button">
+                  <History className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* Sound Toggle */}
                 <button
-                  onClick={() => setSoundEnabled(!soundEnabled)}
+                  onClick={() = aria-label="Button"> setSoundEnabled(!soundEnabled)}
                   className={`p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors ${
                     soundEnabled ? 'text-gray-600 dark:text-gray-300' : 'text-gray-400'
                   }`}
                   title={soundEnabled ? 'Mute Sounds' : 'Enable Sounds'}
                 >
-                  {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+                  {soundEnabled ? <Volume2 className="h-5 w-5 responsive-container" /> : <VolumeX className="h-5 w-5 responsive-container" />}
                 </button>
 
                 {/* Dark Mode Toggle */}
                 <button
-                  onClick={() => setDarkMode(!darkMode)}
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  onClick={() = aria-label="Button"> setDarkMode(!darkMode)}
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title={darkMode ? 'Light Mode' : 'Dark Mode'}
                 >
-                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                  {darkMode ? <Sun className="h-5 w-5 responsive-container" /> : <Moon className="h-5 w-5 responsive-container" />}
                 </button>
 
                 {/* Fullscreen Toggle */}
                 <button
-                  onClick={() => setFullscreen(!fullscreen)}
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  onClick={() = aria-label="Button"> setFullscreen(!fullscreen)}
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title={fullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
                 >
                   {fullscreen ? (
-                    <Minimize2 className="h-5 w-5" />
+                    <Minimize2 className="h-5 w-5 responsive-container" />
                   ) : (
-                    <Maximize2 className="h-5 w-5" />
+                    <Maximize2 className="h-5 w-5 responsive-container" />
                   )}
                 </button>
 
                 {/* Help Button */}
                 <button
-                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Help & Support"
-                >
-                  <HelpCircle className="h-5 w-5" />
+                 aria-label="Button">
+                  <HelpCircle className="h-5 w-5 responsive-container" />
                 </button>
 
                 {/* Notifications */}
-                <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
-                  <Bell className="h-5 w-5" />
+                <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                  <Bell className="h-5 w-5 responsive-container" />
                   {notifications.length > 0 && (
-                    <span className="absolute top-1 right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
+                    <span className="absolute top-1 right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse responsive-container"></span>
                   )}
                 </button>
 
                 {/* Settings Dropdown */}
-                <div className="relative">
+                <div className="relative responsive-container">
                   {/* Theme Toggle */}
                   <ThemeToggle size="sm" />
 
                   <button
-                    onClick={() => setShowSettingsMenu(!showSettingsMenu)}
-                    className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                    onClick={() = aria-label="Button"> setShowSettingsMenu(!showSettingsMenu)}
+                    className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                     title="Settings"
                   >
-                    <Settings className="h-5 w-5" />
+                    <Settings className="h-5 w-5 responsive-container" />
                   </button>
 
                   {/* Settings Dropdown Menu */}
                   {showSettingsMenu && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50 responsive-container">
+                      <div className="px-4 py-2 border-b border-gray-100 responsive-container">
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                           Settings
                         </h3>
                       </div>
-                      <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <User className="h-4 w-4" />
+                      <div className="py-1 responsive-container">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <User className="h-4 w-4 responsive-container" />
                           <span>Profile Settings</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Lock className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Lock className="h-4 w-4 responsive-container" />
                           <span>Security</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Globe className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Globe className="h-4 w-4 responsive-container" />
                           <span>Language</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Wifi className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Wifi className="h-4 w-4 responsive-container" />
                           <span>Network</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Star className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Star className="h-4 w-4 responsive-container" />
                           <span>Preferences</span>
                         </button>
                       </div>
@@ -976,55 +983,55 @@ function CustomerPortal() {
               </div>
 
               {/* User Profile Section */}
-              <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-slate-700">
-                <div className="relative">
+              <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-slate-700 responsive-container">
+                <div className="relative responsive-container">
                   <button
-                    onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors"
+                    onClick={() = aria-label="Button"> setShowUserMenu(!showUserMenu)}
+                    className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors responsive-container"
                   >
                     <img
-                      className="h-10 w-10 rounded-xl shadow-md"
+                      className="h-10 w-10 rounded-xl shadow-md responsive-container"
                       src={user.avatar}
                       alt={user.name}
-                    />
-                    <div className="hidden md:block text-left">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    / alt="Image">
+                    <div className="hidden md:block text-left responsive-container">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         {user.name}
                       </p>
-                      <p className="text-xs text-gray-500 font-medium">{user.role}</p>
+                      <p className="text-xs text-gray-500 font-medium responsive-container">{user.role}</p>
                     </div>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <ChevronDown className="h-4 w-4 text-gray-400 responsive-container" />
                   </button>
 
                   {/* User Dropdown Menu */}
                   {showUserMenu && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50">
-                      <div className="px-4 py-3 border-b border-gray-100">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 py-2 z-50 responsive-container">
+                      <div className="px-4 py-3 border-b border-gray-100 responsive-container">
+                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                           {user.name}
                         </p>
-                        <p className="text-xs text-gray-500">{user.email}</p>
+                        <p className="text-xs text-gray-500 responsive-container">{user.email}</p>
                       </div>
-                      <div className="py-1">
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <User className="h-4 w-4" />
+                      <div className="py-1 responsive-container">
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <User className="h-4 w-4 responsive-container" />
                           <span>My Profile</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Mail className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Mail className="h-4 w-4 responsive-container" />
                           <span>Messages</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Heart className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Heart className="h-4 w-4 responsive-container" />
                           <span>Favorites</span>
                         </button>
-                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2">
-                          <Flag className="h-4 w-4" />
+                        <button className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <Flag className="h-4 w-4 responsive-container" />
                           <span>Reports</span>
                         </button>
-                        <div className="border-t border-gray-100 my-1"></div>
-                        <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2">
-                          <LogOut className="h-4 w-4" />
+                        <div className="border-t border-gray-100 my-1 responsive-container"></div>
+                        <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2 responsive-container" aria-label="Button">
+                          <LogOut className="h-4 w-4 responsive-container" />
                           <span>Sign Out</span>
                         </button>
                       </div>
@@ -1037,28 +1044,28 @@ function CustomerPortal() {
         </div>
       </header>
 
-      <div className="flex relative">
+      <div className="flex relative responsive-container">
         {/* Enhanced Permanent Sidebar - Responsive */}
         <aside
           className={`${sidebarCollapsed ? 'w-16' : 'w-64 lg:w-72'} bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg shadow-xl border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ease-in-out sticky top-20 h-[calc(100vh-5rem)] z-30 hidden md:block`}
         >
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full responsive-container">
             {/* Sidebar Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between">
+            <div className="p-4 border-b border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex items-center justify-between responsive-container">
                 {!sidebarCollapsed && (
-                  <div className="flex items-center space-x-2">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                      <Zap className="h-4 w-4 text-white" />
+                  <div className="flex items-center space-x-2 responsive-container">
+                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center responsive-container">
+                      <Zap className="h-4 w-4 text-white responsive-container" />
                     </div>
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 responsive-container">
                       Navigation
                     </span>
                   </div>
                 )}
                 <button
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
                 >
                   <ChevronRight
                     className={`h-4 w-4 text-gray-500 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`}
@@ -1068,18 +1075,20 @@ function CustomerPortal() {
             </div>
 
             {/* Multi-Level Navigation Menu */}
-            <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+            <nav className="flex-1 p-4 space-y-1 overflow-y-auto responsive-container">
               {menuItems.map(menuItem => {
                 const Icon = menuItem.icon;
                 const isExpanded = expandedMenus.includes(menuItem.id);
                 const isActive = activeMenuItem === menuItem.id;
 
                 return (
-                  <div key={menuItem.id} className="space-y-1">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                  <div key={menuItem.id} className="space-y-1 responsive-container">
                     {/* Main Menu Item */}
-                    <div className="space-y-1">
+                    <div className="space-y-1 responsive-container">
                       <button
-                        onClick={() => {
+                        onClick={() = aria-label="Button"> {
                           if (menuItem.subMenus && menuItem.subMenus.length > 0) {
                             handleMenuToggle(menuItem.id);
                           } else {
@@ -1092,7 +1101,7 @@ function CustomerPortal() {
                             : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                         }`}
                       >
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-3 responsive-container">
                           <Icon
                             className={`h-5 w-5 ${isActive ? menuItem.color : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
                           />
@@ -1119,7 +1128,7 @@ function CustomerPortal() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4"
+                        className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4 responsive-container"
                       >
                         {menuItem.subMenus.map(subMenu => {
                           const SubIcon = subMenu.icon;
@@ -1127,10 +1136,12 @@ function CustomerPortal() {
                           const isSubActive = activeMenuItem === subMenu.id;
 
                           return (
-                            <div key={subMenu.id} className="space-y-1">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                            <div key={subMenu.id} className="space-y-1 responsive-container">
                               {/* Sub-Menu Item */}
                               <button
-                                onClick={() => {
+                                onClick={() = aria-label="Button"> {
                                   if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
                                     handleMenuToggle(subMenu.id);
                                   } else {
@@ -1143,7 +1154,7 @@ function CustomerPortal() {
                                     : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                 }`}
                               >
-                                <div className="flex items-center space-x-3">
+                                <div className="flex items-center space-x-3 responsive-container">
                                   <SubIcon
                                     className={`h-4 w-4 ${isSubActive ? 'text-emerald-600' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
                                   />
@@ -1167,15 +1178,17 @@ function CustomerPortal() {
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                   transition={{ duration: 0.2 }}
-                                  className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4"
+                                  className="ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-4 responsive-container"
                                 >
                                   {subMenu.subSubMenus.map(subSubMenu => {
                                     const isSubSubActive = activeMenuItem === subSubMenu.id;
 
                                     return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                                       <button
                                         key={subSubMenu.id}
-                                        onClick={() =>
+                                        onClick={() = aria-label="Button">
                                           handleMenuItemClick(subSubMenu.id, subSubMenu.path)
                                         }
                                         className={`w-full flex items-center space-x-3 px-3 py-1.5 rounded-md transition-all duration-200 group ${
@@ -1184,7 +1197,7 @@ function CustomerPortal() {
                                             : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                                         }`}
                                       >
-                                        <div className="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
+                                        <div className="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-600 responsive-container" />
                                         <span
                                           className={`text-xs font-medium ${isSubSubActive ? 'text-purple-700' : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
                                         >
@@ -1206,17 +1219,17 @@ function CustomerPortal() {
             </nav>
 
             {/* Sidebar Footer */}
-            <div className="p-4 border-t border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200 dark:border-slate-700">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <Shield className="h-4 w-4 text-white" />
+            <div className="p-4 border-t border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200 dark:border-slate-700 responsive-container">
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center responsive-container">
+                  <Shield className="h-4 w-4 text-white responsive-container" />
                 </div>
                 {!sidebarCollapsed && (
-                  <div className="flex-1">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  <div className="flex-1 responsive-container">
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 responsive-container">
                       MCP 251 Agents
                     </p>
-                    <p className="text-xs text-gray-500">24/7 Active</p>
+                    <p className="text-xs text-gray-500 responsive-container">24/7 Active</p>
                   </div>
                 )}
               </div>
@@ -1226,37 +1239,37 @@ function CustomerPortal() {
 
         {/* Mobile Sidebar Overlay */}
         {!sidebarCollapsed && (
-          <div className="md:hidden fixed inset-0 z-50">
+          <div className="md:hidden fixed inset-0 z-50 responsive-container">
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm responsive-container"
               onClick={() => setSidebarCollapsed(true)}
             />
             {/* Mobile Sidebar */}
-            <aside className="absolute left-0 top-0 w-80 h-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl border-r border-gray-200 dark:border-slate-700/50">
-              <div className="flex flex-col h-full">
+            <aside className="absolute left-0 top-0 w-80 h-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl border-r border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex flex-col h-full responsive-container">
                 {/* Mobile Sidebar Header */}
-                <div className="p-4 border-b border-gray-200 dark:border-slate-700/50">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <Users className="h-6 w-6 text-white" />
+                <div className="p-4 border-b border-gray-200 dark:border-slate-700/50 responsive-container">
+                  <div className="flex items-center justify-between responsive-container">
+                    <div className="flex items-center space-x-3 responsive-container">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                        <Users className="h-6 w-6 text-white responsive-container" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                        <h2 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                           TransBot AI
                         </h2>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">
                           Customer Portal
                         </p>
                       </div>
                     </div>
                     <button
-                      onClick={() => setSidebarCollapsed(true)}
-                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                      onClick={() = aria-label="Button"> setSidebarCollapsed(true)}
+                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
                     >
                       <svg
-                        className="h-5 w-5"
+                        className="h-5 w-5 responsive-container"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -1273,28 +1286,30 @@ function CustomerPortal() {
                 </div>
 
                 {/* Mobile Navigation - Same as desktop but full width */}
-                <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+                <nav className="flex-1 p-4 space-y-2 overflow-y-auto responsive-container">
                   {menuItems.map(menuItem => {
                     const isActive = activeMenuItem === menuItem.id;
                     const isExpanded = expandedMenus.includes(menuItem.id);
 
                     return (
-                      <div key={menuItem.id} className="space-y-1">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                      <div key={menuItem.id} className="space-y-1 responsive-container">
                         {/* Main Menu Item */}
-                        <div className="space-y-1">
+                        <div className="space-y-1 responsive-container">
                           <button
-                            onClick={() => handleMenuToggle(menuItem.id)}
+                            onClick={() = aria-label="Button"> handleMenuToggle(menuItem.id)}
                             className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
                               isActive
                                 ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
                                 : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
                             }`}
                           >
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 responsive-container">
                               <menuItem.icon
                                 className={`h-5 w-5 ${isActive ? 'text-white' : menuItem.color}`}
                               />
-                              <span className="font-medium">{menuItem.label}</span>
+                              <span className="font-medium responsive-container">{menuItem.label}</span>
                             </div>
                             {menuItem.subMenus && menuItem.subMenus.length > 0 && (
                               <ChevronDown
@@ -1305,16 +1320,18 @@ function CustomerPortal() {
 
                           {/* Sub-menus */}
                           {isExpanded && menuItem.subMenus && (
-                            <div className="ml-4 space-y-1">
+                            <div className="ml-4 space-y-1 responsive-container">
                               {menuItem.subMenus.map(subMenu => {
                                 const isSubActive = activeMenuItem === subMenu.id;
                                 const isSubExpanded = expandedMenus.includes(subMenu.id);
 
                                 return (
-                                  <div key={subMenu.id} className="space-y-1">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                                  <div key={subMenu.id} className="space-y-1 responsive-container">
                                     {/* Sub-Menu Item */}
                                     <button
-                                      onClick={() => {
+                                      onClick={() = aria-label="Button"> {
                                         if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
                                           handleMenuToggle(subMenu.id);
                                         } else {
@@ -1327,11 +1344,11 @@ function CustomerPortal() {
                                           : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                                       }`}
                                     >
-                                      <div className="flex items-center space-x-2">
+                                      <div className="flex items-center space-x-2 responsive-container">
                                         <subMenu.icon
                                           className={`h-4 w-4 ${isSubActive ? 'text-white' : 'text-gray-500'}`}
                                         />
-                                        <span className="text-sm font-medium">{subMenu.label}</span>
+                                        <span className="text-sm font-medium responsive-container">{subMenu.label}</span>
                                       </div>
                                       {subMenu.subSubMenus && subMenu.subSubMenus.length > 0 && (
                                         <ChevronDown
@@ -1342,14 +1359,16 @@ function CustomerPortal() {
 
                                     {/* Sub-sub-menus */}
                                     {isSubExpanded && subMenu.subSubMenus && (
-                                      <div className="ml-4 space-y-1">
+                                      <div className="ml-4 space-y-1 responsive-container">
                                         {subMenu.subSubMenus.map(subSubMenu => {
                                           const isSubSubActive = activeMenuItem === subSubMenu.id;
 
                                           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                                             <button
                                               key={subSubMenu.id}
-                                              onClick={() =>
+                                              onClick={() = aria-label="Button">
                                                 handleMenuItemClick(subSubMenu.id, subSubMenu.path)
                                               }
                                               className={`w-full flex items-center space-x-2 px-3 py-1.5 rounded-md transition-all duration-200 group ${
@@ -1361,7 +1380,7 @@ function CustomerPortal() {
                                               <div
                                                 className={`h-3 w-3 rounded-full ${isSubSubActive ? 'bg-white' : 'bg-gray-400'}`}
                                               ></div>
-                                              <span className="text-xs font-medium">
+                                              <span className="text-xs font-medium responsive-container">
                                                 {subSubMenu.label}
                                               </span>
                                             </button>
@@ -1385,33 +1404,35 @@ function CustomerPortal() {
         )}
 
         {/* Main Content Area - Responsive */}
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6 responsive-container">
           {/* Real-time Status */}
           <RealTimePortalStatus portalId="customer" />
 
           {/* Dashboard Header - Responsive */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 responsive-container">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                   Dashboard
                 </h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 dark:text-gray-300 mt-1">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 dark:text-gray-300 mt-1 responsive-container">
                   Welcome back, {user.name}! Here's what's happening with your Customer Portal.
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">Live</span>
+              <div className="flex items-center space-x-2 responsive-container">
+                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse responsive-container"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">Live</span>
               </div>
             </div>
           </div>
 
           {/* Enhanced Metrics Grid - Responsive */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 responsive-container">
             {metrics.map(metric => {
               const Icon = metric.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <motion.div
                   key={metric.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -1419,7 +1440,7 @@ function CustomerPortal() {
                   transition={{ duration: 0.5 }}
                   className={`${metric.bgColor} ${metric.borderColor} border rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer`}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between responsive-container">
                     <div
                       className={`p-3 rounded-xl ${metric.bgColor} border ${metric.borderColor}`}
                     >
@@ -1431,11 +1452,11 @@ function CustomerPortal() {
                       {metric.change}
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  <div className="mt-4 responsive-container">
+                    <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                       {metric.value}
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{metric.title}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 responsive-container">{metric.title}</p>
                   </div>
                 </motion.div>
               );
@@ -1443,61 +1464,61 @@ function CustomerPortal() {
           </div>
 
           {/* Enhanced Navigation Tabs */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-            <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+            <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl responsive-container">
               {menuItems.map(item => (
                 <button
                   key={item.id}
-                  onClick={() => handleMenuItemClick(item.id, item.path)}
+                  onClick={() = aria-label="Button"> handleMenuItemClick(item.id, item.path)}
                   className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                     activeMenuItem === item.id
                       ? 'bg-white shadow-sm text-blue-600 font-semibold'
                       : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100 hover:bg-white/50'
                   }`}
                 >
-                  <item.icon className="h-4 w-4" />
-                  <span className="text-sm">{item.label}</span>
+                  <item.icon className="h-4 w-4 responsive-container" />
+                  <span className="text-sm responsive-container">{item.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Enhanced Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container">
             {/* Performance Overview */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex items-center justify-between mb-6 responsive-container">
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                     Performance Overview
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm responsive-container">
                     Key performance indicators for Customer Portal
                   </p>
                 </div>
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <BarChart3 className="h-4 w-4 text-white" />
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center responsive-container">
+                  <BarChart3 className="h-4 w-4 text-white responsive-container" />
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {performanceData.map((item, index) => (
                   <motion.div
                     key={item.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="space-y-2"
+                    className="space-y-2 responsive-container"
                   >
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <div className="flex justify-between items-center responsive-container">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                         {item.label}
                       </span>
-                      <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                      <span className="text-sm font-bold text-gray-900 dark:text-gray-100 responsive-container">
                         {item.value}%
                       </span>
                     </div>
-                    <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-3 bg-gray-200 rounded-full overflow-hidden responsive-container">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${item.value}%` }}
@@ -1511,25 +1532,27 @@ function CustomerPortal() {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex items-center justify-between mb-6 responsive-container">
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                     Recent Activity
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm responsive-container">
                     Latest updates and notifications
                   </p>
                 </div>
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <Activity className="h-4 w-4 text-white" />
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center responsive-container">
+                  <Activity className="h-4 w-4 text-white responsive-container" />
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 {recentActivity.map((activity, index) => {
                   const Icon = activity.icon;
                   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                     <motion.div
                       key={activity.id}
                       initial={{ opacity: 0, y: 20 }}
@@ -1544,14 +1567,14 @@ function CustomerPortal() {
                           className={`h-4 w-4 ${getStatusColor(activity.type).split(' ')[0]}`}
                         />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      <div className="flex-1 min-w-0 responsive-container">
+                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                           {activity.action}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 responsive-container">
                           {activity.details}
                         </p>
-                        <p className="text-xs text-gray-500 mt-2">{activity.time}</p>
+                        <p className="text-xs text-gray-500 mt-2 responsive-container">{activity.time}</p>
                       </div>
                     </motion.div>
                   );
@@ -1564,9 +1587,9 @@ function CustomerPortal() {
         {/* Enhanced Right CRM Sidebar - Responsive */}
         {rightSidebarCollapsed ? (
           /* Collapsed State - Only Toggle Button */
-          <div className="fixed right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
+          <div className="fixed right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto responsive-container">
             <button
-              onClick={e => {
+              onClick={e = aria-label="Button"> {
                 e.stopPropagation();
                 e.preventDefault();
                 console.log('Toggle button clicked - opening sidebar');
@@ -1574,42 +1597,42 @@ function CustomerPortal() {
               }}
               onMouseDown={e => e.stopPropagation()}
               onMouseUp={e => e.stopPropagation()}
-              className="group p-2 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto"
+              className="group p-2 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700/50 transition-all duration-300 hover:scale-110 pointer-events-auto responsive-container"
             >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-200 transition-transform duration-300 group-hover:-translate-x-0.5" />
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-200 transition-transform duration-300 group-hover:-translate-x-0.5 responsive-container" />
             </button>
           </div>
         ) : (
           /* Expanded State - Full CRM Sidebar */
-          <aside className="bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 sticky top-20 h-[calc(100vh-5rem)] z-30 w-72 sm:w-80 transition-all duration-500 ease-out hidden lg:block">
-            <div className="flex flex-col h-full relative overflow-hidden">
+          <aside className="bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 sticky top-20 h-[calc(100vh-5rem)] z-30 w-72 sm:w-80 transition-all duration-500 ease-out hidden lg:block responsive-container">
+            <div className="flex flex-col h-full relative overflow-hidden responsive-container">
               {/* Animated Background Pattern */}
-              <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400"></div>
-                <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 left-8 w-24 h-24 bg-pink-300 rounded-full blur-2xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 rounded-full blur-xl animate-pulse delay-500"></div>
+              <div className="absolute inset-0 opacity-5 responsive-container">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-indigo-400 responsive-container"></div>
+                <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300 rounded-full blur-3xl animate-pulse responsive-container"></div>
+                <div className="absolute bottom-20 left-8 w-24 h-24 bg-pink-300 rounded-full blur-2xl animate-pulse delay-1000 responsive-container"></div>
+                <div className="absolute top-1/2 right-4 w-16 h-16 bg-indigo-300 rounded-full blur-xl animate-pulse delay-500 responsive-container"></div>
               </div>
 
               {/* Enhanced CRM Sidebar Header */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="relative">
-                      <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <MessageCircle className="h-5 w-5 text-white" />
+              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm responsive-container">
+                <div className="flex items-center justify-between responsive-container">
+                  <div className="flex items-center space-x-3 responsive-container">
+                    <div className="relative responsive-container">
+                      <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                        <MessageCircle className="h-5 w-5 text-white responsive-container" />
                       </div>
-                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse responsive-container"></div>
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent responsive-container">
                         CRM Command Center
                       </h3>
-                      <p className="text-xs text-gray-500 font-medium">All systems active</p>
+                      <p className="text-xs text-gray-500 font-medium responsive-container">All systems active</p>
                     </div>
                   </div>
                   <button
-                    onClick={e => {
+                    onClick={e = aria-label="Button"> {
                       e.stopPropagation();
                       e.preventDefault();
                       console.log('Close button clicked - closing sidebar');
@@ -1617,20 +1640,22 @@ function CustomerPortal() {
                     }}
                     onMouseDown={e => e.stopPropagation()}
                     onMouseUp={e => e.stopPropagation()}
-                    className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                    className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
                   >
-                    <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180" />
+                    <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180 responsive-container" />
                   </button>
                 </div>
               </div>
 
               {/* Enhanced CRM Tabs */}
-              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm responsive-container">
+                <div className="grid grid-cols-2 gap-3 responsive-container">
                   {crmTabs.map((tab, index) => {
                     const Icon = tab.icon;
                     const isActive = activeCrmTab === tab.id;
                     return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                       <motion.button
                         key={tab.id}
                         initial={{ opacity: 0, y: 20 }}
@@ -1668,12 +1693,12 @@ function CustomerPortal() {
                             }`}
                           />
                           {isActive && (
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent responsive-container"></div>
                           )}
                         </div>
 
                         {!rightSidebarCollapsed && (
-                          <div className="relative flex-1">
+                          <div className="relative flex-1 responsive-container">
                             <span
                               className={`text-xs font-semibold transition-all duration-300 ${
                                 isActive
@@ -1684,14 +1709,14 @@ function CustomerPortal() {
                               {tab.label}
                             </span>
                             {isActive && (
-                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50"></div>
+                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50 responsive-container"></div>
                             )}
                           </div>
                         )}
 
                         {/* Active indicator */}
                         {isActive && (
-                          <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
+                          <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse responsive-container"></div>
                         )}
                       </motion.button>
                     );
@@ -1700,10 +1725,10 @@ function CustomerPortal() {
               </div>
 
               {/* Enhanced CRM Content */}
-              <div className="flex-1 p-4 overflow-y-auto relative">
+              <div className="flex-1 p-4 overflow-y-auto relative responsive-container">
                 {/* Content Background Pattern */}
-                <div className="absolute inset-0 opacity-3">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20"></div>
+                <div className="absolute inset-0 opacity-3 responsive-container">
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20 responsive-container"></div>
                 </div>
 
                 {!rightSidebarCollapsed && activeCrmTab === 'chat' && (
@@ -1711,23 +1736,23 @@ function CustomerPortal() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-4 relative"
+                    className="space-y-4 relative responsive-container"
                   >
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 backdrop-blur-sm border border-blue-200/50">
-                      <h3 className="text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 backdrop-blur-sm border border-blue-200/50 responsive-container">
+                      <h3 className="text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent responsive-container">
                         Live Chat
                       </h3>
-                      <div className="flex items-center space-x-2">
-                        <div className="relative">
-                          <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="absolute inset-0 h-3 w-3 bg-green-400 rounded-full animate-ping opacity-75"></div>
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <div className="relative responsive-container">
+                          <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse responsive-container"></div>
+                          <div className="absolute inset-0 h-3 w-3 bg-green-400 rounded-full animate-ping opacity-75 responsive-container"></div>
                         </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                        <span className="text-xs text-gray-600 dark:text-gray-300 font-medium responsive-container">
                           Online
                         </span>
                       </div>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-3 responsive-container">
                       {chatMessages.map((msg, index) => (
                         <motion.div
                           key={msg.id}
@@ -1740,8 +1765,8 @@ function CustomerPortal() {
                               : 'bg-gradient-to-br from-white/70 to-gray-50/70 border-gray-200 dark:border-slate-700/50 hover:from-white/80 hover:to-gray-50/80'
                           }`}
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between mb-2 responsive-container">
+                            <div className="flex items-center space-x-2 responsive-container">
                               <div
                                 className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
                                   msg.unread
@@ -1754,63 +1779,63 @@ function CustomerPortal() {
                                   .map(n => n[0])
                                   .join('')}
                               </div>
-                              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                                 {msg.sender}
                               </span>
                             </div>
-                            <span className="text-xs text-gray-500 font-medium">{msg.time}</span>
+                            <span className="text-xs text-gray-500 font-medium responsive-container">{msg.time}</span>
                           </div>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed responsive-container">
                             {msg.message}
                           </p>
                           {msg.unread && (
-                            <div className="absolute top-3 right-3 h-2 w-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full animate-pulse"></div>
+                            <div className="absolute top-3 right-3 h-2 w-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full animate-pulse responsive-container"></div>
                           )}
                         </motion.div>
                       ))}
                     </div>
 
-                    <div className="flex space-x-3 p-3 rounded-2xl bg-gradient-to-r from-white/80 to-gray-50/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50">
+                    <div className="flex space-x-3 p-3 rounded-2xl bg-gradient-to-r from-white/80 to-gray-50/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 responsive-container">
                       <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-3 text-sm border border-gray-200 dark:border-slate-700/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-300/50 bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm transition-all duration-300"
+                        className="flex-1 px-4 py-3 text-sm border border-gray-200 dark:border-slate-700/50 rounded-xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-300/50 bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm transition-all duration-300 responsive-container"
                       />
-                      <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <Send className="h-4 w-4" />
+                      <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 responsive-container" aria-label="Button">
+                        <Send className="h-4 w-4 responsive-container" />
                       </button>
                     </div>
                   </motion.div>
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'email' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Email
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors responsive-container" aria-label="Button">
+                        <Plus className="h-3 w-3 inline mr-1 responsive-container" />
                         Compose
                       </button>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {emailList.map(email => (
                         <div
                           key={email.id}
                           className={`p-3 rounded-lg border ${email.unread ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center justify-between mb-1 responsive-container">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               {email.from}
                             </span>
-                            <span className="text-xs text-gray-500">{email.time}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{email.time}</span>
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                          <p className="text-sm text-gray-600 dark:text-gray-300 responsive-container">
                             {email.subject}
                           </p>
                           {email.unread && (
-                            <div className="h-2 w-2 bg-emerald-500 rounded-full mt-2"></div>
+                            <div className="h-2 w-2 bg-emerald-500 rounded-full mt-2 responsive-container"></div>
                           )}
                         </div>
                       ))}
@@ -1819,30 +1844,30 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'tasks' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Tasks
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors responsive-container" aria-label="Button">
+                        <Plus className="h-3 w-3 inline mr-1 responsive-container" />
                         Add Task
                       </button>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {tasks.map(task => (
                         <div
                           key={task.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 responsive-container"
                         >
-                          <div className="flex items-center space-x-2 mb-2">
+                          <div className="flex items-center space-x-2 mb-2 responsive-container">
                             <button
                               className={`p-1 rounded ${task.completed ? 'text-green-600' : 'text-gray-400'}`}
-                            >
+                             aria-label="Button">
                               {task.completed ? (
-                                <CheckSquare className="h-4 w-4" />
+                                <CheckSquare className="h-4 w-4 responsive-container" />
                               ) : (
-                                <Square className="h-4 w-4" />
+                                <Square className="h-4 w-4 responsive-container" />
                               )}
                             </button>
                             <span
@@ -1851,7 +1876,7 @@ function CustomerPortal() {
                               {task.title}
                             </span>
                           </div>
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between responsive-container">
                             <span
                               className={`text-xs px-2 py-1 rounded ${
                                 task.priority === 'high'
@@ -1863,7 +1888,7 @@ function CustomerPortal() {
                             >
                               {task.priority}
                             </span>
-                            <span className="text-xs text-gray-500">{task.due}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{task.due}</span>
                           </div>
                         </div>
                       ))}
@@ -1872,34 +1897,34 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'phone' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Phone
                       </h3>
-                      <div className="flex space-x-1">
-                        <button className="p-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                          <Phone className="h-4 w-4" />
+                      <div className="flex space-x-1 responsive-container">
+                        <button className="p-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container" aria-label="Button">
+                          <Phone className="h-4 w-4 responsive-container" />
                         </button>
-                        <button className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                          <Video className="h-4 w-4" />
+                        <button className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
+                          <Video className="h-4 w-4 responsive-container" />
                         </button>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {recentCalls.map(call => (
                         <div
                           key={call.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 responsive-container"
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center justify-between mb-1 responsive-container">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               {call.contact}
                             </span>
-                            <span className="text-xs text-gray-500">{call.time}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{call.time}</span>
                           </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between responsive-container">
+                            <div className="flex items-center space-x-2 responsive-container">
                               <div
                                 className={`h-2 w-2 rounded-full ${
                                   call.type === 'incoming'
@@ -1909,11 +1934,11 @@ function CustomerPortal() {
                                       : 'bg-red-400'
                                 }`}
                               ></div>
-                              <span className="text-xs text-gray-600 dark:text-gray-300">
+                              <span className="text-xs text-gray-600 dark:text-gray-300 responsive-container">
                                 {call.type}
                               </span>
                             </div>
-                            <span className="text-xs text-gray-500">{call.duration}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{call.duration}</span>
                           </div>
                         </div>
                       ))}
@@ -1922,31 +1947,31 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'text' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         SMS
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors responsive-container" aria-label="Button">
+                        <Plus className="h-3 w-3 inline mr-1 responsive-container" />
                         New SMS
                       </button>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {smsMessages.map(sms => (
                         <div
                           key={sms.id}
                           className={`p-3 rounded-lg border ${sms.unread ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-gray-50 border-gray-200 dark:border-slate-700'}`}
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center justify-between mb-1 responsive-container">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               {sms.contact}
                             </span>
-                            <span className="text-xs text-gray-500">{sms.time}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{sms.time}</span>
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">{sms.message}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-300 responsive-container">{sms.message}</p>
                           {sms.unread && (
-                            <div className="h-2 w-2 bg-indigo-500 rounded-full mt-2"></div>
+                            <div className="h-2 w-2 bg-indigo-500 rounded-full mt-2 responsive-container"></div>
                           )}
                         </div>
                       ))}
@@ -1955,27 +1980,27 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'video' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Video Calls
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                        <Video className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container" aria-label="Button">
+                        <Video className="h-3 w-3 inline mr-1 responsive-container" />
                         Start Call
                       </button>
                     </div>
-                    <div className="space-y-2">
-                      <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                            <Video className="h-4 w-4 text-red-600" />
+                    <div className="space-y-2 responsive-container">
+                      <div className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 responsive-container">
+                        <div className="flex items-center space-x-2 mb-2 responsive-container">
+                          <div className="h-8 w-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center responsive-container">
+                            <Video className="h-4 w-4 text-red-600 responsive-container" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               Team Meeting
                             </p>
-                            <p className="text-xs text-gray-500">Starting in 5 minutes</p>
+                            <p className="text-xs text-gray-500 responsive-container">Starting in 5 minutes</p>
                           </div>
                         </div>
                       </div>
@@ -1984,30 +2009,30 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'calendar' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Calendar
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors responsive-container" aria-label="Button">
+                        <Plus className="h-3 w-3 inline mr-1 responsive-container" />
                         Add Event
                       </button>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {calendarEvents.map(event => (
                         <div
                           key={event.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 responsive-container"
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center justify-between mb-1 responsive-container">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               {event.title}
                             </span>
-                            <span className="text-xs text-gray-500">{event.time}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{event.time}</span>
                           </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-600 dark:text-gray-300">
+                          <div className="flex items-center justify-between responsive-container">
+                            <span className="text-xs text-gray-600 dark:text-gray-300 responsive-container">
                               {event.date}
                             </span>
                             <span
@@ -2029,29 +2054,29 @@ function CustomerPortal() {
                 )}
 
                 {!rightSidebarCollapsed && activeCrmTab === 'notes' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center justify-between responsive-container">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Notes
                       </h3>
-                      <button className="px-3 py-1 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                        <Plus className="h-3 w-3 inline mr-1" />
+                      <button className="px-3 py-1 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+                        <Plus className="h-3 w-3 inline mr-1 responsive-container" />
                         New Note
                       </button>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 responsive-container">
                       {notes.map(note => (
                         <div
                           key={note.id}
-                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50"
+                          className="p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 responsive-container"
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center justify-between mb-1 responsive-container">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                               {note.title}
                             </span>
-                            <span className="text-xs text-gray-500">{note.updated}</span>
+                            <span className="text-xs text-gray-500 responsive-container">{note.updated}</span>
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">{note.content}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-300 responsive-container">{note.content}</p>
                         </div>
                       ))}
                     </div>
@@ -2060,29 +2085,29 @@ function CustomerPortal() {
               </div>
 
               {/* Enhanced CRM Sidebar Footer */}
-              <div className="relative p-4 border-t border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
-                <div className="relative flex items-center space-x-3 p-4 rounded-2xl bg-gradient-to-br from-purple-50/90 via-pink-50/80 to-indigo-50/90 border border-purple-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
+              <div className="relative p-4 border-t border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm responsive-container">
+                <div className="relative flex items-center space-x-3 p-4 rounded-2xl bg-gradient-to-br from-purple-50/90 via-pink-50/80 to-indigo-50/90 border border-purple-200/50 shadow-lg backdrop-blur-sm overflow-hidden responsive-container">
                   {/* Animated background elements */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full blur-xl animate-pulse"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-300/20 to-purple-300/20 rounded-full blur-lg animate-pulse delay-1000"></div>
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full blur-xl animate-pulse responsive-container"></div>
+                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-300/20 to-purple-300/20 rounded-full blur-lg animate-pulse delay-1000 responsive-container"></div>
 
-                  <div className="relative h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                    <Zap className="h-5 w-5 text-white" />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent"></div>
+                  <div className="relative h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                    <Zap className="h-5 w-5 text-white responsive-container" />
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent responsive-container"></div>
                   </div>
 
                   {!rightSidebarCollapsed && (
-                    <div className="flex-1 relative">
-                      <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    <div className="flex-1 relative responsive-container">
+                      <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent responsive-container">
                         CRM Command Center
                       </p>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="flex space-x-1">
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-100"></div>
-                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-200"></div>
+                      <div className="flex items-center space-x-2 mt-1 responsive-container">
+                        <div className="flex space-x-1 responsive-container">
+                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse responsive-container"></div>
+                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-100 responsive-container"></div>
+                          <div className="h-1.5 w-1.5 bg-green-400 rounded-full animate-pulse delay-200 responsive-container"></div>
                         </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium responsive-container">
                           All systems operational
                         </p>
                       </div>
@@ -2090,9 +2115,9 @@ function CustomerPortal() {
                   )}
 
                   {/* Status indicator */}
-                  <div className="relative">
-                    <div className="h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
-                    <div className="absolute inset-0 h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-75"></div>
+                  <div className="relative responsive-container">
+                    <div className="h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse responsive-container"></div>
+                    <div className="absolute inset-0 h-3 w-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-75 responsive-container"></div>
                   </div>
                 </div>
               </div>
@@ -2102,48 +2127,50 @@ function CustomerPortal() {
 
         {/* Mobile CRM Sidebar Overlay */}
         {!rightSidebarCollapsed && (
-          <div className="lg:hidden fixed inset-0 z-50">
+          <div className="lg:hidden fixed inset-0 z-50 responsive-container">
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm responsive-container"
               onClick={() => setRightSidebarCollapsed(true)}
             />
             {/* Mobile CRM Sidebar */}
-            <aside className="absolute right-0 top-0 w-80 h-full bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50">
-              <div className="flex flex-col h-full relative overflow-hidden">
+            <aside className="absolute right-0 top-0 w-80 h-full bg-gradient-to-b from-white/95 via-white/90 to-white/85 backdrop-blur-xl shadow-2xl border-l border-gradient-to-b from-purple-200/50 via-pink-200/30 to-indigo-200/50 responsive-container">
+              <div className="flex flex-col h-full relative overflow-hidden responsive-container">
                 {/* Mobile CRM Header */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="relative">
-                        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                          <MessageCircle className="h-5 w-5 text-white" />
+                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/50 to-pink-200/50 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm responsive-container">
+                  <div className="flex items-center justify-between responsive-container">
+                    <div className="flex items-center space-x-3 responsive-container">
+                      <div className="relative responsive-container">
+                        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg responsive-container">
+                          <MessageCircle className="h-5 w-5 text-white responsive-container" />
                         </div>
-                        <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                        <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white animate-pulse responsive-container"></div>
                       </div>
                       <div>
-                        <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                        <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent responsive-container">
                           CRM Command Center
                         </h3>
-                        <p className="text-xs text-gray-500 font-medium">All systems active</p>
+                        <p className="text-xs text-gray-500 font-medium responsive-container">All systems active</p>
                       </div>
                     </div>
                     <button
-                      onClick={() => setRightSidebarCollapsed(true)}
-                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                      onClick={() = aria-label="Button"> setRightSidebarCollapsed(true)}
+                      className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
                     >
-                      <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180" />
+                      <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180 responsive-container" />
                     </button>
                   </div>
                 </div>
 
                 {/* Mobile CRM Tabs */}
-                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="relative p-4 border-b border-gradient-to-r from-purple-200/30 to-pink-200/30 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm responsive-container">
+                  <div className="grid grid-cols-2 gap-3 responsive-container">
                     {crmTabs.map((tab, index) => {
                       const Icon = tab.icon;
                       const isActive = activeCrmTab === tab.id;
                       return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                         <motion.button
                           key={tab.id}
                           initial={{ opacity: 0, y: 20 }}
@@ -2181,11 +2208,11 @@ function CustomerPortal() {
                               }`}
                             />
                             {isActive && (
-                              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
+                              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent responsive-container"></div>
                             )}
                           </div>
 
-                          <div className="relative flex-1">
+                          <div className="relative flex-1 responsive-container">
                             <span
                               className={`text-xs font-semibold transition-all duration-300 ${
                                 isActive
@@ -2196,13 +2223,13 @@ function CustomerPortal() {
                               {tab.label}
                             </span>
                             {isActive && (
-                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50"></div>
+                              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-current to-transparent opacity-50 responsive-container"></div>
                             )}
                           </div>
 
                           {/* Active indicator */}
                           {isActive && (
-                            <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
+                            <div className="absolute top-1 right-1 w-2 h-2 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-pulse responsive-container"></div>
                           )}
                         </motion.button>
                       );
@@ -2211,10 +2238,10 @@ function CustomerPortal() {
                 </div>
 
                 {/* Mobile CRM Content */}
-                <div className="flex-1 p-4 overflow-y-auto relative">
+                <div className="flex-1 p-4 overflow-y-auto relative responsive-container">
                   {/* Content Background Pattern */}
-                  <div className="absolute inset-0 opacity-3">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20"></div>
+                  <div className="absolute inset-0 opacity-3 responsive-container">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-purple-100/20 to-pink-100/20 responsive-container"></div>
                   </div>
 
                   {activeCrmTab === 'chat' && (
@@ -2222,22 +2249,22 @@ function CustomerPortal() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="space-y-4 relative"
+                      className="space-y-4 relative responsive-container"
                     >
-                      <div className="text-center py-8">
-                        <div className="text-gray-500 text-sm">Chat functionality</div>
-                        <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
+                      <div className="text-center py-8 responsive-container">
+                        <div className="text-gray-500 text-sm responsive-container">Chat functionality</div>
+                        <div className="text-xs text-gray-400 mt-2 responsive-container">Available on desktop</div>
                       </div>
                     </motion.div>
                   )}
 
                   {/* Other CRM tabs content would go here - simplified for mobile */}
                   {activeCrmTab !== 'chat' && (
-                    <div className="text-center py-8">
-                      <div className="text-gray-500 text-sm">
+                    <div className="text-center py-8 responsive-container">
+                      <div className="text-gray-500 text-sm responsive-container">
                         {activeCrmTab.charAt(0).toUpperCase() + activeCrmTab.slice(1)} functionality
                       </div>
-                      <div className="text-xs text-gray-400 mt-2">Available on desktop</div>
+                      <div className="text-xs text-gray-400 mt-2 responsive-container">Available on desktop</div>
                     </div>
                   )}
                 </div>

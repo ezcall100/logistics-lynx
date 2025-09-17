@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, 
@@ -119,28 +119,34 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <header className={`${getVariantStyles()} sticky top-0 z-50`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
+        <div className="flex items-center justify-between h-16 responsive-container">
           {/* Logo */}
-          <div className="flex items-center space-x-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Truck className="w-5 h-5 text-white" />
+          <div className="flex items-center space-x-4 responsive-container">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center responsive-container">
+              <Truck className="w-5 h-5 text-white responsive-container" />
             </div>
             {variant !== 'minimal' && (
               <div>
-                <h1 className="text-lg font-bold text-gray-900">Logistics Lynx</h1>
-                <p className="text-xs text-gray-500">Portal Dashboard</p>
+                <h1 className="text-lg font-bold text-gray-900 responsive-container">Logistics Lynx</h1>
+                <p className="text-xs text-gray-500 responsive-container">Portal Dashboard</p>
               </div>
             )}
           </div>
 
           {/* Main Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden md:flex items-center space-x-1 responsive-container">
             {menuItems.map((item) => (
-              <div key={item.id} className="relative">
+              <div key={item.id} className="relative responsive-container">
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     if (item.path) {
                       navigate(item.path);
                     } else {
@@ -153,9 +159,9 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                 >
-                  <item.icon className="w-4 h-4" />
+                  <item.icon className="w-4 h-4 responsive-container" />
                   <span>{item.label}</span>
-                  {item.children && <ChevronDown className="w-4 h-4" />}
+                  {item.children && <ChevronDown className="w-4 h-4 responsive-container" />}
                 </button>
 
                 {/* Dropdown Menu */}
@@ -165,12 +171,12 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 responsive-container"
                     >
                       {item.children.map((child) => (
                         <button
                           key={child.path}
-                          onClick={() => {
+                          onClick={() = aria-label="Button"> {
                             navigate(child.path);
                             setActiveDropdown(null);
                           }}
@@ -178,7 +184,7 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                             isActive(child.path) ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
                           }`}
                         >
-                          <child.icon className="w-4 h-4" />
+                          <child.icon className="w-4 h-4 responsive-container" />
                           <span>{child.label}</span>
                         </button>
                       ))}
@@ -190,50 +196,50 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 responsive-container">
             {/* Search */}
             {variant !== 'minimal' && (
-              <div className="hidden lg:block relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <div className="hidden lg:block relative responsive-container">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 responsive-container" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm w-64"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm w-64 responsive-container"
                 />
               </div>
             )}
 
             {/* Notifications */}
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
-              <Bell className="w-5 h-5 text-gray-500" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative responsive-container" aria-label="Button">
+              <Bell className="w-5 h-5 text-gray-500 responsive-container" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full responsive-container"></span>
             </button>
 
             {/* Messages */}
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-              <MessageSquare className="w-5 h-5 text-gray-500" />
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+              <MessageSquare className="w-5 h-5 text-gray-500 responsive-container" />
             </button>
 
             {/* User Menu */}
-            <div className="relative">
+            <div className="relative responsive-container">
               <button
-                onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                onClick={() = aria-label="Button"> setShowUserMenu(!showUserMenu)}
+                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container">
                   {user?.avatar ? (
-                    <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
+                    <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container" / alt="Image">
                   ) : (
-                    <User className="w-4 h-4 text-white" />
+                    <User className="w-4 h-4 text-white responsive-container" />
                   )}
                 </div>
                 {variant !== 'minimal' && (
                   <>
-                    <div className="hidden md:block text-left">
-                      <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                      <p className="text-xs text-gray-500">{user?.role}</p>
+                    <div className="hidden md:block text-left responsive-container">
+                      <p className="text-sm font-medium text-gray-900 responsive-container">{user?.name}</p>
+                      <p className="text-xs text-gray-500 responsive-container">{user?.role}</p>
                     </div>
-                    <ChevronDown className="w-4 h-4 text-gray-500" />
+                    <ChevronDown className="w-4 h-4 text-gray-500 responsive-container" />
                   </>
                 )}
               </button>
@@ -245,22 +251,22 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                    className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 responsive-container"
                   >
                     {/* User Info */}
-                    <div className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <div className="px-4 py-3 border-b border-gray-200 responsive-container">
+                      <div className="flex items-center space-x-3 responsive-container">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container">
                           {user?.avatar ? (
-                            <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full" />
+                            <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full responsive-container" / alt="Image">
                           ) : (
-                            <User className="w-5 h-5 text-white" />
+                            <User className="w-5 h-5 text-white responsive-container" />
                           )}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                          <p className="text-xs text-gray-500">{user?.company}</p>
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+                          <p className="text-sm font-medium text-gray-900 responsive-container">{user?.name}</p>
+                          <p className="text-xs text-gray-500 responsive-container">{user?.company}</p>
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1 responsive-container">
                             {user?.role}
                           </span>
                         </div>
@@ -268,29 +274,29 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                     </div>
 
                     {/* Menu Items */}
-                    <div className="py-2">
+                    <div className="py-2 responsive-container">
                       {userMenuItems.map((item) => (
                         <button
                           key={item.path}
-                          onClick={() => {
+                          onClick={() = aria-label="Button"> {
                             navigate(item.path);
                             setShowUserMenu(false);
                           }}
-                          className="w-full flex items-center space-x-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                          className="w-full flex items-center space-x-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors responsive-container"
                         >
-                          <item.icon className="w-4 h-4 text-gray-500" />
-                          <span className="text-gray-700">{item.label}</span>
+                          <item.icon className="w-4 h-4 text-gray-500 responsive-container" />
+                          <span className="text-gray-700 responsive-container">{item.label}</span>
                         </button>
                       ))}
                     </div>
 
                     {/* Logout */}
-                    <div className="border-t border-gray-200 py-2">
+                    <div className="border-t border-gray-200 py-2 responsive-container">
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                      >
-                        <LogOut className="w-4 h-4" />
+                        className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors responsive-container"
+                       aria-label="Button">
+                        <LogOut className="w-4 h-4 responsive-container" />
                         <span>Sign Out</span>
                       </button>
                     </div>
@@ -303,12 +309,12 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
       </div>
 
       {/* Mobile Menu */}
-      <div className="md:hidden border-t border-gray-200">
-        <div className="px-4 py-2 space-y-1">
+      <div className="md:hidden border-t border-gray-200 responsive-container">
+        <div className="px-4 py-2 space-y-1 responsive-container">
           {menuItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => {
+              onClick={() = aria-label="Button"> {
                 if (item.path) {
                   navigate(item.path);
                 } else {
@@ -321,9 +327,9 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <item.icon className="w-4 h-4" />
+              <item.icon className="w-4 h-4 responsive-container" />
               <span>{item.label}</span>
-              {item.children && <ChevronDown className="w-4 h-4 ml-auto" />}
+              {item.children && <ChevronDown className="w-4 h-4 ml-auto responsive-container" />}
             </button>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Truck,
   Activity,
@@ -50,7 +50,13 @@ function SuperAdminFocus301() {
   // Update time every second
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(timer);
   }, []);
 
   // Generate 302 agents focused on Super Admin
@@ -614,38 +620,40 @@ function SuperAdminFocus301() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center">
-                  <Truck className="w-6 h-6 text-white" />
+      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 sticky top-0 z-50 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-7xl mx-auto px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Truck className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-slate-900">
+                  <h1 className="text-2xl font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
                     TransBot AI - Logistics Management System
                   </h1>
-                  <p className="text-slate-600 font-medium">
+                  <p className="text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                     Autonomous Logistics Platform with MCP Integration
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="bg-green-50 border border-green-200 rounded-full px-4 py-2">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span className="text-sm font-semibold text-green-700">OPERATIONAL</span>
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-green-50 border border-green-200 rounded-full px-4 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <CheckCircle className="w-4 h-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="text-sm font-semibold text-green-700 responsive-container sm:flex-col md:flex-row lg:grid">OPERATIONAL</span>
                 </div>
               </div>
 
-              <div className="text-right">
-                <div className="text-sm text-slate-500">Last updated</div>
-                <div className="text-lg font-semibold text-slate-900">
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-sm text-slate-500 responsive-container sm:flex-col md:flex-row lg:grid">Last updated</div>
+                <div className="text-lg font-semibold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
                   {currentTime.toLocaleTimeString()}
                 </div>
               </div>
@@ -655,129 +663,129 @@ function SuperAdminFocus301() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Status Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <Activity className="w-6 h-6 text-green-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Activity className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <div className="text-sm text-slate-600 font-medium">MCP API Status</div>
-                <div className="text-lg font-bold text-slate-900">Running on port 3001</div>
-                <div className="text-sm text-green-600 font-semibold">Health: Operational</div>
+                <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">MCP API Status</div>
+                <div className="text-lg font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">Running on port 3001</div>
+                <div className="text-sm text-green-600 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">Health: Operational</div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-blue-600" />
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Users className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <div className="text-sm text-slate-600 font-medium">Autonomous Agents</div>
-                <div className="text-lg font-bold text-slate-900">
+                <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Autonomous Agents</div>
+                <div className="text-lg font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
                   25+ Specialized Agents Active
                 </div>
-                <div className="text-sm text-blue-600 font-semibold">24/7 Operation Enabled</div>
+                <div className="text-sm text-blue-600 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">24/7 Operation Enabled</div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 text-emerald-600" />
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Shield className="w-6 h-6 text-emerald-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <div className="text-sm text-slate-600 font-medium">System Health</div>
-                <div className="text-lg font-bold text-slate-900">Uptime: 99.97%</div>
-                <div className="text-sm text-emerald-600 font-semibold">Performance: Optimal</div>
+                <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">System Health</div>
+                <div className="text-lg font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">Uptime: 99.97%</div>
+                <div className="text-sm text-emerald-600 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">Performance: Optimal</div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Zap className="w-6 h-6 text-purple-600" />
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Zap className="w-6 h-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <div className="text-sm text-slate-600 font-medium">Quantum Enhancement</div>
-                <div className="text-lg font-bold text-slate-900">10x Performance Boost</div>
-                <div className="text-sm text-purple-600 font-semibold">AI-Native Architecture</div>
+                <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Quantum Enhancement</div>
+                <div className="text-lg font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">10x Performance Boost</div>
+                <div className="text-sm text-purple-600 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">AI-Native Architecture</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* System Metrics */}
-        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8">
-          <div className="flex items-center space-x-3 mb-6">
-            <BarChart3 className="w-6 h-6 text-slate-700" />
-            <h2 className="text-2xl font-bold text-slate-900">System Metrics</h2>
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <BarChart3 className="w-6 h-6 text-slate-700 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <h2 className="text-2xl font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">System Metrics</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-1">1,247</div>
-              <div className="text-sm text-slate-600 font-medium">Total Users</div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-blue-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">1,247</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Total Users</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-1">892</div>
-              <div className="text-sm text-slate-600 font-medium">Active Users</div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-green-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">892</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Active Users</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-emerald-600 mb-1">$125K</div>
-              <div className="text-sm text-slate-600 font-medium">Monthly Revenue</div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-emerald-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">$125K</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Monthly Revenue</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-1">45%</div>
-              <div className="text-sm text-slate-600 font-medium">System Load</div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-orange-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">45%</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">System Load</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-1">2.4M</div>
-              <div className="text-sm text-slate-600 font-medium">API Calls</div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-purple-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">2.4M</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">API Calls</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">98.5</div>
-              <div className="text-sm text-slate-600 font-medium">Security Score</div>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-3xl font-bold text-indigo-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">98.5</div>
+              <div className="text-sm text-slate-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">Security Score</div>
             </div>
           </div>
         </div>
 
         {/* Autonomous Agent Activities */}
-        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8">
-          <div className="flex items-center space-x-3 mb-6">
-            <Activity className="w-6 h-6 text-slate-700" />
-            <h2 className="text-2xl font-bold text-slate-900">Autonomous Agent Activities</h2>
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 shadow-sm mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Activity className="w-6 h-6 text-slate-700 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <h2 className="text-2xl font-bold text-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">Autonomous Agent Activities</h2>
           </div>
 
-          <div className="prose prose-slate max-w-none">
-            <p className="text-slate-700 text-lg leading-relaxed mb-4">
+          <div className="prose prose-slate max-w-none responsive-container sm:flex-col md:flex-row lg:grid">
+            <p className="text-slate-700 text-lg leading-relaxed mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               The MCP system is currently running 25+ specialized autonomous agents that are:
             </p>
-            <ul className="space-y-2 text-slate-700">
-              <li className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+            <ul className="space-y-2 text-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+              <li className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Monitoring system health and performance in real-time</span>
               </li>
-              <li className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+              <li className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Optimizing logistics operations and route planning</span>
               </li>
-              <li className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+              <li className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Processing data and generating actionable insights</span>
               </li>
-              <li className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+              <li className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Managing user requests and automated workflows</span>
               </li>
-              <li className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+              <li className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Maintaining security and compliance standards</span>
               </li>
             </ul>
@@ -786,9 +794,9 @@ function SuperAdminFocus301() {
       </div>
 
       {/* Footer */}
-      <div className="bg-white/50 backdrop-blur-sm border-t border-slate-200/60 py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="text-slate-600 text-sm">Last updated: {currentTime.toLocaleString()}</div>
+      <div className="bg-white/50 backdrop-blur-sm border-t border-slate-200/60 py-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-7xl mx-auto px-6 text-center responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="text-slate-600 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Last updated: {currentTime.toLocaleString()}</div>
         </div>
       </div>
     </div>

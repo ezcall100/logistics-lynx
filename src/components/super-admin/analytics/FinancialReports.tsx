@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   DollarSign,
@@ -244,17 +244,23 @@ const FinancialReports: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -263,22 +269,24 @@ const FinancialReports: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Financial Reports
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Comprehensive financial performance and analysis
           </p>
           </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <select
               value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {periods.map(period => (
               <option key={period.value} value={period.value}>
@@ -289,35 +297,37 @@ const FinancialReports: React.FC = () => {
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
             </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export PDF</span>
             </button>
           </div>
         </div>
 
       {/* Report Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="flex space-x-8 px-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {reports.map((report) => {
               const Icon = report.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <button
                   key={report.id}
-                  onClick={() => setSelectedReport(report.id)}
+                  onClick={() = aria-label="Button"> setSelectedReport(report.id)}
                   className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                     selectedReport === report.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                       : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{report.name}</span>
                 </button>
               );
@@ -325,43 +335,45 @@ const FinancialReports: React.FC = () => {
           </nav>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Overview Tab */}
           {selectedReport === 'overview' && (
-            <div className="space-y-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {/* Key Metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 {metrics.map((metric, index) => {
                   const Icon = metric.icon;
                   const ChangeIcon = getChangeIcon(metric.changeType);
                   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
                       key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                          <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {metric.name === 'Profit Margin' || metric.name === 'Cash Flow'
                               ? `${metric.value}%`
                               : formatCurrency(metric.value)
                             }
                   </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">{metric.name}</div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{metric.name}</div>
                 </div>
-                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                          <Icon className="h-6 w-6 text-blue-600" />
+                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Icon className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
               </div>
-                      <div className="mt-4 flex items-center space-x-2">
+                      <div className="mt-4 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <ChangeIcon className={`h-4 w-4 ${getChangeColor(metric.changeType)}`} />
                         <span className={`text-sm font-medium ${getChangeColor(metric.changeType)}`}>
                     {metric.change > 0 ? '+' : ''}{metric.change}%
                   </span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">{metric.period}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{metric.period}</span>
               </div>
             </motion.div>
                   );
@@ -369,40 +381,40 @@ const FinancialReports: React.FC = () => {
         </div>
 
               {/* Revenue vs Expenses Chart */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       Revenue vs Expenses
                     </h3>
-                    <BarChart3 className="h-5 w-5 text-gray-400" />
+                    <BarChart3 className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </div>
-                  <div className="space-y-4">
+                  <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {revenueData.slice(-7).map((day) => (
-                      <div key={day.date} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                      <div key={day.date} className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                             {new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                           </span>
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                          <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {formatCurrency(day.profit)}
                           </span>
                       </div>
-                        <div className="flex space-x-2">
-                          <div className="flex-1 bg-green-100 dark:bg-green-900/20 rounded-full h-2">
+                        <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex-1 bg-green-100 dark:bg-green-900/20 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <div
-                              className="bg-green-500 h-2 rounded-full"
+                              className="bg-green-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               style={{ width: `${(day.revenue / 100000) * 100}%` }}
                             ></div>
                     </div>
-                          <div className="flex-1 bg-red-100 dark:bg-red-900/20 rounded-full h-2">
+                          <div className="flex-1 bg-red-100 dark:bg-red-900/20 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <div
-                              className="bg-red-500 h-2 rounded-full"
+                              className="bg-red-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               style={{ width: `${(day.expenses / 100000) * 100}%` }}
                             ></div>
                       </div>
@@ -416,33 +428,35 @@ const FinancialReports: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       Expense Categories
                     </h3>
-                    <PieChart className="h-5 w-5 text-gray-400" />
+                    <PieChart className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                      <div className="space-y-4">
+                      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {expenseCategories.map((category) => {
                       const Icon = category.icon;
                       return (
-                        <div key={category.category} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <Icon className="h-4 w-4 text-gray-400" />
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                        <div key={category.category} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <Icon className="h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                            <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {category.category}
                               </span>
                             </div>
-                          <div className="flex items-center space-x-3">
-                            <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                               <div
-                                className="h-2 bg-blue-500 rounded-full"
+                                className="h-2 bg-blue-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                                 style={{ width: `${category.percentage}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm text-gray-600 dark:text-gray-400 w-16 text-right">
+                            <span className="text-sm text-gray-600 dark:text-gray-400 w-16 text-right responsive-container sm:flex-col md:flex-row lg:grid">
                               {formatCurrency(category.amount)}
                               </span>
                             </div>
@@ -457,50 +471,50 @@ const FinancialReports: React.FC = () => {
 
           {/* Income Statement Tab */}
           {selectedReport === 'income' && (
-            <div className="space-y-6">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+                <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+                  <thead className="bg-gray-50 dark:bg-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Category
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Amount
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Percentage
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Type
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     {financialStatements.map((statement) => (
                       <motion.tr
                         key={`${statement.type}-${statement.category}`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <td className="px-6 py-4">
-                          <div className="flex items-center space-x-3">
-                            {statement.type === 'income' && <TrendingUp className="h-4 w-4 text-green-600" />}
-                            {statement.type === 'expense' && <TrendingDown className="h-4 w-4 text-red-600" />}
-                            {statement.type === 'profit' && <Target className="h-4 w-4 text-blue-600" />}
-                            <span className="font-medium text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                            {statement.type === 'income' && <TrendingUp className="h-4 w-4 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />}
+                            {statement.type === 'expense' && <TrendingDown className="h-4 w-4 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />}
+                            {statement.type === 'profit' && <Target className="h-4 w-4 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />}
+                            <span className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {statement.category}
                                 </span>
                               </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {formatCurrency(statement.amount)}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {statement.percentage.toFixed(1)}%
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                             statement.type === 'income' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
                             statement.type === 'expense' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
@@ -519,52 +533,54 @@ const FinancialReports: React.FC = () => {
 
           {/* Expense Analysis Tab */}
           {selectedReport === 'expenses' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 {expenseCategories.map((category, index) => {
                   const Icon = category.icon;
                   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <motion.div
                       key={category.category}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                            <Icon className="h-6 w-6 text-red-600" />
+                      <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="p-2 bg-red-50 dark:bg-red-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                            <Icon className="h-6 w-6 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                             </div>
                             <div>
-                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                            <h4 className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {category.category}
                             </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                               {category.percentage.toFixed(1)}% of total
                             </p>
                               </div>
                             </div>
                           </div>
                       
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">Amount</span>
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Amount</span>
+                          <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {formatCurrency(category.amount)}
                           </span>
                         </div>
                         
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">Change</span>
-                          <span className="text-sm font-medium text-red-600">
+                        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Change</span>
+                          <span className="text-sm font-medium text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">
                             +{category.change}%
                           </span>
                             </div>
                         
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
-                            className="bg-red-500 h-2 rounded-full"
+                            className="bg-red-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${category.percentage}%` }}
                           ></div>
                           </div>
@@ -578,24 +594,24 @@ const FinancialReports: React.FC = () => {
 
           {/* Cash Flow Tab */}
           {selectedReport === 'cashflow' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       Monthly Cash Flow
                     </h3>
-                    <Activity className="h-5 w-5 text-gray-400" />
+                    <Activity className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {cashFlowData.map((flow) => (
-                      <div key={flow.period} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      <div key={flow.period} className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {flow.period}
                                 </span>
                           <span className={`text-sm font-medium ${
@@ -604,21 +620,21 @@ const FinancialReports: React.FC = () => {
                             {formatCurrency(flow.netFlow)}
                                 </span>
                               </div>
-                        <div className="flex space-x-2">
-                          <div className="flex-1 bg-green-100 dark:bg-green-900/20 rounded-full h-2">
+                        <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex-1 bg-green-100 dark:bg-green-900/20 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <div
-                              className="bg-green-500 h-2 rounded-full"
+                              className="bg-green-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               style={{ width: `${(flow.inflow / 1500000) * 100}%` }}
                             ></div>
                           </div>
-                          <div className="flex-1 bg-red-100 dark:bg-red-900/20 rounded-full h-2">
+                          <div className="flex-1 bg-red-100 dark:bg-red-900/20 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <div
-                              className="bg-red-500 h-2 rounded-full"
+                              className="bg-red-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               style={{ width: `${(flow.outflow / 1500000) * 100}%` }}
                             ></div>
                             </div>
                           </div>
-                        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500">
+                        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span>In: {formatCurrency(flow.inflow)}</span>
                           <span>Out: {formatCurrency(flow.outflow)}</span>
                           </div>
@@ -631,31 +647,31 @@ const FinancialReports: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       Cash Flow Summary
                     </h3>
-                    <Calculator className="h-5 w-5 text-gray-400" />
+                    <Calculator className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Total Inflow</span>
-                      <span className="text-sm font-medium text-green-600">
+                  <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Inflow</span>
+                      <span className="text-sm font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">
                         {formatCurrency(cashFlowData.reduce((sum, flow) => sum + flow.inflow, 0))}
                       </span>
                             </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Total Outflow</span>
-                      <span className="text-sm font-medium text-red-600">
+                    <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Outflow</span>
+                      <span className="text-sm font-medium text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">
                         {formatCurrency(cashFlowData.reduce((sum, flow) => sum + flow.outflow, 0))}
                                 </span>
                     </div>
-                    <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">Net Cash Flow</span>
-                        <span className="text-sm font-medium text-blue-600">
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Net Cash Flow</span>
+                        <span className="text-sm font-medium text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">
                           {formatCurrency(cashFlowData.reduce((sum, flow) => sum + flow.netFlow, 0))}
                                 </span>
                               </div>

@@ -66,36 +66,42 @@ const PressPage: React.FC = () => {
   ]
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-16 responsive-container">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-16 responsive-container">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 responsive-container">
               Press & News
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto responsive-container">
               Stay updated with the latest news, press releases, and media coverage about Trans Bot AI
             </p>
           </div>
 
           {/* Press Releases */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Latest Press Releases</h2>
-            <div className="space-y-6">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Latest Press Releases</h2>
+            <div className="space-y-6 responsive-container">
               {pressReleases.map((release, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 responsive-container">
+                    <div className="flex items-center space-x-4 mb-4 md:mb-0 responsive-container">
+                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium responsive-container">
                         {release.category}
                       </span>
-                      <span className="text-gray-500 text-sm">{release.date}</span>
+                      <span className="text-gray-500 text-sm responsive-container">{release.date}</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{release.title}</h3>
-                  <p className="text-gray-600 mb-6">{release.summary}</p>
-                  <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 responsive-container">{release.title}</h3>
+                  <p className="text-gray-600 mb-6 responsive-container">{release.summary}</p>
+                  <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors responsive-container" aria-label="Button">
                     Read More →
                   </button>
                 </div>
@@ -104,17 +110,17 @@ const PressPage: React.FC = () => {
           </div>
 
           {/* Media Coverage */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Media Coverage</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Media Coverage</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 responsive-container">
               {mediaCoverage.map((article, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
-                  <div className="text-sm text-gray-500 mb-2">{article.outlet}</div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">{article.title}</h3>
-                  <div className="text-sm text-gray-500 mb-4">{article.date}</div>
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="text-sm text-gray-500 mb-2 responsive-container">{article.outlet}</div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 responsive-container">{article.title}</h3>
+                  <div className="text-sm text-gray-500 mb-4 responsive-container">{article.date}</div>
                   <a 
                     href={article.link}
-                    className="text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                    className="text-blue-600 font-semibold hover:text-blue-700 transition-colors responsive-container"
                   >
                     Read Article →
                   </a>
@@ -124,32 +130,32 @@ const PressPage: React.FC = () => {
           </div>
 
           {/* Awards */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Awards & Recognition</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Awards & Recognition</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 responsive-container">
               {awards.map((award, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-6 text-center hover:shadow-2xl transition-shadow duration-300">
-                  <div className="text-4xl mb-4">🏆</div>
-                  <div className="text-sm text-gray-500 mb-2">{award.year}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{award.award}</h3>
-                  <div className="text-blue-600 font-semibold mb-3">{award.organization}</div>
-                  <p className="text-gray-600 text-sm">{award.description}</p>
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-6 text-center hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="text-4xl mb-4 responsive-container">🏆</div>
+                  <div className="text-sm text-gray-500 mb-2 responsive-container">{award.year}</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 responsive-container">{award.award}</h3>
+                  <div className="text-blue-600 font-semibold mb-3 responsive-container">{award.organization}</div>
+                  <p className="text-gray-600 text-sm responsive-container">{award.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Media Kit */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white text-center">
-            <h2 className="text-3xl font-bold mb-4">Media Kit</h2>
-            <p className="text-xl mb-8 text-blue-100">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white text-center responsive-container">
+            <h2 className="text-3xl font-bold mb-4 responsive-container">Media Kit</h2>
+            <p className="text-xl mb-8 text-blue-100 responsive-container">
               Download our media kit for logos, images, and company information
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
+              <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
                 Download Media Kit
               </button>
-              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors">
+              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors responsive-container" aria-label="Button">
                 Contact Media Team
               </button>
             </div>

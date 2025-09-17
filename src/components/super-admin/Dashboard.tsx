@@ -3,7 +3,7 @@
  * Clean, professional dashboard with sophisticated design
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Building2,
@@ -124,66 +124,72 @@ const Dashboard: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'success':
-        return <div className="w-2 h-2 bg-emerald-500 rounded-full" />;
+        return <div className="w-2 h-2 bg-emerald-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'warning':
-        return <div className="w-2 h-2 bg-amber-500 rounded-full" />;
+        return <div className="w-2 h-2 bg-amber-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <div className="w-2 h-2 bg-red-500 rounded-full" />;
+        return <div className="w-2 h-2 bg-red-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <div className="w-2 h-2 bg-gray-400 rounded-full" />;
+        return <div className="w-2 h-2 bg-gray-400 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'company':
-        return <Building2 className="w-4 h-4 text-blue-500" />;
+        return <Building2 className="w-4 h-4 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'user':
-        return <Users className="w-4 h-4 text-purple-500" />;
+        return <Users className="w-4 h-4 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'portal':
-        return <Globe className="w-4 h-4 text-cyan-500" />;
+        return <Globe className="w-4 h-4 text-cyan-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'system':
-        return <Activity className="w-4 h-4 text-gray-500" />;
+        return <Activity className="w-4 h-4 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Activity className="w-4 h-4 text-gray-500" />;
+        return <Activity className="w-4 h-4 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Welcome Banner */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 p-8 text-white"
+        className="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 p-8 text-white responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="relative z-10">
-          <div className="flex items-center justify-between">
+        <div className="relative z-10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Welcome to Trans Bot AI</h1>
-              <p className="text-slate-300 text-lg">
+              <h1 className="text-3xl font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Welcome to Trans Bot AI</h1>
+              <p className="text-slate-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
                 Super Admin Dashboard - Monitor and manage your entire platform ecosystem
               </p>
             </div>
-            <div className="text-right">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                <span className="text-sm font-medium">All Systems Operational</span>
+            <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center gap-2 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
               </div>
-              <p className="text-xs text-slate-400">Last updated 2 minutes ago</p>
+              <p className="text-xs text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid">Last updated 2 minutes ago</p>
             </div>
           </div>
         </div>
 
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full transform translate-x-32 -translate-y-32" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full transform -translate-x-24 translate-y-24" />
+        <div className="absolute inset-0 opacity-10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full transform translate-x-32 -translate-y-32 responsive-container sm:flex-col md:flex-row lg:grid" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full transform -translate-x-24 translate-y-24 responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
       </motion.div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,7 +199,7 @@ const Dashboard: React.FC = () => {
             title="Total Companies"
             value={formatNumber(metrics.totalCompanies)}
             change={{ value: 12.5, type: 'increase' }}
-            icon={<Building2 className="w-6 h-6 text-blue-500" />}
+            icon={<Building2 className="w-6 h-6 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
           />
         </motion.div>
 
@@ -206,7 +212,7 @@ const Dashboard: React.FC = () => {
             title="Total Users"
             value={formatNumber(metrics.totalUsers)}
             change={{ value: 8.3, type: 'increase' }}
-            icon={<Users className="w-6 h-6 text-emerald-500" />}
+            icon={<Users className="w-6 h-6 text-emerald-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
           />
         </motion.div>
 
@@ -219,7 +225,7 @@ const Dashboard: React.FC = () => {
             title="Monthly Revenue"
             value={formatCurrency(metrics.monthlyRevenue)}
             change={{ value: 15.7, type: 'increase' }}
-            icon={<DollarSign className="w-6 h-6 text-purple-500" />}
+            icon={<DollarSign className="w-6 h-6 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
           />
         </motion.div>
 
@@ -232,13 +238,13 @@ const Dashboard: React.FC = () => {
             title="System Health"
             value={`${metrics.systemUptime}%`}
             change={{ value: 0.1, type: 'increase' }}
-            icon={<Activity className="w-6 h-6 text-amber-500" />}
+            icon={<Activity className="w-6 h-6 text-amber-500 responsive-container sm:flex-col md:flex-row lg:grid" />}
           />
         </motion.div>
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Revenue Analytics */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -247,26 +253,26 @@ const Dashboard: React.FC = () => {
         >
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                 <CardTitle>Revenue Analytics</CardTitle>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-emerald-600 font-medium">+15.7%</span>
-                  <div className="flex gap-1">
-                    <Button variant="ghost" size="icon" className="w-8 h-8">
-                      <Filter className="w-4 h-4" />
+                <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-emerald-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">+15.7%</span>
+                  <div className="flex gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Button variant="ghost" size="icon" className="w-8 h-8 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
-                    <Button variant="ghost" size="icon" className="w-8 h-8">
-                      <Download className="w-4 h-4" />
+                    <Button variant="ghost" size="icon" className="w-8 h-8 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
                   </div>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
-                <div className="text-center">
-                  <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500">Revenue chart will be rendered here</p>
+              <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Revenue chart will be rendered here</p>
                 </div>
               </div>
             </CardContent>
@@ -281,26 +287,26 @@ const Dashboard: React.FC = () => {
         >
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                 <CardTitle>Portal Usage</CardTitle>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-blue-600 font-medium">5 Active</span>
-                  <div className="flex gap-1">
-                    <Button variant="ghost" size="icon" className="w-8 h-8">
-                      <Filter className="w-4 h-4" />
+                <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm text-blue-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">5 Active</span>
+                  <div className="flex gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Button variant="ghost" size="icon" className="w-8 h-8 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
-                    <Button variant="ghost" size="icon" className="w-8 h-8">
-                      <Download className="w-4 h-4" />
+                    <Button variant="ghost" size="icon" className="w-8 h-8 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </Button>
                   </div>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
-                <div className="text-center">
-                  <Globe className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500">Portal usage chart will be rendered here</p>
+              <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Globe className="w-12 h-12 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <p className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Portal usage chart will be rendered here</p>
                 </div>
               </div>
             </CardContent>
@@ -316,29 +322,29 @@ const Dashboard: React.FC = () => {
       >
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <CardTitle>Recent Activity</CardTitle>
               <Button variant="ghost" size="sm">
-                <RefreshCw className="w-4 h-4 mr-2" />
+                <RefreshCw className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Refresh
               </Button>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {recentActivity.map(activity => (
                 <div
                   key={activity.id}
-                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex-shrink-0">{getTypeIcon(activity.type)}</div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{activity.action}</p>
-                    <p className="text-xs text-gray-500">by {activity.user}</p>
+                  <div className="flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">{getTypeIcon(activity.type)}</div>
+                  <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{activity.action}</p>
+                    <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">by {activity.user}</p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {getStatusIcon(activity.status)}
-                    <span className="text-xs text-gray-500">{activity.time}</span>
+                    <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{activity.time}</span>
                   </div>
                 </div>
               ))}

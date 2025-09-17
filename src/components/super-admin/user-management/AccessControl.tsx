@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield,
@@ -310,33 +310,39 @@ export const AccessControl: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-8 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container">
                 Access Control
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 responsive-container">
                 Manage permissions, access rules, and resource security across your system
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
+            <div className="flex items-center space-x-3 responsive-container">
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <Download className="w-4 h-4 responsive-container" />
                 <span>Export</span>
               </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Upload className="w-4 h-4" />
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <Upload className="w-4 h-4 responsive-container" />
                 <span>Import</span>
               </button>
               <button
-                onClick={() => console.log('Create modal clicked')}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                onClick={() = aria-label="Button"> console.log('Create modal clicked')}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 responsive-container"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 responsive-container" />
                 <span>Add Rule</span>
               </button>
             </div>
@@ -344,15 +350,17 @@ export const AccessControl: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200 dark:border-slate-700">
-            <nav className="-mb-px flex space-x-8">
+        <div className="mb-6 responsive-container">
+          <div className="border-b border-gray-200 dark:border-slate-700 responsive-container">
+            <nav className="-mb-px flex space-x-8 responsive-container">
               {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <button
                     key={tab.id}
-                    onClick={() =>
+                    onClick={() = aria-label="Button">
                       setSelectedTab(tab.id as 'permissions' | 'rules' | 'resources' | 'audit')
                     }
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
@@ -361,9 +369,9 @@ export const AccessControl: React.FC = () => {
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-slate-600'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 responsive-container" />
                     <span>{tab.label}</span>
-                    <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs">
+                    <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs responsive-container">
                       {tab.count}
                     </span>
                   </button>
@@ -374,23 +382,23 @@ export const AccessControl: React.FC = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="mb-6 responsive-container">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container">
+            <div className="relative flex-1 responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search permissions, rules, or resources..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm responsive-container"
               />
             </div>
             {selectedTab === 'permissions' && (
               <select
                 value={filterCategory}
                 onChange={e => setFilterCategory(e.target.value)}
-                className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
+                className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700 responsive-container"
               >
                 <option value="all">All Categories</option>
                 <option value="User Management">User Management</option>
@@ -403,68 +411,68 @@ export const AccessControl: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
+        <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
           {selectedTab === 'permissions' && (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Permission
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Level
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Resource
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {filteredPermissions.map(permission => (
                     <motion.tr
                       key={permission.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                             {permission.name}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                             {permission.description}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <span className="text-sm text-gray-900 dark:text-white responsive-container">
                           {permission.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(permission.level)}`}
                         >
                           {permission.level}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <code className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <code className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded responsive-container">
                           {permission.resource}
                         </code>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                             permission.isActive
@@ -474,36 +482,36 @@ export const AccessControl: React.FC = () => {
                         >
                           {permission.isActive ? (
                             <>
-                              <CheckCircle className="w-3 h-3 mr-1" />
+                              <CheckCircle className="w-3 h-3 mr-1 responsive-container" />
                               Active
                             </>
                           ) : (
                             <>
-                              <Clock className="w-3 h-3 mr-1" />
+                              <Clock className="w-3 h-3 mr-1 responsive-container" />
                               Inactive
                             </>
                           )}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
-                          >
-                            <Eye className="w-4 h-4" />
+                           aria-label="Button">
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
+                           aria-label="Button">
+                            <Edit className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                             title="Delete"
-                          >
-                            <Trash2 className="w-4 h-4" />
+                           aria-label="Button">
+                            <Trash2 className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>
@@ -515,86 +523,86 @@ export const AccessControl: React.FC = () => {
           )}
 
           {selectedTab === 'rules' && (
-            <div className="p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="p-6 responsive-container">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 responsive-container">
                 {filteredRules.map(rule => (
                   <motion.div
                     key={rule.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow responsive-container"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                          <Shield className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    <div className="flex items-start justify-between mb-4 responsive-container">
+                      <div className="flex items-center space-x-3 responsive-container">
+                        <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg responsive-container">
+                          <Shield className="w-5 h-5 text-gray-600 dark:text-gray-400 responsive-container" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <h3 className="font-semibold text-gray-900 dark:text-white responsive-container">
                             {rule.name}
                           </h3>
-                          <div className="flex items-center space-x-2 mt-1">
+                          <div className="flex items-center space-x-2 mt-1 responsive-container">
                             <span
                               className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(rule.type)}`}
                             >
                               {rule.type}
                             </span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                            <span className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                               Priority {rule.priority}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1 responsive-container">
                         <button
-                          className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                          className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container"
                           title="Edit"
-                        >
-                          <Edit className="w-4 h-4" />
+                         aria-label="Button">
+                          <Edit className="w-4 h-4 responsive-container" />
                         </button>
                         <button
-                          className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400"
+                          className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400 responsive-container"
                           title="Delete"
-                        >
-                          <Trash2 className="w-4 h-4" />
+                         aria-label="Button">
+                          <Trash2 className="w-4 h-4 responsive-container" />
                         </button>
                       </div>
                     </div>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 responsive-container">
                       {rule.description}
                     </p>
 
-                    <div className="grid grid-cols-3 gap-4 mb-4">
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                    <div className="grid grid-cols-3 gap-4 mb-4 responsive-container">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container">
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container">
                           {rule.appliedTo.users}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">Users</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">Users</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container">
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container">
                           {rule.appliedTo.roles}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">Roles</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">Roles</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg responsive-container">
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container">
                           {rule.appliedTo.groups}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">Groups</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">Groups</div>
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                    <div className="mb-4 responsive-container">
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2 responsive-container">
                         Conditions
                       </h4>
-                      <div className="flex flex-wrap gap-1">
+                      <div className="flex flex-wrap gap-1 responsive-container">
                         {rule.conditions.map((condition, index) => (
                           <span
                             key={index}
-                            className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                            className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 responsive-container"
                           >
                             {condition}
                           </span>
@@ -602,21 +610,21 @@ export const AccessControl: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
-                      <div className="flex items-center space-x-2">
-                        <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium">
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium responsive-container" aria-label="Button">
                           View Details
                         </button>
-                        <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 text-sm font-medium">
+                        <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 text-sm font-medium responsive-container" aria-label="Button">
                           Test Rule
                         </button>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                          <Eye className="w-4 h-4" />
+                      <div className="flex items-center space-x-1 responsive-container">
+                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container" aria-label="Button">
+                          <Eye className="w-4 h-4 responsive-container" />
                         </button>
-                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                          <Settings className="w-4 h-4" />
+                        <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container" aria-label="Button">
+                          <Settings className="w-4 h-4 responsive-container" />
                         </button>
                       </div>
                     </div>
@@ -627,64 +635,64 @@ export const AccessControl: React.FC = () => {
           )}
 
           {selectedTab === 'resources' && (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Resource
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Type
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Access Level
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Protection
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Usage
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {filteredResources.map(resource => (
                     <motion.tr
                       key={resource.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                             {resource.name}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                             {resource.description}
                           </div>
-                          <code className="text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                          <code className="text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded responsive-container">
                             {resource.path}
                           </code>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900 dark:text-white capitalize">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <span className="text-sm text-gray-900 dark:text-white capitalize responsive-container">
                           {resource.type}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getAccessLevelColor(resource.accessLevel)}`}
                         >
                           {resource.accessLevel}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                             resource.isProtected
@@ -694,44 +702,44 @@ export const AccessControl: React.FC = () => {
                         >
                           {resource.isProtected ? (
                             <>
-                              <Lock className="w-3 h-3 mr-1" />
+                              <Lock className="w-3 h-3 mr-1 responsive-container" />
                               Protected
                             </>
                           ) : (
                             <>
-                              <Unlock className="w-3 h-3 mr-1" />
+                              <Unlock className="w-3 h-3 mr-1 responsive-container" />
                               Public
                             </>
                           )}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {resource.accessCount} accesses
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                           Last: {new Date(resource.lastAccessed).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
-                          >
-                            <Eye className="w-4 h-4" />
+                           aria-label="Button">
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
+                           aria-label="Button">
+                            <Edit className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Analytics"
-                          >
-                            <BarChart3 className="w-4 h-4" />
+                           aria-label="Button">
+                            <BarChart3 className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>
@@ -743,16 +751,16 @@ export const AccessControl: React.FC = () => {
           )}
 
           {selectedTab === 'audit' && (
-            <div className="p-6">
-              <div className="text-center py-12">
-                <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            <div className="p-6 responsive-container">
+              <div className="text-center py-12 responsive-container">
+                <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4 responsive-container" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2 responsive-container">
                   Audit Log
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 responsive-container">
                   Access control audit logs and security events will be displayed here.
                 </p>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
                   Enable Audit Logging
                 </button>
               </div>

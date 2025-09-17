@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bot, Bell, User, LogOut, Settings, Search, Plus, 
@@ -277,48 +277,48 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
   );
 
   const renderAIDashboard = () => (
-    <div className="space-y-8">
+    <div className="space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* AI Command Center Header */}
-      <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-3xl p-8 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative z-10">
-          <div className="flex items-center justify-between">
+      <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-3xl p-8 text-white relative overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="absolute inset-0 bg-black/10 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+        <div className="relative z-10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
-                  <Brain className="w-8 h-8" />
+              <div className="flex items-center space-x-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Brain className="w-8 h-8 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h2 className="text-4xl font-bold">AI Command Center</h2>
-                  <p className="text-cyan-100 text-lg">Welcome back, {user.name}! Your AI ecosystem is running optimally.</p>
+                  <h2 className="text-4xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">AI Command Center</h2>
+                  <p className="text-cyan-100 text-lg responsive-container sm:flex-col md:flex-row lg:grid">Welcome back, {user.name}! Your AI ecosystem is running optimally.</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-sm">All Systems Operational</span>
+              <div className="flex items-center space-x-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                  <span className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Cpu className="w-4 h-4" />
-                  <span className="text-sm">24 AI Agents Active</span>
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Cpu className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">24 AI Agents Active</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Zap className="w-4 h-4" />
-                  <span className="text-sm">87% Automation Rate</span>
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">87% Automation Rate</span>
                 </div>
               </div>
             </div>
-            <div className="text-right">
-              <div className="bg-white/20 rounded-2xl p-4 mb-4">
-                <p className="text-sm text-cyan-100">Current Time</p>
-                <p className="text-2xl font-bold">{new Date().toLocaleTimeString()}</p>
+            <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-white/20 rounded-2xl p-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-cyan-100 responsive-container sm:flex-col md:flex-row lg:grid">Current Time</p>
+                <p className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{new Date().toLocaleTimeString()}</p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`w-3 h-3 rounded-full ${
                   aiMode === 'autonomous' ? 'bg-green-400' :
                   aiMode === 'assisted' ? 'bg-yellow-400' : 'bg-red-400'
                 }`}></div>
-                <span className="text-sm capitalize">{aiMode} Mode</span>
+                <span className="text-sm capitalize responsive-container sm:flex-col md:flex-row lg:grid">{aiMode} Mode</span>
               </div>
             </div>
           </div>
@@ -326,7 +326,7 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
       </div>
 
       {/* AI Performance Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {[
           {
             title: 'AI Processing Power',
@@ -372,14 +372,14 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
             transition={{ delay: index * 0.1 }}
             className={`bg-gradient-to-br ${metric.bgGradient} p-6 rounded-2xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:scale-105`}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-gray-600 mb-1">{metric.title}</p>
-                <p className="text-3xl font-bold text-gray-900 mb-2">{metric.value}</p>
-                <p className="text-sm text-green-600">{metric.change}</p>
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm font-medium text-gray-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{metric.title}</p>
+                <p className="text-3xl font-bold text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{metric.value}</p>
+                <p className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{metric.change}</p>
               </div>
               <div className={`bg-gradient-to-r ${metric.gradient} p-4 rounded-xl shadow-lg`}>
-                <metric.icon className="w-8 h-8 text-white" />
+                <metric.icon className="w-8 h-8 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </motion.div>
@@ -387,18 +387,18 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
       </div>
 
       {/* AI Company Network */}
-      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6">
-          <div className="flex items-center justify-between">
+      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h3 className="text-2xl font-bold text-white">AI-Powered Company Network</h3>
-              <p className="text-indigo-100 mt-1">Companies leveraging Trans Bot AI technology</p>
+              <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">AI-Powered Company Network</h3>
+              <p className="text-indigo-100 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Companies leveraging Trans Bot AI technology</p>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {['7D', '1M', '3M', '1Y'].map((period) => (
                 <button
                   key={period}
-                  onClick={() => setSelectedTimeRange(period)}
+                  onClick={() = aria-label="Button"> setSelectedTimeRange(period)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     selectedTimeRange === period
                       ? 'bg-white text-indigo-600'
@@ -412,44 +412,44 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
           </div>
         </div>
         
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-gray-900">{companies.length}</p>
-              <p className="text-sm text-gray-600">Active Companies</p>
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{companies.length}</p>
+              <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Active Companies</p>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-gray-900">{companies.reduce((sum, c) => sum + c.users, 0)}</p>
-              <p className="text-sm text-gray-600">Total Users</p>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{companies.reduce((sum, c) => sum + c.users, 0)}</p>
+              <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Total Users</p>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-gray-900">{Math.round(companies.reduce((sum, c) => sum + c.aiScore, 0) / companies.length)}%</p>
-              <p className="text-sm text-gray-600">Avg AI Score</p>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{Math.round(companies.reduce((sum, c) => sum + c.aiScore, 0) / companies.length)}%</p>
+              <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Avg AI Score</p>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-gray-900">{Math.round(companies.reduce((sum, c) => sum + c.automation, 0) / companies.length)}%</p>
-              <p className="text-sm text-gray-600">Avg Automation</p>
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{Math.round(companies.reduce((sum, c) => sum + c.automation, 0) / companies.length)}%</p>
+              <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Avg Automation</p>
             </div>
           </div>
 
           {/* Company Cards with AI Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {filteredCompanies.map((company, index) => (
               <motion.div
                 key={company.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300"
+                className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                      <Building2 className="w-6 h-6 text-white" />
+                <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Building2 className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900">{company.name}</h4>
-                      <p className="text-sm text-gray-500">{company.industry}</p>
+                      <h4 className="font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.name}</h4>
+                      <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{company.industry}</p>
                     </div>
                   </div>
                   <div className={`px-3 py-1 text-xs rounded-full ${
@@ -461,38 +461,38 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-cyan-600">{company.aiScore}%</p>
-                    <p className="text-xs text-gray-600">AI Score</p>
+                <div className="grid grid-cols-2 gap-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-2xl font-bold text-cyan-600 responsive-container sm:flex-col md:flex-row lg:grid">{company.aiScore}%</p>
+                    <p className="text-xs text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">AI Score</p>
                   </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-purple-600">{company.automation}%</p>
-                    <p className="text-xs text-gray-600">Automation</p>
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-2xl font-bold text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid">{company.automation}%</p>
+                    <p className="text-xs text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Automation</p>
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">AI Performance</span>
-                    <span className="text-gray-900">{company.aiScore}%</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">AI Performance</span>
+                    <span className="text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.aiScore}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div 
-                      className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ width: `${company.aiScore}%` }}
                     ></div>
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Revenue</span>
-                    <span className="font-semibold text-gray-900">${company.revenue.toLocaleString()}/mo</span>
+                <div className="mt-4 pt-4 border-t border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Revenue</span>
+                    <span className="font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">${company.revenue.toLocaleString()}/mo</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm mt-1">
-                    <span className="text-gray-600">Users</span>
-                    <span className="font-semibold text-gray-900">{company.users}</span>
+                  <div className="flex items-center justify-between text-sm mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Users</span>
+                    <span className="font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{company.users}</span>
                   </div>
                 </div>
               </motion.div>
@@ -506,35 +506,35 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+        className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6">
-          <h3 className="text-2xl font-bold text-white">AI Activity Stream</h3>
-          <p className="text-emerald-100 mt-1">Real-time AI operations and insights</p>
+        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">AI Activity Stream</h3>
+          <p className="text-emerald-100 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Real-time AI operations and insights</p>
         </div>
-        <div className="p-6">
-          <div className="space-y-4">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {aiNotifications.map((notification, index) => (
               <motion.div
                 key={notification.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 + index * 0.1 }}
-                className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors"
+                className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <div className={`p-3 rounded-xl ${
                   notification.type === 'success' ? 'bg-green-100 text-green-600' :
                   notification.type === 'warning' ? 'bg-yellow-100 text-yellow-600' : 
                   'bg-blue-100 text-blue-600'
                 }`}>
-                  <notification.icon className="w-6 h-6" />
+                  <notification.icon className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-900">{notification.title}</p>
-                  <p className="text-sm text-gray-600">{notification.message}</p>
+                <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{notification.title}</p>
+                  <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{notification.message}</p>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-500">{notification.time}</p>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{notification.time}</p>
                 </div>
               </motion.div>
             ))}
@@ -549,55 +549,61 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
       case 'ai-dashboard':
         return renderAIDashboard();
       case 'autonomous-agents':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Autonomous Agents</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Autonomous Agents</h2></div>;
       case 'companies':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Company Network</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Company Network</h2></div>;
       case 'portal-ecosystem':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Portal Ecosystem</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Portal Ecosystem</h2></div>;
       case 'ai-analytics':
-        return <div className="p-6"><h2 className="text-2xl font-bold">AI Analytics</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">AI Analytics</h2></div>;
       case 'automation-engine':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Automation Engine</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Automation Engine</h2></div>;
       case 'neural-network':
-        return <div className="p-6"><h2 className="text-2xl font-bold">Neural Network</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Neural Network</h2></div>;
       case 'system-health':
-        return <div className="p-6"><h2 className="text-2xl font-bold">System Health</h2></div>;
+        return <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid"><h2 className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">System Health</h2></div>;
       default:
         return renderAIDashboard();
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Futuristic Header */}
-      <header className="bg-black/20 backdrop-blur-md border-b border-cyan-500/20 fixed top-0 left-0 right-0 z-50 h-16">
-        <div className="flex items-center justify-between px-6 py-4">
+      <header className="bg-black/20 backdrop-blur-md border-b border-cyan-500/20 fixed top-0 left-0 right-0 z-50 h-16 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Left side - AI Toggle and Search */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors border border-cyan-500/20"
+              onClick={() = aria-label="Button"> setSidebarOpen(!sidebarOpen)}
+              className="p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors border border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
             
-            <div className="relative">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <input
                 type="text"
                 placeholder="Search AI systems, companies, agents..."
-                className="w-80 pl-10 pr-4 py-2 bg-black/20 border border-cyan-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-cyan-300"
+                className="w-80 pl-10 pr-4 py-2 bg-black/20 border border-cyan-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-cyan-300 responsive-container sm:flex-col md:flex-row lg:grid"
               />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-cyan-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-cyan-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
 
           {/* Right side - AI Controls and Profile */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 bg-black/20 rounded-lg p-1 border border-cyan-500/20">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 bg-black/20 rounded-lg p-1 border border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid">
               {['autonomous', 'assisted', 'manual'].map((mode) => (
                 <button
                   key={mode}
-                  onClick={() => setAiMode(mode as any)}
+                  onClick={() = aria-label="Button"> setAiMode(mode as any)}
                   className={`px-3 py-1 text-xs rounded-md transition-colors ${
                     aiMode === mode
                       ? 'bg-cyan-500 text-white'
@@ -610,33 +616,33 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
             </div>
             
             <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors"
+              onClick={() = aria-label="Button"> setDarkMode(!darkMode)}
+              className="p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Moon className="w-5 h-5" />
+              <Moon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
             
             <button
-              onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors"
+              onClick={() = aria-label="Button"> setShowNotifications(!showNotifications)}
+              className="relative p-2 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Bell className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 text-black text-xs rounded-full flex items-center justify-center">4</span>
+              <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 text-black text-xs rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">4</span>
             </button>
             
-            <div className="relative">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                className="flex items-center space-x-2 text-cyan-300 hover:text-white px-3 py-2 rounded-lg hover:bg-cyan-500/10 transition-colors"
+                onClick={() = aria-label="Button"> setShowProfileDropdown(!showProfileDropdown)}
+                className="flex items-center space-x-2 text-cyan-300 hover:text-white px-3 py-2 rounded-lg hover:bg-cyan-500/10 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">
+                <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-white text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                     {user.name?.charAt(0) || 'U'}
                   </span>
                 </div>
-                <div className="text-left">
-                  <div className="text-sm font-medium text-white">{user.name}</div>
-                  <div className="text-xs text-cyan-300">AI Administrator</div>
+                <div className="text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-sm font-medium text-white responsive-container sm:flex-col md:flex-row lg:grid">{user.name}</div>
+                  <div className="text-xs text-cyan-300 responsive-container sm:flex-col md:flex-row lg:grid">AI Administrator</div>
                 </div>
               </button>
 
@@ -647,23 +653,23 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-md rounded-lg shadow-xl border border-cyan-500/20 z-50"
+                    className="absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-md rounded-lg shadow-xl border border-cyan-500/20 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <div className="py-2">
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-cyan-300 hover:bg-cyan-500/10">
-                        <User className="w-4 h-4 mr-3" />
+                    <div className="py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <a href="#" className="flex items-center px-4 py-2 text-sm text-cyan-300 hover:bg-cyan-500/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <User className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         Profile
                       </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-cyan-300 hover:bg-cyan-500/10">
-                        <Settings className="w-4 h-4 mr-3" />
+                      <a href="#" className="flex items-center px-4 py-2 text-sm text-cyan-300 hover:bg-cyan-500/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <Settings className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         AI Settings
                       </a>
-                      <hr className="my-2 border-cyan-500/20" />
+                      <hr className="my-2 border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <button
                         onClick={onLogout}
-                        className="flex items-center w-full px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"
-                      >
-                        <LogOut className="w-4 h-4 mr-3" />
+                        className="flex items-center w-full px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 responsive-container sm:flex-col md:flex-row lg:grid"
+                       aria-label="Button">
+                        <LogOut className="w-4 h-4 mr-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         Sign Out
                       </button>
                     </div>
@@ -675,31 +681,31 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
         </div>
       </header>
 
-      <div className="flex pt-16">
+      <div className="flex pt-16 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Futuristic Sidebar */}
         <motion.aside
           initial={false}
           animate={{ width: sidebarOpen ? 320 : 0 }}
-          className="bg-black/20 backdrop-blur-md min-h-screen fixed left-0 top-16 z-40 overflow-hidden border-r border-cyan-500/20"
+          className="bg-black/20 backdrop-blur-md min-h-screen fixed left-0 top-16 z-40 overflow-hidden border-r border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="p-6">
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {/* Trans Bot AI Logo */}
-            <div className="flex items-center space-x-3 mb-8">
-              <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
-                <Bot className="w-8 h-8 text-white" />
+            <div className="flex items-center space-x-3 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Bot className="w-8 h-8 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">Trans Bot AI</h1>
-                <p className="text-cyan-300 text-sm">Super Admin Portal</p>
+                <h1 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">Trans Bot AI</h1>
+                <p className="text-cyan-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Super Admin Portal</p>
               </div>
             </div>
 
             {/* AI Navigation */}
-            <nav className="space-y-2">
+            <nav className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {aiMenuItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => setActiveMenu(item.id)}
+                  onClick={() = aria-label="Button"> setActiveMenu(item.id)}
                   className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl transition-all duration-200 ${
                     activeMenu === item.id
                       ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/30'
@@ -711,10 +717,10 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-500' 
                       : 'bg-cyan-500/20'
                   }`}>
-                    <item.icon className="w-5 h-5 text-white" />
+                    <item.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <div className="flex-1 text-left">
-                    <div className="font-semibold">{item.label}</div>
+                  <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</div>
                     <div className={`text-xs ${
                       activeMenu === item.id ? 'text-cyan-200' : 'text-cyan-500'
                     }`}>
@@ -726,42 +732,42 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
             </nav>
 
             {/* AI Quick Actions */}
-            <div className="mt-8 pt-6 border-t border-cyan-500/20">
-              <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-4">AI QUICK ACTIONS</h3>
-              <div className="space-y-2">
+            <div className="mt-8 pt-6 border-t border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-4 responsive-container sm:flex-col md:flex-row lg:grid">AI QUICK ACTIONS</h3>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 {aiQuickActions.map((action, index) => (
                   <button
                     key={index}
                     onClick={action.action}
-                    className="w-full flex items-center space-x-3 px-4 py-3 text-cyan-300 hover:bg-cyan-500/10 rounded-xl transition-all duration-200"
-                  >
+                    className="w-full flex items-center space-x-3 px-4 py-3 text-cyan-300 hover:bg-cyan-500/10 rounded-xl transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
                     <div className={`w-10 h-10 ${action.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                      <action.icon className="w-5 h-5 text-white" />
+                      <action.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                    <span className="font-medium">{action.label}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* System Status */}
-            <div className="mt-8 pt-6 border-t border-cyan-500/20">
-              <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-4">AI SYSTEM STATUS</h3>
-              <div className="space-y-3">
+            <div className="mt-8 pt-6 border-t border-cyan-500/20 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-4 responsive-container sm:flex-col md:flex-row lg:grid">AI SYSTEM STATUS</h3>
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 {[
                   { label: 'Neural Networks', status: 'active', color: 'green' },
                   { label: 'AI Agents', status: 'running', color: 'green' },
                   { label: 'Data Pipeline', status: 'optimal', color: 'green' },
                   { label: 'ML Models', status: 'training', color: 'yellow' }
                 ].map((system, index) => (
-                  <div key={index} className="flex items-center justify-between px-4 py-3 bg-cyan-500/5 rounded-xl border border-cyan-500/10">
-                    <span className="text-sm font-medium text-cyan-300">{system.label}</span>
-                    <div className="flex items-center space-x-2">
+                  <div key={index} className="flex items-center justify-between px-4 py-3 bg-cyan-500/5 rounded-xl border border-cyan-500/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm font-medium text-cyan-300 responsive-container sm:flex-col md:flex-row lg:grid">{system.label}</span>
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div className={`w-2 h-2 ${
                         system.color === 'green' ? 'bg-green-400' :
                         system.color === 'yellow' ? 'bg-yellow-400' : 'bg-red-400'
                       } rounded-full animate-pulse`}></div>
-                      <span className="text-xs text-cyan-400">{system.status}</span>
+                      <span className="text-xs text-cyan-400 responsive-container sm:flex-col md:flex-row lg:grid">{system.status}</span>
                     </div>
                   </div>
                 ))}
@@ -772,16 +778,16 @@ const TransBotAISuperAdmin: React.FC<TransBotAISuperAdminProps> = ({ user, onLog
 
         {/* Main Content */}
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-320' : 'ml-0'}`}>
-          <div className="p-8">
+          <div className="p-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {renderContent()}
           </div>
         </main>
       </div>
 
       {/* Futuristic Floating Action Button */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4 rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-200 hover:scale-105 border border-cyan-400/20">
-          <Plus className="w-6 h-6" />
+      <div className="fixed bottom-8 right-8 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+        <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4 rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-200 hover:scale-105 border border-cyan-400/20 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <Plus className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
         </button>
       </div>
     </div>

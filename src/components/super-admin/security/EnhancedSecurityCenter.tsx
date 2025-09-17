@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
@@ -377,69 +377,79 @@ const EnhancedSecurityCenter: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+          <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl responsive-container sm:flex-col md:flex-row lg:grid"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Security Center
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Monitor security events, threats, and compliance status
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setShowSensitiveData(!showSensitiveData)}
-            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowSensitiveData(!showSensitiveData)}
+            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            {showSensitiveData ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showSensitiveData ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{showSensitiveData ? 'Hide' : 'Show'} Sensitive</span>
           </button>
         </div>
       </div>
 
       {/* Security Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {metrics.map((metric, index) => {
           const Icon = metric.icon;
           
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`p-3 rounded-lg ${metric.bgColor}`}>
                   <Icon className={`h-6 w-6 ${metric.color}`} />
                 </div>
@@ -448,22 +458,22 @@ const EnhancedSecurityCenter: React.FC = () => {
                   metric.changeType === 'decrease' ? 'text-red-600' : 'text-gray-600'
                 }`}>
                   {metric.changeType === 'increase' ? (
-                    <TrendingUp className="h-4 w-4" />
+                    <TrendingUp className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : metric.changeType === 'decrease' ? (
-                    <TrendingDown className="h-4 w-4" />
+                    <TrendingDown className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : null}
                   <span>{Math.abs(metric.change)}%</span>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.name}
                 </h3>
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.value}
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {metric.description}
                 </p>
               </div>
@@ -473,17 +483,19 @@ const EnhancedSecurityCenter: React.FC = () => {
       </div>
 
       {/* Compliance Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           Compliance Status
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {compliance.map((item) => {
             const ComplianceIcon = getComplianceIcon(item.status);
             
             return (
-              <div key={item.id} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div className="flex items-center space-x-3 mb-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+              <div key={item.id} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <ComplianceIcon className={`h-5 w-5 ${
                     item.status === 'compliant' ? 'text-green-600' :
                     item.status === 'non_compliant' ? 'text-red-600' :
@@ -493,13 +505,13 @@ const EnhancedSecurityCenter: React.FC = () => {
                     {item.status.replace('_', ' ')}
                   </span>
                 </div>
-                <h3 className="font-medium text-gray-900 dark:text-white mb-1">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {item.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {item.description}
                 </p>
-                <div className="text-xs text-gray-500 dark:text-gray-500">
+                <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   Last check: {new Date(item.lastCheck).toLocaleDateString()}
                 </div>
               </div>
@@ -509,36 +521,36 @@ const EnhancedSecurityCenter: React.FC = () => {
       </div>
 
       {/* Security Events */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Security Events
           </h2>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               {filteredEvents.length} events
             </span>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-          <div className="lg:col-span-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="lg:col-span-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 placeholder="Search events..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
           </div>
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Types</option>
             <option value="login">Login</option>
@@ -550,7 +562,7 @@ const EnhancedSecurityCenter: React.FC = () => {
           <select
             value={filterSeverity}
             onChange={(e) => setFilterSeverity(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Severities</option>
             <option value="critical">Critical</option>
@@ -561,7 +573,7 @@ const EnhancedSecurityCenter: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -570,13 +582,15 @@ const EnhancedSecurityCenter: React.FC = () => {
         </div>
 
         {/* Events List */}
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {filteredEvents.map((event) => {
             const isExpanded = expandedEvents.includes(event.id);
             const SeverityIcon = getSeverityIcon(event.severity);
             const TypeIcon = getTypeIcon(event.type);
             
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <div
                 key={event.id}
                 className={`border rounded-lg p-4 transition-colors ${
@@ -585,8 +599,8 @@ const EnhancedSecurityCenter: React.FC = () => {
                     : 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20'
                 }`}
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start space-x-4 flex-1">
+                <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-start space-x-4 flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className={`p-2 rounded-lg ${
                       event.severity === 'critical' ? 'bg-red-100' :
                       event.severity === 'high' ? 'bg-orange-100' :
@@ -599,69 +613,69 @@ const EnhancedSecurityCenter: React.FC = () => {
                       }`} />
                     </div>
                     
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="font-medium text-gray-900 dark:text-white">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <h3 className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {event.title}
                         </h3>
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${getSeverityColor(event.severity)}`}>
                           {event.severity}
                         </span>
                         {event.resolved && (
-                          <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                          <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 responsive-container sm:flex-col md:flex-row lg:grid">
                             Resolved
                           </span>
                         )}
                       </div>
                       
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         {event.description}
                       </p>
                       
-                      <div className="flex items-center space-x-6 text-xs text-gray-500 dark:text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <User className="h-3 w-3" />
+                      <div className="flex items-center space-x-6 text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <User className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>{showSensitiveData ? event.user : '***@***.com'}</span>
                         </div>
-                        <div className="flex items-center space-x-1">
-                          <Globe className="h-3 w-3" />
+                        <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Globe className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>{showSensitiveData ? event.ip : '***.***.***.***'}</span>
                         </div>
-                        <div className="flex items-center space-x-1">
-                          <MapPin className="h-3 w-3" />
+                        <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <MapPin className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>{event.location}</span>
                         </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-3 w-3" />
+                        <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Clock className="h-3 w-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>{new Date(event.timestamp).toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2 ml-4">
+                  <div className="flex items-center space-x-2 ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => toggleEventExpansion(event.id)}
-                      className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                      onClick={() = aria-label="Button"> toggleEventExpansion(event.id)}
+                      className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="View Details"
                     >
-                      {isExpanded ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {isExpanded ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                     </button>
                     {!event.resolved && (
                       <button
-                        onClick={() => handleResolveEvent(event.id)}
-                        className="p-1 text-green-600 hover:text-green-700 transition-colors"
+                        onClick={() = aria-label="Button"> handleResolveEvent(event.id)}
+                        className="p-1 text-green-600 hover:text-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title="Resolve Event"
                       >
-                        <CheckCircle className="h-4 w-4" />
+                        <CheckCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                     )}
                     <button
-                      onClick={() => handleDeleteEvent(event.id)}
-                      className="p-1 text-red-600 hover:text-red-700 transition-colors"
+                      onClick={() = aria-label="Button"> handleDeleteEvent(event.id)}
+                      className="p-1 text-red-600 hover:text-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete Event"
                     >
-                      <XCircle className="h-4 w-4" />
+                      <XCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   </div>
                 </div>
@@ -672,29 +686,29 @@ const EnhancedSecurityCenter: React.FC = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                      className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                             Event Details
                           </h4>
-                          <div className="space-y-2 text-sm">
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">Source:</span>
-                              <span className="text-gray-900 dark:text-white">{event.source}</span>
+                          <div className="space-y-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Source:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{event.source}</span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">Device:</span>
-                              <span className="text-gray-900 dark:text-white">{event.device}</span>
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Device:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{event.device}</span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">Browser:</span>
-                              <span className="text-gray-900 dark:text-white">{event.browser}</span>
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Browser:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{event.browser}</span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">Timestamp:</span>
-                              <span className="text-gray-900 dark:text-white">
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Timestamp:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                                 {new Date(event.timestamp).toLocaleString()}
                               </span>
                             </div>
@@ -702,25 +716,25 @@ const EnhancedSecurityCenter: React.FC = () => {
                         </div>
                         
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                             User Information
                           </h4>
-                          <div className="space-y-2 text-sm">
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">User:</span>
-                              <span className="text-gray-900 dark:text-white">
+                          <div className="space-y-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">User:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                                 {showSensitiveData ? event.user : '***@***.com'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">IP Address:</span>
-                              <span className="text-gray-900 dark:text-white">
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">IP Address:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                                 {showSensitiveData ? event.ip : '***.***.***.***'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-500 dark:text-gray-400">Location:</span>
-                              <span className="text-gray-900 dark:text-white">{event.location}</span>
+                            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Location:</span>
+                              <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{event.location}</span>
                             </div>
                           </div>
                         </div>

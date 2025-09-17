@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   MessageSquare,
   Send,
@@ -237,65 +237,73 @@ export const CompleteCommunicationHub: React.FC = () => {
   const getNotificationIcon = (type: string) => {
     switch (type) {
       case 'success':
-        return <Check className="w-4 h-4 text-green-400" />;
+        return <Check className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'warning':
-        return <Bell className="w-4 h-4 text-yellow-400" />;
+        return <Bell className="w-4 h-4 text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <X className="w-4 h-4 text-red-400" />;
+        return <X className="w-4 h-4 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Bell className="w-4 h-4 text-blue-400" />;
+        return <Bell className="w-4 h-4 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   if (isMinimized) {
     return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="fixed bottom-4 right-4 z-50"
+        className="fixed bottom-4 right-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
       >
         <button
-          onClick={() => setIsMinimized(false)}
-          className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-colors"
+          onClick={() = aria-label="Button"> setIsMinimized(false)}
+          className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <MessageSquare className="w-6 h-6" />
+          <MessageSquare className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
         </button>
       </motion.div>
     );
   }
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.div
       initial={{ opacity: 0, x: 300 }}
       animate={{ opacity: 1, x: 0 }}
-      className="fixed top-4 right-4 w-96 h-[600px] bg-gray-900/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-2xl z-50 flex flex-col"
+      className="fixed top-4 right-4 w-96 h-[600px] bg-gray-900/95 backdrop-blur-sm border border-white/10 rounded-lg shadow-2xl z-50 flex flex-col responsive-container sm:flex-col md:flex-row lg:grid"
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/10">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <MessageSquare className="w-5 h-5 text-blue-400" />
+      <div className="flex items-center justify-between p-4 border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="p-2 bg-blue-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <MessageSquare className="w-5 h-5 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">Communication Hub</h3>
-            <p className="text-xs text-gray-400">Real-time collaboration</p>
+            <h3 className="text-lg font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Communication Hub</h3>
+            <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Real-time collaboration</p>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() => setIsMinimized(true)}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            onClick={() = aria-label="Button"> setIsMinimized(true)}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Minimize2 className="w-4 h-4 text-gray-400" />
+            <Minimize2 className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
-          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <X className="w-4 h-4 text-gray-400" />
+          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <X className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-white/10">
+      <div className="flex border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
         {[
           { id: 'chat', label: 'Chat', icon: MessageSquare },
           { id: 'notifications', label: 'Notifications', icon: Bell },
@@ -304,17 +312,17 @@ export const CompleteCommunicationHub: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as 'chat' | 'notifications' | 'alerts' | 'calls')}
+            onClick={() = aria-label="Button"> setActiveTab(tab.id as 'chat' | 'notifications' | 'alerts' | 'calls')}
             className={`flex-1 flex items-center justify-center space-x-2 py-3 text-sm font-medium transition-colors ${activeTab === tab.id ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-white'}`}
           >
-            <tab.icon className="w-4 h-4" />
+            <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>{tab.label}</span>
           </button>
         ))}
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
         <AnimatePresence mode="wait">
           {activeTab === 'chat' && (
             <motion.div
@@ -322,27 +330,27 @@ export const CompleteCommunicationHub: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="h-full flex flex-col"
+              className="h-full flex flex-col responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {/* Online Users */}
-              <div className="p-3 border-b border-white/10">
-                <div className="flex items-center space-x-2">
-                  <Users className="w-4 h-4 text-gray-400" />
-                  <span className="text-sm text-gray-400">Online Users</span>
+              <div className="p-3 border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Users className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Online Users</span>
                 </div>
-                <div className="flex items-center space-x-2 mt-2">
+                <div className="flex items-center space-x-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {users
                     .filter(user => user.status === 'online')
                     .map(user => (
-                      <div key={user.id} className="relative">
+                      <div key={user.id} className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                         <img
                           src={
                             user.avatar ||
                             `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff`
                           }
                           alt={user.name}
-                          className="w-8 h-8 rounded-full"
-                        />
+                          className="w-8 h-8 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
+                        / alt="Image">
                         <div
                           className={`absolute -bottom-1 -right-1 w-3 h-3 ${getStatusColor(user.status)} rounded-full border-2 border-gray-900`}
                         ></div>
@@ -352,28 +360,28 @@ export const CompleteCommunicationHub: React.FC = () => {
               </div>
 
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {messages.map(message => (
-                  <div key={message.id} className="flex items-start space-x-3">
+                  <div key={message.id} className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <img
                       src={
                         message.avatar ||
                         `https://ui-avatars.com/api/?name=${encodeURIComponent(message.sender)}&background=6366f1&color=fff`
                       }
                       alt={message.sender}
-                      className="w-8 h-8 rounded-full flex-shrink-0"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <span className="text-sm font-medium text-white">{message.sender}</span>
-                        <span className="text-xs text-gray-400">
+                      className="w-8 h-8 rounded-full flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid"
+                    / alt="Image">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm font-medium text-white responsive-container sm:flex-col md:flex-row lg:grid">{message.sender}</span>
+                        <span className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(message.timestamp).toLocaleTimeString()}
                         </span>
                         {!message.isRead && message.sender !== 'You' && (
-                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <div className="w-2 h-2 bg-blue-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
                         )}
                       </div>
-                      <p className="text-sm text-gray-300">{message.content}</p>
+                      <p className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">{message.content}</p>
                     </div>
                   </div>
                 ))}
@@ -381,36 +389,36 @@ export const CompleteCommunicationHub: React.FC = () => {
               </div>
 
               {/* Message Input */}
-              <div className="p-4 border-t border-white/10">
-                <div className="flex items-center space-x-2">
+              <div className="p-4 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    onClick={() = aria-label="Button"> fileInputRef.current?.click()}
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <Paperclip className="w-4 h-4 text-gray-400" />
+                    <Paperclip className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                   <input
                     ref={fileInputRef}
                     type="file"
-                    className="hidden"
+                    className="hidden responsive-container sm:flex-col md:flex-row lg:grid"
                     onChange={handleFileUpload}
                   />
-                  <div className="flex-1 relative">
+                  <div className="flex-1 relative responsive-container sm:flex-col md:flex-row lg:grid">
                     <input
                       type="text"
                       value={newMessage}
                       onChange={e => setNewMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Type a message..."
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </div>
                   <button
                     onClick={handleSendMessage}
                     disabled={!newMessage.trim()}
-                    className="p-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-                  >
-                    <Send className="w-4 h-4" />
+                    className="p-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                   aria-label="Button">
+                    <Send className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
               </div>
@@ -423,24 +431,24 @@ export const CompleteCommunicationHub: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="h-full overflow-y-auto p-4 space-y-3"
+              className="h-full overflow-y-auto p-4 space-y-3 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {notifications.map(notification => (
                 <div
                   key={notification.id}
                   className={`p-3 rounded-lg border ${notification.isRead ? 'bg-white/5 border-white/10' : 'bg-blue-500/10 border-blue-500/30'}`}
                 >
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     {getNotificationIcon(notification.type)}
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-white">{notification.title}</h4>
-                      <p className="text-xs text-gray-400 mt-1">{notification.message}</p>
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-gray-500">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <h4 className="text-sm font-medium text-white responsive-container sm:flex-col md:flex-row lg:grid">{notification.title}</h4>
+                      <p className="text-xs text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{notification.message}</p>
+                      <div className="flex items-center justify-between mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(notification.timestamp).toLocaleTimeString()}
                         </span>
                         {notification.action && (
-                          <button className="text-xs text-blue-400 hover:text-blue-300">
+                          <button className="text-xs text-blue-400 hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                             {notification.action}
                           </button>
                         )}
@@ -458,12 +466,12 @@ export const CompleteCommunicationHub: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="h-full flex items-center justify-center"
+              className="h-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="text-center">
-                <Settings className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-white mb-2">System Alerts</h3>
-                <p className="text-sm text-gray-400">No active alerts at this time</p>
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Settings className="w-12 h-12 text-gray-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <h3 className="text-lg font-medium text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">System Alerts</h3>
+                <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">No active alerts at this time</p>
               </div>
             </motion.div>
           )}
@@ -474,58 +482,58 @@ export const CompleteCommunicationHub: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="h-full flex flex-col items-center justify-center p-4"
+              className="h-full flex flex-col items-center justify-center p-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {isCallActive ? (
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="w-8 h-8 text-green-400" />
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Phone className="w-8 h-8 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <h3 className="text-lg font-medium text-white mb-2">Call in Progress</h3>
-                  <p className="text-sm text-gray-400 mb-6">Connected to team meeting</p>
+                  <h3 className="text-lg font-medium text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Call in Progress</h3>
+                  <p className="text-sm text-gray-400 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Connected to team meeting</p>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setIsMuted(!isMuted)}
+                      onClick={() = aria-label="Button"> setIsMuted(!isMuted)}
                       className={`p-3 rounded-full ${isMuted ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'} text-white transition-colors`}
                     >
-                      {isMuted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                      {isMuted ? <MicOff className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Mic className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
                     </button>
                     <button
-                      onClick={() => setIsVideoEnabled(!isVideoEnabled)}
+                      onClick={() = aria-label="Button"> setIsVideoEnabled(!isVideoEnabled)}
                       className={`p-3 rounded-full ${isVideoEnabled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700'} text-white transition-colors`}
                     >
                       {isVideoEnabled ? (
-                        <Camera className="w-5 h-5" />
+                        <Camera className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                       ) : (
-                        <CameraOff className="w-5 h-5" />
+                        <CameraOff className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                       )}
                     </button>
                     <button
-                      onClick={() => setIsCallActive(false)}
-                      className="p-3 bg-red-600 hover:bg-red-700 text-white rounded-full transition-colors"
+                      onClick={() = aria-label="Button"> setIsCallActive(false)}
+                      className="p-3 bg-red-600 hover:bg-red-700 text-white rounded-full transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="w-8 h-8 text-blue-400" />
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Phone className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <h3 className="text-lg font-medium text-white mb-2">Start a Call</h3>
-                  <p className="text-sm text-gray-400 mb-6">Connect with your team</p>
+                  <h3 className="text-lg font-medium text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Start a Call</h3>
+                  <p className="text-sm text-gray-400 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Connect with your team</p>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() => setIsCallActive(true)}
-                      className="p-3 bg-green-600 hover:bg-green-700 text-white rounded-full transition-colors"
+                      onClick={() = aria-label="Button"> setIsCallActive(true)}
+                      className="p-3 bg-green-600 hover:bg-green-700 text-white rounded-full transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
-                    <button className="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
-                      <Video className="w-5 h-5" />
+                    <button className="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                      <Video className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                   </div>
                 </div>

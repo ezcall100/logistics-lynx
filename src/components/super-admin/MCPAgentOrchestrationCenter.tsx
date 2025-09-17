@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bot,
@@ -1065,27 +1065,33 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
               🤖 MCP Agent Orchestration Center
             </h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-gray-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
               Real-time monitoring and control of all 302 MCP agents (251 existing + 51 new testing
               agents)
             </p>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">Live</span>
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">Live</span>
             </div>
             <button
-              onClick={() => setRealTimeData(!realTimeData)}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              onClick={() = aria-label="Button"> setRealTimeData(!realTimeData)}
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {realTimeData ? 'Pause Updates' : 'Resume Updates'}
             </button>
@@ -1093,18 +1099,18 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Total Agents</p>
-                <p className="text-3xl font-bold text-white">{totalAgents}</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Total Agents</p>
+                <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{totalAgents}</p>
               </div>
-              <Bot className="w-8 h-8 text-purple-400" />
+              <Bot className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1112,14 +1118,14 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Active Agents</p>
-                <p className="text-3xl font-bold text-green-400">{activeAgents}</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</p>
+                <p className="text-3xl font-bold text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">{activeAgents}</p>
               </div>
-              <Activity className="w-8 h-8 text-green-400" />
+              <Activity className="w-8 h-8 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1127,14 +1133,14 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Error Agents</p>
-                <p className="text-3xl font-bold text-red-400">{errorAgents}</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Error Agents</p>
+                <p className="text-3xl font-bold text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{errorAgents}</p>
               </div>
-              <AlertTriangle className="w-8 h-8 text-red-400" />
+              <AlertTriangle className="w-8 h-8 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -1142,35 +1148,35 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">System Health</p>
-                <p className="text-3xl font-bold text-blue-400">99.7%</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">System Health</p>
+                <p className="text-3xl font-bold text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid">99.7%</p>
               </div>
-              <Shield className="w-8 h-8 text-blue-400" />
+              <Shield className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-between mb-8 gap-4">
-        <div className="flex items-center space-x-4">
-          <div className="relative">
+      <div className="flex flex-wrap items-center justify-between mb-8 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="text"
               placeholder="Search agents..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
           <select
             value={filterType}
             onChange={e => setFilterType(e.target.value)}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="all">All Types</option>
             <option value="core">Core Systems</option>
@@ -1182,42 +1188,42 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           </select>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() => setViewMode('cluster')}
+            onClick={() = aria-label="Button"> setViewMode('cluster')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'cluster'
                 ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <Network className="w-4 h-4" />
+            <Network className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() => setViewMode('grid')}
+            onClick={() = aria-label="Button"> setViewMode('grid')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'grid'
                 ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <BarChart3 className="w-4 h-4" />
+            <BarChart3 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() => setViewMode('list')}
+            onClick={() = aria-label="Button"> setViewMode('list')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'list'
                 ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
-            <Terminal className="w-4 h-4" />
+            <Terminal className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
         </div>
       </div>
 
       {/* Agent Clusters */}
-      <div className="space-y-8">
+      <div className="space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {agentClusters.map((cluster, clusterIndex) => (
           <motion.div
             key={cluster.id}
@@ -1226,25 +1232,25 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             transition={{ delay: clusterIndex * 0.1 }}
             className={`rounded-xl border-2 ${getClusterStatusColor(cluster.status)} p-6`}
           >
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                  <Brain className="w-6 h-6 text-purple-400" />
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Brain className="w-6 h-6 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">{cluster.name}</h3>
-                  <p className="text-gray-300">
+                  <h3 className="text-xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{cluster.name}</h3>
+                  <p className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     {cluster.agents.length} agents • {cluster.utilization}% utilization
                   </p>
                 </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <p className="text-sm text-gray-300">Capacity</p>
-                  <p className="text-lg font-bold text-white">{cluster.totalCapacity}%</p>
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Capacity</p>
+                  <p className="text-lg font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{cluster.totalCapacity}%</p>
                 </div>
-                <div className="w-16 h-16 relative">
-                  <svg className="w-16 h-16 transform -rotate-90">
+                <div className="w-16 h-16 relative responsive-container sm:flex-col md:flex-row lg:grid">
+                  <svg className="w-16 h-16 transform -rotate-90 responsive-container sm:flex-col md:flex-row lg:grid">
                     <circle
                       cx="32"
                       cy="32"
@@ -1252,7 +1258,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                       stroke="currentColor"
                       strokeWidth="4"
                       fill="none"
-                      className="text-white/20"
+                      className="text-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                     <circle
                       cx="32"
@@ -1262,18 +1268,18 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                       strokeWidth="4"
                       fill="none"
                       strokeDasharray={`${cluster.utilization * 1.76} 176`}
-                      className="text-purple-400"
+                      className="text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid"
                     />
                   </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-sm font-bold text-white">{cluster.utilization}%</span>
+                  <div className="absolute inset-0 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{cluster.utilization}%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Agent Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {cluster.agents.slice(0, 8).map((agent, agentIndex) => (
                 <motion.div
                   key={agent.id}
@@ -1281,12 +1287,12 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: agentIndex * 0.05 }}
                   onClick={() => setSelectedAgent(agent)}
-                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all cursor-pointer group"
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all cursor-pointer group responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center space-x-2">
-                      <Bot className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-white truncate">{agent.name}</span>
+                  <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <Bot className="w-4 h-4 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                      <span className="text-sm font-medium text-white truncate responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</span>
                     </div>
                     <div
                       className={`px-2 py-1 rounded-full text-xs ${getStatusColor(agent.status)}`}
@@ -1295,41 +1301,41 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-400">
+                  <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex justify-between text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>CPU</span>
                       <span>{agent.cpu}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-1">
+                    <div className="w-full bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="bg-purple-400 h-1 rounded-full transition-all duration-300"
+                        className="bg-purple-400 h-1 rounded-full transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{ width: `${agent.cpu}%` }}
                       ></div>
                     </div>
 
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Memory</span>
                       <span>{agent.memory}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-1">
+                    <div className="w-full bg-gray-700 rounded-full h-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="bg-blue-400 h-1 rounded-full transition-all duration-300"
+                        className="bg-blue-400 h-1 rounded-full transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{ width: `${agent.memory}%` }}
                       ></div>
                     </div>
 
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Health</span>
                       <span className={getPriorityColor(agent.priority)}>{agent.health}%</span>
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-white/10">
-                    <div className="flex justify-between text-xs text-gray-400">
+                  <div className="mt-3 pt-3 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex justify-between text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Tasks</span>
                       <span>{agent.tasksCompleted}</span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Location</span>
                       <span>{agent.location}</span>
                     </div>
@@ -1338,12 +1344,12 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               ))}
 
               {cluster.agents.length > 8 && (
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-white font-bold text-sm">+</span>
+                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-white font-bold text-sm responsive-container sm:flex-col md:flex-row lg:grid">+</span>
                     </div>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       +{cluster.agents.length - 8} more agents
                     </p>
                   </div>
@@ -1361,7 +1367,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={() => setSelectedAgent(null)}
           >
             <motion.div
@@ -1369,30 +1375,30 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                    <Bot className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Bot className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">{selectedAgent.name}</h3>
-                    <p className="text-gray-300">Agent ID: {selectedAgent.id}</p>
+                    <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.name}</h3>
+                    <p className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Agent ID: {selectedAgent.id}</p>
                   </div>
                 </div>
                 <button
-                  onClick={() => setSelectedAgent(null)}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() = aria-label="Button"> setSelectedAgent(null)}
+                  className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-6 mb-6">
-                <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="text-sm text-gray-400">Status</label>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Status</label>
                     <div
                       className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedAgent.status)}`}
                     >
@@ -1400,7 +1406,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Priority</label>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Priority</label>
                     <p
                       className={`text-sm font-medium ${getPriorityColor(selectedAgent.priority)}`}
                     >
@@ -1408,68 +1414,68 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Location</label>
-                    <p className="text-sm text-white">{selectedAgent.location}</p>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Location</label>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.location}</p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Last Activity</label>
-                    <p className="text-sm text-white">{selectedAgent.lastActivity}</p>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Activity</label>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.lastActivity}</p>
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="text-sm text-gray-400">CPU Usage</label>
-                    <div className="flex items-center space-x-2">
-                      <div className="flex-1 bg-gray-700 rounded-full h-2">
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU Usage</label>
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex-1 bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-purple-400 h-2 rounded-full"
+                          className="bg-purple-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${selectedAgent.cpu}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-white">{selectedAgent.cpu}%</span>
+                      <span className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.cpu}%</span>
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Memory Usage</label>
-                    <div className="flex items-center space-x-2">
-                      <div className="flex-1 bg-gray-700 rounded-full h-2">
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory Usage</label>
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex-1 bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-blue-400 h-2 rounded-full"
+                          className="bg-blue-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${selectedAgent.memory}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-white">{selectedAgent.memory}%</span>
+                      <span className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.memory}%</span>
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Health Score</label>
-                    <div className="flex items-center space-x-2">
-                      <div className="flex-1 bg-gray-700 rounded-full h-2">
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Health Score</label>
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex-1 bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-green-400 h-2 rounded-full"
+                          className="bg-green-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${selectedAgent.health}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-white">{selectedAgent.health}%</span>
+                      <span className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.health}%</span>
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Tasks Completed</label>
-                    <p className="text-sm text-white">
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Tasks Completed</label>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedAgent.tasksCompleted.toLocaleString()}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mb-6">
-                <label className="text-sm text-gray-400 mb-2 block">Capabilities</label>
-                <div className="flex flex-wrap gap-2">
+              <div className="mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <label className="text-sm text-gray-400 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Capabilities</label>
+                <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedAgent.capabilities.map((capability, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm"
+                      className="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       {capability}
                     </span>
@@ -1477,17 +1483,17 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex space-x-4">
-                <button className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <Play className="w-4 h-4" />
+              <div className="flex space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <button className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Start Agent</span>
                 </button>
-                <button className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <Pause className="w-4 h-4" />
+                <button className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Pause Agent</span>
                 </button>
-                <button className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <RotateCcw className="w-4 h-4" />
+                <button className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <RotateCcw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>Restart Agent</span>
                 </button>
               </div>

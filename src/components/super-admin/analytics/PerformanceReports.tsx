@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Activity,
@@ -277,17 +277,23 @@ const PerformanceReports: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -296,22 +302,24 @@ const PerformanceReports: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Performance Reports
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             System and application performance monitoring and analysis
           </p>
           </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <select
               value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {periods.map(period => (
               <option key={period.value} value={period.value}>
@@ -322,48 +330,50 @@ const PerformanceReports: React.FC = () => {
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>Export</span>
             </button>
           </div>
         </div>
 
         {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {metrics.map((metric, index) => {
           const Icon = metric.icon;
           const ChangeIcon = getChangeIcon(metric.changeType);
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {metric.value}{metric.unit}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">{metric.name}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{metric.name}</div>
                 </div>
-                <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <Icon className="h-6 w-6 text-blue-600" />
+                <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Icon className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
               </div>
-              <div className="mt-4 flex items-center space-x-2">
+              <div className="mt-4 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <ChangeIcon className={`h-4 w-4 ${getChangeColor(metric.changeType)}`} />
                 <span className={`text-sm font-medium ${getChangeColor(metric.changeType)}`}>
                   {metric.change > 0 ? '+' : ''}{metric.change}%
                   </span>
-                <span className="text-sm text-gray-600 dark:text-gray-400">{metric.period}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{metric.period}</span>
               </div>
             </motion.div>
           );
@@ -371,22 +381,24 @@ const PerformanceReports: React.FC = () => {
         </div>
 
       {/* Category Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="flex space-x-8 px-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <button
                   key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
+                  onClick={() = aria-label="Button"> setSelectedCategory(category.id)}
                   className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                     selectedCategory === category.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                       : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{category.name}</span>
               </button>
               );
@@ -394,37 +406,37 @@ const PerformanceReports: React.FC = () => {
           </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Overview Tab */}
           {selectedCategory === 'overview' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       System Performance Trend
                     </h3>
-                    <LineChart className="h-5 w-5 text-gray-400" />
+                    <LineChart className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                      <div className="space-y-4">
+                      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {systemPerformance.slice(-7).map((perf, index) => (
-                      <div key={perf.timestamp} className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                      <div key={perf.timestamp} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                          <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                             {new Date(perf.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                               {perf.responseTime}ms
                               </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-500">
+                            <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                               {perf.cpuUsage}% CPU
                               </div>
                               </div>
@@ -438,30 +450,30 @@ const PerformanceReports: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       Application Performance
                     </h3>
-                    <BarChart3 className="h-5 w-5 text-gray-400" />
+                    <BarChart3 className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                      <div className="space-y-4">
+                      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {applicationPerformance.slice(0, 5).map((app, index) => (
-                      <div key={`${app.endpoint}-${app.method}`} className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
+                      <div key={`${app.endpoint}-${app.method}`} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div className={`w-3 h-3 rounded-full ${
                             index === 0 ? 'bg-green-500' :
                             index === 1 ? 'bg-blue-500' :
                             index === 2 ? 'bg-purple-500' :
                             index === 3 ? 'bg-orange-500' : 'bg-red-500'
                           }`}></div>
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                          <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {app.method} {app.endpoint}
                               </span>
                             </div>
-                        <div className="flex items-center space-x-3">
-                          <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <div
                               className={`h-2 rounded-full ${
                                 index === 0 ? 'bg-green-500' :
@@ -472,7 +484,7 @@ const PerformanceReports: React.FC = () => {
                               style={{ width: `${(app.avgResponseTime / 200) * 100}%` }}
                             ></div>
                               </div>
-                          <span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right">
+                          <span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right responsive-container sm:flex-col md:flex-row lg:grid">
                             {app.avgResponseTime}ms
                           </span>
                             </div>
@@ -486,71 +498,71 @@ const PerformanceReports: React.FC = () => {
 
           {/* System Performance Tab */}
           {selectedCategory === 'system' && (
-            <div className="space-y-6">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+                <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+                  <thead className="bg-gray-50 dark:bg-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Timestamp
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         CPU Usage
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Memory Usage
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Response Time
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Throughput
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     {systemPerformance.slice(-10).map((perf) => (
                       <motion.tr
                         key={perf.timestamp}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(perf.timestamp).toLocaleString()}
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center space-x-2">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <span className={`text-sm font-medium ${getPerformanceColor(perf.cpuUsage, 'cpuUsage')}`}>
                               {perf.cpuUsage}%
                               </span>
-                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                               <div
-                                className="bg-blue-500 h-2 rounded-full"
+                                className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                                 style={{ width: `${perf.cpuUsage}%` }}
                               ></div>
                               </div>
                             </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center space-x-2">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <span className={`text-sm font-medium ${getPerformanceColor(perf.memoryUsage, 'memoryUsage')}`}>
                               {perf.memoryUsage}%
                             </span>
-                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                               <div
-                                className="bg-green-500 h-2 rounded-full"
+                                className="bg-green-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                                 style={{ width: `${perf.memoryUsage}%` }}
                               ></div>
                       </div>
                     </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(perf.responseTime, 'responseTime')}`}>
                             {perf.responseTime}ms
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {formatNumber(perf.throughput)} req/s
                         </td>
                       </motion.tr>
@@ -563,43 +575,43 @@ const PerformanceReports: React.FC = () => {
 
           {/* Application Performance Tab */}
           {selectedCategory === 'application' && (
-            <div className="space-y-6">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+                <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+                  <thead className="bg-gray-50 dark:bg-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Endpoint
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Method
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Avg Response Time
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Success Rate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Error Rate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Requests
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     {applicationPerformance.map((app) => (
                       <motion.tr
                         key={`${app.endpoint}-${app.method}`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {app.endpoint}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                             app.method === 'GET' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' :
                             app.method === 'POST' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
@@ -610,22 +622,22 @@ const PerformanceReports: React.FC = () => {
                             {app.method}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(app.avgResponseTime, 'responseTime')}`}>
                             {app.avgResponseTime}ms
                                 </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(app.successRate, 'successRate')}`}>
                             {app.successRate}%
                                 </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(app.errorRate, 'errorRate')}`}>
                             {app.errorRate}%
                                 </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {formatNumber(app.requestCount)}
                         </td>
                       </motion.tr>
@@ -638,55 +650,55 @@ const PerformanceReports: React.FC = () => {
 
           {/* Database Performance Tab */}
           {selectedCategory === 'database' && (
-            <div className="space-y-6">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+                <table className="w-full responsive-container sm:flex-col md:flex-row lg:grid">
+                  <thead className="bg-gray-50 dark:bg-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Query
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Avg Execution Time
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Execution Count
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Slow Queries
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                         Cache Hit Rate
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     {databasePerformance.map((db) => (
                       <motion.tr
                         key={db.query}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                        className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-mono text-gray-900 dark:text-white max-w-xs truncate">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="text-sm font-mono text-gray-900 dark:text-white max-w-xs truncate responsive-container sm:flex-col md:flex-row lg:grid">
                             {db.query}
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(db.avgExecutionTime, 'responseTime')}`}>
                             {db.avgExecutionTime}ms
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {formatNumber(db.executionCount)}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${db.slowQueries > 10 ? 'text-red-600' : db.slowQueries > 5 ? 'text-yellow-600' : 'text-green-600'}`}>
                             {db.slowQueries}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`text-sm font-medium ${getPerformanceColor(db.cacheHitRate, 'successRate')}`}>
                             {db.cacheHitRate}%
                             </span>
@@ -701,57 +713,57 @@ const PerformanceReports: React.FC = () => {
 
           {/* User Experience Tab */}
           {selectedCategory === 'user-experience' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 {userExperience.map((ux, index) => (
                 <motion.div
                     key={ux.page}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                          <Globe className="h-6 w-6 text-blue-600" />
+                    <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                          <Globe className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                             </div>
                             <div>
-                          <h4 className="font-semibold text-gray-900 dark:text-white">
+                          <h4 className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {ux.page}
                           </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                             User Experience
                           </p>
                               </div>
                             </div>
                           </div>
                     
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Load Time</span>
+                    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Load Time</span>
                         <span className={`text-sm font-medium ${getPerformanceColor(ux.loadTime * 1000, 'responseTime')}`}>
                           {ux.loadTime}s
                         </span>
                               </div>
                       
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Bounce Rate</span>
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Bounce Rate</span>
                         <span className={`text-sm font-medium ${ux.bounceRate > 30 ? 'text-red-600' : ux.bounceRate > 20 ? 'text-yellow-600' : 'text-green-600'}`}>
                           {ux.bounceRate}%
                         </span>
                               </div>
                       
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Conversion Rate</span>
-                        <span className="text-sm font-medium text-green-600">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Conversion Rate</span>
+                        <span className="text-sm font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">
                           {ux.conversionRate}%
                         </span>
                             </div>
                       
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Satisfaction</span>
-                        <span className="text-sm font-medium text-blue-600">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Satisfaction</span>
+                        <span className="text-sm font-medium text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">
                           {ux.userSatisfaction}/5
                             </span>
                           </div>

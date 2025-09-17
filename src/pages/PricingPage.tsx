@@ -10,7 +10,7 @@ import {
   Brain
 } from 'lucide-react'
 
-export default function PricingPage() {
+const PricingPage = React.memo(function PricingPage() {
   const plans = [
     {
       name: 'Starter',
@@ -112,23 +112,29 @@ export default function PricingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light responsive-container">
       {/* Hero Section */}
-      <section className="pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="pt-20 pb-16 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Simple, Transparent{' '}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-primary bg-clip-text text-transparent responsive-container">
                 Pricing
               </span>
             </h1>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto leading-relaxed responsive-container">
               Choose the plan that fits your business needs. All plans include our core AI-powered features.
             </p>
           </motion.div>
@@ -136,9 +142,9 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-20 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 responsive-container">
             {plans.map((plan, index) => (
               <motion.div
                 key={plan.name}
@@ -153,14 +159,14 @@ export default function PricingPage() {
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-transbot-teal text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 responsive-container">
+                    <div className="bg-transbot-teal text-white px-4 py-2 rounded-full text-sm font-semibold responsive-container">
                       Most Popular
                     </div>
                   </div>
                 )}
 
-                <div className="text-center mb-8">
+                <div className="text-center mb-8 responsive-container">
                   <div className={`p-4 rounded-xl w-fit mx-auto mb-4 ${
                     plan.popular ? 'bg-white/20' : 'bg-transbot-sky/10'
                   }`}>
@@ -181,7 +187,7 @@ export default function PricingPage() {
                     {plan.description}
                   </p>
 
-                  <div className="flex items-baseline justify-center">
+                  <div className="flex items-baseline justify-center responsive-container">
                     <span className={`text-5xl font-bold ${
                       plan.popular ? 'text-white' : 'text-transbot-text-primary'
                     }`}>
@@ -195,9 +201,9 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8 responsive-container">
                   {plan.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
+                    <div key={idx} className="flex items-center gap-3 responsive-container">
                       <CheckCircle className={`w-5 h-5 ${
                         plan.popular ? 'text-white' : 'text-transbot-teal'
                       }`} />
@@ -214,7 +220,7 @@ export default function PricingPage() {
                   plan.popular
                     ? 'bg-white text-transbot-sky hover:bg-transbot-neutral-light'
                     : 'bg-gradient-primary text-white hover:opacity-90'
-                }`}>
+                }`} aria-label="Button">
                   {plan.cta}
                 </button>
               </motion.div>
@@ -224,24 +230,24 @@ export default function PricingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-20 bg-white/50 responsive-container">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4 responsive-container">
               All Plans Include
             </h2>
-            <p className="text-xl text-transbot-text-secondary">
+            <p className="text-xl text-transbot-text-secondary responsive-container">
               Core features available across all pricing tiers
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 responsive-container">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -249,15 +255,15 @@ export default function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-6"
+                className="text-center p-6 responsive-container"
               >
-                <div className="p-4 rounded-full bg-transbot-sky/10 w-fit mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-transbot-sky" />
+                <div className="p-4 rounded-full bg-transbot-sky/10 w-fit mx-auto mb-4 responsive-container">
+                  <feature.icon className="w-8 h-8 text-transbot-sky responsive-container" />
                 </div>
-                <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                <h3 className="text-xl font-bold text-transbot-text-primary mb-3 responsive-container">
                   {feature.title}
                 </h3>
-                <p className="text-transbot-text-secondary">
+                <p className="text-transbot-text-secondary responsive-container">
                   {feature.description}
                 </p>
               </motion.div>
@@ -267,24 +273,24 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-transbot-sky/5 to-transbot-teal/5 responsive-container">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-4 responsive-container">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-transbot-text-secondary">
+            <p className="text-xl text-transbot-text-secondary responsive-container">
               Everything you need to know about our pricing
             </p>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 responsive-container">
             {faqs.map((faq, index) => (
               <motion.div
                 key={faq.question}
@@ -292,12 +298,12 @@ export default function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 bg-white rounded-xl shadow-transbot border border-transbot-border/20"
+                className="p-6 bg-white rounded-xl shadow-transbot border border-transbot-border/20 responsive-container"
               >
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-3">
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-3 responsive-container">
                   {faq.question}
                 </h3>
-                <p className="text-transbot-text-secondary">
+                <p className="text-transbot-text-secondary responsive-container">
                   {faq.answer}
                 </p>
               </motion.div>
@@ -307,26 +313,26 @@ export default function PricingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <section className="py-20 bg-gradient-primary responsive-container">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-8 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-white">
+            <h2 className="text-4xl font-bold text-white responsive-container">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-white/90">
+            <p className="text-xl text-white/90 responsive-container">
               Join thousands of companies already using Trans Bot AI
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
+              <button className="px-8 py-4 bg-white text-transbot-sky font-semibold rounded-xl hover:bg-transbot-neutral-light transition-all duration-200 shadow-transbot responsive-container" aria-label="Button">
                 Start Free Trial
               </button>
-              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200">
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-transbot-sky transition-all duration-200 responsive-container" aria-label="Button">
                 Contact Sales
               </button>
             </div>

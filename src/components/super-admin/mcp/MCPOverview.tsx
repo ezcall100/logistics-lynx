@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -82,102 +82,108 @@ const MCPOverview: React.FC = () => {
     switch (status) {
       case 'active':
       case 'running':
-        return <Badge className="bg-green-100 text-green-800">Active</Badge>;
+        return <Badge className="bg-green-100 text-green-800 responsive-container sm:flex-col md:flex-row lg:grid">Active</Badge>;
       case 'idle':
       case 'paused':
-        return <Badge className="bg-yellow-100 text-yellow-800">Paused</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800 responsive-container sm:flex-col md:flex-row lg:grid">Paused</Badge>;
       case 'error':
-        return <Badge className="bg-red-100 text-red-800">Error</Badge>;
+        return <Badge className="bg-red-100 text-red-800 responsive-container sm:flex-col md:flex-row lg:grid">Error</Badge>;
       default:
-        return <Badge className="bg-gray-100 text-gray-800">Unknown</Badge>;
+        return <Badge className="bg-gray-100 text-gray-800 responsive-container sm:flex-col md:flex-row lg:grid">Unknown</Badge>;
     }
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold">MCP Overview</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">MCP Overview</h1>
+          <p className="text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
             Monitor and manage your Model Context Protocol agents and workflows
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
-            <RefreshCw className="h-4 w-4" />
+        <div className="flex gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <Button variant="outline" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Refresh
           </Button>
-          <Button className="flex items-center gap-2">
-            <Plus className="h-4 w-4" />
+          <Button className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Add Agent
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Agents</CardTitle>
-            <Bot className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Total Agents</CardTitle>
+            <Bot className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{agents.length}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{agents.length}</div>
+            <p className="text-xs text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
               {agents.filter(a => a.status === 'active').length} active
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Workflows</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Active Workflows</CardTitle>
+            <Activity className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">
               {workflows.filter(w => w.status === 'running').length}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
               {workflows.length} total workflows
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
-            <Settings className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Success Rate</CardTitle>
+            <Settings className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">97.8%</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">97.8%</div>
+            <p className="text-xs text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
               Average across all agents
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
           <CardHeader>
             <CardTitle>Active Agents</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {agents.map((agent) => (
-              <div key={agent.id} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center space-x-3">
+              <div key={agent.id} className="flex items-center justify-between p-4 border rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`} />
                   <div>
-                    <h4 className="font-medium">{agent.name}</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</h4>
+                    <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.type} • {agent.lastActivity}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {getStatusBadge(agent.status)}
                   <Button variant="ghost" size="sm">
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </Button>
                 </div>
               </div>
@@ -189,25 +195,25 @@ const MCPOverview: React.FC = () => {
           <CardHeader>
             <CardTitle>Workflows</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {workflows.map((workflow) => (
-              <div key={workflow.id} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center space-x-3">
+              <div key={workflow.id} className="flex items-center justify-between p-4 border rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-3 h-3 rounded-full ${getStatusColor(workflow.status)}`} />
                   <div>
-                    <h4 className="font-medium">{workflow.name}</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{workflow.name}</h4>
+                    <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                       {workflow.steps} steps • {workflow.lastRun}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {getStatusBadge(workflow.status)}
                   <Button variant="ghost" size="sm">
                     {workflow.status === 'running' ? (
-                      <Pause className="h-4 w-4" />
+                      <Pause className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     ) : (
-                      <Play className="h-4 w-4" />
+                      <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
                   </Button>
                 </div>

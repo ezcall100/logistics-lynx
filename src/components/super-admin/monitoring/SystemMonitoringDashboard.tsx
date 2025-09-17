@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Activity,
@@ -321,7 +321,13 @@ const SystemMonitoringDashboard: React.FC = () => {
       fetchData();
     }, 30000); // Refresh every 30 seconds
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, [autoRefresh, fetchData]);
 
   const getStatusColor = (status: string) => {
@@ -394,17 +400,19 @@ const SystemMonitoringDashboard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             ))}
           </div>
         </div>
@@ -413,33 +421,35 @@ const SystemMonitoringDashboard: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             System Monitoring Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time system performance and health monitoring
           </p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="checkbox"
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}
-              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <label className="text-sm text-gray-700 dark:text-gray-300">
+            <label className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
               Auto Refresh
             </label>
           </div>
           <select
             value={selectedTimeRange}
             onChange={(e) => setSelectedTimeRange(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {timeRanges.map(range => (
               <option key={range.value} value={range.value}>
@@ -450,42 +460,44 @@ const SystemMonitoringDashboard: React.FC = () => {
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
         </div>
       </div>
 
       {/* System Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {metrics.map((metric, index) => {
           const Icon = metric.icon;
           const StatusIcon = getStatusIcon(metric.status);
           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <Icon className="h-6 w-6 text-blue-600" />
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Icon className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                    <h3 className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {metric.name}
                     </h3>
-                    <div className="flex items-center space-x-2">
-                      <StatusIcon className="h-4 w-4" />
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <StatusIcon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(metric.status)}`}>
                         {metric.status.charAt(0).toUpperCase() + metric.status.slice(1)}
                       </span>
@@ -494,9 +506,9 @@ const SystemMonitoringDashboard: React.FC = () => {
                 </div>
               </div>
               
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {metric.value}{metric.unit}
                   </span>
                   <span className={`text-sm font-medium ${
@@ -506,7 +518,7 @@ const SystemMonitoringDashboard: React.FC = () => {
                   </span>
                 </div>
                 
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`h-2 rounded-full ${
                       metric.status === 'healthy' ? 'bg-green-500' :
@@ -516,7 +528,7 @@ const SystemMonitoringDashboard: React.FC = () => {
                   ></div>
                 </div>
                 
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>Warning: {metric.threshold.warning}{metric.unit}</span>
                   <span>Critical: {metric.threshold.critical}{metric.unit}</span>
                 </div>
@@ -527,41 +539,43 @@ const SystemMonitoringDashboard: React.FC = () => {
       </div>
 
       {/* Services and Alerts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Services Status */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Services Status
             </h3>
-            <Server className="h-5 w-5 text-gray-400" />
+            <Server className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {services.map((service) => {
               const StatusIcon = getStatusIcon(service.status);
               return (
-                <div key={service.id} className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <StatusIcon className="h-5 w-5" />
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                <div key={service.id} className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <StatusIcon className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-white">
+                      <div className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {service.name}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         v{service.version} • {service.uptime} uptime
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(service.status)}`}>
                       {service.status.charAt(0).toUpperCase() + service.status.slice(1)}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {service.responseTime}ms
                     </div>
                   </div>
@@ -576,38 +590,40 @@ const SystemMonitoringDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Recent Alerts
             </h3>
-            <Bell className="h-5 w-5 text-gray-400" />
+            <Bell className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {alerts.map((alert) => {
               const AlertIcon = getStatusIcon(alert.type);
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <div key={alert.id} className={`p-4 border rounded-lg ${
                   alert.acknowledged 
                     ? 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50' 
                     : 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20'
                 }`}>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-3">
-                      <AlertIcon className="h-5 w-5 mt-0.5" />
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-900 dark:text-white">
+                  <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-start space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <AlertIcon className="h-5 w-5 mt-0.5 responsive-container sm:flex-col md:flex-row lg:grid" />
+                      <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {alert.title}
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           {alert.message}
                         </div>
-                        <div className="flex items-center space-x-2 mt-2">
+                        <div className="flex items-center space-x-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAlertColor(alert.type)}`}>
                             {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
                           </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-500">
+                          <span className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                             {new Date(alert.timestamp).toLocaleString()}
                           </span>
                         </div>
@@ -615,8 +631,8 @@ const SystemMonitoringDashboard: React.FC = () => {
                     </div>
                     {!alert.acknowledged && (
                       <button
-                        onClick={() => handleAcknowledgeAlert(alert.id)}
-                        className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                        onClick={() = aria-label="Button"> handleAcknowledgeAlert(alert.id)}
+                        className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Acknowledge
                       </button>
@@ -634,40 +650,40 @@ const SystemMonitoringDashboard: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             System Logs
           </h3>
-          <div className="flex items-center space-x-2">
-            <Eye className="h-5 w-5 text-gray-400" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Eye className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
               Real-time
             </span>
           </div>
         </div>
-        <div className="space-y-2 max-h-64 overflow-y-auto">
+        <div className="space-y-2 max-h-64 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
           {logs.map((log) => (
-            <div key={log.id} className="flex items-start space-x-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div key={log.id} className="flex items-start space-x-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
               <div className={`w-2 h-2 rounded-full mt-2 ${
                 log.level === 'error' ? 'bg-red-500' :
                 log.level === 'warning' ? 'bg-yellow-500' :
                 log.level === 'info' ? 'bg-blue-500' : 'bg-gray-500'
               }`}></div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center space-x-2">
+              <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span className={`text-sm font-medium ${getLogColor(log.level)}`}>
                     {log.level.toUpperCase()}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-500">
+                  <span className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     {new Date(log.timestamp).toLocaleString()}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-500">
+                  <span className="text-xs text-gray-500 dark:text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     {log.source}
                   </span>
                 </div>
-                <div className="text-sm text-gray-900 dark:text-white mt-1">
+                <div className="text-sm text-gray-900 dark:text-white mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {log.message}
                 </div>
               </div>
@@ -677,33 +693,33 @@ const SystemMonitoringDashboard: React.FC = () => {
       </motion.div>
 
       {/* Performance Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               CPU & Memory Usage
             </h3>
-            <LineChart className="h-5 w-5 text-gray-400" />
+            <LineChart className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">CPU Usage</span>
-              <span className="text-sm font-medium text-gray-900 dark:text-white">45.2%</span>
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU Usage</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">45.2%</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: '45.2%' }}></div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '45.2%' }}></div>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">Memory Usage</span>
-              <span className="text-sm font-medium text-gray-900 dark:text-white">67.8%</span>
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory Usage</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">67.8%</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div className="bg-green-500 h-2 rounded-full" style={{ width: '67.8%' }}></div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-green-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '67.8%' }}></div>
             </div>
           </div>
         </motion.div>
@@ -712,28 +728,28 @@ const SystemMonitoringDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               Network & Response Time
             </h3>
-            <BarChart3 className="h-5 w-5 text-gray-400" />
+            <BarChart3 className="h-5 w-5 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">Network Latency</span>
-              <span className="text-sm font-medium text-gray-900 dark:text-white">12.3ms</span>
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Network Latency</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">12.3ms</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div className="bg-purple-500 h-2 rounded-full" style={{ width: '12.3%' }}></div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-purple-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '12.3%' }}></div>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">Response Time</span>
-              <span className="text-sm font-medium text-gray-900 dark:text-white">245ms</span>
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Response Time</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">245ms</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div className="bg-orange-500 h-2 rounded-full" style={{ width: '24.5%' }}></div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="bg-orange-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '24.5%' }}></div>
             </div>
           </div>
         </motion.div>

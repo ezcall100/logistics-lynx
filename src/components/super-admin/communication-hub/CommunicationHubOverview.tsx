@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageCircle,
@@ -103,7 +103,13 @@ const CommunicationHubOverview: React.FC = () => {
       setIsLoading(false);
     }, 1000);
 
-    return () => clearTimeout(timer);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearTimeout(timer);
   }, [refreshKey]);
 
   const handleRefresh = () => {
@@ -125,16 +131,16 @@ const CommunicationHubOverview: React.FC = () => {
 
   const getChannelIcon = (channel: string) => {
     switch (channel) {
-      case 'AI Assistant': return <MessageCircle className="h-5 w-5" />;
-      case 'Live Chat': return <MessageSquare className="h-5 w-5" />;
-      case 'Email': return <Mail className="h-5 w-5" />;
-      case 'Phone': return <Phone className="h-5 w-5" />;
-      case 'Video': return <Video className="h-5 w-5" />;
-      case 'SMS': return <MessageSquare className="h-5 w-5" />;
-      case 'Calendar': return <Calendar className="h-5 w-5" />;
-      case 'Tasks': return <CheckSquare className="h-5 w-5" />;
-      case 'Notes': return <FileText className="h-5 w-5" />;
-      default: return <Activity className="h-5 w-5" />;
+      case 'AI Assistant': return <MessageCircle className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Live Chat': return <MessageSquare className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Email': return <Mail className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Phone': return <Phone className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Video': return <Video className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'SMS': return <MessageSquare className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Calendar': return <Calendar className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Tasks': return <CheckSquare className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'Notes': return <FileText className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      default: return <Activity className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -155,11 +161,11 @@ const CommunicationHubOverview: React.FC = () => {
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'ai_assistant': return <MessageCircle className="h-4 w-4" />;
-      case 'live_chat': return <MessageSquare className="h-4 w-4" />;
-      case 'email': return <Mail className="h-4 w-4" />;
-      case 'video_call': return <Video className="h-4 w-4" />;
-      default: return <Activity className="h-4 w-4" />;
+      case 'ai_assistant': return <MessageCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'live_chat': return <MessageSquare className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'email': return <Mail className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'video_call': return <Video className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      default: return <Activity className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -185,61 +191,65 @@ const CommunicationHubOverview: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="flex items-center space-x-2">
-          <RefreshCw className="h-6 w-6 animate-spin text-blue-500" />
-          <span className="text-gray-600 dark:text-gray-300">Loading Communication Hub overview...</span>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="flex items-center justify-center h-96 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <RefreshCw className="h-6 w-6 animate-spin text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+          <span className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Loading Communication Hub overview...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Communication Hub Overview</h1>
-          <p className="text-gray-600 dark:text-gray-300">Monitor all communication channels and performance metrics</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Communication Hub Overview</h1>
+          <p className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Monitor all communication channels and performance metrics</p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={handleRefresh}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <RefreshCw className="h-4 w-4" />
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
+            <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
         </div>
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Messages</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Messages</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatNumber(mockCommunicationData.overview.totalMessages)}
               </p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-              <MessageCircle className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <MessageCircle className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">+15.2%</span>
-            <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+15.2%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
           </div>
         </motion.div>
 
@@ -247,22 +257,22 @@ const CommunicationHubOverview: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {mockCommunicationData.overview.activeUsers}
               </p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-              <Users className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="h-6 w-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <Activity className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">Live now</span>
+          <div className="mt-4 flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <Activity className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Live now</span>
           </div>
         </motion.div>
 
@@ -270,23 +280,23 @@ const CommunicationHubOverview: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Response Time</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Avg Response Time</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatTime(mockCommunicationData.overview.responseTime)}
               </p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-              <Clock className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Clock className="h-6 w-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">-12%</span>
-            <span className="text-sm text-gray-500 ml-2">faster than last month</span>
+          <div className="mt-4 flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">-12%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">faster than last month</span>
           </div>
         </motion.div>
 
@@ -294,53 +304,53 @@ const CommunicationHubOverview: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Satisfaction Rate</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Satisfaction Rate</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatPercentage(mockCommunicationData.overview.satisfactionRate)}
               </p>
             </div>
-            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg">
-              <Zap className="h-6 w-6 text-emerald-600" />
+            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Zap className="h-6 w-6 text-emerald-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">+2.1%</span>
-            <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+2.1%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
           </div>
         </motion.div>
       </div>
 
       {/* Communication Channels Usage */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Channel Usage</h3>
-          <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Channel Usage</h3>
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {mockCommunicationData.usageStats.map((stat, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+              <div key={index} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`p-2 rounded-lg ${getChannelColor(stat.channel)}`}>
                     {getChannelIcon(stat.channel)}
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-gray-100">{stat.channel}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{stat.users} users</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">{stat.channel}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{stat.users} users</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-medium text-gray-900 dark:text-gray-100">{formatPercentage(stat.usage)}</p>
-                  <div className="flex items-center">
-                    <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
-                    <span className="text-xs text-green-600">+{formatPercentage(stat.growth)}</span>
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">{formatPercentage(stat.usage)}</p>
+                  <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <TrendingUp className="h-3 w-3 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="text-xs text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+{formatPercentage(stat.growth)}</span>
                   </div>
                 </div>
               </div>
@@ -352,42 +362,42 @@ const CommunicationHubOverview: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Performance Metrics</h3>
-          <div className="h-64 flex items-end justify-between space-x-2">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Performance Metrics</h3>
+          <div className="h-64 flex items-end justify-between space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {mockCommunicationData.performanceMetrics.map((metric, index) => (
-              <div key={index} className="flex flex-col items-center space-y-2">
-                <div className="flex flex-col space-y-1">
+              <div key={index} className="flex flex-col items-center space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex flex-col space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="w-8 bg-blue-500 rounded-t"
+                    className="w-8 bg-blue-500 rounded-t responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${(metric.messages / 200) * 100}px` }}
                   ></div>
                   <div
-                    className="w-8 bg-green-500"
+                    className="w-8 bg-green-500 responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${(metric.responseTime / 5) * 100}px` }}
                   ></div>
                   <div
-                    className="w-8 bg-purple-500 rounded-b"
+                    className="w-8 bg-purple-500 rounded-b responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${(metric.satisfaction / 100) * 100}px` }}
                   ></div>
                 </div>
-                <span className="text-xs text-gray-500">{metric.time}</span>
+                <span className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{metric.time}</span>
               </div>
             ))}
           </div>
-          <div className="mt-4 flex items-center justify-center space-x-6">
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">Messages</span>
+          <div className="mt-4 flex items-center justify-center space-x-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-blue-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Messages</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">Response Time</span>
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Response Time</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">Satisfaction</span>
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-purple-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Satisfaction</span>
             </div>
           </div>
         </motion.div>
@@ -398,32 +408,32 @@ const CommunicationHubOverview: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Recent Activity</h3>
-          <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">View All</button>
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Recent Activity</h3>
+          <button className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">View All</button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {mockCommunicationData.recentActivity.map((activity) => (
-            <div key={activity.id} className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <div key={activity.id} className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
               <div className={`p-2 rounded-lg ${getActivityColor(activity.type)}`}>
                 {getActivityIcon(activity.type)}
               </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-900 dark:text-gray-100">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                   {activity.user} - {activity.action}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {new Date(activity.timestamp).toLocaleString()}
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(activity.status)}`}>
                   {activity.status}
                 </span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Eye className="h-4 w-4" />
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </div>

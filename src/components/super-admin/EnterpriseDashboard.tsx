@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -315,7 +315,13 @@ const EnterpriseDashboard: React.FC = () => {
       );
     }, 3000);
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, [autoRefresh]);
 
   const getColorClasses = (color: string) => {
@@ -373,26 +379,28 @@ const EnterpriseDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 p-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">🏢 Enterprise Dashboard</h1>
-            <p className="text-gray-200 text-lg">
+            <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">🏢 Enterprise Dashboard</h1>
+            <p className="text-gray-200 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
               Real-time system overview and performance metrics
             </p>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                 {autoRefresh ? 'Live Updates' : 'Paused'}
               </span>
             </div>
             <button
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
               <span>{autoRefresh ? 'Pause' : 'Resume'}</span>
@@ -401,12 +409,12 @@ const EnterpriseDashboard: React.FC = () => {
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-between mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <select
               value={selectedTimeRange}
               onChange={e => setSelectedTimeRange(e.target.value)}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <option value="1h">Last Hour</option>
               <option value="24h">Last 24 Hours</option>
@@ -417,7 +425,7 @@ const EnterpriseDashboard: React.FC = () => {
             <select
               value={viewMode}
               onChange={e => setViewMode(e.target.value as 'overview' | 'detailed' | 'minimal')}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <option value="overview">Overview</option>
               <option value="detailed">Detailed</option>
@@ -425,19 +433,19 @@ const EnterpriseDashboard: React.FC = () => {
             </select>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-              <Download className="w-4 h-4 text-white" />
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <Download className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
-            <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-              <Settings className="w-4 h-4 text-white" />
+            <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <Settings className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {metrics.map((metric, index) => (
           <motion.div
             key={metric.id}
@@ -447,21 +455,21 @@ const EnterpriseDashboard: React.FC = () => {
             className={`bg-gradient-to-br ${getColorClasses(metric.color)} backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer`}
             onClick={() => toggleCardExpansion(metric.id)}
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                  <metric.icon className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <metric.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-200">{metric.title}</h3>
-                  <p className="text-2xl font-bold text-white">{metric.value}</p>
+                  <h3 className="text-sm text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">{metric.title}</h3>
+                  <p className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{metric.value}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 {metric.changeType === 'increase' ? (
-                  <ArrowUpRight className="w-4 h-4 text-green-400" />
+                  <ArrowUpRight className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : metric.changeType === 'decrease' ? (
-                  <ArrowDownRight className="w-4 h-4 text-red-400" />
+                  <ArrowDownRight className="w-4 h-4 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : null}
                 <span
                   className={`text-sm font-medium ${
@@ -478,14 +486,14 @@ const EnterpriseDashboard: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-xs text-gray-300 mb-4">{metric.description}</p>
+            <p className="text-xs text-gray-300 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">{metric.description}</p>
 
             {/* Mini Trend Chart */}
-            <div className="h-16 flex items-end space-x-1">
+            <div className="h-16 flex items-end space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
               {metric.trend.slice(-12).map((value, trendIndex) => (
                 <div
                   key={trendIndex}
-                  className="flex-1 bg-white/30 rounded-t"
+                  className="flex-1 bg-white/30 rounded-t responsive-container sm:flex-col md:flex-row lg:grid"
                   style={{ height: `${(value / Math.max(...metric.trend)) * 100}%` }}
                 ></div>
               ))}
@@ -498,14 +506,14 @@ const EnterpriseDashboard: React.FC = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 pt-4 border-t border-white/20"
+                  className="mt-4 pt-4 border-t border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-300">
+                  <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex justify-between text-xs text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Peak Value</span>
                       <span>{Math.max(...metric.trend).toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-300">
+                    <div className="flex justify-between text-xs text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Average</span>
                       <span>
                         {Math.round(
@@ -513,9 +521,9 @@ const EnterpriseDashboard: React.FC = () => {
                         ).toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-300">
+                    <div className="flex justify-between text-xs text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                       <span>Growth Rate</span>
-                      <span className="text-green-400">+{metric.change}%</span>
+                      <span className="text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">+{metric.change}%</span>
                     </div>
                   </div>
                 </motion.div>
@@ -526,96 +534,96 @@ const EnterpriseDashboard: React.FC = () => {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Left Column - Performance Charts */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* System Performance Chart */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-white">System Performance</h3>
-              <div className="flex items-center space-x-2">
-                <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-                  <Maximize2 className="w-4 h-4 text-white" />
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">System Performance</h3>
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <button className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Maximize2 className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </div>
 
-            <div className="h-64 flex items-end space-x-1">
+            <div className="h-64 flex items-end space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
               {performanceData.slice(-24).map((point, index) => (
-                <div key={index} className="flex-1 flex flex-col items-center space-y-1">
-                  <div className="w-full flex flex-col space-y-1">
+                <div key={index} className="flex-1 flex flex-col items-center space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-full flex flex-col space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div
-                      className="bg-blue-400 rounded-t"
+                      className="bg-blue-400 rounded-t responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ height: `${point.cpu}%` }}
                       title={`CPU: ${point.cpu}%`}
                     ></div>
                     <div
-                      className="bg-green-400"
+                      className="bg-green-400 responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ height: `${point.memory}%` }}
                       title={`Memory: ${point.memory}%`}
                     ></div>
                     <div
-                      className="bg-purple-400 rounded-b"
+                      className="bg-purple-400 rounded-b responsive-container sm:flex-col md:flex-row lg:grid"
                       style={{ height: `${point.network}%` }}
                       title={`Network: ${point.network}%`}
                     ></div>
                   </div>
-                  <span className="text-xs text-gray-400">{point.timestamp}</span>
+                  <span className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{point.timestamp}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-4 flex items-center justify-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-blue-400 rounded"></div>
-                <span className="text-sm text-gray-300">CPU</span>
+            <div className="mt-4 flex items-center justify-center space-x-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-3 h-3 bg-blue-400 rounded responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                <span className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">CPU</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-green-400 rounded"></div>
-                <span className="text-sm text-gray-300">Memory</span>
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-3 h-3 bg-green-400 rounded responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                <span className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Memory</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-purple-400 rounded"></div>
-                <span className="text-sm text-gray-300">Network</span>
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-3 h-3 bg-purple-400 rounded responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                <span className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Network</span>
               </div>
             </div>
           </div>
 
           {/* Portal Status */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-white">Portal Status</h3>
-              <div className="flex items-center space-x-2">
-                <Globe className="w-5 h-5 text-blue-400" />
-                <span className="text-sm text-gray-300">8 Portals</span>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">Portal Status</h3>
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Globe className="w-5 h-5 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">8 Portals</span>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {portalStatuses.map((portal, index) => (
                 <motion.div
                   key={portal.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all"
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                        <Globe className="w-4 h-4 text-white" />
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                        <Globe className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
                       <div>
-                        <h4 className="text-white font-medium">{portal.name}</h4>
-                        <p className="text-xs text-gray-400">
+                        <h4 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</h4>
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           {portal.users.toLocaleString()} users
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="text-right">
-                        <p className="text-sm text-white">{portal.uptime}% uptime</p>
-                        <p className="text-xs text-gray-400">{portal.responseTime}ms response</p>
+                    <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.uptime}% uptime</p>
+                        <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{portal.responseTime}ms response</p>
                       </div>
                       <div
                         className={`px-3 py-1 rounded-full text-xs ${getStatusColor(portal.status)}`}
@@ -631,18 +639,18 @@ const EnterpriseDashboard: React.FC = () => {
         </div>
 
         {/* Right Column - Alerts & Quick Actions */}
-        <div className="space-y-6">
+        <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* System Alerts */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
-                <Bell className="w-5 h-5 text-yellow-400" />
-                <h3 className="text-lg font-bold text-white">System Alerts</h3>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Bell className="w-5 h-5 text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <h3 className="text-lg font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">System Alerts</h3>
               </div>
-              <span className="text-sm text-gray-400">{alerts.length} alerts</span>
+              <span className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{alerts.length} alerts</span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {alerts.slice(0, 4).map((alert, index) => (
                 <motion.div
                   key={alert.id}
@@ -651,15 +659,15 @@ const EnterpriseDashboard: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   className={`p-3 rounded-lg border ${getAlertColor(alert.type)}`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-white">{alert.title}</h4>
-                      <p className="text-xs text-gray-300 mt-1">{alert.message}</p>
-                      <p className="text-xs text-gray-400 mt-1">Source: {alert.source}</p>
+                  <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <h4 className="text-sm font-medium text-white responsive-container sm:flex-col md:flex-row lg:grid">{alert.title}</h4>
+                      <p className="text-xs text-gray-300 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{alert.message}</p>
+                      <p className="text-xs text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Source: {alert.source}</p>
                     </div>
-                    <div className="text-right ml-2">
-                      <span className="text-xs text-gray-400">{alert.timestamp}</span>
-                      {alert.resolved && <CheckCircle className="w-4 h-4 text-green-400 mt-1" />}
+                    <div className="text-right ml-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{alert.timestamp}</span>
+                      {alert.resolved && <CheckCircle className="w-4 h-4 text-green-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid" />}
                     </div>
                   </div>
                 </motion.div>
@@ -668,66 +676,66 @@ const EnterpriseDashboard: React.FC = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
-            <div className="space-y-3">
-              <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                <Zap className="w-4 h-4" />
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Quick Actions</h3>
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Deploy Update</span>
               </button>
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                <Shield className="w-4 h-4" />
+              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Run Security Scan</span>
               </button>
-              <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                <Database className="w-4 h-4" />
+              <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Database className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Backup Database</span>
               </button>
-              <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                <Activity className="w-4 h-4" />
+              <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Performance Report</span>
               </button>
             </div>
           </div>
 
           {/* System Resources */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-            <h3 className="text-lg font-bold text-white mb-4">System Resources</h3>
-            <div className="space-y-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">System Resources</h3>
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <div className="flex justify-between text-sm text-gray-300 mb-2">
+                <div className="flex justify-between text-sm text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>CPU Usage</span>
                   <span>78%</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-blue-400 h-2 rounded-full" style={{ width: '78%' }}></div>
+                <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-blue-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '78%' }}></div>
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-sm text-gray-300 mb-2">
+                <div className="flex justify-between text-sm text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>Memory Usage</span>
                   <span>65%</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-green-400 h-2 rounded-full" style={{ width: '65%' }}></div>
+                <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-green-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '65%' }}></div>
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-sm text-gray-300 mb-2">
+                <div className="flex justify-between text-sm text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>Disk Usage</span>
                   <span>42%</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-purple-400 h-2 rounded-full" style={{ width: '42%' }}></div>
+                <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-purple-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '42%' }}></div>
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-sm text-gray-300 mb-2">
+                <div className="flex justify-between text-sm text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <span>Network I/O</span>
                   <span>89%</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-orange-400 h-2 rounded-full" style={{ width: '89%' }}></div>
+                <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-orange-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" style={{ width: '89%' }}></div>
                 </div>
               </div>
             </div>

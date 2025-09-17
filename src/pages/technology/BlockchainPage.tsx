@@ -62,26 +62,32 @@ const BlockchainPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 responsive-container">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white responsive-container">
+        <div className="absolute inset-0 bg-black/20 responsive-container"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center responsive-container"
           >
-            <div className="flex justify-center mb-8">
-              <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-2xl">
-                <Shield className="h-16 w-16 text-white" />
+            <div className="flex justify-center mb-8 responsive-container">
+              <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-2xl responsive-container">
+                <Shield className="h-16 w-16 text-white responsive-container" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent responsive-container">
               Blockchain Technology
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto responsive-container">
               Secure, transparent, and immutable blockchain technology ensures data integrity and trust 
               across all logistics operations and transactions.
             </p>
@@ -90,47 +96,47 @@ const BlockchainPage: React.FC = () => {
       </section>
 
       {/* Blockchain Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-white responsive-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 responsive-container">
               Blockchain Features
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto responsive-container">
               Our blockchain implementation provides enterprise-grade security and transparency 
               for all logistics operations and data transactions.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 responsive-container">
             {blockchainFeatures.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200"
+                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 responsive-container"
               >
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mr-4">
-                    <feature.icon className="h-8 w-8 text-white" />
+                <div className="flex items-center mb-6 responsive-container">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mr-4 responsive-container">
+                    <feature.icon className="h-8 w-8 text-white responsive-container" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">
+                  <h3 className="text-2xl font-bold text-gray-900 responsive-container">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed responsive-container">
                   {feature.description}
                 </p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 responsive-container">
                   {feature.features.map((item, itemIndex) => (
-                    <div key={itemIndex} className="flex items-center text-sm text-gray-600">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                    <div key={itemIndex} className="flex items-center text-sm text-gray-600 responsive-container">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 responsive-container"></div>
                       {item}
                     </div>
                   ))}
@@ -142,41 +148,41 @@ const BlockchainPage: React.FC = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gray-50 responsive-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 responsive-container">
               Blockchain Benefits
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto responsive-container">
               Experience the advantages of blockchain technology in logistics management 
               and supply chain operations.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 responsive-container">
             {blockchainBenefits.map((benefit, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center responsive-container"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
-                    <benefit.icon className="h-8 w-8 text-white" />
+                <div className="flex justify-center mb-4 responsive-container">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl responsive-container">
+                    <benefit.icon className="h-8 w-8 text-white responsive-container" />
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                <h3 className="text-lg font-bold text-gray-900 mb-3 responsive-container">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed responsive-container">
                   {benefit.description}
                 </p>
               </motion.div>
@@ -186,40 +192,40 @@ const BlockchainPage: React.FC = () => {
       </section>
 
       {/* Security Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white responsive-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center responsive-container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="text-4xl md:text-5xl font-bold mb-2">99.9%</div>
-              <div className="text-blue-100">Security Uptime</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 responsive-container">99.9%</div>
+              <div className="text-blue-100 responsive-container">Security Uptime</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className="text-4xl md:text-5xl font-bold mb-2">256-bit</div>
-              <div className="text-blue-100">Encryption</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 responsive-container">256-bit</div>
+              <div className="text-blue-100 responsive-container">Encryption</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="text-4xl md:text-5xl font-bold mb-2">0</div>
-              <div className="text-blue-100">Data Breaches</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 responsive-container">0</div>
+              <div className="text-blue-100 responsive-container">Data Breaches</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
-              <div className="text-blue-100">Transparency</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 responsive-container">100%</div>
+              <div className="text-blue-100 responsive-container">Transparency</div>
             </motion.div>
           </div>
         </div>

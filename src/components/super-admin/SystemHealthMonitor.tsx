@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Activity,
@@ -257,7 +257,13 @@ const SystemHealthMonitor: React.FC = () => {
       );
     }, 3000);
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, [autoRefresh]);
 
   const getStatusColor = (status: string) => {
@@ -313,17 +319,17 @@ const SystemHealthMonitor: React.FC = () => {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'server':
-        return <Server className="w-4 h-4" />;
+        return <Server className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'database':
-        return <Database className="w-4 h-4" />;
+        return <Database className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'network':
-        return <Network className="w-4 h-4" />;
+        return <Network className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'service':
-        return <Zap className="w-4 h-4" />;
+        return <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'portal':
-        return <Globe className="w-4 h-4" />;
+        return <Globe className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -335,35 +341,37 @@ const SystemHealthMonitor: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 p-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">💚 System Health Monitor</h1>
-            <p className="text-gray-300 text-lg">
+            <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">💚 System Health Monitor</h1>
+            <p className="text-gray-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
               Autonomous system monitoring and self-healing capabilities
             </p>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                 {autoRefresh ? 'Live Monitoring' : 'Paused'}
               </span>
             </div>
             <button
-              onClick={() => setAutoHealing(!autoHealing)}
+              onClick={() = aria-label="Button"> setAutoHealing(!autoHealing)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 autoHealing ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'
               } text-white flex items-center space-x-2`}
             >
-              <Heart className="w-4 h-4" />
+              <Heart className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>{autoHealing ? 'Auto-Healing ON' : 'Auto-Healing OFF'}</span>
             </button>
             <button
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
               <span>{autoRefresh ? 'Pause' : 'Resume'}</span>
@@ -372,7 +380,7 @@ const SystemHealthMonitor: React.FC = () => {
         </div>
 
         {/* Navigation */}
-        <div className="flex space-x-2 mb-8">
+        <div className="flex space-x-2 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
           {[
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'components', label: 'Components', icon: Server },
@@ -381,33 +389,33 @@ const SystemHealthMonitor: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() => setViewMode(id as 'overview' | 'components' | 'healing' | 'metrics')}
+              onClick={() = aria-label="Button"> setViewMode(id as 'overview' | 'components' | 'healing' | 'metrics')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id
                   ? 'bg-cyan-600 text-white'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>{label}</span>
             </button>
           ))}
         </div>
 
         {/* System Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">System Health</p>
-                <p className="text-3xl font-bold text-white">{averageHealth}%</p>
-                <p className="text-xs text-gray-400">Average across all components</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">System Health</p>
+                <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{averageHealth}%</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Average across all components</p>
               </div>
-              <Heart className="w-8 h-8 text-cyan-400" />
+              <Heart className="w-8 h-8 text-cyan-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -415,15 +423,15 @@ const SystemHealthMonitor: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Healthy Components</p>
-                <p className="text-3xl font-bold text-green-400">{healthyComponents}</p>
-                <p className="text-xs text-gray-400">of {totalComponents} total</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Healthy Components</p>
+                <p className="text-3xl font-bold text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">{healthyComponents}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">of {totalComponents} total</p>
               </div>
-              <CheckCircle className="w-8 h-8 text-green-400" />
+              <CheckCircle className="w-8 h-8 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -431,15 +439,15 @@ const SystemHealthMonitor: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Critical Issues</p>
-                <p className="text-3xl font-bold text-red-400">{criticalComponents}</p>
-                <p className="text-xs text-gray-400">Require immediate attention</p>
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Critical Issues</p>
+                <p className="text-3xl font-bold text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">{criticalComponents}</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Require immediate attention</p>
               </div>
-              <AlertTriangle className="w-8 h-8 text-red-400" />
+              <AlertTriangle className="w-8 h-8 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
 
@@ -447,17 +455,17 @@ const SystemHealthMonitor: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-gray-300 text-sm">Auto-Healing</p>
-                <p className="text-3xl font-bold text-purple-400">
+                <p className="text-gray-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid">Auto-Healing</p>
+                <p className="text-3xl font-bold text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {healingActions.filter(a => a.automated).length}
                 </p>
-                <p className="text-xs text-gray-400">Active healing actions</p>
+                <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active healing actions</p>
               </div>
-              <Zap className="w-8 h-8 text-purple-400" />
+              <Zap className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </motion.div>
         </div>
@@ -465,7 +473,7 @@ const SystemHealthMonitor: React.FC = () => {
 
       {/* Main Content */}
       {viewMode === 'components' && (
-        <div className="space-y-6">
+        <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {components.map((component, index) => (
             <motion.div
               key={component.id}
@@ -473,75 +481,75 @@ const SystemHealthMonitor: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setSelectedComponent(component)}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-cyan-600 rounded-lg flex items-center justify-center">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-10 h-10 bg-cyan-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                     {getTypeIcon(component.type)}
                   </div>
                   <div>
-                    <h3 className="text-white font-bold">{component.name}</h3>
-                    <p className="text-sm text-gray-300">
+                    <h3 className="text-white font-bold responsive-container sm:flex-col md:flex-row lg:grid">{component.name}</h3>
+                    <p className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                       {component.type} • {component.location}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`px-3 py-1 rounded-full text-xs ${getStatusColor(component.status)}`}
                   >
                     {component.status}
                   </div>
-                  <div className="text-right">
+                  <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
                     <p className={`text-lg font-bold ${getHealthColor(component.health)}`}>
                       {component.health}%
                     </p>
-                    <p className="text-xs text-gray-400">{component.lastCheck}</p>
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{component.lastCheck}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 mb-4">
-                <div className="text-center">
-                  <p className="text-xs text-gray-400">CPU</p>
-                  <p className="text-sm text-white">{component.cpu}%</p>
+              <div className="grid grid-cols-4 gap-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU</p>
+                  <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.cpu}%</p>
                 </div>
-                <div className="text-center">
-                  <p className="text-xs text-gray-400">Memory</p>
-                  <p className="text-sm text-white">{component.memory}%</p>
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory</p>
+                  <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.memory}%</p>
                 </div>
-                <div className="text-center">
-                  <p className="text-xs text-gray-400">Disk</p>
-                  <p className="text-sm text-white">{component.disk}%</p>
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Disk</p>
+                  <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.disk}%</p>
                 </div>
-                <div className="text-center">
-                  <p className="text-xs text-gray-400">Network</p>
-                  <p className="text-sm text-white">{component.network}%</p>
+                <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Network</p>
+                  <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.network}%</p>
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-white/20">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="text-center">
-                      <p className="text-xs text-gray-400">Uptime</p>
-                      <p className="text-sm text-white">{component.uptime}%</p>
+              <div className="mt-4 pt-4 border-t border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Uptime</p>
+                      <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.uptime}%</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-xs text-gray-400">Alerts</p>
-                      <p className="text-sm text-white">{component.alerts}</p>
+                    <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Alerts</p>
+                      <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.alerts}</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-xs text-gray-400">Auto-Healing</p>
-                      <p className="text-sm text-white">{component.autoHealing ? 'ON' : 'OFF'}</p>
+                    <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Auto-Healing</p>
+                      <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{component.autoHealing ? 'ON' : 'OFF'}</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <button className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <button className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                       Heal
                     </button>
-                    <button className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm">
+                    <button className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                       Restart
                     </button>
                   </div>
@@ -553,7 +561,7 @@ const SystemHealthMonitor: React.FC = () => {
       )}
 
       {viewMode === 'healing' && (
-        <div className="space-y-6">
+        <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {healingActions.map((action, index) => (
             <motion.div
               key={action.id}
@@ -561,52 +569,52 @@ const SystemHealthMonitor: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => {}}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:scale-105 transition-transform cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
-                    <Heart className="w-5 h-5 text-white" />
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Heart className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold">{action.action}</h3>
-                    <p className="text-sm text-gray-300">Component: {action.component}</p>
+                    <h3 className="text-white font-bold responsive-container sm:flex-col md:flex-row lg:grid">{action.action}</h3>
+                    <p className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Component: {action.component}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`px-3 py-1 rounded-full text-xs ${getActionStatusColor(action.status)}`}
                   >
                     {action.status}
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm text-white">Started {action.startedAt}</p>
+                  <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">Started {action.startedAt}</p>
                     {action.completedAt && (
-                      <p className="text-xs text-gray-400">Completed {action.completedAt}</p>
+                      <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Completed {action.completedAt}</p>
                     )}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400">Automated</p>
-                    <p className="text-sm text-white">{action.automated ? 'Yes' : 'No'}</p>
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Automated</p>
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{action.automated ? 'Yes' : 'No'}</p>
                   </div>
                   {action.result && (
-                    <div className="flex-1">
-                      <p className="text-xs text-gray-400">Result</p>
-                      <p className="text-sm text-white">{action.result}</p>
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Result</p>
+                      <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{action.result}</p>
                     </div>
                   )}
                 </div>
-                <div className="flex items-center space-x-2">
-                  <button className="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors text-sm">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     View Details
                   </button>
                   {action.status === 'running' && (
-                    <button className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm">
+                    <button className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                       Cancel
                     </button>
                   )}
@@ -618,19 +626,19 @@ const SystemHealthMonitor: React.FC = () => {
       )}
 
       {viewMode === 'metrics' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {metrics.map((metric, index) => (
             <motion.div
               key={metric.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <h3 className="text-white font-bold">{metric.name}</h3>
-                  <p className="text-sm text-gray-300">{metric.description}</p>
+                  <h3 className="text-white font-bold responsive-container sm:flex-col md:flex-row lg:grid">{metric.name}</h3>
+                  <p className="text-sm text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">{metric.description}</p>
                 </div>
                 <div
                   className={`px-3 py-1 rounded-full text-xs ${getMetricStatusColor(metric.status)}`}
@@ -639,33 +647,33 @@ const SystemHealthMonitor: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-white">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {metric.value}
                     {metric.unit}
                   </span>
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {metric.trend === 'up' ? (
-                      <TrendingUp className="w-4 h-4 text-green-400" />
+                      <TrendingUp className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     ) : metric.trend === 'down' ? (
-                      <TrendingDown className="w-4 h-4 text-red-400" />
+                      <TrendingDown className="w-4 h-4 text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     ) : (
-                      <Activity className="w-4 h-4 text-gray-400" />
+                      <Activity className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                     )}
-                    <span className="text-sm text-gray-400 capitalize">{metric.trend}</span>
+                    <span className="text-sm text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{metric.trend}</span>
                   </div>
                 </div>
 
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Threshold</span>
-                  <span className="text-white">
+                <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Threshold</span>
+                  <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {metric.threshold}
                     {metric.unit}
                   </span>
                 </div>
 
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
                     className={`h-2 rounded-full transition-all duration-300 ${
                       metric.status === 'good'
@@ -690,7 +698,7 @@ const SystemHealthMonitor: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={() => setSelectedComponent(null)}
           >
             <motion.div
@@ -698,38 +706,38 @@ const SystemHealthMonitor: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl w-full border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center">
+              <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                     {getTypeIcon(selectedComponent.type)}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">{selectedComponent.name}</h3>
-                    <p className="text-gray-300">
+                    <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedComponent.name}</h3>
+                    <p className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedComponent.type} • {selectedComponent.location}
                     </p>
                   </div>
                 </div>
                 <button
-                  onClick={() => setSelectedComponent(null)}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() = aria-label="Button"> setSelectedComponent(null)}
+                  className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="grid grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="text-sm text-gray-400">Health Score</label>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Health Score</label>
                     <p className={`text-2xl font-bold ${getHealthColor(selectedComponent.health)}`}>
                       {selectedComponent.health}%
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400">Status</label>
+                    <label className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Status</label>
                     <div
                       className={`inline-block px-3 py-1 rounded-full text-sm ${getStatusColor(selectedComponent.status)}`}
                     >
@@ -738,54 +746,54 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="text-sm text-gray-400 mb-2 block">Resource Usage</label>
-                    <div className="space-y-3">
+                    <label className="text-sm text-gray-400 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Resource Usage</label>
+                    <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">CPU</span>
-                          <span className="text-white">{selectedComponent.cpu}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedComponent.cpu}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
-                            className="bg-blue-400 h-2 rounded-full"
+                            className="bg-blue-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedComponent.cpu}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Memory</span>
-                          <span className="text-white">{selectedComponent.memory}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedComponent.memory}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
-                            className="bg-green-400 h-2 rounded-full"
+                            className="bg-green-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedComponent.memory}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Disk</span>
-                          <span className="text-white">{selectedComponent.disk}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Disk</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedComponent.disk}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
-                            className="bg-purple-400 h-2 rounded-full"
+                            className="bg-purple-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedComponent.disk}%` }}
                           ></div>
                         </div>
                       </div>
                       <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Network</span>
-                          <span className="text-white">{selectedComponent.network}%</span>
+                        <div className="flex justify-between text-sm mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Network</span>
+                          <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedComponent.network}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
-                            className="bg-orange-400 h-2 rounded-full"
+                            className="bg-orange-400 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                             style={{ width: `${selectedComponent.network}%` }}
                           ></div>
                         </div>
@@ -795,12 +803,12 @@ const SystemHealthMonitor: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm text-gray-400 mb-2 block">Dependencies</label>
-                  <div className="flex flex-wrap gap-2">
+                  <label className="text-sm text-gray-400 mb-2 block responsive-container sm:flex-col md:flex-row lg:grid">Dependencies</label>
+                  <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedComponent.dependencies.map((dep, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-sm"
+                        className="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {dep}
                       </span>
@@ -808,17 +816,17 @@ const SystemHealthMonitor: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-4">
-                  <button className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                    <Heart className="w-4 h-4" />
+                <div className="flex space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Heart className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Heal Component</span>
                   </button>
-                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                    <RotateCcw className="w-4 h-4" />
+                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <RotateCcw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Restart Component</span>
                   </button>
-                  <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                    <Settings className="w-4 h-4" />
+                  <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                    <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Configure</span>
                   </button>
                 </div>

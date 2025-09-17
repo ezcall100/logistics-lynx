@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Settings,
@@ -415,15 +415,21 @@ const EnhancedSystemSettings: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-1">
-              <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="lg:col-span-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             </div>
-            <div className="lg:col-span-3">
-              <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div className="lg:col-span-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"></div>
             </div>
           </div>
         </div>
@@ -432,45 +438,47 @@ const EnhancedSystemSettings: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             System Settings
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Configure system-wide settings and preferences
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
           <button
-            onClick={() => setShowBackupModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowBackupModal(true)}
+            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Download className="h-4 w-4" />
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Backup</span>
           </button>
           <button
-            onClick={() => setShowRestoreModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowRestoreModal(true)}
+            className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Upload className="h-4 w-4" />
+            <Upload className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Restore</span>
           </button>
           <button
             onClick={handleSaveSettings}
             disabled={saving || !hasUnsavedChanges}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <Save className={`h-4 w-4 ${saving ? 'animate-spin' : ''}`} />
             <span>{saving ? 'Saving...' : 'Save Changes'}</span>
           </button>
@@ -479,40 +487,42 @@ const EnhancedSystemSettings: React.FC = () => {
 
       {/* Unsaved Changes Alert */}
       {hasUnsavedChanges && (
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-          <div className="flex items-center space-x-2">
-            <AlertTriangle className="h-5 w-5 text-yellow-600" />
-            <span className="text-yellow-800 dark:text-yellow-200 font-medium">
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <AlertTriangle className="h-5 w-5 text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-yellow-800 dark:text-yellow-200 font-medium responsive-container sm:flex-col md:flex-row lg:grid">
               You have unsaved changes. Don't forget to save your settings.
             </span>
           </div>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Categories Sidebar */}
-        <div className="lg:col-span-1">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="lg:col-span-1 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               Categories
             </h3>
-            <nav className="space-y-2">
+            <nav className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {categories.map((category) => {
                 const Icon = category.icon;
                 const isActive = activeCategory === category.id;
                 
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <button
                     key={category.id}
-                    onClick={() => setActiveCategory(category.id)}
+                    onClick={() = aria-label="Button"> setActiveCategory(category.id)}
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       isActive
                         ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                     }`}
                   >
-                    <Icon className="h-5 w-5" />
-                    <span className="font-medium">{category.name}</span>
+                    <Icon className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{category.name}</span>
                   </button>
                 );
               })}
@@ -520,35 +530,37 @@ const EnhancedSystemSettings: React.FC = () => {
           </div>
 
           {/* System Status */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 mt-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               System Status
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {systemStatus.map((status) => {
                 const StatusIcon = getStatusIcon(status.status);
                 
                 return (
-                  <div key={status.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <div className="flex items-center space-x-3">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                  <div key={status.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <StatusIcon className={`h-4 w-4 ${
                         status.status === 'healthy' ? 'text-green-600' :
                         status.status === 'warning' ? 'text-yellow-600' : 'text-red-600'
                       }`} />
                       <div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {status.name}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           {status.description}
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                    <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {status.value}
                       </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {new Date(status.lastCheck).toLocaleTimeString()}
                       </div>
                     </div>
@@ -560,43 +572,43 @@ const EnhancedSystemSettings: React.FC = () => {
         </div>
 
         {/* Settings Content */}
-        <div className="lg:col-span-3">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <div className="lg:col-span-3 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {categories.find(c => c.id === activeCategory)?.name} Settings
               </h2>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+              <span className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 {filteredSettings.length} settings
               </span>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
               {filteredSettings.map((setting) => (
-                <div key={setting.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                <div key={setting.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-start justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {setting.name}
                         </h3>
                         {setting.required && (
-                          <span className="text-red-500 text-sm">*</span>
+                          <span className="text-red-500 text-sm responsive-container sm:flex-col md:flex-row lg:grid">*</span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {setting.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {setting.type === 'string' && (
                       <input
                         type={setting.sensitive && !showSensitiveValues[setting.id] ? 'password' : 'text'}
                         value={setting.value}
                         onChange={(e) => handleSettingChange(setting.id, e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                         placeholder={`Enter ${setting.name.toLowerCase()}`}
                       />
                     )}
@@ -608,20 +620,20 @@ const EnhancedSystemSettings: React.FC = () => {
                         onChange={(e) => handleSettingChange(setting.id, Number(e.target.value))}
                         min={setting.validation?.min}
                         max={setting.validation?.max}
-                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                         placeholder={`Enter ${setting.name.toLowerCase()}`}
                       />
                     )}
 
                     {setting.type === 'boolean' && (
-                      <label className="flex items-center space-x-2">
+                      <label className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <input
                           type="checkbox"
                           checked={setting.value}
                           onChange={(e) => handleSettingChange(setting.id, e.target.checked)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
                         />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
+                        <span className="text-sm text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                           {setting.value ? 'Enabled' : 'Disabled'}
                         </span>
                       </label>
@@ -631,7 +643,7 @@ const EnhancedSystemSettings: React.FC = () => {
                       <select
                         value={setting.value}
                         onChange={(e) => handleSettingChange(setting.id, e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {setting.options?.map((option) => (
                           <option key={option} value={option}>
@@ -653,7 +665,7 @@ const EnhancedSystemSettings: React.FC = () => {
                             handleSettingChange(setting.id, e.target.value);
                           }
                         }}
-                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-sm"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                         rows={3}
                         placeholder="Enter JSON value"
                       />
@@ -661,14 +673,14 @@ const EnhancedSystemSettings: React.FC = () => {
 
                     {setting.sensitive && (
                       <button
-                        onClick={() => toggleSensitiveValue(setting.id)}
-                        className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                        onClick={() = aria-label="Button"> toggleSensitiveValue(setting.id)}
+                        className="p-2 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title={showSensitiveValues[setting.id] ? 'Hide value' : 'Show value'}
                       >
                         {showSensitiveValues[setting.id] ? (
-                          <EyeOff className="h-4 w-4" />
+                          <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                       </button>
                     )}
@@ -687,52 +699,52 @@ const EnhancedSystemSettings: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   Backup Settings
                 </h3>
                 <button
-                  onClick={() => setShowBackupModal(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowBackupModal(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="space-y-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   This will create a backup file containing all current system settings. 
                   You can use this file to restore settings later.
                 </p>
-                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
-                  <div className="flex items-center space-x-2">
-                    <Info className="h-4 w-4 text-blue-600" />
-                    <span className="text-sm text-blue-800 dark:text-blue-200">
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Info className="h-4 w-4 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="text-sm text-blue-800 dark:text-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
                       Backup includes all settings except sensitive values
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setShowBackupModal(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowBackupModal(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleBackupSettings}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                 aria-label="Button">
                   Download Backup
                 </button>
               </div>
@@ -748,32 +760,32 @@ const EnhancedSystemSettings: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   Restore Settings
                 </h3>
                 <button
-                  onClick={() => setShowRestoreModal(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowRestoreModal(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
 
-              <div className="space-y-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Select a backup file to restore system settings. This will overwrite current settings.
                 </p>
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
-                  <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <input
                     type="file"
                     accept=".json"
@@ -783,30 +795,30 @@ const EnhancedSystemSettings: React.FC = () => {
                         handleRestoreSettings(file);
                       }
                     }}
-                    className="hidden"
+                    className="hidden responsive-container sm:flex-col md:flex-row lg:grid"
                     id="restore-file"
                   />
                   <label
                     htmlFor="restore-file"
-                    className="cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:text-gray-200"
+                    className="cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Click to select backup file
                   </label>
                 </div>
-                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
-                  <div className="flex items-center space-x-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                    <span className="text-sm text-yellow-800 dark:text-yellow-200">
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <AlertTriangle className="h-4 w-4 text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="text-sm text-yellow-800 dark:text-yellow-200 responsive-container sm:flex-col md:flex-row lg:grid">
                       This action cannot be undone. Make sure to backup current settings first.
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setShowRestoreModal(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowRestoreModal(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
                 </button>

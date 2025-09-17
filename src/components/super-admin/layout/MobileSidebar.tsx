@@ -44,34 +44,42 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
   if (!mobileMenuOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="fixed inset-0 z-50 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid">
       <div
-        className="fixed inset-0 bg-black bg-opacity-50"
+        className="fixed inset-0 bg-black bg-opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
         onClick={() => setMobileMenuOpen(false)}
       />
-      <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Navigation</h2>
+      <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
             <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              onClick={() = aria-label="Button"> setMobileMenuOpen(false)}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
         </div>
-        <nav className="p-4">
-          <div className="space-y-2">
+        <nav className="p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {navigationItems.map(item => {
               const isActive = activeTab === item.id;
               const isExpanded = expandedMenus.includes(item.id);
 
               return (
-                <div key={item.id} className="space-y-1">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+                <div key={item.id} className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {/* Main Menu Item */}
                   <button
-                    onClick={() => {
+                    onClick={() = aria-label="Button"> {
                       if (item.subMenus && item.subMenus.length > 0) {
                         handleMenuToggle(item.id);
                       } else {
@@ -85,18 +93,18 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                         : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
                     }`}
                   >
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <item.icon className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`} />
-                      <div className="flex-1 text-left">
-                        <div className="font-medium">{item.label}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                      <div className="flex-1 text-left responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.label}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate responsive-container sm:flex-col md:flex-row lg:grid">
                           {item.description}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {item.count && (
-                        <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                        <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                           {item.count}
                         </span>
                       )}
@@ -110,14 +118,16 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
                   {/* Sub-menus */}
                   {isExpanded && item.subMenus && (
-                    <div className="ml-4 space-y-1">
+                    <div className="ml-4 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {item.subMenus.map((subMenu: { id: string; label: string; path: string }) => {
                         const isSubActive = activeTab === subMenu.id;
 
                         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                           <button
                             key={subMenu.id}
-                            onClick={() => {
+                            onClick={() = aria-label="Button"> {
                               setActiveTab(subMenu.id);
                               setMobileMenuOpen(false);
                             }}
@@ -127,8 +137,8 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                                 : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                             }`}
                           >
-                            <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                            <span className="text-sm font-medium">{subMenu.label}</span>
+                            <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+                            <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{subMenu.label}</span>
                           </button>
                         );
                       })}

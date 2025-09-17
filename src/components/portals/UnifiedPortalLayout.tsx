@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, 
@@ -120,7 +120,13 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Mobile sidebar overlay */}
       <AnimatePresence>
         {sidebarOpen && (
@@ -128,7 +134,7 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -139,42 +145,42 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
         initial={{ x: -300 }}
         animate={{ x: sidebarOpen ? 0 : -300 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed inset-y-0 left-0 z-50 w-80 bg-white shadow-xl lg:translate-x-0 lg:static lg:inset-0"
+        className="fixed inset-y-0 left-0 z-50 w-80 bg-white shadow-xl lg:translate-x-0 lg:static lg:inset-0 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Sidebar header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Truck className="w-5 h-5 text-white" />
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-gray-900">Logistics Lynx</h1>
-                <p className="text-xs text-gray-500">Portal Dashboard</p>
+                <h1 className="text-lg font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Logistics Lynx</h1>
+                <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Portal Dashboard</p>
               </div>
             </div>
             <button
-              onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() = aria-label="Button"> setSidebarOpen(false)}
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <X className="w-5 h-5 text-gray-500" />
+              <X className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
           {/* User info */}
-          <div className="p-6 border-b border-gray-200">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+          <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                 {user?.avatar ? (
-                  <img src={user.avatar} alt={user.name} className="w-12 h-12 rounded-full" />
+                  <img src={user.avatar} alt={user.name} className="w-12 h-12 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" / alt="Image">
                 ) : (
-                  <User className="w-6 h-6 text-white" />
+                  <User className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">{user?.name}</p>
-                <p className="text-xs text-gray-500 truncate">{user?.company}</p>
-                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+              <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm font-medium text-gray-900 truncate responsive-container sm:flex-col md:flex-row lg:grid">{user?.name}</p>
+                <p className="text-xs text-gray-500 truncate responsive-container sm:flex-col md:flex-row lg:grid">{user?.company}</p>
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {user?.role}
                 </span>
               </div>
@@ -182,35 +188,35 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
           </div>
 
           {/* Search */}
-          <div className="p-6 border-b border-gray-200">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 placeholder="Search portals..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
           </div>
 
           {/* Categories */}
-          <div className="p-6 border-b border-gray-200">
-            <div className="space-y-1">
+          <div className="p-6 border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() = aria-label="Button"> setActiveCategory(category.id)}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     activeCategory === category.id
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                 >
-                  <category.icon className="w-4 h-4" />
+                  <category.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{category.name}</span>
-                  <span className="ml-auto text-xs text-gray-400">
+                  <span className="ml-auto text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     {category.id === 'all' 
                       ? filteredPortals.length 
                       : allPortals.filter(p => p.category === category.id).length
@@ -222,8 +228,8 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
           </div>
 
           {/* Portals */}
-          <div className="flex-1 overflow-y-auto p-6">
-            <div className="space-y-2">
+          <div className="flex-1 overflow-y-auto p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {filteredPortals.map((portal) => (
                 <motion.button
                   key={portal.id}
@@ -236,20 +242,20 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
                       : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className={`w-10 h-10 bg-gradient-to-br ${portal.color} rounded-lg flex items-center justify-center`}>
-                      <portal.icon className="w-5 h-5 text-white" />
+                      <portal.icon className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center space-x-2">
-                        <p className="text-sm font-medium text-gray-900 truncate">{portal.name}</p>
+                    <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-sm font-medium text-gray-900 truncate responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</p>
                         {portal.badge && (
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 responsive-container sm:flex-col md:flex-row lg:grid">
                             {portal.badge}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-gray-500 truncate">{portal.description}</p>
+                      <p className="text-xs text-gray-500 truncate responsive-container sm:flex-col md:flex-row lg:grid">{portal.description}</p>
                     </div>
                   </div>
                 </motion.button>
@@ -258,21 +264,21 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
           </div>
 
           {/* Sidebar footer */}
-          <div className="p-6 border-t border-gray-200">
-            <div className="space-y-2">
-              <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                <Settings className="w-4 h-4" />
+          <div className="p-6 border-t border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Settings</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                <HelpCircle className="w-4 h-4" />
+              <button className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <HelpCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Help & Support</span>
               </button>
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-              >
-                <LogOut className="w-4 h-4" />
+                className="w-full flex items-center space-x-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+               aria-label="Button">
+                <LogOut className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Sign Out</span>
               </button>
             </div>
@@ -281,40 +287,40 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
       </motion.div>
 
       {/* Main content */}
-      <div className="lg:pl-80">
+      <div className="lg:pl-80 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Top header */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between px-6 py-4">
-            <div className="flex items-center space-x-4">
+        <header className="bg-white shadow-sm border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                onClick={() = aria-label="Button"> setSidebarOpen(true)}
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <Menu className="w-5 h-5 text-gray-500" />
+                <Menu className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
               <div>
-                <h1 className="text-xl font-semibold text-gray-900">
+                <h1 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
                   {allPortals.find(p => p.path === location.pathname)?.name || 'Portal Dashboard'}
                 </h1>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                   {allPortals.find(p => p.path === location.pathname)?.description || 'Manage your logistics operations'}
                 </p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
-                <Bell className="w-5 h-5 text-gray-500" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Bell className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></span>
               </button>
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                <MessageSquare className="w-5 h-5 text-gray-500" />
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <MessageSquare className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                 {user?.avatar ? (
-                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
+                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" / alt="Image">
                 ) : (
-                  <User className="w-4 h-4 text-white" />
+                  <User className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
               </div>
             </div>
@@ -322,7 +328,7 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
         </header>
 
         {/* Page content */}
-        <main className="p-6">
+        <main className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {children}
         </main>
       </div>

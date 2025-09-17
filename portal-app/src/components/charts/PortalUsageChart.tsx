@@ -18,7 +18,7 @@ import {
 
 interface PortalUsageChartProps {
   type?: 'bar' | 'pie' | 'line' | 'area';
-  data?: any[];
+  data?: unknown[];
   height?: number;
 }
 
@@ -47,6 +47,12 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
     switch (type) {
       case 'bar':
         return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis 
@@ -69,7 +75,7 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
                 borderRadius: '8px',
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
               }}
-              formatter={(value: any, name: string) => [
+              formatter={(value: unknown, name: string) => [
                 `${value}%`, 
                 name === 'usage' ? 'Usage' : name
               ]}
@@ -90,13 +96,15 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
 
       case 'pie':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <PieChart margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <Pie
               data={portalStatusData}
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={(entry: any) => `${entry.name} ${(entry.percent * 100).toFixed(0)}%`}
+              label={(entry: unknown) => `${entry.name} ${(entry.percent * 100).toFixed(0)}%`}
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
@@ -118,6 +126,8 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
 
       case 'line':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis 
@@ -140,7 +150,7 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
                 borderRadius: '8px',
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
               }}
-              formatter={(value: any) => [`${value}%`, 'Usage']}
+              formatter={(value: unknown) => [`${value}%`, 'Usage']}
             />
             <Line 
               type="monotone" 
@@ -155,6 +165,8 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
 
       case 'area':
         return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
           <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <defs>
               <linearGradient id="portalAreaGradient" x1="0" y1="0" x2="0" y2="1">
@@ -183,7 +195,7 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
                 borderRadius: '8px',
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
               }}
-              formatter={(value: any) => [`${value}%`, 'Usage']}
+              formatter={(value: unknown) => [`${value}%`, 'Usage']}
             />
             <Area 
               type="monotone" 
@@ -201,7 +213,9 @@ export const PortalUsageChart: React.FC<PortalUsageChartProps> = ({
   };
 
   return (
-    <div className="w-full h-full">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="w-full h-full responsive-container sm:flex-col md:flex-row lg:grid">
       <ResponsiveContainer width="100%" height={height}>
         {renderChart() || <div>No chart data available</div>}
       </ResponsiveContainer>

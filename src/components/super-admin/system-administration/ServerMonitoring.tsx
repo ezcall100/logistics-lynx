@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -85,7 +85,13 @@ const ServerMonitoring: React.FC = () => {
       }));
     }, 5000);
 
-    return () => clearInterval(interval);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
   }, []);
 
   const getStatusColor = (status: string) => {
@@ -107,118 +113,120 @@ const ServerMonitoring: React.FC = () => {
     switch (status) {
       case 'healthy':
       case 'running':
-        return <Badge className="bg-green-100 text-green-800">Healthy</Badge>;
+        return <Badge className="bg-green-100 text-green-800 responsive-container sm:flex-col md:flex-row lg:grid">Healthy</Badge>;
       case 'warning':
-        return <Badge className="bg-yellow-100 text-yellow-800">Warning</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800 responsive-container sm:flex-col md:flex-row lg:grid">Warning</Badge>;
       case 'error':
       case 'stopped':
-        return <Badge className="bg-red-100 text-red-800">Error</Badge>;
+        return <Badge className="bg-red-100 text-red-800 responsive-container sm:flex-col md:flex-row lg:grid">Error</Badge>;
       default:
-        return <Badge className="bg-gray-100 text-gray-800">Unknown</Badge>;
+        return <Badge className="bg-gray-100 text-gray-800 responsive-container sm:flex-col md:flex-row lg:grid">Unknown</Badge>;
     }
   };
 
   const getAlertIcon = (type: string) => {
     switch (type) {
       case 'warning':
-        return <AlertTriangle className="h-4 w-4 text-yellow-600" />;
+        return <AlertTriangle className="h-4 w-4 text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertTriangle className="h-4 w-4 text-red-600" />;
+        return <AlertTriangle className="h-4 w-4 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'info':
-        return <CheckCircle className="h-4 w-4 text-blue-600" />;
+        return <CheckCircle className="h-4 w-4 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Activity className="h-4 w-4 text-gray-600" />;
+        return <Activity className="h-4 w-4 text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="space-y-6">
-            <div className="flex items-center justify-between">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-          <h1 className="text-3xl font-bold">Server Monitoring</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Server Monitoring</h1>
+          <p className="text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
             Monitor server performance and health metrics
                 </p>
               </div>
-        <Button variant="outline" className="flex items-center gap-2">
-          <RefreshCw className="h-4 w-4" />
+        <Button variant="outline" className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           Refresh
         </Button>
             </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">CPU Usage</CardTitle>
-            <Cpu className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">CPU Usage</CardTitle>
+            <Cpu className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{serverStats.cpu.usage.toFixed(1)}%</div>
-            <Progress value={serverStats.cpu.usage} className="mt-2" />
-            <p className="text-xs text-muted-foreground mt-2">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.cpu.usage.toFixed(1)}%</div>
+            <Progress value={serverStats.cpu.usage} className="mt-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <p className="text-xs text-muted-foreground mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {serverStats.cpu.cores} cores • {serverStats.cpu.temperature}°C
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Memory</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Memory</CardTitle>
+            <Activity className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{serverStats.memory.percentage.toFixed(1)}%</div>
-            <Progress value={serverStats.memory.percentage} className="mt-2" />
-            <p className="text-xs text-muted-foreground mt-2">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.memory.percentage.toFixed(1)}%</div>
+            <Progress value={serverStats.memory.percentage} className="mt-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <p className="text-xs text-muted-foreground mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {serverStats.memory.used}GB / {serverStats.memory.total}GB
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Disk Usage</CardTitle>
-            <HardDrive className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Disk Usage</CardTitle>
+            <HardDrive className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{serverStats.disk.percentage}%</div>
-            <Progress value={serverStats.disk.percentage} className="mt-2" />
-            <p className="text-xs text-muted-foreground mt-2">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.disk.percentage}%</div>
+            <Progress value={serverStats.disk.percentage} className="mt-2 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <p className="text-xs text-muted-foreground mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {serverStats.disk.used}GB / {serverStats.disk.total}GB
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Network</CardTitle>
-            <Wifi className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <CardTitle className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Network</CardTitle>
+            <Wifi className="h-4 w-4 text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{serverStats.network.connections}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.network.connections}</div>
+            <p className="text-xs text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
               {serverStats.network.incoming} MB/s in
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
               {serverStats.network.outgoing} MB/s out
             </p>
           </CardContent>
         </Card>
         </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <Card>
           <CardHeader>
             <CardTitle>System Services</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {services.map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                            <div className="flex items-center space-x-3">
+              <div key={index} className="flex items-center justify-between p-4 border rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-3 h-3 rounded-full ${getStatusColor(service.status)}`} />
                               <div>
-                    <h4 className="font-medium">{service.name}</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{service.name}</h4>
+                    <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                       Port {service.port} • {service.uptime}
                     </p>
                               </div>
@@ -233,14 +241,14 @@ const ServerMonitoring: React.FC = () => {
           <CardHeader>
             <CardTitle>System Alerts</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {alerts.map((alert) => (
-              <div key={alert.id} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center space-x-3">
+              <div key={alert.id} className="flex items-center justify-between p-4 border rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   {getAlertIcon(alert.type)}
                             <div>
-                    <h4 className="font-medium">{alert.message}</h4>
-                    <p className="text-sm text-muted-foreground">{alert.timestamp}</p>
+                    <h4 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{alert.message}</h4>
+                    <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">{alert.timestamp}</p>
                             </div>
                           </div>
                 <Badge 
@@ -263,21 +271,21 @@ const ServerMonitoring: React.FC = () => {
           <CardTitle>System Information</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div>
-              <h4 className="font-medium mb-2">Server Status</h4>
-                        <div className="flex items-center space-x-2">
+              <h4 className="font-medium mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Server Status</h4>
+                        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className={`w-3 h-3 rounded-full ${getStatusColor(serverStats.status)}`} />
-                <span className="capitalize">{serverStats.status}</span>
+                <span className="capitalize responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.status}</span>
                         </div>
                           </div>
                           <div>
-              <h4 className="font-medium mb-2">Uptime</h4>
-              <p className="text-sm text-muted-foreground">{serverStats.uptime}</p>
+              <h4 className="font-medium mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Uptime</h4>
+              <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">{serverStats.uptime}</p>
                           </div>
                           <div>
-              <h4 className="font-medium mb-2">Load Average</h4>
-              <p className="text-sm text-muted-foreground">
+              <h4 className="font-medium mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Load Average</h4>
+              <p className="text-sm text-muted-foreground responsive-container sm:flex-col md:flex-row lg:grid">
                 {serverStats.cpu.load.map((load, index) => 
                   `${load.toFixed(2)}${index < serverStats.cpu.load.length - 1 ? ', ' : ''}`
                 ).join('')}

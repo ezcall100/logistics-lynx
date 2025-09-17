@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   DollarSign,
@@ -92,23 +92,23 @@ const FactoringPortal: React.FC = () => {
   };
 
   const renderDashboard = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container">
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm text-slate-600">Total Factored</p>
-              <p className="text-3xl font-bold text-slate-900">
+              <p className="text-sm text-slate-600 responsive-container">Total Factored</p>
+              <p className="text-3xl font-bold text-slate-900 responsive-container">
                 ${stats.totalFactored.toLocaleString()}
               </p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <DollarSign className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center responsive-container">
+              <DollarSign className="w-6 h-6 text-blue-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -117,17 +117,17 @@ const FactoringPortal: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm text-slate-600">Total Advances</p>
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-sm text-slate-600 responsive-container">Total Advances</p>
+              <p className="text-3xl font-bold text-green-600 responsive-container">
                 ${stats.totalAdvances.toLocaleString()}
               </p>
             </div>
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <CreditCard className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center responsive-container">
+              <CreditCard className="w-6 h-6 text-green-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -136,15 +136,15 @@ const FactoringPortal: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm text-slate-600">Pending Invoices</p>
-              <p className="text-3xl font-bold text-orange-600">{stats.pendingInvoices}</p>
+              <p className="text-sm text-slate-600 responsive-container">Pending Invoices</p>
+              <p className="text-3xl font-bold text-orange-600 responsive-container">{stats.pendingInvoices}</p>
             </div>
-            <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <Clock className="w-6 h-6 text-orange-600" />
+            <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center responsive-container">
+              <Clock className="w-6 h-6 text-orange-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -153,15 +153,15 @@ const FactoringPortal: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+          className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm text-slate-600">Avg Advance Rate</p>
-              <p className="text-3xl font-bold text-purple-600">{stats.avgAdvanceRate}%</p>
+              <p className="text-sm text-slate-600 responsive-container">Avg Advance Rate</p>
+              <p className="text-3xl font-bold text-purple-600 responsive-container">{stats.avgAdvanceRate}%</p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
+            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center responsive-container">
+              <TrendingUp className="w-6 h-6 text-purple-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -172,21 +172,21 @@ const FactoringPortal: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+        className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
       >
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
-            <Plus className="w-5 h-5 text-blue-600 mr-2" />
-            <span className="font-medium text-slate-900">Submit Invoice</span>
+        <h3 className="text-lg font-semibold text-slate-900 mb-4 responsive-container">Quick Actions</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container">
+          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors responsive-container" aria-label="Button">
+            <Plus className="w-5 h-5 text-blue-600 mr-2 responsive-container" />
+            <span className="font-medium text-slate-900 responsive-container">Submit Invoice</span>
           </button>
-          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-green-50 hover:border-green-300 transition-colors">
-            <CreditCard className="w-5 h-5 text-green-600 mr-2" />
-            <span className="font-medium text-slate-900">Request Advance</span>
+          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-green-50 hover:border-green-300 transition-colors responsive-container" aria-label="Button">
+            <CreditCard className="w-5 h-5 text-green-600 mr-2 responsive-container" />
+            <span className="font-medium text-slate-900 responsive-container">Request Advance</span>
           </button>
-          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-purple-50 hover:border-purple-300 transition-colors">
-            <FileText className="w-5 h-5 text-purple-600 mr-2" />
-            <span className="font-medium text-slate-900">View Reports</span>
+          <button className="flex items-center justify-center p-4 border border-slate-200 rounded-lg hover:bg-purple-50 hover:border-purple-300 transition-colors responsive-container" aria-label="Button">
+            <FileText className="w-5 h-5 text-purple-600 mr-2 responsive-container" />
+            <span className="font-medium text-slate-900 responsive-container">View Reports</span>
           </button>
         </div>
       </motion.div>
@@ -196,26 +196,26 @@ const FactoringPortal: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white p-6 rounded-xl shadow-lg border border-slate-200"
+        className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 responsive-container"
       >
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Recent Activity</h3>
-        <div className="space-y-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm text-slate-600">
+        <h3 className="text-lg font-semibold text-slate-900 mb-4 responsive-container">Recent Activity</h3>
+        <div className="space-y-4 responsive-container">
+          <div className="flex items-center space-x-3 responsive-container">
+            <div className="w-2 h-2 bg-green-500 rounded-full responsive-container"></div>
+            <span className="text-sm text-slate-600 responsive-container">
               Invoice INV001 approved and advance processed
             </span>
-            <span className="text-xs text-slate-400 ml-auto">2 hours ago</span>
+            <span className="text-xs text-slate-400 ml-auto responsive-container">2 hours ago</span>
           </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <span className="text-sm text-slate-600">Invoice INV003 paid in full</span>
-            <span className="text-xs text-slate-400 ml-auto">1 day ago</span>
+          <div className="flex items-center space-x-3 responsive-container">
+            <div className="w-2 h-2 bg-blue-500 rounded-full responsive-container"></div>
+            <span className="text-sm text-slate-600 responsive-container">Invoice INV003 paid in full</span>
+            <span className="text-xs text-slate-400 ml-auto responsive-container">1 day ago</span>
           </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-            <span className="text-sm text-slate-600">Invoice INV002 submitted for approval</span>
-            <span className="text-xs text-slate-400 ml-auto">2 days ago</span>
+          <div className="flex items-center space-x-3 responsive-container">
+            <div className="w-2 h-2 bg-orange-500 rounded-full responsive-container"></div>
+            <span className="text-sm text-slate-600 responsive-container">Invoice INV002 submitted for approval</span>
+            <span className="text-xs text-slate-400 ml-auto responsive-container">2 days ago</span>
           </div>
         </div>
       </motion.div>
@@ -223,32 +223,32 @@ const FactoringPortal: React.FC = () => {
   );
 
   const renderInvoices = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Invoice Management</h2>
-        <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Plus className="w-4 h-4 mr-2" />
+    <div className="space-y-6 responsive-container">
+      <div className="flex items-center justify-between responsive-container">
+        <h2 className="text-2xl font-bold text-slate-900 responsive-container">Invoice Management</h2>
+        <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
+          <Plus className="w-4 h-4 mr-2 responsive-container" />
           Submit Invoice
         </button>
       </div>
 
       {/* Invoice Filters */}
-      <div className="flex items-center space-x-4">
-        <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+      <div className="flex items-center space-x-4 responsive-container">
+        <div className="flex-1 relative responsive-container">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 responsive-container" />
           <input
             type="text"
             placeholder="Search invoices..."
-            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container"
           />
         </div>
-        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container">
           <option>All Status</option>
           <option>Pending</option>
           <option>Approved</option>
           <option>Paid</option>
         </select>
-        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <select className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container">
           <option>All Customers</option>
           <option>Walmart Inc.</option>
           <option>Target Corp.</option>
@@ -257,50 +257,50 @@ const FactoringPortal: React.FC = () => {
       </div>
 
       {/* Invoices Table */}
-      <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-slate-50">
+      <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden responsive-container">
+        <div className="overflow-x-auto responsive-container">
+          <table className="w-full responsive-container">
+            <thead className="bg-slate-50 responsive-container">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Invoice ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Customer
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Amount
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Advance
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Due Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-slate-200 responsive-container">
               {invoices.map(invoice => (
-                <tr key={invoice.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                <tr key={invoice.id} className="hover:bg-slate-50 responsive-container">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 responsive-container">
                     {invoice.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {invoice.customer}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 responsive-container">
                     ${invoice.amount.toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     ${invoice.advanceAmount.toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         invoice.status === 'Paid'
@@ -313,19 +313,19 @@ const FactoringPortal: React.FC = () => {
                       {invoice.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {invoice.dueDate}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <Eye className="w-4 h-4" />
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                    <div className="flex items-center space-x-2 responsive-container">
+                      <button className="text-blue-600 hover:text-blue-900 responsive-container" aria-label="Button">
+                        <Eye className="w-4 h-4 responsive-container" />
                       </button>
-                      <button className="text-green-600 hover:text-green-900">
-                        <Download className="w-4 h-4" />
+                      <button className="text-green-600 hover:text-green-900 responsive-container" aria-label="Button">
+                        <Download className="w-4 h-4 responsive-container" />
                       </button>
-                      <button className="text-purple-600 hover:text-purple-900">
-                        <Edit className="w-4 h-4" />
+                      <button className="text-purple-600 hover:text-purple-900 responsive-container" aria-label="Button">
+                        <Edit className="w-4 h-4 responsive-container" />
                       </button>
                     </div>
                   </td>
@@ -339,80 +339,80 @@ const FactoringPortal: React.FC = () => {
   );
 
   const renderPayments = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Payment History</h2>
-        <button className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-          <Download className="w-4 h-4 mr-2" />
+    <div className="space-y-6 responsive-container">
+      <div className="flex items-center justify-between responsive-container">
+        <h2 className="text-2xl font-bold text-slate-900 responsive-container">Payment History</h2>
+        <button className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors responsive-container" aria-label="Button">
+          <Download className="w-4 h-4 mr-2 responsive-container" />
           Export
         </button>
       </div>
 
       {/* Payments Table */}
-      <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-slate-50">
+      <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden responsive-container">
+        <div className="overflow-x-auto responsive-container">
+          <table className="w-full responsive-container">
+            <thead className="bg-slate-50 responsive-container">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Payment ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Invoice ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Amount
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Type
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Method
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider responsive-container">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-slate-200 responsive-container">
               {payments.map(payment => (
-                <tr key={payment.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                <tr key={payment.id} className="hover:bg-slate-50 responsive-container">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 responsive-container">
                     {payment.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {payment.invoiceId}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 responsive-container">
                     ${payment.amount.toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {payment.type}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {payment.method}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 responsive-container">
                       {payment.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 responsive-container">
                     {payment.date}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <Eye className="w-4 h-4" />
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                    <div className="flex items-center space-x-2 responsive-container">
+                      <button className="text-blue-600 hover:text-blue-900 responsive-container" aria-label="Button">
+                        <Eye className="w-4 h-4 responsive-container" />
                       </button>
-                      <button className="text-green-600 hover:text-green-900">
-                        <Download className="w-4 h-4" />
+                      <button className="text-green-600 hover:text-green-900 responsive-container" aria-label="Button">
+                        <Download className="w-4 h-4 responsive-container" />
                       </button>
                     </div>
                   </td>
@@ -426,23 +426,29 @@ const FactoringPortal: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16 responsive-container">
       <PortalHeader
         title="Factoring Portal"
         description="Invoice factoring and cash flow management for trucking businesses"
         icon={Banknote}
         color="from-green-500 to-emerald-600"
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
         {/* Navigation Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8"
+          className="mb-8 responsive-container"
         >
-          <div className="border-b border-slate-200">
-            <nav className="-mb-px flex space-x-8">
+          <div className="border-b border-slate-200 responsive-container">
+            <nav className="-mb-px flex space-x-8 responsive-container">
               {[
                 { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
                 { id: 'invoices', label: 'Invoices', icon: FileText },
@@ -452,14 +458,14 @@ const FactoringPortal: React.FC = () => {
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                   className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'
                       : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                   }`}
                 >
-                  <tab.icon className="w-4 h-4" />
+                  <tab.icon className="w-4 h-4 responsive-container" />
                   <span>{tab.label}</span>
                 </button>
               ))}
@@ -477,19 +483,19 @@ const FactoringPortal: React.FC = () => {
           {activeTab === 'invoices' && renderInvoices()}
           {activeTab === 'payments' && renderPayments()}
           {activeTab === 'reports' && (
-            <div className="text-center py-12">
-              <PieChart className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-slate-900 mb-2">Reports Coming Soon</h3>
-              <p className="text-slate-600">
+            <div className="text-center py-12 responsive-container">
+              <PieChart className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+              <h3 className="text-lg font-medium text-slate-900 mb-2 responsive-container">Reports Coming Soon</h3>
+              <p className="text-slate-600 responsive-container">
                 Advanced reporting and analytics features will be available soon.
               </p>
             </div>
           )}
           {activeTab === 'settings' && (
-            <div className="text-center py-12">
-              <Settings className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-slate-900 mb-2">Settings Coming Soon</h3>
-              <p className="text-slate-600">
+            <div className="text-center py-12 responsive-container">
+              <Settings className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+              <h3 className="text-lg font-medium text-slate-900 mb-2 responsive-container">Settings Coming Soon</h3>
+              <p className="text-slate-600 responsive-container">
                 Configuration and settings options will be available soon.
               </p>
             </div>

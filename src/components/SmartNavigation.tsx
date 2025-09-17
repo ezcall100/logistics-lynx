@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Brain, User, Settings, LogOut, Shield, ArrowRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
@@ -38,7 +39,13 @@ export function SmartNavigation() {
       setAiInsights(insights[Math.floor(Math.random() * insights.length)])
     }, 5000)
 
-    return () => clearInterval(interval)
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval)
   }, [])
 
   const getMainMenu = (): MenuItem[] => {
@@ -147,30 +154,32 @@ export function SmartNavigation() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg border-b border-slate-300/20 dark:border-slate-600/20">
-      <div className="container-pro">
-        <div className="flex items-center justify-between h-16">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg border-b border-slate-300/20 dark:border-slate-600/20 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="container-pro responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between h-16 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Trans Bot AI Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold gradient-text flex items-center gap-2 flex-shrink-0"
+            className="text-2xl font-bold gradient-text flex items-center gap-2 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Brain className="w-6 h-6 text-emerald-400" />
+            <Brain className="w-6 h-6 text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             Trans Bot AI
           </motion.div>
 
           {/* Center Content Area */}
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
             {/* AI Insights Bar - Desktop */}
             {aiInsights && (
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+                className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <Brain className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm text-emerald-600 dark:text-emerald-400">
+                <Brain className="w-4 h-4 text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-emerald-600 dark:text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {aiInsights}
                 </span>
               </motion.div>
@@ -181,10 +190,10 @@ export function SmartNavigation() {
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="hidden lg:flex xl:hidden items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+                className="hidden lg:flex xl:hidden items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <Brain className="w-3 h-3 text-emerald-400" />
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 truncate max-w-32">
+                <Brain className="w-3 h-3 text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 truncate max-w-32 responsive-container sm:flex-col md:flex-row lg:grid">
                   {aiInsights}
                 </span>
               </motion.div>
@@ -192,21 +201,21 @@ export function SmartNavigation() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 flex-shrink-0">
+          <div className="hidden lg:flex items-center space-x-6 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
             {getRoleBasedMenu().map((item) => (
               <div
                 key={item.name}
-                className="relative"
+                className="relative responsive-container sm:flex-col md:flex-row lg:grid"
                 onMouseEnter={() => setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link to={item.path}>
                   <motion.button
                     whileHover={{ y: -2 }}
-                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-slate-50"
+                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-slate-50 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <span className="text-sm font-medium">{item.name}</span>
-                    {item.hasSubmenu && <ChevronDown className="w-3 h-3" />}
+                    <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
+                    {item.hasSubmenu && <ChevronDown className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   </motion.button>
                 </Link>
 
@@ -218,9 +227,9 @@ export function SmartNavigation() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-72 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg rounded-xl shadow-2xl border border-slate-200/50 z-50"
+                      className="absolute top-full left-0 mt-2 w-72 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg rounded-xl shadow-2xl border border-slate-200/50 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="p-3">
+                      <div className="p-3 responsive-container sm:flex-col md:flex-row lg:grid">
                         {item.subpages?.map((subpage: SubPage, index: number) => (
                           <motion.div
                             key={subpage.name}
@@ -230,12 +239,12 @@ export function SmartNavigation() {
                           >
                             <Link
                               to={subpage.path}
-                              className="flex items-center justify-between p-3 rounded-lg hover:bg-white/80 transition-colors group"
+                              className="flex items-center justify-between p-3 rounded-lg hover:bg-white/80 transition-colors group responsive-container sm:flex-col md:flex-row lg:grid"
                             >
-                              <span className="text-transbot-text-primary/90 group-hover:text-transbot-text-primary text-sm">
+                              <span className="text-transbot-text-primary/90 group-hover:text-transbot-text-primary text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                                 {subpage.name}
                               </span>
-                              <ArrowRight className="w-3 h-3 text-transbot-text-primary/50 group-hover:text-transbot-text-primary/80 transition-colors" />
+                              <ArrowRight className="w-3 h-3 text-transbot-text-primary/50 group-hover:text-transbot-text-primary/80 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" />
                             </Link>
                           </motion.div>
                         ))}
@@ -248,21 +257,21 @@ export function SmartNavigation() {
           </div>
 
           {/* Tablet Navigation */}
-          <div className="hidden md:flex lg:hidden items-center space-x-4 flex-shrink-0">
+          <div className="hidden md:flex lg:hidden items-center space-x-4 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
             {getRoleBasedMenu().slice(0, 4).map((item) => (
               <div
                 key={item.name}
-                className="relative"
+                className="relative responsive-container sm:flex-col md:flex-row lg:grid"
                 onMouseEnter={() => setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link to={item.path}>
                   <motion.button
                     whileHover={{ y: -2 }}
-                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-slate-50"
+                    className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <span className="text-xs font-medium">{item.name}</span>
-                    {item.hasSubmenu && <ChevronDown className="w-3 h-3" />}
+                    <span className="text-xs font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
+                    {item.hasSubmenu && <ChevronDown className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   </motion.button>
                 </Link>
 
@@ -274,9 +283,9 @@ export function SmartNavigation() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg rounded-xl shadow-2xl border border-slate-200/50 z-50"
+                      className="absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg rounded-xl shadow-2xl border border-slate-200/50 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="p-2">
+                      <div className="p-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         {item.subpages?.slice(0, 4).map((subpage: SubPage, index: number) => (
                           <motion.div
                             key={subpage.name}
@@ -286,12 +295,12 @@ export function SmartNavigation() {
                           >
                             <Link
                               to={subpage.path}
-                              className="flex items-center justify-between p-2 rounded-lg hover:bg-white/80 transition-colors group"
+                              className="flex items-center justify-between p-2 rounded-lg hover:bg-white/80 transition-colors group responsive-container sm:flex-col md:flex-row lg:grid"
                             >
-                              <span className="text-transbot-text-primary/90 group-hover:text-transbot-text-primary text-xs">
+                              <span className="text-transbot-text-primary/90 group-hover:text-transbot-text-primary text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                                 {subpage.name}
                               </span>
-                              <ArrowRight className="w-3 h-3 text-transbot-text-primary/50 group-hover:text-transbot-text-primary/80 transition-colors" />
+                              <ArrowRight className="w-3 h-3 text-transbot-text-primary/50 group-hover:text-transbot-text-primary/80 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" />
                             </Link>
                           </motion.div>
                         ))}
@@ -304,21 +313,21 @@ export function SmartNavigation() {
           </div>
 
           {/* Action Buttons - Desktop */}
-          <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
+          <div className="hidden lg:flex items-center space-x-3 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
             <ThemeToggle />
             
             {userRole === 'guest' ? (
               <>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-3 py-2 rounded-lg hover:bg-slate-50"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-3 py-2 rounded-lg hover:bg-slate-50 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Login
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-4 py-2 text-sm"
+                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-4 py-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Get Demo
                 </motion.button>
@@ -329,52 +338,52 @@ export function SmartNavigation() {
                   <Link to="/super-admin">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-sm"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Shield className="w-4 h-4" />
+                      <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>Super Admin</span>
                     </motion.button>
                   </Link>
                 )}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-slate-50"
+                  className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg hover:bg-slate-50 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <User className="w-4 h-4" />
-                  <span className="capitalize text-sm">{userRole}</span>
+                  <User className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="capitalize text-sm responsive-container sm:flex-col md:flex-row lg:grid">{userRole}</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Settings className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                  <Settings className="w-4 h-4 text-slate-600 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="p-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors"
+                  className="p-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <LogOut className="w-4 h-4 text-red-600 dark:text-red-400" />
+                  <LogOut className="w-4 h-4 text-red-600 dark:text-red-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </motion.button>
               </>
             )}
           </div>
 
           {/* Action Buttons - Tablet */}
-          <div className="hidden md:flex lg:hidden items-center space-x-2 flex-shrink-0">
+          <div className="hidden md:flex lg:hidden items-center space-x-2 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
             <ThemeToggle />
             
             {userRole === 'guest' ? (
               <>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 text-xs"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Login
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-3 py-2 text-xs"
+                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-3 py-2 text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Demo
                 </motion.button>
@@ -385,46 +394,46 @@ export function SmartNavigation() {
                   <Link to="/super-admin">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs"
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Shield className="w-3 h-3" />
+                      <Shield className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>Admin</span>
                     </motion.button>
                   </Link>
                 )}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-slate-50"
+                  className="flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <User className="w-3 h-3" />
-                  <span className="capitalize text-xs">{userRole}</span>
+                  <User className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="capitalize text-xs responsive-container sm:flex-col md:flex-row lg:grid">{userRole}</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Settings className="w-3 h-3 text-slate-600 dark:text-slate-300" />
+                  <Settings className="w-3 h-3 text-slate-600 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </motion.button>
               </>
             )}
           </div>
 
           {/* Action Buttons - Mobile */}
-          <div className="flex md:hidden items-center space-x-2 flex-shrink-0">
+          <div className="flex md:hidden items-center space-x-2 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid">
             <ThemeToggle />
             
             {userRole === 'guest' ? (
               <>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 text-xs"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-transbot-text-primary transition-colors px-2 py-2 rounded-lg hover:bg-slate-50 text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Login
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-3 py-2 text-xs"
+                  className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 px-3 py-2 text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Demo
                 </motion.button>
@@ -435,17 +444,17 @@ export function SmartNavigation() {
                   <Link to="/super-admin">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs"
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 transition-colors text-xs responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <Shield className="w-3 h-3" />
+                      <Shield className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </motion.button>
                   </Link>
                 )}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <User className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                  <User className="w-4 h-4 text-slate-600 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </motion.button>
               </>
             )}

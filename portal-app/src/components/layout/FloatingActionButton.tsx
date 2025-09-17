@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Plus, Building2, UserPlus, Settings, TestTube, FileText,
@@ -29,7 +29,13 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       setIsMobile(window.innerWidth < 768);
     };
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => window.removeEventListener('resize', handleResize);
   }, []);
 
   const actions: FABAction[] = [
@@ -75,7 +81,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       Building2, UserPlus, Settings, TestTube, FileText
     };
     const IconComponent = icons[iconName] || Plus;
-    return <IconComponent className="w-5 h-5" />;
+    return <IconComponent className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />;
   };
 
   const handleActionClick = (action: FABAction) => {
@@ -85,14 +91,16 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 
   if (isMobile) {
     return (
-      <div className="fixed bottom-4 right-4 z-50">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="fixed bottom-4 right-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
         <AnimatePresence>
           {isExpanded && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="absolute bottom-16 right-0 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-2"
+              className="absolute bottom-16 right-0 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {actions.map((action, index) => (
                 <motion.button
@@ -101,12 +109,12 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => handleActionClick(action)}
-                  className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
+                  className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <div className={`p-3 rounded-xl shadow-lg ${action.color} text-white hover:shadow-xl transition-all duration-200`}>
                     {getIcon(action.icon)}
                   </div>
-                  <span className="text-sm font-medium text-gray-900">{action.label}</span>
+                  <span className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</span>
                 </motion.button>
               ))}
             </motion.div>
@@ -117,7 +125,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsExpanded(!isExpanded)}
-          className="portal-fab w-14 h-14 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center hover:scale-110"
+          className="portal-fab w-14 h-14 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center hover:scale-110 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <AnimatePresence mode="wait">
             {isExpanded ? (
@@ -128,7 +136,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
               </motion.div>
             ) : (
               <motion.div
@@ -138,7 +146,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <Plus className="w-6 h-6" />
+                <Plus className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -148,11 +156,13 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="fixed bottom-6 right-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Action Buttons */}
       <AnimatePresence>
         {isExpanded && (
-          <div className="absolute bottom-16 right-0 space-y-3">
+          <div className="absolute bottom-16 right-0 space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
             {actions.map((action, index) => (
               <motion.div
                 key={action.id}
@@ -160,13 +170,13 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 20 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center space-x-3"
+                className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <motion.div
                   initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 + 0.1 }}
-                  className="bg-white px-3 py-1 rounded-full shadow-md text-sm font-medium text-gray-700 whitespace-nowrap"
+                  className="bg-white px-3 py-1 rounded-full shadow-md text-sm font-medium text-gray-700 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {action.label}
                 </motion.div>
@@ -189,10 +199,10 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsExpanded(!isExpanded)}
-          className="portal-fab w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center relative overflow-hidden hover:scale-110"
+          className="portal-fab w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center relative overflow-hidden hover:scale-110 responsive-container sm:flex-col md:flex-row lg:grid"
       >
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 hover:opacity-100 transition-opacity"
+          className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 hover:opacity-100 transition-opacity responsive-container sm:flex-col md:flex-row lg:grid"
         />
         <AnimatePresence mode="wait">
           {isExpanded ? (
@@ -202,9 +212,9 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative z-10"
+              className="relative z-10 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <X className="w-7 h-7" />
+              <X className="w-7 h-7 responsive-container sm:flex-col md:flex-row lg:grid" />
             </motion.div>
           ) : (
             <motion.div
@@ -213,9 +223,9 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative z-10"
+              className="relative z-10 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Plus className="w-7 h-7" />
+              <Plus className="w-7 h-7 responsive-container sm:flex-col md:flex-row lg:grid" />
             </motion.div>
           )}
         </AnimatePresence>

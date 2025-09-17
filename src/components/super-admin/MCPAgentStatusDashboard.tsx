@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -285,32 +286,38 @@ export function MCPAgentStatusDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">MCP Agent Status Dashboard</h1>
-              <p className="text-gray-300 text-lg">
+              <h1 className="text-4xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">MCP Agent Status Dashboard</h1>
+              <p className="text-gray-300 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
                 Real-time monitoring of 250 autonomous MCP agents building the complete portal
                 ecosystem
               </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
                 onClick={handleDeployAgents}
                 disabled={isDeploying}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+               aria-label="Button">
                 {isDeploying ? (
-                  <RotateCcw className="w-4 h-4 animate-spin" />
+                  <RotateCcw className="w-4 h-4 animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
                 ) : (
-                  <Play className="w-4 h-4" />
+                  <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 )}
                 <span>{isDeploying ? 'Deploying...' : 'Deploy Agents'}</span>
               </button>
@@ -322,7 +329,7 @@ export function MCPAgentStatusDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-8"
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-8 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           {[
             { label: 'Total Agents', value: systemMetrics.totalAgents, color: 'blue' },
@@ -336,24 +343,24 @@ export function MCPAgentStatusDashboard() {
           ].map((metric, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20"
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
-              <div className="text-gray-400 text-sm">{metric.label}</div>
+              <div className="text-2xl font-bold text-white mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{metric.value}</div>
+              <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">{metric.label}</div>
             </div>
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Sidebar */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-white font-semibold mb-4">Navigation</h3>
-              <div className="space-y-2">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h3>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 {[
                   { id: 'agents', label: 'Agents', icon: Users, count: agents.length },
                   { id: 'portals', label: 'Portals', icon: Globe, count: portalProgress.length },
@@ -362,18 +369,18 @@ export function MCPAgentStatusDashboard() {
                 ].map(tab => (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as TabType)}
+                    onClick={() = aria-label="Button"> setActiveTab(tab.id as TabType)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center justify-between ${
                       activeTab === tab.id
                         ? 'bg-blue-600 text-white'
                         : 'bg-white/10 text-gray-300 hover:bg-white/20'
                     }`}
                   >
-                    <div className="flex items-center space-x-3">
-                      <tab.icon className="w-4 h-4" />
+                    <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>{tab.label}</span>
                     </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">{tab.count}</span>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid">{tab.count}</span>
                   </button>
                 ))}
               </div>
@@ -384,12 +391,12 @@ export function MCPAgentStatusDashboard() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3"
+            className="lg:col-span-3 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
               {/* Tab Navigation */}
-              <div className="border-b border-white/20">
-                <div className="flex">
+              <div className="border-b border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex responsive-container sm:flex-col md:flex-row lg:grid">
                   {[
                     { id: 'agents', label: 'Agents', icon: Users },
                     { id: 'portals', label: 'Portals', icon: Globe },
@@ -398,14 +405,14 @@ export function MCPAgentStatusDashboard() {
                   ].map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id as TabType)}
+                      onClick={() = aria-label="Button"> setActiveTab(tab.id as TabType)}
                       className={`flex items-center space-x-2 px-6 py-4 transition-colors ${
                         activeTab === tab.id
                           ? 'bg-blue-600 text-white'
                           : 'text-gray-300 hover:bg-white/10'
                       }`}
                     >
-                      <tab.icon className="w-4 h-4" />
+                      <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       <span>{tab.label}</span>
                     </button>
                   ))}
@@ -413,7 +420,7 @@ export function MCPAgentStatusDashboard() {
               </div>
 
               {/* Tab Content */}
-              <div className="p-6">
+              <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <AnimatePresence mode="wait">
                   {activeTab === 'agents' && (
                     <motion.div
@@ -421,20 +428,22 @@ export function MCPAgentStatusDashboard() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-semibold text-white">MCP Agents</h3>
-                        <div className="flex items-center space-x-2">
-                          <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                          <span className="text-green-400 text-sm">All Systems Operational</span>
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">MCP Agents</h3>
+                        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="w-3 h-3 bg-green-400 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                          <span className="text-green-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         {agents.map(agent => {
                           const IconComponent = getAgentIcon(agent.type);
                           return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                             <div
                               key={agent.id}
                               onClick={() => setSelectedAgent(agent.id)}
@@ -444,12 +453,12 @@ export function MCPAgentStatusDashboard() {
                                   : 'border-white/20 bg-white/5 hover:border-white/40 hover:bg-white/10'
                               }`}
                             >
-                              <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center space-x-3">
-                                  <IconComponent className="w-6 h-6 text-blue-400" />
+                              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <IconComponent className="w-6 h-6 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <div>
-                                    <h4 className="text-white font-semibold">{agent.name}</h4>
-                                    <p className="text-gray-400 text-sm capitalize">
+                                    <h4 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</h4>
+                                    <p className="text-gray-400 text-sm capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                                       {agent.type} Agent
                                     </p>
                                   </div>
@@ -461,45 +470,45 @@ export function MCPAgentStatusDashboard() {
                                 </div>
                               </div>
 
-                              <div className="space-y-3">
-                                <div className="flex items-center justify-between text-sm">
-                                  <span className="text-gray-400">Performance</span>
-                                  <span className="text-white font-medium">
+                              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                                <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Performance</span>
+                                  <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                                     {agent.performance}%
                                   </span>
                                 </div>
-                                <div className="flex items-center justify-between text-sm">
-                                  <span className="text-gray-400">Efficiency</span>
-                                  <span className="text-white font-medium">
+                                <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Efficiency</span>
+                                  <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                                     {agent.efficiency}%
                                   </span>
                                 </div>
-                                <div className="flex items-center justify-between text-sm">
-                                  <span className="text-gray-400">Tasks Active</span>
-                                  <span className="text-white font-medium">
+                                <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Tasks Active</span>
+                                  <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                                     {agent.tasksActive}
                                   </span>
                                 </div>
-                                <div className="flex items-center justify-between text-sm">
-                                  <span className="text-gray-400">Tasks Completed</span>
-                                  <span className="text-white font-medium">
+                                <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Tasks Completed</span>
+                                  <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                                     {agent.tasksCompleted}
                                   </span>
                                 </div>
-                                <div className="text-sm">
-                                  <span className="text-gray-400">Location: </span>
-                                  <span className="text-white">{agent.location}</span>
+                                <div className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Location: </span>
+                                  <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.location}</span>
                                 </div>
-                                <div className="text-sm">
-                                  <span className="text-gray-400">Last Update: </span>
-                                  <span className="text-white">{agent.lastUpdate}</span>
+                                <div className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Update: </span>
+                                  <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.lastUpdate}</span>
                                 </div>
                               </div>
 
                               {agent.currentTask && (
-                                <div className="mt-4 pt-4 border-t border-white/20">
-                                  <div className="text-sm text-gray-400 mb-1">Current Task:</div>
-                                  <div className="text-sm text-white">{agent.currentTask}</div>
+                                <div className="mt-4 pt-4 border-t border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <div className="text-sm text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">Current Task:</div>
+                                  <div className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.currentTask}</div>
                                 </div>
                               )}
 
@@ -507,14 +516,14 @@ export function MCPAgentStatusDashboard() {
                                 <motion.div
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
-                                  className="mt-4 pt-4 border-t border-white/20"
+                                  className="mt-4 pt-4 border-t border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
-                                  <div className="text-sm text-gray-400 mb-2">Capabilities:</div>
-                                  <div className="flex flex-wrap gap-2">
+                                  <div className="text-sm text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Capabilities:</div>
+                                  <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                                     {agent.capabilities.map((capability, index) => (
                                       <span
                                         key={index}
-                                        className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full"
+                                        className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                                       >
                                         {capability}
                                       </span>
@@ -535,33 +544,33 @@ export function MCPAgentStatusDashboard() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-semibold text-white">
+                      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           Portal Development Progress
                         </h3>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           {portalProgress.filter(p => p.status === 'complete').length} of{' '}
                           {portalProgress.length} complete
                         </div>
                       </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         {portalProgress.map(portal => (
                           <div
                             key={portal.id}
-                            className="bg-white/5 rounded-lg p-6 border border-white/10"
+                            className="bg-white/5 rounded-lg p-6 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                               <div>
-                                <h4 className="text-white font-semibold">{portal.name}</h4>
-                                <p className="text-gray-400 text-sm capitalize">
+                                <h4 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</h4>
+                                <p className="text-gray-400 text-sm capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                                   {portal.category} Portal
                                 </p>
                               </div>
-                              <div className="flex items-center space-x-4">
-                                <div className="text-sm text-gray-400">
+                              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                                <div className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                                   {portal.agentsAssigned} agents
                                 </div>
                                 <div
@@ -580,25 +589,25 @@ export function MCPAgentStatusDashboard() {
                               </div>
                             </div>
 
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between text-sm">
-                                <span className="text-gray-400">Progress</span>
-                                <span className="text-white font-medium">{portal.progress}%</span>
+                            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                              <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Progress</span>
+                                <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{portal.progress}%</span>
                               </div>
-                              <div className="w-full bg-gray-700 rounded-full h-2">
+                              <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                                 <div
                                   className={`h-2 rounded-full ${getProgressColor(portal.progress)}`}
                                   style={{ width: `${portal.progress}%` }}
                                 ></div>
                               </div>
-                              <div className="flex items-center justify-between text-sm">
-                                <span className="text-gray-400">Estimated Completion</span>
-                                <span className="text-white">{portal.estimatedCompletion}</span>
+                              <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Estimated Completion</span>
+                                <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.estimatedCompletion}</span>
                               </div>
                               {portal.blockers.length > 0 && (
-                                <div className="text-sm">
-                                  <span className="text-red-400">Blockers: </span>
-                                  <span className="text-white">{portal.blockers.join(', ')}</span>
+                                <div className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                                  <span className="text-red-400 responsive-container sm:flex-col md:flex-row lg:grid">Blockers: </span>
+                                  <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{portal.blockers.join(', ')}</span>
                                 </div>
                               )}
                             </div>
@@ -614,50 +623,50 @@ export function MCPAgentStatusDashboard() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <h3 className="text-xl font-semibold text-white">System Performance</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-white/5 rounded-lg p-6 border border-white/10">
-                          <h4 className="text-white font-semibold mb-4">
+                      <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">System Performance</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="bg-white/5 rounded-lg p-6 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <h4 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                             Agent Performance Distribution
                           </h4>
-                          <div className="space-y-3">
+                          <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                             {[
                               { range: '90-100%', count: 198, color: 'bg-green-500' },
                               { range: '80-89%', count: 42, color: 'bg-blue-500' },
                               { range: '70-79%', count: 8, color: 'bg-yellow-500' },
                               { range: '60-69%', count: 2, color: 'bg-red-500' },
                             ].map((item, index) => (
-                              <div key={index} className="flex items-center justify-between">
-                                <span className="text-gray-400">{item.range}</span>
-                                <div className="flex items-center space-x-2">
+                              <div key={index} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{item.range}</span>
+                                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                                   <div className={`w-3 h-3 rounded-full ${item.color}`}></div>
-                                  <span className="text-white">{item.count} agents</span>
+                                  <span className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{item.count} agents</span>
                                 </div>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        <div className="bg-white/5 rounded-lg p-6 border border-white/10">
-                          <h4 className="text-white font-semibold mb-4">Task Completion Rate</h4>
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400">Today</span>
-                              <span className="text-white font-medium">94.2%</span>
+                        <div className="bg-white/5 rounded-lg p-6 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <h4 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Task Completion Rate</h4>
+                          <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Today</span>
+                              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">94.2%</span>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400">This Week</span>
-                              <span className="text-white font-medium">96.8%</span>
+                            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">This Week</span>
+                              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">96.8%</span>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400">This Month</span>
-                              <span className="text-white font-medium">95.1%</span>
+                            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">This Month</span>
+                              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">95.1%</span>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400">All Time</span>
-                              <span className="text-white font-medium">94.5%</span>
+                            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                              <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">All Time</span>
+                              <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">94.5%</span>
                             </div>
                           </div>
                         </div>
@@ -671,10 +680,10 @@ export function MCPAgentStatusDashboard() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="space-y-6"
+                      className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <h3 className="text-xl font-semibold text-white">System Alerts</h3>
-                      <div className="space-y-4">
+                      <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">System Alerts</h3>
+                      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         {[
                           {
                             id: 'alert-001',
@@ -703,10 +712,10 @@ export function MCPAgentStatusDashboard() {
                         ].map(alert => (
                           <div
                             key={alert.id}
-                            className="bg-white/5 rounded-lg p-4 border border-white/10"
+                            className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center space-x-3">
+                            <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                                 <div
                                   className={`w-3 h-3 rounded-full ${
                                     alert.type === 'error'
@@ -716,7 +725,7 @@ export function MCPAgentStatusDashboard() {
                                         : 'bg-blue-400'
                                   }`}
                                 ></div>
-                                <h4 className="text-white font-medium">{alert.title}</h4>
+                                <h4 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">{alert.title}</h4>
                               </div>
                               <div
                                 className={`px-2 py-1 rounded text-xs ${
@@ -730,8 +739,8 @@ export function MCPAgentStatusDashboard() {
                                 {alert.status}
                               </div>
                             </div>
-                            <p className="text-gray-400 text-sm mb-2">{alert.message}</p>
-                            <div className="text-xs text-gray-500">{alert.timestamp}</div>
+                            <p className="text-gray-400 text-sm mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{alert.message}</p>
+                            <div className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{alert.timestamp}</div>
                           </div>
                         ))}
                       </div>

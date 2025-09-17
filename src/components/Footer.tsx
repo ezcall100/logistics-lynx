@@ -27,7 +27,7 @@ import { Link } from 'react-router-dom'
 interface SubPage {
   name: string
   path: string
-  icon?: any
+  icon?: unknown
   description?: string
 }
 
@@ -35,7 +35,7 @@ interface MenuSection {
   title: string
   path: string
   subpages: SubPage[]
-  icon?: any
+  icon?: unknown
 }
 
 export function Footer() {
@@ -142,46 +142,52 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden responsive-container">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
+      <div className="absolute inset-0 opacity-5 responsive-container">
+        <div className="absolute inset-0 responsive-container" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 responsive-container">
         {/* Main Footer Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 responsive-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 responsive-container">
             {/* Brand Section */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 responsive-container">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="space-y-8"
+                className="space-y-8 responsive-container"
               >
                 {/* Logo */}
-                <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg">
-                    <Brain className="w-10 h-10 text-white" />
+                <div className="flex items-center gap-4 responsive-container">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg responsive-container">
+                    <Brain className="w-10 h-10 text-white responsive-container" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-white">Trans Bot AI</h3>
-                    <p className="text-blue-200 text-sm font-medium">Intelligent Logistics Platform</p>
+                    <h3 className="text-3xl font-bold text-white responsive-container">Trans Bot AI</h3>
+                    <p className="text-blue-200 text-sm font-medium responsive-container">Intelligent Logistics Platform</p>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-gray-300 leading-relaxed text-lg responsive-container">
                   Revolutionizing logistics through artificial intelligence. Streamline your supply chain, 
                   optimize routes, and enhance visibility with our comprehensive AI-powered platform.
                 </p>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 responsive-container">
                   {stats.map((stat, index) => (
                     <motion.div
                       key={stat.label}
@@ -189,15 +195,15 @@ export function Footer() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10"
+                      className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 responsive-container"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-blue-500/20">
-                          <stat.icon className="w-5 h-5 text-blue-400" />
+                      <div className="flex items-center gap-3 responsive-container">
+                        <div className="p-2 rounded-lg bg-blue-500/20 responsive-container">
+                          <stat.icon className="w-5 h-5 text-blue-400 responsive-container" />
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-white">{stat.number}</div>
-                          <div className="text-xs text-gray-400">{stat.label}</div>
+                          <div className="text-2xl font-bold text-white responsive-container">{stat.number}</div>
+                          <div className="text-xs text-gray-400 responsive-container">{stat.label}</div>
                         </div>
                       </div>
                     </motion.div>
@@ -205,24 +211,24 @@ export function Footer() {
                 </div>
 
                 {/* Contact Info */}
-                <div className="space-y-4">
-                  <h4 className="text-white font-semibold text-lg">Get in Touch</h4>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-                      <div className="p-2 rounded-lg bg-green-500/20">
-                        <Mail className="w-4 h-4 text-green-400" />
+                <div className="space-y-4 responsive-container">
+                  <h4 className="text-white font-semibold text-lg responsive-container">Get in Touch</h4>
+                  <div className="space-y-3 responsive-container">
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors responsive-container">
+                      <div className="p-2 rounded-lg bg-green-500/20 responsive-container">
+                        <Mail className="w-4 h-4 text-green-400 responsive-container" />
                       </div>
                       <span>contact@transbotai.com</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-                      <div className="p-2 rounded-lg bg-blue-500/20">
-                        <Phone className="w-4 h-4 text-blue-400" />
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors responsive-container">
+                      <div className="p-2 rounded-lg bg-blue-500/20 responsive-container">
+                        <Phone className="w-4 h-4 text-blue-400 responsive-container" />
                       </div>
                       <span>+1 (555) 123-4567</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-                      <div className="p-2 rounded-lg bg-purple-500/20">
-                        <MapPin className="w-4 h-4 text-purple-400" />
+                    <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors responsive-container">
+                      <div className="p-2 rounded-lg bg-purple-500/20 responsive-container">
+                        <MapPin className="w-4 h-4 text-purple-400 responsive-container" />
                       </div>
                       <span>San Francisco, CA</span>
                     </div>
@@ -230,9 +236,9 @@ export function Footer() {
                 </div>
 
                 {/* Social Links */}
-                <div className="space-y-4">
-                  <h4 className="text-white font-semibold text-lg">Follow Us</h4>
-                  <div className="flex items-center gap-4">
+                <div className="space-y-4 responsive-container">
+                  <h4 className="text-white font-semibold text-lg responsive-container">Follow Us</h4>
+                  <div className="flex items-center gap-4 responsive-container">
                     {socialLinks.map((social) => (
                       <motion.a
                         key={social.name}
@@ -243,7 +249,7 @@ export function Footer() {
                         whileTap={{ scale: 0.95 }}
                         className={`p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 ${social.color} transition-all duration-200 hover:bg-white/10`}
                       >
-                        <social.icon className="w-6 h-6" />
+                        <social.icon className="w-6 h-6 responsive-container" />
                       </motion.a>
                     ))}
                   </div>
@@ -252,8 +258,8 @@ export function Footer() {
             </div>
 
             {/* Navigation Sections */}
-            <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+            <div className="lg:col-span-8 responsive-container">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 responsive-container">
                 {menuSections.map((section, index) => (
                   <motion.div
                     key={section.title}
@@ -261,35 +267,35 @@ export function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="space-y-6"
+                    className="space-y-6 responsive-container"
                   >
                     <Link
                       to={section.path}
-                      className="group flex items-center gap-3 text-white font-bold text-xl hover:text-blue-400 transition-colors duration-200"
+                      className="group flex items-center gap-3 text-white font-bold text-xl hover:text-blue-400 transition-colors duration-200 responsive-container"
                     >
-                      <div className="p-2 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
-                        <section.icon className="w-6 h-6 text-blue-400" />
+                      <div className="p-2 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors responsive-container">
+                        <section.icon className="w-6 h-6 text-blue-400 responsive-container" />
                       </div>
                       {section.title}
-                      <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 responsive-container" />
                     </Link>
                     
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 responsive-container">
                       {section.subpages.map((subpage) => (
                         <li key={subpage.name}>
                           <Link
                             to={subpage.path}
-                            className="group flex items-start gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                            className="group flex items-start gap-3 text-gray-300 hover:text-white transition-colors duration-200 responsive-container"
                           >
-                            <div className="p-1 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors mt-0.5">
-                              {subpage.icon && <subpage.icon className="w-4 h-4 text-blue-400" />}
+                            <div className="p-1 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors mt-0.5 responsive-container">
+                              {subpage.icon && <subpage.icon className="w-4 h-4 text-blue-400 responsive-container" />}
                             </div>
                             <div>
-                              <div className="font-medium text-sm group-hover:text-white transition-colors">
+                              <div className="font-medium text-sm group-hover:text-white transition-colors responsive-container">
                                 {subpage.name}
                               </div>
                               {subpage.description && (
-                                <div className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                                <div className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors responsive-container">
                                   {subpage.description}
                                 </div>
                               )}
@@ -311,37 +317,37 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="border-t border-white/10 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
+          className="border-t border-white/10 bg-gradient-to-r from-blue-500/10 to-purple-500/10 responsive-container"
         >
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-blue-500/20">
-                  <Mail className="w-6 h-6 text-blue-400" />
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 responsive-container">
+            <div className="text-center responsive-container">
+              <div className="flex items-center justify-center gap-3 mb-4 responsive-container">
+                <div className="p-2 rounded-lg bg-blue-500/20 responsive-container">
+                  <Mail className="w-6 h-6 text-blue-400 responsive-container" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">
+                <h3 className="text-3xl font-bold text-white responsive-container">
                   Stay Ahead of the Curve
                 </h3>
               </div>
-              <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto responsive-container">
                 Get the latest AI insights, product updates, and industry trends delivered to your inbox. 
                 Join 10,000+ logistics professionals who trust Trans Bot AI.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto responsive-container">
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 responsive-container"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl responsive-container"
                 >
                   Subscribe Now
                 </motion.button>
               </div>
-              <p className="text-gray-400 text-sm mt-4">
+              <p className="text-gray-400 text-sm mt-4 responsive-container">
                 No spam, unsubscribe at any time. We respect your privacy.
               </p>
             </div>
@@ -354,38 +360,38 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="border-t border-white/10 bg-black/20 backdrop-blur-sm"
+          className="border-t border-white/10 bg-black/20 backdrop-blur-sm responsive-container"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-6">
-                <div className="text-gray-400 text-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 responsive-container">
+              <div className="flex items-center gap-6 responsive-container">
+                <div className="text-gray-400 text-sm responsive-container">
                   © 2024 Trans Bot AI. All rights reserved.
                 </div>
-                <div className="flex items-center gap-2 text-gray-400 text-sm">
-                  <Shield className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-gray-400 text-sm responsive-container">
+                  <Shield className="w-4 h-4 responsive-container" />
                   <span>SOC 2 Compliant</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400 text-sm">
-                  <CheckCircle className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-gray-400 text-sm responsive-container">
+                  <CheckCircle className="w-4 h-4 responsive-container" />
                   <span>GDPR Ready</span>
                 </div>
               </div>
               
-              <div className="flex items-center gap-8 text-sm">
-                <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200">
+              <div className="flex items-center gap-8 text-sm responsive-container">
+                <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200 responsive-container">
                   Privacy Policy
                 </Link>
-                <Link to="/terms" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link to="/terms" className="text-gray-400 hover:text-white transition-colors duration-200 responsive-container">
                   Terms of Service
                 </Link>
-                <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors duration-200 responsive-container">
                   Cookie Policy
                 </Link>
-                <Link to="/security" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link to="/security" className="text-gray-400 hover:text-white transition-colors duration-200 responsive-container">
                   Security
                 </Link>
-                <Link to="/sitemap" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link to="/sitemap" className="text-gray-400 hover:text-white transition-colors duration-200 responsive-container">
                   Sitemap
                 </Link>
               </div>

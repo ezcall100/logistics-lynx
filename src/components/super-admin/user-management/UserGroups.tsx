@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -199,12 +199,18 @@ const UserGroups: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="space-y-4">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container">
+        <div className="animate-pulse responsive-container">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container"></div>
+          <div className="space-y-4 responsive-container">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container"></div>
             ))}
           </div>
         </div>
@@ -213,57 +219,59 @@ const UserGroups: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container">
         {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container">
             <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">
             User Groups
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container">
             Manage user groups and team memberships
               </p>
             </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container">
                 <button
             onClick={fetchData}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
                 </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container" />
                 <span>Export</span>
               </button>
               <button
-            onClick={() => setShowCreateGroup(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowCreateGroup(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4 responsive-container" />
             <span>Add Group</span>
               </button>
           </div>
         </div>
 
       {/* Search and Filter */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 responsive-container">
+            <div className="relative flex-1 responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
               placeholder="Search groups..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
               />
             </div>
             <select
             value={filterCompany}
             onChange={(e) => setFilterCompany(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
           >
             <option value="">All Companies</option>
             <option value="TechCorp">TechCorp</option>
@@ -274,51 +282,53 @@ const UserGroups: React.FC = () => {
         </div>
 
       {/* Groups Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
         {filteredGroups.map((group, index) => {
           const groupMembers = getGroupMembers(group);
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <motion.div
                   key={group.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow responsive-container"
                 >
-              <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                      <div className="flex items-center space-x-3 responsive-container">
                   <div className={`p-2 rounded-lg ${group.isActive ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-900/20'}`}>
                     <Users className={`h-6 w-6 ${group.isActive ? 'text-green-600' : 'text-gray-600'}`} />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <h3 className="font-semibold text-gray-900 dark:text-white responsive-container">
                             {group.name}
                           </h3>
-                    <div className="flex items-center space-x-2">
-                      <Building className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center space-x-2 responsive-container">
+                      <Building className="h-4 w-4 text-gray-400 responsive-container" />
+                      <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container">
                         {group.company}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1 responsive-container">
                         <button
-                    onClick={() => console.log('View group:', group.id)}
-                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                    onClick={() = aria-label="Button"> console.log('View group:', group.id)}
+                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container"
                     title="View Details"
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 responsive-container" />
                   </button>
                   <button
-                    onClick={() => console.log('Edit group:', group.id)}
-                    className="p-1 text-gray-400 hover:text-green-600 transition-colors"
+                    onClick={() = aria-label="Button"> console.log('Edit group:', group.id)}
+                    className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container"
                     title="Edit"
                   >
-                    <Edit className="h-4 w-4" />
+                    <Edit className="h-4 w-4 responsive-container" />
                   </button>
                   <button
-                    onClick={() => handleToggleGroupStatus(group.id)}
+                    onClick={() = aria-label="Button"> handleToggleGroupStatus(group.id)}
                     className={`p-1 transition-colors ${
                       group.isActive 
                         ? 'text-green-600 hover:text-red-600' 
@@ -326,25 +336,25 @@ const UserGroups: React.FC = () => {
                     }`}
                     title={group.isActive ? 'Deactivate' : 'Activate'}
                   >
-                    {group.isActive ? <Unlock className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+                    {group.isActive ? <Unlock className="h-4 w-4 responsive-container" /> : <Lock className="h-4 w-4 responsive-container" />}
                         </button>
                         <button
-                          onClick={() => handleDeleteGroup(group.id)}
-                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleDeleteGroup(group.id)}
+                    className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                     title="Delete"
                         >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4 responsive-container" />
                         </button>
                       </div>
                     </div>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 responsive-container">
                       {group.description}
                     </p>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <div className="space-y-3 responsive-container">
+                <div className="flex items-center justify-between responsive-container">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                     Members ({group.memberCount})
                   </span>
                   <span className={`px-2 py-1 text-xs rounded-full ${
@@ -356,31 +366,31 @@ const UserGroups: React.FC = () => {
                   </span>
                         </div>
                 
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container">
                   {groupMembers.slice(0, 3).map(member => (
-                    <div key={member.id} className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                    <div key={member.id} className="flex items-center space-x-3 responsive-container">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs responsive-container">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      <div className="flex-1 min-w-0 responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white truncate responsive-container">
                           {member.name}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-500 truncate">
+                        <div className="text-xs text-gray-500 dark:text-gray-500 truncate responsive-container">
                           {member.role}
                     </div>
                       </div>
                           </div>
                         ))}
                   {groupMembers.length > 3 && (
-                    <div className="text-xs text-gray-500 dark:text-gray-500">
+                    <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container">
                       +{groupMembers.length - 3} more members
                           </div>
                         )}
                     </div>
 
-                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                  <div className="text-xs text-gray-500 dark:text-gray-500">
+                <div className="pt-2 border-t border-gray-200 dark:border-gray-700 responsive-container">
+                  <div className="text-xs text-gray-500 dark:text-gray-500 responsive-container">
                     Permissions: {group.permissions.length}
                       </div>
                     </div>
@@ -397,61 +407,61 @@ const UserGroups: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container"
             >
               <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4 responsive-container"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container">
                       Create New Group
                 </h3>
                     <button
-                  onClick={() => setShowCreateGroup(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateGroup(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                     >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container" />
                     </button>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-4 responsive-container">
                     <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                         Group Name
                       </label>
                       <input
                         type="text"
                     value={newGroup.name || ''}
                     onChange={(e) => setNewGroup({ ...newGroup, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                         placeholder="Enter group name"
                       />
                     </div>
 
                     <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                         Description
                       </label>
                       <textarea
                     value={newGroup.description || ''}
                     onChange={(e) => setNewGroup({ ...newGroup, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                         rows={3}
                         placeholder="Enter group description"
                       />
                     </div>
 
                     <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Company
                       </label>
                   <select
                     value={newGroup.company || ''}
                     onChange={(e) => setNewGroup({ ...newGroup, company: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                   >
                     <option value="">Select Company</option>
                     <option value="TechCorp">TechCorp</option>
@@ -460,30 +470,30 @@ const UserGroups: React.FC = () => {
                       </select>
                     </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container">
                       <input
                     type="checkbox"
                     checked={newGroup.isActive || false}
                     onChange={(e) => setNewGroup({ ...newGroup, isActive: e.target.checked })}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container"
                   />
-                  <label className="text-sm text-gray-700 dark:text-gray-300">
+                  <label className="text-sm text-gray-700 dark:text-gray-300 responsive-container">
                     Active Group
                   </label>
                     </div>
                   </div>
 
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                     <button
-                  onClick={() => setShowCreateGroup(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateGroup(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                     >
                       Cancel
                     </button>
                 <button
                   onClick={handleCreateGroup}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
+                 aria-label="Button">
                       Create Group
                     </button>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -550,17 +550,17 @@ const UserManagement: React.FC = () => {
   const getRoleIcon = (role: string) => {
     switch (role) {
       case 'Super Admin':
-        return <Crown className="w-4 h-4" />;
+        return <Crown className="w-4 h-4 responsive-container" />;
       case 'Admin':
-        return <Shield className="w-4 h-4" />;
+        return <Shield className="w-4 h-4 responsive-container" />;
       case 'Manager':
-        return <UserCog className="w-4 h-4" />;
+        return <UserCog className="w-4 h-4 responsive-container" />;
       case 'User':
-        return <Users className="w-4 h-4" />;
+        return <Users className="w-4 h-4 responsive-container" />;
       case 'Viewer':
-        return <Eye className="w-4 h-4" />;
+        return <Eye className="w-4 h-4 responsive-container" />;
       default:
-        return <Users className="w-4 h-4" />;
+        return <Users className="w-4 h-4 responsive-container" />;
     }
   };
 
@@ -581,17 +581,17 @@ const UserManagement: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 responsive-container"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto responsive-container"
           >
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">
+            <div className="p-6 border-b border-gray-200 responsive-container">
+              <div className="flex items-center justify-between responsive-container">
+                <h2 className="text-xl font-bold text-gray-900 responsive-container">
                   {editingUserData ? 'Edit User' : 'Add New User'}
                 </h2>
                 <Button
@@ -603,13 +603,13 @@ const UserManagement: React.FC = () => {
                     resetForm();
                   }}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 responsive-container" />
                 </Button>
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 space-y-6 responsive-container">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container">
                 <div>
                   <Input
                     label="Full Name"
@@ -631,9 +631,9 @@ const UserManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container">Role</label>
                   <select
                     value={formData.role}
                     onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
@@ -648,11 +648,11 @@ const UserManagement: React.FC = () => {
                     ))}
                   </select>
                   {formErrors.role && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.role}</p>
+                    <p className="text-red-500 text-sm mt-1 responsive-container">{formErrors.role}</p>
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1 responsive-container">Company</label>
                   <select
                     value={formData.companyId}
                     onChange={e =>
@@ -669,12 +669,12 @@ const UserManagement: React.FC = () => {
                     ))}
                   </select>
                   {formErrors.companyId && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.companyId}</p>
+                    <p className="text-red-500 text-sm mt-1 responsive-container">{formErrors.companyId}</p>
                   )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container">
                 <Input
                   label="Phone"
                   value={formData.phone}
@@ -696,10 +696,10 @@ const UserManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Permissions</label>
-                <div className="grid grid-cols-2 gap-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2 responsive-container">Permissions</label>
+                <div className="grid grid-cols-2 gap-2 responsive-container">
                   {availablePermissions.map(permission => (
-                    <label key={permission} className="flex items-center gap-2">
+                    <label key={permission} className="flex items-center gap-2 responsive-container">
                       <input
                         type="checkbox"
                         checked={formData.permissions.includes(permission)}
@@ -716,9 +716,9 @@ const UserManagement: React.FC = () => {
                             }));
                           }
                         }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container"
                       />
-                      <span className="text-sm text-gray-700 capitalize">
+                      <span className="text-sm text-gray-700 capitalize responsive-container">
                         {permission.replace('_', ' ')}
                       </span>
                     </label>
@@ -727,7 +727,7 @@ const UserManagement: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
+            <div className="p-6 border-t border-gray-200 flex justify-end gap-3 responsive-container">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -736,14 +736,14 @@ const UserManagement: React.FC = () => {
                   resetForm();
                 }}
               >
-                <X className="w-4 h-4 mr-2" />
+                <X className="w-4 h-4 mr-2 responsive-container" />
                 Cancel
               </Button>
               <Button
                 onClick={editingUserData ? handleUpdateUser : handleCreateUser}
                 loading={loading}
               >
-                <Save className="w-4 h-4 mr-2" />
+                <Save className="w-4 h-4 mr-2 responsive-container" />
                 {editingUserData ? 'Update User' : 'Create User'}
               </Button>
             </div>
@@ -754,33 +754,39 @@ const UserManagement: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
-          <p className="text-gray-600">Manage user accounts, roles, and permissions</p>
+          <h2 className="text-2xl font-bold text-gray-900 responsive-container">User Management</h2>
+          <p className="text-gray-600 responsive-container">Manage user accounts, roles, and permissions</p>
         </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 responsive-container">
+          <div className="flex gap-2 responsive-container">
             <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
+              <Download className="w-4 h-4 mr-2 responsive-container" />
               Export
             </Button>
             <Button variant="outline" size="sm">
-              <Upload className="w-4 h-4 mr-2" />
+              <Upload className="w-4 h-4 mr-2 responsive-container" />
               Import
             </Button>
           </div>
-          <Button onClick={() => setShowUserModal(true)} className="w-full sm:w-auto">
-            <UserPlus className="w-4 h-4 mr-2" />
+          <Button onClick={() => setShowUserModal(true)} className="w-full sm:w-auto responsive-container">
+            <UserPlus className="w-4 h-4 mr-2 responsive-container" />
             Add User
           </Button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container">
         {[
           {
             title: 'Total Users',
@@ -808,14 +814,14 @@ const UserManagement: React.FC = () => {
           },
         ].map(stat => (
           <Card key={stat.title}>
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
+            <CardContent className="p-6 responsive-container">
+              <div className="flex items-center space-x-4 responsive-container">
                 <div className={`p-3 rounded-xl bg-gray-50`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{stat.count}</div>
-                  <div className="text-gray-600 text-sm">{stat.title}</div>
+                  <div className="text-2xl font-bold text-gray-900 responsive-container">{stat.count}</div>
+                  <div className="text-gray-600 text-sm responsive-container">{stat.title}</div>
                 </div>
               </div>
             </CardContent>
@@ -825,21 +831,21 @@ const UserManagement: React.FC = () => {
 
       {/* Filters and Search */}
       <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
+        <CardContent className="p-4 responsive-container">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container">
+            <div className="flex-1 responsive-container">
               <Input
                 placeholder="Search users..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-4 h-4" />}
+                leftIcon={<Search className="w-4 h-4 responsive-container" />}
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 responsive-container">
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container"
               >
                 <option value="all">All Status</option>
                 <option value="Active">Active</option>
@@ -850,7 +856,7 @@ const UserManagement: React.FC = () => {
               <select
                 value={roleFilter}
                 onChange={e => setRoleFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container"
               >
                 <option value="all">All Roles</option>
                 {roles.map(role => (
@@ -862,7 +868,7 @@ const UserManagement: React.FC = () => {
               <select
                 value={companyFilter}
                 onChange={e => setCompanyFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent responsive-container"
               >
                 <option value="all">All Companies</option>
                 {companies.map(company => (
@@ -872,7 +878,7 @@ const UserManagement: React.FC = () => {
                 ))}
               </select>
               <Button variant="outline">
-                <Filter className="w-4 h-4 mr-2" />
+                <Filter className="w-4 h-4 mr-2 responsive-container" />
                 More Filters
               </Button>
             </div>
@@ -883,16 +889,16 @@ const UserManagement: React.FC = () => {
       {/* Bulk Actions */}
       {bulkSelected.length > 0 && (
         <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">{bulkSelected.length} users selected</span>
-              <div className="flex gap-2">
+          <CardContent className="p-4 responsive-container">
+            <div className="flex items-center justify-between responsive-container">
+              <span className="text-sm text-gray-600 responsive-container">{bulkSelected.length} users selected</span>
+              <div className="flex gap-2 responsive-container">
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('activate')}>
-                  <UserCheck className="w-4 h-4 mr-2" />
+                  <UserCheck className="w-4 h-4 mr-2 responsive-container" />
                   Activate
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => handleBulkAction('suspend')}>
-                  <UserX className="w-4 h-4 mr-2" />
+                  <UserX className="w-4 h-4 mr-2 responsive-container" />
                   Suspend
                 </Button>
                 <Button
@@ -900,11 +906,11 @@ const UserManagement: React.FC = () => {
                   variant="outline"
                   onClick={() => handleBulkAction('reset-password')}
                 >
-                  <Key className="w-4 h-4 mr-2" />
+                  <Key className="w-4 h-4 mr-2 responsive-container" />
                   Reset Password
                 </Button>
                 <Button size="sm" variant="destructive" onClick={() => handleBulkAction('delete')}>
-                  <Trash2 className="w-4 h-4 mr-2" />
+                  <Trash2 className="w-4 h-4 mr-2 responsive-container" />
                   Delete
                 </Button>
               </div>
@@ -915,12 +921,12 @@ const UserManagement: React.FC = () => {
 
       {/* Users Table */}
       <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px]">
-              <thead className="bg-gray-50 border-b">
+        <CardContent className="p-0 responsive-container">
+          <div className="overflow-x-auto responsive-container">
+            <table className="w-full min-w-[800px] responsive-container">
+              <thead className="bg-gray-50 border-b responsive-container">
                 <tr>
-                  <th className="px-6 py-4 text-left">
+                  <th className="px-6 py-4 text-left responsive-container">
                     <input
                       type="checkbox"
                       checked={
@@ -933,36 +939,36 @@ const UserManagement: React.FC = () => {
                           setBulkSelected([]);
                         }
                       }}
-                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container"
                     />
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     User
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Company
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Role
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Last Login
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Security
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider responsive-container">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 responsive-container">
                 {filteredUsers.map(user => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={user.id} className="hover:bg-gray-50 transition-colors responsive-container">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container">
                       <input
                         type="checkbox"
                         checked={bulkSelected.includes(user.id)}
@@ -973,13 +979,13 @@ const UserManagement: React.FC = () => {
                             setBulkSelected(prev => prev.filter(id => id !== user.id));
                           }
                         }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 responsive-container"
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
-                          <span className="text-white font-medium text-sm">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                      <div className="flex items-center gap-3 responsive-container">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center responsive-container">
+                          <span className="text-white font-medium text-sm responsive-container">
                             {user.name
                               .split(' ')
                               .map(n => n[0])
@@ -987,15 +993,15 @@ const UserManagement: React.FC = () => {
                           </span>
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                          <div className="text-sm text-gray-500">{user.email}</div>
+                          <div className="text-sm font-medium text-gray-900 responsive-container">{user.name}</div>
+                          <div className="text-sm text-gray-500 responsive-container">{user.email}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 responsive-container">
                       {user.company}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}
                       >
@@ -1003,7 +1009,7 @@ const UserManagement: React.FC = () => {
                         {user.role}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container">
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(user.status)}`}
                       >
@@ -1011,55 +1017,55 @@ const UserManagement: React.FC = () => {
                         {user.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 responsive-container">
                       {formatRelativeTime(user.lastLogin)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                      <div className="flex items-center gap-2 responsive-container">
                         {user.security.twoFactorEnabled ? (
-                          <span className="text-green-600" title="2FA Enabled">
-                            <Shield className="w-4 h-4" />
+                          <span className="text-green-600 responsive-container" title="2FA Enabled">
+                            <Shield className="w-4 h-4 responsive-container" />
                           </span>
                         ) : (
-                          <span className="text-gray-400" title="2FA Disabled">
-                            <Shield className="w-4 h-4" />
+                          <span className="text-gray-400 responsive-container" title="2FA Disabled">
+                            <Shield className="w-4 h-4 responsive-container" />
                           </span>
                         )}
                         {user.security.accountStatus === 'warning' && (
                           <span
-                            className="text-yellow-600"
+                            className="text-yellow-600 responsive-container"
                             title="Account security warning"
                           >
-                            <AlertTriangle className="w-4 h-4" />
+                            <AlertTriangle className="w-4 h-4 responsive-container" />
                           </span>
                         )}
                         {user.security.accountStatus === 'critical' && (
                           <span
-                            className="text-red-600"
+                            className="text-red-600 responsive-container"
                             title="Critical security issue"
                           >
-                            <AlertTriangle className="w-4 h-4" />
+                            <AlertTriangle className="w-4 h-4 responsive-container" />
                           </span>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                      <div className="flex items-center gap-2 responsive-container">
                         <Button size="sm" variant="ghost">
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4 responsive-container" />
                         </Button>
                         <Button size="sm" variant="ghost" onClick={() => openEditModal(user)}>
-                          <Edit className="w-4 h-4" />
+                          <Edit className="w-4 h-4 responsive-container" />
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDeleteUser(user.id)}
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4 responsive-container" />
                         </Button>
                         <Button size="sm" variant="ghost">
-                          <MoreVertical className="w-4 h-4" />
+                          <MoreVertical className="w-4 h-4 responsive-container" />
                         </Button>
                       </div>
                     </td>

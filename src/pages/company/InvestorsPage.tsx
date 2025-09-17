@@ -76,66 +76,72 @@ const InvestorsPage: React.FC = () => {
   ]
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <ResponsiveContainer>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-green-50 py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-green-50 py-16 responsive-container">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-16 responsive-container">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 responsive-container">
               Investor Information
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto responsive-container">
               Learn about our funding, growth metrics, and investment opportunities at Trans Bot AI
             </p>
           </div>
 
           {/* Financial Highlights */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Financial Highlights</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Financial Highlights</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 responsive-container">
               {financialHighlights.map((highlight, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transition-shadow duration-300">
-                  <div className="text-4xl font-bold text-green-600 mb-2">{highlight.value}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{highlight.metric}</h3>
-                  <p className="text-gray-600 text-sm">{highlight.description}</p>
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="text-4xl font-bold text-green-600 mb-2 responsive-container">{highlight.value}</div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 responsive-container">{highlight.metric}</h3>
+                  <p className="text-gray-600 text-sm responsive-container">{highlight.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Investors */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Investors</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Our Investors</h2>
+            <div className="grid md:grid-cols-2 gap-8 responsive-container">
               {investors.map((investor, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="text-4xl mr-4">{investor.logo}</div>
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="flex items-center mb-4 responsive-container">
+                    <div className="text-4xl mr-4 responsive-container">{investor.logo}</div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">{investor.name}</h3>
-                      <p className="text-green-600 font-semibold">{investor.type}</p>
+                      <h3 className="text-xl font-bold text-gray-900 responsive-container">{investor.name}</h3>
+                      <p className="text-green-600 font-semibold responsive-container">{investor.type}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600">{investor.description}</p>
+                  <p className="text-gray-600 responsive-container">{investor.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Company Milestones */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Company Milestones</h2>
-            <div className="space-y-6">
+          <div className="mb-16 responsive-container">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center responsive-container">Company Milestones</h2>
+            <div className="space-y-6 responsive-container">
               {milestones.map((milestone, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div className="flex items-center mb-4 md:mb-0">
-                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                        <span className="text-green-600 font-bold">{milestone.date}</span>
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 responsive-container">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between responsive-container">
+                    <div className="flex items-center mb-4 md:mb-0 responsive-container">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 responsive-container">
+                        <span className="text-green-600 font-bold responsive-container">{milestone.date}</span>
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900">{milestone.title}</h3>
-                        <p className="text-gray-600">{milestone.description}</p>
+                        <h3 className="text-xl font-bold text-gray-900 responsive-container">{milestone.title}</h3>
+                        <p className="text-gray-600 responsive-container">{milestone.description}</p>
                       </div>
                     </div>
                   </div>
@@ -145,37 +151,37 @@ const InvestorsPage: React.FC = () => {
           </div>
 
           {/* Investment Opportunities */}
-          <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white text-center">
-            <h2 className="text-3xl font-bold mb-4">Investment Opportunities</h2>
-            <p className="text-xl mb-8 text-green-100">
+          <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white text-center responsive-container">
+            <h2 className="text-3xl font-bold mb-4 responsive-container">Investment Opportunities</h2>
+            <p className="text-xl mb-8 text-green-100 responsive-container">
               We're always looking for strategic partners and investors who share our vision
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-green-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
+              <button className="bg-white text-green-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
                 Download Investor Deck
               </button>
-              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors">
+              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors responsive-container" aria-label="Button">
                 Contact Investor Relations
               </button>
             </div>
           </div>
 
           {/* Contact Information */}
-          <div className="mt-16 bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Investor Relations Contact</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+          <div className="mt-16 bg-white rounded-2xl shadow-xl p-8 responsive-container">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center responsive-container">Investor Relations Contact</h2>
+            <div className="grid md:grid-cols-2 gap-8 responsive-container">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">General Inquiries</h3>
-                <div className="space-y-2">
-                  <p className="text-gray-600">Email: investors@transbotai.com</p>
-                  <p className="text-gray-600">Phone: +1 (555) 123-4567</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">General Inquiries</h3>
+                <div className="space-y-2 responsive-container">
+                  <p className="text-gray-600 responsive-container">Email: investors@transbotai.com</p>
+                  <p className="text-gray-600 responsive-container">Phone: +1 (555) 123-4567</p>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Media Inquiries</h3>
-                <div className="space-y-2">
-                  <p className="text-gray-600">Email: press@transbotai.com</p>
-                  <p className="text-gray-600">Phone: +1 (555) 123-4568</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">Media Inquiries</h3>
+                <div className="space-y-2 responsive-container">
+                  <p className="text-gray-600 responsive-container">Email: press@transbotai.com</p>
+                  <p className="text-gray-600 responsive-container">Phone: +1 (555) 123-4568</p>
                 </div>
               </div>
             </div>

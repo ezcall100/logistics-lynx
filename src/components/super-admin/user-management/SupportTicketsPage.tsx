@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageSquare,
@@ -174,21 +174,21 @@ export const SupportTicketsPage: React.FC = () => {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'open': return <AlertCircle className="w-4 h-4" />;
-      case 'in_progress': return <Clock className="w-4 h-4" />;
-      case 'resolved': return <CheckCircle className="w-4 h-4" />;
-      case 'closed': return <XCircle className="w-4 h-4" />;
-      default: return <AlertCircle className="w-4 h-4" />;
+      case 'open': return <AlertCircle className="w-4 h-4 responsive-container" />;
+      case 'in_progress': return <Clock className="w-4 h-4 responsive-container" />;
+      case 'resolved': return <CheckCircle className="w-4 h-4 responsive-container" />;
+      case 'closed': return <XCircle className="w-4 h-4 responsive-container" />;
+      default: return <AlertCircle className="w-4 h-4 responsive-container" />;
     }
   };
 
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
-      case 'urgent': return <Flag className="w-4 h-4" />;
-      case 'high': return <AlertCircle className="w-4 h-4" />;
-      case 'medium': return <Clock className="w-4 h-4" />;
-      case 'low': return <CheckCircle className="w-4 h-4" />;
-      default: return <AlertCircle className="w-4 h-4" />;
+      case 'urgent': return <Flag className="w-4 h-4 responsive-container" />;
+      case 'high': return <AlertCircle className="w-4 h-4 responsive-container" />;
+      case 'medium': return <Clock className="w-4 h-4 responsive-container" />;
+      case 'low': return <CheckCircle className="w-4 h-4 responsive-container" />;
+      default: return <AlertCircle className="w-4 h-4 responsive-container" />;
     }
   };
 
@@ -207,25 +207,31 @@ export const SupportTicketsPage: React.FC = () => {
   const urgentTickets = tickets.filter(ticket => ticket.priority === 'urgent').length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Open Tickets</p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{openTickets}</p>
-                <p className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <AlertCircle className="w-3 h-3 mr-1" />Awaiting
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container">Open Tickets</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{openTickets}</p>
+                <p className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <AlertCircle className="w-3 h-3 mr-1 responsive-container" />Awaiting
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl responsive-container">
+                <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -234,18 +240,18 @@ export const SupportTicketsPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">In Progress</p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{inProgressTickets}</p>
-                <p className="text-xs text-yellow-600 dark:text-yellow-400 flex items-center mt-1">
-                  <Clock className="w-3 h-3 mr-1" />Working
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container">In Progress</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{inProgressTickets}</p>
+                <p className="text-xs text-yellow-600 dark:text-yellow-400 flex items-center mt-1 responsive-container">
+                  <Clock className="w-3 h-3 mr-1 responsive-container" />Working
                 </p>
               </div>
-              <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl">
-                <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
+              <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl responsive-container">
+                <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -254,18 +260,18 @@ export const SupportTicketsPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Resolved</p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{resolvedTickets}</p>
-                <p className="text-xs text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-3 h-3 mr-1" />Fixed
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container">Resolved</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{resolvedTickets}</p>
+                <p className="text-xs text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-3 h-3 mr-1 responsive-container" />Fixed
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl responsive-container">
+                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -274,41 +280,41 @@ export const SupportTicketsPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Urgent</p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">{urgentTickets}</p>
-                <p className="text-xs text-red-600 dark:text-red-400 flex items-center mt-1">
-                  <Flag className="w-3 h-3 mr-1" />Critical
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 responsive-container">Urgent</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{urgentTickets}</p>
+                <p className="text-xs text-red-600 dark:text-red-400 flex items-center mt-1 responsive-container">
+                  <Flag className="w-3 h-3 mr-1 responsive-container" />Critical
                 </p>
               </div>
-              <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-xl">
-                <Flag className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-xl responsive-container">
+                <Flag className="w-5 h-5 text-red-600 dark:text-red-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="relative flex-1 responsive-container">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400 responsive-container" />
             <input
               type="text"
               placeholder="Search tickets..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+              className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
             />
           </div>
           
-          <div className="flex gap-3">
+          <div className="flex gap-3 responsive-container">
             <select
               value={filterStatus}
               onChange={e => setFilterStatus(e.target.value)}
-              className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+              className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
             >
               <option value="all">All Status</option>
               <option value="open">Open</option>
@@ -320,7 +326,7 @@ export const SupportTicketsPage: React.FC = () => {
             <select
               value={filterPriority}
               onChange={e => setFilterPriority(e.target.value)}
-              className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+              className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
             >
               <option value="all">All Priority</option>
               <option value="urgent">Urgent</option>
@@ -329,19 +335,19 @@ export const SupportTicketsPage: React.FC = () => {
               <option value="low">Low</option>
             </select>
             
-            <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Download className="w-4 h-4" />
+            <button className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Download className="w-4 h-4 responsive-container" />
               <span>Export</span>
             </button>
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg">
-              <Plus className="w-4 h-4" />
+            <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg responsive-container" aria-label="Button">
+              <Plus className="w-4 h-4 responsive-container" />
               <span>New Ticket</span>
             </button>
           </div>
         </div>
 
         {/* Tickets List */}
-        <div className="space-y-4 mb-8">
+        <div className="space-y-4 mb-8 responsive-container">
           {filteredTickets.map((ticket, index) => (
             <motion.div
               key={ticket.id}
@@ -353,62 +359,62 @@ export const SupportTicketsPage: React.FC = () => {
               }`}
               onClick={() => setSelectedTicket(ticket)}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                    <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <div className="flex items-center space-x-4 responsive-container">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl responsive-container">
+                    <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400 responsive-container" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{ticket.title}</h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">#{ticket.id} • {ticket.requester}</p>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white responsive-container">{ticket.title}</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">#{ticket.id} • {ticket.requester}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}>
                     {getStatusIcon(ticket.status)}
-                    <span className="ml-1 capitalize">{ticket.status.replace('_', ' ')}</span>
+                    <span className="ml-1 capitalize responsive-container">{ticket.status.replace('_', ' ')}</span>
                   </span>
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
                     {getPriorityIcon(ticket.priority)}
-                    <span className="ml-1 capitalize">{ticket.priority}</span>
+                    <span className="ml-1 capitalize responsive-container">{ticket.priority}</span>
                   </span>
                 </div>
               </div>
 
-              <p className="text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">{ticket.description}</p>
+              <p className="text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 responsive-container">{ticket.description}</p>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-1">
-                    <Tag className="w-4 h-4 text-slate-400" />
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{ticket.category}</span>
+              <div className="flex items-center justify-between responsive-container">
+                <div className="flex items-center space-x-4 responsive-container">
+                  <div className="flex items-center space-x-1 responsive-container">
+                    <Tag className="w-4 h-4 text-slate-400 responsive-container" />
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{ticket.category}</span>
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <User className="w-4 h-4 text-slate-400" />
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{ticket.assignee || 'Unassigned'}</span>
+                  <div className="flex items-center space-x-1 responsive-container">
+                    <User className="w-4 h-4 text-slate-400 responsive-container" />
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{ticket.assignee || 'Unassigned'}</span>
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <MessageCircle className="w-4 h-4 text-slate-400" />
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{ticket.messages}</span>
+                  <div className="flex items-center space-x-1 responsive-container">
+                    <MessageCircle className="w-4 h-4 text-slate-400 responsive-container" />
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{ticket.messages}</span>
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <Paperclip className="w-4 h-4 text-slate-400" />
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{ticket.attachments}</span>
+                  <div className="flex items-center space-x-1 responsive-container">
+                    <Paperclip className="w-4 h-4 text-slate-400 responsive-container" />
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{ticket.attachments}</span>
                   </div>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <Calendar className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                <div className="flex items-center space-x-1 responsive-container">
+                  <Calendar className="w-4 h-4 text-slate-400 responsive-container" />
+                  <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                     {new Date(ticket.lastActivity).toLocaleDateString()}
                   </span>
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2 responsive-container">
                 {ticket.tags.map((tag, tagIndex) => (
                   <span
                     key={tagIndex}
-                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300 responsive-container"
                   >
                     {tag}
                   </span>
@@ -423,90 +429,90 @@ export const SupportTicketsPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="p-4 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                  <MessageSquare className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="flex items-center justify-between mb-6 responsive-container">
+              <div className="flex items-center space-x-4 responsive-container">
+                <div className="p-4 bg-blue-100 dark:bg-blue-900/30 rounded-xl responsive-container">
+                  <MessageSquare className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{selectedTicket.title}</h2>
-                  <p className="text-slate-600 dark:text-slate-400">#{selectedTicket.id} • {selectedTicket.requester}</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container">{selectedTicket.title}</h2>
+                  <p className="text-slate-600 dark:text-slate-400 responsive-container">#{selectedTicket.id} • {selectedTicket.requester}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-                  <Edit className="w-4 h-4" />
+              <div className="flex items-center space-x-2 responsive-container">
+                <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+                  <Edit className="w-4 h-4 responsive-container" />
                   <span>Edit</span>
                 </button>
-                <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-                  <Archive className="w-4 h-4" />
+                <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+                  <Archive className="w-4 h-4 responsive-container" />
                   <span>Archive</span>
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
               {/* Ticket Information */}
               <div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Ticket Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Status</span>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">Ticket Information</h3>
+                <div className="space-y-4 responsive-container">
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Status</span>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(selectedTicket.status)}`}>
                       {getStatusIcon(selectedTicket.status)}
-                      <span className="ml-1 capitalize">{selectedTicket.status.replace('_', ' ')}</span>
+                      <span className="ml-1 capitalize responsive-container">{selectedTicket.status.replace('_', ' ')}</span>
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Priority</span>
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Priority</span>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(selectedTicket.priority)}`}>
                       {getPriorityIcon(selectedTicket.priority)}
-                      <span className="ml-1 capitalize">{selectedTicket.priority}</span>
+                      <span className="ml-1 capitalize responsive-container">{selectedTicket.priority}</span>
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Category</span>
-                    <span className="text-sm font-medium text-slate-900 dark:text-white">{selectedTicket.category}</span>
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Category</span>
+                    <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">{selectedTicket.category}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Assignee</span>
-                    <span className="text-sm font-medium text-slate-900 dark:text-white">{selectedTicket.assignee || 'Unassigned'}</span>
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Assignee</span>
+                    <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">{selectedTicket.assignee || 'Unassigned'}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Created</span>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{new Date(selectedTicket.createdAt).toLocaleString()}</span>
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Created</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{new Date(selectedTicket.createdAt).toLocaleString()}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-400">Last Updated</span>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">{new Date(selectedTicket.updatedAt).toLocaleString()}</span>
+                  <div className="flex items-center justify-between responsive-container">
+                    <span className="text-sm text-slate-600 dark:text-slate-400 responsive-container">Last Updated</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">{new Date(selectedTicket.updatedAt).toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
               {/* Messages */}
               <div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Messages</h3>
-                <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">Messages</h3>
+                <div className="space-y-4 responsive-container">
                   {messages.filter(msg => msg.ticketId === selectedTicket.id).map((message) => (
                     <div key={message.id} className={`p-4 rounded-lg ${message.isInternal ? 'bg-blue-50 dark:bg-blue-900/20' : 'bg-slate-50 dark:bg-slate-700/50'}`}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-900 dark:text-white">{message.sender}</span>
-                        <span className="text-xs text-slate-500 dark:text-slate-400">{new Date(message.timestamp).toLocaleString()}</span>
+                      <div className="flex items-center justify-between mb-2 responsive-container">
+                        <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">{message.sender}</span>
+                        <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">{new Date(message.timestamp).toLocaleString()}</span>
                       </div>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">{message.message}</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">{message.message}</p>
                     </div>
                   ))}
                   
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 responsive-container">
                     <input
                       type="text"
                       placeholder="Type your message..."
-                      className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                      className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
                     />
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200">
-                      <Send className="w-4 h-4" />
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 responsive-container" aria-label="Button">
+                      <Send className="w-4 h-4 responsive-container" />
                     </button>
                   </div>
                 </div>

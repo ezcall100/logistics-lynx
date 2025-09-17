@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Brain, Zap, Globe, Shield, TrendingUp, Activity } from 'lucide-react'
@@ -50,7 +51,13 @@ export function AIAgentVisualization() {
       }))
     }, 2000)
 
-    return () => clearInterval(interval)
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval)
   }, [])
 
   const agentTypes = [
@@ -99,13 +106,15 @@ export function AIAgentVisualization() {
   ]
 
   return (
-    <section id="ai-agents" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <section id="ai-agents" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden responsive-container">
       {/* Animated Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 responsive-container">
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full opacity-60"
+            className="absolute rounded-full opacity-60 responsive-container"
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
@@ -129,19 +138,19 @@ export function AIAgentVisualization() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 responsive-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 responsive-container"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-transbot-text-primary mb-6">
-            Powered by <span className="text-accent">250 AI Agents</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-transbot-text-primary mb-6 responsive-container">
+            Powered by <span className="text-accent responsive-container">250 AI Agents</span>
           </h2>
-          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto">
+          <p className="text-xl text-transbot-text-primary/70 max-w-3xl mx-auto responsive-container">
             Autonomous intelligence working 24/7 to optimize every aspect of your logistics operations. 
             From real-time monitoring to predictive analytics, our AI agents never sleep.
           </p>
@@ -153,7 +162,7 @@ export function AIAgentVisualization() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16 responsive-container"
         >
           {[
             { label: 'Active Agents', value: stats.active, suffix: '', color: 'text-accent' },
@@ -167,12 +176,12 @@ export function AIAgentVisualization() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl text-center"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl text-center responsive-container"
             >
               <div className={`text-3xl sm:text-4xl font-bold ${stat.color} mb-2`}>
                 {stat.value}{stat.suffix}
               </div>
-              <div className="text-transbot-text-primary/70 text-sm">{stat.label}</div>
+              <div className="text-transbot-text-primary/70 text-sm responsive-container">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -183,7 +192,7 @@ export function AIAgentVisualization() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 responsive-container"
         >
           {agentTypes.map((agent, index) => (
             <motion.div
@@ -192,18 +201,18 @@ export function AIAgentVisualization() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl hover:scale-105 transition-transform group cursor-pointer"
+              className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-6 rounded-2xl hover:scale-105 transition-transform group cursor-pointer responsive-container"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 responsive-container">
                 <div className={`p-3 rounded-xl bg-gradient-to-r ${agent.color}`}>
-                  <agent.icon className="w-6 h-6 text-transbot-text-primary" />
+                  <agent.icon className="w-6 h-6 text-transbot-text-primary responsive-container" />
                 </div>
-                <div className="text-2xl font-bold text-accent">{agent.count}</div>
+                <div className="text-2xl font-bold text-accent responsive-container">{agent.count}</div>
               </div>
-              <h3 className="text-lg font-semibold text-transbot-text-primary mb-2 group-hover:text-accent transition-colors">
+              <h3 className="text-lg font-semibold text-transbot-text-primary mb-2 group-hover:text-accent transition-colors responsive-container">
                 {agent.name}
               </h3>
-              <p className="text-transbot-text-primary/70 text-sm">{agent.description}</p>
+              <p className="text-transbot-text-primary/70 text-sm responsive-container">{agent.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -214,17 +223,17 @@ export function AIAgentVisualization() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
           viewport={{ once: true }}
-          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl"
+          className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl responsive-container"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-transbot-text-primary">Real-time Agent Activity</h3>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-sm text-transbot-text-primary/70">Live</span>
+          <div className="flex items-center justify-between mb-6 responsive-container">
+            <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container">Real-time Agent Activity</h3>
+            <div className="flex items-center space-x-2 responsive-container">
+              <div className="w-2 h-2 bg-accent rounded-full animate-pulse responsive-container" />
+              <span className="text-sm text-transbot-text-primary/70 responsive-container">Live</span>
             </div>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container">
             {[
               { agent: 'Monitoring Agent #23', action: 'Optimized route for Load #1234', time: '2s ago' },
               { agent: 'Language Agent #15', action: 'Translated document to Spanish', time: '5s ago' },
@@ -238,16 +247,16 @@ export function AIAgentVisualization() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center justify-between p-4 bg-slate-50 rounded-xl"
+                className="flex items-center justify-between p-4 bg-slate-50 rounded-xl responsive-container"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                <div className="flex items-center space-x-3 responsive-container">
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse responsive-container" />
                   <div>
-                    <div className="text-transbot-text-primary font-medium">{activity.agent}</div>
-                    <div className="text-transbot-text-primary/70 text-sm">{activity.action}</div>
+                    <div className="text-transbot-text-primary font-medium responsive-container">{activity.agent}</div>
+                    <div className="text-transbot-text-primary/70 text-sm responsive-container">{activity.action}</div>
                   </div>
                 </div>
-                <div className="text-transbot-text-primary/50 text-sm">{activity.time}</div>
+                <div className="text-transbot-text-primary/50 text-sm responsive-container">{activity.time}</div>
               </motion.div>
             ))}
           </div>
@@ -259,20 +268,20 @@ export function AIAgentVisualization() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-16 responsive-container"
         >
-          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-transbot-text-primary mb-4">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg p-8 rounded-2xl max-w-2xl mx-auto responsive-container">
+            <h3 className="text-2xl font-bold text-transbot-text-primary mb-4 responsive-container">
               Experience AI-Powered Logistics
             </h3>
-            <p className="text-transbot-text-primary/70 mb-6">
+            <p className="text-transbot-text-primary/70 mb-6 responsive-container">
               See how our 250 AI agents work together to optimize your operations, 
               predict issues before they happen, and deliver unprecedented efficiency.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
+              className="bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 responsive-container"
             >
               See AI Agents in Action
             </motion.button>

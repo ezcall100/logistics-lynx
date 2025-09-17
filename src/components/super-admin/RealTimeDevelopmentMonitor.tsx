@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Code,
@@ -168,20 +168,26 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
         );
       }, 3000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [autoRefresh]);
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-400" />;
+        return <CheckCircle className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'in-progress':
-        return <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />;
+        return <Loader2 className="w-4 h-4 text-blue-400 animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'pending':
-        return <Clock className="w-4 h-4 text-yellow-400" />;
+        return <Clock className="w-4 h-4 text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <AlertCircle className="w-4 h-4 text-gray-400" />;
+        return <AlertCircle className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -216,55 +222,57 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
   };
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.div
       initial={{ opacity: 0, x: 300 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 300 }}
-      className="fixed top-16 right-4 w-96 bg-black/80 backdrop-blur-sm border border-white/10 rounded-lg shadow-2xl z-50 max-h-[80vh] overflow-hidden"
+      className="fixed top-16 right-4 w-96 bg-black/80 backdrop-blur-sm border border-white/10 rounded-lg shadow-2xl z-50 max-h-[80vh] overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid"
     >
       {/* Header */}
-      <div className="p-4 border-b border-white/10">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Code className="w-5 h-5 text-blue-400" />
-            <h3 className="text-white font-semibold">Real-Time Development</h3>
+      <div className="p-4 border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Code className="w-5 h-5 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <h3 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">Real-Time Development</h3>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
-              onClick={() => setAutoRefresh(!autoRefresh)}
+              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
               className={`p-1 rounded ${autoRefresh ? 'bg-green-600' : 'bg-gray-600'} text-white`}
             >
-              <Zap className="w-4 h-4" />
+              <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
-            <button onClick={onClose} className="p-1 hover:bg-white/10 rounded text-white">
-              <EyeOff className="w-4 h-4" />
+            <button onClick={onClose} className="p-1 hover:bg-white/10 rounded text-white responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <EyeOff className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4 max-h-[60vh] overflow-y-auto">
+      <div className="p-4 space-y-4 max-h-[60vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Agent Status */}
         <div>
-          <h4 className="text-white font-medium mb-2 flex items-center space-x-2">
-            <Activity className="w-4 h-4 text-green-400" />
+          <h4 className="text-white font-medium mb-2 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Activity className="w-4 h-4 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Active Agents ({agents.filter(a => a.status === 'active').length})</span>
           </h4>
-          <div className="space-y-2">
+          <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {agents.slice(0, 5).map((agent, index) => (
               <motion.div
                 key={agent.name}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center justify-between p-2 bg-white/5 rounded"
+                className="flex items-center justify-between p-2 bg-white/5 rounded responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-2 h-2 rounded-full ${getAgentStatusColor(agent.status)}`} />
-                  <span className="text-white text-sm">{agent.name}</span>
+                  <span className="text-white text-sm responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</span>
                 </div>
-                <div className="text-xs text-gray-400">{agent.progress}%</div>
+                <div className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{agent.progress}%</div>
               </motion.div>
             ))}
           </div>
@@ -272,11 +280,11 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
 
         {/* Recent Activities */}
         <div>
-          <h4 className="text-white font-medium mb-2 flex items-center space-x-2">
-            <GitCommit className="w-4 h-4 text-blue-400" />
+          <h4 className="text-white font-medium mb-2 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <GitCommit className="w-4 h-4 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Recent Activities</span>
           </h4>
-          <div className="space-y-2">
+          <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <AnimatePresence>
               {activities.slice(0, 8).map((activity, index) => (
                 <motion.div
@@ -285,18 +293,18 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: index * 0.05 }}
-                  className="p-2 bg-white/5 rounded border-l-2 border-blue-400"
+                  className="p-2 bg-white/5 rounded border-l-2 border-blue-400 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
+                  <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {getStatusIcon(activity.status)}
-                      <span className="text-white text-sm">{activity.agent}</span>
+                      <span className="text-white text-sm responsive-container sm:flex-col md:flex-row lg:grid">{activity.agent}</span>
                     </div>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {Math.round((Date.now() - activity.timestamp.getTime()) / 1000)}s ago
                     </span>
                   </div>
-                  <div className="text-xs text-gray-300 mt-1">{activity.action}</div>
+                  <div className="text-xs text-gray-300 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{activity.action}</div>
                   <div className={`text-xs ${getTypeColor(activity.type)} mt-1`}>
                     {activity.file}
                   </div>
@@ -308,8 +316,8 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-white/10">
-        <div className="flex items-center justify-between text-xs text-gray-400">
+      <div className="p-4 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
           <span>MCP 301 Agents Working</span>
           <span>{new Date().toLocaleTimeString()}</span>
         </div>

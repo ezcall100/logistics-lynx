@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Brain } from 'lucide-react'
@@ -26,7 +27,13 @@ export function MobileNavigation() {
       document.body.style.overflow = 'unset'
     }
 
-    return () => {
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
@@ -48,15 +55,17 @@ export function MobileNavigation() {
   ]
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <>
       {/* Mobile Menu Button */}
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden p-2 rounded-lg bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg hover:scale-105 transition-all duration-200"
+        className="lg:hidden p-2 rounded-lg bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg hover:scale-105 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
         aria-label="Toggle mobile menu"
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {isOpen ? <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Menu className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />}
       </motion.button>
 
       {/* Mobile Menu Overlay */}
@@ -68,7 +77,7 @@ export function MobileNavigation() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
               onClick={() => setIsOpen(false)}
             />
 
@@ -78,30 +87,30 @@ export function MobileNavigation() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg z-50 lg:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg z-50 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex flex-col h-full">
+              <div className="flex flex-col h-full responsive-container sm:flex-col md:flex-row lg:grid">
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-slate-300/20 dark:border-slate-600/20">
-                  <div className="flex items-center gap-2">
-                    <Brain className="w-6 h-6 text-emerald-400" />
-                    <span className="text-xl font-bold gradient-text">Trans Bot AI</span>
+                <div className="flex items-center justify-between p-6 border-b border-slate-300/20 dark:border-slate-600/20 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Brain className="w-6 h-6 text-emerald-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="text-xl font-bold gradient-text responsive-container sm:flex-col md:flex-row lg:grid">Trans Bot AI</span>
                   </div>
                   <ThemeToggle />
                 </div>
 
                 {/* Menu Items */}
-                <div className="flex-1 overflow-y-auto p-6">
-                  <nav className="space-y-2">
+                <div className="flex-1 overflow-y-auto p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <nav className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {menuItems.map((item) => (
                       <div key={item.label}>
                         <button
-                          onClick={() => setActiveSubmenu(
+                          onClick={() = aria-label="Button"> setActiveSubmenu(
                             activeSubmenu === item.label ? null : item.label
                           )}
-                          className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                          className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
-                          <span className="font-medium text-slate-700 dark:text-slate-300">
+                          <span className="font-medium text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">
                             {item.label}
                           </span>
                           <ChevronDown 
@@ -118,14 +127,14 @@ export function MobileNavigation() {
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
+                              className="overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid"
                             >
-                              <div className="ml-4 space-y-1 py-2">
+                              <div className="ml-4 space-y-1 py-2 responsive-container sm:flex-col md:flex-row lg:grid">
                                 {item.submenu.map((subItem) => (
                                   <a
                                     key={subItem}
                                     href="#"
-                                    className="block p-2 rounded-lg text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                    className="block p-2 rounded-lg text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                                     onClick={() => setIsOpen(false)}
                                   >
                                     {subItem}
@@ -141,11 +150,11 @@ export function MobileNavigation() {
                 </div>
 
                 {/* Footer Actions */}
-                <div className="p-6 border-t border-slate-300/20 dark:border-slate-600/20 space-y-3">
-                  <button className="w-full bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300">
+                <div className="p-6 border-t border-slate-300/20 dark:border-slate-600/20 space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="w-full bg-white/80 text-transbot-text-primary border border-slate-200/50 font-semibold hover:bg-slate-50 transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     Login
                   </button>
-                  <button className="w-full bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300">
+                  <button className="w-full bg-gradient-primary text-transbot-text-primary font-semibold shadow-transbot hover:shadow-transbot-lg transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     Get Demo
                   </button>
                 </div>

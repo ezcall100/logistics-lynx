@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTheme } from '../../../contexts/ThemeContext';
 
 // Import modular components
@@ -68,6 +68,12 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <div
       className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}
     >
@@ -83,7 +89,7 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      <div className="flex">
+      <div className="flex responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Left Sidebar */}
         <SuperAdminSidebar
           sidebarCollapsed={sidebarCollapsed}

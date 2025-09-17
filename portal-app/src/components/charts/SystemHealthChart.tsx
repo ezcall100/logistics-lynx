@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 
 interface SystemHealthChartProps {
-  data?: any[];
+  data?: unknown[];
   height?: number;
 }
 
@@ -29,7 +29,13 @@ export const SystemHealthChart: React.FC<SystemHealthChartProps> = ({
   height = 200 
 }) => {
   return (
-    <div className="w-full h-full">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="w-full h-full responsive-container sm:flex-col md:flex-row lg:grid">
       <ResponsiveContainer width="100%" height={height}>
         <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
@@ -57,7 +63,7 @@ export const SystemHealthChart: React.FC<SystemHealthChartProps> = ({
               borderRadius: '8px',
               boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
             }}
-            formatter={(value: any, name: string) => [
+            formatter={(value: unknown, name: string) => [
               `${value}%`, 
               name.charAt(0).toUpperCase() + name.slice(1)
             ]}

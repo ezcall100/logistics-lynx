@@ -17,37 +17,43 @@ const Sidebar: React.FC = () => {
   ]
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white/10 backdrop-blur-xl border-r border-white/20 overflow-y-auto">
-      <div className="p-6">
-        <h3 className="text-white font-semibold mb-4">Portal Access</h3>
-        <nav className="space-y-2">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white/10 backdrop-blur-xl border-r border-white/20 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Portal Access</h3>
+        <nav className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {portals.map((portal, index) => (
             <a
               key={index}
               href={portal.path}
-              className="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white/20 transition-colors group"
+              className="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white/20 transition-colors group responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <portal.icon className="w-5 h-5 group-hover:text-cyan-300 transition-colors" />
-              <span className="group-hover:text-cyan-300 transition-colors">{portal.name}</span>
+              <portal.icon className="w-5 h-5 group-hover:text-cyan-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="group-hover:text-cyan-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">{portal.name}</span>
             </a>
           ))}
         </nav>
 
         {/* System Status */}
-        <div className="mt-8 p-4 bg-white/5 rounded-lg border border-white/20">
-          <h4 className="text-white font-semibold mb-3">System Status</h4>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-300">Portals</span>
-              <span className="text-cyan-400 font-semibold">25 Active</span>
+        <div className="mt-8 p-4 bg-white/5 rounded-lg border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h4 className="text-white font-semibold mb-3 responsive-container sm:flex-col md:flex-row lg:grid">System Status</h4>
+          <div className="space-y-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Portals</span>
+              <span className="text-cyan-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">25 Active</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-300">AI Agents</span>
-              <span className="text-green-400 font-semibold">250 Online</span>
+            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">AI Agents</span>
+              <span className="text-green-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">250 Online</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-300">Languages</span>
-              <span className="text-purple-400 font-semibold">6 Supported</span>
+            <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Languages</span>
+              <span className="text-purple-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">6 Supported</span>
             </div>
           </div>
         </div>

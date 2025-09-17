@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Truck, 
@@ -24,7 +24,13 @@ const DashboardPage: React.FC = () => {
   useEffect(() => {
     // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearTimeout(timer);
   }, []);
 
   const kpiData = [
@@ -136,11 +142,13 @@ const DashboardPage: React.FC = () => {
 
   if (isLoading) {
     return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
       <UnifiedPortalLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-gray-600">Loading dashboard...</span>
+        <div className="flex items-center justify-center h-64 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Loading dashboard...</span>
           </div>
         </div>
       </UnifiedPortalLayout>
@@ -148,56 +156,58 @@ const DashboardPage: React.FC = () => {
   }
 
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <UnifiedPortalLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Welcome Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
+              <h1 className="text-3xl font-bold mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Welcome back, {user?.name?.split(' ')[0]}!
               </h1>
-              <p className="text-blue-100 text-lg">
+              <p className="text-blue-100 text-lg responsive-container sm:flex-col md:flex-row lg:grid">
                 Here's what's happening with your logistics operations today.
               </p>
             </div>
-            <div className="hidden md:block">
-              <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center">
-                <Truck className="w-12 h-12 text-white" />
+            <div className="hidden md:block responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <Truck className="w-12 h-12 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
               </div>
             </div>
           </div>
         </motion.div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {kpiData.map((kpi, index) => (
             <motion.div
               key={kpi.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+              className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 mb-1">{kpi.title}</p>
-                  <p className="text-2xl font-bold text-gray-900">{kpi.value}</p>
-                  <div className="flex items-center mt-2">
+                  <p className="text-sm font-medium text-gray-600 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{kpi.title}</p>
+                  <p className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{kpi.value}</p>
+                  <div className="flex items-center mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <span className={`text-sm font-medium ${
                       kpi.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
                     }`}>
                       {kpi.change}
                     </span>
-                    <span className="text-sm text-gray-500 ml-1">vs last month</span>
+                    <span className="text-sm text-gray-500 ml-1 responsive-container sm:flex-col md:flex-row lg:grid">vs last month</span>
                   </div>
                 </div>
                 <div className={`w-12 h-12 bg-gradient-to-br ${kpi.color} rounded-lg flex items-center justify-center`}>
-                  <kpi.icon className="w-6 h-6 text-white" />
+                  <kpi.icon className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
               </div>
             </motion.div>
@@ -205,31 +215,31 @@ const DashboardPage: React.FC = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Recent Activities */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">Recent Activities</h2>
-              <button className="flex items-center space-x-2 text-sm text-blue-600 hover:text-blue-700 transition-colors">
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Recent Activities</h2>
+              <button className="flex items-center space-x-2 text-sm text-blue-600 hover:text-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                 <span>View All</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {recentActivities.map((activity) => (
-                <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className={`w-10 h-10 ${activity.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                    <activity.icon className="w-5 h-5" />
+                    <activity.icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                    <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
-                    <p className="text-xs text-gray-500 mt-2">{activity.time}</p>
+                  <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{activity.title}</p>
+                    <p className="text-sm text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{activity.description}</p>
+                    <p className="text-xs text-gray-500 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">{activity.time}</p>
                   </div>
                 </div>
               ))}
@@ -241,22 +251,22 @@ const DashboardPage: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">Upcoming Tasks</h2>
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                <Plus className="w-4 h-4 text-gray-500" />
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Upcoming Tasks</h2>
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Plus className="w-4 h-4 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {upcomingTasks.map((task) => (
-                <div key={task.id} className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">{task.title}</p>
-                      <p className="text-xs text-gray-500 mt-1">{task.assignedTo}</p>
-                      <p className="text-xs text-gray-500 mt-1">{task.dueDate}</p>
+                <div key={task.id} className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{task.title}</p>
+                      <p className="text-xs text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{task.assignedTo}</p>
+                      <p className="text-xs text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{task.dueDate}</p>
                     </div>
                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getPriorityColor(task.priority)}`}>
                       {task.priority}
@@ -273,10 +283,10 @@ const DashboardPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Quick Actions</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {[
               { icon: Plus, label: 'Create Load', color: 'from-blue-500 to-indigo-500' },
               { icon: Users, label: 'Add Driver', color: 'from-green-500 to-emerald-500' },
@@ -289,12 +299,12 @@ const DashboardPage: React.FC = () => {
                 key={action.label}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <div className={`w-12 h-12 bg-gradient-to-br ${action.color} rounded-lg flex items-center justify-center mb-3`}>
-                  <action.icon className="w-6 h-6 text-white" />
+                  <action.icon className="w-6 h-6 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 text-center">{action.label}</span>
+                <span className="text-sm font-medium text-gray-700 text-center responsive-container sm:flex-col md:flex-row lg:grid">{action.label}</span>
               </motion.button>
             ))}
           </div>
@@ -305,26 +315,26 @@ const DashboardPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-gray-900">Performance Overview</h2>
-            <div className="flex items-center space-x-2">
-              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors">
-                <Filter className="w-4 h-4" />
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-lg font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Performance Overview</h2>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Filter</span>
               </button>
-              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors">
-                <Download className="w-4 h-4" />
+              <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span>Export</span>
               </button>
             </div>
           </div>
-          <div className="h-64 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <BarChart3 className="w-16 h-16 text-blue-400 mx-auto mb-4" />
-              <p className="text-gray-600">Performance charts will be displayed here</p>
-              <p className="text-sm text-gray-500 mt-2">Real-time data visualization coming soon</p>
+          <div className="h-64 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <BarChart3 className="w-16 h-16 text-blue-400 mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Performance charts will be displayed here</p>
+              <p className="text-sm text-gray-500 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">Real-time data visualization coming soon</p>
             </div>
           </div>
         </motion.div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Building2, Save, Globe, Phone, MapPin, Users, Shield } from 'lucide-react';
 
 // Custom UI Components
@@ -27,10 +27,16 @@ const Button: React.FC<{
   const variantClasses = 'bg-primary text-primary-foreground hover:bg-primary/90';
   const sizeClasses = 'h-10 px-4 py-2';
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <button 
       className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`}
       onClick={onClick}
-    >
+     aria-label="Button">
       {children}
     </button>
   );
@@ -94,41 +100,45 @@ const CompanySettings: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Company Settings</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Company Settings</h1>
+          <p className="text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
             Manage your company information and configuration
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           <Button 
             onClick={handleSave} 
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <Save className="h-4 w-4" />
+            <Save className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             Save Changes
           </Button>
         </div>
       </div>
 
       {/* Tab Navigation */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
+      <div className="border-b border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+        <nav className="-mb-px flex space-x-8 responsive-container sm:flex-col md:flex-row lg:grid">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                 className={`flex items-center gap-2 py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 {tab.label}
               </button>
             );
@@ -137,18 +147,18 @@ const CompanySettings: React.FC = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="mt-6">
+      <div className="mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {activeTab === 'basic' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Building2 className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Company Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
+              <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="companyName">Company Name</Label>
                   <Input
                     id="companyName"
@@ -160,7 +170,7 @@ const CompanySettings: React.FC = () => {
                     placeholder="Enter company name"
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="industry">Industry</Label>
                   <Input
                     id="industry"
@@ -172,8 +182,8 @@ const CompanySettings: React.FC = () => {
                     placeholder="Enter industry"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <Label htmlFor="founded">Founded</Label>
                     <Input
                       id="founded"
@@ -185,7 +195,7 @@ const CompanySettings: React.FC = () => {
                       placeholder="2020"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <Label htmlFor="employees">Employees</Label>
                     <Input
                       id="employees"
@@ -203,13 +213,13 @@ const CompanySettings: React.FC = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <MapPin className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Location & Timezone
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
+              <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="address">Address</Label>
                   <Input
                     id="address"
@@ -221,7 +231,7 @@ const CompanySettings: React.FC = () => {
                     placeholder="Enter company address"
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="timezone">Timezone</Label>
                   <Input
                     id="timezone"
@@ -239,16 +249,16 @@ const CompanySettings: React.FC = () => {
         )}
 
         {activeTab === 'contact' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Phone className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Phone className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Contact Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
+              <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="phone">Phone</Label>
                   <Input
                     id="phone"
@@ -260,7 +270,7 @@ const CompanySettings: React.FC = () => {
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
@@ -278,13 +288,13 @@ const CompanySettings: React.FC = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Globe className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Globe className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Web Presence
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
+              <CardContent className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <Label htmlFor="website">Website</Label>
                   <Input
                     id="website"
@@ -304,16 +314,16 @@ const CompanySettings: React.FC = () => {
         {activeTab === 'business' && (
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Users className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Business Configuration
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-8 text-gray-500">
-                <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <div className="text-center py-8 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Users className="h-12 w-12 mx-auto mb-4 opacity-50 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <p>Business settings and configurations will be available here.</p>
-                <p className="text-sm mt-2">This section is under development.</p>
+                <p className="text-sm mt-2 responsive-container sm:flex-col md:flex-row lg:grid">This section is under development.</p>
               </div>
             </CardContent>
           </Card>
@@ -322,16 +332,16 @@ const CompanySettings: React.FC = () => {
         {activeTab === 'security' && (
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Shield className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Security Settings
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-8 text-gray-500">
-                <Shield className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <div className="text-center py-8 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
+                <Shield className="h-12 w-12 mx-auto mb-4 opacity-50 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <p>Security settings and access controls will be available here.</p>
-                <p className="text-sm mt-2">This section is under development.</p>
+                <p className="text-sm mt-2 responsive-container sm:flex-col md:flex-row lg:grid">This section is under development.</p>
               </div>
             </CardContent>
           </Card>

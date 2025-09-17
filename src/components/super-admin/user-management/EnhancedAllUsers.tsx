@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -59,10 +59,16 @@ const GlassButton: React.FC<{
     lg: 'px-6 py-3 text-base'
   };
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <button 
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
-    >
+     aria-label="Button">
       {children}
     </button>
   );
@@ -286,19 +292,19 @@ const EnhancedAllUsers: React.FC = () => {
 
   const getRoleIcon = (role: string) => {
     switch (role) {
-      case 'admin': return <Crown className="h-4 w-4 text-purple-600" />;
-      case 'manager': return <Shield className="h-4 w-4 text-blue-600" />;
-      case 'user': return <Users className="h-4 w-4 text-gray-600" />;
-      default: return <Users className="h-4 w-4 text-gray-600" />;
+      case 'admin': return <Crown className="h-4 w-4 text-purple-600 responsive-container" />;
+      case 'manager': return <Shield className="h-4 w-4 text-blue-600 responsive-container" />;
+      case 'user': return <Users className="h-4 w-4 text-gray-600 responsive-container" />;
+      default: return <Users className="h-4 w-4 text-gray-600 responsive-container" />;
     }
   };
 
   const getDeviceIcon = (device: string) => {
     switch (device) {
-      case 'desktop': return <Monitor className="h-4 w-4" />;
-      case 'mobile': return <Smartphone className="h-4 w-4" />;
-      case 'tablet': return <Monitor className="h-4 w-4" />;
-      default: return <Monitor className="h-4 w-4" />;
+      case 'desktop': return <Monitor className="h-4 w-4 responsive-container" />;
+      case 'mobile': return <Smartphone className="h-4 w-4 responsive-container" />;
+      case 'tablet': return <Monitor className="h-4 w-4 responsive-container" />;
+      default: return <Monitor className="h-4 w-4 responsive-container" />;
     }
   };
 
@@ -314,129 +320,133 @@ const EnhancedAllUsers: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="flex items-center space-x-2">
-          <RefreshCw className="h-6 w-6 animate-spin text-blue-500" />
-          <span className="text-gray-600 dark:text-gray-300">Loading users...</span>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="flex items-center justify-center h-96 responsive-container">
+        <div className="flex items-center space-x-2 responsive-container">
+          <RefreshCw className="h-6 w-6 animate-spin text-blue-500 responsive-container" />
+          <span className="text-gray-600 dark:text-gray-300 responsive-container">Loading users...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container">
       {/* Enhanced Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent responsive-container">
             User Management
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">
+          <p className="text-gray-600 dark:text-gray-300 mt-1 responsive-container">
             Manage and monitor all system users with advanced controls
           </p>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 responsive-container">
           <GlassButton 
             variant="secondary" 
             onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
           >
-            {viewMode === 'grid' ? <Users className="h-4 w-4 mr-2" /> : <Activity className="h-4 w-4 mr-2" />}
+            {viewMode === 'grid' ? <Users className="h-4 w-4 mr-2 responsive-container" /> : <Activity className="h-4 w-4 mr-2 responsive-container" />}
             {viewMode === 'grid' ? 'List View' : 'Grid View'}
           </GlassButton>
           <GlassButton variant="primary" onClick={() => setShowCreateUser(true)}>
-            <UserPlus className="h-4 w-4 mr-2" />
+            <UserPlus className="h-4 w-4 mr-2 responsive-container" />
             Add User
           </GlassButton>
         </div>
       </div>
 
       {/* Enhanced Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container">
+        <GlassCard className="p-6 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{users.length}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">{users.length}</p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-xl">
-              <Users className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-xl responsive-container">
+              <Users className="h-6 w-6 text-blue-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">+12.5%</span>
-            <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container" />
+            <span className="text-sm text-green-600 responsive-container">+12.5%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container">from last month</span>
           </div>
         </GlassCard>
 
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between">
+        <GlassCard className="p-6 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                 {users.filter(u => u.status === 'active').length}
               </p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-xl">
-              <UserCheck className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-xl responsive-container">
+              <UserCheck className="h-6 w-6 text-green-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
-            <span className="text-sm text-green-600">Online now</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2 responsive-container"></div>
+            <span className="text-sm text-green-600 responsive-container">Online now</span>
           </div>
         </GlassCard>
 
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between">
+        <GlassCard className="p-6 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Pending</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Pending</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                 {users.filter(u => u.status === 'pending').length}
               </p>
             </div>
-            <div className="p-3 bg-yellow-100 dark:bg-yellow-900/20 rounded-xl">
-              <Clock className="h-6 w-6 text-yellow-600" />
+            <div className="p-3 bg-yellow-100 dark:bg-yellow-900/20 rounded-xl responsive-container">
+              <Clock className="h-6 w-6 text-yellow-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <AlertTriangle className="h-4 w-4 text-yellow-500 mr-1" />
-            <span className="text-sm text-yellow-600">Requires attention</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <AlertTriangle className="h-4 w-4 text-yellow-500 mr-1 responsive-container" />
+            <span className="text-sm text-yellow-600 responsive-container">Requires attention</span>
           </div>
         </GlassCard>
 
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between">
+        <GlassCard className="p-6 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Online Now</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Online Now</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                 {users.filter(u => u.isOnline).length}
               </p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-xl">
-              <Zap className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-xl responsive-container">
+              <Zap className="h-6 w-6 text-purple-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <Globe className="h-4 w-4 text-purple-500 mr-1" />
-            <span className="text-sm text-purple-600">Real-time</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <Globe className="h-4 w-4 text-purple-500 mr-1 responsive-container" />
+            <span className="text-sm text-purple-600 responsive-container">Real-time</span>
           </div>
         </GlassCard>
       </div>
 
       {/* Enhanced Search and Filters */}
-      <GlassCard className="p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+      <GlassCard className="p-6 responsive-container">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4 responsive-container">
+          <div className="flex-1 relative responsive-container">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 responsive-container" />
             <GlassInput
               placeholder="Search users by name, email, or company..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
+              className="pl-10 responsive-container"
             />
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 responsive-container">
             <GlassSelect value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)}>
               <option value="all">All Roles</option>
               <option value="admin">Admin</option>
@@ -451,7 +461,7 @@ const EnhancedAllUsers: React.FC = () => {
               <option value="suspended">Suspended</option>
             </GlassSelect>
             <GlassButton variant="secondary" onClick={() => setShowFilters(!showFilters)}>
-              <Filter className="h-4 w-4 mr-2" />
+              <Filter className="h-4 w-4 mr-2 responsive-container" />
               Filters
             </GlassButton>
           </div>
@@ -459,64 +469,64 @@ const EnhancedAllUsers: React.FC = () => {
       </GlassCard>
 
       {/* Enhanced User Grid/List */}
-      <GlassCard className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <GlassCard className="p-6 responsive-container">
+        <div className="flex items-center justify-between mb-6 responsive-container">
+          <div className="flex items-center space-x-4 responsive-container">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
               Users ({filteredUsers.length})
             </h3>
             {selectedUsers.length > 0 && (
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex items-center space-x-2 responsive-container">
+                <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container">
                   {selectedUsers.length} selected
                 </span>
                 <GlassButton variant="danger" size="sm">
-                  <Trash2 className="h-4 w-4 mr-1" />
+                  <Trash2 className="h-4 w-4 mr-1 responsive-container" />
                   Delete
                 </GlassButton>
               </div>
             )}
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 responsive-container">
             <GlassButton variant="ghost" size="sm">
-              <Download className="h-4 w-4 mr-1" />
+              <Download className="h-4 w-4 mr-1 responsive-container" />
               Export
             </GlassButton>
             <GlassButton variant="ghost" size="sm">
-              <RefreshCw className="h-4 w-4" />
+              <RefreshCw className="h-4 w-4 responsive-container" />
             </GlassButton>
           </div>
         </div>
 
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container">
             {filteredUsers.map((user) => (
               <motion.div
                 key={user.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl p-6 border border-white/20 dark:border-gray-600/30 hover:shadow-lg transition-all duration-300 group"
+                className="bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl p-6 border border-white/20 dark:border-gray-600/30 hover:shadow-lg transition-all duration-300 group responsive-container"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="relative">
+                <div className="flex items-start justify-between mb-4 responsive-container">
+                  <div className="flex items-center space-x-3 responsive-container">
+                    <div className="relative responsive-container">
                       <img
                         src={user.avatar}
                         alt={`${user.firstName} ${user.lastName}`}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
+                        className="w-12 h-12 rounded-full object-cover responsive-container"
+                      / alt="Image">
                       {user.isOnline && (
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full responsive-container"></div>
                       )}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                      <h4 className="font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         {user.firstName} {user.lastName}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{user.email}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container">{user.email}</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container">
                     {getRoleIcon(user.role)}
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
                       {user.status}
@@ -524,41 +534,41 @@ const EnhancedAllUsers: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Company</span>
-                    <span className="font-medium">{user.company}</span>
+                <div className="space-y-3 responsive-container">
+                  <div className="flex items-center justify-between text-sm responsive-container">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container">Company</span>
+                    <span className="font-medium responsive-container">{user.company}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Department</span>
-                    <span className="font-medium">{user.department}</span>
+                  <div className="flex items-center justify-between text-sm responsive-container">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container">Department</span>
+                    <span className="font-medium responsive-container">{user.department}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Last Login</span>
-                    <span className="font-medium">{formatDate(user.lastLogin)}</span>
+                  <div className="flex items-center justify-between text-sm responsive-container">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container">Last Login</span>
+                    <span className="font-medium responsive-container">{formatDate(user.lastLogin)}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Device</span>
-                    <div className="flex items-center space-x-1">
+                  <div className="flex items-center justify-between text-sm responsive-container">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container">Device</span>
+                    <div className="flex items-center space-x-1 responsive-container">
                       {getDeviceIcon(user.deviceType)}
-                      <span className="font-medium capitalize">{user.deviceType}</span>
+                      <span className="font-medium capitalize responsive-container">{user.deviceType}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between responsive-container">
+                  <div className="flex items-center space-x-2 responsive-container">
                     <GlassButton variant="ghost" size="sm">
-                      <Eye className="h-4 w-4" />
+                      <Eye className="h-4 w-4 responsive-container" />
                     </GlassButton>
                     <GlassButton variant="ghost" size="sm">
-                      <Edit className="h-4 w-4" />
+                      <Edit className="h-4 w-4 responsive-container" />
                     </GlassButton>
                     <GlassButton variant="ghost" size="sm">
-                      <MoreVertical className="h-4 w-4" />
+                      <MoreVertical className="h-4 w-4 responsive-container" />
                     </GlassButton>
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                     {user.loginCount} logins
                   </div>
                 </div>
@@ -566,74 +576,74 @@ const EnhancedAllUsers: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
+          <div className="overflow-x-auto responsive-container">
+            <table className="w-full responsive-container">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left py-3 px-4">
+                <tr className="border-b border-gray-200 dark:border-gray-700 responsive-container">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <input
                       type="checkbox"
                       checked={selectedUsers.length === filteredUsers.length}
                       onChange={handleSelectAll}
-                      className="rounded border-gray-300"
+                      className="rounded border-gray-300 responsive-container"
                     />
                   </th>
-                  <th className="text-left py-3 px-4">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() => handleSort('firstName')}
-                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100"
+                      onClick={() = aria-label="Button"> handleSort('firstName')}
+                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>User</span>
                       {sortField === 'firstName' && (
-                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />
+                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4 responsive-container" /> : <SortDesc className="h-4 w-4 responsive-container" />
                       )}
                     </button>
                   </th>
-                  <th className="text-left py-3 px-4">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() => handleSort('role')}
-                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100"
+                      onClick={() = aria-label="Button"> handleSort('role')}
+                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Role</span>
                       {sortField === 'role' && (
-                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />
+                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4 responsive-container" /> : <SortDesc className="h-4 w-4 responsive-container" />
                       )}
                     </button>
                   </th>
-                  <th className="text-left py-3 px-4">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() => handleSort('status')}
-                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100"
+                      onClick={() = aria-label="Button"> handleSort('status')}
+                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Status</span>
                       {sortField === 'status' && (
-                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />
+                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4 responsive-container" /> : <SortDesc className="h-4 w-4 responsive-container" />
                       )}
                     </button>
                   </th>
-                  <th className="text-left py-3 px-4">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() => handleSort('company')}
-                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100"
+                      onClick={() = aria-label="Button"> handleSort('company')}
+                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Company</span>
                       {sortField === 'company' && (
-                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />
+                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4 responsive-container" /> : <SortDesc className="h-4 w-4 responsive-container" />
                       )}
                     </button>
                   </th>
-                  <th className="text-left py-3 px-4">
+                  <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() => handleSort('lastLogin')}
-                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100"
+                      onClick={() = aria-label="Button"> handleSort('lastLogin')}
+                      className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Last Login</span>
                       {sortField === 'lastLogin' && (
-                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />
+                        sortDirection === 'asc' ? <SortAsc className="h-4 w-4 responsive-container" /> : <SortDesc className="h-4 w-4 responsive-container" />
                       )}
                     </button>
                   </th>
-                  <th className="text-left py-3 px-4">Actions</th>
+                  <th className="text-left py-3 px-4 responsive-container">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -642,69 +652,69 @@ const EnhancedAllUsers: React.FC = () => {
                     key={user.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50/50 dark:hover:bg-gray-700/50 transition-colors"
+                    className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50/50 dark:hover:bg-gray-700/50 transition-colors responsive-container"
                   >
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 responsive-container">
                       <input
                         type="checkbox"
                         checked={selectedUsers.includes(user.id)}
                         onChange={() => handleSelectUser(user.id)}
-                        className="rounded border-gray-300"
+                        className="rounded border-gray-300 responsive-container"
                       />
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="relative">
+                    <td className="py-3 px-4 responsive-container">
+                      <div className="flex items-center space-x-3 responsive-container">
+                        <div className="relative responsive-container">
                           <img
                             src={user.avatar}
                             alt={`${user.firstName} ${user.lastName}`}
-                            className="w-10 h-10 rounded-full object-cover"
-                          />
+                            className="w-10 h-10 rounded-full object-cover responsive-container"
+                          / alt="Image">
                           {user.isOnline && (
-                            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+                            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full responsive-container"></div>
                           )}
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                          <div className="font-medium text-gray-900 dark:text-gray-100 responsive-container">
                             {user.firstName} {user.lastName}
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">{user.email}</div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">{user.email}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
+                    <td className="py-3 px-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
                         {getRoleIcon(user.role)}
-                        <span className="capitalize">{user.role}</span>
+                        <span className="capitalize responsive-container">{user.role}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 responsive-container">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
                         {user.status}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
-                        <Building className="h-4 w-4 text-gray-400" />
+                    <td className="py-3 px-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Building className="h-4 w-4 text-gray-400 responsive-container" />
                         <span>{user.company}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-4 w-4 text-gray-400" />
-                        <span className="text-sm">{formatDate(user.lastLogin)}</span>
+                    <td className="py-3 px-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Clock className="h-4 w-4 text-gray-400 responsive-container" />
+                        <span className="text-sm responsive-container">{formatDate(user.lastLogin)}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
+                    <td className="py-3 px-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
                         <GlassButton variant="ghost" size="sm">
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 responsive-container" />
                         </GlassButton>
                         <GlassButton variant="ghost" size="sm">
-                          <Edit className="h-4 w-4" />
+                          <Edit className="h-4 w-4 responsive-container" />
                         </GlassButton>
                         <GlassButton variant="ghost" size="sm">
-                          <MoreVertical className="h-4 w-4" />
+                          <MoreVertical className="h-4 w-4 responsive-container" />
                         </GlassButton>
                       </div>
                     </td>
@@ -716,10 +726,10 @@ const EnhancedAllUsers: React.FC = () => {
         )}
 
         {filteredUsers.length === 0 && (
-          <div className="text-center py-12">
-            <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No users found</h3>
-            <p className="text-gray-600 dark:text-gray-400">Try adjusting your search or filter criteria.</p>
+          <div className="text-center py-12 responsive-container">
+            <Users className="h-12 w-12 text-gray-400 mx-auto mb-4 responsive-container" />
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 responsive-container">No users found</h3>
+            <p className="text-gray-600 dark:text-gray-400 responsive-container">Try adjusting your search or filter criteria.</p>
           </div>
         )}
       </GlassCard>

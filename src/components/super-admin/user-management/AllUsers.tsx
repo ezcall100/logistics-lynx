@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -89,7 +89,13 @@ const AllUsers: React.FC = () => {
       setUsers(updatedUsers);
     });
 
-    return () => {
+    return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => {
       superAdminService.unsubscribe('users');
     };
   }, []);
@@ -262,12 +268,14 @@ const AllUsers: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="space-y-4">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="p-6 responsive-container">
+        <div className="animate-pulse responsive-container">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container"></div>
+          <div className="space-y-4 responsive-container">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg responsive-container"></div>
             ))}
           </div>
         </div>
@@ -276,56 +284,58 @@ const AllUsers: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container">
         {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white responsive-container">
             All Users
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 responsive-container">
             Manage user accounts and permissions
           </p>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 responsive-container">
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <Download className="h-4 w-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+            <Download className="h-4 w-4 responsive-container" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setShowCreateUser(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            onClick={() = aria-label="Button"> setShowCreateUser(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
           >
-            <UserPlus className="h-4 w-4" />
+            <UserPlus className="h-4 w-4 responsive-container" />
             <span>Add User</span>
           </button>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white responsive-container">
                 {totalUsers.toLocaleString()}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Total Users</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">Total Users</div>
             </div>
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg responsive-container">
+              <Users className="h-6 w-6 text-blue-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -334,17 +344,17 @@ const AllUsers: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-2xl font-bold text-green-600 responsive-container">
                 {users.filter(u => u.status === 'active').length}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Active</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">Active</div>
             </div>
-            <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-              <UserCheck className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg responsive-container">
+              <UserCheck className="h-6 w-6 text-green-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -353,17 +363,17 @@ const AllUsers: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <div className="text-2xl font-bold text-yellow-600">
+              <div className="text-2xl font-bold text-yellow-600 responsive-container">
                 {users.filter(u => u.status === 'pending').length}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Pending</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">Pending</div>
             </div>
-            <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-              <Clock className="h-6 w-6 text-yellow-600" />
+            <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg responsive-container">
+              <Clock className="h-6 w-6 text-yellow-600 responsive-container" />
             </div>
           </div>
         </motion.div>
@@ -372,41 +382,41 @@ const AllUsers: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <div className="text-2xl font-bold text-red-600">
+              <div className="text-2xl font-bold text-red-600 responsive-container">
                 {users.filter(u => u.status === 'suspended').length}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Suspended</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">Suspended</div>
             </div>
-            <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
-              <UserX className="h-6 w-6 text-red-600" />
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg responsive-container">
+              <UserX className="h-6 w-6 text-red-600 responsive-container" />
             </div>
           </div>
         </motion.div>
         </div>
 
       {/* Filters and Search */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 responsive-container">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search users..."
                 value={filters.search || ''}
                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
               />
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 responsive-container">
               <select
                 value={filters.role || ''}
                 onChange={(e) => setFilters({ ...filters, role: e.target.value || undefined })}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
               >
                 <option value="">All Roles</option>
                 <option value="superadmin">Super Admin</option>
@@ -418,7 +428,7 @@ const AllUsers: React.FC = () => {
               <select
                 value={filters.status || ''}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value || undefined })}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
               >
                 <option value="">All Status</option>
                 <option value="active">Active</option>
@@ -428,7 +438,7 @@ const AllUsers: React.FC = () => {
               </select>
                     </div>
                   </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">
             Showing {filteredUsers.length} of {totalUsers} users
                     </div>
                   </div>
@@ -439,36 +449,36 @@ const AllUsers: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-          className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4"
+          className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 responsive-container"
           >
-            <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
+            <div className="flex items-center justify-between responsive-container">
+            <div className="flex items-center space-x-2 responsive-container">
+              <span className="text-sm font-medium text-blue-900 dark:text-blue-100 responsive-container">
                 {selectedUsers.length} user(s) selected
               </span>
             </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container">
               <button
-                onClick={() => handleBulkAction('activate')}
-                className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors"
+                onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
                 Activate
               </button>
               <button
-                onClick={() => handleBulkAction('deactivate')}
-                className="px-3 py-1 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors"
+                onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                className="px-3 py-1 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors responsive-container"
               >
                 Deactivate
               </button>
                   <button
-                onClick={() => handleBulkAction('delete')}
-                className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
+                onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors responsive-container"
                   >
                 Delete
                   </button>
                 <button
-                  onClick={() => setSelectedUsers([])}
-                className="px-3 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 transition-colors"
+                  onClick={() = aria-label="Button"> setSelectedUsers([])}
+                className="px-3 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 transition-colors responsive-container"
                 >
                 Clear
                 </button>
@@ -478,12 +488,12 @@ const AllUsers: React.FC = () => {
         )}
 
         {/* Users Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden responsive-container">
+          <div className="overflow-x-auto responsive-container">
+            <table className="w-full responsive-container">
+            <thead className="bg-gray-50 dark:bg-gray-700 responsive-container">
                 <tr>
-                  <th className="px-6 py-3 text-left">
+                  <th className="px-6 py-3 text-left responsive-container">
                     <input
                       type="checkbox"
                     checked={selectedUsers.length === filteredUsers.length && filteredUsers.length > 0}
@@ -494,89 +504,91 @@ const AllUsers: React.FC = () => {
                         setSelectedUsers([]);
                       }
                     }}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container"
                     />
                   </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('name')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('name')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Name</span>
                     {sortConfig.field === 'name' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                 </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('email')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('email')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Email</span>
                     {sortConfig.field === 'email' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                   </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('role')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('role')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Role</span>
                     {sortConfig.field === 'role' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                 </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('company')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('company')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Company</span>
                     {sortConfig.field === 'company' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                   </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('status')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('status')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Status</span>
                     {sortConfig.field === 'status' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                   </th>
-                <th className="px-6 py-3 text-left">
+                <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() => handleSort('lastLogin')}
-                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                    onClick={() = aria-label="Button"> handleSort('lastLogin')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Last Login</span>
                     {sortConfig.field === 'lastLogin' && (
-                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3 responsive-container" /> : <SortDesc className="h-3 w-3 responsive-container" />
                     )}
                   </button>
                   </th>
-                <th className="px-6 py-3 text-right">Actions</th>
+                <th className="px-6 py-3 text-right responsive-container">Actions</th>
                 </tr>
               </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container">
               {filteredUsers.map((user) => {
                 const StatusIcon = getStatusIcon(user.status);
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.tr
                     key={user.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container"
                   >
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 responsive-container">
                       <input
                         type="checkbox"
                         checked={selectedUsers.includes(user.id)}
@@ -587,65 +599,65 @@ const AllUsers: React.FC = () => {
                             setSelectedUsers(selectedUsers.filter(id => id !== user.id));
                           }
                         }}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container"
                       />
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                    <td className="px-6 py-4 responsive-container">
+                      <div className="flex items-center space-x-3 responsive-container">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm responsive-container">
                           {user.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900 dark:text-white">
+                          <div className="font-medium text-gray-900 dark:text-white responsive-container">
                               {user.name}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-500">
+                          <div className="text-sm text-gray-500 dark:text-gray-500 responsive-container">
                             ID: {user.id.slice(0, 8)}...
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-2">
-                        <Mail className="h-4 w-4 text-gray-400" />
-                        <span className="text-gray-900 dark:text-white">{user.email}</span>
+                    <td className="px-6 py-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Mail className="h-4 w-4 text-gray-400 responsive-container" />
+                        <span className="text-gray-900 dark:text-white responsive-container">{user.email}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 responsive-container">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(user.role)}`}>
                         {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-2">
-                        <Building className="h-4 w-4 text-gray-400" />
-                        <span className="text-gray-900 dark:text-white">{user.company}</span>
+                    <td className="px-6 py-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Building className="h-4 w-4 text-gray-400 responsive-container" />
+                        <span className="text-gray-900 dark:text-white responsive-container">{user.company}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-2">
-                        <StatusIcon className="h-4 w-4" />
+                    <td className="px-6 py-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <StatusIcon className="h-4 w-4 responsive-container" />
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
                           {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="h-4 w-4 text-gray-400" />
-                        <span className="text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 responsive-container">
+                      <div className="flex items-center space-x-2 responsive-container">
+                        <Calendar className="h-4 w-4 text-gray-400 responsive-container" />
+                        <span className="text-gray-900 dark:text-white responsive-container">
                           {new Date(user.lastLogin).toLocaleDateString()}
                           </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex items-center justify-end space-x-2">
+                    <td className="px-6 py-4 text-right responsive-container">
+                      <div className="flex items-center justify-end space-x-2 responsive-container">
                         <button
-                          onClick={() => handleDeleteUser(user.id)}
-                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          onClick={() = aria-label="Button"> handleDeleteUser(user.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                           title="Delete"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4 responsive-container" />
                         </button>
                       </div>
                     </td>
@@ -658,26 +670,26 @@ const AllUsers: React.FC = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-700 dark:text-gray-300">
+          <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 responsive-container">
+            <div className="flex items-center justify-between responsive-container">
+              <div className="text-sm text-gray-700 dark:text-gray-300 responsive-container">
                 Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, totalUsers)} of {totalUsers} results
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 responsive-container">
             <button
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  onClick={() = aria-label="Button"> setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container"
             >
               Previous
             </button>
-                <span className="px-3 py-1 text-sm text-gray-700 dark:text-gray-300">
+                <span className="px-3 py-1 text-sm text-gray-700 dark:text-gray-300 responsive-container">
                   Page {currentPage} of {totalPages}
                 </span>
                 <button
-                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  onClick={() = aria-label="Button"> setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container"
                 >
                   Next
                 </button>
@@ -694,62 +706,62 @@ const AllUsers: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4 responsive-container"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container">
                   Create New User
                 </h3>
                 <button
-                  onClick={() => setShowCreateUser(false)}
-                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateUser(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container" />
             </button>
           </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Name
                   </label>
                   <input
                     type="text"
                     value={newUser.name || ''}
                     onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                     placeholder="Full name"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Email
                   </label>
                   <input
                     type="email"
                     value={newUser.email || ''}
                     onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                     placeholder="Email address"
                   />
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 responsive-container">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                       Role
                     </label>
                     <select
                       value={newUser.role || 'viewer'}
                       onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                     >
                       <option value="viewer">Viewer</option>
                       <option value="user">User</option>
@@ -760,13 +772,13 @@ const AllUsers: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                       Status
                     </label>
                     <select
                       value={newUser.status || 'pending'}
                       onChange={(e) => setNewUser({ ...newUser, status: e.target.value as 'pending' | 'active' | 'inactive' | 'suspended' })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                     >
                       <option value="pending">Pending</option>
                       <option value="active">Active</option>
@@ -777,30 +789,30 @@ const AllUsers: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Company
                   </label>
                   <input
                     type="text"
                     value={newUser.company || ''}
                     onChange={(e) => setNewUser({ ...newUser, company: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white responsive-container"
                     placeholder="Company name"
                   />
         </div>
       </div>
               
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() => setShowCreateUser(false)}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() = aria-label="Button"> setShowCreateUser(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateUser}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
+                 aria-label="Button">
                   Create User
                 </button>
               </div>

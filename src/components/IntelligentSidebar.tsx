@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -116,50 +117,56 @@ export function IntelligentSidebar() {
   const isActive = (path: string) => location.pathname === path
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.aside
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-64"
+      className="hidden md:block fixed left-0 top-20 bottom-0 z-30 w-64 responsive-container sm:flex-col md:flex-row lg:grid"
     >
-      <div className="h-full bg-white/95 backdrop-blur-xl border-r border-transbot-border/20 shadow-transbot">
+      <div className="h-full bg-white/95 backdrop-blur-xl border-r border-transbot-border/20 shadow-transbot responsive-container sm:flex-col md:flex-row lg:grid">
         
         {/* Header */}
-        <div className="p-4 border-b border-transbot-border/20">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
+        <div className="p-4 border-b border-transbot-border/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Brain className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h2 className="font-bold text-transbot-text-primary">Navigation</h2>
-              <p className="text-xs text-transbot-text-secondary">Smart Access</p>
+              <h2 className="font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
+              <p className="text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Smart Access</p>
             </div>
           </div>
         </div>
 
         {/* Search */}
-        <div className="p-4 border-b border-transbot-border/20">
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary" />
+        <div className="p-4 border-b border-transbot-border/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid" />
             <input
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/80 backdrop-blur-sm border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky transition-all duration-200 text-sm"
+              className="w-full pl-10 pr-4 py-2 bg-white/80 backdrop-blur-sm border border-transbot-border/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-transbot-sky/20 focus:border-transbot-sky transition-all duration-200 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
         </div>
 
         {/* Navigation Sections */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
           {navigationSections.map((section) => (
             <motion.div
               key={section.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-1"
+              className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {/* Section Header */}
               <motion.button
@@ -172,7 +179,7 @@ export function IntelligentSidebar() {
                     : 'text-transbot-text-primary hover:bg-transbot-sky/5 hover:text-transbot-sky'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <section.icon className={`w-5 h-5 ${section.color}`} />
                   <span>{section.name}</span>
                 </div>
@@ -191,7 +198,7 @@ export function IntelligentSidebar() {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="ml-4 space-y-1"
+                    className="ml-4 space-y-1 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {section.items.map((item, index) => (
                       <motion.button
@@ -207,7 +214,7 @@ export function IntelligentSidebar() {
                             : 'text-transbot-text-secondary hover:text-transbot-sky hover:bg-transbot-sky/5'
                         }`}
                       >
-                        <item.icon className="w-4 h-4" />
+                        <item.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>{item.name}</span>
                       </motion.button>
                     ))}
@@ -219,9 +226,9 @@ export function IntelligentSidebar() {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-transbot-border/20">
-          <div className="flex items-center gap-2 text-xs text-transbot-text-secondary">
-            <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse"></div>
+        <div className="p-4 border-t border-transbot-border/20 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center gap-2 text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-2 h-2 bg-transbot-teal rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
             <span>AI System Active</span>
           </div>
         </div>

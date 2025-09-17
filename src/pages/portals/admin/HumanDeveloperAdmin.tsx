@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
@@ -264,11 +265,11 @@ export function HumanDeveloperAdmin() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active': return <CheckCircle className="w-4 h-4" />
-      case 'busy': return <Activity className="w-4 h-4" />
-      case 'away': return <Clock className="w-4 h-4" />
-      case 'offline': return <XCircle className="w-4 h-4" />
-      default: return <AlertTriangle className="w-4 h-4" />
+      case 'active': return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'busy': return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'away': return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      case 'offline': return <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+      default: return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
     }
   }
 
@@ -294,22 +295,22 @@ export function HumanDeveloperAdmin() {
   }
 
   const renderOverview = () => (
-    <div className="space-y-8">
+    <div className="space-y-8 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-8">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-8 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex items-center space-x-4 mb-4">
-            <User className="w-12 h-12" />
+          <div className="flex items-center space-x-4 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <User className="w-12 h-12 responsive-container sm:flex-col md:flex-row lg:grid" />
             <div>
-              <h2 className="text-4xl font-bold">Human Developer Management</h2>
-              <p className="text-xl opacity-90">Coordinate and manage human development teams</p>
+              <h2 className="text-4xl font-bold responsive-container sm:flex-col md:flex-row lg:grid">Human Developer Management</h2>
+              <p className="text-xl opacity-90 responsive-container sm:flex-col md:flex-row lg:grid">Coordinate and manage human development teams</p>
             </div>
           </div>
-          <p className="text-lg opacity-80 max-w-3xl">
+          <p className="text-lg opacity-80 max-w-3xl responsive-container sm:flex-col md:flex-row lg:grid">
             Manage human developers working alongside MCP Agents. Track performance, 
             assign projects, monitor progress, and ensure seamless collaboration between 
             human and AI development teams.
@@ -318,21 +319,21 @@ export function HumanDeveloperAdmin() {
       </div>
 
       {/* System Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-transbot-text-secondary text-sm font-medium">Total Developers</p>
-              <p className="text-2xl font-bold text-transbot-text-primary">15</p>
-              <p className="text-green-600 text-sm font-medium">+3 this month</p>
+              <p className="text-transbot-text-secondary text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Total Developers</p>
+              <p className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">15</p>
+              <p className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">+3 this month</p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-              <Users className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -341,16 +342,16 @@ export function HumanDeveloperAdmin() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-transbot-text-secondary text-sm font-medium">Active Projects</p>
-              <p className="text-2xl font-bold text-transbot-text-primary">12</p>
-              <p className="text-green-600 text-sm font-medium">+2 this week</p>
+              <p className="text-transbot-text-secondary text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Active Projects</p>
+              <p className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">12</p>
+              <p className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">+2 this week</p>
             </div>
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-              <Briefcase className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Briefcase className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -359,16 +360,16 @@ export function HumanDeveloperAdmin() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-transbot-text-secondary text-sm font-medium">Avg Performance</p>
-              <p className="text-2xl font-bold text-transbot-text-primary">88.2%</p>
-              <p className="text-green-600 text-sm font-medium">+5.1% this month</p>
+              <p className="text-transbot-text-secondary text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Avg Performance</p>
+              <p className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">88.2%</p>
+              <p className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">+5.1% this month</p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="w-6 h-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
@@ -377,121 +378,121 @@ export function HumanDeveloperAdmin() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-transbot-text-secondary text-sm font-medium">Code Commits</p>
-              <p className="text-2xl font-bold text-transbot-text-primary">3,116</p>
-              <p className="text-green-600 text-sm font-medium">+156 today</p>
+              <p className="text-transbot-text-secondary text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">Code Commits</p>
+              <p className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">3,116</p>
+              <p className="text-green-600 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">+156 today</p>
             </div>
-            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-              <GitBranch className="w-6 h-6 text-orange-600" />
+            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <GitBranch className="w-6 h-6 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setActiveTab('developers')}
         >
-          <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-            <Users className="w-6 h-6 text-blue-600" />
+          <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Users className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2">Developer Management</h3>
-          <p className="text-transbot-text-secondary">Manage individual developers and their assignments</p>
+          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Developer Management</h3>
+          <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Manage individual developers and their assignments</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setActiveTab('projects')}
         >
-          <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-            <Briefcase className="w-6 h-6 text-green-600" />
+          <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Briefcase className="w-6 h-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2">Project Management</h3>
-          <p className="text-transbot-text-secondary">Track and manage development projects</p>
+          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Project Management</h3>
+          <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Track and manage development projects</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setActiveTab('teams')}
         >
-          <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-            <Users className="w-6 h-6 text-purple-600" />
+          <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Users className="w-6 h-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2">Team Management</h3>
-          <p className="text-transbot-text-secondary">Organize developers into teams and departments</p>
+          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Team Management</h3>
+          <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Organize developers into teams and departments</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 hover:shadow-xl transition-all duration-300 cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setActiveTab('analytics')}
         >
-          <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-            <BarChart3 className="w-6 h-6 text-orange-600" />
+          <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <BarChart3 className="w-6 h-6 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
-          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2">Performance Analytics</h3>
-          <p className="text-transbot-text-secondary">Analyze team and individual performance</p>
+          <h3 className="text-xl font-semibold text-transbot-text-primary mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Performance Analytics</h3>
+          <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Analyze team and individual performance</p>
         </motion.div>
       </div>
     </div>
   )
 
   const renderDevelopers = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-transbot-text-primary">Developer Management</h3>
-        <div className="flex space-x-2">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Developer Management</h3>
+        <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <input
             type="text"
             placeholder="Search developers..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="px-4 py-2 bg-white/80 border border-slate-200/50 rounded-lg text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent"
+            className="px-4 py-2 bg-white/80 border border-slate-200/50 rounded-lg text-transbot-text-primary placeholder-transbot-text-secondary focus:outline-none focus:ring-2 focus:ring-transbot-sky focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
           />
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors flex items-center space-x-2">
-            <Plus className="w-4 h-4" />
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Add Developer</span>
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {developers.map((dev, index) => (
           <motion.div
             key={dev.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <User className="w-6 h-6 text-blue-600" />
+            <div className="flex items-start justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <User className="w-6 h-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-transbot-text-primary">{dev.name}</h4>
-                  <p className="text-sm text-transbot-text-secondary">{dev.email}</p>
+                  <h4 className="text-lg font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{dev.name}</h4>
+                  <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">{dev.email}</p>
                 </div>
               </div>
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1 ${getStatusColor(dev.status)}`}>
                   {getStatusIcon(dev.status)}
                   <span>{dev.status}</span>
@@ -502,81 +503,81 @@ export function HumanDeveloperAdmin() {
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm text-transbot-text-secondary">Performance</p>
-                <div className="flex items-center space-x-2">
-                  <div className="flex-1 bg-slate-200 rounded-full h-2">
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Performance</p>
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex-1 bg-slate-200 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div 
-                      className="bg-blue-500 h-2 rounded-full" 
+                      className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" 
                       style={{ width: `${dev.performance}%` }}
                     ></div>
                   </div>
-                  <span className="text-sm font-semibold text-transbot-text-primary">{dev.performance}%</span>
+                  <span className="text-sm font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{dev.performance}%</span>
                 </div>
               </div>
 
               <div>
-                <p className="text-sm text-transbot-text-secondary">Experience</p>
-                <p className="text-sm text-transbot-text-primary font-medium">{dev.experience}</p>
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Experience</p>
+                <p className="text-sm text-transbot-text-primary font-medium responsive-container sm:flex-col md:flex-row lg:grid">{dev.experience}</p>
               </div>
 
               <div>
-                <p className="text-sm text-transbot-text-secondary">Location</p>
-                <div className="flex items-center space-x-1 text-sm text-transbot-text-primary">
-                  <MapPin className="w-4 h-4" />
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Location</p>
+                <div className="flex items-center space-x-1 text-sm text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">
+                  <MapPin className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{dev.location}</span>
                 </div>
               </div>
 
               <div>
-                <p className="text-sm text-transbot-text-secondary">Specializations</p>
-                <div className="flex flex-wrap gap-1 mt-1">
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Specializations</p>
+                <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {dev.specialization.slice(0, 3).map(skill => (
-                    <span key={skill} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                    <span key={skill} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                       {skill}
                     </span>
                   ))}
                   {dev.specialization.length > 3 && (
-                    <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                    <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                       +{dev.specialization.length - 3}
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 text-xs">
+              <div className="grid grid-cols-3 gap-2 text-xs responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <p className="text-transbot-text-secondary">Commits</p>
-                  <p className="font-semibold text-transbot-text-primary">{dev.commits}</p>
+                  <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Commits</p>
+                  <p className="font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{dev.commits}</p>
                 </div>
                 <div>
-                  <p className="text-transbot-text-secondary">PRs</p>
-                  <p className="font-semibold text-transbot-text-primary">{dev.pullRequests}</p>
+                  <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">PRs</p>
+                  <p className="font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{dev.pullRequests}</p>
                 </div>
                 <div>
-                  <p className="text-transbot-text-secondary">Reviews</p>
-                  <p className="font-semibold text-transbot-text-primary">{dev.codeReviews}</p>
+                  <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Reviews</p>
+                  <p className="font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{dev.codeReviews}</p>
                 </div>
               </div>
 
               <div>
-                <p className="text-xs text-transbot-text-secondary">Last activity: {dev.lastActivity}</p>
+                <p className="text-xs text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Last activity: {dev.lastActivity}</p>
               </div>
             </div>
 
-            <div className="flex space-x-2 mt-4">
+            <div className="flex space-x-2 mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button 
-                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors"
-                onClick={() => setSelectedDeveloper(dev)}
+                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+                onClick={() = aria-label="Button"> setSelectedDeveloper(dev)}
               >
                 Manage
               </button>
-              <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors">
-                <MessageSquare className="w-4 h-4" />
+              <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
-              <button className="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-600 transition-colors">
-                <Calendar className="w-4 h-4" />
+              <button className="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Calendar className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </motion.div>
@@ -586,28 +587,28 @@ export function HumanDeveloperAdmin() {
   )
 
   const renderProjects = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-transbot-text-primary">Project Management</h3>
-        <button className="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Project Management</h3>
+        <button className="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           <span>Create Project</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h4 className="text-lg font-semibold text-transbot-text-primary">{project.name}</h4>
+            <div className="flex items-start justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h4 className="text-lg font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{project.name}</h4>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${getProjectStatusColor(project.status)}`}>
                     {project.status}
                   </span>
@@ -620,44 +621,44 @@ export function HumanDeveloperAdmin() {
                     {project.priority}
                   </span>
                 </div>
-                <p className="text-transbot-text-secondary mb-3">{project.description}</p>
+                <p className="text-transbot-text-secondary mb-3 responsive-container sm:flex-col md:flex-row lg:grid">{project.description}</p>
                 
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-transbot-text-secondary">Progress</span>
-                    <span className="text-sm font-semibold text-transbot-text-primary">{project.progress}%</span>
+                <div className="mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Progress</span>
+                    <span className="text-sm font-semibold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{project.progress}%</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-2">
+                  <div className="w-full bg-slate-200 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div 
-                      className="bg-blue-500 h-2 rounded-full" 
+                      className="bg-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" 
                       style={{ width: `${project.progress}%` }}
                     ></div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <p className="text-transbot-text-secondary">Technologies</p>
-                    <div className="flex flex-wrap gap-1 mt-1">
+                    <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Technologies</p>
+                    <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {project.technologies.map(tech => (
-                        <span key={tech} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">
+                        <span key={tech} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <p className="text-transbot-text-secondary">Deadline</p>
-                    <p className="font-medium text-transbot-text-primary">{project.deadline}</p>
+                    <p className="text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Deadline</p>
+                    <p className="font-medium text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{project.deadline}</p>
                   </div>
                 </div>
               </div>
-              <div className="flex space-x-2 ml-4">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors">
-                  <Eye className="w-4 h-4" />
+              <div className="flex space-x-2 ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
-                <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors">
-                  <Edit className="w-4 h-4" />
+                <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </div>
@@ -668,46 +669,46 @@ export function HumanDeveloperAdmin() {
   )
 
   const renderTeams = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-transbot-text-primary">Team Management</h3>
-        <button className="bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Team Management</h3>
+        <button className="bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           <span>Create Team</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {teams.map((team, index) => (
           <motion.div
             key={team.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50"
+            className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex items-start justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <h4 className="text-xl font-semibold text-transbot-text-primary mb-1">{team.name}</h4>
-                <p className="text-sm text-transbot-text-secondary">{team.specialization}</p>
+                <h4 className="text-xl font-semibold text-transbot-text-primary mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{team.name}</h4>
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">{team.specialization}</p>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-transbot-text-secondary">Performance</p>
-                <p className="text-lg font-bold text-transbot-text-primary">{team.performance}%</p>
+              <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Performance</p>
+                <p className="text-lg font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{team.performance}%</p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm text-transbot-text-secondary">Team Lead</p>
-                <p className="font-medium text-transbot-text-primary">{team.lead}</p>
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Team Lead</p>
+                <p className="font-medium text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{team.lead}</p>
               </div>
               
               <div>
-                <p className="text-sm text-transbot-text-secondary">Members ({team.members.length})</p>
-                <div className="flex flex-wrap gap-1 mt-1">
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Members ({team.members.length})</p>
+                <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {team.members.map(member => (
-                    <span key={member} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded">
+                    <span key={member} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                       {member}
                     </span>
                   ))}
@@ -715,10 +716,10 @@ export function HumanDeveloperAdmin() {
               </div>
 
               <div>
-                <p className="text-sm text-transbot-text-secondary">Projects ({team.projects.length})</p>
-                <div className="flex flex-wrap gap-1 mt-1">
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Projects ({team.projects.length})</p>
+                <div className="flex flex-wrap gap-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {team.projects.map(project => (
-                    <span key={project} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">
+                    <span key={project} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid">
                       {project}
                     </span>
                   ))}
@@ -726,20 +727,20 @@ export function HumanDeveloperAdmin() {
               </div>
 
               <div>
-                <p className="text-sm text-transbot-text-secondary">Last Meeting</p>
-                <p className="text-sm text-transbot-text-primary">{team.lastMeeting}</p>
+                <p className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Last Meeting</p>
+                <p className="text-sm text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">{team.lastMeeting}</p>
               </div>
             </div>
 
-            <div className="flex space-x-2 mt-4">
-              <button className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+            <div className="flex space-x-2 mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                 Manage Team
               </button>
-              <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors">
-                <Calendar className="w-4 h-4" />
+              <button className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Calendar className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
-              <button className="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-600 transition-colors">
-                <MessageSquare className="w-4 h-4" />
+              <button className="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <MessageSquare className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </motion.div>
@@ -749,19 +750,19 @@ export function HumanDeveloperAdmin() {
   )
 
   const renderAnalytics = () => (
-    <div className="space-y-6">
-      <h3 className="text-2xl font-bold text-transbot-text-primary">Performance Analytics</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50">
-          <h4 className="text-lg font-semibold text-transbot-text-primary mb-4">Developer Performance Trends</h4>
-          <div className="h-64 bg-slate-50 rounded-xl flex items-center justify-center">
-            <BarChart3 className="w-16 h-16 text-slate-400" />
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h3 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">Performance Analytics</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h4 className="text-lg font-semibold text-transbot-text-primary mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Developer Performance Trends</h4>
+          <div className="h-64 bg-slate-50 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <BarChart3 className="w-16 h-16 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
-        <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50">
-          <h4 className="text-lg font-semibold text-transbot-text-primary mb-4">Project Progress</h4>
-          <div className="h-64 bg-slate-50 rounded-xl flex items-center justify-center">
-            <TrendingUp className="w-16 h-16 text-slate-400" />
+        <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h4 className="text-lg font-semibold text-transbot-text-primary mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Project Progress</h4>
+          <div className="h-64 bg-slate-50 rounded-xl flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <TrendingUp className="w-16 h-16 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
@@ -769,34 +770,40 @@ export function HumanDeveloperAdmin() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-16 responsive-container sm:flex-col md:flex-row lg:grid">
       <PortalHeader
         title="Human Developer Admin"
         description="Manage and coordinate human development teams"
         icon={User}
         color="from-blue-500 to-purple-600"
       >
-        <div className="flex items-center space-x-4">
-          <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-medium">
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-medium responsive-container sm:flex-col md:flex-row lg:grid">
             Teams Status: Active
           </div>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
             Schedule Meeting
           </button>
         </div>
       </PortalHeader>
-      <section className="pt-8 pb-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-8 pb-8 px-6 lg:px-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
 
           {/* Navigation Tabs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="flex space-x-1 bg-slate-100 p-1 rounded-lg mb-8"
+            className="flex space-x-1 bg-slate-100 p-1 rounded-lg mb-8 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <button
-              onClick={() => setActiveTab('overview')}
+              onClick={() = aria-label="Button"> setActiveTab('overview')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'overview'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -806,7 +813,7 @@ export function HumanDeveloperAdmin() {
               Overview
             </button>
             <button
-              onClick={() => setActiveTab('developers')}
+              onClick={() = aria-label="Button"> setActiveTab('developers')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'developers'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -816,7 +823,7 @@ export function HumanDeveloperAdmin() {
               Developer Management
             </button>
             <button
-              onClick={() => setActiveTab('projects')}
+              onClick={() = aria-label="Button"> setActiveTab('projects')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'projects'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -826,7 +833,7 @@ export function HumanDeveloperAdmin() {
               Project Management
             </button>
             <button
-              onClick={() => setActiveTab('teams')}
+              onClick={() = aria-label="Button"> setActiveTab('teams')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'teams'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -836,7 +843,7 @@ export function HumanDeveloperAdmin() {
               Team Management
             </button>
             <button
-              onClick={() => setActiveTab('analytics')}
+              onClick={() = aria-label="Button"> setActiveTab('analytics')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'analytics'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -850,8 +857,8 @@ export function HumanDeveloperAdmin() {
       </section>
 
       {/* Main Content */}
-      <section className="px-6 lg:px-8 pb-16">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-6 lg:px-8 pb-16 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
           {activeTab === 'overview' && renderOverview()}
           {activeTab === 'developers' && renderDevelopers()}
           {activeTab === 'projects' && renderProjects()}
@@ -862,50 +869,50 @@ export function HumanDeveloperAdmin() {
 
       {/* Developer Detail Modal */}
       {selectedDeveloper && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-transbot-text-primary">
+            <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h2 className="text-2xl font-bold text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedDeveloper.name}
                 </h2>
                 <button
-                  onClick={() => setSelectedDeveloper(null)}
-                  className="text-transbot-text-secondary hover:text-transbot-text-primary"
+                  onClick={() = aria-label="Button"> setSelectedDeveloper(null)}
+                  className="text-transbot-text-secondary hover:text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <XCircle className="w-6 h-6" />
+                  <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
               
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <label className="text-sm text-transbot-text-secondary">Role</label>
-                    <p className="font-medium capitalize">{selectedDeveloper.role}</p>
+                    <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Role</label>
+                    <p className="font-medium capitalize responsive-container sm:flex-col md:flex-row lg:grid">{selectedDeveloper.role}</p>
                   </div>
                   <div>
-                    <label className="text-sm text-transbot-text-secondary">Experience</label>
-                    <p className="font-medium">{selectedDeveloper.experience}</p>
+                    <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Experience</label>
+                    <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedDeveloper.experience}</p>
                   </div>
                   <div>
-                    <label className="text-sm text-transbot-text-secondary">Location</label>
-                    <p className="font-medium">{selectedDeveloper.location}</p>
+                    <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Location</label>
+                    <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedDeveloper.location}</p>
                   </div>
                   <div>
-                    <label className="text-sm text-transbot-text-secondary">Join Date</label>
-                    <p className="font-medium">{selectedDeveloper.joinDate}</p>
+                    <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Join Date</label>
+                    <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedDeveloper.joinDate}</p>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-sm text-transbot-text-secondary">Skills</label>
-                  <div className="flex flex-wrap gap-2 mt-2">
+                  <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Skills</label>
+                  <div className="flex flex-wrap gap-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedDeveloper.skills.map(skill => (
-                      <span key={skill} className="px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-lg">
+                      <span key={skill} className="px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                         {skill}
                       </span>
                     ))}
@@ -913,15 +920,15 @@ export function HumanDeveloperAdmin() {
                 </div>
 
                 <div>
-                  <label className="text-sm text-transbot-text-secondary">Working Hours</label>
-                  <p className="font-medium">{selectedDeveloper.workingHours.start} - {selectedDeveloper.workingHours.end} ({selectedDeveloper.workingHours.timezone})</p>
+                  <label className="text-sm text-transbot-text-secondary responsive-container sm:flex-col md:flex-row lg:grid">Working Hours</label>
+                  <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedDeveloper.workingHours.start} - {selectedDeveloper.workingHours.end} ({selectedDeveloper.workingHours.timezone})</p>
                 </div>
                 
-                <div className="flex space-x-4">
-                  <button className="flex-1 bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                <div className="flex space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <button className="flex-1 bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     Manage Developer
                   </button>
-                  <button className="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                  <button className="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     Send Message
                   </button>
                 </div>

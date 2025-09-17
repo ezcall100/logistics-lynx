@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   CreditCard,
@@ -304,18 +304,18 @@ export const BillingManagement: React.FC = () => {
     switch (status) {
       case 'active':
       case 'paid':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container" />;
       case 'pending':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container" />;
       case 'cancelled':
       case 'failed':
-        return <XCircle className="w-4 h-4" />;
+        return <XCircle className="w-4 h-4 responsive-container" />;
       case 'expired':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container" />;
       case 'refunded':
-        return <RefreshCw className="w-4 h-4" />;
+        return <RefreshCw className="w-4 h-4 responsive-container" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container" />;
     }
   };
 
@@ -370,33 +370,39 @@ export const BillingManagement: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 responsive-container">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-8 responsive-container">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 responsive-container">
                 Billing Management
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 responsive-container">
                 Manage subscriptions, invoices, and payment processing across your platform
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <RefreshCw className="w-4 h-4" />
+            <div className="flex items-center space-x-3 responsive-container">
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <RefreshCw className="w-4 h-4 responsive-container" />
                 <span>Refresh</span>
               </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
+              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2 responsive-container" aria-label="Button">
+                <Download className="w-4 h-4 responsive-container" />
                 <span>Export</span>
               </button>
               <button
-                onClick={() => console.log('Create modal clicked')}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                onClick={() = aria-label="Button"> console.log('Create modal clicked')}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 responsive-container"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 responsive-container" />
                 <span>Add Subscription</span>
               </button>
             </div>
@@ -404,15 +410,17 @@ export const BillingManagement: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200 dark:border-slate-700">
-            <nav className="-mb-px flex space-x-8">
+        <div className="mb-6 responsive-container">
+          <div className="border-b border-gray-200 dark:border-slate-700 responsive-container">
+            <nav className="-mb-px flex space-x-8 responsive-container">
               {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <button
                     key={tab.id}
-                    onClick={() =>
+                    onClick={() = aria-label="Button">
                       setSelectedTab(
                         tab.id as 'overview' | 'subscriptions' | 'invoices' | 'payments'
                       )
@@ -423,10 +431,10 @@ export const BillingManagement: React.FC = () => {
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-slate-600'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 responsive-container" />
                     <span>{tab.label}</span>
                     {tab.count !== undefined && (
-                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs">
+                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs responsive-container">
                         {tab.count}
                       </span>
                     )}
@@ -438,22 +446,22 @@ export const BillingManagement: React.FC = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="mb-6 responsive-container">
+          <div className="flex flex-col lg:flex-row gap-4 responsive-container">
+            <div className="relative flex-1 responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search subscriptions, invoices, or users..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm responsive-container"
               />
             </div>
             <select
               value={statusFilter}
               onChange={e => setStatusFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
+              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700 responsive-container"
             >
               <option value="all">All Statuses</option>
               <option value="active">Active</option>
@@ -471,27 +479,29 @@ export const BillingManagement: React.FC = () => {
         {selectedTab === 'overview' && (
           <>
             {/* Key Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8 responsive-container">
               {billingMetrics.map(metric => {
                 const Icon = metric.icon;
                 return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                   <motion.div
                     key={metric.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow responsive-container"
                   >
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-4 responsive-container">
                       <div className={`p-2 rounded-lg ${metric.color} bg-opacity-10`}>
                         <Icon className={`w-5 h-5 ${metric.color.replace('bg-', 'text-')}`} />
                       </div>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1 responsive-container">
                         {metric.changeType === 'increase' ? (
-                          <ArrowUpRight className="w-4 h-4 text-green-500" />
+                          <ArrowUpRight className="w-4 h-4 text-green-500 responsive-container" />
                         ) : metric.changeType === 'decrease' ? (
-                          <ArrowDownRight className="w-4 h-4 text-red-500" />
+                          <ArrowDownRight className="w-4 h-4 text-red-500 responsive-container" />
                         ) : (
-                          <Activity className="w-4 h-4 text-gray-500" />
+                          <Activity className="w-4 h-4 text-gray-500 responsive-container" />
                         )}
                         <span
                           className={`text-sm font-medium ${
@@ -506,11 +516,11 @@ export const BillingManagement: React.FC = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1 responsive-container">
                       {formatValue(metric.value, metric.format)}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 responsive-container">{metric.title}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 responsive-container">
                       {metric.period}
                     </div>
                   </motion.div>
@@ -519,25 +529,25 @@ export const BillingManagement: React.FC = () => {
             </div>
 
             {/* Charts and Additional Overview Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container">
+              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">
                   Revenue Trends
                 </h3>
-                <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                  <div className="text-center">
-                    <BarChart3 className="w-12 h-12 mx-auto mb-2" />
+                <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400 responsive-container">
+                  <div className="text-center responsive-container">
+                    <BarChart3 className="w-12 h-12 mx-auto mb-2 responsive-container" />
                     <p>Revenue chart will be displayed here</p>
                   </div>
                 </div>
               </div>
-              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container">
                   Subscription Distribution
                 </h3>
-                <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                  <div className="text-center">
-                    <PieChart className="w-12 h-12 mx-auto mb-2" />
+                <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400 responsive-container">
+                  <div className="text-center responsive-container">
+                    <PieChart className="w-12 h-12 mx-auto mb-2 responsive-container" />
                     <p>Subscription distribution chart will be displayed here</p>
                   </div>
                 </div>
@@ -547,120 +557,120 @@ export const BillingManagement: React.FC = () => {
         )}
 
         {selectedTab === 'subscriptions' && (
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       User
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Plan
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Amount
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Next Billing
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Usage
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {filteredSubscriptions.slice(0, 20).map(subscription => (
                     <motion.tr
                       key={subscription.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                             {subscription.userName}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                             {subscription.userEmail}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPlanColor(subscription.plan)}`}
                         >
                           {subscription.plan}
                         </span>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 responsive-container">
                           {subscription.billingCycle}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                           ${subscription.amount}/
                           {subscription.billingCycle === 'yearly' ? 'year' : 'month'}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                           {subscription.currency}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(subscription.status)}`}
                         >
                           {getStatusIcon(subscription.status)}
-                          <span className="ml-1 capitalize">{subscription.status}</span>
+                          <span className="ml-1 capitalize responsive-container">{subscription.status}</span>
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {new Date(subscription.nextBillingDate).toLocaleDateString()}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                           {subscription.autoRenew ? 'Auto-renew' : 'Manual'}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {subscription.usage.current}/{subscription.usage.limit}{' '}
                           {subscription.usage.unit}
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1 responsive-container">
                           <div
-                            className="bg-blue-600 h-2 rounded-full"
+                            className="bg-blue-600 h-2 rounded-full responsive-container"
                             style={{
                               width: `${(subscription.usage.current / subscription.usage.limit) * 100}%`,
                             }}
                           ></div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
-                          >
-                            <Eye className="w-4 h-4" />
+                           aria-label="Button">
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
+                           aria-label="Button">
+                            <Edit className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Invoice"
-                          >
-                            <Receipt className="w-4 h-4" />
+                           aria-label="Button">
+                            <Receipt className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>
@@ -673,108 +683,108 @@ export const BillingManagement: React.FC = () => {
         )}
 
         {selectedTab === 'invoices' && (
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Invoice
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       User
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Amount
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Issue Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Due Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {filteredInvoices.slice(0, 20).map(invoice => (
                     <motion.tr
                       key={invoice.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                           {invoice.id}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                           {invoice.subscriptionId}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                           {invoice.userName}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">
                           {invoice.userId}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                           ${invoice.amount} {invoice.currency}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                           {invoice.paymentMethod}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(invoice.status)}`}
                         >
                           {getStatusIcon(invoice.status)}
-                          <span className="ml-1 capitalize">{invoice.status}</span>
+                          <span className="ml-1 capitalize responsive-container">{invoice.status}</span>
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {new Date(invoice.issueDate).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {new Date(invoice.dueDate).toLocaleDateString()}
                         </div>
                         {invoice.paidDate && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                             Paid: {new Date(invoice.paidDate).toLocaleDateString()}
                           </div>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
-                          >
-                            <Eye className="w-4 h-4" />
+                           aria-label="Button">
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Download"
-                          >
-                            <Download className="w-4 h-4" />
+                           aria-label="Button">
+                            <Download className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Send"
-                          >
-                            <Mail className="w-4 h-4" />
+                           aria-label="Button">
+                            <Mail className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>
@@ -787,104 +797,104 @@ export const BillingManagement: React.FC = () => {
         )}
 
         {selectedTab === 'payments' && (
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden responsive-container">
+            <div className="overflow-x-auto responsive-container">
+              <table className="w-full responsive-container">
+                <thead className="bg-gray-50 dark:bg-slate-700/50 responsive-container">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       User
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Payment Method
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Type
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Expiry
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Created
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-slate-700 responsive-container">
                   {paymentMethods.slice(0, 20).map(payment => (
                     <motion.tr
                       key={payment.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors responsive-container"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                           {payment.userId}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center space-x-2">
-                          <CardIcon className="w-4 h-4 text-gray-400" />
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
+                          <CardIcon className="w-4 h-4 text-gray-400 responsive-container" />
                           <div>
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
+                            <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container">
                               {payment.brand} ****{payment.last4}
                             </div>
                             {payment.isDefault && (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 responsive-container">
                                 Default
                               </span>
                             )}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900 dark:text-white capitalize">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <span className="text-sm text-gray-900 dark:text-white capitalize responsive-container">
                           {payment.type}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
                         <span
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}
                         >
                           {getStatusIcon(payment.status)}
-                          <span className="ml-1 capitalize">{payment.status}</span>
+                          <span className="ml-1 capitalize responsive-container">{payment.status}</span>
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {payment.expiryMonth}/{payment.expiryYear}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                        <div className="text-sm text-gray-900 dark:text-white responsive-container">
                           {new Date(payment.createdAt).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
                           <button
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                             title="View"
-                          >
-                            <Eye className="w-4 h-4" />
+                           aria-label="Button">
+                            <Eye className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 responsive-container"
                             title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
+                           aria-label="Button">
+                            <Edit className="w-4 h-4 responsive-container" />
                           </button>
                           <button
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                             title="Delete"
-                          >
-                            <Trash2 className="w-4 h-4" />
+                           aria-label="Button">
+                            <Trash2 className="w-4 h-4 responsive-container" />
                           </button>
                         </div>
                       </td>

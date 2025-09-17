@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Activity,
@@ -162,7 +162,13 @@ const ProgressTrackingDashboard: React.FC = () => {
         });
       }, 5000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isAutoRefresh, tasks]);
 
@@ -184,15 +190,15 @@ const ProgressTrackingDashboard: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'in_progress':
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'pending':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'failed':
-        return <XCircle className="w-4 h-4" />;
+        return <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -225,73 +231,75 @@ const ProgressTrackingDashboard: React.FC = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Live Progress Tracking</h1>
-          <p className="text-gray-600 mt-2">Real-time build progress and agent assignments</p>
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Live Progress Tracking</h1>
+          <p className="text-gray-600 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">Real-time build progress and agent assignments</p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600">Build Active</span>
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Build Active</span>
           </div>
           <button
-            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}
           >
-            {isAutoRefresh ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            {isAutoRefresh ? <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{isAutoRefresh ? 'Live Updates ON' : 'Live Updates OFF'}</span>
           </button>
         </div>
       </div>
 
       {/* Build Overview */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">
             Current Build: {buildProgress.currentBuild}
           </h2>
-          <div className="flex items-center space-x-2">
-            <Timer className="w-5 h-5 text-gray-500" />
-            <span className="text-sm text-gray-500">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Timer className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
               Started: {new Date(buildProgress.buildStartTime).toLocaleString()}
             </span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-3xl font-bold text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">
               {buildProgress.overallProgress.toFixed(0)}%
             </div>
-            <div className="text-sm text-gray-600">Overall Progress</div>
+            <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Overall Progress</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-green-600">{buildProgress.completedTasks}</div>
-            <div className="text-sm text-gray-600">Completed</div>
+          <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-3xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{buildProgress.completedTasks}</div>
+            <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Completed</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600">{buildProgress.inProgressTasks}</div>
-            <div className="text-sm text-gray-600">In Progress</div>
+          <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-3xl font-bold text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">{buildProgress.inProgressTasks}</div>
+            <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">In Progress</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-yellow-600">{buildProgress.pendingTasks}</div>
-            <div className="text-sm text-gray-600">Pending</div>
+          <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="text-3xl font-bold text-yellow-600 responsive-container sm:flex-col md:flex-row lg:grid">{buildProgress.pendingTasks}</div>
+            <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Pending</div>
           </div>
         </div>
 
-        <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+        <div className="w-full bg-gray-200 rounded-full h-3 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
-            className="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full"
+            className="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
             initial={{ width: 0 }}
             animate={{ width: `${buildProgress.overallProgress}%` }}
             transition={{ duration: 1, ease: 'easeOut' }}
           />
         </div>
 
-        <div className="flex items-center justify-between text-sm text-gray-600">
+        <div className="flex items-center justify-between text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
           <span>
             Estimated completion: {new Date(buildProgress.estimatedCompletion).toLocaleString()}
           </span>
@@ -302,16 +310,16 @@ const ProgressTrackingDashboard: React.FC = () => {
       </div>
 
       {/* Task Progress */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Task Progress</h2>
-          <div className="flex items-center space-x-2">
-            <BarChart3 className="w-5 h-5 text-gray-500" />
-            <span className="text-sm text-gray-500">Real-time updates</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Task Progress</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <BarChart3 className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Real-time updates</span>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {tasks.map((task, index) => (
             <motion.div
               key={task.id}
@@ -321,11 +329,11 @@ const ProgressTrackingDashboard: React.FC = () => {
               className={`border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow ${getStatusColor(task.status)}`}
               onClick={() => setSelectedTask(task)}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {getStatusIcon(task.status)}
-                    <span className="font-medium">{task.name}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{task.name}</span>
                   </div>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}
@@ -333,35 +341,35 @@ const ProgressTrackingDashboard: React.FC = () => {
                     {task.priority.toUpperCase()}
                   </span>
                 </div>
-                <div className="flex items-center space-x-4 text-sm">
-                  <span className="text-gray-500">Agent: {task.assignedAgent}</span>
-                  <span className="text-gray-500">
+                <div className="flex items-center space-x-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Agent: {task.assignedAgent}</span>
+                  <span className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                     Duration: {formatDuration(task.startTime, task.endTime)}
                   </span>
                 </div>
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <motion.div
-                  className="bg-blue-600 h-2 rounded-full"
+                  className="bg-blue-600 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                   initial={{ width: 0 }}
                   animate={{ width: `${task.progress}%` }}
                   transition={{ duration: 1, ease: 'easeOut' }}
                 />
               </div>
 
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">{task.progress.toFixed(0)}% complete</span>
-                <span className="text-gray-500">Est: {task.estimatedDuration}</span>
+              <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{task.progress.toFixed(0)}% complete</span>
+                <span className="text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Est: {task.estimatedDuration}</span>
               </div>
 
               {task.changes.length > 0 && (
-                <div className="mt-3">
-                  <p className="text-sm font-medium text-gray-700 mb-2">Recent Changes:</p>
-                  <ul className="space-y-1">
+                <div className="mt-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="text-sm font-medium text-gray-700 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Recent Changes:</p>
+                  <ul className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {task.changes.map((change, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2">
-                        <CheckCircle className="w-3 h-3 text-green-500" />
+                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <CheckCircle className="w-3 h-3 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>{change}</span>
                       </li>
                     ))}
@@ -374,44 +382,46 @@ const ProgressTrackingDashboard: React.FC = () => {
       </div>
 
       {/* Agent Status Summary */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Agent Status Summary</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Agent Status Summary</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {Array.from(new Set(tasks.map(t => t.assignedAgent))).map((agent, index) => {
             const agentTasks = tasks.filter(t => t.assignedAgent === agent);
             const activeTask = agentTasks.find(t => t.status === 'in_progress');
             const completedCount = agentTasks.filter(t => t.status === 'completed').length;
 
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <motion.div
                 key={agent}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="border border-gray-200 rounded-lg p-4"
+                className="border border-gray-200 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Users className="w-5 h-5 text-blue-600" />
+                <div className="flex items-center space-x-3 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                    <Users className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900">{agent}</h3>
-                    <p className="text-sm text-gray-500">{agentTasks.length} tasks assigned</p>
+                    <h3 className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{agent}</h3>
+                    <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{agentTasks.length} tasks assigned</p>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Completed:</span>
-                    <span className="font-medium text-green-600">{completedCount}</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Completed:</span>
+                    <span className="font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{completedCount}</span>
                   </div>
                   {activeTask && (
-                    <div className="text-sm">
-                      <p className="text-gray-600">Current: {activeTask.name}</p>
-                      <div className="w-full bg-gray-200 rounded-full h-1 mt-1">
+                    <div className="text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Current: {activeTask.name}</p>
+                      <div className="w-full bg-gray-200 rounded-full h-1 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div
-                          className="bg-blue-600 h-1 rounded-full"
+                          className="bg-blue-600 h-1 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           style={{ width: `${activeTask.progress}%` }}
                         />
                       </div>
@@ -429,68 +439,68 @@ const ProgressTrackingDashboard: React.FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setSelectedTask(null)}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+            className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={e => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-900">Task Details</h3>
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Task Details</h3>
               <button
-                onClick={() => setSelectedTask(null)}
-                className="p-2 text-gray-500 hover:text-gray-700"
+                onClick={() = aria-label="Button"> setSelectedTask(null)}
+                className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Task Information</h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Task Information</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <span className="text-gray-600">Name:</span>
-                    <p className="font-medium">{selectedTask.name}</p>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Name:</span>
+                    <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedTask.name}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Status:</span>
-                    <p className="font-medium capitalize">
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Status:</span>
+                    <p className="font-medium capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                       {selectedTask.status.replace('_', ' ')}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Assigned Agent:</span>
-                    <p className="font-medium">{selectedTask.assignedAgent}</p>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Assigned Agent:</span>
+                    <p className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{selectedTask.assignedAgent}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Priority:</span>
-                    <p className="font-medium capitalize">{selectedTask.priority}</p>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Priority:</span>
+                    <p className="font-medium capitalize responsive-container sm:flex-col md:flex-row lg:grid">{selectedTask.priority}</p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Progress</h4>
-                <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Progress</h4>
+                <div className="w-full bg-gray-200 rounded-full h-3 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div
-                    className="bg-blue-600 h-3 rounded-full"
+                    className="bg-blue-600 h-3 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ width: `${selectedTask.progress}%` }}
                   />
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedTask.progress.toFixed(0)}% complete
                 </p>
               </div>
 
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Timing</h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Timing</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <span className="text-gray-600">Start Time:</span>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Start Time:</span>
                     <p>
                       {selectedTask.startTime
                         ? new Date(selectedTask.startTime).toLocaleString()
@@ -498,7 +508,7 @@ const ProgressTrackingDashboard: React.FC = () => {
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-600">End Time:</span>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">End Time:</span>
                     <p>
                       {selectedTask.endTime
                         ? new Date(selectedTask.endTime).toLocaleString()
@@ -506,11 +516,11 @@ const ProgressTrackingDashboard: React.FC = () => {
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Estimated Duration:</span>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Estimated Duration:</span>
                     <p>{selectedTask.estimatedDuration}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Actual Duration:</span>
+                    <span className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Actual Duration:</span>
                     <p>{formatDuration(selectedTask.startTime, selectedTask.endTime)}</p>
                   </div>
                 </div>
@@ -518,11 +528,11 @@ const ProgressTrackingDashboard: React.FC = () => {
 
               {selectedTask.changes.length > 0 && (
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Changes Made</h4>
-                  <ul className="space-y-1">
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Changes Made</h4>
+                  <ul className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedTask.changes.map((change, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2">
-                        <CheckCircle className="w-3 h-3 text-green-500" />
+                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <CheckCircle className="w-3 h-3 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>{change}</span>
                       </li>
                     ))}

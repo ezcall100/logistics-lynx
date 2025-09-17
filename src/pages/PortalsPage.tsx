@@ -419,51 +419,57 @@ const PortalsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 responsive-container">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-purple-600/50"></div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 responsive-container">
+        <div className="absolute inset-0 bg-black/20 responsive-container"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-purple-600/50 responsive-container"></div>
         
         {/* Animated Background Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-400/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse responsive-container"></div>
+        <div className="absolute top-40 right-20 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl animate-pulse delay-1000 responsive-container"></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-400/20 rounded-full blur-xl animate-pulse delay-2000 responsive-container"></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center responsive-container"
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <Globe className="w-6 h-6 text-white" />
+            <div className="flex items-center justify-center gap-3 mb-6 responsive-container">
+              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center responsive-container">
+                <Globe className="w-6 h-6 text-white responsive-container" />
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-white">
+              <h1 className="text-4xl md:text-6xl font-bold text-white responsive-container">
                 Portal Ecosystem
               </h1>
             </div>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto responsive-container">
               Comprehensive suite of transportation management portals designed for every role in the logistics ecosystem
             </p>
             
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto responsive-container">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 responsive-container"
                 >
-                  <div className="flex items-center justify-center gap-3 mb-2">
+                  <div className="flex items-center justify-center gap-3 mb-2 responsive-container">
                     <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                    <span className="text-3xl font-bold text-white">{stat.number}</span>
+                    <span className="text-3xl font-bold text-white responsive-container">{stat.number}</span>
                   </div>
-                  <p className="text-blue-100 text-sm font-medium">{stat.label}</p>
+                  <p className="text-blue-100 text-sm font-medium responsive-container">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -472,55 +478,55 @@ const PortalsPage: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 responsive-container">
         {/* Search and Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 responsive-container">
+          <div className="relative flex-1 max-w-md responsive-container">
+            <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 responsive-container" />
             <input
               type="text"
               placeholder="Search portals..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white shadow-sm"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white shadow-sm responsive-container"
             />
           </div>
           
-          <div className="flex items-center gap-3">
-            <div className="flex items-center bg-white rounded-xl p-1 shadow-sm border border-gray-200">
+          <div className="flex items-center gap-3 responsive-container">
+            <div className="flex items-center bg-white rounded-xl p-1 shadow-sm border border-gray-200 responsive-container">
               <button
-                onClick={() => setViewMode('grid')}
+                onClick={() = aria-label="Button"> setViewMode('grid')}
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === 'grid' ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                <Grid className="w-4 h-4" />
+                <Grid className="w-4 h-4 responsive-container" />
               </button>
               <button
-                onClick={() => setViewMode('list')}
+                onClick={() = aria-label="Button"> setViewMode('list')}
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === 'list' ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                <List className="w-4 h-4" />
+                <List className="w-4 h-4 responsive-container" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8 responsive-container">
           {Object.entries(portalCategories).map(([key, category]) => (
             <button
               key={key}
-              onClick={() => setActiveTab(key)}
+              onClick={() = aria-label="Button"> setActiveTab(key)}
               className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
                 activeTab === key
                   ? `bg-gradient-to-r ${category.color} text-white shadow-lg transform scale-105`
                   : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
               }`}
             >
-              <category.icon className="w-5 h-5" />
+              <category.icon className="w-5 h-5 responsive-container" />
               <span>{category.title}</span>
               <span className={`px-2 py-1 rounded-full text-xs ${
                 activeTab === key ? 'bg-white/20' : 'bg-gray-100'
@@ -538,15 +544,15 @@ const PortalsPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className={`bg-gradient-to-r ${portalCategories[activeTab as keyof typeof portalCategories].bgColor} rounded-2xl p-6 mb-8 border border-gray-200`}
         >
-          <div className="flex items-center gap-4 mb-3">
+          <div className="flex items-center gap-4 mb-3 responsive-container">
             <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${portalCategories[activeTab as keyof typeof portalCategories].color} flex items-center justify-center`}>
               {React.createElement(portalCategories[activeTab as keyof typeof portalCategories].icon, { className: "w-6 h-6 text-white" })}
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-gray-900 responsive-container">
                 {portalCategories[activeTab as keyof typeof portalCategories].title}
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 responsive-container">
                 {portalCategories[activeTab as keyof typeof portalCategories].description}
               </p>
             </div>
@@ -580,52 +586,52 @@ const PortalsPage: React.FC = () => {
                 {viewMode === 'grid' ? (
                   <>
                     {/* Grid View */}
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-start justify-between mb-4 responsive-container">
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${portal.color} flex items-center justify-center shadow-lg`}>
-                        <portal.icon className="w-7 h-7 text-white" />
+                        <portal.icon className="w-7 h-7 text-white responsive-container" />
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 responsive-container">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getBadgeColor(portal.badge)}`}>
                           {portal.badge}
                         </span>
-                        <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm font-medium text-gray-600">{portal.stats.rating}</span>
+                        <div className="flex items-center gap-1 responsive-container">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current responsive-container" />
+                          <span className="text-sm font-medium text-gray-600 responsive-container">{portal.stats.rating}</span>
                         </div>
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors responsive-container">
                       {portal.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
+                    <p className="text-gray-600 mb-4 line-clamp-2 responsive-container">
                       {portal.description}
                     </p>
 
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">Active Users</span>
-                        <span className="font-medium text-gray-900">{portal.stats.users}</span>
+                    <div className="space-y-3 mb-6 responsive-container">
+                      <div className="flex items-center justify-between text-sm responsive-container">
+                        <span className="text-gray-500 responsive-container">Active Users</span>
+                        <span className="font-medium text-gray-900 responsive-container">{portal.stats.users}</span>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">Rating</span>
-                        <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="font-medium text-gray-900">{portal.stats.rating}</span>
+                      <div className="flex items-center justify-between text-sm responsive-container">
+                        <span className="text-gray-500 responsive-container">Rating</span>
+                        <div className="flex items-center gap-1 responsive-container">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current responsive-container" />
+                          <span className="font-medium text-gray-900 responsive-container">{portal.stats.rating}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mb-6">
-                      <h4 className="text-sm font-medium text-gray-900 mb-2">Key Features</h4>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mb-6 responsive-container">
+                      <h4 className="text-sm font-medium text-gray-900 mb-2 responsive-container">Key Features</h4>
+                      <div className="flex flex-wrap gap-2 responsive-container">
                         {portal.features.slice(0, 3).map((feature, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs">
+                          <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs responsive-container">
                             {feature}
                           </span>
                         ))}
                         {portal.features.length > 3 && (
-                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs">
+                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs responsive-container">
                             +{portal.features.length - 3} more
                           </span>
                         )}
@@ -634,54 +640,54 @@ const PortalsPage: React.FC = () => {
 
                     <Link
                       to={portal.path}
-                      className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium group-hover:shadow-lg"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium group-hover:shadow-lg responsive-container"
                     >
-                      <Play className="w-4 h-4" />
+                      <Play className="w-4 h-4 responsive-container" />
                       Access Portal
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform responsive-container" />
                     </Link>
                   </>
                 ) : (
                   <>
                     {/* List View */}
                     <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${portal.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                      <portal.icon className="w-8 h-8 text-white" />
+                      <portal.icon className="w-8 h-8 text-white responsive-container" />
                     </div>
                     
-                    <div className="flex-1 ml-6">
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <div className="flex-1 ml-6 responsive-container">
+                      <div className="flex items-start justify-between mb-2 responsive-container">
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors responsive-container">
                           {portal.title}
                         </h3>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 responsive-container">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getBadgeColor(portal.badge)}`}>
                             {portal.badge}
                           </span>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <span className="text-sm font-medium text-gray-600">{portal.stats.rating}</span>
+                          <div className="flex items-center gap-1 responsive-container">
+                            <Star className="w-4 h-4 text-yellow-400 fill-current responsive-container" />
+                            <span className="text-sm font-medium text-gray-600 responsive-container">{portal.stats.rating}</span>
                           </div>
                         </div>
                       </div>
                       
-                      <p className="text-gray-600 mb-3">
+                      <p className="text-gray-600 mb-3 responsive-container">
                         {portal.description}
                       </p>
                       
-                      <div className="flex items-center gap-6 text-sm text-gray-500 mb-3">
+                      <div className="flex items-center gap-6 text-sm text-gray-500 mb-3 responsive-container">
                         <span>{portal.stats.users} users</span>
                         <span>•</span>
                         <span>{portal.features.length} features</span>
                       </div>
                       
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 responsive-container">
                         {portal.features.slice(0, 4).map((feature, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs">
+                          <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs responsive-container">
                             {feature}
                           </span>
                         ))}
                         {portal.features.length > 4 && (
-                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs">
+                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs responsive-container">
                             +{portal.features.length - 4} more
                           </span>
                         )}
@@ -690,11 +696,11 @@ const PortalsPage: React.FC = () => {
                     
                     <Link
                       to={portal.path}
-                      className="flex items-center gap-2 py-3 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium group-hover:shadow-lg flex-shrink-0"
+                      className="flex items-center gap-2 py-3 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium group-hover:shadow-lg flex-shrink-0 responsive-container"
                     >
-                      <Play className="w-4 h-4" />
+                      <Play className="w-4 h-4 responsive-container" />
                       Access
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform responsive-container" />
                     </Link>
                   </>
                 )}
@@ -708,13 +714,13 @@ const PortalsPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-12"
+            className="text-center py-12 responsive-container"
           >
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-12 h-12 text-gray-400" />
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container">
+              <Search className="w-12 h-12 text-gray-400 responsive-container" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No portals found</h3>
-            <p className="text-gray-600">Try adjusting your search terms or browse different categories.</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2 responsive-container">No portals found</h3>
+            <p className="text-gray-600 responsive-container">Try adjusting your search terms or browse different categories.</p>
           </motion.div>
         )}
 
@@ -723,18 +729,18 @@ const PortalsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white"
+          className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white responsive-container"
         >
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Operations?</h2>
-            <p className="text-xl text-blue-100 mb-6">
+          <div className="max-w-3xl mx-auto responsive-container">
+            <h2 className="text-3xl font-bold mb-4 responsive-container">Ready to Transform Your Operations?</h2>
+            <p className="text-xl text-blue-100 mb-6 responsive-container">
               Join thousands of logistics professionals who trust our portal ecosystem to streamline their operations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
+              <button className="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
                 Start Free Trial
               </button>
-              <button className="px-8 py-3 border-2 border-white text-white rounded-xl font-semibold hover:bg-white/10 transition-colors">
+              <button className="px-8 py-3 border-2 border-white text-white rounded-xl font-semibold hover:bg-white/10 transition-colors responsive-container" aria-label="Button">
                 Schedule Demo
               </button>
             </div>

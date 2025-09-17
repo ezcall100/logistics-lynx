@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Activity,
@@ -442,34 +442,34 @@ export const DeploymentMonitoring: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'success':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-green-500 responsive-container" />;
       case 'running':
-        return <Activity className="w-4 h-4 text-blue-500" />;
+        return <Activity className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'failed':
-        return <XCircle className="w-4 h-4 text-red-500" />;
+        return <XCircle className="w-4 h-4 text-red-500 responsive-container" />;
       case 'pending':
-        return <Clock className="w-4 h-4 text-yellow-500" />;
+        return <Clock className="w-4 h-4 text-yellow-500 responsive-container" />;
       case 'rollback':
-        return <RotateCcw className="w-4 h-4 text-orange-500" />;
+        return <RotateCcw className="w-4 h-4 text-orange-500 responsive-container" />;
       case 'cancelled':
-        return <XCircle className="w-4 h-4 text-gray-500" />;
+        return <XCircle className="w-4 h-4 text-gray-500 responsive-container" />;
       default:
-        return <Clock className="w-4 h-4 text-gray-500" />;
+        return <Clock className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
   const getStrategyIcon = (strategy: string) => {
     switch (strategy) {
       case 'rolling':
-        return <Layers className="w-4 h-4 text-blue-500" />;
+        return <Layers className="w-4 h-4 text-blue-500 responsive-container" />;
       case 'blue-green':
-        return <Target className="w-4 h-4 text-green-500" />;
+        return <Target className="w-4 h-4 text-green-500 responsive-container" />;
       case 'canary':
-        return <Package className="w-4 h-4 text-purple-500" />;
+        return <Package className="w-4 h-4 text-purple-500 responsive-container" />;
       case 'recreate':
-        return <RotateCcw className="w-4 h-4 text-orange-500" />;
+        return <RotateCcw className="w-4 h-4 text-orange-500 responsive-container" />;
       default:
-        return <Package className="w-4 h-4 text-gray-500" />;
+        return <Package className="w-4 h-4 text-gray-500 responsive-container" />;
     }
   };
 
@@ -499,70 +499,76 @@ export const DeploymentMonitoring: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
+      <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 responsive-container">
+          <div className="flex-1 responsive-container">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 responsive-container">
               Deployment Monitoring
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-slate-400 responsive-container">
               Real-time deployment tracking and monitoring
             </p>
           </div>
 
-          <div className="flex gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="flex gap-3 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search deployments..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+                className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4" />
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+              <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
             <button
-              onClick={() => console.log('Create deployment modal')}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2"
+              onClick={() = aria-label="Button"> console.log('Create deployment modal')}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 responsive-container" />
               <span>Deploy</span>
             </button>
           </div>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Total Deployments
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {deployments.length}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <CheckCircle className="w-4 h-4 mr-1 responsive-container" />
                   {deployments.filter(d => d.status === 'success').length} successful
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <Package className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                <Package className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -571,23 +577,23 @@ export const DeploymentMonitoring: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Running Deployments
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {deployments.filter(d => d.status === 'running').length}
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <Activity className="w-4 h-4 mr-1" />
+                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <Activity className="w-4 h-4 mr-1 responsive-container" />
                   In Progress
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+                <Activity className="w-6 h-6 text-green-600 dark:text-green-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -596,25 +602,25 @@ export const DeploymentMonitoring: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Success Rate</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Success Rate</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {Math.round(
                     deployments.reduce((sum, d) => sum + d.metrics.successRate, 0) /
                       deployments.length
                   )}
                   %
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                  <TrendingUp className="w-4 h-4 mr-1" />
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1 responsive-container">
+                  <TrendingUp className="w-4 h-4 mr-1 responsive-container" />
                   Excellent
                 </p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+                <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400 responsive-container" />
               </div>
             </div>
           </motion.div>
@@ -623,14 +629,14 @@ export const DeploymentMonitoring: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl"
+            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl p-6 shadow-xl responsive-container"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between responsive-container">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                   Avg Deployment Time
                 </p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white responsive-container">
                   {Math.round(
                     deployments.reduce((sum, d) => {
                       const time = d.duration ? parseInt(d.duration.split('m')[0]) : 0;
@@ -639,25 +645,25 @@ export const DeploymentMonitoring: React.FC = () => {
                   )}
                   m
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1">
-                  <Clock className="w-4 h-4 mr-1" />
+                <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center mt-1 responsive-container">
+                  <Clock className="w-4 h-4 mr-1 responsive-container" />
                   Fast
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                <Clock className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+                <Clock className="w-6 h-6 text-orange-600 dark:text-orange-400 responsive-container" />
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8">
-          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-2xl shadow-xl mb-8 responsive-container">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto responsive-container">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() =>
+                onClick={() = aria-label="Button">
                   setSelectedTab(tab.id as 'deployments' | 'stages' | 'logs' | 'health')
                 }
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
@@ -666,14 +672,14 @@ export const DeploymentMonitoring: React.FC = () => {
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4 responsive-container" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-6 responsive-container">
             <AnimatePresence mode="wait">
               {selectedTab === 'deployments' && (
                 <motion.div
@@ -681,7 +687,7 @@ export const DeploymentMonitoring: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-4"
+                  className="space-y-4 responsive-container"
                 >
                   {deployments.map((deployment, index) => (
                     <motion.div
@@ -689,22 +695,22 @@ export const DeploymentMonitoring: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200"
+                      className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 hover:bg-slate-100 dark:hover:bg-slate-700/70 transition-all duration-200 responsive-container"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                            <Package className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <div className="flex items-center justify-between mb-4 responsive-container">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+                            <Package className="w-6 h-6 text-blue-600 dark:text-blue-400 responsive-container" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-slate-900 dark:text-white">
+                            <h3 className="font-semibold text-slate-900 dark:text-white responsive-container">
                               {deployment.name}
                             </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 responsive-container">
                               {deployment.service} • {deployment.commit.substring(0, 7)} •{' '}
                               {deployment.branch}
                             </p>
-                            <div className="flex items-center space-x-4 mt-2">
+                            <div className="flex items-center space-x-4 mt-2 responsive-container">
                               <span
                                 className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(deployment.status)}`}
                               >
@@ -715,91 +721,91 @@ export const DeploymentMonitoring: React.FC = () => {
                               >
                                 {deployment.environment}
                               </span>
-                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded">
+                              <span className="text-xs bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-400 px-2 py-1 rounded responsive-container">
                                 {deployment.strategy}
                               </span>
-                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                                 {deployment.duration || 'In progress...'}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-slate-900 dark:text-white">
+                        <div className="flex items-center space-x-4 responsive-container">
+                          <div className="text-right responsive-container">
+                            <div className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                               {deployment.progress}%
                             </div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 responsive-container">
                               Progress
                             </div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-2 responsive-container">
                             {getStrategyIcon(deployment.strategy)}
                             {getStatusIcon(deployment.status)}
                             <button
-                              onClick={() => handleDeploymentAction(deployment.id, 'rollback')}
-                              className="p-2 hover:bg-orange-100 dark:hover:bg-orange-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> handleDeploymentAction(deployment.id, 'rollback')}
+                              className="p-2 hover:bg-orange-100 dark:hover:bg-orange-900/20 rounded-lg transition-colors responsive-container"
                               title="Rollback Deployment"
                             >
-                              <RotateCcw className="w-4 h-4 text-orange-600" />
+                              <RotateCcw className="w-4 h-4 text-orange-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() => handleDeploymentAction(deployment.id, 'cancel')}
-                              className="p-2 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> handleDeploymentAction(deployment.id, 'cancel')}
+                              className="p-2 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors responsive-container"
                               title="Cancel Deployment"
                             >
-                              <XCircle className="w-4 h-4 text-red-600" />
+                              <XCircle className="w-4 h-4 text-red-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() => console.log('View deployment details', deployment.id)}
-                              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> console.log('View deployment details', deployment.id)}
+                              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                               title="View Details"
                             >
-                              <Eye className="w-4 h-4 text-gray-600" />
+                              <Eye className="w-4 h-4 text-gray-600 responsive-container" />
                             </button>
                           </div>
                         </div>
                       </div>
 
                       {/* Progress Bar */}
-                      <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-slate-900 dark:text-white">
+                      <div className="mb-4 responsive-container">
+                        <div className="flex items-center justify-between mb-2 responsive-container">
+                          <span className="text-sm font-medium text-slate-900 dark:text-white responsive-container">
                             Deployment Progress
                           </span>
-                          <span className="text-sm text-slate-500 dark:text-slate-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                             {deployment.progress}%
                           </span>
                         </div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                        <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 responsive-container">
                           <div
-                            className="h-2 rounded-full bg-blue-500 transition-all duration-300"
+                            className="h-2 rounded-full bg-blue-500 transition-all duration-300 responsive-container"
                             style={{ width: `${deployment.progress}%` }}
                           ></div>
                         </div>
                       </div>
 
                       {/* Deployment Stages */}
-                      <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">
+                      <div className="mt-4 responsive-container">
+                        <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3 responsive-container">
                           Deployment Stages
                         </h4>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 responsive-container">
                           {deployment.stages.map((stage, stageIndex) => (
-                            <div key={stage.id} className="flex items-center space-x-2">
+                            <div key={stage.id} className="flex items-center space-x-2 responsive-container">
                               <div className={`p-2 rounded-lg ${getStatusColor(stage.status)}`}>
                                 {getStatusIcon(stage.status)}
                               </div>
-                              <div className="text-xs">
-                                <div className="font-medium text-slate-900 dark:text-white">
+                              <div className="text-xs responsive-container">
+                                <div className="font-medium text-slate-900 dark:text-white responsive-container">
                                   {stage.name}
                                 </div>
-                                <div className="text-slate-500 dark:text-slate-400">
+                                <div className="text-slate-500 dark:text-slate-400 responsive-container">
                                   {stage.duration || 'In progress...'}
                                 </div>
                               </div>
                               {stageIndex < deployment.stages.length - 1 && (
-                                <div className="w-4 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div className="w-4 h-0.5 bg-slate-300 dark:bg-slate-600 responsive-container"></div>
                               )}
                             </div>
                           ))}
@@ -816,17 +822,17 @@ export const DeploymentMonitoring: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="text-center py-12">
-                    <Layers className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                  <div className="text-center py-12 responsive-container">
+                    <Layers className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 responsive-container">
                       Deployment Stages
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 mb-6">
+                    <p className="text-slate-500 dark:text-slate-400 mb-6 responsive-container">
                       Detailed stage execution monitoring and management
                     </p>
-                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
                       View Stage Details
                     </button>
                   </div>
@@ -839,17 +845,17 @@ export const DeploymentMonitoring: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="text-center py-12">
-                    <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                  <div className="text-center py-12 responsive-container">
+                    <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 responsive-container">
                       Deployment Logs
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 mb-6">
+                    <p className="text-slate-500 dark:text-slate-400 mb-6 responsive-container">
                       Real-time deployment logs and execution details
                     </p>
-                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
                       View Live Logs
                     </button>
                   </div>
@@ -862,26 +868,26 @@ export const DeploymentMonitoring: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-8 responsive-container"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 responsive-container">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Health Checks
                       </h3>
-                      <div className="space-y-3">
+                      <div className="space-y-3 responsive-container">
                         {deployments[0]?.healthChecks.map(check => (
-                          <div key={check.id} className="bg-white dark:bg-slate-800 rounded-lg p-4">
-                            <div className="flex items-center justify-between">
+                          <div key={check.id} className="bg-white dark:bg-slate-800 rounded-lg p-4 responsive-container">
+                            <div className="flex items-center justify-between responsive-container">
                               <div>
-                                <h4 className="font-medium text-slate-900 dark:text-white">
+                                <h4 className="font-medium text-slate-900 dark:text-white responsive-container">
                                   {check.name}
                                 </h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">
+                                <p className="text-sm text-slate-500 dark:text-slate-400 responsive-container">
                                   {check.endpoint}
                                 </p>
                               </div>
-                              <div className="text-right">
+                              <div className="text-right responsive-container">
                                 <span
                                   className={`px-2 py-1 rounded-full text-xs font-medium ${
                                     check.status === 'passing'
@@ -893,13 +899,13 @@ export const DeploymentMonitoring: React.FC = () => {
                                 >
                                   {check.status}
                                 </span>
-                                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 responsive-container">
                                   {check.responseTime}ms
                                 </div>
                               </div>
                             </div>
                             {check.message && (
-                              <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-2">
+                              <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-2 responsive-container">
                                 {check.message}
                               </p>
                             )}
@@ -908,14 +914,14 @@ export const DeploymentMonitoring: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6 responsive-container">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 responsive-container">
                         Deployment Metrics
                       </h3>
-                      <div className="h-64 flex items-center justify-center">
-                        <div className="text-center">
-                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                          <p className="text-slate-500 dark:text-slate-400">
+                      <div className="h-64 flex items-center justify-center responsive-container">
+                        <div className="text-center responsive-container">
+                          <Activity className="w-16 h-16 text-slate-400 mx-auto mb-4 responsive-container" />
+                          <p className="text-slate-500 dark:text-slate-400 responsive-container">
                             Deployment metrics chart
                           </p>
                         </div>

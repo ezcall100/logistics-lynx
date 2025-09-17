@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { 
@@ -15,7 +16,7 @@ import {
 } from 'lucide-react'
 import { trackUserInteraction, trackAIAgentActivity } from '../../../services/webhookService'
 
-export default function FleetManager() {
+const FleetManager = React.memo(function FleetManager() {
   const [isOptimizing, setIsOptimizing] = useState(false)
   const [optimizationResults, setOptimizationResults] = useState<any>(null)
   const [agentStatus, setAgentStatus] = useState('Monitoring')
@@ -110,57 +111,63 @@ export default function FleetManager() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5 responsive-container">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-20 px-6 lg:px-8 responsive-container">
+        <div className="max-w-7xl mx-auto responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <div className="inline-flex items-center gap-2 bg-transbot-sky/10 text-transbot-sky px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Truck className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 bg-transbot-sky/10 text-transbot-sky px-4 py-2 rounded-full text-sm font-medium mb-6 responsive-container">
+              <Truck className="w-4 h-4 responsive-container" />
               AI Agent: Fleet Manager
             </div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Intelligent
-              <span className="bg-gradient-primary bg-clip-text text-transparent"> Fleet Management</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent responsive-container"> Fleet Management</span>
             </h1>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto mb-8 responsive-container">
               Our AI-powered Fleet Manager optimizes vehicle performance, reduces maintenance costs, 
               and maximizes efficiency across your entire fleet operations.
             </p>
             
             {/* Agent Status */}
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
+            <div className="flex items-center justify-center gap-4 mb-8 responsive-container">
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20 responsive-container">
                 <div className={`w-2 h-2 rounded-full ${agentStatus === 'Monitoring' ? 'bg-transbot-sky animate-pulse' : agentStatus === 'Processing' ? 'bg-transbot-warning animate-pulse' : 'bg-transbot-teal'}`}></div>
-                <span className="text-sm font-medium text-transbot-text-primary">{agentStatus}</span>
+                <span className="text-sm font-medium text-transbot-text-primary responsive-container">{agentStatus}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20">
-                <Zap className="w-4 h-4 text-transbot-sky" />
-                <span className="text-sm font-medium text-transbot-text-primary">{efficiency}% Efficiency</span>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-transbot-border/20 responsive-container">
+                <Zap className="w-4 h-4 text-transbot-sky responsive-container" />
+                <span className="text-sm font-medium text-transbot-text-primary responsive-container">{efficiency}% Efficiency</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center responsive-container">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={startOptimization}
                 disabled={isOptimizing}
-                className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
               >
                 {isOptimizing ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin responsive-container"></div>
                     Optimizing...
                   </>
                 ) : (
                   <>
-                    <Play className="w-5 h-5" />
+                    <Play className="w-5 h-5 responsive-container" />
                     Start Optimization
                   </>
                 )}
@@ -169,9 +176,9 @@ export default function FleetManager() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetOptimization}
-                className="border-2 border-transbot-sky text-transbot-sky px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300"
+                className="border-2 border-transbot-sky text-transbot-sky px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300 responsive-container"
               >
-                <RotateCcw className="w-5 h-5" />
+                <RotateCcw className="w-5 h-5 responsive-container" />
                 Reset
               </motion.button>
             </div>
@@ -182,7 +189,7 @@ export default function FleetManager() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 responsive-container"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -190,11 +197,11 @@ export default function FleetManager() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-transbot-border/20 shadow-transbot"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-transbot-border/20 shadow-transbot responsive-container"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-3`} />
-                <div className="text-3xl font-bold text-transbot-text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-transbot-text-secondary">{stat.label}</div>
+                <div className="text-3xl font-bold text-transbot-text-primary mb-1 responsive-container">{stat.value}</div>
+                <div className="text-sm text-transbot-text-secondary responsive-container">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -203,73 +210,73 @@ export default function FleetManager() {
 
       {/* Optimization Results */}
       {optimizationResults && (
-        <section className="py-20 px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-20 px-6 lg:px-8 responsive-container">
+          <div className="max-w-7xl mx-auto responsive-container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot mb-12"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot mb-12 responsive-container"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <CheckCircle className="w-6 h-6 text-transbot-teal" />
-                <h2 className="text-2xl font-bold text-transbot-text-primary">Fleet Optimization Complete!</h2>
+              <div className="flex items-center gap-3 mb-6 responsive-container">
+                <CheckCircle className="w-6 h-6 text-transbot-teal responsive-container" />
+                <h2 className="text-2xl font-bold text-transbot-text-primary responsive-container">Fleet Optimization Complete!</h2>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-sky mb-1">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 responsive-container">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-sky mb-1 responsive-container">
                     {optimizationResults.fuelEfficiency.improvement}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Fuel Efficiency</div>
-                  <div className="text-xs text-transbot-teal">{optimizationResults.fuelEfficiency.savings}</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Fuel Efficiency</div>
+                  <div className="text-xs text-transbot-teal responsive-container">{optimizationResults.fuelEfficiency.savings}</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-teal mb-1">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-teal mb-1 responsive-container">
                     {optimizationResults.maintenance.costReduction}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Maintenance Cost</div>
-                  <div className="text-xs text-transbot-teal">{optimizationResults.maintenance.uptime} uptime</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Maintenance Cost</div>
+                  <div className="text-xs text-transbot-teal responsive-container">{optimizationResults.maintenance.uptime} uptime</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-transbot-purple mb-1">
+                <div className="text-center responsive-container">
+                  <div className="text-3xl font-bold text-transbot-purple mb-1 responsive-container">
                     {optimizationResults.driverPerformance.safetyScore}
                   </div>
-                  <div className="text-sm text-transbot-text-secondary">Driver Safety</div>
-                  <div className="text-xs text-transbot-teal">{optimizationResults.driverPerformance.efficiency} efficiency</div>
+                  <div className="text-sm text-transbot-text-secondary responsive-container">Driver Safety</div>
+                  <div className="text-xs text-transbot-teal responsive-container">{optimizationResults.driverPerformance.efficiency} efficiency</div>
                 </div>
               </div>
 
               {/* Recommendations */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4">Optimization Recommendations</h3>
-                <div className="space-y-3">
+              <div className="mb-6 responsive-container">
+                <h3 className="text-lg font-semibold text-transbot-text-primary mb-4 responsive-container">Optimization Recommendations</h3>
+                <div className="space-y-3 responsive-container">
                   {optimizationResults.recommendations.map((recommendation: string, index: number) => (
-                    <div key={index} className="flex items-center gap-3 p-3 bg-transbot-neutral-light rounded-lg">
-                      <CheckCircle className="w-5 h-5 text-transbot-teal flex-shrink-0" />
-                      <span className="text-transbot-text-primary">{recommendation}</span>
+                    <div key={index} className="flex items-center gap-3 p-3 bg-transbot-neutral-light rounded-lg responsive-container">
+                      <CheckCircle className="w-5 h-5 text-transbot-teal flex-shrink-0 responsive-container" />
+                      <span className="text-transbot-text-primary responsive-container">{recommendation}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 responsive-container">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => trackUserInteraction('fleet_report_exported', { format: 'pdf' })}
-                  className="bg-transbot-sky text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+                  className="bg-transbot-sky text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 responsive-container"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 responsive-container" />
                   Export Report
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => trackUserInteraction('fleet_dashboard_viewed', { type: 'analytics' })}
-                  className="border-2 border-transbot-sky text-transbot-sky px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300"
+                  className="border-2 border-transbot-sky text-transbot-sky px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-transbot-sky hover:text-white transition-all duration-300 responsive-container"
                 >
-                  <BarChart3 className="w-4 h-4" />
+                  <BarChart3 className="w-4 h-4 responsive-container" />
                   View Dashboard
                 </motion.button>
               </div>
@@ -279,47 +286,47 @@ export default function FleetManager() {
       )}
 
       {/* Features Section */}
-      <section className="py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6 lg:px-8 responsive-container">
+        <div className="max-w-7xl mx-auto responsive-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 responsive-container"
           >
-            <h2 className="text-4xl font-bold text-transbot-text-primary mb-6">
+            <h2 className="text-4xl font-bold text-transbot-text-primary mb-6 responsive-container">
               Advanced Fleet Management Features
             </h2>
-            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto">
+            <p className="text-xl text-transbot-text-secondary max-w-3xl mx-auto responsive-container">
               Comprehensive fleet management solution powered by AI to optimize performance, 
               reduce costs, and ensure maximum efficiency across your entire fleet.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8 responsive-container">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot hover:shadow-transbot-lg transition-all duration-300"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-transbot-border/20 shadow-transbot hover:shadow-transbot-lg transition-all duration-300 responsive-container"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-6 h-6 text-white" />
+                <div className="flex items-start gap-4 responsive-container">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 responsive-container">
+                    <feature.icon className="w-6 h-6 text-white responsive-container" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-transbot-text-primary mb-3">
+                  <div className="flex-1 responsive-container">
+                    <h3 className="text-xl font-bold text-transbot-text-primary mb-3 responsive-container">
                       {feature.title}
                     </h3>
-                    <p className="text-transbot-text-secondary mb-4">
+                    <p className="text-transbot-text-secondary mb-4 responsive-container">
                       {feature.description}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 responsive-container">
                       {feature.benefits.map((benefit, benefitIndex) => (
-                        <li key={benefitIndex} className="flex items-center gap-2 text-sm text-transbot-text-secondary">
-                          <CheckCircle className="w-4 h-4 text-transbot-teal flex-shrink-0" />
+                        <li key={benefitIndex} className="flex items-center gap-2 text-sm text-transbot-text-secondary responsive-container">
+                          <CheckCircle className="w-4 h-4 text-transbot-teal flex-shrink-0 responsive-container" />
                           {benefit}
                         </li>
                       ))}

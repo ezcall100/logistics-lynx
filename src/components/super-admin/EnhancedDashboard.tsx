@@ -3,7 +3,7 @@
  * Real-time dashboard with interactive charts, activity feed, and modern design
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Building2,
@@ -237,23 +237,29 @@ const EnhancedDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent responsive-container sm:flex-col md:flex-row lg:grid">
             Dashboard
           </h1>
-          <p className="text-gray-600 mt-1">Monitor and manage your entire platform ecosystem</p>
+          <p className="text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">Monitor and manage your entire platform ecosystem</p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
           {/* Time Range Selector */}
-          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
+          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1 responsive-container sm:flex-col md:flex-row lg:grid">
             {(['1h', '24h', '7d', '30d'] as const).map(range => (
               <button
                 key={range}
-                onClick={() => setSelectedTimeRange(range)}
+                onClick={() = aria-label="Button"> setSelectedTimeRange(range)}
                 className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                   selectedTimeRange === range
                     ? 'bg-blue-100 text-blue-700'
@@ -271,7 +277,7 @@ const EnhancedDashboard: React.FC = () => {
             size="sm"
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
@@ -280,7 +286,7 @@ const EnhancedDashboard: React.FC = () => {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -290,8 +296,8 @@ const EnhancedDashboard: React.FC = () => {
             title="Total Companies"
             value={formatNumber(metrics.totalCompanies)}
             change={{ value: 12.5, type: 'increase' }}
-            icon={<Building2 className="w-5 h-5" />}
-            className="bg-blue-50 border-blue-200"
+            icon={<Building2 className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
+            className="bg-blue-50 border-blue-200 responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </motion.div>
 
@@ -304,8 +310,8 @@ const EnhancedDashboard: React.FC = () => {
             title="Total Users"
             value={formatNumber(metrics.totalUsers)}
             change={{ value: 8.3, type: 'increase' }}
-            icon={<Users className="w-5 h-5" />}
-            className="bg-green-50 border-green-200"
+            icon={<Users className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
+            className="bg-green-50 border-green-200 responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </motion.div>
 
@@ -318,8 +324,8 @@ const EnhancedDashboard: React.FC = () => {
             title="Monthly Revenue"
             value={formatCurrency(metrics.monthlyRevenue)}
             change={{ value: 15.7, type: 'increase' }}
-            icon={<DollarSign className="w-5 h-5" />}
-            className="bg-purple-50 border-purple-200"
+            icon={<DollarSign className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
+            className="bg-purple-50 border-purple-200 responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </motion.div>
 
@@ -332,8 +338,8 @@ const EnhancedDashboard: React.FC = () => {
             title="System Health"
             value={`${metrics.systemUptime}%`}
             change={{ value: 0.1, type: 'increase' }}
-            icon={<Activity className="w-5 h-5" />}
-            className="bg-emerald-50 border-emerald-200"
+            icon={<Activity className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
+            className="bg-emerald-50 border-emerald-200 responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </motion.div>
       </div>
@@ -344,26 +350,26 @@ const EnhancedDashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200 responsive-container sm:flex-col md:flex-row lg:grid">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-600" />
+            <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <Zap className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
               MCP Agents Status
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">{metrics.mcpAgents}</div>
-                <div className="text-sm text-gray-600">Active Agents</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-3xl font-bold text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">{metrics.mcpAgents}</div>
+                <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">{metrics.responseTime}ms</div>
-                <div className="text-sm text-gray-600">Avg Response Time</div>
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-3xl font-bold text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{metrics.responseTime}ms</div>
+                <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Avg Response Time</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-600">{metrics.errorRate}%</div>
-                <div className="text-sm text-gray-600">Error Rate</div>
+              <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-3xl font-bold text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">{metrics.errorRate}%</div>
+                <div className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Error Rate</div>
               </div>
             </div>
           </CardContent>
@@ -371,7 +377,7 @@ const EnhancedDashboard: React.FC = () => {
       </motion.div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Revenue Analytics */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -380,39 +386,39 @@ const EnhancedDashboard: React.FC = () => {
         >
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5 text-blue-600" />
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <BarChart3 className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Revenue Analytics
                 </CardTitle>
-                <div className="flex items-center gap-2 text-sm text-green-600">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <TrendingUp className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   +15.7%
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {revenueData.map(item => (
-                  <div key={item.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                  <div key={item.name} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="w-3 h-3 rounded-full"
+                        className="w-3 h-3 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{ backgroundColor: item.color }}
                       />
-                      <span className="text-sm font-medium">{item.name}</span>
+                      <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold">{formatCurrency(item.value)}</span>
+                    <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-sm font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{formatCurrency(item.value)}</span>
                       <div
                         className={`flex items-center gap-1 text-xs ${
                           item.change > 0 ? 'text-green-600' : 'text-red-600'
                         }`}
                       >
                         {item.change > 0 ? (
-                          <ArrowUpRight className="w-3 h-3" />
+                          <ArrowUpRight className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         ) : (
-                          <ArrowDownRight className="w-3 h-3" />
+                          <ArrowDownRight className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         )}
                         {Math.abs(item.change)}%
                       </div>
@@ -432,42 +438,42 @@ const EnhancedDashboard: React.FC = () => {
         >
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-green-600" />
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Globe className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Portal Usage
                 </CardTitle>
-                <div className="flex items-center gap-2 text-sm text-green-600">
-                  <Activity className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {metrics.activePortals} Active
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 {portalUsageData.map(item => (
-                  <div key={item.name} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">{item.name}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold">{item.value}%</span>
+                  <div key={item.name} className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">{item.name}</span>
+                      <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-sm font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{item.value}%</span>
                         <div
                           className={`flex items-center gap-1 text-xs ${
                             item.change > 0 ? 'text-green-600' : 'text-red-600'
                           }`}
                         >
                           {item.change > 0 ? (
-                            <ArrowUpRight className="w-3 h-3" />
+                            <ArrowUpRight className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           ) : (
-                            <ArrowDownRight className="w-3 h-3" />
+                            <ArrowDownRight className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                           )}
                           {Math.abs(item.change)}%
                         </div>
                       </div>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div
-                        className="h-2 rounded-full transition-all duration-500"
+                        className="h-2 rounded-full transition-all duration-500 responsive-container sm:flex-col md:flex-row lg:grid"
                         style={{
                           width: `${item.value}%`,
                           backgroundColor: item.color,
@@ -483,19 +489,19 @@ const EnhancedDashboard: React.FC = () => {
       </div>
 
       {/* Bottom Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Recent Activity */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="lg:col-span-2"
+          className="lg:col-span-2 responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-blue-600" />
+              <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Clock className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Recent Activity
                 </CardTitle>
                 <Button variant="outline" size="sm">
@@ -504,35 +510,37 @@ const EnhancedDashboard: React.FC = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 {recentActivity.map((activity, index) => {
                   const StatusIcon = getStatusIcon(activity.status);
                   const ActivityIcon = activity.icon;
 
                   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                     <motion.div
                       key={activity.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.9 + index * 0.1 }}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                        <ActivityIcon className="w-4 h-4 text-gray-600" />
+                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                        <ActivityIcon className="w-4 h-4 text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <p className="text-sm font-medium text-gray-900">{activity.action}</p>
+                      <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center gap-2 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{activity.action}</p>
                           <StatusIcon
                             className={`w-4 h-4 ${getStatusColor(activity.status).split(' ')[0]}`}
                           />
                         </div>
-                        <p className="text-sm text-gray-600">{activity.user}</p>
+                        <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{activity.user}</p>
                         {activity.details && (
-                          <p className="text-xs text-gray-500 mt-1">{activity.details}</p>
+                          <p className="text-xs text-gray-500 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{activity.details}</p>
                         )}
                       </div>
-                      <div className="text-xs text-gray-500">{activity.time}</div>
+                      <div className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{activity.time}</div>
                     </motion.div>
                   );
                 })}
@@ -549,13 +557,13 @@ const EnhancedDashboard: React.FC = () => {
         >
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-amber-600" />
+              <CardTitle className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <AlertTriangle className="w-5 h-5 text-amber-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 System Alerts
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 {systemAlerts.map((alert, index) => (
                   <motion.div
                     key={alert.id}
@@ -564,14 +572,14 @@ const EnhancedDashboard: React.FC = () => {
                     transition={{ delay: 1.1 + index * 0.1 }}
                     className={`p-3 rounded-lg border ${getAlertColor(alert.type)}`}
                   >
-                    <div className="flex items-start gap-2">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">{alert.title}</p>
-                        <p className="text-xs text-gray-600 mt-1">{alert.message}</p>
-                        <p className="text-xs text-gray-500 mt-2">{alert.time}</p>
+                    <div className="flex items-start gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-sm font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{alert.title}</p>
+                        <p className="text-xs text-gray-600 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">{alert.message}</p>
+                        <p className="text-xs text-gray-500 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">{alert.time}</p>
                       </div>
                       {alert.resolved && (
-                        <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 responsive-container sm:flex-col md:flex-row lg:grid" />
                       )}
                     </div>
                   </motion.div>
