@@ -20,12 +20,6 @@ const PortalHeader: React.FC<PortalHeaderProps> = ({
   children
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="bg-white shadow-sm border-b responsive-container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 responsive-container">
         <div className="flex items-center justify-between responsive-container">

@@ -68,12 +68,6 @@ const GitHubWebhookStatusWidget: React.FC = () => {
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">

@@ -92,12 +92,6 @@ const ColorPaletteDemo: React.FC = () => {
   ] as const;
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div
       className={`min-h-screen transition-colors duration-300 ${
         isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'

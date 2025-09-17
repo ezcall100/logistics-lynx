@@ -24,12 +24,6 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">

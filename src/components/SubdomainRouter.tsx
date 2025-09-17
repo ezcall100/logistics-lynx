@@ -61,13 +61,7 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
   // Show loading while detecting subdomain
   if (isLoading) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid"></div>
           <h2 className="text-2xl font-bold text-white mb-2 responsive-container sm:flex-col md:flex-row lg:grid">TransBot AI</h2>

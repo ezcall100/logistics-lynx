@@ -76,12 +76,6 @@ const CommanderStatusReport: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Commander Header */}
       <motion.div

@@ -241,13 +241,7 @@ const CommunicationHubCustomization: React.FC = () => {
 
   if (isLoading) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="flex items-center justify-center h-96 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="flex items-center justify-center h-96 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <RefreshCw className="h-6 w-6 animate-spin text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           <span className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Loading customization settings...</span>

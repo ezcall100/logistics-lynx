@@ -2,12 +2,6 @@ import React from 'react';
 
 const TestCustomerPortal: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="container mx-auto px-4 py-8 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">

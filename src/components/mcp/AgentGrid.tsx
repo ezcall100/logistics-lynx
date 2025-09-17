@@ -74,13 +74,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({
 
   if (agents.length === 0) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="text-center py-12 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
           <Search className="w-8 h-8 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>

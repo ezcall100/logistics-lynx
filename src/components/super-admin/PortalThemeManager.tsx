@@ -939,12 +939,6 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-7xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}

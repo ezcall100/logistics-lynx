@@ -24,12 +24,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Live Chat Header */}
       <div className="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 responsive-container sm:flex-col md:flex-row lg:grid">

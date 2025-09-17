@@ -88,12 +88,6 @@ export const AgentFilter: React.FC<AgentFilterProps> = ({ filter, onFilterChange
     filter.priority !== 'all';
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Search Bar */}
       <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">

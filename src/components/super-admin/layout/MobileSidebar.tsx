@@ -44,12 +44,6 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
   if (!mobileMenuOpen) return null;
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="fixed inset-0 z-50 lg:hidden responsive-container sm:flex-col md:flex-row lg:grid">
       <div
         className="fixed inset-0 bg-black bg-opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"

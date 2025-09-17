@@ -124,13 +124,7 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
     const isActive = location.pathname === item.href
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div key={item.id}>
+    <div key={item.id}>
         <motion.button
           whileHover={{ x: level === 0 ? 4 : 8 }}
           onClick={() => {

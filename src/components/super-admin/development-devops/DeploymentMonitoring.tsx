@@ -499,12 +499,6 @@ export const DeploymentMonitoring: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 responsive-container">
       <div className="max-w-7xl mx-auto px-6 py-8 responsive-container">
         {/* Header */}

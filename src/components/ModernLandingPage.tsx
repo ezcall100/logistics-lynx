@@ -62,12 +62,6 @@ export function ModernLandingPage() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-transbot-bg-light via-white to-transbot-neutral-light responsive-container">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16 responsive-container">

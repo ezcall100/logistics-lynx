@@ -222,13 +222,7 @@ const EnhancedUserRoles: React.FC = () => {
 
   if (isLoading) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="animate-pulse responsive-container sm:flex-col md:flex-row lg:grid">
           <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6 responsive-container sm:flex-col md:flex-row lg:grid"></div>
           <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">

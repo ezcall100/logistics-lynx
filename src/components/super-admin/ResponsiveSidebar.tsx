@@ -58,12 +58,6 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className={`responsive-sidebar-container ${className}`}>
       {/* Desktop Sidebar */}
       <aside

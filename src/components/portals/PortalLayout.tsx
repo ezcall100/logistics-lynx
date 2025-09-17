@@ -21,12 +21,6 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({
   showBackButton = true
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className={`min-h-screen bg-gradient-to-br ${bgColor}`}>
       {/* Header */}
       <div className="bg-white shadow-sm border-b responsive-container">

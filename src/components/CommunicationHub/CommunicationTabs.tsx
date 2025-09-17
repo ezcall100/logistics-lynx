@@ -13,12 +13,6 @@ export const CommunicationTabs: React.FC<CommunicationTabsProps> = ({
   onTabChange,
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30 dark:from-slate-800 dark:via-blue-900/20 dark:to-indigo-900/20 responsive-container">
       {/* Communication Groups */}
       <div className="space-y-3 responsive-container">

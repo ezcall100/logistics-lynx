@@ -51,12 +51,6 @@ export function FloatingActionButton() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="fixed bottom-6 right-6 z-50 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Secondary FABs */}
       <AnimatePresence>

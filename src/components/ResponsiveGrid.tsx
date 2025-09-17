@@ -39,12 +39,6 @@ export function ResponsiveGrid({
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className={`grid ${getGridCols()} ${gapClasses[gap]} ${className}`}>
       {children}
     </div>

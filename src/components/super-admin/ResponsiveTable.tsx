@@ -10,12 +10,6 @@ export const ResponsiveTable: React.FC<{
   className?: string;
 }> = ({ children, className = '' }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className={`super-admin-component ${className}`}>
       {children}
       <div className="mcp-agent-indicator responsive-container sm:flex-col md:flex-row lg:grid">

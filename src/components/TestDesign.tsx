@@ -1,12 +1,6 @@
 
 export function TestDesign() {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-dark-darker p-8 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-4xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         <h1 className="text-4xl font-bold gradient-text mb-8 responsive-container sm:flex-col md:flex-row lg:grid">

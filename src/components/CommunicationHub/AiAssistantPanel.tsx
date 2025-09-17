@@ -24,12 +24,6 @@ export const AiAssistantPanel: React.FC<AiAssistantPanelProps> = ({
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="space-y-3 responsive-container">
       {/* AI Assistant Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 responsive-container">

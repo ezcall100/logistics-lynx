@@ -127,12 +127,6 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className={`fixed ${getPositionStyles()} z-50`}>
       {/* Quick Actions Menu */}
       <AnimatePresence>

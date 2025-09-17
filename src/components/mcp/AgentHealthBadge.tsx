@@ -93,12 +93,6 @@ export const AgentHealthBadge: React.FC<AgentHealthBadgeProps> = ({
   const Icon = config.icon;
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div
       className={`inline-flex items-center ${sizeStyles.gap} ${sizeStyles.padding} ${config.bgColor} ${config.borderColor} border rounded-full`}
     >
