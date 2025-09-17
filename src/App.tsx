@@ -1,3 +1,4 @@
+import React, { Suspense, lazy, useCallback, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/dark-mode.css';
 import { HorizontalMegaMenu } from './components/HorizontalMegaMenu';
@@ -10,6 +11,14 @@ import { EcosystemGrid } from './components/EcosystemGrid';
 import { Footer } from './components/Footer';
 import { TestDesign } from './components/TestDesign';
 import SubdomainRouter from './components/SubdomainRouter';
+
+// Lazy load components for better performance
+const LazyTestDesign = lazy(() => import('./components/TestDesign'));
+const LazyPortalEntry = lazy(() => import('./pages/PortalEntry'));
+const LazyGetStartedPage = lazy(() => import('./pages/GetStartedPage'));
+const LazySubdomainManagement = lazy(() => import('./pages/admin/SubdomainManagement'));
+const LazyMCPAgentAdmin = lazy(() => import('./pages/portals/admin/MCPAgentAdmin'));
+const LazyHumanDeveloperAdmin = lazy(() => import('./pages/portals/admin/HumanDeveloperAdmin'));
 // import DashboardPage from './pages/DashboardPage' // Removed - not needed for main website
 import TestAuth from './pages/TestAuth';
 import PortalEntry from './pages/PortalEntry';
@@ -120,17 +129,52 @@ import EdgeComputingPage from './pages/technology/EdgeComputingPage';
 import MicroservicesPage from './pages/technology/MicroservicesPage';
 // import MCPProgressDashboard from './pages/MCPProgressDashboard'; // Using port 3002 instead
 
-function App() {
-  return (
-    <ThemeProvider>
-      <AuthProvider>
-        <SubdomainRouter>
-          <Router>
-            <div className="min-h-screen relative">
-              <NeuralBackground />
-              <HorizontalMegaMenu />
-              <AdvancedFAB />
-              <Routes>
+// Loading component for Suspense
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  </div>
+);
+
+// Error boundary component
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-red-600 mb-4">Something went wrong</h2>
+            <button 
+              onClick={() => this.setState({ hasError: false })}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Try again
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+const App = React.memo(() => {
+  const memoizedRoutes = useMemo(() => (
+    <Routes>
                 <Route
                   path="/"
                   element={
@@ -155,7 +199,14 @@ function App() {
                     </>
                   }
                 />
-                <Route path="/test" element={<TestDesign />} />
+                <Route 
+                  path="/test" 
+                  element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <LazyTestDesign />
+                    </Suspense>
+                  } 
+                />
                 <Route path="/test-auth" element={<TestAuth />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<RegistrationFlowNew />} />
@@ -165,7 +216,9 @@ function App() {
                   path="/portal/*"
                   element={
                     <ProtectedRoute>
-                      <PortalEntry />
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <LazyPortalEntry />
+                      </Suspense>
                     </ProtectedRoute>
                   }
                 />
@@ -1204,13 +1257,14 @@ function App() {
                 {/* MCP Dashboard routes removed - causing errors */}
                 {/* Catch-all route for 404 errors */}
                 <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </div>
-          </Router>
-        </SubdomainRouter>
-      </AuthProvider>
-    </ThemeProvider>
+                </Routes>
+              </div>
+            </Router>
+          </SubdomainRouter>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
-}
+}, []);
 
 export default App;

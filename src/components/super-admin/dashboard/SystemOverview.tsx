@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Lazy load heavy components
+const LazySystemMetrics = lazy(() => import('./SystemMetrics'));
+const LazyActivityFeed = lazy(() => import('./ActivityFeed'));
+const LazyPerformanceChart = lazy(() => import('./PerformanceChart'));
 import {
   Users,
   Building2,
@@ -83,7 +88,48 @@ const mockSystemData = {
   ]
 };
 
-const SystemOverview: React.FC = () => {
+// Loading component for Suspense
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center p-8">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+  </div>
+);
+
+// Error boundary for System Overview
+class SystemOverviewErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('System Overview Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-8 text-center">
+          <h3 className="text-lg font-semibold text-red-600 mb-2">System Overview Error</h3>
+          <button 
+            onClick={() => this.setState({ hasError: false })}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Retry
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+const SystemOverview: React.FC = React.memo(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRealTimeEnabled, setIsRealTimeEnabled] = useState(true);
   const [systemData, setSystemData] = useState(mockSystemData);
@@ -93,6 +139,7 @@ const SystemOverview: React.FC = () => {
   const [filterType, setFilterType] = useState('all');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [error, setError] = useState(null);
 
   // Real-time data simulation
   const updateSystemData = useCallback(() => {

@@ -1,6 +1,15 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useCallback, useMemo, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
+
+// Lazy load heavy components for better performance
+const LazyEnterpriseDashboard = lazy(() => import('../../../components/super-admin/EnterpriseDashboard'));
+const LazyUserManagement = lazy(() => import('../../../components/super-admin/UserManagement'));
+const LazyBusinessIntelligenceCenter = lazy(() => import('../../../components/super-admin/BusinessIntelligenceCenter'));
+const LazyGlobalSettings = lazy(() => import('../../../components/super-admin/GlobalSettings'));
+const LazySecurityCompliance = lazy(() => import('../../../components/super-admin/SecurityCompliance'));
+const LazySystemHealthMonitor = lazy(() => import('../../../components/super-admin/SystemHealthMonitor'));
+const LazyMCPAgentOrchestrationCenter = lazy(() => import('../../../components/super-admin/MCPAgentOrchestrationCenter'));
 import {
   Users,
   TrendingUp,
@@ -321,10 +330,54 @@ const mockData = {
   },
 };
 
-const SuperAdminPortal: React.FC = () => {
+// Loading component for Suspense
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  </div>
+);
+
+// Error boundary for Super Admin Portal
+class SuperAdminErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Super Admin Portal Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-red-600 mb-4">Super Admin Portal Error</h2>
+            <p className="text-gray-600 mb-4">Something went wrong in the Super Admin Portal</p>
+            <button 
+              onClick={() => this.setState({ hasError: false, error: null })}
+              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            >
+              Reload Portal
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+const SuperAdminPortal: React.FC = React.memo(() => {
   const { theme, toggleTheme } = useTheme();
   const darkMode = theme === 'dark';
-  const toggleDarkMode = toggleTheme;
+  const toggleDarkMode = useCallback(toggleTheme, [toggleTheme]);
   const [activeTab, setActiveTab] = useState('system-overview');
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -333,6 +386,7 @@ const SuperAdminPortal: React.FC = () => {
   const [notificationCount] = useState(12);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showRealTimeMonitor, setShowRealTimeMonitor] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleMenuToggle = (menuId: string) => {
     setExpandedMenus(prev =>
