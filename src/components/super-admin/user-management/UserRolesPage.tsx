@@ -17,45 +17,18 @@ import {
   Upload,
   Search,
   Filter,
-  RefreshCw,
   X,
   Save,
   UserCheck,
   UserX,
-  Mail,
-  Phone,
   Settings,
-  Key,
   Ban,
-  Unlock,
-  Minus,
   ChevronDown,
   ChevronUp,
-  ExternalLink,
-  Send,
-  Bell,
-  AlertTriangle,
-  Info,
-  UserCog,
-  Layers,
-  Database,
-  Globe,
-  Server,
-  FileText,
-  BarChart3,
   Grid3X3,
-  List,
   Table,
-  Layout,
-  ToggleLeft,
-  ToggleRight,
   MoreVertical,
   Building,
-  Activity,
-  TrendingUp,
-  Calendar,
-  MapPin,
-  Zap,
 } from 'lucide-react';
 
 /**
@@ -111,7 +84,6 @@ interface RoleFormData {
 export const UserRolesPage: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [permissions, setPermissions] = useState<Permission[]>([]);
-  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
   const [filterStatus, setFilterStatus] = useState<string>('all');
@@ -120,14 +92,12 @@ export const UserRolesPage: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [showBulkActions, setShowBulkActions] = useState(false);
 
   // CRUD State
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
-  const [showPermissionsModal, setShowPermissionsModal] = useState(false);
   const [editingRole, setEditingRole] = useState<Role | null>(null);
   const [viewingRole, setViewingRole] = useState<Role | null>(null);
   const [deletingRole, setDeletingRole] = useState<Role | null>(null);
@@ -144,7 +114,6 @@ export const UserRolesPage: React.FC = () => {
     tags: [],
     notes: '',
   });
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [showDropdown, setShowDropdown] = useState<string | null>(null);
 
   // CRUD Functions
@@ -233,7 +202,6 @@ export const UserRolesPage: React.FC = () => {
           break;
       }
       setSelectedRoles([]);
-      setShowBulkActions(false);
     } catch (error) {
       console.error('Error performing bulk action:', error);
     } finally {
@@ -254,7 +222,6 @@ export const UserRolesPage: React.FC = () => {
       tags: [],
       notes: '',
     });
-    setFormErrors({});
   };
 
   const openEditModal = (role: Role) => {
@@ -625,6 +592,11 @@ export const UserRolesPage: React.FC = () => {
       let aValue = a[sortBy as keyof Role];
       let bValue = b[sortBy as keyof Role];
 
+      // Handle undefined values
+      if (aValue === undefined && bValue === undefined) return 0;
+      if (aValue === undefined) return sortOrder === 'asc' ? 1 : -1;
+      if (bValue === undefined) return sortOrder === 'asc' ? -1 : 1;
+
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         aValue = aValue.toLowerCase();
         bValue = bValue.toLowerCase();
@@ -714,7 +686,7 @@ export const UserRolesPage: React.FC = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = () => {
       if (showDropdown) {
         setShowDropdown(null);
       }

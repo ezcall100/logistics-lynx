@@ -5,98 +5,19 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import {
   Users,
   Search,
-  Filter,
   CheckCircle,
   XCircle,
   Clock,
   Eye,
-  Edit,
-  Trash2,
   UserPlus,
   UserCheck,
-  UserX,
-  Mail,
-  Phone,
-  Building,
-  MapPin,
-  Calendar,
-  DollarSign,
-  Shield,
-  AlertTriangle,
-  Info,
   Download,
-  Upload,
-  RefreshCw,
-  MoreHorizontal,
-  ChevronDown,
-  ChevronRight,
-  Star,
-  Flag,
-  Bookmark,
-  Archive,
-  Send,
-  Copy,
-  ExternalLink,
-  Lock,
-  Unlock,
-  Key,
-  Settings,
-  Bell,
-  MessageSquare,
-  FileText,
-  CreditCard,
-  Truck,
-  Package,
-  Car,
-  User,
-  Globe,
-  Server,
-  Database,
-  BarChart3,
-  PieChart,
-  LineChart,
-  TrendingUp,
-  TrendingDown,
-  Activity,
-  Zap,
-  Target,
-  Award,
-  Gift,
-  Coffee,
-  Camera,
-  Mic,
-  MicOff,
-  Headphones,
-  Volume1,
-  Volume2,
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  Repeat,
-  Shuffle,
-  Heart,
-  ThumbsUp,
-  ThumbsDown,
-  Smile,
-  Frown,
-  Meh,
-  Angry,
-  Laugh,
-  Hot,
-  Cold,
-  Happy,
-  Sad,
-  Excited,
-  Bored,
-  Tired,
-  Hungry,
-  Thirsty,
+  Shield,
 } from 'lucide-react';
 
 // UserData Status Types
@@ -116,7 +37,7 @@ type UserDataRole = 'shipper' | 'broker' | 'carrier' | 'owner_operator' | 'drive
 type SubscriptionType = 'free' | 'professional' | 'enterprise' | 'custom';
 
 // UserData Interface
-interface UserDataData {
+interface UserData {
   id: string;
   // Company Information
   companyName: string;
@@ -198,8 +119,8 @@ function UserDataManagement() {
   const [filteredUserDatas, setFilteredUserDatas] = useState<UserData[]>([]);
   const [selectedUserData, setSelectedUserData] = useState<UserData | null>(null);
   const [showUserDataDetails, setShowUserDataDetails] = useState(false);
-  const [showApprovalModal, setShowApprovalModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [showApprovalModal, setShowApprovalModal] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const [filters, setFilters] = useState<FilterOptions>({
     status: 'all',
@@ -415,7 +336,7 @@ function UserDataManagement() {
     userId: string,
     action: 'approve' | 'reject' | 'suspend' | 'activate'
   ) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -447,7 +368,7 @@ function UserDataManagement() {
     } catch (error) {
       console.error('Error updating user:', error);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
@@ -458,7 +379,7 @@ function UserDataManagement() {
 
   const handleApproveUserData = (user: UserData) => {
     setSelectedUserData(user);
-    setShowApprovalModal(true);
+    // setShowApprovalModal(true);
   };
 
   // Status color helper
@@ -788,7 +709,7 @@ function UserDataManagement() {
             </div>
             <div className="flex items-center space-x-3">
               <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <UserDataPlus className="w-4 h-4 mr-2" />
+                <UserPlus className="w-4 h-4 mr-2" />
                 Add UserData
               </button>
               <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
@@ -924,7 +845,7 @@ function UserDataManagement() {
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{users.length}</p>
               </div>
-              <UserDatas className="w-8 h-8 text-blue-500" />
+              <Users className="w-8 h-8 text-blue-500" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
@@ -950,7 +871,7 @@ function UserDataManagement() {
                   {users.filter(u => u.status === 'active').length}
                 </p>
               </div>
-              <UserDataCheck className="w-8 h-8 text-green-500" />
+              <UserCheck className="w-8 h-8 text-green-500" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
