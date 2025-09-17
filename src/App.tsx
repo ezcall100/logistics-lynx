@@ -22,6 +22,9 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import RegistrationFlowNew from './pages/auth/RegistrationFlowNew';
+import TMSCoreApplication from './pages/tms/TMSCoreApplication';
+import DriverMobileApp from './pages/driver/DriverMobileApp';
 import SolutionsPage from './pages/SolutionsPage';
 import PricingPage from './pages/PricingPage';
 import ResourcesPage from './pages/ResourcesPage';
@@ -154,7 +157,9 @@ function App() {
                 <Route path="/test" element={<TestDesign />} />
                 <Route path="/test-auth" element={<TestAuth />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/signup" element={<RegistrationFlowNew />} />
+                <Route path="/tms/*" element={<TMSCoreApplication />} />
+                <Route path="/driver/*" element={<DriverMobileApp />} />
                 <Route
                   path="/portal/*"
                   element={
@@ -167,6 +172,11 @@ function App() {
                 <Route path="/super-admin/*" element={<SuperAdminPortal />} />
                 <Route path="/mcp-agents/*" element={<MCPAgentsPortal />} />
                 <Route path="/mcp-dashboard" element={<MCPDashboard />} />
+                {/* Legacy portal redirects to new TMS application */}
+                <Route path="/shipper" element={<TMSCoreApplication />} />
+                <Route path="/broker" element={<TMSCoreApplication />} />
+                <Route path="/carrier" element={<TMSCoreApplication />} />
+                <Route path="/owner-operator" element={<TMSCoreApplication />} />
                 <Route path="/get-started" element={<GetStartedPage />} />
                 <Route path="/admin/subdomains" element={<SubdomainManagement />} />
                 <Route path="/admin/mcp-agents" element={<MCPAgentAdmin />} />

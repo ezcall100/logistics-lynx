@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "environment": "production",
     "timestamp": "2025-08-26T18:44:23.693Z",
-    "mcpAgents": 250,
+    "mcpAgents": 302,
     "taskQueueSize": 1000,
     "confidenceThreshold": 0.85
   },
@@ -26,10 +26,7 @@
     },
     "nginx": {
       "type": "proxy",
-      "ports": [
-        80,
-        443
-      ],
+      "ports": [80, 443],
       "purpose": "reverse-proxy"
     }
   },

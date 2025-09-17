@@ -12,7 +12,15 @@ export interface User {
     | 'driver'
     | 'owner-operator'
     | 'viewer'
-    | 'superadmin';
+    | 'superadmin'
+    | 'warehousing'
+    | 'freight-forwarding'
+    | 'insurance'
+    | 'fleet-services'
+    | 'technology'
+    | 'consulting'
+    | 'customs-brokerage'
+    | 'maintenance';
   company: string;
   avatar?: string;
   permissions: string[];
@@ -142,6 +150,230 @@ const mockUsers: User[] = [
     lastLogin: new Date().toISOString(),
     createdAt: '2024-01-01T00:00:00Z',
   },
+  // DEMO / PLACEHOLDER Users - New Demo Users for Each Role
+  {
+    id: '7',
+    email: 'demo.shipper@logisticslynx.com',
+    name: 'DEMO Shipper User',
+    role: 'shipper',
+    company: 'DEMO Shipping Corp',
+    avatar:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    permissions: ['shipper:read', 'shipper:write', 'loads:create', 'loads:view', 'carriers:view'],
+    subdomain: 'demo-shipping',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '8',
+    email: 'demo.broker@logisticslynx.com',
+    name: 'DEMO Broker User',
+    role: 'broker',
+    company: 'DEMO Brokerage LLC',
+    avatar:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    permissions: ['broker:read', 'broker:write', 'loads:manage', 'rates:manage', 'carriers:manage'],
+    subdomain: 'demo-brokerage',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '9',
+    email: 'demo.carrier@logisticslynx.com',
+    name: 'DEMO Carrier User',
+    role: 'carrier',
+    company: 'DEMO Transport Inc',
+    avatar:
+      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'carrier:read',
+      'carrier:write',
+      'fleet:manage',
+      'loads:accept',
+      'drivers:manage',
+    ],
+    subdomain: 'demo-transport',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '10',
+    email: 'demo.owneroperator@logisticslynx.com',
+    name: 'DEMO Owner Operator',
+    role: 'owner-operator',
+    company: 'DEMO Independent Trucking',
+    avatar:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
+    permissions: ['owner:read', 'owner:write', 'loads:manage', 'expenses:manage'],
+    subdomain: 'demo-independent',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  // DEMO / PLACEHOLDER Service Provider Companies
+  {
+    id: '11',
+    email: 'demo.warehousing@logisticslynx.com',
+    name: 'DEMO Warehousing Manager',
+    role: 'warehousing',
+    company: 'DEMO Storage Solutions Inc',
+    avatar:
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'warehousing:read',
+      'warehousing:write',
+      'storage:manage',
+      'fulfillment:manage',
+      'distribution:manage',
+    ],
+    subdomain: 'demo-storage',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '12',
+    email: 'demo.freightforwarding@logisticslynx.com',
+    name: 'DEMO Freight Forwarder',
+    role: 'freight-forwarding',
+    company: 'DEMO Global Freight Solutions',
+    avatar:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'freight:read',
+      'freight:write',
+      'international:manage',
+      'customs:manage',
+      'shipping:manage',
+    ],
+    subdomain: 'demo-global-freight',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '13',
+    email: 'demo.insurance@logisticslynx.com',
+    name: 'DEMO Insurance Agent',
+    role: 'insurance',
+    company: 'DEMO Transport Insurance Group',
+    avatar:
+      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'insurance:read',
+      'insurance:write',
+      'cargo:manage',
+      'liability:manage',
+      'claims:manage',
+    ],
+    subdomain: 'demo-transport-insurance',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '14',
+    email: 'demo.fleetservices@logisticslynx.com',
+    name: 'DEMO Fleet Services Manager',
+    role: 'fleet-services',
+    company: 'DEMO Fleet Solutions LLC',
+    avatar:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'fleet:read',
+      'fleet:write',
+      'fuel:manage',
+      'maintenance:manage',
+      'repair:manage',
+    ],
+    subdomain: 'demo-fleet-solutions',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '15',
+    email: 'demo.technology@logisticslynx.com',
+    name: 'DEMO Technology Director',
+    role: 'technology',
+    company: 'DEMO Logistics Tech Corp',
+    avatar:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'technology:read',
+      'technology:write',
+      'software:manage',
+      'apps:manage',
+      'digital:manage',
+    ],
+    subdomain: 'demo-logistics-tech',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '16',
+    email: 'demo.consulting@logisticslynx.com',
+    name: 'DEMO Logistics Consultant',
+    role: 'consulting',
+    company: 'DEMO Strategic Logistics Consulting',
+    avatar:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'consulting:read',
+      'consulting:write',
+      'optimization:manage',
+      'strategy:manage',
+      'analysis:manage',
+    ],
+    subdomain: 'demo-strategic-logistics',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '17',
+    email: 'demo.customs@logisticslynx.com',
+    name: 'DEMO Customs Broker',
+    role: 'customs-brokerage',
+    company: 'DEMO Customs Clearance Services',
+    avatar:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'customs:read',
+      'customs:write',
+      'clearance:manage',
+      'import:manage',
+      'export:manage',
+    ],
+    subdomain: 'demo-customs-clearance',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '18',
+    email: 'demo.maintenance@logisticslynx.com',
+    name: 'DEMO Maintenance Manager',
+    role: 'maintenance',
+    company: 'DEMO Truck Service Center',
+    avatar:
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+    permissions: [
+      'maintenance:read',
+      'maintenance:write',
+      'repair:manage',
+      'service:manage',
+      'parts:manage',
+    ],
+    subdomain: 'demo-truck-service',
+    isActive: true,
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 interface AuthProviderProps {
@@ -254,6 +486,63 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       'owner-operator': ['owner:read', 'owner:write', 'loads:manage', 'expenses:manage'],
       viewer: ['view:read'],
       superadmin: ['*'],
+      // Service Provider Roles
+      warehousing: [
+        'warehousing:read',
+        'warehousing:write',
+        'storage:manage',
+        'fulfillment:manage',
+        'distribution:manage',
+      ],
+      'freight-forwarding': [
+        'freight:read',
+        'freight:write',
+        'international:manage',
+        'customs:manage',
+        'shipping:manage',
+      ],
+      insurance: [
+        'insurance:read',
+        'insurance:write',
+        'cargo:manage',
+        'liability:manage',
+        'claims:manage',
+      ],
+      'fleet-services': [
+        'fleet:read',
+        'fleet:write',
+        'fuel:manage',
+        'maintenance:manage',
+        'repair:manage',
+      ],
+      technology: [
+        'technology:read',
+        'technology:write',
+        'software:manage',
+        'apps:manage',
+        'digital:manage',
+      ],
+      consulting: [
+        'consulting:read',
+        'consulting:write',
+        'optimization:manage',
+        'strategy:manage',
+        'analysis:manage',
+      ],
+      'customs-brokerage': [
+        'customs:read',
+        'customs:write',
+        'clearance:manage',
+        'import:manage',
+        'export:manage',
+      ],
+      maintenance: [
+        'maintenance:read',
+        'maintenance:write',
+        'repair:manage',
+        'service:manage',
+        'parts:manage',
+      ],
     };
 
     return rolePermissions[role] || [];

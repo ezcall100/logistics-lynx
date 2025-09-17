@@ -154,7 +154,62 @@ export default function SignupPage() {
     },
     { value: 'broker', label: 'Broker', icon: '🤝', description: 'Connect shippers with carriers' },
     { value: 'driver', label: 'Driver', icon: '👨‍💼', description: 'Drive and deliver shipments' },
+    {
+      value: 'owner-operator',
+      label: 'Owner Operator',
+      icon: '🚚',
+      description: 'Independent trucking operator',
+    },
     { value: 'admin', label: 'Administrator', icon: '⚙️', description: 'Manage system and users' },
+    // Service Provider Roles
+    {
+      value: 'warehousing',
+      label: 'Warehousing & 3PL',
+      icon: '🏭',
+      description: 'Storage, fulfillment, and distribution services',
+    },
+    {
+      value: 'freight-forwarding',
+      label: 'Freight Forwarding',
+      icon: '🌍',
+      description: 'International shipping and customs clearance',
+    },
+    {
+      value: 'insurance',
+      label: 'Insurance Services',
+      icon: '🛡️',
+      description: 'Transportation and cargo insurance',
+    },
+    {
+      value: 'fleet-services',
+      label: 'Fleet Services',
+      icon: '⛽',
+      description: 'Fuel cards, maintenance, and repair services',
+    },
+    {
+      value: 'technology',
+      label: 'Technology Solutions',
+      icon: '💻',
+      description: 'Software, apps, and digital tools for logistics',
+    },
+    {
+      value: 'consulting',
+      label: 'Consulting Services',
+      icon: '📊',
+      description: 'Logistics consulting and optimization',
+    },
+    {
+      value: 'customs-brokerage',
+      label: 'Customs Brokerage',
+      icon: '📋',
+      description: 'Customs clearance and import/export services',
+    },
+    {
+      value: 'maintenance',
+      label: 'Truck Maintenance & Repair',
+      icon: '🔧',
+      description: 'Vehicle maintenance and repair services',
+    },
   ];
 
   const features = [

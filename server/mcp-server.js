@@ -28,7 +28,7 @@ import { createServer } from 'http';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.MCP_PORT || 3001; // 🔒 LOCKED: Do not change this port
+const PORT = process.env.MCP_PORT || 3001; // 🔒 LOCKED: MCP API server port
 
 // Create HTTP server for WebSocket support
 const server = createServer(app);
@@ -36,7 +36,7 @@ const wss = new WebSocketServer({ server });
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:8084'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:8084'],
   credentials: true
 }));
 
