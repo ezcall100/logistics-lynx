@@ -45,12 +45,6 @@ const FinancialManagementSolution: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-blue-900 to-purple-900 responsive-container">
       {/* Hero Section */}
       <div className="relative overflow-hidden responsive-container">

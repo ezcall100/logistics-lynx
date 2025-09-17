@@ -3,12 +3,6 @@ import { Brain, Target, Users, Award, Globe } from 'lucide-react'
 
 const AboutPage: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="pt-16 min-h-screen responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-7xl mx-auto px-6 py-20 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="text-center mb-16 responsive-container sm:flex-col md:flex-row lg:grid">

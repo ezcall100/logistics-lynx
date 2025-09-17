@@ -35,12 +35,6 @@ const LoadMatching: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-teal-900 to-blue-900 responsive-container">
       {/* Hero Section */}
       <div className="relative overflow-hidden responsive-container">

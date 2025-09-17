@@ -5,12 +5,6 @@ const TestAuth: React.FC = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gray-100 p-8 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-4xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         <h1 className="text-3xl font-bold mb-8 responsive-container sm:flex-col md:flex-row lg:grid">Authentication Test</h1>

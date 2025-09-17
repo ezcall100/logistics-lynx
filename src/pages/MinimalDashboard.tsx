@@ -12,12 +12,6 @@ const MinimalDashboard: React.FC = () => {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div style={{ padding: '20px', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <h1>Minimal Dashboard</h1>
       <p>Welcome, {user?.name}!</p>

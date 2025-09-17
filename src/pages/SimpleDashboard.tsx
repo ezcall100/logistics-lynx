@@ -6,13 +6,7 @@ const SimpleDashboard: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
           <h1 className="text-2xl font-bold text-gray-900 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Not Authenticated</h1>
           <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Please log in to access the dashboard.</p>

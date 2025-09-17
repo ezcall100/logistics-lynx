@@ -61,12 +61,6 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Left Side - Branding */}

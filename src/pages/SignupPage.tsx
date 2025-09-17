@@ -250,12 +250,6 @@ const SignupPage = React.memo(function SignupPage() {
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden responsive-container">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 responsive-container">

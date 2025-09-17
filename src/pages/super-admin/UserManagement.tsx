@@ -410,13 +410,7 @@ function UserDataManagement() {
     if (!selectedUserData) return null;
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
           <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">UserData Details</h2>
@@ -697,8 +691,8 @@ function UserDataManagement() {
           </div>
         </div>
       </div>
-    );
-  };
+  );
+};
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>

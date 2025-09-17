@@ -197,13 +197,7 @@ const MCPAgentIntegration: React.FC = () => {
             {mcpAgents.slice(0, 3).map(agent => {
               const TypeIcon = getTypeIcon(agent.type);
               return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                <div
+    <div
                   key={agent.id}
                   className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                 >

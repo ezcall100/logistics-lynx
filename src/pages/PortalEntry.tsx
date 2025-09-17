@@ -17,12 +17,6 @@ const PortalEntry: React.FC = () => {
   }, [isAuthenticated, user, navigate]);
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gray-100 flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="text-center responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">

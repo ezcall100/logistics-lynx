@@ -4,12 +4,6 @@ import { Footer } from '../components/Footer';
 
 const NotFoundPage: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-center px-4 responsive-container">
       <div className="text-center max-w-2xl mx-auto responsive-container">
         {/* 404 Animation */}

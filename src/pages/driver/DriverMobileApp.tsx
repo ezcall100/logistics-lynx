@@ -211,13 +211,7 @@ const DriverMobileApp: React.FC = () => {
         return renderDashboard();
       case 'loads':
         return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Available Loads</h2>
           </div>
         );

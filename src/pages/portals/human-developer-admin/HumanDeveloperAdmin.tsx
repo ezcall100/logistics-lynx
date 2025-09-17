@@ -187,12 +187,6 @@ function HumanDeveloperAdmin() {
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gray-50 responsive-container">
       {/* Modern Header */}
       <header className="bg-white shadow-sm border-b border-gray-200 responsive-container">

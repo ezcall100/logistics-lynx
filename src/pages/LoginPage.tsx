@@ -47,12 +47,6 @@ const LoginPage = React.memo(function LoginPage() {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden responsive-container">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 responsive-container">

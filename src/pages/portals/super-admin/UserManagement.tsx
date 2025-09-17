@@ -8,12 +8,6 @@ import { GlassMorphismCard } from '@/components/super-admin/GlassMorphismCard';
  */
 export const UserManagement: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       <GlassMorphismCard>
         <h1 className="text-2xl font-bold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">

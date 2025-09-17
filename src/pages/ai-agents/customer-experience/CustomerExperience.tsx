@@ -49,12 +49,6 @@ const CustomerExperience = React.memo(function CustomerExperience() {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-pink-900 via-rose-900 to-red-900 responsive-container">
       {/* Header */}
       <div className="relative overflow-hidden responsive-container">

@@ -51,12 +51,6 @@ const FuelOptimizer = React.memo(function FuelOptimizer() {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-emerald-900 to-teal-900 responsive-container">
       {/* Header */}
       <div className="relative overflow-hidden responsive-container">

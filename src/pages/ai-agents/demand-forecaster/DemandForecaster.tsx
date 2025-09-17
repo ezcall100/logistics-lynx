@@ -50,12 +50,6 @@ const DemandForecaster = React.memo(function DemandForecaster() {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 responsive-container">
       {/* Header */}
       <div className="relative overflow-hidden responsive-container">

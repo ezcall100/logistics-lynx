@@ -51,12 +51,6 @@ const RiskAssessment = React.memo(function RiskAssessment() {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 responsive-container">
       {/* Header */}
       <div className="relative overflow-hidden responsive-container">

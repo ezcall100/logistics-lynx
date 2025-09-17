@@ -45,12 +45,6 @@ const CRMSolution: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 responsive-container">
       {/* Hero Section */}
       <div className="relative overflow-hidden responsive-container">

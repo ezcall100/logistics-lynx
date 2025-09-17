@@ -86,12 +86,6 @@ const TransportationManagement = React.memo(function TransportationManagement() 
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-transbot-sky/5 via-white to-transbot-teal/5 responsive-container">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 lg:px-8 responsive-container">

@@ -78,12 +78,6 @@ export function GetStartedPage() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Hero Section */}
       <section className="pt-20 pb-16 responsive-container sm:flex-col md:flex-row lg:grid">

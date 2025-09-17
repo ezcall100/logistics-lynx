@@ -819,13 +819,7 @@ function RegistrationFlowNew() {
     const suggestedRoles = getRolePriority(registrationData.companyTypes);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="max-w-4xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="max-w-4xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="text-center mb-12 responsive-container sm:flex-col md:flex-row lg:grid">
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
@@ -988,8 +982,8 @@ function RegistrationFlowNew() {
           )}
         </motion.div>
       </div>
-    );
-  };
+  );
+};
 
   const renderServiceProviderWelcomeStep = () => (
     <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">

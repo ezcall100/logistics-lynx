@@ -45,12 +45,6 @@ const WebinarsPage: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 responsive-container">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-700 text-white py-20 responsive-container">

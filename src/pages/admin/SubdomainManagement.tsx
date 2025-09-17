@@ -98,13 +98,7 @@ export function SubdomainManagement() {
 
   if (isLoading) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <div className="flex items-center justify-center min-h-screen responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="flex items-center justify-center min-h-screen responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="w-8 h-8 border-2 border-transbot-sky border-t-transparent rounded-full animate-spin responsive-container sm:flex-col md:flex-row lg:grid" />
       </div>
     )
