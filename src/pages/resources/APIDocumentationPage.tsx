@@ -147,7 +147,8 @@ const APIDocumentationPage: React.FC = () => {
                     <code>{endpoint.example}</code>
                   </pre>
                   <button
-                    onClick={() = aria-label="Button"> copyToClipboard(endpoint.example, `example-${index}`)}
+                    onClick={() => copyToClipboard(endpoint.example, `example-${index}`)}
+                    aria-label="Copy code example"
                     className="absolute top-2 right-2 p-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors responsive-container"
                   >
                     {copiedCode === `example-${index}` ? (
