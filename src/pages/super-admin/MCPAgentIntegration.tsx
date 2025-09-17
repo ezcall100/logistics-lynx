@@ -5,7 +5,7 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -131,92 +131,98 @@ const MCPAgentIntegration: React.FC = () => {
   };
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Agents</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Agents</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agentStats.totalAgents}
               </p>
             </div>
-            <Users className="w-8 h-8 text-blue-500" />
+            <Users className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Agents</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agentStats.activeAgents}
               </p>
             </div>
-            <Activity className="w-8 h-8 text-green-500" />
+            <Activity className="w-8 h-8 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Total Interactions
               </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agentStats.totalInteractions.toLocaleString()}
               </p>
             </div>
-            <MessageSquare className="w-8 h-8 text-purple-500" />
+            <MessageSquare className="w-8 h-8 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Success Rate</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Success Rate</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agentStats.averageSuccessRate}%
               </p>
             </div>
-            <CheckCircle className="w-8 h-8 text-yellow-500" />
+            <CheckCircle className="w-8 h-8 text-yellow-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm">
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
             Recent Agent Activity
           </h3>
         </div>
-        <div className="p-6">
-          <div className="space-y-4">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {mcpAgents.slice(0, 3).map(agent => {
               const TypeIcon = getTypeIcon(agent.type);
               return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <div
                   key={agent.id}
-                  className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+                  className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <div className="flex items-center space-x-4">
-                    <TypeIcon className="w-8 h-8 text-blue-500" />
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <TypeIcon className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{agent.name}</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {agent.totalInteractions} interactions • {agent.assignedUsers} users
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
                     <span
                       className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(agent.status)}`}
                     >
                       {agent.status}
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.successRate}% success
                     </p>
                   </div>
@@ -230,26 +236,28 @@ const MCPAgentIntegration: React.FC = () => {
   );
 
   const renderAgents = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">MCP Agents</h2>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <UserPlus className="w-4 h-4 mr-2" />
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">MCP Agents</h2>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <UserPlus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
           Add Agent
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {mcpAgents.map(agent => {
           const TypeIcon = getTypeIcon(agent.type);
           return (
-            <div key={agent.id} className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <TypeIcon className="w-8 h-8 text-blue-500" />
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+            <div key={agent.id} className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <TypeIcon className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{agent.name}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 capitalize">
+                    <h3 className="font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.name}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                       {agent.type}
                     </p>
                   </div>
@@ -261,34 +269,34 @@ const MCPAgentIntegration: React.FC = () => {
                 </span>
               </div>
 
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Users:</span>
-                  <span className="text-gray-900 dark:text-white">{agent.assignedUsers}</span>
+              <div className="space-y-2 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Users:</span>
+                  <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.assignedUsers}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Interactions:</span>
-                  <span className="text-gray-900 dark:text-white">{agent.totalInteractions}</span>
+                <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Interactions:</span>
+                  <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.totalInteractions}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Success Rate:</span>
-                  <span className="text-gray-900 dark:text-white">{agent.successRate}%</span>
+                <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Success Rate:</span>
+                  <span className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.successRate}%</span>
                 </div>
               </div>
 
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setSelectedAgent(agent);
                     setShowAgentDetails(true);
                   }}
-                  className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
+                  className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Eye className="w-4 h-4 mr-1" />
+                  <Eye className="w-4 h-4 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   View
                 </button>
-                <button className="flex-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Settings className="w-4 h-4 mr-1" />
+                <button className="flex-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Settings className="w-4 h-4 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Configure
                 </button>
               </div>
@@ -307,14 +315,18 @@ const MCPAgentIntegration: React.FC = () => {
         return renderAgents();
       case 'analytics':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Analytics</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Analytics</h2>
           </div>
         );
       case 'settings':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Settings</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Settings</h2>
           </div>
         );
       default:
@@ -323,23 +335,25 @@ const MCPAgentIntegration: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
+      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 MCP Agent Integration
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">Manage and monitor MCP agents</p>
+              <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Manage and monitor MCP agents</p>
             </div>
-            <div className="flex items-center space-x-4">
-              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700">
-                <Bell className="w-5 h-5" />
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
-              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700">
-                <Settings className="w-5 h-5" />
+              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Settings className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
@@ -347,22 +361,24 @@ const MCPAgentIntegration: React.FC = () => {
       </header>
 
       {/* Navigation */}
-      <nav className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700">
-        <div className="px-6">
-          <div className="flex space-x-8">
+      <nav className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="px-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex space-x-8 responsive-container sm:flex-col md:flex-row lg:grid">
             {navigationItems.map(item => {
               const Icon = item.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() = aria-label="Button"> setActiveTab(item.id)}
                   className={`flex items-center space-x-2 px-3 py-4 border-b-2 transition-colors ${
                     activeTab === item.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{item.label}</span>
                 </button>
               );
@@ -372,7 +388,7 @@ const MCPAgentIntegration: React.FC = () => {
       </nav>
 
       {/* Content */}
-      <main className="p-6">
+      <main className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -388,57 +404,57 @@ const MCPAgentIntegration: React.FC = () => {
 
       {/* Agent Details Modal */}
       {showAgentDetails && selectedAgent && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-2xl w-full mx-4">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-2xl w-full mx-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {selectedAgent.name} Details
               </h3>
               <button
-                onClick={() => setShowAgentDetails(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700"
+                onClick={() = aria-label="Button"> setShowAgentDetails(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <XCircle className="w-5 h-5" />
+                <XCircle className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="grid grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Type
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">{selectedAgent.type}</p>
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.type}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">{selectedAgent.status}</p>
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.status}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Assigned Users
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedAgent.assignedUsers}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.assignedUsers}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Success Rate
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedAgent.successRate}%</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedAgent.successRate}%</p>
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Capabilities
                 </label>
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="flex flex-wrap gap-2 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedAgent.capabilities.map((capability, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                      className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       {capability}
                     </span>

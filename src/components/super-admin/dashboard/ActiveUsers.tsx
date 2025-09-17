@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -162,7 +162,13 @@ const ActiveUsers: React.FC = () => {
   useEffect(() => {
     if (isRealTimeEnabled) {
       const interval = setInterval(updateUserData, 10000); // Update every 10 seconds
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isRealTimeEnabled, updateUserData]);
 
@@ -175,7 +181,9 @@ const ActiveUsers: React.FC = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
+    return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [openDropdown]);
@@ -415,13 +423,13 @@ const ActiveUsers: React.FC = () => {
   const getDeviceIcon = (device: string) => {
     switch (device) {
       case 'Desktop':
-        return <Monitor className="h-4 w-4" />;
+        return <Monitor className="h-4 w-4 responsive-container" />;
       case 'Mobile':
-        return <Smartphone className="h-4 w-4" />;
+        return <Smartphone className="h-4 w-4 responsive-container" />;
       case 'Tablet':
-        return <Tablet className="h-4 w-4" />;
+        return <Tablet className="h-4 w-4 responsive-container" />;
       default:
-        return <Globe className="h-4 w-4" />;
+        return <Globe className="h-4 w-4 responsive-container" />;
     }
   };
 
@@ -440,90 +448,92 @@ const ActiveUsers: React.FC = () => {
   const totalUsersCount = users.length;
 
   return (
-    <div className="space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container">
         <div>
-          <div className="flex items-center space-x-3">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Active Users</h1>
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3 responsive-container">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">Active Users</h1>
+            <div className="flex items-center space-x-2 responsive-container">
               <div
                 className={`w-2 h-2 rounded-full ${isRealTimeEnabled ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
               ></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container">
                 {isRealTimeEnabled ? 'Live' : 'Paused'}
               </span>
             </div>
           </div>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-gray-600 dark:text-gray-300 responsive-container">
             Monitor user sessions and activity in real-time
             {lastUpdated && (
-              <span className="ml-2 text-xs text-gray-500">
+              <span className="ml-2 text-xs text-gray-500 responsive-container">
                 Last updated: {lastUpdated.toLocaleTimeString()}
               </span>
             )}
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container">
           <button
-            onClick={() => setIsRealTimeEnabled(!isRealTimeEnabled)}
+            onClick={() = aria-label="Button"> setIsRealTimeEnabled(!isRealTimeEnabled)}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
               isRealTimeEnabled
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
-            {isRealTimeEnabled ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            {isRealTimeEnabled ? <Pause className="h-4 w-4 responsive-container" /> : <Play className="h-4 w-4 responsive-container" />}
             <span>{isRealTimeEnabled ? 'Pause' : 'Resume'}</span>
           </button>
           <button
             onClick={handleRefresh}
             disabled={isLoading}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
           <button
             onClick={handleExport}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-          >
-            <Download className="h-4 w-4" />
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
+           aria-label="Button">
+            <Download className="h-4 w-4 responsive-container" />
             <span>Export</span>
           </button>
           <button
             onClick={handleAddUser}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-          >
-            <Plus className="h-4 w-4" />
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
+           aria-label="Button">
+            <Plus className="h-4 w-4 responsive-container" />
             <span>Add User</span>
           </button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                 {activeUsersCount}
               </p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-              <UserCheck className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+              <UserCheck className="h-6 w-6 text-green-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">+12%</span>
-            <span className="text-sm text-gray-500 ml-2">from last hour</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container" />
+            <span className="text-sm text-green-600 responsive-container">+12%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container">from last hour</span>
           </div>
         </motion.div>
 
@@ -531,22 +541,22 @@ const ActiveUsers: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Sessions</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Total Sessions</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">
                 {totalUsersCount}
               </p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container">
+              <Users className="h-6 w-6 text-blue-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <Activity className="h-4 w-4 text-blue-500 mr-1" />
-            <span className="text-sm text-blue-600">Live monitoring</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <Activity className="h-4 w-4 text-blue-500 mr-1 responsive-container" />
+            <span className="text-sm text-blue-600 responsive-container">Live monitoring</span>
           </div>
         </motion.div>
 
@@ -554,48 +564,48 @@ const ActiveUsers: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">
                 Avg Session Time
               </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">2h 15m</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">2h 15m</p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-              <Clock className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container">
+              <Clock className="h-6 w-6 text-purple-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">+8%</span>
-            <span className="text-sm text-gray-500 ml-2">from yesterday</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container" />
+            <span className="text-sm text-green-600 responsive-container">+8%</span>
+            <span className="text-sm text-gray-500 ml-2 responsive-container">from yesterday</span>
           </div>
         </motion.div>
       </div>
 
       {/* Filters and Bulk Actions */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="flex-1">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container">
+        <div className="flex flex-col lg:flex-row gap-4 responsive-container">
+          <div className="flex-1 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search users..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
               />
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Filter className="h-4 w-4 text-gray-400" />
+          <div className="flex items-center space-x-2 responsive-container">
+            <Filter className="h-4 w-4 text-gray-400 responsive-container" />
             <select
               value={statusFilter}
               onChange={e => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
             >
               <option value="all">All Status</option>
               <option value="active">Active</option>
@@ -605,7 +615,7 @@ const ActiveUsers: React.FC = () => {
             <select
               value={roleFilter}
               onChange={e => setRoleFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
             >
               <option value="all">All Roles</option>
               <option value="Super Admin">Super Admin</option>
@@ -616,7 +626,7 @@ const ActiveUsers: React.FC = () => {
             <select
               value={deviceFilter}
               onChange={e => setDeviceFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
             >
               <option value="all">All Devices</option>
               <option value="Desktop">Desktop</option>
@@ -632,32 +642,32 @@ const ActiveUsers: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+            className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center justify-between responsive-container">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container">
                 {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
               </span>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container">
                 <button
-                  onClick={() => handleBulkAction('activate')}
-                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors"
+                  onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors responsive-container"
                 >
-                  <UserCheck className="h-4 w-4" />
+                  <UserCheck className="h-4 w-4 responsive-container" />
                   <span>Activate</span>
                 </button>
                 <button
-                  onClick={() => handleBulkAction('deactivate')}
-                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400 rounded-lg hover:bg-yellow-200 dark:hover:bg-yellow-900/30 transition-colors"
+                  onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400 rounded-lg hover:bg-yellow-200 dark:hover:bg-yellow-900/30 transition-colors responsive-container"
                 >
-                  <UserX className="h-4 w-4" />
+                  <UserX className="h-4 w-4 responsive-container" />
                   <span>Deactivate</span>
                 </button>
                 <button
-                  onClick={() => handleBulkAction('delete')}
-                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors"
+                  onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                  className="flex items-center space-x-1 px-3 py-1 text-sm bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors responsive-container"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4 responsive-container" />
                   <span>Delete</span>
                 </button>
               </div>
@@ -667,173 +677,173 @@ const ActiveUsers: React.FC = () => {
       </div>
 
       {/* Users Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700/50">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden responsive-container">
+        <div className="overflow-x-auto responsive-container">
+          <table className="w-full responsive-container">
+            <thead className="bg-gray-50 dark:bg-gray-700/50 responsive-container">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                   <input
                     type="checkbox"
                     checked={
                       selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0
                     }
                     onChange={handleSelectAll}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container"
                   />
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   onClick={() => handleSort('name')}
                 >
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container">
                     <span>User</span>
                     {sortField === 'name' && (
-                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                      <span className="text-blue-500 responsive-container">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   onClick={() => handleSort('status')}
                 >
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container">
                     <span>Status</span>
                     {sortField === 'status' && (
-                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                      <span className="text-blue-500 responsive-container">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                   Location
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   onClick={() => handleSort('device')}
                 >
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container">
                     <span>Device</span>
                     {sortField === 'device' && (
-                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                      <span className="text-blue-500 responsive-container">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                   Session
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   onClick={() => handleSort('actions')}
                 >
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 responsive-container">
                     <span>Actions</span>
                     {sortField === 'actions' && (
-                      <span className="text-blue-500">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                      <span className="text-blue-500 responsive-container">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                   Last Active
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700 responsive-container">
               {paginatedUsers.map((user, index) => (
                 <motion.tr
                   key={user.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors responsive-container"
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
                     <input
                       type="checkbox"
                       checked={selectedUsers.includes(user.id)}
                       onChange={() => handleSelectUser(user.id)}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 responsive-container"
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
-                          <User className="h-5 w-5 text-blue-600" />
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                    <div className="flex items-center responsive-container">
+                      <div className="flex-shrink-0 h-10 w-10 responsive-container">
+                        <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center responsive-container">
+                          <User className="h-5 w-5 text-blue-600 responsive-container" />
                         </div>
                       </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <div className="ml-4 responsive-container">
+                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100 responsive-container">
                           {user.name}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">{user.email}</div>
-                        <div className="text-xs text-gray-400 dark:text-gray-500">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container">{user.email}</div>
+                        <div className="text-xs text-gray-400 dark:text-gray-500 responsive-container">
                           {user.role} • {user.company}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
                     <span
                       className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}
                     >
                       {user.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
-                      <MapPin className="h-4 w-4 text-gray-400 mr-1" />
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                    <div className="flex items-center text-sm text-gray-900 dark:text-gray-100 responsive-container">
+                      <MapPin className="h-4 w-4 text-gray-400 mr-1 responsive-container" />
                       {user.location}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">{user.ipAddress}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 responsive-container">{user.ipAddress}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap responsive-container">
+                    <div className="flex items-center text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {getDeviceIcon(user.device)}
-                      <span className="ml-2">{user.device}</span>
+                      <span className="ml-2 responsive-container">{user.device}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 responsive-container">
                     {user.sessionDuration}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 responsive-container">
                     {user.actions}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 responsive-container">
                     {formatTimeAgo(user.lastActive)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center justify-end space-x-2">
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium responsive-container">
+                    <div className="flex items-center justify-end space-x-2 responsive-container">
                       <button 
-                        onClick={() => handleViewUser(user)}
-                        className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                        onClick={() = aria-label="Button"> handleViewUser(user)}
+                        className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 responsive-container"
                         title="View Details"
                       >
-                        <Eye className="h-4 w-4" />
+                        <Eye className="h-4 w-4 responsive-container" />
                       </button>
                       <button 
-                        onClick={() => handleEditUser(user)}
-                        className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-50 dark:hover:bg-green-900/20"
+                        onClick={() = aria-label="Button"> handleEditUser(user)}
+                        className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-50 dark:hover:bg-green-900/20 responsive-container"
                         title="Edit User"
                       >
-                        <Edit className="h-4 w-4" />
+                        <Edit className="h-4 w-4 responsive-container" />
                       </button>
                       <button 
-                        onClick={() => handleDeleteUser(user)}
-                        className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
+                        onClick={() = aria-label="Button"> handleDeleteUser(user)}
+                        className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 responsive-container"
                         title="Delete User"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4 responsive-container" />
                       </button>
-                      <div className="relative">
+                      <div className="relative responsive-container">
                         <button 
-                          onClick={() => handleDropdownToggle(user.id)}
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                          onClick={() = aria-label="Button"> handleDropdownToggle(user.id)}
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700/50 responsive-container"
                           title="More Options"
                         >
-                          <MoreVertical className="h-4 w-4" />
+                          <MoreVertical className="h-4 w-4 responsive-container" />
                         </button>
                         
                         {/* Dropdown Menu */}
@@ -844,96 +854,96 @@ const ActiveUsers: React.FC = () => {
                               animate={{ opacity: 1, scale: 1, y: 0 }}
                               exit={{ opacity: 0, scale: 0.95, y: -10 }}
                               transition={{ duration: 0.15 }}
-                              className="absolute right-0 top-8 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50"
+                              className="absolute right-0 top-8 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 responsive-container"
                             >
-                              <div className="py-1">
+                              <div className="py-1 responsive-container">
                                 <button
-                                  onClick={() => handleDropdownAction('view', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('view', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Eye className="h-4 w-4" />
+                                  <Eye className="h-4 w-4 responsive-container" />
                                   <span>View Details</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('edit', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('edit', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Edit className="h-4 w-4" />
+                                  <Edit className="h-4 w-4 responsive-container" />
                                   <span>Edit User</span>
                                 </button>
                                 
-                                <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() => handleDropdownAction('activate', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('activate', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center space-x-2 responsive-container"
                                 >
-                                  <UserCheck className="h-4 w-4" />
+                                  <UserCheck className="h-4 w-4 responsive-container" />
                                   <span>Activate User</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('deactivate', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-yellow-700 dark:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('deactivate', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-yellow-700 dark:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 flex items-center space-x-2 responsive-container"
                                 >
-                                  <UserX className="h-4 w-4" />
+                                  <UserX className="h-4 w-4 responsive-container" />
                                   <span>Deactivate User</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('suspend', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-orange-700 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('suspend', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-orange-700 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Pause className="h-4 w-4" />
+                                  <Pause className="h-4 w-4 responsive-container" />
                                   <span>Suspend User</span>
                                 </button>
                                 
-                                <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() => handleDropdownAction('send_email', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('send_email', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Mail className="h-4 w-4" />
+                                  <Mail className="h-4 w-4 responsive-container" />
                                   <span>Send Email</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('reset_password', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('reset_password', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Lock className="h-4 w-4" />
+                                  <Lock className="h-4 w-4 responsive-container" />
                                   <span>Reset Password</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('permissions', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('permissions', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Shield className="h-4 w-4" />
+                                  <Shield className="h-4 w-4 responsive-container" />
                                   <span>Manage Permissions</span>
                                 </button>
                                 
-                                <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() => handleDropdownAction('export_user', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('export_user', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Download className="h-4 w-4" />
+                                  <Download className="h-4 w-4 responsive-container" />
                                   <span>Export User Data</span>
                                 </button>
                                 <button
-                                  onClick={() => handleDropdownAction('audit_log', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('audit_log', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
-                                  <FileText className="h-4 w-4" />
+                                  <FileText className="h-4 w-4 responsive-container" />
                                   <span>View Audit Log</span>
                                 </button>
                                 
-                                <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                                <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() => handleDropdownAction('delete', user)}
-                                  className="w-full px-4 py-2 text-left text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2"
+                                  onClick={() = aria-label="Button"> handleDropdownAction('delete', user)}
+                                  className="w-full px-4 py-2 text-left text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container"
                                 >
-                                  <Trash2 className="h-4 w-4" />
+                                  <Trash2 className="h-4 w-4 responsive-container" />
                                   <span>Delete User</span>
                                 </button>
                               </div>
@@ -950,50 +960,50 @@ const ActiveUsers: React.FC = () => {
         </div>
         
         {/* Pagination */}
-        <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
-          <div className="flex-1 flex justify-between sm:hidden">
+        <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6 responsive-container">
+          <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+              className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 responsive-container"
             >
               Previous
             </button>
             <button
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
+              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 responsive-container"
             >
               Next
             </button>
           </div>
-          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between responsive-container">
             <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span>{' '}
+              <p className="text-sm text-gray-700 dark:text-gray-300 responsive-container">
+                Showing <span className="font-medium responsive-container">{(currentPage - 1) * itemsPerPage + 1}</span>{' '}
                 to{' '}
-                <span className="font-medium">
+                <span className="font-medium responsive-container">
                   {Math.min(currentPage * itemsPerPage, sortedUsers.length)}
                 </span>{' '}
-                of <span className="font-medium">{sortedUsers.length}</span> results
+                of <span className="font-medium responsive-container">{sortedUsers.length}</span> results
               </p>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 responsive-container">
               <select
                 value={itemsPerPage}
                 onChange={e => setItemsPerPage(Number(e.target.value))}
-                className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
               >
                 <option value={5}>5 per page</option>
                 <option value={10}>10 per page</option>
                 <option value={25}>25 per page</option>
                 <option value={50}>50 per page</option>
               </select>
-              <div className="flex space-x-1">
+              <div className="flex space-x-1 responsive-container">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
-                    onClick={() => setCurrentPage(page)}
+                    onClick={() = aria-label="Button"> setCurrentPage(page)}
                     className={`px-3 py-1 text-sm rounded ${
                       page === currentPage
                         ? 'bg-blue-600 text-white'
@@ -1016,7 +1026,7 @@ const ActiveUsers: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container"
             onClick={() => {
               setShowAddModal(false);
               setShowEditModal(false);
@@ -1027,60 +1037,60 @@ const ActiveUsers: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4 responsive-container"
               onClick={e => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                   {editingUser ? 'Edit User' : 'Add New User'}
                 </h3>
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowAddModal(false);
                     setShowEditModal(false);
                     setEditingUser(null);
                   }}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container" />
                 </button>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 responsive-container">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Name
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                     placeholder="Enter user name"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                     placeholder="Enter email address"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Role
                   </label>
                   <select
                     value={formData.role}
                     onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                   >
                     <option value="Super Admin">Super Admin</option>
                     <option value="Manager">Manager</option>
@@ -1090,20 +1100,20 @@ const ActiveUsers: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Company
                   </label>
                   <input
                     type="text"
                     value={formData.company}
                     onChange={e => setFormData(prev => ({ ...prev, company: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                     placeholder="Enter company name"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Status
                   </label>
                   <select
@@ -1114,7 +1124,7 @@ const ActiveUsers: React.FC = () => {
                         status: e.target.value as 'active' | 'idle' | 'inactive',
                       }))
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                   >
                     <option value="active">Active</option>
                     <option value="idle">Idle</option>
@@ -1123,13 +1133,13 @@ const ActiveUsers: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Device
                   </label>
                   <select
                     value={formData.device}
                     onChange={e => setFormData(prev => ({ ...prev, device: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                   >
                     <option value="Desktop">Desktop</option>
                     <option value="Mobile">Mobile</option>
@@ -1138,47 +1148,47 @@ const ActiveUsers: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     Location
                   </label>
                   <input
                     type="text"
                     value={formData.location}
                     onChange={e => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                     placeholder="Enter location"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 responsive-container">
                     IP Address
                   </label>
                   <input
                     type="text"
                     value={formData.ipAddress}
                     onChange={e => setFormData(prev => ({ ...prev, ipAddress: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
                     placeholder="Enter IP address"
                   />
                 </div>
               </div>
               
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowAddModal(false);
                     setShowEditModal(false);
                     setEditingUser(null);
                   }}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSaveUser}
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
-                >
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors responsive-container"
+                 aria-label="Button">
                   {editingUser ? 'Update User' : 'Add User'}
                 </button>
               </div>
@@ -1194,7 +1204,7 @@ const ActiveUsers: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container"
             onClick={() => {
               setShowViewModal(false);
               setViewingUser(null);
@@ -1204,34 +1214,34 @@ const ActiveUsers: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-lg mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-lg mx-4 responsive-container"
               onClick={e => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <div className="flex items-center justify-between mb-4 responsive-container">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                   User Details
                 </h3>
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowViewModal(false);
                     setViewingUser(null);
                   }}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container" />
                 </button>
               </div>
               
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <div className="h-16 w-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
-                    <User className="h-8 w-8 text-blue-600" />
+              <div className="space-y-4 responsive-container">
+                <div className="flex items-center space-x-4 responsive-container">
+                  <div className="h-16 w-16 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center responsive-container">
+                    <User className="h-8 w-8 text-blue-600 responsive-container" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.name}
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-400">{viewingUser.email}</p>
+                    <p className="text-gray-600 dark:text-gray-400 responsive-container">{viewingUser.email}</p>
                     <span
                       className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(viewingUser.status)}`}
                     >
@@ -1240,86 +1250,86 @@ const ActiveUsers: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 responsive-container">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Role
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.role}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">{viewingUser.role}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Company
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.company}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Device
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{viewingUser.device}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">{viewingUser.device}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Location
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.location}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       IP Address
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.ipAddress}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Session Duration
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.sessionDuration}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Actions Count
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {viewingUser.actions}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                       Last Active
                     </label>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">
+                    <p className="text-sm text-gray-900 dark:text-gray-100 responsive-container">
                       {new Date(viewingUser.lastActive).toLocaleString()}
                     </p>
                   </div>
                 </div>
               </div>
               
-              <div className="flex items-center justify-end space-x-3 mt-6">
+              <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowViewModal(false);
                     setViewingUser(null);
                   }}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Close
                 </button>
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowViewModal(false);
                     handleEditUser(viewingUser);
                   }}
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors responsive-container"
                 >
                   Edit User
                 </button>
@@ -1336,7 +1346,7 @@ const ActiveUsers: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container"
             onClick={() => {
               setShowDeleteModal(false);
               setDeletingUser(null);
@@ -1346,37 +1356,37 @@ const ActiveUsers: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4"
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4 responsive-container"
               onClick={e => e.stopPropagation()}
             >
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
+              <div className="flex items-center space-x-3 mb-4 responsive-container">
+                <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container">
+                  <AlertTriangle className="h-6 w-6 text-red-600 responsive-container" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                   Delete User
                 </h3>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-gray-600 dark:text-gray-400 mb-6 responsive-container">
                 Are you sure you want to delete <strong>{deletingUser.name}</strong>? This action
                 cannot be undone.
               </p>
               
-              <div className="flex items-center justify-end space-x-3">
+              <div className="flex items-center justify-end space-x-3 responsive-container">
                 <button
-                  onClick={() => {
+                  onClick={() = aria-label="Button"> {
                     setShowDeleteModal(false);
                     setDeletingUser(null);
                   }}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleConfirmDelete}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
-                >
+                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors responsive-container"
+                 aria-label="Button">
                   Delete User
                 </button>
               </div>

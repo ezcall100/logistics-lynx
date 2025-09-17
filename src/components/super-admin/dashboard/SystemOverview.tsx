@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Suspense, lazy, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Lazy load heavy components
@@ -90,8 +90,8 @@ const mockSystemData = {
 
 // Loading component for Suspense
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center p-8">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+  <div className="flex items-center justify-center p-8 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"></div>
   </div>
 );
 
@@ -113,11 +113,15 @@ class SystemOverviewErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="p-8 text-center">
-          <h3 className="text-lg font-semibold text-red-600 mb-2">System Overview Error</h3>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+        <div className="p-8 text-center responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-red-600 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">System Overview Error</h3>
           <button 
-            onClick={() => this.setState({ hasError: false })}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            onClick={() = aria-label="Button"> this.setState({ hasError: false })}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Retry
           </button>
@@ -234,52 +238,52 @@ const SystemOverview: React.FC = React.memo(() => {
 
   const getSeverityIcon = (severity: string) => {
     switch (severity) {
-      case 'error': return <AlertTriangle className="h-4 w-4" />;
-      case 'warning': return <AlertTriangle className="h-4 w-4" />;
-      case 'success': return <CheckCircle className="h-4 w-4" />;
-      default: return <Activity className="h-4 w-4" />;
+      case 'error': return <AlertTriangle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'warning': return <AlertTriangle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      case 'success': return <CheckCircle className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
+      default: return <Activity className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="flex items-center space-x-2">
-          <RefreshCw className="h-6 w-6 animate-spin text-blue-500" />
-          <span className="text-gray-600 dark:text-gray-300">Loading system overview...</span>
+      <div className="flex items-center justify-center h-96 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <RefreshCw className="h-6 w-6 animate-spin text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+          <span className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">Loading system overview...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <div className="flex items-center space-x-3">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">System Overview</h1>
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">System Overview</h1>
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <div className={`w-2 h-2 rounded-full ${isRealTimeEnabled ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 {isRealTimeEnabled ? 'Live' : 'Paused'}
               </span>
             </div>
           </div>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time system metrics and performance monitoring
             {lastUpdated && (
-              <span className="ml-2 text-xs text-gray-500">
+              <span className="ml-2 text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                 Last updated: {lastUpdated.toLocaleTimeString()}
               </span>
             )}
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <select
             value={selectedTimeRange}
             onChange={(e) => setSelectedTimeRange(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <option value="1h">Last Hour</option>
             <option value="24h">Last 24 Hours</option>
@@ -293,62 +297,62 @@ const SystemOverview: React.FC = React.memo(() => {
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
-          >
-            {isRealTimeEnabled ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+           aria-label="Button">
+            {isRealTimeEnabled ? <Pause className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{isRealTimeEnabled ? 'Pause' : 'Resume'}</span>
           </button>
           <button
             onClick={handleRefresh}
             disabled={isLoading}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
           <button
             onClick={handleExport}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-          >
-            <Download className="h-4 w-4" />
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
+           aria-label="Button">
+            <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
-            onClick={() => setIsFullscreen(!isFullscreen)}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            onClick={() = aria-label="Button"> setIsFullscreen(!isFullscreen)}
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
-            {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+            {isFullscreen ? <Minimize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Maximize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
           </button>
         </div>
       </div>
 
       {/* Enhanced Key Metrics Grid with Glassmorphism */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => toggleCardExpansion('companies')}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Companies</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Companies</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatNumber(systemData.systemMetrics.totalCompanies)}
               </p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-              <Building2 className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Building2 className="h-6 w-6 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-              <span className="text-sm text-green-600">+12.5%</span>
-              <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+12.5%</span>
+              <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-              <MoreVertical className="h-4 w-4" />
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
           <AnimatePresence>
@@ -357,20 +361,20 @@ const SystemOverview: React.FC = React.memo(() => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Active Companies</span>
-                    <span className="font-medium">{formatNumber(systemData.systemMetrics.totalCompanies * 0.85)}</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Companies</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{formatNumber(systemData.systemMetrics.totalCompanies * 0.85)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">New This Month</span>
-                    <span className="font-medium text-green-600">+{formatNumber(156)}</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">New This Month</span>
+                    <span className="font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+{formatNumber(156)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Churn Rate</span>
-                    <span className="font-medium text-red-600">2.1%</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Churn Rate</span>
+                    <span className="font-medium text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">2.1%</span>
                   </div>
                 </div>
               </motion.div>
@@ -382,28 +386,28 @@ const SystemOverview: React.FC = React.memo(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => toggleCardExpansion('users')}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Users</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Users</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatNumber(systemData.systemMetrics.totalUsers)}
               </p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-              <Users className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Users className="h-6 w-6 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-              <span className="text-sm text-green-600">+8.3%</span>
-              <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+8.3%</span>
+              <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-              <MoreVertical className="h-4 w-4" />
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
           <AnimatePresence>
@@ -412,20 +416,20 @@ const SystemOverview: React.FC = React.memo(() => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Active Users</span>
-                    <span className="font-medium">{formatNumber(systemData.systemMetrics.totalUsers * 0.78)}</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Users</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{formatNumber(systemData.systemMetrics.totalUsers * 0.78)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">New Signups</span>
-                    <span className="font-medium text-green-600">+{formatNumber(1247)}</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">New Signups</span>
+                    <span className="font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+{formatNumber(1247)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Retention Rate</span>
-                    <span className="font-medium text-blue-600">94.2%</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Retention Rate</span>
+                    <span className="font-medium text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid">94.2%</span>
                   </div>
                 </div>
               </motion.div>
@@ -437,28 +441,28 @@ const SystemOverview: React.FC = React.memo(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => toggleCardExpansion('revenue')}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Monthly Revenue</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Monthly Revenue</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatCurrency(systemData.systemMetrics.monthlyRevenue)}
               </p>
             </div>
-            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg">
-              <DollarSign className="h-6 w-6 text-emerald-600" />
+            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <DollarSign className="h-6 w-6 text-emerald-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-              <span className="text-sm text-green-600">+15.2%</span>
-              <span className="text-sm text-gray-500 ml-2">from last month</span>
+          <div className="mt-4 flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+15.2%</span>
+              <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-              <MoreVertical className="h-4 w-4" />
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
           <AnimatePresence>
@@ -467,20 +471,20 @@ const SystemOverview: React.FC = React.memo(() => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">ARPU</span>
-                    <span className="font-medium">{formatCurrency(systemData.systemMetrics.monthlyRevenue / systemData.systemMetrics.totalUsers)}</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">ARPU</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{formatCurrency(systemData.systemMetrics.monthlyRevenue / systemData.systemMetrics.totalUsers)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">MRR Growth</span>
-                    <span className="font-medium text-green-600">+15.2%</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">MRR Growth</span>
+                    <span className="font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+15.2%</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Churn Revenue</span>
-                    <span className="font-medium text-red-600">-{formatCurrency(8500)}</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Churn Revenue</span>
+                    <span className="font-medium text-red-600 responsive-container sm:flex-col md:flex-row lg:grid">-{formatCurrency(8500)}</span>
                   </div>
                 </div>
               </motion.div>
@@ -492,27 +496,27 @@ const SystemOverview: React.FC = React.memo(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => toggleCardExpansion('uptime')}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">System Uptime</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">System Uptime</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">
                 {formatPercentage(systemData.systemMetrics.systemUptime)}
               </p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-              <Activity className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Activity className="h-6 w-6 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <CheckCircle className="h-4 w-4 text-green-500 mr-1" />
-              <span className="text-sm text-green-600">All systems operational</span>
+          <div className="mt-4 flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <CheckCircle className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
+              <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">All systems operational</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-              <MoreVertical className="h-4 w-4" />
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
           <AnimatePresence>
@@ -521,20 +525,20 @@ const SystemOverview: React.FC = React.memo(() => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Last Downtime</span>
-                    <span className="font-medium">2 days ago</span>
+                <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Downtime</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">2 days ago</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Avg Response Time</span>
-                    <span className="font-medium">{systemData.systemMetrics.responseTime}ms</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Avg Response Time</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{systemData.systemMetrics.responseTime}ms</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Error Rate</span>
-                    <span className="font-medium text-green-600">{formatPercentage(systemData.systemMetrics.errorRate)}</span>
+                  <div className="flex justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <span className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Error Rate</span>
+                    <span className="font-medium text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">{formatPercentage(systemData.systemMetrics.errorRate)}</span>
                   </div>
                 </div>
               </motion.div>
@@ -544,70 +548,70 @@ const SystemOverview: React.FC = React.memo(() => {
       </div>
 
       {/* Performance Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">System Performance</h3>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center space-x-1">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">CPU</span>
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">System Performance</h3>
+            <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">CPU</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Memory</span>
+                <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-3 h-3 bg-green-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Memory</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Disk</span>
+                <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Disk</span>
                 </div>
               </div>
-              <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Settings className="h-4 w-4" />
+              <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Settings className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
-          <div className="h-64 flex items-end justify-between space-x-2">
+          <div className="h-64 flex items-end justify-between space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {systemData.performanceData.map((data, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex flex-col items-center space-y-2 group cursor-pointer"
+                className="flex flex-col items-center space-y-2 group cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
                 title={`CPU: ${data.cpu}%, Memory: ${data.memory}%, Disk: ${data.disk}%`}
               >
-                <div className="flex flex-col space-y-1">
+                <div className="flex flex-col space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   <motion.div
-                    className="w-8 bg-blue-500 rounded-t hover:bg-blue-600 transition-colors"
+                    className="w-8 bg-blue-500 rounded-t hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${data.cpu}px` }}
                     whileHover={{ scaleY: 1.1 }}
                   ></motion.div>
                   <motion.div
-                    className="w-8 bg-green-500 hover:bg-green-600 transition-colors"
+                    className="w-8 bg-green-500 hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${data.memory}px` }}
                     whileHover={{ scaleY: 1.1 }}
                   ></motion.div>
                   <motion.div
-                    className="w-8 bg-yellow-500 rounded-b hover:bg-yellow-600 transition-colors"
+                    className="w-8 bg-yellow-500 rounded-b hover:bg-yellow-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     style={{ height: `${data.disk}px` }}
                     whileHover={{ scaleY: 1.1 }}
                   ></motion.div>
                 </div>
-                <span className="text-xs text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300">{data.time}</span>
+                <span className="text-xs text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">{data.time}</span>
               </motion.div>
             ))}
           </div>
-          <div className="mt-4 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+          <div className="mt-4 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
             <span>Real-time performance monitoring</span>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
               <span>Live</span>
             </div>
           </div>
@@ -617,99 +621,99 @@ const SystemOverview: React.FC = React.memo(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">System Health</h3>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-              <RefreshCw className="h-4 w-4" />
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">System Health</h3>
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
+              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                  <Server className="h-5 w-5 text-green-600" />
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Server className="h-5 w-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">API Server</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Response time: {systemData.systemMetrics.responseTime}ms</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">API Server</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Response time: {systemData.systemMetrics.responseTime}ms</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-sm text-green-600">Healthy</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Eye className="h-4 w-4" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Healthy</span>
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
+              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                  <Database className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Database className="h-5 w-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">Database</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Queries: {formatNumber(systemData.systemMetrics.databaseQueries)}</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Database</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Queries: {formatNumber(systemData.systemMetrics.databaseQueries)}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-sm text-green-600">Healthy</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Eye className="h-4 w-4" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Healthy</span>
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
+              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                  <Brain className="h-5 w-5 text-purple-600" />
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Brain className="h-5 w-5 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">MCP Agents</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Active: {systemData.systemMetrics.mcpAgents}</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">MCP Agents</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active: {systemData.systemMetrics.mcpAgents}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-sm text-green-600">Active</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Eye className="h-4 w-4" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Active</span>
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
+              className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
-                  <Shield className="h-5 w-5 text-red-600" />
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Shield className="h-5 w-5 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">Security</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Error rate: {formatPercentage(systemData.systemMetrics.errorRate)}</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Security</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Error rate: {formatPercentage(systemData.systemMetrics.errorRate)}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-sm text-green-600">Secure</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                  <Eye className="h-4 w-4" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+                <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Secure</span>
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>
@@ -722,25 +726,25 @@ const SystemOverview: React.FC = React.memo(() => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Recent Activity</h3>
-          <div className="flex items-center space-x-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Recent Activity</h3>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
               <input
                 type="text"
                 placeholder="Search activities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 w-64 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="pl-10 pr-4 py-2 w-64 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid"
               />
             </div>
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <option value="all">All Types</option>
               <option value="user_login">User Login</option>
@@ -748,10 +752,10 @@ const SystemOverview: React.FC = React.memo(() => {
               <option value="payment">Payment</option>
               <option value="error">Error</option>
             </select>
-            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">View All</button>
+            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">View All</button>
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {systemData.recentActivity
             .filter(activity => {
               const matchesSearch = activity.message.toLowerCase().includes(searchQuery.toLowerCase());
@@ -763,26 +767,26 @@ const SystemOverview: React.FC = React.memo(() => {
               key={activity.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer group"
+              className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer group responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <div className={`p-2 rounded-lg ${getSeverityColor(activity.severity)}`}>
                 {getSeverityIcon(activity.severity)}
               </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors responsive-container sm:flex-col md:flex-row lg:grid">
                   {activity.message}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   {new Date(activity.timestamp).toLocaleString()}
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="text-sm text-gray-500">
-                  <Clock className="h-4 w-4 inline mr-1" />
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Clock className="h-4 w-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {new Date(activity.timestamp).toLocaleTimeString()}
                 </div>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Eye className="h-4 w-4" />
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
             </motion.div>
@@ -793,7 +797,7 @@ const SystemOverview: React.FC = React.memo(() => {
           const matchesFilter = filterType === 'all' || activity.type === filterType;
           return matchesSearch && matchesFilter;
         }).length === 0 && (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
             No activities found matching your criteria.
           </div>
         )}

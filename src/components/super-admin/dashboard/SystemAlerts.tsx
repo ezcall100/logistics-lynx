@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   AlertTriangle,
@@ -120,10 +120,10 @@ const SystemAlerts: React.FC = () => {
 
   const getAlertIcon = (type: string) => {
     switch (type) {
-      case 'error': return <AlertTriangle className="h-5 w-5" />;
-      case 'warning': return <AlertCircle className="h-5 w-5" />;
-      case 'success': return <CheckCircle className="h-5 w-5" />;
-      default: return <Info className="h-5 w-5" />;
+      case 'error': return <AlertTriangle className="h-5 w-5 responsive-container" />;
+      case 'warning': return <AlertCircle className="h-5 w-5 responsive-container" />;
+      case 'success': return <CheckCircle className="h-5 w-5 responsive-container" />;
+      default: return <Info className="h-5 w-5 responsive-container" />;
     }
   };
 
@@ -169,19 +169,25 @@ const SystemAlerts: React.FC = () => {
   const resolvedAlertsCount = alerts.filter(alert => alert.status === 'resolved').length;
 
   return (
-    <div className="space-y-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="space-y-6 responsive-container">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">System Alerts</h1>
-          <p className="text-gray-600 dark:text-gray-300">Monitor system alerts and notifications</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">System Alerts</h1>
+          <p className="text-gray-600 dark:text-gray-300 responsive-container">Monitor system alerts and notifications</p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 responsive-container">
           <button
             onClick={handleRefresh}
             disabled={isLoading}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container"
+           aria-label="Button">
             <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
@@ -189,25 +195,25 @@ const SystemAlerts: React.FC = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Alerts</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{activeAlertsCount}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Active Alerts</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">{activeAlertsCount}</p>
             </div>
-            <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg">
-              <AlertTriangle className="h-6 w-6 text-red-600" />
+            <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg responsive-container">
+              <AlertTriangle className="h-6 w-6 text-red-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <Activity className="h-4 w-4 text-red-500 mr-1" />
-            <span className="text-sm text-red-600">Requires attention</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <Activity className="h-4 w-4 text-red-500 mr-1 responsive-container" />
+            <span className="text-sm text-red-600 responsive-container">Requires attention</span>
           </div>
         </motion.div>
 
@@ -215,20 +221,20 @@ const SystemAlerts: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Critical Alerts</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{criticalAlertsCount}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Critical Alerts</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">{criticalAlertsCount}</p>
             </div>
-            <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-              <AlertCircle className="h-6 w-6 text-orange-600" />
+            <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg responsive-container">
+              <AlertCircle className="h-6 w-6 text-orange-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingDown className="h-4 w-4 text-orange-500 mr-1" />
-            <span className="text-sm text-orange-600">Immediate action needed</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <TrendingDown className="h-4 w-4 text-orange-500 mr-1 responsive-container" />
+            <span className="text-sm text-orange-600 responsive-container">Immediate action needed</span>
           </div>
         </motion.div>
 
@@ -236,45 +242,45 @@ const SystemAlerts: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between responsive-container">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Resolved Today</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{resolvedAlertsCount}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container">Resolved Today</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 responsive-container">{resolvedAlertsCount}</p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-              <CheckCircle className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg responsive-container">
+              <CheckCircle className="h-6 w-6 text-green-600 responsive-container" />
             </div>
           </div>
-          <div className="mt-4 flex items-center">
-            <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-            <span className="text-sm text-green-600">System healthy</span>
+          <div className="mt-4 flex items-center responsive-container">
+            <TrendingUp className="h-4 w-4 text-green-500 mr-1 responsive-container" />
+            <span className="text-sm text-green-600 responsive-container">System healthy</span>
           </div>
         </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 responsive-container">
+        <div className="flex flex-col sm:flex-row gap-4 responsive-container">
+          <div className="flex-1 responsive-container">
+            <div className="relative responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search alerts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
               />
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Filter className="h-4 w-4 text-gray-400" />
+          <div className="flex items-center space-x-2 responsive-container">
+            <Filter className="h-4 w-4 text-gray-400 responsive-container" />
             <select
               value={severityFilter}
               onChange={(e) => setSeverityFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
             >
               <option value="all">All Severity</option>
               <option value="critical">Critical</option>
@@ -285,7 +291,7 @@ const SystemAlerts: React.FC = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 responsive-container"
             >
               <option value="all">All Status</option>
               <option value="active">Active</option>
@@ -297,7 +303,7 @@ const SystemAlerts: React.FC = () => {
       </div>
 
       {/* Alerts List */}
-      <div className="space-y-4">
+      <div className="space-y-4 responsive-container">
         {filteredAlerts.map((alert, index) => (
           <motion.div
             key={alert.id}
@@ -306,14 +312,14 @@ const SystemAlerts: React.FC = () => {
             transition={{ delay: index * 0.1 }}
             className={`bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border ${getAlertColor(alert.type, alert.severity)}`}
           >
-            <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-4">
+            <div className="flex items-start justify-between responsive-container">
+              <div className="flex items-start space-x-4 responsive-container">
                 <div className={`p-2 rounded-lg ${getAlertColor(alert.type, alert.severity)}`}>
                   {getAlertIcon(alert.type)}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{alert.title}</h3>
+                <div className="flex-1 responsive-container">
+                  <div className="flex items-center space-x-2 mb-2 responsive-container">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">{alert.title}</h3>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getSeverityColor(alert.severity)}`}>
                       {alert.severity}
                     </span>
@@ -321,38 +327,38 @@ const SystemAlerts: React.FC = () => {
                       {alert.status}
                     </span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-3">{alert.message}</p>
-                  <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center space-x-1">
-                      <Server className="h-4 w-4" />
+                  <p className="text-gray-600 dark:text-gray-300 mb-3 responsive-container">{alert.message}</p>
+                  <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 responsive-container">
+                    <div className="flex items-center space-x-1 responsive-container">
+                      <Server className="h-4 w-4 responsive-container" />
                       <span>{alert.source}</span>
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4" />
+                    <div className="flex items-center space-x-1 responsive-container">
+                      <Clock className="h-4 w-4 responsive-container" />
                       <span>{formatTimeAgo(alert.timestamp)}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 responsive-container">
                 {!alert.acknowledged && (
                   <button
-                    onClick={() => handleAcknowledge(alert.id)}
-                    className="px-3 py-1 text-sm bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/30 transition-colors"
+                    onClick={() = aria-label="Button"> handleAcknowledge(alert.id)}
+                    className="px-3 py-1 text-sm bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/30 transition-colors responsive-container"
                   >
                     Acknowledge
                   </button>
                 )}
                 {!alert.resolved && (
                   <button
-                    onClick={() => handleResolve(alert.id)}
-                    className="px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors"
+                    onClick={() = aria-label="Button"> handleResolve(alert.id)}
+                    className="px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors responsive-container"
                   >
                     Resolve
                   </button>
                 )}
-                <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-                  <Eye className="h-4 w-4" />
+                <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container" aria-label="Button">
+                  <Eye className="h-4 w-4 responsive-container" />
                 </button>
               </div>
             </div>

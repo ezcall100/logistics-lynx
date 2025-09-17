@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bot,
@@ -199,7 +199,13 @@ const MCP301AgentsWorking: React.FC = () => {
         );
       }, 3000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isLiveUpdate]);
 
@@ -221,51 +227,53 @@ const MCP301AgentsWorking: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'working':
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'completed':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'idle':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-blue-500/20 rounded-lg">
-              <Bot className="w-8 h-8 text-blue-400" />
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-3 bg-blue-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Bot className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-white">MCP 301 Agents</h1>
-              <p className="text-gray-400">Real-time Super Admin Development</p>
+              <h1 className="text-4xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">MCP 301 Agents</h1>
+              <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Real-time Super Admin Development</p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <div
                 className={`w-3 h-3 rounded-full ${isLiveUpdate ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}
               ></div>
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 {isLiveUpdate ? 'Live Updates Active' : 'Updates Paused'}
               </span>
             </div>
             <button
-              onClick={() => setIsLiveUpdate(!isLiveUpdate)}
+              onClick={() = aria-label="Button"> setIsLiveUpdate(!isLiveUpdate)}
               className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                 isLiveUpdate
                   ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-green-600 hover:bg-green-700 text-white'
               }`}
             >
-              {isLiveUpdate ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              {isLiveUpdate ? <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
               <span>{isLiveUpdate ? 'Pause' : 'Resume'}</span>
             </button>
           </div>
@@ -273,72 +281,72 @@ const MCP301AgentsWorking: React.FC = () => {
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Active Agents</p>
-              <p className="text-3xl font-bold text-white">301</p>
-              <p className="text-sm text-green-400">All Systems Go</p>
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Agents</p>
+              <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">301</p>
+              <p className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">All Systems Go</p>
             </div>
-            <Bot className="w-8 h-8 text-blue-400" />
+            <Bot className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Files Created</p>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Files Created</p>
+              <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agents.reduce((sum, agent) => sum + agent.filesCreated, 0)}
               </p>
-              <p className="text-sm text-blue-400">+12 today</p>
+              <p className="text-sm text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid">+12 today</p>
             </div>
-            <Code className="w-8 h-8 text-green-400" />
+            <Code className="w-8 h-8 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Lines of Code</p>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Lines of Code</p>
+              <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {agents.reduce((sum, agent) => sum + agent.linesOfCode, 0).toLocaleString()}
               </p>
-              <p className="text-sm text-purple-400">Growing fast</p>
+              <p className="text-sm text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid">Growing fast</p>
             </div>
-            <Database className="w-8 h-8 text-purple-400" />
+            <Database className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Completion</p>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Completion</p>
+              <p className="text-3xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {Math.round(agents.reduce((sum, agent) => sum + agent.progress, 0) / agents.length)}
                 %
               </p>
-              <p className="text-sm text-yellow-400">On track</p>
+              <p className="text-sm text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid">On track</p>
             </div>
-            <TrendingUp className="w-8 h-8 text-yellow-400" />
+            <TrendingUp className="w-8 h-8 text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Agent Activity */}
-        <div className="lg:col-span-2">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Agent Activity</h2>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-green-400">Real-time</span>
+        <div className="lg:col-span-2 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h2 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">Agent Activity</h2>
+              <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+                <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Real-time</span>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {agents.map(agent => (
                 <motion.div
                   key={agent.id}
@@ -351,35 +359,35 @@ const MCP301AgentsWorking: React.FC = () => {
                   }`}
                   onClick={() => setSelectedAgent(selectedAgent === agent.id ? null : agent.id)}
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center space-x-3">
+                  <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div className={`p-2 rounded-lg ${getStatusColor(agent.status)}`}>
                         {getStatusIcon(agent.status)}
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">{agent.agentName}</h3>
-                        <p className="text-sm text-gray-400">{agent.role}</p>
+                        <h3 className="font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">{agent.agentName}</h3>
+                        <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{agent.role}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-400">{agent.lastUpdate}</p>
-                      <p className="text-xs text-gray-500">
+                    <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                      <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{agent.lastUpdate}</p>
+                      <p className="text-xs text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
                         {agent.filesCreated} files • {agent.linesOfCode} LOC
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-300 mb-3">{agent.currentTask}</p>
+                  <p className="text-sm text-gray-300 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">{agent.currentTask}</p>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-1">
-                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                  <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <span>Progress</span>
                         <span>{Math.round(agent.progress)}%</span>
                       </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-700 rounded-full h-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <motion.div
-                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                           initial={{ width: 0 }}
                           animate={{ width: `${agent.progress}%` }}
                           transition={{ duration: 0.5 }}
@@ -394,26 +402,26 @@ const MCP301AgentsWorking: React.FC = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mt-4 pt-4 border-t border-white/10"
+                        className="mt-4 pt-4 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
-                        <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="grid grid-cols-2 gap-4 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
                           <div>
-                            <p className="text-gray-400">Files Created</p>
-                            <p className="text-white font-semibold">{agent.filesCreated}</p>
+                            <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Files Created</p>
+                            <p className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{agent.filesCreated}</p>
                           </div>
                           <div>
-                            <p className="text-gray-400">Lines of Code</p>
-                            <p className="text-white font-semibold">
+                            <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Lines of Code</p>
+                            <p className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">
                               {agent.linesOfCode.toLocaleString()}
                             </p>
                           </div>
                           <div>
-                            <p className="text-gray-400">Status</p>
-                            <p className="text-white font-semibold capitalize">{agent.status}</p>
+                            <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Status</p>
+                            <p className="text-white font-semibold capitalize responsive-container sm:flex-col md:flex-row lg:grid">{agent.status}</p>
                           </div>
                           <div>
-                            <p className="text-gray-400">Last Update</p>
-                            <p className="text-white font-semibold">{agent.lastUpdate}</p>
+                            <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Update</p>
+                            <p className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{agent.lastUpdate}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -427,33 +435,33 @@ const MCP301AgentsWorking: React.FC = () => {
 
         {/* Development Progress */}
         <div>
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-white mb-6">Development Progress</h2>
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-white mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Development Progress</h2>
 
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               {progress.map((category, index) => (
-                <div key={index} className="bg-white/5 border border-white/10 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-white">{category.category}</h3>
-                    <span className="text-sm text-gray-400">
+                <div key={index} className="bg-white/5 border border-white/10 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h3 className="font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">{category.category}</h3>
+                    <span className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {category.completed}/{category.total}
                     </span>
                   </div>
 
-                  <div className="w-full bg-gray-700 rounded-full h-2 mb-3">
+                  <div className="w-full bg-gray-700 rounded-full h-2 mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
                     <motion.div
-                      className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full"
+                      className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                       initial={{ width: 0 }}
                       animate={{ width: `${(category.completed / category.total) * 100}%` }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                     ></motion.div>
                   </div>
 
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {category.agents.map((agent, agentIndex) => (
                       <span
                         key={agentIndex}
-                        className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded"
+                        className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {agent}
                       </span>
@@ -465,10 +473,10 @@ const MCP301AgentsWorking: React.FC = () => {
           </div>
 
           {/* Recent Achievements */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mt-6">
-            <h2 className="text-2xl font-bold text-white mb-6">Recent Achievements</h2>
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-white mb-6 responsive-container sm:flex-col md:flex-row lg:grid">Recent Achievements</h2>
 
-            <div className="space-y-3">
+            <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
               {[
                 {
                   achievement: 'Complete CRUD system implemented',
@@ -506,12 +514,12 @@ const MCP301AgentsWorking: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg"
+                  className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <achievement.icon className="w-5 h-5 text-green-400" />
-                  <div className="flex-1">
-                    <p className="text-sm text-white">{achievement.achievement}</p>
-                    <p className="text-xs text-gray-400">
+                  <achievement.icon className="w-5 h-5 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <p className="text-sm text-white responsive-container sm:flex-col md:flex-row lg:grid">{achievement.achievement}</p>
+                    <p className="text-xs text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       by {achievement.agent} • {achievement.time}
                     </p>
                   </div>

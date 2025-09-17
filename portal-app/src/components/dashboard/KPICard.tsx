@@ -40,9 +40,9 @@ const KPICard: React.FC<KPICardProps> = ({
   const getChangeIcon = () => {
     switch (changeType) {
       case 'increase':
-        return <TrendingUp className="w-4 h-4 text-green-500" />;
+        return <TrendingUp className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'decrease':
-        return <TrendingDown className="w-4 h-4 text-red-500" />;
+        return <TrendingDown className="w-4 h-4 text-red-500 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
         return null;
     }
@@ -60,30 +60,36 @@ const KPICard: React.FC<KPICardProps> = ({
   };
 
   return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
       className={`${bgColor} rounded-2xl p-6 shadow-lg border border-gray-200/30 dark:border-slate-700/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 dark:text-slate-400 mb-1">{title}</p>
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex-1 responsive-container sm:flex-col md:flex-row lg:grid">
+          <p className="text-sm font-medium text-gray-600 dark:text-slate-400 mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{title}</p>
           <p className={`text-3xl font-bold ${color} mb-2`}>
             {formatValue(value)}
           </p>
           {change !== undefined && (
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
               {getChangeIcon()}
               <span className={`text-sm font-medium ${getChangeColor()}`}>
                 {change > 0 ? '+' : ''}{change}%
               </span>
-              <span className="text-sm text-gray-500">vs last month</span>
+              <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">vs last month</span>
             </div>
           )}
         </div>
         <div className={`p-4 rounded-2xl shadow-lg ${iconColor}`}>
-          <Icon className="w-7 h-7 text-white" />
+          <Icon className="w-7 h-7 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
         </div>
       </div>
     </motion.div>

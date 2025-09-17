@@ -1257,14 +1257,16 @@ const App = React.memo(() => {
                 {/* MCP Dashboard routes removed - causing errors */}
                 {/* Catch-all route for 404 errors */}
                 <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </div>
-            </Router>
-          </SubdomainRouter>
-        </AuthProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+              </Routes>
+            </div>
+          </Router>
+        </SubdomainRouter>
+      </AuthProvider>
+    </ThemeProvider>
+  </ErrorBoundary>
+  ), []);
+
+  return memoizedRoutes;
 }, []);
 
 export default App;

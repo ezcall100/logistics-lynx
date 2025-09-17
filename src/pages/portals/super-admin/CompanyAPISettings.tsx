@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Key,
@@ -210,36 +210,36 @@ const CompanyAPISettings: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'connected':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'inactive':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'disconnected':
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'failed':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'expired':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'webhook':
-        return <Link className="w-4 h-4" />;
+        return <Link className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'api':
-        return <Key className="w-4 h-4" />;
+        return <Key className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'oauth':
-        return <Shield className="w-4 h-4" />;
+        return <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'sdk':
-        return <Code className="w-4 h-4" />;
+        return <Code className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Settings className="w-4 h-4" />;
+        return <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
@@ -266,32 +266,38 @@ const CompanyAPISettings: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-purple-500/20 rounded-lg">
-              <Key className="w-8 h-8 text-purple-400" />
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-3 bg-purple-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Key className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-white">API & Integrations</h1>
-              <p className="text-gray-400">
+              <h1 className="text-4xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">API & Integrations</h1>
+              <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Manage API keys, integrations, and webhooks • MCP 301 Agents
               </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-400">Live API Data</span>
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live API Data</span>
             </div>
             <button
-              onClick={() => console.log('Add API key clicked')}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+              onClick={() = aria-label="Button"> console.log('Add API key clicked')}
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>Add API Key</span>
             </button>
           </div>
@@ -299,76 +305,76 @@ const CompanyAPISettings: React.FC = () => {
       </div>
 
       {/* API Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Active API Keys</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active API Keys</p>
+              <p className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {apiKeys.filter(k => k.status === 'active').length}
               </p>
-              <p className="text-sm text-green-400">All systems go</p>
+              <p className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">All systems go</p>
             </div>
-            <Key className="w-8 h-8 text-green-400" />
+            <Key className="w-8 h-8 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Connected Integrations</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Connected Integrations</p>
+              <p className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {integrations.filter(i => i.status === 'connected').length}
               </p>
-              <p className="text-sm text-blue-400">Running smoothly</p>
+              <p className="text-sm text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid">Running smoothly</p>
             </div>
-            <Globe className="w-8 h-8 text-blue-400" />
+            <Globe className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">Active Webhooks</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Active Webhooks</p>
+              <p className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {webhooks.filter(w => w.status === 'active').length}
               </p>
-              <p className="text-sm text-purple-400">Real-time sync</p>
+              <p className="text-sm text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid">Real-time sync</p>
             </div>
-            <Zap className="w-8 h-8 text-purple-400" />
+            <Zap className="w-8 h-8 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm text-gray-400">API Requests Today</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">API Requests Today</p>
+              <p className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {apiKeys.reduce((sum, key) => sum + key.usage.requests, 0).toLocaleString()}
               </p>
-              <p className="text-sm text-yellow-400">Across all keys</p>
+              <p className="text-sm text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid">Across all keys</p>
             </div>
-            <BarChart3 className="w-8 h-8 text-yellow-400" />
+            <BarChart3 className="w-8 h-8 text-yellow-400 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden">
-        <div className="border-b border-white/10">
-          <nav className="flex space-x-8 px-6">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-purple-500 text-purple-400'
                     : 'border-transparent text-gray-400 hover:text-white hover:border-gray-300'
                 }`}
               >
-                <div className="flex items-center space-x-2">
-                  <tab.icon className="w-4 h-4" />
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{tab.name}</span>
                 </div>
               </button>
@@ -377,7 +383,7 @@ const CompanyAPISettings: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="p-6">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <AnimatePresence mode="wait">
             {activeTab === 'keys' && (
               <motion.div
@@ -385,84 +391,84 @@ const CompanyAPISettings: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="space-y-6"
+                className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-white">API Keys</h3>
+                <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">API Keys</h3>
                   <button
-                    onClick={() => console.log('Add API key clicked')}
-                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                    onClick={() = aria-label="Button"> console.log('Add API key clicked')}
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Create API Key</span>
                   </button>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {apiKeys.map(key => (
-                    <div key={key.id} className="bg-white/5 border border-white/10 rounded-lg p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-purple-500/20 rounded-lg">
-                            <Key className="w-5 h-5 text-purple-400" />
+                    <div key={key.id} className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="p-2 bg-purple-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                            <Key className="w-5 h-5 text-purple-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                           </div>
                           <div>
-                            <h4 className="text-white font-semibold">{key.name}</h4>
-                            <p className="text-sm text-gray-400">
+                            <h4 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{key.name}</h4>
+                            <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                               Created {new Date(key.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span
                             className={`px-2 py-1 text-xs rounded-full ${getStatusColor(key.status)}`}
                           >
                             {getStatusIcon(key.status)}
-                            <span className="ml-1">{key.status}</span>
+                            <span className="ml-1 responsive-container sm:flex-col md:flex-row lg:grid">{key.status}</span>
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             API Key
                           </label>
-                          <div className="flex space-x-2">
+                          <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             <input
                               type={visibleKeys.has(key.id) ? 'text' : 'password'}
                               value={key.key}
                               readOnly
-                              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-mono text-sm"
+                              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-mono text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                             />
                             <button
-                              onClick={() => toggleKeyVisibility(key.id)}
-                              className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> toggleKeyVisibility(key.id)}
+                              className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             >
                               {visibleKeys.has(key.id) ? (
-                                <EyeOff className="w-4 h-4" />
+                                <EyeOff className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                               ) : (
-                                <Eye className="w-4 h-4" />
+                                <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                               )}
                             </button>
                             <button
-                              onClick={() => copyToClipboard(key.key)}
-                              className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+                              onClick={() = aria-label="Button"> copyToClipboard(key.key)}
+                              className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             >
-                              <Copy className="w-4 h-4" />
+                              <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             </button>
                           </div>
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             Permissions
                           </label>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             {key.permissions.map(permission => (
                               <span
                                 key={permission}
-                                className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full"
+                                className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               >
                                 {permission}
                               </span>
@@ -471,37 +477,37 @@ const CompanyAPISettings: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div>
-                          <p className="text-sm text-gray-400">Last Used</p>
-                          <p className="text-white">{new Date(key.lastUsed).toLocaleString()}</p>
+                          <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Used</p>
+                          <p className="text-white responsive-container sm:flex-col md:flex-row lg:grid">{new Date(key.lastUsed).toLocaleString()}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-400">Usage This Month</p>
-                          <p className="text-white">
+                          <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Usage This Month</p>
+                          <p className="text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {key.usage.requests.toLocaleString()} /{' '}
                             {key.usage.limit.toLocaleString()}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-400">Reset Date</p>
-                          <p className="text-white">
+                          <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Reset Date</p>
+                          <p className="text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {new Date(key.usage.resetDate).toLocaleDateString()}
                           </p>
                         </div>
                       </div>
 
-                      <div className="mt-4 flex space-x-2">
-                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2">
-                          <Edit className="w-4 h-4" />
+                      <div className="mt-4 flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Edit</span>
                         </button>
-                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2">
-                          <RefreshCw className="w-4 h-4" />
+                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <RefreshCw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Regenerate</span>
                         </button>
-                        <button className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors flex items-center space-x-2">
-                          <Trash2 className="w-4 h-4" />
+                        <button className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Delete</span>
                         </button>
                       </div>
@@ -517,62 +523,62 @@ const CompanyAPISettings: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="space-y-6"
+                className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-white">Integrations</h3>
+                <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Integrations</h3>
                   <button
-                    onClick={() => console.log('Add integration clicked')}
-                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                    onClick={() = aria-label="Button"> console.log('Add integration clicked')}
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Add Integration</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   {integrations.map(integration => (
                     <div
                       key={integration.id}
-                      className="bg-white/5 border border-white/10 rounded-lg p-6"
+                      className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-blue-500/20 rounded-lg">
+                      <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="p-2 bg-blue-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
                             {getTypeIcon(integration.type)}
                           </div>
                           <div>
-                            <h4 className="text-white font-semibold">{integration.name}</h4>
-                            <p className="text-sm text-gray-400 capitalize">{integration.type}</p>
+                            <h4 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{integration.name}</h4>
+                            <p className="text-sm text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">{integration.type}</p>
                           </div>
                         </div>
                         <span
                           className={`px-2 py-1 text-xs rounded-full ${getStatusColor(integration.status)}`}
                         >
                           {getStatusIcon(integration.status)}
-                          <span className="ml-1">{integration.status}</span>
+                          <span className="ml-1 responsive-container sm:flex-col md:flex-row lg:grid">{integration.status}</span>
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-300 mb-4">{integration.description}</p>
+                      <p className="text-sm text-gray-300 mb-4 responsive-container sm:flex-col md:flex-row lg:grid">{integration.description}</p>
 
-                      <div className="mb-4">
-                        <p className="text-sm text-gray-400">Last Sync</p>
-                        <p className="text-white">
+                      <div className="mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Last Sync</p>
+                        <p className="text-white responsive-container sm:flex-col md:flex-row lg:grid">
                           {new Date(integration.lastSync).toLocaleString()}
                         </p>
                       </div>
 
-                      <div className="flex space-x-2">
-                        <button className="flex-1 px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center justify-center space-x-2">
-                          <Settings className="w-4 h-4" />
+                      <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <button className="flex-1 px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center justify-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Configure</span>
                         </button>
-                        <button className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
-                          <Edit className="w-4 h-4" />
+                        <button className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
-                        <button className="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors">
-                          <Trash2 className="w-4 h-4" />
+                        <button className="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                       </div>
                     </div>
@@ -587,58 +593,58 @@ const CompanyAPISettings: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="space-y-6"
+                className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-white">Webhooks</h3>
+                <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Webhooks</h3>
                   <button
-                    onClick={() => console.log('Add webhook clicked')}
-                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                    onClick={() = aria-label="Button"> console.log('Add webhook clicked')}
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>Add Webhook</span>
                   </button>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {webhooks.map(webhook => (
                     <div
                       key={webhook.id}
-                      className="bg-white/5 border border-white/10 rounded-lg p-6"
+                      className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid"
                     >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 bg-green-500/20 rounded-lg">
-                            <Zap className="w-5 h-5 text-green-400" />
+                      <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="p-2 bg-green-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                            <Zap className="w-5 h-5 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                           </div>
                           <div>
-                            <h4 className="text-white font-semibold">{webhook.name}</h4>
-                            <p className="text-sm text-gray-400">{webhook.url}</p>
+                            <h4 className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{webhook.name}</h4>
+                            <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{webhook.url}</p>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                           <span
                             className={`px-2 py-1 text-xs rounded-full ${getStatusColor(webhook.status)}`}
                           >
                             {getStatusIcon(webhook.status)}
-                            <span className="ml-1">{webhook.status}</span>
+                            <span className="ml-1 responsive-container sm:flex-col md:flex-row lg:grid">{webhook.status}</span>
                           </span>
-                          <span className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full">
+                          <span className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid">
                             {webhook.successRate}% success
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             Events
                           </label>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             {webhook.events.map(event => (
                               <span
                                 key={event}
-                                className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full"
+                                className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
                               >
                                 {event}
                               </span>
@@ -647,26 +653,26 @@ const CompanyAPISettings: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                             Last Triggered
                           </label>
-                          <p className="text-white">
+                          <p className="text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {new Date(webhook.lastTriggered).toLocaleString()}
                           </p>
                         </div>
                       </div>
 
-                      <div className="mt-4 flex space-x-2">
-                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2">
-                          <Edit className="w-4 h-4" />
+                      <div className="mt-4 flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Edit</span>
                         </button>
-                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2">
-                          <Zap className="w-4 h-4" />
+                        <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Test</span>
                         </button>
-                        <button className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors flex items-center space-x-2">
-                          <Trash2 className="w-4 h-4" />
+                        <button className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                          <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Delete</span>
                         </button>
                       </div>
@@ -682,47 +688,47 @@ const CompanyAPISettings: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="space-y-6"
+                className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <h3 className="text-xl font-semibold text-white">API Analytics</h3>
+                <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">API Analytics</h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h4 className="text-lg font-semibold text-white mb-4">Request Volume</h4>
-                    <div className="space-y-4">
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Today</span>
-                        <span className="text-white font-semibold">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Request Volume</h4>
+                    <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Today</span>
+                        <span className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">
                           {apiKeys
                             .reduce((sum, key) => sum + key.usage.requests, 0)
                             .toLocaleString()}
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">This Month</span>
-                        <span className="text-white font-semibold">1,234,567</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">This Month</span>
+                        <span className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">1,234,567</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Peak Hour</span>
-                        <span className="text-white font-semibold">2:00 PM - 3:00 PM</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Peak Hour</span>
+                        <span className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">2:00 PM - 3:00 PM</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h4 className="text-lg font-semibold text-white mb-4">Response Times</h4>
-                    <div className="space-y-4">
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Average</span>
-                        <span className="text-white font-semibold">145ms</span>
+                  <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Response Times</h4>
+                    <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Average</span>
+                        <span className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">145ms</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">95th Percentile</span>
-                        <span className="text-white font-semibold">320ms</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">95th Percentile</span>
+                        <span className="text-white font-semibold responsive-container sm:flex-col md:flex-row lg:grid">320ms</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Error Rate</span>
-                        <span className="text-green-400 font-semibold">0.02%</span>
+                      <div className="flex justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+                        <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Error Rate</span>
+                        <span className="text-green-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">0.02%</span>
                       </div>
                     </div>
                   </div>

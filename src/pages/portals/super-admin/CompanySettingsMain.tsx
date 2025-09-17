@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building,
@@ -195,40 +195,46 @@ const CompanySettingsMain: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'active':
-        return <Settings className="w-4 h-4" />;
+        return <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'pending':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Settings className="w-4 h-4" />;
+        return <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6">
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-blue-500/20 rounded-lg">
-              <Settings className="w-8 h-8 text-blue-400" />
+      <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="p-3 bg-blue-500/20 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <Settings className="w-8 h-8 text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-white">Company Settings</h1>
-              <p className="text-gray-400">
+              <h1 className="text-4xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">Company Settings</h1>
+              <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Manage company configurations and preferences • MCP 301 Agents
               </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-400">Live Updates</span>
+          <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+              <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live Updates</span>
             </div>
-            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2">
-              <Save className="w-4 h-4" />
+            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <Save className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>Save All</span>
             </button>
           </div>
@@ -236,16 +242,16 @@ const CompanySettingsMain: React.FC = () => {
       </div>
 
       {/* Company Selector */}
-      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-white">Select Company</h2>
-          <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2">
-            <Plus className="w-4 h-4" />
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Select Company</h2>
+          <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Add Company</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {companies.map(company => (
             <div
               key={company.id}
@@ -256,18 +262,18 @@ const CompanySettingsMain: React.FC = () => {
                   : 'bg-white/5 border-white/10 hover:bg-white/10'
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-white">{company.name}</h3>
+              <div className="flex items-center justify-between mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">{company.name}</h3>
                 <span
                   className={`px-2 py-1 text-xs rounded-full ${getStatusColor(company.status)}`}
                 >
                   {company.status}
                 </span>
               </div>
-              <p className="text-sm text-gray-400 mb-2">{company.domain}</p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">{company.users} users</span>
-                <span className="text-blue-400">{company.plan}</span>
+              <p className="text-sm text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">{company.domain}</p>
+              <div className="flex items-center justify-between text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{company.users} users</span>
+                <span className="text-blue-400 responsive-container sm:flex-col md:flex-row lg:grid">{company.plan}</span>
               </div>
             </div>
           ))}
@@ -275,21 +281,21 @@ const CompanySettingsMain: React.FC = () => {
       </div>
 
       {/* Settings Tabs */}
-      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden">
-        <div className="border-b border-white/10">
-          <nav className="flex space-x-8 px-6">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="border-b border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
+          <nav className="flex space-x-8 px-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-400'
                     : 'border-transparent text-gray-400 hover:text-white hover:border-gray-300'
                 }`}
               >
-                <div className="flex items-center space-x-2">
-                  <tab.icon className="w-4 h-4" />
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <span>{tab.name}</span>
                   <div className={`p-1 rounded-full ${getStatusColor(tab.status)}`}>
                     {getStatusIcon(tab.status)}
@@ -301,7 +307,7 @@ const CompanySettingsMain: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="p-6">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <AnimatePresence mode="wait">
             {tabs.map(
               tab =>
@@ -311,11 +317,11 @@ const CompanySettingsMain: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="space-y-6"
+                    className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-bold text-white">{tab.name}</h3>
-                      <p className="text-gray-400">{tab.description}</p>
+                    <div className="mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+                      <h3 className="text-2xl font-bold text-white responsive-container sm:flex-col md:flex-row lg:grid">{tab.name}</h3>
+                      <p className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{tab.description}</p>
                     </div>
 
                     <tab.component company={selectedCompany} />
@@ -331,36 +337,36 @@ const CompanySettingsMain: React.FC = () => {
 
 // Placeholder components for each settings section
 const CompanyProfileSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
-  <div className="space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-        <h4 className="text-lg font-semibold text-white mb-4">Company Information</h4>
-        <div className="space-y-4">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Company Information</h4>
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Company Name</label>
+            <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Company Name</label>
             <input
               type="text"
               defaultValue={company?.name || ''}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Domain</label>
+            <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Domain</label>
             <input
               type="text"
               defaultValue={company?.domain || ''}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
           </div>
         </div>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-        <h4 className="text-lg font-semibold text-white mb-4">Company Details</h4>
-        <div className="space-y-4">
+      <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Company Details</h4>
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Industry</label>
-            <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
+            <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Industry</label>
+            <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid">
               <option value="transportation">Transportation</option>
               <option value="shipping">Shipping</option>
               <option value="logistics">Logistics</option>
@@ -368,8 +374,8 @@ const CompanyProfileSettings: React.FC<{ company: CompanyData | null }> = ({ com
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Company Size</label>
-            <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
+            <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Company Size</label>
+            <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid">
               <option value="startup">Startup</option>
               <option value="small">Small</option>
               <option value="medium">Medium</option>
@@ -384,26 +390,26 @@ const CompanyProfileSettings: React.FC<{ company: CompanyData | null }> = ({ com
 );
 
 const CompanyBillingSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">Subscription Details</h4>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Subscription Details</h4>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Current Plan</label>
-          <div className="p-3 bg-blue-500/20 border border-blue-500/30 rounded-lg">
-            <span className="text-blue-400 font-semibold">{company?.plan || 'Professional'}</span>
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Current Plan</label>
+          <div className="p-3 bg-blue-500/20 border border-blue-500/30 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+            <span className="text-blue-400 font-semibold responsive-container sm:flex-col md:flex-row lg:grid">{company?.plan || 'Professional'}</span>
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Billing Cycle</label>
-          <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Billing Cycle</label>
+          <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid">
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Next Billing Date</label>
-          <div className="p-3 bg-white/10 border border-white/20 rounded-lg text-white">
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Next Billing Date</label>
+          <div className="p-3 bg-white/10 border border-white/20 rounded-lg text-white responsive-container sm:flex-col md:flex-row lg:grid">
             October 14, 2025
           </div>
         </div>
@@ -413,22 +419,22 @@ const CompanyBillingSettings: React.FC<{ company: CompanyData | null }> = ({ com
 );
 
 const CompanyUserSettings: React.FC<{ company: CompanyData | null }> = ({ company }) => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">User Management</h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">User Management</h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Total Users</label>
-          <div className="p-3 bg-white/10 border border-white/20 rounded-lg text-white">
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Total Users</label>
+          <div className="p-3 bg-white/10 border border-white/20 rounded-lg text-white responsive-container sm:flex-col md:flex-row lg:grid">
             {company?.users || 0} users
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">User Limit</label>
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">User Limit</label>
           <input
             type="number"
             defaultValue={company?.users || 0}
-            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
           />
         </div>
       </div>
@@ -437,19 +443,19 @@ const CompanyUserSettings: React.FC<{ company: CompanyData | null }> = ({ compan
 );
 
 const CompanyAPISettings: React.FC<{ company: CompanyData | null }> = () => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">API Configuration</h4>
-      <div className="space-y-4">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">API Configuration</h4>
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">API Key</label>
-          <div className="flex space-x-2">
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">API Key</label>
+          <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <input
               type="password"
               defaultValue="sk-1234567890abcdef"
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid"
             />
-            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
               Regenerate
             </button>
           </div>
@@ -460,18 +466,18 @@ const CompanyAPISettings: React.FC<{ company: CompanyData | null }> = () => (
 );
 
 const CompanySecuritySettings: React.FC<{ company: CompanyData | null }> = () => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">Security Policies</h4>
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Security Policies</h4>
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h5 className="text-white font-medium">Two-Factor Authentication</h5>
-            <p className="text-sm text-gray-400">Require 2FA for all users</p>
+            <h5 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">Two-Factor Authentication</h5>
+            <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Require 2FA for all users</p>
           </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" defaultChecked className="sr-only peer" />
-            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+          <label className="relative inline-flex items-center cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid">
+            <input type="checkbox" defaultChecked className="sr-only peer responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"></div>
           </label>
         </div>
       </div>
@@ -480,18 +486,18 @@ const CompanySecuritySettings: React.FC<{ company: CompanyData | null }> = () =>
 );
 
 const CompanyNotificationSettings: React.FC<{ company: CompanyData | null }> = () => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">Notification Preferences</h4>
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Notification Preferences</h4>
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h5 className="text-white font-medium">Email Notifications</h5>
-            <p className="text-sm text-gray-400">Receive email updates</p>
+            <h5 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">Email Notifications</h5>
+            <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Receive email updates</p>
           </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" defaultChecked className="sr-only peer" />
-            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+          <label className="relative inline-flex items-center cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid">
+            <input type="checkbox" defaultChecked className="sr-only peer responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"></div>
           </label>
         </div>
       </div>
@@ -500,15 +506,15 @@ const CompanyNotificationSettings: React.FC<{ company: CompanyData | null }> = (
 );
 
 const CompanyComplianceSettings: React.FC<{ company: CompanyData | null }> = () => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">Compliance & Legal</h4>
-      <div className="space-y-4">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Compliance & Legal</h4>
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">
+          <label className="block text-sm font-medium text-gray-400 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Data Retention Policy
           </label>
-          <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
+          <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500 responsive-container sm:flex-col md:flex-row lg:grid">
             <option value="1year">1 Year</option>
             <option value="2years">2 Years</option>
             <option value="5years">5 Years</option>
@@ -521,18 +527,18 @@ const CompanyComplianceSettings: React.FC<{ company: CompanyData | null }> = () 
 );
 
 const CompanyAnalyticsSettings: React.FC<{ company: CompanyData | null }> = () => (
-  <div className="space-y-6">
-    <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-      <h4 className="text-lg font-semibold text-white mb-4">Analytics & Reporting</h4>
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
+  <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+    <div className="bg-white/5 border border-white/10 rounded-lg p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <h4 className="text-lg font-semibold text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Analytics & Reporting</h4>
+      <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
           <div>
-            <h5 className="text-white font-medium">Usage Analytics</h5>
-            <p className="text-sm text-gray-400">Track user activity and system usage</p>
+            <h5 className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">Usage Analytics</h5>
+            <p className="text-sm text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Track user activity and system usage</p>
           </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" defaultChecked className="sr-only peer" />
-            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+          <label className="relative inline-flex items-center cursor-pointer responsive-container sm:flex-col md:flex-row lg:grid">
+            <input type="checkbox" defaultChecked className="sr-only peer responsive-container sm:flex-col md:flex-row lg:grid" />
+            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"></div>
           </label>
         </div>
       </div>

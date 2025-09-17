@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback, useMemo, useEffect, Suspense, lazy } from 'react';
+﻿import React, { useState, useCallback, useMemo, useEffect, Suspense, lazy, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 
@@ -105,9 +105,9 @@ import SystemMonitoringDashboard from '../../../components/super-admin/SystemMon
 
 // Placeholder component for Settings Management
 const SettingsManagementPlaceholder = () => (
-  <div className="p-6">
-    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Settings Management</h2>
-    <p className="text-gray-600 dark:text-gray-400">
+  <div className="p-6 responsive-container">
+    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 responsive-container">Settings Management</h2>
+    <p className="text-gray-600 dark:text-gray-400 responsive-container">
       Settings Management functionality coming soon...
     </p>
   </div>
@@ -332,8 +332,8 @@ const mockData = {
 
 // Loading component for Suspense
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  <div className="flex items-center justify-center min-h-screen responsive-container">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 responsive-container"></div>
   </div>
 );
 
@@ -355,13 +355,17 @@ class SuperAdminErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Super Admin Portal Error</h2>
-            <p className="text-gray-600 mb-4">Something went wrong in the Super Admin Portal</p>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+        <div className="flex items-center justify-center min-h-screen bg-gray-50 responsive-container">
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg responsive-container">
+            <h2 className="text-2xl font-bold text-red-600 mb-4 responsive-container">Super Admin Portal Error</h2>
+            <p className="text-gray-600 mb-4 responsive-container">Something went wrong in the Super Admin Portal</p>
             <button 
-              onClick={() => this.setState({ hasError: false, error: null })}
-              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              onClick={() = aria-label="Button"> this.setState({ hasError: false, error: null })}
+              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors responsive-container"
             >
               Reload Portal
             </button>
@@ -932,68 +936,68 @@ const SuperAdminPortal: React.FC = React.memo(() => {
       className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}
     >
       {/* Header */}
-      <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40">
-        <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
-          <div className="flex items-center space-x-3 sm:space-x-4">
+      <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40 responsive-container">
+        <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 responsive-container">
+          <div className="flex items-center space-x-3 sm:space-x-4 responsive-container">
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden"
+              onClick={() = aria-label="Button"> setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden responsive-container"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 responsive-container" />
             </button>
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <div className="flex items-center space-x-2 sm:space-x-3 responsive-container">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg responsive-container">
+                <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white responsive-container" />
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+              <div className="hidden sm:block responsive-container">
+                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                   TransBot AI
                 </h1>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">
                   Super Admin Portal
                 </p>
               </div>
-              <div className="sm:hidden">
-                <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+              <div className="sm:hidden responsive-container">
+                <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent responsive-container">
                   TransBot AI
                 </h1>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center space-x-1 sm:space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2 responsive-container">
             {/* Search Bar - Responsive */}
-            <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <div className="relative hidden md:block responsive-container">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 responsive-container" />
               <input
                 type="text"
                 placeholder="Search companies, users, reports..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm"
+                className="pl-10 pr-4 py-2.5 w-48 lg:w-80 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm shadow-sm responsive-container"
               />
             </div>
             {/* Mobile Search Button */}
-            <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
-              <Search className="h-5 w-5" />
+            <button className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container" aria-label="Button">
+              <Search className="h-5 w-5 responsive-container" />
             </button>
 
             {/* Essential Icons */}
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 responsive-container">
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container"
                 title={darkMode ? 'Light Mode' : 'Dark Mode'}
-              >
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+               aria-label="Button">
+                {darkMode ? <Sun className="h-5 w-5 responsive-container" /> : <Moon className="h-5 w-5 responsive-container" />}
               </button>
 
               {/* Notifications */}
-              <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors">
-                <Bell className="h-5 w-5" />
+              <button className="relative p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                <Bell className="h-5 w-5 responsive-container" />
                 {notificationCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center responsive-container">
                     {notificationCount}
                   </span>
                 )}
@@ -1001,7 +1005,7 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
               {/* Real-Time Development Monitor Toggle */}
               <button
-                onClick={() => setShowRealTimeMonitor(!showRealTimeMonitor)}
+                onClick={() = aria-label="Button"> setShowRealTimeMonitor(!showRealTimeMonitor)}
                 className={`relative p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-colors ${
                   showRealTimeMonitor
                     ? 'text-green-500 hover:text-green-600 bg-green-50 dark:bg-green-900/20'
@@ -1011,34 +1015,34 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                   showRealTimeMonitor ? 'Hide Real-Time Development' : 'Show Real-Time Development'
                 }
               >
-                <Activity className="h-5 w-5" />
+                <Activity className="h-5 w-5 responsive-container" />
                 {showRealTimeMonitor && (
-                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse responsive-container">
+                    <div className="w-2 h-2 bg-white rounded-full responsive-container"></div>
                   </span>
                 )}
               </button>
 
               {/* Settings */}
               <button
-                onClick={() => setActiveTab('company-settings')}
-                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors"
+                onClick={() = aria-label="Button"> setActiveTab('company-settings')}
+                className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                 title="Company Settings"
               >
-                <Settings className="h-5 w-5" />
+                <Settings className="h-5 w-5 responsive-container" />
               </button>
 
               {/* User Profile */}
-              <div className="relative">
+              <div className="relative responsive-container">
                 <button
-                  onClick={() => setActiveTab('profile')}
-                  className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  onClick={() = aria-label="Button"> setActiveTab('profile')}
+                  className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container"
                   title="Profile & Account"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
-                    <UserIcon className="h-4 w-4 text-white" />
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md responsive-container">
+                    <UserIcon className="h-4 w-4 text-white responsive-container" />
                   </div>
-                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container">
                     Super Admin
                   </span>
                 </button>
@@ -1048,48 +1052,48 @@ const SuperAdminPortal: React.FC = React.memo(() => {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex responsive-container">
         {/* Left Sidebar - Super Admin Navigation */}
         <aside
           className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
             sidebarCollapsed ? 'w-16' : 'w-64'
           }`}
         >
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col responsive-container">
             {/* Sidebar Header */}
-            <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-slate-700/50">
-              <div className="flex items-center justify-between">
+            <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-slate-700/50 responsive-container">
+              <div className="flex items-center justify-between responsive-container">
                 {!sidebarCollapsed && (
-                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container">
                     Navigation
                   </h2>
                 )}
                 <button
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors responsive-container"
                 >
                   {sidebarCollapsed ? (
-                    <ChevronRight className="h-5 w-5" />
+                    <ChevronRight className="h-5 w-5 responsive-container" />
                   ) : (
-                    <ChevronLeft className="h-5 w-5" />
+                    <ChevronLeft className="h-5 w-5 responsive-container" />
                   )}
                 </button>
               </div>
             </div>
 
             {/* Navigation Items */}
-            <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-y-auto">
+            <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-y-auto responsive-container">
               {navigationItems.map(item => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
                 const isExpanded = expandedMenus.includes(item.id);
 
                 return (
-                  <div key={item.id} className="space-y-1">
+                  <div key={item.id} className="space-y-1 responsive-container">
                     {/* Main Menu Item */}
-                    <div className="space-y-1">
+                    <div className="space-y-1 responsive-container">
                       <button
-                        onClick={() => {
+                        onClick={() = aria-label="Button"> {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
                           } else {
@@ -1102,33 +1106,33 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                             : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:shadow-sm'
                         }`}
                       >
-                        <div className="flex items-center space-x-2 sm:space-x-3">
+                        <div className="flex items-center space-x-2 sm:space-x-3 responsive-container">
                           <Icon
                             className={`h-4 w-4 sm:h-5 sm:w-5 ${isActive ? item.color : 'text-gray-500 group-hover:text-gray-700 dark:text-gray-300'}`}
                           />
                           {!sidebarCollapsed && (
-                            <div className="flex-1 text-left">
-                              <div className="flex items-center space-x-2">
+                            <div className="flex-1 text-left responsive-container">
+                              <div className="flex items-center space-x-2 responsive-container">
                                 <span
                                   className={`text-sm font-medium ${isActive ? 'text-blue-700' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:text-gray-100'}`}
                                 >
                                   {item.label}
                                 </span>
                                 {(item as { badge?: number }).badge && (
-                                  <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                                  <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full responsive-container">
                                     {(item as { badge?: number }).badge}
                                   </span>
                                 )}
                               </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              <div className="text-xs text-gray-500 dark:text-gray-400 truncate responsive-container">
                                 {item.description}
                               </div>
                             </div>
                           )}
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           {!sidebarCollapsed && item.count && (
-                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full responsive-container">
                               {item.count}
                             </span>
                           )}
@@ -1148,7 +1152,7 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="ml-2 sm:ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-2 sm:pl-4"
+                        className="ml-2 sm:ml-4 space-y-1 border-l border-gray-200 dark:border-slate-700 pl-2 sm:pl-4 responsive-container"
                       >
                         {item.subMenus.map(subMenu => {
                           const isSubActive = activeTab === subMenu.id;
@@ -1156,15 +1160,15 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                           return (
                             <button
                               key={subMenu.id}
-                              onClick={() => handleMenuItemClick(subMenu.id, subMenu.path || '')}
+                              onClick={() = aria-label="Button"> handleMenuItemClick(subMenu.id, subMenu.path || '')}
                               className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
                                 isSubActive
                                   ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'
                                   : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                               }`}
                             >
-                              <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                              <span className="text-sm font-medium">{subMenu.label}</span>
+                              <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600 responsive-container" />
+                              <span className="text-sm font-medium responsive-container">{subMenu.label}</span>
                             </button>
                           );
                         })}
@@ -1178,7 +1182,7 @@ const SuperAdminPortal: React.FC = React.memo(() => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 p-3 sm:p-4 md:p-6">
+        <main className="flex-1 p-3 sm:p-4 md:p-6 responsive-container">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -1186,7 +1190,7 @@ const SuperAdminPortal: React.FC = React.memo(() => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="h-full"
+              className="h-full responsive-container"
             >
               <ActiveComponent />
             </motion.div>
@@ -1198,32 +1202,32 @@ const SuperAdminPortal: React.FC = React.memo(() => {
           initial={{ width: '20rem' }}
           animate={{ width: rightSidebarCollapsed ? '4rem' : '20rem' }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg border-l border-gray-200 dark:border-gray-700 shadow-xl relative z-20"
+          className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg border-l border-gray-200 dark:border-gray-700 shadow-xl relative z-20 responsive-container"
         >
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col responsive-container">
             {/* Communication Hub Header */}
             {!rightSidebarCollapsed && (
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <MessageCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 responsive-container">
+                <div className="flex items-center justify-between responsive-container">
+                  <div className="flex items-center space-x-3 responsive-container">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg responsive-container">
+                      <MessageCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 responsive-container" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                         Hub
                       </h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 responsive-container">
                         Communication center
                       </p>
                     </div>
                   </div>
                   <button
-                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
-                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
+                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container"
                     title="Collapse Hub"
                   >
-                    <ChevronRight className="h-5 w-5" />
+                    <ChevronRight className="h-5 w-5 responsive-container" />
                   </button>
                 </div>
               </div>
@@ -1231,48 +1235,48 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
             {/* Collapsed Header - Only Toggle Button */}
             {rightSidebarCollapsed && (
-              <div className="p-2 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex justify-center">
+              <div className="p-2 border-b border-gray-200 dark:border-gray-700 responsive-container">
+                <div className="flex justify-center responsive-container">
                   <button
-                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
-                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200"
+                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container"
                     title="Expand Hub"
                   >
-                    <ChevronLeft className="h-5 w-5" />
+                    <ChevronLeft className="h-5 w-5 responsive-container" />
                   </button>
                 </div>
               </div>
             )}
 
             {/* Communication Hub Content */}
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-hidden responsive-container">
               {rightSidebarCollapsed ? (
-                <div className="flex flex-col items-center py-6 space-y-4">
+                <div className="flex flex-col items-center py-6 space-y-4 responsive-container">
                   <button
-                    onClick={() => setRightSidebarCollapsed(false)}
-                    className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105"
+                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(false)}
+                    className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105 responsive-container"
                     title="Expand Hub"
                   >
-                    <MessageCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    <MessageCircle className="h-6 w-6 text-blue-600 dark:text-blue-400 responsive-container" />
                   </button>
-                  <div className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight font-medium">
+                  <div className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600 rounded responsive-container"></div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight font-medium responsive-container">
                     Hub
                   </div>
-                  <div className="flex flex-col space-y-2 mt-4">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="flex flex-col space-y-2 mt-4 responsive-container">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse responsive-container"></div>
                     <div
-                      className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+                      className="w-2 h-2 bg-blue-500 rounded-full animate-pulse responsive-container"
                       style={{ animationDelay: '0.5s' }}
                     ></div>
                     <div
-                      className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"
+                      className="w-2 h-2 bg-purple-500 rounded-full animate-pulse responsive-container"
                       style={{ animationDelay: '1s' }}
                     ></div>
                   </div>
                 </div>
               ) : (
-                <div className="h-full overflow-y-auto">
+                <div className="h-full overflow-y-auto responsive-container">
                   <CommunicationHub />
                 </div>
               )}
@@ -1283,36 +1287,36 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden responsive-container">
           <div
-            className="fixed inset-0 bg-black bg-opacity-50"
+            className="fixed inset-0 bg-black bg-opacity-50 responsive-container"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+          <div className="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg responsive-container">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 responsive-container">
+              <div className="flex items-center justify-between responsive-container">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container">
                   Navigation
                 </h2>
                 <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  onClick={() = aria-label="Button"> setMobileMenuOpen(false)}
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 responsive-container" />
                 </button>
               </div>
             </div>
-            <nav className="p-4">
-              <div className="space-y-2">
+            <nav className="p-4 responsive-container">
+              <div className="space-y-2 responsive-container">
                 {navigationItems.map(item => {
                   const isActive = activeTab === item.id;
                   const isExpanded = expandedMenus.includes(item.id);
 
                   return (
-                    <div key={item.id} className="space-y-1">
+                    <div key={item.id} className="space-y-1 responsive-container">
                       {/* Main Menu Item */}
                       <button
-                        onClick={() => {
+                        onClick={() = aria-label="Button"> {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
                           } else {
@@ -1326,20 +1330,20 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                             : 'hover:bg-gray-100 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:text-gray-100'
                         }`}
                       >
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-3 responsive-container">
                           <item.icon
                             className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`}
                           />
-                          <div className="flex-1 text-left">
-                            <div className="font-medium">{item.label}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                          <div className="flex-1 text-left responsive-container">
+                            <div className="font-medium responsive-container">{item.label}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 truncate responsive-container">
                               {item.description}
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 responsive-container">
                           {item.count && (
-                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full responsive-container">
                               {item.count}
                             </span>
                           )}
@@ -1353,14 +1357,14 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
                       {/* Sub-menus */}
                       {isExpanded && item.subMenus && (
-                        <div className="ml-4 space-y-1">
+                        <div className="ml-4 space-y-1 responsive-container">
                           {item.subMenus.map(subMenu => {
                             const isSubActive = activeTab === subMenu.id;
 
                             return (
                               <button
                                 key={subMenu.id}
-                                onClick={() => {
+                                onClick={() = aria-label="Button"> {
                                   setActiveTab(subMenu.id);
                                   setMobileMenuOpen(false);
                                 }}
@@ -1370,8 +1374,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                                     : 'hover:bg-gray-50 dark:hover:bg-slate-700/50 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200'
                                 }`}
                               >
-                                <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600" />
-                                <span className="text-sm font-medium">{subMenu.label}</span>
+                                <div className="w-2 h-2 rounded-full bg-gray-400 group-hover:bg-gray-600 responsive-container" />
+                                <span className="text-sm font-medium responsive-container">{subMenu.label}</span>
                               </button>
                             );
                           })}

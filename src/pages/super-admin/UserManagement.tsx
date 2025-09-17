@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * Super Admin UserData Management - Complete UserData Control System
  * Manage registrations, approvals, and user access
@@ -409,64 +410,70 @@ function UserDataManagement() {
     if (!selectedUserData) return null;
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">UserData Details</h2>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">UserData Details</h2>
             <button
-              onClick={() => setShowUserDataDetails(false)}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg"
+              onClick={() = aria-label="Button"> setShowUserDataDetails(false)}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             >
-              <XCircle className="w-6 h-6" />
+              <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
             {/* Company Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 Company Information
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Company Name
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.companyName}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.companyName}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Company Type
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.companyType}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Industry
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.industry}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.industry}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Company Size
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.companySize} employees
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Website
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.website}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.website}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Address
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.address}, {selectedUserData.city}, {selectedUserData.state}{' '}
                     {selectedUserData.zipCode}
                   </p>
@@ -475,48 +482,48 @@ function UserDataManagement() {
             </div>
 
             {/* UserData Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 UserData Information
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Name
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.firstName} {selectedUserData.lastName}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Email
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.email}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.email}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Phone
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.phone}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.phone}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Job Title
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.jobTitle}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.jobTitle}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Department
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.department}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.department}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Primary Role
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.primaryRole.replace('_', ' ')}
                   </p>
                 </div>
@@ -524,38 +531,38 @@ function UserDataManagement() {
             </div>
 
             {/* Subscription Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Subscription</h3>
-              <div className="space-y-3">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Subscription</h3>
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Plan
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.subscriptionType}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Billing Cycle
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.billingCycle}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Payment Method
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.paymentMethod.replace('_', ' ')}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </label>
-                  <p className="text-gray-900 dark:text-white capitalize">
+                  <p className="text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.subscriptionStatus}
                   </p>
                 </div>
@@ -563,38 +570,38 @@ function UserDataManagement() {
             </div>
 
             {/* Usage Statistics */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 Usage Statistics
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Total Logins
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.totalLogins}</p>
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.totalLogins}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Loads Created
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.usageStats.loadsCreated}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Loads Completed
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedUserData.usageStats.loadsCompleted}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                     Revenue
                   </label>
-                  <p className="text-gray-900 dark:text-white">
+                  <p className="text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     ${selectedUserData.usageStats.revenue.toLocaleString()}
                   </p>
                 </div>
@@ -603,15 +610,15 @@ function UserDataManagement() {
           </div>
 
           {/* Active Functions */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               Active Functions
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
               {selectedUserData.activeFunctions.map(func => (
                 <span
                   key={func}
-                  className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-full text-sm"
+                  className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-full text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {func.replace('_', ' ')}
                 </span>
@@ -621,18 +628,18 @@ function UserDataManagement() {
 
           {/* MCP Agent Information */}
           {selectedUserData.mcpAgentAssigned && (
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 MCP Agent
               </h3>
-              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between">
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                   <div>
-                    <p className="font-medium text-blue-900 dark:text-blue-100">
+                    <p className="font-medium text-blue-900 dark:text-blue-100 responsive-container sm:flex-col md:flex-row lg:grid">
                       Agent ID: {selectedUserData.mcpAgentId}
                     </p>
-                    <p className="text-sm text-blue-700 dark:text-blue-300">
-                      Status: <span className="capitalize">{selectedUserData.mcpAgentStatus}</span>
+                    <p className="text-sm text-blue-700 dark:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid">
+                      Status: <span className="capitalize responsive-container sm:flex-col md:flex-row lg:grid">{selectedUserData.mcpAgentStatus}</span>
                     </p>
                   </div>
                   <div
@@ -648,18 +655,18 @@ function UserDataManagement() {
           )}
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+          <div className="flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
             {selectedUserData.status === 'pending' && (
               <>
                 <button
-                  onClick={() => handleApproveUserData(selectedUserData)}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  onClick={() = aria-label="Button"> handleApproveUserData(selectedUserData)}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Approve
                 </button>
                 <button
-                  onClick={() => handleUserDataAction(selectedUserData.id, 'reject')}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                  onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'reject')}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Reject
                 </button>
@@ -667,23 +674,23 @@ function UserDataManagement() {
             )}
             {selectedUserData.status === 'active' && (
               <button
-                onClick={() => handleUserDataAction(selectedUserData.id, 'suspend')}
-                className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'suspend')}
+                className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Suspend
               </button>
             )}
             {selectedUserData.status === 'suspended' && (
               <button
-                onClick={() => handleUserDataAction(selectedUserData.id, 'activate')}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'activate')}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Activate
               </button>
             )}
             <button
-              onClick={() => setShowUserDataDetails(false)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+              onClick={() = aria-label="Button"> setShowUserDataDetails(false)}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               Close
             </button>
@@ -694,26 +701,28 @@ function UserDataManagement() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
+      <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 UserData Management
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Manage user registrations and access
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <UserPlus className="w-4 h-4 mr-2" />
+            <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <UserPlus className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Add UserData
               </button>
-              <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
-                <Download className="w-4 h-4 mr-2" />
+              <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Download className="w-4 h-4 mr-2 responsive-container sm:flex-col md:flex-row lg:grid" />
                 Export
               </button>
             </div>
@@ -722,33 +731,33 @@ function UserDataManagement() {
       </header>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700">
-        <div className="px-6 py-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Search
               </label>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <input
                   type="text"
                   placeholder="Search users..."
                   value={filters.search}
                   onChange={e => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Status
               </label>
               <select
                 value={filters.status}
                 onChange={e => handleFilterChange('status', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -762,13 +771,13 @@ function UserDataManagement() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Role
               </label>
               <select
                 value={filters.role}
                 onChange={e => handleFilterChange('role', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Roles</option>
                 <option value="shipper">Shipper</option>
@@ -780,13 +789,13 @@ function UserDataManagement() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Subscription
               </label>
               <select
                 value={filters.subscription}
                 onChange={e => handleFilterChange('subscription', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Plans</option>
                 <option value="free">Free</option>
@@ -797,13 +806,13 @@ function UserDataManagement() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Company Size
               </label>
               <select
                 value={filters.companySize}
                 onChange={e => handleFilterChange('companySize', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Sizes</option>
                 <option value="1-10">1-10</option>
@@ -815,13 +824,13 @@ function UserDataManagement() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 Date Range
               </label>
               <select
                 value={filters.dateRange}
                 onChange={e => handleFilterChange('dateRange', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <option value="all">All Time</option>
                 <option value="today">Today</option>
@@ -835,183 +844,183 @@ function UserDataManagement() {
       </div>
 
       {/* Statistics */}
-      <div className="px-6 py-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
-            <div className="flex items-center justify-between">
+      <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Total UserDatas
                 </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{users.length}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">{users.length}</p>
               </div>
-              <Users className="w-8 h-8 text-blue-500" />
+              <Users className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
-            <div className="flex items-center justify-between">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Pending Approval
                 </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {users.filter(u => u.status === 'pending').length}
                 </p>
               </div>
-              <Clock className="w-8 h-8 text-yellow-500" />
+              <Clock className="w-8 h-8 text-yellow-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
-            <div className="flex items-center justify-between">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                   Active UserDatas
                 </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {users.filter(u => u.status === 'active').length}
                 </p>
               </div>
-              <UserCheck className="w-8 h-8 text-green-500" />
+              <UserCheck className="w-8 h-8 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
-            <div className="flex items-center justify-between">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">MCP Agents</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">MCP Agents</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                   {users.filter(u => u.mcpAgentAssigned).length}
                 </p>
               </div>
-              <Shield className="w-8 h-8 text-purple-500" />
+              <Shield className="w-8 h-8 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
           </div>
         </div>
       </div>
 
       {/* UserDatas Table */}
-      <div className="px-6 py-4">
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
-              <thead className="bg-gray-50 dark:bg-slate-700">
+      <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm overflow-hidden responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="overflow-x-auto responsive-container sm:flex-col md:flex-row lg:grid">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+              <thead className="bg-gray-50 dark:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     UserData
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Company
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Role
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Subscription
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     MCP Agent
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Registered
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider responsive-container sm:flex-col md:flex-row lg:grid">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+              <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                 {filteredUserDatas.map(user => (
-                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-slate-700">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
+                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                         <img
                           src={user.avatar}
                           alt={`${user.firstName} ${user.lastName}`}
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          className="w-10 h-10 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
+                        / alt="Image">
+                        <div className="ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {user.firstName} {user.lastName}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                             {user.email}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                         {user.companyName}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                      <div className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                         {user.industry}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-900 dark:text-white capitalize">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <span className="text-sm text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                         {user.primaryRole.replace('_', ' ')}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-white capitalize">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="text-sm text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                         {user.subscriptionType}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400 capitalize">
+                      <div className="text-sm text-gray-500 dark:text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                         {user.billingCycle}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(user.status)}`}
                       >
                         {user.status.replace('_', ' ')}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       {user.mcpAgentAssigned ? (
-                        <div className="flex items-center">
+                        <div className="flex items-center responsive-container sm:flex-col md:flex-row lg:grid">
                           <div
                             className={`w-2 h-2 rounded-full mr-2 ${
                               user.mcpAgentStatus === 'active' ? 'bg-green-500' : 'bg-yellow-500'
                             }`}
                           />
-                          <span className="text-sm text-gray-900 dark:text-white">
+                          <span className="text-sm text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {user.mcpAgentId}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                           Not Assigned
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {new Date(user.registeredAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center space-x-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
+                      <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <button
-                          onClick={() => handleViewUserData(user)}
-                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                          onClick={() = aria-label="Button"> handleViewUserData(user)}
+                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                         {user.status === 'pending' && (
                           <button
-                            onClick={() => handleApproveUserData(user)}
-                            className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
+                            onClick={() = aria-label="Button"> handleApproveUserData(user)}
+                            className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <CheckCircle className="w-4 h-4" />
+                            <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           </button>
                         )}
                         {user.status === 'pending' && (
                           <button
-                            onClick={() => handleUserDataAction(user.id, 'reject')}
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            onClick={() = aria-label="Button"> handleUserDataAction(user.id, 'reject')}
+                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
-                            <XCircle className="w-4 h-4" />
+                            <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           </button>
                         )}
                       </div>

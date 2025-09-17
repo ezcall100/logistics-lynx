@@ -5,7 +5,7 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bell,
@@ -112,88 +112,88 @@ const DriverMobileApp: React.FC = () => {
   ];
 
   const renderDashboard = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">This Month</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">This Month</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 ${driverStats.thisMonthEarnings.toLocaleString()}
               </p>
             </div>
-            <DollarSign className="w-8 h-8 text-green-500" />
+            <DollarSign className="w-8 h-8 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                 Completed Loads
               </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {driverStats.completedLoads}
               </p>
             </div>
-            <CheckCircle className="w-8 h-8 text-blue-500" />
+            <CheckCircle className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Rating</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Rating</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {driverStats.averageRating}
               </p>
             </div>
-            <Star className="w-8 h-8 text-yellow-500" />
+            <Star className="w-8 h-8 text-yellow-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Miles</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Total Miles</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                 {driverStats.totalMiles.toLocaleString()}
               </p>
             </div>
-            <Route className="w-8 h-8 text-purple-500" />
+            <Route className="w-8 h-8 text-purple-500 responsive-container sm:flex-col md:flex-row lg:grid" />
           </div>
         </div>
       </div>
 
       {/* Available Loads */}
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm">
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Available Loads</h3>
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Available Loads</h3>
         </div>
-        <div className="p-6">
-          <div className="space-y-4">
+        <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
             {availableLoads.map(load => (
               <div
                 key={load.id}
-                className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <div className="flex items-center space-x-4">
-                  <Truck className="w-8 h-8 text-blue-500" />
+                <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Truck className="w-8 h-8 text-blue-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
+                    <p className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                       {load.origin} → {load.destination}
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
                       {load.distance} miles • Pickup: {load.pickupDate}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-medium text-gray-900 dark:text-white">
+                <div className="text-right responsive-container sm:flex-col md:flex-row lg:grid">
+                  <p className="font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                     ${load.rate.toLocaleString()}
                   </p>
-                  <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
                     Book Load
                   </button>
                 </div>
@@ -211,26 +211,38 @@ const DriverMobileApp: React.FC = () => {
         return renderDashboard();
       case 'loads':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Available Loads</h2>
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Available Loads</h2>
           </div>
         );
       case 'my-loads':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">My Loads</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">My Loads</h2>
           </div>
         );
       case 'earnings':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Earnings</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Earnings</h2>
           </div>
         );
       case 'profile':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Profile</h2>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+          <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Profile</h2>
           </div>
         );
       default:
@@ -239,39 +251,43 @@ const DriverMobileApp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Sidebar */}
       <div
         className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white dark:bg-slate-800 shadow-sm transition-all duration-300 flex flex-col`}
       >
         {/* Logo */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
-              <Truck className="w-5 h-5 text-white" />
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <Truck className="w-5 h-5 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
             </div>
             {!sidebarCollapsed && (
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Driver App</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Driver App</h1>
             )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
+        <nav className="flex-1 p-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <ul className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
             {navigationItems.map(item => {
               const Icon = item.icon;
               return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
                 <li key={item.id}>
                   <button
-                    onClick={() => setActiveTab(item.id)}
+                    onClick={() = aria-label="Button"> setActiveTab(item.id)}
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       activeTab === item.id
                         ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                     {!sidebarCollapsed && <span>{item.label}</span>}
                   </button>
                 </li>
@@ -281,10 +297,10 @@ const DriverMobileApp: React.FC = () => {
         </nav>
 
         {/* Driver Profile */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                 {currentDriver.name
                   .split(' ')
                   .map(n => n[0])
@@ -292,11 +308,11 @@ const DriverMobileApp: React.FC = () => {
               </span>
             </div>
             {!sidebarCollapsed && (
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+              <div className="flex-1 min-w-0 responsive-container sm:flex-col md:flex-row lg:grid">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate responsive-container sm:flex-col md:flex-row lg:grid">
                   {currentDriver.name}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                <p className="text-xs text-gray-500 dark:text-gray-400 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                   {currentDriver.role} • {currentDriver.status}
                 </p>
               </div>
@@ -306,38 +322,38 @@ const DriverMobileApp: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
-        <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-          <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+        <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700"
+                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {sidebarCollapsed ? (
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : (
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                 </button>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white capitalize">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                   {activeTab.replace('-', ' ')}
                 </h2>
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative"
+                  onClick={() = aria-label="Button"> setShowNotifications(!showNotifications)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative responsive-container sm:flex-col md:flex-row lg:grid"
                 >
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                  <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"></span>
                 </button>
 
-                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid">
                     {currentDriver.name
                       .split(' ')
                       .map(n => n[0])
@@ -350,7 +366,7 @@ const DriverMobileApp: React.FC = () => {
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto responsive-container sm:flex-col md:flex-row lg:grid">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}

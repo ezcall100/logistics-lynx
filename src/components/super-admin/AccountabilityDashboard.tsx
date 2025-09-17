@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield,
@@ -35,6 +35,8 @@ interface AccountabilityEntry {
     committed: boolean;
     deployed: boolean;
     verified: boolean;
+  } catch (error) {
+    console.error('Error:', error);
   };
 }
 
@@ -150,7 +152,13 @@ const AccountabilityDashboard: React.FC = () => {
         setEntries(prev => [newEntry, ...prev.slice(0, 19)]);
       }, 10000);
 
-      return () => clearInterval(interval);
+      return (
+    <>
+      <script type="application/ld+json">
+        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
+      </script>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      ) => clearInterval(interval);
     }
   }, [isAutoRefresh]);
 
@@ -172,43 +180,45 @@ const AccountabilityDashboard: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'success':
-        return <CheckCircle className="w-4 h-4" />;
+        return <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'warning':
-        return <AlertTriangle className="w-4 h-4" />;
+        return <AlertTriangle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'error':
-        return <AlertCircle className="w-4 h-4" />;
+        return <AlertCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       case 'info':
-        return <Activity className="w-4 h-4" />;
+        return <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
       default:
-        return <Clock className="w-4 h-4" />;
+        return <Clock className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />;
     }
   };
 
   const getVerificationIcon = (verified: boolean) => {
     return verified ? (
-      <CheckCircle className="w-4 h-4 text-green-500" />
+      <CheckCircle className="w-4 h-4 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
     ) : (
-      <Clock className="w-4 h-4 text-gray-400" />
+      <Clock className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
     );
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
+    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Accountability Dashboard</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Accountability Dashboard</h1>
+          <p className="text-gray-600 mt-2 responsive-container sm:flex-col md:flex-row lg:grid">
             Real-time verification and transparency for all 302 autonomous agents
           </p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600">All Systems Verified</span>
+        <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse responsive-container sm:flex-col md:flex-row lg:grid"></div>
+            <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">All Systems Verified</span>
           </div>
           <button
-            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}
           >
             <RefreshCw className={`w-4 h-4 ${isAutoRefresh ? 'animate-spin' : ''}`} />
@@ -218,34 +228,36 @@ const AccountabilityDashboard: React.FC = () => {
       </div>
 
       {/* System Verification Status */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">System Verification Status</h2>
-          <div className="flex items-center space-x-2">
-            <Shield className="w-5 h-5 text-green-600" />
-            <span className="text-sm text-green-600 font-medium">All Systems Operational</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">System Verification Status</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <Shield className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-green-600 font-medium responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {Object.entries(systemVerification).map(([key, value]) => {
             if (key === 'lastVerification') return null;
             return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      
               <motion.div
                 key={key}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg"
+                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <div className={`p-2 rounded-lg ${value ? 'bg-green-100' : 'bg-red-100'}`}>
                   {value ? (
-                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <CheckCircle className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : (
-                    <AlertCircle className="w-5 h-5 text-red-600" />
+                    <AlertCircle className="w-5 h-5 text-red-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 capitalize">
+                  <p className="font-medium text-gray-900 capitalize responsive-container sm:flex-col md:flex-row lg:grid">
                     {key.replace(/([A-Z])/g, ' $1').trim()}
                   </p>
                   <p className={`text-sm ${value ? 'text-green-600' : 'text-red-600'}`}>
@@ -257,24 +269,24 @@ const AccountabilityDashboard: React.FC = () => {
           })}
         </div>
 
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+        <div className="mt-4 pt-4 border-t border-gray-200 responsive-container sm:flex-col md:flex-row lg:grid">
+          <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">
             Last verification: {new Date(systemVerification.lastVerification).toLocaleString()}
           </p>
         </div>
       </div>
 
       {/* Accountability Entries */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Real-Time Accountability Log</h2>
-          <div className="flex items-center space-x-2">
-            <FileText className="w-5 h-5 text-gray-500" />
-            <span className="text-sm text-gray-500">{entries.length} entries</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
+          <h2 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Real-Time Accountability Log</h2>
+          <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+            <FileText className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
+            <span className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">{entries.length} entries</span>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
           {entries.map((entry, index) => (
             <motion.div
               key={entry.id}
@@ -284,40 +296,40 @@ const AccountabilityDashboard: React.FC = () => {
               className={`border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow ${getStatusColor(entry.status)}`}
               onClick={() => setSelectedEntry(entry)}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between mb-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                  <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     {getStatusIcon(entry.status)}
-                    <span className="font-medium">{entry.agent}</span>
+                    <span className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{entry.agent}</span>
                   </div>
-                  <span className="text-sm opacity-75">
+                  <span className="text-sm opacity-75 responsive-container sm:flex-col md:flex-row lg:grid">
                     {new Date(entry.timestamp).toLocaleString()}
                   </span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {Object.entries(entry.verification).map(([key, verified]) => (
-                    <div key={key} className="flex items-center space-x-1">
+                    <div key={key} className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       {getVerificationIcon(verified)}
-                      <span className="text-xs capitalize">{key}</span>
+                      <span className="text-xs capitalize responsive-container sm:flex-col md:flex-row lg:grid">{key}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="font-medium">{entry.action}</h3>
-                <p className="text-sm opacity-75">{entry.details}</p>
+              <div className="space-y-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                <h3 className="font-medium responsive-container sm:flex-col md:flex-row lg:grid">{entry.action}</h3>
+                <p className="text-sm opacity-75 responsive-container sm:flex-col md:flex-row lg:grid">{entry.details}</p>
 
                 {entry.gitCommit && (
-                  <div className="flex items-center space-x-2 text-sm">
-                    <GitCommit className="w-4 h-4" />
-                    <span className="font-mono">{entry.gitCommit}</span>
+                  <div className="flex items-center space-x-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <GitCommit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
+                    <span className="font-mono responsive-container sm:flex-col md:flex-row lg:grid">{entry.gitCommit}</span>
                   </div>
                 )}
 
                 {entry.fileChanges && entry.fileChanges.length > 0 && (
-                  <div className="flex items-center space-x-2 text-sm">
-                    <FileText className="w-4 h-4" />
+                  <div className="flex items-center space-x-2 text-sm responsive-container sm:flex-col md:flex-row lg:grid">
+                    <FileText className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     <span>{entry.fileChanges.join(', ')}</span>
                   </div>
                 )}
@@ -328,70 +340,70 @@ const AccountabilityDashboard: React.FC = () => {
       </div>
 
       {/* Access Points */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">System Access Points</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">System Access Points</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Database className="w-5 h-5 text-blue-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 responsive-container sm:flex-col md:flex-row lg:grid">
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-blue-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Database className="w-5 h-5 text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Supabase Logs</p>
-                  <p className="text-sm text-gray-500">Real-time database events</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Supabase Logs</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Real-time database events</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <ExternalLink className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <GitCommit className="w-5 h-5 text-green-600" />
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-green-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <GitCommit className="w-5 h-5 text-green-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">GitHub Repository</p>
-                  <p className="text-sm text-gray-500">Private repo with all commits</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">GitHub Repository</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Private repo with all commits</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <ExternalLink className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Webhook className="w-5 h-5 text-purple-600" />
+          <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-purple-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <Webhook className="w-5 h-5 text-purple-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">N8N Workflows</p>
-                  <p className="text-sm text-gray-500">Automated deployment pipeline</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">N8N Workflows</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Automated deployment pipeline</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <ExternalLink className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <ExternalLink className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <FileText className="w-5 h-5 text-orange-600" />
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+              <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
+                <div className="p-2 bg-orange-100 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid">
+                  <FileText className="w-5 h-5 text-orange-600 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Log Files</p>
-                  <p className="text-sm text-gray-500">Real-autonomous-development.log</p>
+                  <p className="font-medium text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Log Files</p>
+                  <p className="text-sm text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid">Real-autonomous-development.log</p>
                 </div>
               </div>
-              <button className="p-2 text-gray-500 hover:text-gray-700">
-                <Download className="w-4 h-4" />
+              <button className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
           </div>
@@ -403,45 +415,45 @@ const AccountabilityDashboard: React.FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 responsive-container sm:flex-col md:flex-row lg:grid"
           onClick={() => setSelectedEntry(null)}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+            className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid"
             onClick={e => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-900">Accountability Details</h3>
+            <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
+              <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Accountability Details</h3>
               <button
-                onClick={() => setSelectedEntry(null)}
-                className="p-2 text-gray-500 hover:text-gray-700"
+                onClick={() = aria-label="Button"> setSelectedEntry(null)}
+                className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Agent & Action</h4>
-                <p className="text-gray-600">
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Agent & Action</h4>
+                <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">
                   {selectedEntry.agent} - {selectedEntry.action}
                 </p>
               </div>
 
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Details</h4>
-                <p className="text-gray-600">{selectedEntry.details}</p>
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Details</h4>
+                <p className="text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">{selectedEntry.details}</p>
               </div>
 
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Verification Status</h4>
-                <div className="grid grid-cols-2 gap-2">
+                <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Verification Status</h4>
+                <div className="grid grid-cols-2 gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {Object.entries(selectedEntry.verification).map(([key, verified]) => (
-                    <div key={key} className="flex items-center space-x-2">
+                    <div key={key} className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       {getVerificationIcon(verified)}
-                      <span className="text-sm capitalize">{key}</span>
+                      <span className="text-sm capitalize responsive-container sm:flex-col md:flex-row lg:grid">{key}</span>
                     </div>
                   ))}
                 </div>
@@ -449,8 +461,8 @@ const AccountabilityDashboard: React.FC = () => {
 
               {selectedEntry.gitCommit && (
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Git Commit</h4>
-                  <p className="font-mono text-sm bg-gray-100 p-2 rounded">
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">Git Commit</h4>
+                  <p className="font-mono text-sm bg-gray-100 p-2 rounded responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedEntry.gitCommit}
                   </p>
                 </div>
@@ -458,11 +470,11 @@ const AccountabilityDashboard: React.FC = () => {
 
               {selectedEntry.fileChanges && selectedEntry.fileChanges.length > 0 && (
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">File Changes</h4>
-                  <ul className="space-y-1">
+                  <h4 className="font-medium text-gray-900 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">File Changes</h4>
+                  <ul className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                     {selectedEntry.fileChanges.map((file, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2">
-                        <FileText className="w-3 h-3" />
+                      <li key={idx} className="text-sm text-gray-600 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
+                        <FileText className="w-3 h-3 responsive-container sm:flex-col md:flex-row lg:grid" />
                         <span>{file}</span>
                       </li>
                     ))}
