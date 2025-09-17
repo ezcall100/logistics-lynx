@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import {
@@ -21,10 +21,11 @@ import {
   MessageCircle,
   Building,
   Activity,
+  FileText,
 } from 'lucide-react';
 
 // Import the new modular Communication Hub
-import { CommunicationHub } from '../../../components/CommunicationHub';
+import { CommunicationHub } from '../../../components/CommunicationHub/CommunicationHub';
 
 // Import all the real Super Admin components
 import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashboard';
@@ -83,7 +84,15 @@ import CompanySettings from '../../../components/super-admin/settings/CompanySet
 import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
 
 // Import Real-Time Development Monitor
-import RealTimeDevelopmentMonitor from '../../../components/super-admin/RealTimeDevelopmentMonitor';
+import { RealTimeDevelopmentMonitor } from '../../../components/super-admin/RealTimeDevelopmentMonitor';
+import AutonomousDevelopmentDashboard from '../../../components/super-admin/AutonomousDevelopmentDashboard';
+import AccountabilityDashboard from '../../../components/super-admin/AccountabilityDashboard';
+import ProgressTrackingDashboard from '../../../components/super-admin/ProgressTrackingDashboard';
+import SystemVerificationDashboard from '../../../components/super-admin/SystemVerificationDashboard';
+import CommanderStatusReport from '../../../components/super-admin/CommanderStatusReport';
+import EnhancedUserManagement from '../../../components/super-admin/EnhancedUserManagement';
+import AuditLoggingSystem from '../../../components/super-admin/AuditLoggingSystem';
+import SystemMonitoringDashboard from '../../../components/super-admin/SystemMonitoringDashboard';
 
 // Placeholder component for Settings Management
 const SettingsManagementPlaceholder = () => (
@@ -347,6 +356,78 @@ const SuperAdminPortal: React.FC = () => {
       bgColor: 'bg-blue-50',
       component: EnterpriseDashboard,
       subMenus: [
+        {
+          id: 'autonomous-dashboard',
+          label: 'Autonomous Development',
+          icon: Activity,
+          description: 'Real-time monitoring of 302 MCP agents',
+          color: 'text-green-500',
+          bgColor: 'bg-green-50',
+          component: AutonomousDevelopmentDashboard,
+        },
+        {
+          id: 'accountability-dashboard',
+          label: 'Accountability Dashboard',
+          icon: Shield,
+          description: 'Full transparency and verification system',
+          color: 'text-blue-500',
+          bgColor: 'bg-blue-50',
+          component: AccountabilityDashboard,
+        },
+        {
+          id: 'progress-tracking',
+          label: 'Progress Tracking',
+          icon: BarChart3,
+          description: 'Live build progress and agent assignments',
+          color: 'text-purple-500',
+          bgColor: 'bg-purple-50',
+          component: ProgressTrackingDashboard,
+        },
+        {
+          id: 'system-verification',
+          label: 'System Verification',
+          icon: Shield,
+          description: 'Port monitoring and system health verification',
+          color: 'text-indigo-500',
+          bgColor: 'bg-indigo-50',
+          component: SystemVerificationDashboard,
+        },
+        {
+          id: 'commander-status',
+          label: 'Commander Status Report',
+          icon: Shield,
+          description: 'Final verification and mission status',
+          color: 'text-red-500',
+          bgColor: 'bg-red-50',
+          component: CommanderStatusReport,
+        },
+        {
+          id: 'enhanced-user-management',
+          label: 'Enhanced User Management',
+          icon: Users,
+          description: 'Complete RBAC system with audit logging',
+          color: 'text-indigo-500',
+          bgColor: 'bg-indigo-50',
+          component: EnhancedUserManagement,
+        },
+        {
+          id: 'audit-logging-system',
+          label: 'Audit Logging System',
+          icon: FileText,
+          description: 'Comprehensive audit trail for all activities',
+          color: 'text-amber-500',
+          bgColor: 'bg-amber-50',
+          component: AuditLoggingSystem,
+        },
+        {
+          id: 'system-monitoring',
+          label: 'System Monitoring',
+          icon: Activity,
+          description: 'Real-time monitoring of all system ports',
+          color: 'text-cyan-500',
+          bgColor: 'bg-cyan-50',
+          component: SystemMonitoringDashboard,
+        },
         {
           id: 'system-overview',
           label: 'System Overview',
@@ -1021,7 +1102,7 @@ const SuperAdminPortal: React.FC = () => {
                           return (
                             <button
                               key={subMenu.id}
-                              onClick={() => handleMenuItemClick(subMenu.id, subMenu.path)}
+                              onClick={() => handleMenuItemClick(subMenu.id, subMenu.path || '')}
                               className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
                                 isSubActive
                                   ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'

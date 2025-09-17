@@ -1,1 +1,147 @@
-[33m2538b8b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m  ULTIMATE SUPER ADMIN SYSTEM: Complete Enterprise Solution
+[1mdiff --git a/check-services.ps1 b/check-services.ps1[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6862dbd[m
+[1m--- /dev/null[m
+[1m+++ b/check-services.ps1[m
+[36m@@ -0,0 +1,46 @@[m
+[32m+[m[32m#!/usr/bin/env pwsh[m
+[32m+[m
+[32m+[m[32m# Service Status Checker[m
+[32m+[m[32mWrite-Host "🌐 CHECKING ALL SERVICES STATUS" -ForegroundColor Cyan[m
+[32m+[m[32mWrite-Host "================================" -ForegroundColor Cyan[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m
+[32m+[m[32m$services = @([m
+[32m+[m[32m    @{ Name = "Main Website"; Port = 3000; URL = "http://localhost:3000" },[m
+[32m+[m[32m    @{ Name = "MCP API Server"; Port = 3001; URL = "http://localhost:3001" },[m
+[32m+[m[32m    @{ Name = "MCP Dashboard"; Port = 3002; URL = "http://localhost:3002" },[m
+[32m+[m[32m    @{ Name = "Super Admin Portal"; Port = 3005; URL = "http://localhost:3005" },[m
+[32m+[m[32m    @{ Name = "Portal App (Login)"; Port = 3006; URL = "http://localhost:3006" }[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mforeach ($service in $services) {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        $response = Invoke-WebRequest -Uri $service.URL -TimeoutSec 3 -ErrorAction Stop[m
+[32m+[m[32m        Write-Host "✅ Port $($service.Port): $($service.Name) - Status: $($response.StatusCode)" -ForegroundColor Green[m
+[32m+[m[32m    }[m
+[32m+[m[32m    catch {[m
+[32m+[m[32m        Write-Host "❌ Port $($service.Port): $($service.Name) - Not accessible" -ForegroundColor Red[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m[32mWrite-Host "📊 PORT USAGE CHECK" -ForegroundColor Yellow[m
+[32m+[m[32mWrite-Host "===================" -ForegroundColor Yellow[m
+[32m+[m
+[32m+[m[32mforeach ($service in $services) {[m
+[32m+[m[32m    $connection = Test-NetConnection -ComputerName localhost -Port $service.Port -InformationLevel Quiet -WarningAction SilentlyContinue[m
+[32m+[m[32m    if ($connection) {[m
+[32m+[m[32m        Write-Host "✅ Port $($service.Port): $($service.Name) - Port is open" -ForegroundColor Green[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m        Write-Host "❌ Port $($service.Port): $($service.Name) - Port is closed" -ForegroundColor Red[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m[32mWrite-Host "🔗 ACCESS URLS" -ForegroundColor Magenta[m
+[32m+[m[32mWrite-Host "==============" -ForegroundColor Magenta[m
+[32m+[m[32mWrite-Host "Main Website: http://localhost:3000" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "MCP API: http://localhost:3001" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "MCP Dashboard: http://localhost:3002" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "Super Admin: http://localhost:3005" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "Portal Login: http://localhost:3006" -ForegroundColor White[m
+[1mdiff --git a/final-status-check.ps1 b/final-status-check.ps1[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3449943[m
+[1m--- /dev/null[m
+[1m+++ b/final-status-check.ps1[m
+[36m@@ -0,0 +1,60 @@[m
+[32m+[m[32m#!/usr/bin/env pwsh[m
+[32m+[m
+[32m+[m[32mWrite-Host "🌐 FINAL SERVICE STATUS CHECK" -ForegroundColor Cyan[m
+[32m+[m[32mWrite-Host "=============================" -ForegroundColor Cyan[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m
+[32m+[m[32m$services = @([m
+[32m+[m[32m    @{ Name = "Main Website"; Port = 3000; URL = "http://localhost:3000" },[m
+[32m+[m[32m    @{ Name = "MCP API Server"; Port = 3001; URL = "http://localhost:3001" },[m
+[32m+[m[32m    @{ Name = "MCP Dashboard"; Port = 3002; URL = "http://localhost:3002" },[m
+[32m+[m[32m    @{ Name = "Super Admin Portal"; Port = 3005; URL = "http://localhost:3005" },[m
+[32m+[m[32m    @{ Name = "Portal App (Login)"; Port = 3006; URL = "http://localhost:3006" }[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32m$allRunning = $true[m
+[32m+[m
+[32m+[m[32mforeach ($service in $services) {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        $response = Invoke-WebRequest -Uri $service.URL -TimeoutSec 3 -ErrorAction Stop[m
+[32m+[m[32m        Write-Host "✅ Port $($service.Port): $($service.Name) - Status: $($response.StatusCode)" -ForegroundColor Green[m
+[32m+[m[32m    }[m
+[32m+[m[32m    catch {[m
+[32m+[m[32m        if ($_.Exception.Response.StatusCode -eq 404) {[m
+[32m+[m[32m            Write-Host "✅ Port $($service.Port): $($service.Name) - Running (404 is normal)" -ForegroundColor Green[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            Write-Host "❌ Port $($service.Port): $($service.Name) - Not accessible: $($_.Exception.Message)" -ForegroundColor Red[m
+[32m+[m[32m            $allRunning = $false[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m[32mWrite-Host "📊 PORT CONNECTIVITY CHECK" -ForegroundColor Yellow[m
+[32m+[m[32mWrite-Host "===========================" -ForegroundColor Yellow[m
+[32m+[m
+[32m+[m[32mforeach ($service in $services) {[m
+[32m+[m[32m    $connection = Test-NetConnection -ComputerName localhost -Port $service.Port -InformationLevel Quiet -WarningAction SilentlyContinue[m
+[32m+[m[32m    if ($connection) {[m
+[32m+[m[32m        Write-Host "✅ Port $($service.Port): $($service.Name) - Port is open" -ForegroundColor Green[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m        Write-Host "❌ Port $($service.Port): $($service.Name) - Port is closed" -ForegroundColor Red[m
+[32m+[m[32m        $allRunning = $false[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m[32mif ($allRunning) {[m
+[32m+[m[32m    Write-Host "🎉 ALL SERVICES ARE RUNNING SUCCESSFULLY!" -ForegroundColor Green[m
+[32m+[m[32m} else {[m
+[32m+[m[32m    Write-Host "⚠️  Some services may need attention" -ForegroundColor Yellow[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mWrite-Host ""[m
+[32m+[m[32mWrite-Host "🔗 ACCESS URLS" -ForegroundColor Magenta[m
+[32m+[m[32mWrite-Host "==============" -ForegroundColor Magenta[m
+[32m+[m[32mWrite-Host "Main Website: http://localhost:3000" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "MCP API: http://localhost:3001" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "MCP Dashboard: http://localhost:3002" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "Super Admin: http://localhost:3005" -ForegroundColor White[m
+[32m+[m[32mWrite-Host "Portal Login: http://localhost:3006" -ForegroundColor White[m
+[1mdiff --git a/src/components/super-admin/mcp-agents/MCPOverview.tsx b/src/components/super-admin/mcp-agents/MCPOverview.tsx[m
+[1mindex 1e427df..a008455 100644[m
+[1m--- a/src/components/super-admin/mcp-agents/MCPOverview.tsx[m
+[1m+++ b/src/components/super-admin/mcp-agents/MCPOverview.tsx[m
+[36m@@ -459,7 +459,7 @@[m [mexport const MCPOverview: React.FC = () => {[m
+             {tabs.map(tab => ([m
+               <button[m
+                 key={tab.id}[m
+[31m-                onClick={() => setSelectedTab(tab.id)}[m
+[32m+[m[32m                onClick={() => setSelectedTab(tab.id as 'overview' | 'agents' | 'tasks' | 'performance' | 'analytics')}[m
+                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${[m
+                   selectedTab === tab.id[m
+                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'[m
+[1mdiff --git a/src/components/super-admin/user-management/UserGroupsPage.tsx b/src/components/super-admin/user-management/UserGroupsPage.tsx[m
+[1mindex 088f9ba..e72220d 100644[m
+[1m--- a/src/components/super-admin/user-management/UserGroupsPage.tsx[m
+[1m+++ b/src/components/super-admin/user-management/UserGroupsPage.tsx[m
+[36m@@ -4,50 +4,15 @@[m [mimport {[m
+   Users,[m
+   Plus,[m
+   Edit,[m
+[31m-  Trash2,[m
+   UserPlus,[m
+   Eye,[m
+[31m-  Copy,[m
+[31m-  Download,[m
+[31m-  Upload,[m
+   Search,[m
+[3

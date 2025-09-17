@@ -11,11 +11,14 @@ import {
   Bell,
   Settings,
   DollarSign,
-  MessageCircle,
   Home,
   Truck,
   Package,
-  User,
+  CheckCircle,
+  Star,
+  Route,
+  ChevronRight,
+  ChevronLeft,
 } from 'lucide-react';
 
 // Types

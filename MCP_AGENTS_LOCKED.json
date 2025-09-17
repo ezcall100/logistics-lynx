@@ -1,31 +1,31 @@
-{
+﻿{
   "mcpAgentsLock": {
-    "status": "ACTIVE",
-    "agentCount": 302,
-    "lockDate": "2025-01-27T12:00:00.000Z",
     "protectionLevel": "MAXIMUM",
-    "message": "🔒 ALL 302 MCP AGENTS ARE PERMANENTLY LOCKED",
-    "warning": "DO NOT MODIFY, REMOVE, OR DEACTIVATE ANY AGENTS",
-    "emergencyContact": "MCP_SYSTEM_ADMIN",
-    "lastVerified": "2025-01-27T12:00:00.000Z",
+    "agentCount": 302,
+    "threeDotMenuTracking": true,
+    "superAdminIntegration": true,
+    "portConfiguration": {
+      "mcpDashboard": 3002,
+      "portalApp": 3006,
+      "mcpApi": 3001,
+      "superAdmin": 3005,
+      "mainWebsite": 3000
+    },
     "protectedFiles": [
       "server/mcp-server.js",
       "deployment-manifest.json",
       "vite.config.ts",
       "portal-app/vite.config.ts"
     ],
-    "monitoringActive": true,
     "autonomousMode": true,
-    "mcpVersion": "v2.1.4",
     "enhanced": true,
-    "superAdminIntegration": true,
-    "threeDotMenuTracking": true,
-    "portConfiguration": {
-      "mcpApi": 3001,
-      "mcpDashboard": 3002,
-      "mainWebsite": 3000,
-      "superAdmin": 3005,
-      "portalApp": 3006
-    }
+    "warning": "DO NOT MODIFY, REMOVE, OR DEACTIVATE ANY AGENTS",
+    "status": "ACTIVE",
+    "lockDate": "2025-01-27T12:00:00.000Z",
+    "lastVerified": "2025-01-27T12:00:00.000Z",
+    "mcpVersion": "v2.1.4",
+    "monitoringActive": true,
+    "message": "🔒 ALL 302 MCP AGENTS ARE PERMANENTLY LOCKED",
+    "emergencyContact": "MCP_SYSTEM_ADMIN"
   }
 }
