@@ -31,7 +31,7 @@ import EnterpriseDashboard from '../../../components/super-admin/EnterpriseDashb
 import UserManagement from '../../../components/super-admin/UserManagement';
 import { AllUsersPage } from '../../../components/super-admin/user-management/AllUsersPage';
 import { UserRolesPage } from '../../../components/super-admin/user-management/UserRolesPage';
-import { UserGroupsPage } from '../../../components/super-admin/user-management/UserGroupsPage';
+import UserGroupsPage from '../../../components/super-admin/user-management/UserGroupsPage';
 import { AccessControlPage } from '../../../components/super-admin/user-management/AccessControlPage';
 import { UserAnalyticsPage } from '../../../components/super-admin/user-management/UserAnalyticsPage';
 import { BillingManagementPage } from '../../../components/super-admin/user-management/BillingManagementPage';
