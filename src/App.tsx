@@ -21,7 +21,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+// import SignupPage from './pages/SignupPage'; // Not used - using RegistrationFlowNew instead
 import RegistrationFlowNew from './pages/auth/RegistrationFlowNew';
 import TMSCoreApplication from './pages/tms/TMSCoreApplication';
 import DriverMobileApp from './pages/driver/DriverMobileApp';
@@ -84,6 +84,7 @@ import MaintenancePortal from './pages/portals/maintenance/MaintenancePortal';
 import FuelPortal from './pages/portals/fuel/FuelPortal';
 import InsurancePortal from './pages/portals/insurance/InsurancePortal';
 import CompliancePortal from './pages/portals/compliance/CompliancePortal';
+import NotFoundPage from './pages/NotFoundPage';
 import WarehouseManagement from './pages/solutions/WarehouseManagement';
 import RouteOptimization from './pages/solutions/RouteOptimization';
 import LoadMatching from './pages/solutions/LoadMatching';
@@ -1201,6 +1202,8 @@ function App() {
                   }
                 />
                 {/* MCP Dashboard routes removed - causing errors */}
+                {/* Catch-all route for 404 errors */}
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </div>
           </Router>

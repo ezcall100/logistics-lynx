@@ -46,6 +46,8 @@ const SubdomainRouter: React.FC<SubdomainRouterProps> = ({ children }) => {
         setCurrentSubdomain(subdomain);
       } else if (hostname === 'transbotai.com' || hostname === 'www.transbotai.com') {
         setCurrentSubdomain('main');
+      } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        setCurrentSubdomain('main');
       } else {
         setCurrentSubdomain('main');
       }

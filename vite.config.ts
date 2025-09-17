@@ -88,11 +88,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: path => path.replace(/^\/admin/, ''),
       },
-      '/super-admin': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/super-admin/, ''),
-      },
+      // '/super-admin': {
+      //   target: 'http://localhost:3000',
+      //   changeOrigin: true,
+      //   rewrite: path => path.replace(/^\/super-admin/, ''),
+      // },
       '/mcp': {
         target: 'http://localhost:3002',
         changeOrigin: true,
