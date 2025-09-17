@@ -4,12 +4,6 @@ import { Target } from 'lucide-react';
 
 const IoTSensorsPage: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-100 responsive-container">
       <section className="relative overflow-hidden bg-gradient-to-r from-green-900 via-emerald-900 to-teal-900 text-white responsive-container">
         <div className="absolute inset-0 bg-black/20 responsive-container"></div>

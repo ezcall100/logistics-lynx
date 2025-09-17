@@ -63,12 +63,6 @@ const SecurityPage: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-red-50 to-orange-100 responsive-container">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-red-900 via-orange-900 to-yellow-900 text-white responsive-container">

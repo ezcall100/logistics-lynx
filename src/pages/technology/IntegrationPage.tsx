@@ -63,12 +63,6 @@ const IntegrationPage: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-100 responsive-container">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 text-white responsive-container">

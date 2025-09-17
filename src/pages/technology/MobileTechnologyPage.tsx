@@ -62,12 +62,6 @@ const MobileTechnologyPage: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-cyan-50 to-blue-100 responsive-container">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cyan-900 via-blue-900 to-indigo-900 text-white responsive-container">

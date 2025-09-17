@@ -4,12 +4,6 @@ import { Server } from 'lucide-react';
 
 const EdgeComputingPage: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-purple-100 responsive-container">
       <section className="relative overflow-hidden bg-gradient-to-r from-violet-900 via-purple-900 to-indigo-900 text-white responsive-container">
         <div className="absolute inset-0 bg-black/20 responsive-container"></div>

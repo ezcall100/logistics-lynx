@@ -4,12 +4,6 @@ import { Layers } from 'lucide-react';
 
 const MicroservicesPage: React.FC = () => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-rose-50 to-pink-100 responsive-container">
       <section className="relative overflow-hidden bg-gradient-to-r from-rose-900 via-pink-900 to-purple-900 text-white responsive-container">
         <div className="absolute inset-0 bg-black/20 responsive-container"></div>
