@@ -1,16 +1,16 @@
 {
-  "timestamp": "2025-09-17T18:52:42.191Z",
+  "timestamp": "2025-09-17T19:12:04.923Z",
   "mission": {
     "phase": "SUPER_ADMIN_FOCUS_ENFORCEMENT",
     "status": "ACTIVE",
-    "violations": 0,
-    "lastCheck": "2025-09-17T18:52:42.191Z"
+    "violations": 30,
+    "lastCheck": "2025-09-17T19:12:04.923Z"
   },
   "scope": {
     "allowedPaths": 4,
     "restrictedPaths": 19,
     "enforcementLevel": "STRICT",
-    "violations": 0
+    "violations": 30
   },
   "agentAllocation": {
     "total": 302,
