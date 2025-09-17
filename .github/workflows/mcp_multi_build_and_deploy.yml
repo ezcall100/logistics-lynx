@@ -11,10 +11,7 @@ jobs:
       matrix:
         portal: [super-admin, admin, partner, customer, ops]
     env:
-      SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
-      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-      OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
-      ENFORCE_IA:        true
+      ENFORCE_IA: true
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -22,22 +19,16 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
 
-      - name: Validate environment variables
+      - name: Setup environment variables
         run: |
-          echo "🔍 Validating environment variables..."
-          if [ -z "$SUPABASE_URL" ] || [ "$SUPABASE_URL" = "https://your-project.supabase.co" ]; then
-            echo "⚠️  SUPABASE_URL not configured, using default"
-            export SUPABASE_URL="https://your-project.supabase.co"
-          fi
-          if [ -z "$SUPABASE_ANON_KEY" ] || [ "$SUPABASE_ANON_KEY" = "your-anon-key" ]; then
-            echo "⚠️  SUPABASE_ANON_KEY not configured, using default"
-            export SUPABASE_ANON_KEY="your-anon-key"
-          fi
-          if [ -z "$OPENAI_API_KEY" ] || [ "$OPENAI_API_KEY" = "sk-your-openai-key" ]; then
-            echo "⚠️  OPENAI_API_KEY not configured, using default"
-            export OPENAI_API_KEY="sk-your-openai-key"
-          fi
-          echo "✅ Environment validation complete"
+          echo "🔍 Setting up environment variables..."
+          # Create .env file for the build process
+          cat > .env << EOF
+          SUPABASE_URL=https://your-project.supabase.co
+          SUPABASE_ANON_KEY=your-anon-key
+          OPENAI_API_KEY=sk-your-openai-key
+          EOF
+          echo "✅ Environment file created with defaults"
 
       - name: Autodesign portals
         run: |

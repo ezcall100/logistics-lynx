@@ -47,20 +47,20 @@ import MCPAgentOrchestrationCenter from '../../../components/super-admin/MCPAgen
 import SecurityWarRoom from '../../../components/super-admin/SecurityWarRoom';
 
 // Import System Administration components
-import { DatabaseManagement } from '../../../components/super-admin/system-administration/DatabaseManagement';
-import { APIManagement } from '../../../components/super-admin/system-administration/APIManagement';
-import { ServerMonitoring } from '../../../components/super-admin/system-administration/ServerMonitoring';
-import { SecuritySettings } from '../../../components/super-admin/system-administration/SecuritySettings';
-import { SystemSettings } from '../../../components/super-admin/system-administration/SystemSettings';
+import DatabaseManagement from '../../../components/super-admin/system-administration/DatabaseManagement';
+import APIManagement from '../../../components/super-admin/system-administration/APIManagement';
+import ServerMonitoring from '../../../components/super-admin/system-administration/ServerMonitoring';
+import SecuritySettings from '../../../components/super-admin/system-administration/SecuritySettings';
+import SystemSettings from '../../../components/super-admin/system-administration/SystemSettings';
 
 // Import MCP Agents components
 import { MCPOverview } from '../../../components/super-admin/mcp-agents/MCPOverview';
 import { AgentWorkflows } from '../../../components/super-admin/mcp-agents/AgentWorkflows';
 
 // Import Analytics & Reports components
-import { BusinessAnalytics } from '../../../components/super-admin/analytics/BusinessAnalytics';
-import { PerformanceReports } from '../../../components/super-admin/analytics/PerformanceReports';
-import { FinancialReports } from '../../../components/super-admin/analytics/FinancialReports';
+import BusinessAnalytics from '../../../components/super-admin/analytics/BusinessAnalytics';
+import PerformanceReports from '../../../components/super-admin/analytics/PerformanceReports';
+import FinancialReports from '../../../components/super-admin/analytics/FinancialReports';
 
 // Import Development & DevOps components
 import { CICDPipeline } from '../../../components/super-admin/development-devops/CICDPipeline';
@@ -80,7 +80,7 @@ import CommunicationHubOverview from '../../../components/super-admin/communicat
 import CommunicationHubCustomization from '../../../components/super-admin/communication-hub/CommunicationHubCustomization';
 
 // Import Settings and Profile pages
-import CompanySettings from '../../../components/super-admin/settings/CompanySettings';
+import CompanySettings from '@/components/super-admin/settings/CompanySettings';
 import ProfilePage from '../../../components/super-admin/profile/ProfilePage';
 
 // Import Real-Time Development Monitor

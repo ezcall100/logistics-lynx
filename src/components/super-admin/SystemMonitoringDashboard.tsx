@@ -20,6 +20,7 @@ import {
   Eye,
   BarChart3,
   Network,
+  X,
 } from 'lucide-react';
 
 interface PortStatus {

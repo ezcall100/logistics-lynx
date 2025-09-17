@@ -1,429 +1,437 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Search,
-  Filter,
-  Download,
-  Upload,
+  Users,
   UserPlus,
-  Eye,
-  Edit,
+  Search,
+  Download,
+  RefreshCw,
   Trash2,
-  Shield,
-  CheckCircle,
-  AlertCircle,
   Clock,
-  Lock,
-  ArrowUpDown,
+  Mail,
+  Building,
+  Calendar,
+  UserCheck,
+  UserX,
+  AlertTriangle,
   X,
+  SortAsc,
+  SortDesc,
 } from 'lucide-react';
+import { superAdminService, User } from '../../../services/supabase/superAdminService';
 
-/**
- * All Users Page - Redesigned
- * Comprehensive user listing with advanced features
- * Created by MCP 301 Agents
- * Timestamp: 2025-09-14T23:15:00.000Z
- */
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: 'active' | 'inactive' | 'pending' | 'suspended';
-  lastLogin: string;
-  company: string;
-  department: string;
-  avatar?: string;
-  phone?: string;
-  location?: string;
-  joinDate: string;
-  plan: string;
-  permissions: string[];
-  verified: boolean;
-  twoFactorEnabled: boolean;
-  loginCount: number;
-  avgSessionTime: string;
+interface UserFilters {
+  role?: string;
+  status?: string;
+  company?: string;
+  search?: string;
 }
 
-interface FilterOptions {
-  status: string[];
-  role: string[];
-  company: string[];
-  department: string[];
-  plan: string[];
-  verified: boolean | null;
-  twoFactor: boolean | null;
+interface SortConfig {
+  field: keyof User;
+  direction: 'asc' | 'desc';
 }
 
-export const AllUsers: React.FC = () => {
+const AllUsers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
-  const [sortBy, setSortBy] = useState('name');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [showCreateUser, setShowCreateUser] = useState(false);
+  const [filters, setFilters] = useState<UserFilters>({});
+  const [sortConfig, setSortConfig] = useState<SortConfig>({ field: 'createdAt', direction: 'desc' });
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(25);
-  const [filters, setFilters] = useState<FilterOptions>({
-    status: [],
-    role: [],
-    company: [],
-    department: [],
-    plan: [],
-    verified: null,
-    twoFactor: null,
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [itemsPerPage] = useState(20);
+
+  const [newUser, setNewUser] = useState<Partial<User>>({
+    email: '',
+    name: '',
+    role: 'viewer',
+    company: '',
+    status: 'pending',
+    permissions: [],
   });
 
-  // Mock data
-  useEffect(() => {
-    const mockUsers: User[] = Array.from({ length: 100 }, (_, i) => ({
-      id: `${i + 1}`,
-      name: `User ${i + 1}`,
-      email: `user${i + 1}@demo-company.com`,
-      role: ['Admin', 'Manager', 'User', 'Guest'][Math.floor(Math.random() * 4)],
-      status: ['active', 'inactive', 'pending', 'suspended'][Math.floor(Math.random() * 4)] as
-        | 'active'
-        | 'inactive'
-        | 'pending'
-        | 'suspended',
-      lastLogin: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-      company: `DEMO Company ${String.fromCharCode(65 + Math.floor(Math.random() * 5))}`,
-      department: ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance'][
-        Math.floor(Math.random() * 5)
-      ],
-      avatar: `https://images.unsplash.com/photo-${1472099645785 + i}?w=40&h=40&fit=crop&crop=face`,
-      phone: `+1-555-${String(Math.floor(Math.random() * 10000)).padStart(4, '0')}`,
-      location: ['New York, NY', 'Los Angeles, CA', 'Chicago, IL', 'Houston, TX', 'Phoenix, AZ'][
-        Math.floor(Math.random() * 5)
-      ],
-      joinDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
-      plan: ['Enterprise', 'Professional', 'Basic', 'Free'][Math.floor(Math.random() * 4)],
-      permissions: ['read', 'write', 'admin'].slice(0, Math.floor(Math.random() * 3) + 1),
-      verified: Math.random() > 0.2,
-      twoFactorEnabled: Math.random() > 0.5,
-      loginCount: Math.floor(Math.random() * 1000),
-      avgSessionTime: `${Math.floor(Math.random() * 5)}h ${Math.floor(Math.random() * 60)}m`,
-    }));
+  // Fetch users with pagination and filters
+  const fetchUsers = useCallback(async () => {
+    setIsLoading(true);
+    setRefreshing(true);
+    
+    try {
+      const offset = (currentPage - 1) * itemsPerPage;
+      const result = await superAdminService.getUsers({
+        ...filters,
+        limit: itemsPerPage,
+        offset,
+      });
 
-    setUsers(mockUsers);
+      setUsers(result.users);
+      setTotalUsers(result.total);
+      setTotalPages(Math.ceil(result.total / itemsPerPage));
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+    } finally {
+      setIsLoading(false);
+      setRefreshing(false);
+    }
+  }, [currentPage, itemsPerPage, filters]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  // Set up real-time subscription
+  useEffect(() => {
+    superAdminService.subscribeToUsers((updatedUsers) => {
+      setUsers(updatedUsers);
+    });
+
+    return () => {
+      superAdminService.unsubscribe('users');
+    };
   }, []);
+
+  // Apply filters and sorting
+  useEffect(() => {
+    let filtered = [...users];
+
+    // Apply search filter
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase();
+      filtered = filtered.filter(user =>
+        user.name.toLowerCase().includes(searchLower) ||
+        user.email.toLowerCase().includes(searchLower) ||
+        user.company.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Apply role filter
+    if (filters.role) {
+      filtered = filtered.filter(user => user.role === filters.role);
+    }
+
+    // Apply status filter
+    if (filters.status) {
+      filtered = filtered.filter(user => user.status === filters.status);
+    }
+
+    // Apply company filter
+    if (filters.company) {
+      filtered = filtered.filter(user => user.company === filters.company);
+    }
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      const aValue = a[sortConfig.field];
+      const bValue = b[sortConfig.field];
+      
+      if (aValue == null || bValue == null) return 0;
+      
+      if (aValue < bValue) {
+        return sortConfig.direction === 'asc' ? -1 : 1;
+      }
+      if (aValue > bValue) {
+        return sortConfig.direction === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+
+    setFilteredUsers(filtered);
+  }, [users, filters, sortConfig]);
+
+  const handleRefresh = async () => {
+    await fetchUsers();
+  };
+
+  const handleCreateUser = async () => {
+    if (!newUser.email || !newUser.name) return;
+
+    try {
+      await superAdminService.createUser({
+        ...newUser,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      } as Omit<User, 'id' | 'createdAt' | 'updatedAt'>);
+      
+      setShowCreateUser(false);
+      setNewUser({
+        email: '',
+        name: '',
+        role: 'viewer',
+        company: '',
+        status: 'pending',
+        permissions: [],
+      });
+      await fetchUsers();
+    } catch (error) {
+      console.error('Failed to create user:', error);
+    }
+  };
+
+
+  const handleDeleteUser = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this user?')) return;
+
+    try {
+      await superAdminService.deleteUser(id);
+      await fetchUsers();
+    } catch (error) {
+      console.error('Failed to delete user:', error);
+    }
+  };
+
+  const handleBulkAction = async (action: 'activate' | 'deactivate' | 'delete') => {
+    if (selectedUsers.length === 0) return;
+
+    try {
+      switch (action) {
+        case 'activate':
+          await superAdminService.bulkUpdateUsers(selectedUsers, { status: 'active' });
+          break;
+        case 'deactivate':
+          await superAdminService.bulkUpdateUsers(selectedUsers, { status: 'inactive' });
+          break;
+        case 'delete':
+          if (!confirm(`Are you sure you want to delete ${selectedUsers.length} users?`)) return;
+          await Promise.all(selectedUsers.map(id => superAdminService.deleteUser(id)));
+          break;
+      }
+      setSelectedUsers([]);
+      await fetchUsers();
+    } catch (error) {
+      console.error('Failed to perform bulk action:', error);
+    }
+  };
+
+  const handleSort = (field: keyof User) => {
+    setSortConfig(prev => ({
+      field,
+      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
+    }));
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
+        return 'text-green-600 bg-green-100 dark:bg-green-900/30';
       case 'inactive':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
       case 'suspended':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400';
+        return 'text-red-600 bg-red-100 dark:bg-red-900/30';
+      case 'pending':
+        return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active':
-        return <CheckCircle className="w-4 h-4" />;
+        return UserCheck;
       case 'inactive':
-        return <Clock className="w-4 h-4" />;
-      case 'pending':
-        return <AlertCircle className="w-4 h-4" />;
+        return UserX;
       case 'suspended':
-        return <Lock className="w-4 h-4" />;
+        return AlertTriangle;
+      case 'pending':
+        return Clock;
       default:
-        return <Clock className="w-4 h-4" />;
+        return UserX;
     }
   };
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case 'Admin':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400';
-      case 'Manager':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'User':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'Guest':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+      case 'superadmin':
+        return 'text-red-600 bg-red-100 dark:bg-red-900/30';
+      case 'admin':
+        return 'text-blue-600 bg-blue-100 dark:bg-blue-900/30';
+      case 'manager':
+        return 'text-purple-600 bg-purple-100 dark:bg-purple-900/30';
+      case 'user':
+        return 'text-green-600 bg-green-100 dark:bg-green-900/30';
+      case 'viewer':
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
     }
   };
 
-  const filteredUsers = users.filter(user => {
-    const matchesSearch =
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.company.toLowerCase().includes(searchQuery.toLowerCase());
-
-    const matchesStatus = filters.status.length === 0 || filters.status.includes(user.status);
-    const matchesRole = filters.role.length === 0 || filters.role.includes(user.role);
-    const matchesCompany = filters.company.length === 0 || filters.company.includes(user.company);
-    const matchesDepartment =
-      filters.department.length === 0 || filters.department.includes(user.department);
-    const matchesPlan = filters.plan.length === 0 || filters.plan.includes(user.plan);
-    const matchesVerified = filters.verified === null || user.verified === filters.verified;
-    const matchesTwoFactor =
-      filters.twoFactor === null || user.twoFactorEnabled === filters.twoFactor;
-
+  if (isLoading) {
     return (
-      matchesSearch &&
-      matchesStatus &&
-      matchesRole &&
-      matchesCompany &&
-      matchesDepartment &&
-      matchesPlan &&
-      matchesVerified &&
-      matchesTwoFactor
-    );
-  });
-
-  const sortedUsers = [...filteredUsers].sort((a, b) => {
-    let aValue = a[sortBy as keyof User];
-    let bValue = b[sortBy as keyof User];
-
-    if (aValue === undefined || bValue === undefined) return 0;
-
-    if (typeof aValue === 'string') aValue = aValue.toLowerCase();
-    if (typeof bValue === 'string') bValue = bValue.toLowerCase();
-
-    if (sortOrder === 'asc') {
-      return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
-    } else {
-      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
-    }
-  });
-
-  const totalPages = Math.ceil(sortedUsers.length / itemsPerPage);
-  const paginatedUsers = sortedUsers.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handleSort = (column: string) => {
-    if (sortBy === column) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortBy(column);
-      setSortOrder('asc');
-    }
-  };
-
-  const handleSelectAll = () => {
-    if (selectedUsers.length === paginatedUsers.length) {
-      setSelectedUsers([]);
-    } else {
-      setSelectedUsers(paginatedUsers.map(user => user.id));
-    }
-  };
-
-  const handleSelectUser = (userId: string) => {
-    setSelectedUsers(prev =>
-      prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]
-    );
-  };
-
-  const bulkActions = [
-    { label: 'Activate', action: 'activate' },
-    { label: 'Deactivate', action: 'deactivate' },
-    { label: 'Send Email', action: 'email' },
-    { label: 'Export', action: 'export' },
-    { label: 'Delete', action: 'delete' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">All Users</h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                {filteredUsers.length} users found • {selectedUsers.length} selected
-              </p>
-            </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
-                <span>Export</span>
-              </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Upload className="w-4 h-4" />
-                <span>Import</span>
-              </button>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-                <UserPlus className="w-4 h-4" />
-                <span>Add User</span>
-              </button>
-            </div>
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+          <div className="space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            ))}
           </div>
         </div>
+      </div>
+    );
+  }
 
-        {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
+  return (
+    <div className="p-6 space-y-6">
+        {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            All Users
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Manage user accounts and permissions
+          </p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </button>
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <Download className="h-4 w-4" />
+            <span>Export</span>
+          </button>
+          <button
+            onClick={() => setShowCreateUser(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          >
+            <UserPlus className="h-4 w-4" />
+            <span>Add User</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                {totalUsers.toLocaleString()}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Total Users</div>
+            </div>
+            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <Users className="h-6 w-6 text-blue-600" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-2xl font-bold text-green-600">
+                {users.filter(u => u.status === 'active').length}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Active</div>
+            </div>
+            <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <UserCheck className="h-6 w-6 text-green-600" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-2xl font-bold text-yellow-600">
+                {users.filter(u => u.status === 'pending').length}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Pending</div>
+            </div>
+            <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+              <Clock className="h-6 w-6 text-yellow-600" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-2xl font-bold text-red-600">
+                {users.filter(u => u.status === 'suspended').length}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Suspended</div>
+            </div>
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+              <UserX className="h-6 w-6 text-red-600" />
+            </div>
+          </div>
+        </motion.div>
+        </div>
+
+      {/* Filters and Search */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search users by name, email, or company..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
+                placeholder="Search users..."
+                value={filters.search || ''}
+                onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 py-3 border rounded-lg transition-colors flex items-center space-x-2 ${
-                showFilters
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                  : 'border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700'
-              }`}
-            >
-              <Filter className="w-4 h-4" />
-              <span>Filters</span>
-              {Object.values(filters).some(filter =>
-                Array.isArray(filter) ? filter.length > 0 : filter !== null
-              ) && <span className="w-2 h-2 bg-blue-500 rounded-full"></span>}
-            </button>
-          </div>
-
-          {/* Advanced Filters */}
-          <AnimatePresence>
-            {showFilters && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-4 p-6 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg"
+            <div className="flex space-x-2">
+              <select
+                value={filters.role || ''}
+                onChange={(e) => setFilters({ ...filters, role: e.target.value || undefined })}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Status Filter */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Status
-                    </label>
-                    <div className="space-y-2">
-                      {['active', 'inactive', 'pending', 'suspended'].map(status => (
-                        <label key={status} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={filters.status.includes(status)}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                setFilters(prev => ({ ...prev, status: [...prev.status, status] }));
-                              } else {
-                                setFilters(prev => ({
-                                  ...prev,
-                                  status: prev.status.filter(s => s !== status),
-                                }));
-                              }
-                            }}
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="ml-2 text-sm text-gray-700 dark:text-gray-300 capitalize">
-                            {status}
-                          </span>
-                        </label>
-                      ))}
+                <option value="">All Roles</option>
+                <option value="superadmin">Super Admin</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="user">User</option>
+                <option value="viewer">Viewer</option>
+              </select>
+              <select
+                value={filters.status || ''}
+                onChange={(e) => setFilters({ ...filters, status: e.target.value || undefined })}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="suspended">Suspended</option>
+                <option value="pending">Pending</option>
+              </select>
                     </div>
                   </div>
-
-                  {/* Role Filter */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Role
-                    </label>
-                    <div className="space-y-2">
-                      {['Admin', 'Manager', 'User', 'Guest'].map(role => (
-                        <label key={role} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={filters.role.includes(role)}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                setFilters(prev => ({ ...prev, role: [...prev.role, role] }));
-                              } else {
-                                setFilters(prev => ({
-                                  ...prev,
-                                  role: prev.role.filter(r => r !== role),
-                                }));
-                              }
-                            }}
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                            {role}
-                          </span>
-                        </label>
-                      ))}
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Showing {filteredUsers.length} of {totalUsers} users
                     </div>
                   </div>
-
-                  {/* Plan Filter */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Plan
-                    </label>
-                    <div className="space-y-2">
-                      {['Enterprise', 'Professional', 'Basic', 'Free'].map(plan => (
-                        <label key={plan} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={filters.plan.includes(plan)}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                setFilters(prev => ({ ...prev, plan: [...prev.plan, plan] }));
-                              } else {
-                                setFilters(prev => ({
-                                  ...prev,
-                                  plan: prev.plan.filter(p => p !== plan),
-                                }));
-                              }
-                            }}
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                            {plan}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-end mt-4 space-x-2">
-                  <button
-                    onClick={() =>
-                      setFilters({
-                        status: [],
-                        role: [],
-                        company: [],
-                        department: [],
-                        plan: [],
-                        verified: null,
-                        twoFactor: null,
-                      })
-                    }
-                    className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-                  >
-                    Clear All
-                  </button>
-                  <button
-                    onClick={() => setShowFilters(false)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         {/* Bulk Actions */}
@@ -431,26 +439,38 @@ export const AllUsers: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
+          className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4"
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                {selectedUsers.length} user(s) selected
               </span>
+            </div>
               <div className="flex items-center space-x-2">
-                {bulkActions.map(action => (
+              <button
+                onClick={() => handleBulkAction('activate')}
+                className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Activate
+              </button>
+              <button
+                onClick={() => handleBulkAction('deactivate')}
+                className="px-3 py-1 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors"
+              >
+                Deactivate
+              </button>
                   <button
-                    key={action.action}
-                    className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                onClick={() => handleBulkAction('delete')}
+                className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
                   >
-                    {action.label}
+                Delete
                   </button>
-                ))}
                 <button
                   onClick={() => setSelectedUsers([])}
-                  className="p-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+                className="px-3 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 transition-colors"
                 >
-                  <X className="w-4 h-4" />
+                Clear
                 </button>
               </div>
             </div>
@@ -458,246 +478,336 @@ export const AllUsers: React.FC = () => {
         )}
 
         {/* Users Table */}
-        <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 dark:bg-slate-700/50">
+            <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th className="px-6 py-3 text-left">
                     <input
                       type="checkbox"
-                      checked={
-                        selectedUsers.length === paginatedUsers.length && paginatedUsers.length > 0
+                    checked={selectedUsers.length === filteredUsers.length && filteredUsers.length > 0}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedUsers(filteredUsers.map(u => u.id));
+                      } else {
+                        setSelectedUsers([]);
                       }
-                      onChange={handleSelectAll}
+                    }}
                       className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-600"
+                <th className="px-6 py-3 text-left">
+                  <button
                     onClick={() => handleSort('name')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
                   >
-                    <div className="flex items-center space-x-1">
-                      <span>User</span>
-                      <ArrowUpDown className="w-3 h-3" />
-                    </div>
+                    <span>Name</span>
+                    {sortConfig.field === 'name' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
+                </th>
+                <th className="px-6 py-3 text-left">
+                  <button
+                    onClick={() => handleSort('email')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                  >
+                    <span>Email</span>
+                    {sortConfig.field === 'email' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-600"
+                <th className="px-6 py-3 text-left">
+                  <button
                     onClick={() => handleSort('role')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
                   >
-                    <div className="flex items-center space-x-1">
                       <span>Role</span>
-                      <ArrowUpDown className="w-3 h-3" />
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-600"
-                    onClick={() => handleSort('status')}
-                  >
-                    <div className="flex items-center space-x-1">
-                      <span>Status</span>
-                      <ArrowUpDown className="w-3 h-3" />
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-600"
-                    onClick={() => handleSort('lastLogin')}
-                  >
-                    <div className="flex items-center space-x-1">
-                      <span>Last Login</span>
-                      <ArrowUpDown className="w-3 h-3" />
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-600"
+                    {sortConfig.field === 'role' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
+                </th>
+                <th className="px-6 py-3 text-left">
+                  <button
                     onClick={() => handleSort('company')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
                   >
-                    <div className="flex items-center space-x-1">
-                      <span>Company</span>
-                      <ArrowUpDown className="w-3 h-3" />
-                    </div>
+                    <span>Company</span>
+                    {sortConfig.field === 'company' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Security
+                <th className="px-6 py-3 text-left">
+                  <button
+                    onClick={() => handleSort('status')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                  >
+                      <span>Status</span>
+                    {sortConfig.field === 'status' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Actions
+                <th className="px-6 py-3 text-left">
+                  <button
+                    onClick={() => handleSort('lastLogin')}
+                    className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300"
+                  >
+                      <span>Last Login</span>
+                    {sortConfig.field === 'lastLogin' && (
+                      sortConfig.direction === 'asc' ? <SortAsc className="h-3 w-3" /> : <SortDesc className="h-3 w-3" />
+                    )}
+                  </button>
                   </th>
+                <th className="px-6 py-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                {paginatedUsers.map(user => (
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+              {filteredUsers.map((user) => {
+                const StatusIcon = getStatusIcon(user.status);
+                return (
                   <motion.tr
                     key={user.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4">
                       <input
                         type="checkbox"
                         checked={selectedUsers.includes(user.id)}
-                        onChange={() => handleSelectUser(user.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedUsers([...selectedUsers, user.id]);
+                          } else {
+                            setSelectedUsers(selectedUsers.filter(id => id !== user.id));
+                          }
+                        }}
                         className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={user.avatar}
-                            alt={user.name}
-                          />
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                          {user.name.split(' ').map(n => n[0]).join('')}
                         </div>
-                        <div className="ml-4">
-                          <div className="flex items-center space-x-2">
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-white">
                               {user.name}
-                            </div>
-                            {user.verified && <CheckCircle className="w-4 h-4 text-green-500" />}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
-                            {user.email}
-                          </div>
-                          <div className="text-xs text-gray-400 dark:text-gray-500">
-                            {user.location}
+                          <div className="text-sm text-gray-500 dark:text-gray-500">
+                            ID: {user.id.slice(0, 8)}...
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRoleColor(user.role)}`}
-                      >
-                        {user.role}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4 text-gray-400" />
+                        <span className="text-gray-900 dark:text-white">{user.email}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(user.role)}`}>
+                        {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}
-                      >
-                        {getStatusIcon(user.status)}
-                        <span className="ml-1 capitalize">{user.status}</span>
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                      <div>{new Date(user.lastLogin).toLocaleDateString()}</div>
-                      <div className="text-xs text-gray-400 dark:text-gray-500">
-                        {user.loginCount} logins
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-white">{user.company}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {user.department}
-                      </div>
-                      <div className="text-xs text-gray-400 dark:text-gray-500">{user.plan}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
-                        {user.twoFactorEnabled ? (
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                            <Shield className="w-3 h-3 mr-1" />
-                            2FA
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400">
-                            <Shield className="w-3 h-3 mr-1" />
-                            No 2FA
-                          </span>
-                        )}
+                        <Building className="h-4 w-4 text-gray-400" />
+                        <span className="text-gray-900 dark:text-white">{user.company}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
+                        <StatusIcon className="h-4 w-4" />
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
+                          {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="h-4 w-4 text-gray-400" />
+                        <span className="text-gray-900 dark:text-white">
+                          {new Date(user.lastLogin).toLocaleDateString()}
+                          </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <div className="flex items-center justify-end space-x-2">
                         <button
-                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                          title="View"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
-                          title="Edit"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
-                          title="Email"
-                        >
-                          <Download className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                          onClick={() => handleDeleteUser(user.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
                           title="Delete"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
                     </td>
                   </motion.tr>
-                ))}
+                );
+              })}
               </tbody>
             </table>
-          </div>
         </div>
 
         {/* Pagination */}
-        <div className="mt-6 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-700 dark:text-gray-300">Show</span>
-            <select
-              value={itemsPerPage}
-              onChange={e => setItemsPerPage(Number(e.target.value))}
-              className="border border-gray-200 dark:border-slate-700 rounded px-2 py-1 text-sm bg-white dark:bg-slate-700"
-            >
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </select>
-            <span className="text-sm text-gray-700 dark:text-gray-300">per page</span>
+        {totalPages > 1 && (
+          <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-700 dark:text-gray-300">
+                Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, totalUsers)} of {totalUsers} results
           </div>
-
           <div className="flex items-center space-x-2">
             <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1 border border-gray-200 dark:border-slate-700 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-700"
+                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               Previous
             </button>
-
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              const page = i + 1;
-              return (
+                <span className="px-3 py-1 text-sm text-gray-700 dark:text-gray-300">
+                  Page {currentPage} of {totalPages}
+                </span>
                 <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 text-sm rounded ${
-                    currentPage === page
-                      ? 'bg-blue-600 text-white'
-                      : 'border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700'
-                  }`}
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  {page}
+                  Next
                 </button>
-              );
-            })}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
-            <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 border border-gray-200 dark:border-slate-700 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-700"
+      {/* Create User Modal */}
+      <AnimatePresence>
+        {showCreateUser && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
             >
-              Next
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Create New User
+                </h3>
+                <button
+                  onClick={() => setShowCreateUser(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                >
+                  <X className="h-5 w-5" />
             </button>
           </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={newUser.name || ''}
+                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Full name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={newUser.email || ''}
+                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Email address"
+                  />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Role
+                    </label>
+                    <select
+                      value={newUser.role || 'viewer'}
+                      onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    >
+                      <option value="viewer">Viewer</option>
+                      <option value="user">User</option>
+                      <option value="manager">Manager</option>
+                      <option value="admin">Admin</option>
+                      <option value="superadmin">Super Admin</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Status
+                    </label>
+                    <select
+                      value={newUser.status || 'pending'}
+                      onChange={(e) => setNewUser({ ...newUser, status: e.target.value as 'pending' | 'active' | 'inactive' | 'suspended' })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                      <option value="suspended">Suspended</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Company
+                  </label>
+                  <input
+                    type="text"
+                    value={newUser.company || ''}
+                    onChange={(e) => setNewUser({ ...newUser, company: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Company name"
+                  />
         </div>
       </div>
+              
+              <div className="flex items-center justify-end space-x-3 mt-6">
+                <button
+                  onClick={() => setShowCreateUser(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCreateUser}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Create User
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

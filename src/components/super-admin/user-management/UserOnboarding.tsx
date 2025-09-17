@@ -1,946 +1,653 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   UserPlus,
   CheckCircle,
   Clock,
-  XCircle,
-  Play,
-  Pause,
-  RotateCcw,
+  AlertTriangle,
+  Send,
   Eye,
   Edit,
-  Plus,
-  Search,
-  Download,
+  Trash2,
   RefreshCw,
+  Download,
+  Mail,
+  Calendar,
   Users,
   Target,
   TrendingUp,
-  TrendingDown,
-  Activity,
-  BarChart3,
-  PieChart,
-  MessageSquare,
-  Shield,
-  Award,
-  Star,
-  Smartphone,
-  Monitor,
-  Tablet,
+  Filter,
+  Search,
+  X,
+  Plus,
   Settings,
-  FileText,
+  Bell,
+  UserCheck,
+  UserX,
 } from 'lucide-react';
 
-/**
- * User Onboarding Page - Redesigned
- * Comprehensive user onboarding flow management and optimization
- * Created by MCP 301 Agents
- * Timestamp: 2025-09-15T15:35:00.000Z
- */
+interface OnboardingInvite {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  company: string;
+  status: 'pending' | 'sent' | 'accepted' | 'expired' | 'cancelled';
+  invitedBy: string;
+  invitedAt: string;
+  expiresAt: string;
+  acceptedAt?: string;
+  reminderCount: number;
+  lastReminderAt?: string;
+}
 
-interface OnboardingFlow {
+interface OnboardingTemplate {
   id: string;
   name: string;
   description: string;
-  version: string;
-  status: 'active' | 'draft' | 'archived' | 'testing';
-  steps: OnboardingStep[];
-  targetAudience: string[];
-  completionRate: number;
-  avgCompletionTime: number;
-  userCount: number;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string;
-}
-
-interface OnboardingStep {
+  steps: Array<{
   id: string;
   title: string;
   description: string;
-  type: 'welcome' | 'form' | 'tutorial' | 'verification' | 'completion';
+    type: 'email' | 'task' | 'approval';
   order: number;
   isRequired: boolean;
-  estimatedTime: number;
+  }>;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface OnboardingStats {
+  totalInvites: number;
+  pendingInvites: number;
+  acceptedInvites: number;
+  expiredInvites: number;
+  averageAcceptanceTime: number;
   completionRate: number;
-  content: {
-    title: string;
-    description: string;
-    media?: string;
-    formFields?: Record<string, unknown>[];
-    actions: string[];
-  };
 }
 
-interface OnboardingMetric {
-  id: string;
-  title: string;
-  value: number;
-  change: number;
-  changeType: 'increase' | 'decrease' | 'neutral';
-  period: string;
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-}
+const UserOnboarding: React.FC = () => {
+  const [invites, setInvites] = useState<OnboardingInvite[]>([]);
+  const [templates, setTemplates] = useState<OnboardingTemplate[]>([]);
+  const [stats, setStats] = useState<OnboardingStats | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showCreateInvite, setShowCreateInvite] = useState(false);
+  const [showCreateTemplate, setShowCreateTemplate] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
-interface UserProgress {
-  id: string;
-  userId: string;
-  userName: string;
-  userEmail: string;
-  flowId: string;
-  flowName: string;
-  currentStep: number;
-  totalSteps: number;
-  progress: number;
-  status: 'in-progress' | 'completed' | 'abandoned' | 'paused';
-  startedAt: string;
-  lastActivity: string;
-  completedAt?: string;
-  timeSpent: number;
-  device: 'desktop' | 'mobile' | 'tablet';
-  source: string;
-}
+  const [newInvite, setNewInvite] = useState<Partial<OnboardingInvite>>({
+    email: '',
+    name: '',
+    role: 'user',
+    company: '',
+    status: 'pending',
+  });
 
-export const UserOnboarding: React.FC = () => {
-  const [flows, setFlows] = useState<OnboardingFlow[]>([]);
-  const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
-  // const [selectedFlow, setSelectedFlow] = useState<OnboardingFlow | null>(null);
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'flows' | 'progress' | 'analytics'>(
-    'overview'
-  );
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  // const [showCreateModal, setShowCreateModal] = useState(false);
-  // const [showFlowModal, setShowFlowModal] = useState(false);
-
-  // Mock onboarding metrics
-  const onboardingMetrics: OnboardingMetric[] = [
+  // Mock data
+  const mockInvites: OnboardingInvite[] = [
     {
-      id: 'total-flows',
-      title: 'Total Flows',
-      value: 8,
-      change: 2,
-      changeType: 'increase',
-      period: 'vs last month',
-      icon: UserPlus,
-      color: 'bg-blue-500',
+      id: '1',
+      email: 'john.doe@techcorp.com',
+      name: 'John Doe',
+      role: 'Developer',
+      company: 'TechCorp',
+      status: 'pending',
+      invitedBy: 'admin@techcorp.com',
+      invitedAt: '2024-01-15T10:00:00Z',
+      expiresAt: '2024-01-22T10:00:00Z',
+      reminderCount: 0,
     },
     {
-      id: 'active-users',
-      title: 'Users in Onboarding',
-      value: 234,
-      change: 15.3,
-      changeType: 'increase',
-      period: 'vs last month',
-      icon: Users,
-      color: 'bg-green-500',
+      id: '2',
+      email: 'sarah.smith@techcorp.com',
+      name: 'Sarah Smith',
+      role: 'Manager',
+      company: 'TechCorp',
+      status: 'sent',
+      invitedBy: 'admin@techcorp.com',
+      invitedAt: '2024-01-14T14:30:00Z',
+      expiresAt: '2024-01-21T14:30:00Z',
+      reminderCount: 1,
+      lastReminderAt: '2024-01-16T09:00:00Z',
     },
     {
-      id: 'completion-rate',
-      title: 'Completion Rate',
-      value: 78.5,
-      change: 5.2,
-      changeType: 'increase',
-      period: 'vs last month',
-      icon: Target,
-      color: 'bg-purple-500',
+      id: '3',
+      email: 'mike.wilson@logistics.com',
+      name: 'Mike Wilson',
+      role: 'User',
+      company: 'LogisticsCorp',
+      status: 'accepted',
+      invitedBy: 'admin@logistics.com',
+      invitedAt: '2024-01-13T16:00:00Z',
+      expiresAt: '2024-01-20T16:00:00Z',
+      acceptedAt: '2024-01-14T11:30:00Z',
+      reminderCount: 0,
     },
     {
-      id: 'avg-time',
-      title: 'Avg Completion Time',
-      value: 12.3,
-      change: -8.1,
-      changeType: 'decrease',
-      period: 'vs last month',
-      icon: Clock,
-      color: 'bg-yellow-500',
-    },
-    {
-      id: 'abandonment-rate',
-      title: 'Abandonment Rate',
-      value: 21.5,
-      change: -3.2,
-      changeType: 'decrease',
-      period: 'vs last month',
-      icon: XCircle,
-      color: 'bg-red-500',
-    },
-    {
-      id: 'satisfaction',
-      title: 'Satisfaction Score',
-      value: 4.6,
-      change: 0.3,
-      changeType: 'increase',
-      period: 'vs last month',
-      icon: Star,
-      color: 'bg-indigo-500',
+      id: '4',
+      email: 'emily.davis@finance.com',
+      name: 'Emily Davis',
+      role: 'Analyst',
+      company: 'FinanceCorp',
+      status: 'expired',
+      invitedBy: 'admin@finance.com',
+      invitedAt: '2024-01-10T12:00:00Z',
+      expiresAt: '2024-01-17T12:00:00Z',
+      reminderCount: 2,
+      lastReminderAt: '2024-01-16T10:00:00Z',
     },
   ];
 
-  // Mock data
-  useEffect(() => {
-    const mockFlows: OnboardingFlow[] = [
-      {
-        id: 'flow_1',
-        name: 'New User Welcome',
-        description: 'Complete onboarding flow for new users',
-        version: '2.1',
-        status: 'active',
+  const mockTemplates: OnboardingTemplate[] = [
+    {
+      id: '1',
+      name: 'Standard User Onboarding',
+      description: 'Basic onboarding flow for new users',
         steps: [
           {
-            id: 'step_1',
-            title: 'Welcome Message',
-            description: 'Welcome new users to the platform',
-            type: 'welcome',
+          id: '1',
+          title: 'Welcome Email',
+          description: 'Send welcome email with login credentials',
+          type: 'email',
             order: 1,
             isRequired: true,
-            estimatedTime: 2,
-            completionRate: 95,
-            content: {
-              title: 'Welcome to Our Platform!',
-              description: "Let's get you started with a quick tour.",
-              actions: ['Get Started', 'Skip Tour'],
-            },
-          },
-          {
-            id: 'step_2',
+        },
+        {
+          id: '2',
             title: 'Profile Setup',
             description: 'Complete user profile information',
-            type: 'form',
+          type: 'task',
             order: 2,
             isRequired: true,
-            estimatedTime: 5,
-            completionRate: 87,
-            content: {
-              title: 'Complete Your Profile',
-              description: 'Tell us a bit about yourself.',
-              formFields: [
-                { name: 'name', type: 'text' },
-                { name: 'company', type: 'text' },
-                { name: 'role', type: 'select' },
-              ],
-              actions: ['Save & Continue', 'Skip'],
-            },
-          },
-          {
-            id: 'step_3',
-            title: 'Feature Tour',
-            description: 'Interactive tour of key features',
-            type: 'tutorial',
+        },
+        {
+          id: '3',
+          title: 'Manager Approval',
+          description: 'Manager approval for account activation',
+          type: 'approval',
             order: 3,
-            isRequired: false,
-            estimatedTime: 8,
-            completionRate: 72,
-            content: {
-              title: 'Explore Key Features',
-              description: 'Learn about the main features of our platform.',
-              actions: ['Start Tour', 'Skip'],
-            },
-          },
-        ],
-        targetAudience: ['new-users', 'free-trial'],
-        completionRate: 78.5,
-        avgCompletionTime: 12.3,
-        userCount: 1247,
-        createdAt: '2024-01-15T00:00:00Z',
-        updatedAt: '2024-03-20T00:00:00Z',
-        createdBy: 'Admin User',
-      },
-      {
-        id: 'flow_2',
-        name: 'Premium Upgrade',
-        description: 'Onboarding flow for premium plan users',
-        version: '1.3',
-        status: 'active',
+          isRequired: true,
+        },
+      ],
+      isActive: true,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
+    },
+    {
+      id: '2',
+      name: 'Manager Onboarding',
+      description: 'Extended onboarding for management roles',
         steps: [
           {
-            id: 'step_1',
-            title: 'Welcome to Premium',
-            description: 'Welcome message for premium users',
-            type: 'welcome',
+          id: '1',
+          title: 'Welcome Email',
+          description: 'Send welcome email with login credentials',
+          type: 'email',
             order: 1,
             isRequired: true,
-            estimatedTime: 3,
-            completionRate: 92,
-            content: {
-              title: 'Welcome to Premium!',
-              description: 'Unlock all premium features.',
-              actions: ['Explore Features', 'Get Started'],
-            },
-          },
-          {
-            id: 'step_2',
-            title: 'Premium Features',
-            description: 'Overview of premium features',
-            type: 'tutorial',
+        },
+        {
+          id: '2',
+          title: 'Security Training',
+          description: 'Complete security awareness training',
+          type: 'task',
             order: 2,
             isRequired: true,
-            estimatedTime: 10,
-            completionRate: 85,
-            content: {
-              title: 'Premium Features Overview',
-              description: "Discover what's included in your premium plan.",
-              actions: ['Continue', 'Skip'],
-            },
-          },
-        ],
-        targetAudience: ['premium-users'],
-        completionRate: 85.2,
-        avgCompletionTime: 8.7,
-        userCount: 456,
-        createdAt: '2024-02-01T00:00:00Z',
-        updatedAt: '2024-03-15T00:00:00Z',
-        createdBy: 'Admin User',
-      },
-    ];
+        },
+        {
+          id: '3',
+          title: 'Admin Approval',
+          description: 'Admin approval for elevated permissions',
+          type: 'approval',
+          order: 3,
+          isRequired: true,
+        },
+      ],
+      isActive: true,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
+    },
+  ];
 
-    const mockUserProgress: UserProgress[] = Array.from({ length: 50 }, (_, i) => ({
-      id: `progress_${i + 1}`,
-      userId: `user_${i + 1}`,
-      userName: `User ${i + 1}`,
-      userEmail: `user${i + 1}@demo-company.com`,
-      flowId: `flow_${Math.floor(Math.random() * 2) + 1}`,
-      flowName: ['New User Welcome', 'Premium Upgrade'][Math.floor(Math.random() * 2)],
-      currentStep: Math.floor(Math.random() * 5) + 1,
-      totalSteps: 5,
-      progress: Math.floor(Math.random() * 100),
-      status: ['in-progress', 'completed', 'abandoned', 'paused'][Math.floor(Math.random() * 4)] as
-        | 'in-progress'
-        | 'completed'
-        | 'abandoned'
-        | 'paused',
-      startedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-      lastActivity: new Date(Date.now() - Math.random() * 2 * 24 * 60 * 60 * 1000).toISOString(),
-      completedAt:
-        Math.random() > 0.6
-          ? new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000).toISOString()
-          : undefined,
-      timeSpent: Math.floor(Math.random() * 30) + 5,
-      device: ['desktop', 'mobile', 'tablet'][Math.floor(Math.random() * 3)] as
-        | 'desktop'
-        | 'mobile'
-        | 'tablet',
-      source: ['direct', 'email', 'social', 'referral'][Math.floor(Math.random() * 4)],
-    }));
+  const mockStats: OnboardingStats = {
+    totalInvites: 1247,
+    pendingInvites: 23,
+    acceptedInvites: 1156,
+    expiredInvites: 68,
+    averageAcceptanceTime: 2.5,
+    completionRate: 92.7,
+  };
 
-    setFlows(mockFlows);
-    setUserProgress(mockUserProgress);
+  // Fetch data
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    setRefreshing(true);
+    
+    try {
+      // Simulate API calls
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setInvites(mockInvites);
+      setTemplates(mockTemplates);
+      setStats(mockStats);
+    } catch (error) {
+      console.error('Failed to fetch onboarding data:', error);
+    } finally {
+      setIsLoading(false);
+      setRefreshing(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const handleCreateInvite = async () => {
+    if (!newInvite.email || !newInvite.name || !newInvite.company) return;
+
+    try {
+      const invite: OnboardingInvite = {
+        id: Date.now().toString(),
+        email: newInvite.email,
+        name: newInvite.name,
+        role: newInvite.role || 'user',
+        company: newInvite.company,
+        status: 'pending',
+        invitedBy: 'current-user@company.com',
+        invitedAt: new Date().toISOString(),
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days
+        reminderCount: 0,
+      };
+
+      setInvites(prev => [...prev, invite]);
+      setShowCreateInvite(false);
+      setNewInvite({ email: '', name: '', role: 'user', company: '', status: 'pending' });
+    } catch (error) {
+      console.error('Failed to create invite:', error);
+    }
+  };
+
+  const handleSendInvite = async (id: string) => {
+    try {
+      setInvites(prev => prev.map(invite => 
+        invite.id === id 
+          ? { ...invite, status: 'sent', invitedAt: new Date().toISOString() }
+          : invite
+      ));
+    } catch (error) {
+      console.error('Failed to send invite:', error);
+    }
+  };
+
+  const handleSendReminder = async (id: string) => {
+    try {
+      setInvites(prev => prev.map(invite => 
+        invite.id === id 
+          ? { 
+              ...invite, 
+              reminderCount: invite.reminderCount + 1,
+              lastReminderAt: new Date().toISOString()
+            }
+          : invite
+      ));
+    } catch (error) {
+      console.error('Failed to send reminder:', error);
+    }
+  };
+
+  const handleCancelInvite = async (id: string) => {
+    try {
+      setInvites(prev => prev.map(invite => 
+        invite.id === id 
+          ? { ...invite, status: 'cancelled' }
+          : invite
+      ));
+    } catch (error) {
+      console.error('Failed to cancel invite:', error);
+    }
+  };
+
+  const handleDeleteInvite = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this invite?')) return;
+
+    try {
+      setInvites(prev => prev.filter(invite => invite.id !== id));
+    } catch (error) {
+      console.error('Failed to delete invite:', error);
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'draft':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
-      case 'archived':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-      case 'testing':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'in-progress':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'abandoned':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400';
-      case 'paused':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
+      case 'pending':
+        return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30';
+      case 'sent':
+        return 'text-blue-600 bg-blue-100 dark:bg-blue-900/30';
+      case 'accepted':
+        return 'text-green-600 bg-green-100 dark:bg-green-900/30';
+      case 'expired':
+        return 'text-red-600 bg-red-100 dark:bg-red-900/30';
+      case 'cancelled':
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active':
-      case 'completed':
-        return <CheckCircle className="w-4 h-4" />;
-      case 'draft':
-      case 'paused':
-        return <Pause className="w-4 h-4" />;
-      case 'archived':
-        return <XCircle className="w-4 h-4" />;
-      case 'testing':
-      case 'in-progress':
-        return <Clock className="w-4 h-4" />;
-      case 'abandoned':
-        return <XCircle className="w-4 h-4" />;
+      case 'pending':
+        return Clock;
+      case 'sent':
+        return Send;
+      case 'accepted':
+        return UserCheck;
+      case 'expired':
+        return AlertTriangle;
+      case 'cancelled':
+        return UserX;
       default:
-        return <Clock className="w-4 h-4" />;
+        return Clock;
     }
   };
 
-  const getStepTypeIcon = (type: string) => {
-    switch (type) {
-      case 'welcome':
-        return <UserPlus className="w-4 h-4" />;
-      case 'form':
-        return <FileText className="w-4 h-4" />;
-      case 'tutorial':
-        return <Play className="w-4 h-4" />;
-      case 'verification':
-        return <Shield className="w-4 h-4" />;
-      case 'completion':
-        return <Award className="w-4 h-4" />;
-      default:
-        return <Activity className="w-4 h-4" />;
-    }
-  };
-
-  const getDeviceIcon = (device: string) => {
-    switch (device) {
-      case 'desktop':
-        return Monitor;
-      case 'mobile':
-        return Smartphone;
-      case 'tablet':
-        return Tablet;
-      default:
-        return Monitor;
-    }
-  };
-
-  const getDeviceColor = (device: string) => {
-    switch (device) {
-      case 'desktop':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'mobile':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'tablet':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400';
-      default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-    }
-  };
-
-  const filteredFlows = flows.filter(flow => {
-    const matchesSearch =
-      flow.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      flow.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || flow.status === statusFilter;
+  const filteredInvites = invites.filter(invite => {
+    const matchesSearch = invite.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         invite.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         invite.company.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = !filterStatus || invite.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
 
-  const filteredProgress = userProgress.filter(progress => {
-    const matchesSearch =
-      progress.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      progress.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      progress.flowName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || progress.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
-
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'flows', label: 'Onboarding Flows', icon: UserPlus, count: flows.length },
-    { id: 'progress', label: 'User Progress', icon: Users, count: userProgress.length },
-    { id: 'analytics', label: 'Analytics', icon: PieChart },
-  ];
+  if (isLoading) {
+    return (
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            ))}
+          </div>
+          <div className="space-y-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="p-6 space-y-6">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                 User Onboarding
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Design, manage, and optimize user onboarding flows for better user experience
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Manage user invitations and onboarding process
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <RefreshCw className="w-4 h-4" />
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={fetchData}
+            disabled={refreshing}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
                 <span>Refresh</span>
               </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <Download className="h-4 w-4" />
                 <span>Export</span>
               </button>
               <button
-                onClick={() => console.log('Create modal clicked')}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+            onClick={() => setShowCreateInvite(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
-                <Plus className="w-4 h-4" />
-                <span>New Flow</span>
+            <UserPlus className="h-4 w-4" />
+            <span>Invite User</span>
               </button>
-            </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200 dark:border-slate-700">
-            <nav className="-mb-px flex space-x-8">
-              {tabs.map(tab => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() =>
-                      setSelectedTab(tab.id as 'overview' | 'flows' | 'progress' | 'analytics')
-                    }
-                    className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-                      selectedTab === tab.id
-                        ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-slate-600'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{tab.label}</span>
-                    {tab.count !== undefined && (
-                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full text-xs">
-                        {tab.count}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-        </div>
-
-        {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search flows, users, or progress..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
-              />
-            </div>
-            <select
-              value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
-            >
-              <option value="all">All Statuses</option>
-              <option value="active">Active</option>
-              <option value="draft">Draft</option>
-              <option value="testing">Testing</option>
-              <option value="archived">Archived</option>
-              <option value="in-progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="abandoned">Abandoned</option>
-              <option value="paused">Paused</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Content */}
-        {selectedTab === 'overview' && (
-          <>
-            {/* Key Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-              {onboardingMetrics.map(metric => {
-                const Icon = metric.icon;
-                return (
+      {/* Stats */}
+      {stats && (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <motion.div
-                    key={metric.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`p-2 rounded-lg ${metric.color} bg-opacity-10`}>
-                        <Icon className={`w-5 h-5 ${metric.color.replace('bg-', 'text-')}`} />
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {stats.totalInvites.toLocaleString()}
                       </div>
-                      <div className="flex items-center space-x-1">
-                        {metric.changeType === 'increase' ? (
-                          <TrendingUp className="w-4 h-4 text-green-500" />
-                        ) : metric.changeType === 'decrease' ? (
-                          <TrendingDown className="w-4 h-4 text-red-500" />
-                        ) : (
-                          <Activity className="w-4 h-4 text-gray-500" />
-                        )}
-                        <span
-                          className={`text-sm font-medium ${
-                            metric.changeType === 'increase'
-                              ? 'text-green-600 dark:text-green-400'
-                              : metric.changeType === 'decrease'
-                                ? 'text-red-600 dark:text-red-400'
-                                : 'text-gray-600 dark:text-gray-400'
-                          }`}
-                        >
-                          {Math.abs(metric.change)}%
-                        </span>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Total Invites</div>
                       </div>
+              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                <UserPlus className="h-6 w-6 text-blue-600" />
                     </div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                      {metric.value}
-                      {metric.id === 'completion-rate' && '%'}
-                      {metric.id === 'avg-time' && 'm'}
-                      {metric.id === 'abandonment-rate' && '%'}
-                      {metric.id === 'satisfaction' && '/5'}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{metric.title}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                      {metric.period}
                     </div>
                   </motion.div>
-                );
-              })}
-            </div>
 
-            {/* Recent Flows */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-                <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Recent Flows
-                  </h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    {flows.slice(0, 3).map(flow => (
                       <motion.div
-                        key={flow.id}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                        onClick={() => {
-                          console.log('Flow selected:', flow);
-                        }}
-                      >
-                        <div className="flex items-center space-x-4">
-                          <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                            <UserPlus className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                          </div>
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          >
+            <div className="flex items-center justify-between">
                           <div>
-                            <div className="font-medium text-gray-900 dark:text-white">
-                              {flow.name}
+                <div className="text-2xl font-bold text-green-600">
+                  {stats.acceptedInvites.toLocaleString()}
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
-                              {flow.description}
+                <div className="text-sm text-gray-600 dark:text-gray-400">Accepted</div>
                             </div>
+              <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <UserCheck className="h-6 w-6 text-green-600" />
                           </div>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="font-semibold text-gray-900 dark:text-white">
-                              {flow.completionRate}%
-                            </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
-                              completion
-                            </div>
-                          </div>
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}
-                          >
-                            {getStatusIcon(flow.status)}
-                            <span className="ml-1 capitalize">{flow.status}</span>
-                          </span>
                         </div>
                       </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
 
-              <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
-                <div className="p-6 border-b border-gray-200 dark:border-slate-700">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    User Progress
-                  </h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    {userProgress.slice(0, 5).map(progress => {
-                      const DeviceIcon = getDeviceIcon(progress.device);
-                      return (
                         <motion.div
-                          key={progress.id}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
-                        >
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                              <UserPlus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                            </div>
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          >
+            <div className="flex items-center justify-between">
                             <div>
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                {progress.userName}
+                <div className="text-2xl font-bold text-yellow-600">
+                  {stats.pendingInvites}
                               </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
-                                {progress.flowName}
+                <div className="text-sm text-gray-600 dark:text-gray-400">Pending</div>
                               </div>
+              <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                <Clock className="h-6 w-6 text-yellow-600" />
                             </div>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className="text-right">
-                              <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                {progress.progress}%
-                              </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
-                                Step {progress.currentStep}/{progress.totalSteps}
-                              </div>
-                            </div>
-                            <span
-                              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}
-                            >
-                              <DeviceIcon className="w-3 h-3 mr-1" />
-                              {progress.device}
-                            </span>
                           </div>
                         </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
 
-        {selectedTab === 'flows' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredFlows.map(flow => (
               <motion.div
-                key={flow.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                onClick={() => {
-                  console.log('Flow selected:', flow);
-                }}
-              >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                        <UserPlus className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                      </div>
+            transition={{ delay: 0.3 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          >
+            <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{flow.name}</h3>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <span
-                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(flow.status)}`}
-                          >
-                            {getStatusIcon(flow.status)}
-                            <span className="ml-1 capitalize">{flow.status}</span>
-                          </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            v{flow.version}
-                          </span>
+                <div className="text-2xl font-bold text-purple-600">
+                  {stats.completionRate.toFixed(1)}%
                         </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Completion Rate</div>
                       </div>
+              <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                <Target className="h-6 w-6 text-purple-600" />
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <button
-                        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                        title="Edit"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </button>
-                      <button
-                        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                        title="View"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
                     </div>
-                  </div>
-
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    {flow.description}
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {flow.completionRate}%
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">Completion</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {flow.avgCompletionTime}m
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">Avg Time</div>
-                    </div>
-                  </div>
-
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                      Steps ({flow.steps.length})
-                    </h4>
-                    <div className="space-y-2">
-                      {flow.steps.slice(0, 3).map(step => (
-                        <div key={step.id} className="flex items-center space-x-2 text-sm">
-                          <div className="p-1 bg-gray-100 dark:bg-gray-700 rounded">
-                            {getStepTypeIcon(step.type)}
-                          </div>
-                          <span className="text-gray-700 dark:text-gray-300">{step.title}</span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            ({step.completionRate}%)
-                          </span>
-                        </div>
-                      ))}
-                      {flow.steps.length > 3 && (
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                          +{flow.steps.length - 3} more steps
+          </motion.div>
                         </div>
                       )}
+
+      {/* Search and Filter */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search invites..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            />
+                    </div>
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          >
+            <option value="">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="sent">Sent</option>
+            <option value="accepted">Accepted</option>
+            <option value="expired">Expired</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium">
-                        View Details
-                      </button>
-                      <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 text-sm font-medium">
-                        Analytics
-                      </button>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <Settings className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {selectedTab === 'progress' && (
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg overflow-hidden">
+      {/* Invites List */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+            <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                       User
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Flow
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Progress
+                  Role & Company
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                       Status
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Device
+                  Invited
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Time Spent
+                  Expires
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Last Activity
+                  Reminders
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {filteredProgress.map(progress => {
-                    const DeviceIcon = getDeviceIcon(progress.device);
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+              {filteredInvites.map((invite) => {
+                const StatusIcon = getStatusIcon(invite.status);
                     return (
                       <motion.tr
-                        key={progress.id}
+                    key={invite.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap">
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                          {invite.name.split(' ').map(n => n[0]).join('')}
+                        </div>
                           <div>
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
-                              {progress.userName}
+                          <div className="font-medium text-gray-900 dark:text-white">
+                            {invite.name}
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {progress.userEmail}
+                          <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-500">
+                            <Mail className="h-3 w-3" />
+                            <span>{invite.email}</span>
+                          </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-white">
-                            {progress.flowName}
+                    <td className="px-6 py-4">
+                      <div>
+                        <div className="font-medium text-gray-900 dark:text-white">
+                          {invite.role}
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            {progress.flowId}
+                        <div className="text-sm text-gray-500 dark:text-gray-500">
+                          {invite.company}
+                        </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4">
                           <div className="flex items-center space-x-2">
-                            <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                              <div
-                                className="bg-blue-600 h-2 rounded-full"
-                                style={{ width: `${progress.progress}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-sm text-gray-900 dark:text-white">
-                              {progress.progress}%
+                        <StatusIcon className="h-4 w-4" />
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(invite.status)}`}>
+                          {invite.status.charAt(0).toUpperCase() + invite.status.slice(1)}
                             </span>
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            Step {progress.currentStep}/{progress.totalSteps}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-1 text-sm text-gray-900 dark:text-white">
+                        <Calendar className="h-4 w-4 text-gray-400" />
+                        <span>{new Date(invite.invitedAt).toLocaleDateString()}</span>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(progress.status)}`}
-                          >
-                            {getStatusIcon(progress.status)}
-                            <span className="ml-1 capitalize">
-                              {progress.status.replace('-', ' ')}
-                            </span>
-                          </span>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-1 text-sm text-gray-900 dark:text-white">
+                        <Clock className="h-4 w-4 text-gray-400" />
+                        <span>{new Date(invite.expiresAt).toLocaleDateString()}</span>
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDeviceColor(progress.device)}`}
-                          >
-                            <DeviceIcon className="w-3 h-3 mr-1" />
-                            {progress.device}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4">
                           <div className="text-sm text-gray-900 dark:text-white">
-                            {progress.timeSpent}m
+                        {invite.reminderCount}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-white">
-                            {new Date(progress.lastActivity).toLocaleDateString()}
-                          </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            {new Date(progress.lastActivity).toLocaleTimeString()}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex items-center space-x-2">
+                    <td className="px-6 py-4 text-right">
+                      <div className="flex items-center justify-end space-x-2">
+                        {invite.status === 'pending' && (
                             <button
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                              title="View"
+                            onClick={() => handleSendInvite(invite.id)}
+                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                            title="Send Invite"
                             >
-                              <Eye className="w-4 h-4" />
+                            <Send className="h-4 w-4" />
                             </button>
+                        )}
+                        {(invite.status === 'sent' || invite.status === 'pending') && (
                             <button
-                              className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
-                              title="Message"
+                            onClick={() => handleSendReminder(invite.id)}
+                            className="p-1 text-gray-400 hover:text-yellow-600 transition-colors"
+                            title="Send Reminder"
                             >
-                              <MessageSquare className="w-4 h-4" />
+                            <Bell className="h-4 w-4" />
                             </button>
+                        )}
                             <button
-                              className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
-                              title="Reset"
-                            >
-                              <RotateCcw className="w-4 h-4" />
+                          onClick={() => handleCancelInvite(invite.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          title="Cancel"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteInvite(invite.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="h-4 w-4" />
                             </button>
                           </div>
                         </td>
@@ -951,35 +658,114 @@ export const UserOnboarding: React.FC = () => {
               </table>
             </div>
           </div>
-        )}
 
-        {selectedTab === 'analytics' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Completion Trends
+      {/* Create Invite Modal */}
+      <AnimatePresence>
+        {showCreateInvite && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md mx-4"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Invite New User
               </h3>
-              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                <div className="text-center">
-                  <BarChart3 className="w-12 h-12 mx-auto mb-2" />
-                  <p>Completion trends chart will be displayed here</p>
+                <button
+                  onClick={() => setShowCreateInvite(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
                 </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    value={newInvite.name || ''}
+                    onChange={(e) => setNewInvite({ ...newInvite, name: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Enter full name"
+                  />
               </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    value={newInvite.email || ''}
+                    onChange={(e) => setNewInvite({ ...newInvite, email: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Enter email address"
+                  />
             </div>
-            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Flow Performance
-              </h3>
-              <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                <div className="text-center">
-                  <PieChart className="w-12 h-12 mx-auto mb-2" />
-                  <p>Flow performance chart will be displayed here</p>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Role
+                    </label>
+                    <select
+                      value={newInvite.role || 'user'}
+                      onChange={(e) => setNewInvite({ ...newInvite, role: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    >
+                      <option value="user">User</option>
+                      <option value="manager">Manager</option>
+                      <option value="admin">Admin</option>
+                      <option value="viewer">Viewer</option>
+                    </select>
                 </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Company
+                    </label>
+                    <select
+                      value={newInvite.company || ''}
+                      onChange={(e) => setNewInvite({ ...newInvite, company: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    >
+                      <option value="">Select Company</option>
+                      <option value="TechCorp">TechCorp</option>
+                      <option value="LogisticsCorp">LogisticsCorp</option>
+                      <option value="FinanceCorp">FinanceCorp</option>
+                    </select>
               </div>
             </div>
           </div>
+              
+              <div className="flex items-center justify-end space-x-3 mt-6">
+                <button
+                  onClick={() => setShowCreateInvite(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCreateInvite}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Create Invite
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

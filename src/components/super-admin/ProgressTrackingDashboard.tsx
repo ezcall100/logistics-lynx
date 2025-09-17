@@ -18,6 +18,7 @@ import {
   Timer,
   AlertTriangle,
   XCircle,
+  X,
 } from 'lucide-react';
 
 interface BuildTask {

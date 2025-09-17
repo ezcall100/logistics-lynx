@@ -1,671 +1,466 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
   Plus,
-  Edit,
   Trash2,
-  Users,
-  Settings,
-  Eye,
-  XCircle,
+  X,
+  Lock,
   Search,
+  RefreshCw,
   Download,
-  Crown,
-  UserCheck,
-  UserX,
-  Key,
-  Database,
-  Globe,
-  FileText,
-  BarChart3,
-  Activity,
-  Clock,
-  Star,
-  Zap,
 } from 'lucide-react';
 
-/**
- * User Roles Page - Redesigned
- * Comprehensive role and permission management
- * Created by MCP 301 Agents
- * Timestamp: 2025-09-14T23:15:00.000Z
- */
+interface Role {
+  id: string;
+  name: string;
+  description: string;
+  permissions: string[];
+  isSystem: boolean;
+  userCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface Permission {
   id: string;
   name: string;
   description: string;
   category: string;
-  level: 'read' | 'write' | 'admin';
+  resource: string;
+  action: string;
 }
 
-interface Role {
-  id: string;
-  name: string;
-  description: string;
-  permissions: Permission[];
-  userCount: number;
-  isSystem: boolean;
-  createdAt: string;
-  updatedAt: string;
-  color: string;
-  icon: string;
-  priority: number;
-}
-
-interface RoleTemplate {
-  id: string;
-  name: string;
-  description: string;
-  permissions: string[];
-  category: string;
-}
-
-export const UserRoles: React.FC = () => {
+const UserRoles: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [permissions, setPermissions] = useState<Permission[]>([]);
-  // const [selectedRole, setSelectedRole] = useState<Role | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  // const [showEditModal, setShowEditModal] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filterCategory, setFilterCategory] = useState('all');
-  const [roleTemplates] = useState<RoleTemplate[]>([
+  const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showCreateRole, setShowCreateRole] = useState(false);
+  const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
+
+  const [newRole, setNewRole] = useState<Partial<Role>>({
+    name: '',
+    description: '',
+    permissions: [],
+    isSystem: false,
+  });
+
+  // Mock permissions data
+  const mockPermissions: Permission[] = [
+    { id: '1', name: 'View Users', description: 'View user list and details', category: 'Users', resource: 'users', action: 'read' },
+    { id: '2', name: 'Create Users', description: 'Create new user accounts', category: 'Users', resource: 'users', action: 'create' },
+    { id: '3', name: 'Edit Users', description: 'Edit user information', category: 'Users', resource: 'users', action: 'update' },
+    { id: '4', name: 'Delete Users', description: 'Delete user accounts', category: 'Users', resource: 'users', action: 'delete' },
+    { id: '5', name: 'View Companies', description: 'View company information', category: 'Companies', resource: 'companies', action: 'read' },
+    { id: '6', name: 'Manage Companies', description: 'Create and edit companies', category: 'Companies', resource: 'companies', action: 'manage' },
+    { id: '7', name: 'View Analytics', description: 'View analytics and reports', category: 'Analytics', resource: 'analytics', action: 'read' },
+    { id: '8', name: 'Export Data', description: 'Export data and reports', category: 'Analytics', resource: 'analytics', action: 'export' },
+    { id: '9', name: 'System Settings', description: 'Access system settings', category: 'System', resource: 'system', action: 'manage' },
+    { id: '10', name: 'Security Settings', description: 'Manage security policies', category: 'Security', resource: 'security', action: 'manage' },
+  ];
+
+  // Mock roles data
+  const mockRoles: Role[] = [
     {
-      id: 'admin',
-      name: 'Administrator',
+      id: '1',
+      name: 'Super Admin',
       description: 'Full system access with all permissions',
-      permissions: ['all'],
-      category: 'System',
+      permissions: mockPermissions.map(p => p.id),
+      isSystem: true,
+      userCount: 2,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
     },
     {
-      id: 'manager',
+      id: '2',
+      name: 'Admin',
+      description: 'Administrative access to most system features',
+      permissions: ['1', '2', '3', '5', '6', '7', '8'],
+      isSystem: true,
+      userCount: 5,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
+    },
+    {
+      id: '3',
       name: 'Manager',
-      description: 'Management level access with user and content management',
-      permissions: ['user.read', 'user.write', 'content.read', 'content.write', 'reports.read'],
-      category: 'Management',
+      description: 'Management access to team and company features',
+      permissions: ['1', '5', '7'],
+      isSystem: true,
+      userCount: 12,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
     },
     {
-      id: 'user',
-      name: 'Standard User',
-      description: 'Basic user access with limited permissions',
-      permissions: ['user.read', 'content.read'],
-      category: 'Standard',
-    },
-    {
-      id: 'guest',
-      name: 'Guest',
-      description: 'Read-only access for external users',
-      permissions: ['content.read'],
-      category: 'Limited',
-    },
-  ]);
-
-  // Mock data
-  useEffect(() => {
-    const mockPermissions: Permission[] = [
-      // User Management
-      {
-        id: 'user.read',
-        name: 'View Users',
-        description: 'View user profiles and information',
-        category: 'User Management',
-        level: 'read',
-      },
-      {
-        id: 'user.write',
-        name: 'Edit Users',
-        description: 'Create, edit, and delete users',
-        category: 'User Management',
-        level: 'write',
-      },
-      {
-        id: 'user.admin',
-        name: 'User Administration',
-        description: 'Full user management capabilities',
-        category: 'User Management',
-        level: 'admin',
-      },
-
-      // Content Management
-      {
-        id: 'content.read',
-        name: 'View Content',
-        description: 'View all content and documents',
-        category: 'Content Management',
-        level: 'read',
-      },
-      {
-        id: 'content.write',
-        name: 'Edit Content',
-        description: 'Create, edit, and delete content',
-        category: 'Content Management',
-        level: 'write',
-      },
-      {
-        id: 'content.admin',
-        name: 'Content Administration',
-        description: 'Full content management capabilities',
-        category: 'Content Management',
-        level: 'admin',
-      },
-
-      // System Administration
-      {
-        id: 'system.read',
-        name: 'View System',
-        description: 'View system settings and logs',
-        category: 'System Administration',
-        level: 'read',
-      },
-      {
-        id: 'system.write',
-        name: 'Edit System',
-        description: 'Modify system settings',
-        category: 'System Administration',
-        level: 'write',
-      },
-      {
-        id: 'system.admin',
-        name: 'System Administration',
-        description: 'Full system administration',
-        category: 'System Administration',
-        level: 'admin',
-      },
-
-      // Reports & Analytics
-      {
-        id: 'reports.read',
-        name: 'View Reports',
-        description: 'View reports and analytics',
-        category: 'Reports & Analytics',
-        level: 'read',
-      },
-      {
-        id: 'reports.write',
-        name: 'Create Reports',
-        description: 'Create and modify reports',
-        category: 'Reports & Analytics',
-        level: 'write',
-      },
-      {
-        id: 'reports.admin',
-        name: 'Report Administration',
-        description: 'Full report management',
-        category: 'Reports & Analytics',
-        level: 'admin',
-      },
-
-      // Security
-      {
-        id: 'security.read',
-        name: 'View Security',
-        description: 'View security logs and settings',
-        category: 'Security',
-        level: 'read',
-      },
-      {
-        id: 'security.write',
-        name: 'Edit Security',
-        description: 'Modify security settings',
-        category: 'Security',
-        level: 'write',
-      },
-      {
-        id: 'security.admin',
-        name: 'Security Administration',
-        description: 'Full security management',
-        category: 'Security',
-        level: 'admin',
-      },
-    ];
-
-    const mockRoles: Role[] = [
-      {
-        id: '1',
-        name: 'Super Administrator',
-        description: 'Full system access with all permissions and capabilities',
-        permissions: mockPermissions,
-        userCount: 5,
+      id: '4',
+      name: 'User',
+      description: 'Standard user access to assigned features',
+      permissions: ['1', '7'],
         isSystem: true,
+      userCount: 45,
         createdAt: '2024-01-01T00:00:00Z',
-        updatedAt: '2024-01-01T00:00:00Z',
-        color: 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400',
-        icon: 'Crown',
-        priority: 1,
-      },
-      {
-        id: '2',
-        name: 'Administrator',
-        description: 'Administrative access with most system permissions',
-        permissions: mockPermissions.filter(p => p.id !== 'system.admin'),
-        userCount: 12,
-        isSystem: true,
-        createdAt: '2024-01-01T00:00:00Z',
-        updatedAt: '2024-01-01T00:00:00Z',
-        color: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
-        icon: 'Shield',
-        priority: 2,
-      },
-      {
-        id: '3',
-        name: 'Manager',
-        description: 'Management level access for team leaders',
-        permissions: mockPermissions.filter(
-          p =>
-            p.category === 'User Management' ||
-            p.category === 'Content Management' ||
-            p.id === 'reports.read'
-        ),
-        userCount: 45,
-        isSystem: false,
-        createdAt: '2024-02-15T00:00:00Z',
-        updatedAt: '2024-03-20T00:00:00Z',
-        color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
-        icon: 'UserCheck',
-        priority: 3,
-      },
-      {
-        id: '4',
-        name: 'Standard User',
-        description: 'Basic user access with essential permissions',
-        permissions: mockPermissions.filter(
-          p => p.level === 'read' && p.category !== 'System Administration'
-        ),
-        userCount: 850,
-        isSystem: false,
-        createdAt: '2024-02-15T00:00:00Z',
-        updatedAt: '2024-02-15T00:00:00Z',
-        color: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
-        icon: 'Users',
-        priority: 4,
+      updatedAt: '2024-01-15T10:00:00Z',
       },
       {
         id: '5',
-        name: 'Guest',
-        description: 'Limited read-only access for external users',
-        permissions: mockPermissions.filter(p => p.id === 'content.read'),
-        userCount: 120,
-        isSystem: false,
-        createdAt: '2024-03-01T00:00:00Z',
-        updatedAt: '2024-03-01T00:00:00Z',
-        color: 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400',
-        icon: 'UserX',
-        priority: 5,
-      },
-    ];
+      name: 'Viewer',
+      description: 'Read-only access to assigned features',
+      permissions: ['1', '7'],
+      isSystem: true,
+      userCount: 23,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T10:00:00Z',
+    },
+  ];
 
+  // Fetch roles and permissions
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    setRefreshing(true);
+    
+    try {
+      // Simulate API calls
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setRoles(mockRoles);
     setPermissions(mockPermissions);
-    setRoles(mockRoles);
+    } catch (error) {
+      console.error('Failed to fetch roles and permissions:', error);
+    } finally {
+      setIsLoading(false);
+      setRefreshing(false);
+    }
   }, []);
 
-  const getIcon = (iconName: string) => {
-    const icons: { [key: string]: React.ComponentType<{ className?: string }> } = {
-      Crown,
-      Shield,
-      UserCheck,
-      Users,
-      UserX,
-      Settings,
-      Key,
-      Database,
-      Globe,
-      FileText,
-      BarChart3,
-      Activity,
-      Clock,
-      Star,
-      Zap,
-    };
-    return icons[iconName] || Users;
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const handleCreateRole = async () => {
+    if (!newRole.name || !newRole.description) return;
+
+    try {
+      const role: Role = {
+        id: Date.now().toString(),
+        name: newRole.name,
+        description: newRole.description,
+        permissions: selectedPermissions,
+        isSystem: false,
+        userCount: 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      setRoles(prev => [...prev, role]);
+      setShowCreateRole(false);
+      setNewRole({ name: '', description: '', permissions: [], isSystem: false });
+      setSelectedPermissions([]);
+    } catch (error) {
+      console.error('Failed to create role:', error);
+    }
   };
 
-  const getPermissionLevelColor = (level: string) => {
-    switch (level) {
-      case 'read':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'write':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
-      case 'admin':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400';
+
+  const handleDeleteRole = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this role?')) return;
+
+    try {
+      setRoles(prev => prev.filter(role => role.id !== id));
+    } catch (error) {
+      console.error('Failed to delete role:', error);
+    }
+  };
+
+  const handlePermissionToggle = (permissionId: string) => {
+    setSelectedPermissions(prev => 
+      prev.includes(permissionId)
+        ? prev.filter(id => id !== permissionId)
+        : [...prev, permissionId]
+    );
+  };
+
+  const getPermissionCategory = (category: string) => {
+    switch (category) {
+      case 'Users':
+        return 'text-blue-600 bg-blue-100 dark:bg-blue-900/30';
+      case 'Companies':
+        return 'text-green-600 bg-green-100 dark:bg-green-900/30';
+      case 'Analytics':
+        return 'text-purple-600 bg-purple-100 dark:bg-purple-900/30';
+      case 'System':
+        return 'text-orange-600 bg-orange-100 dark:bg-orange-900/30';
+      case 'Security':
+        return 'text-red-600 bg-red-100 dark:bg-red-900/30';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-900/30';
     }
   };
 
-  const filteredRoles = roles.filter(role => {
-    const matchesSearch =
-      role.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      role.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      filterCategory === 'all' ||
-      (filterCategory === 'system' && role.isSystem) ||
-      (filterCategory === 'custom' && !role.isSystem);
-    return matchesSearch && matchesCategory;
-  });
+  const filteredRoles = roles.filter(role =>
+    role.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    role.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const permissionCategories = [...new Set(permissions.map(p => p.category))];
+  const filteredPermissions = permissions.filter(permission =>
+    !filterCategory || permission.category === filterCategory
+  );
 
-  const handleCreateRole = (template?: RoleTemplate) => {
-    // Implementation for creating new role
-    console.log('Creating role from template:', template);
-  };
-
-  const handleEditRole = (role: Role) => {
-    // setSelectedRole(role);
-    // setShowEditModal(true);
-    console.log('Edit role:', role);
-  };
-
-  const handleDeleteRole = (roleId: string) => {
-    if (window.confirm('Are you sure you want to delete this role?')) {
-      setRoles(prev => prev.filter(role => role.id !== roleId));
+  const groupedPermissions = filteredPermissions.reduce((acc, permission) => {
+    if (!acc[permission.category]) {
+      acc[permission.category] = [];
     }
-  };
+    acc[permission.category].push(permission);
+    return acc;
+  }, {} as Record<string, Permission[]>);
+
+  if (isLoading) {
+    return (
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+          <div className="space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="p-6 space-y-6">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">User Roles</h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Manage user roles and permissions across your organization
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            User Roles
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Manage user roles and permissions
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={fetchData}
+            disabled={refreshing}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </button>
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <Download className="h-4 w-4" />
                 <span>Export</span>
               </button>
-              <button className="px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Download className="w-4 h-4" />
-                <span>Import</span>
-              </button>
               <button
-                onClick={() => setShowCreateModal(true)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+            onClick={() => setShowCreateRole(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
-                <Plus className="w-4 h-4" />
-                <span>Create Role</span>
+            <Plus className="h-4 w-4" />
+            <span>Add Role</span>
               </button>
-            </div>
           </div>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+      {/* Search and Filter */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search roles..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
             <select
               value={filterCategory}
-              onChange={e => setFilterCategory(e.target.value)}
-              className="px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-700"
-            >
-              <option value="all">All Roles</option>
-              <option value="system">System Roles</option>
-              <option value="custom">Custom Roles</option>
+            onChange={(e) => setFilterCategory(e.target.value)}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          >
+            <option value="">All Categories</option>
+            <option value="Users">Users</option>
+            <option value="Companies">Companies</option>
+            <option value="Analytics">Analytics</option>
+            <option value="System">System</option>
+            <option value="Security">Security</option>
             </select>
           </div>
         </div>
 
-        {/* Role Templates */}
-        <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Quick Start Templates
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {roleTemplates.map(template => (
-              <motion.div
-                key={template.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                onClick={() => handleCreateRole(template)}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                    <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <span className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                    {template.category}
-                  </span>
-                </div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
-                  {template.name}
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                  {template.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {template.permissions.length} permissions
-                  </span>
-                  <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium">
-                    Use Template
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
         {/* Roles Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredRoles.map(role => {
-            const Icon = getIcon(role.icon);
-            return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredRoles.map((role, index) => (
               <motion.div
                 key={role.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+            transition={{ delay: index * 0.1 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
               >
-                <div className="p-6">
-                  {/* Role Header */}
-                  <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                        <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <Shield className="h-6 w-6 text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{role.name}</h3>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <span
-                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${role.color}`}
-                          >
-                            {role.isSystem ? 'System' : 'Custom'}
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    {role.name}
+                  </h3>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {role.userCount} users
                           </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            Priority {role.priority}
+                    {role.isSystem && (
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full">
+                        System
                           </span>
+                    )}
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <button
-                        onClick={() => handleEditRole(role)}
-                        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                        title="Edit Role"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </button>
                       {!role.isSystem && (
+                  <>
                         <button
                           onClick={() => handleDeleteRole(role.id)}
-                          className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400"
-                          title="Delete Role"
+                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      title="Delete"
                         >
-                          <Trash2 className="w-4 h-4" />
+                      <Trash2 className="h-4 w-4" />
                         </button>
+                  </>
+                )}
+                {role.isSystem && (
+                  <div className="p-1" title="System Role">
+                    <Lock className="h-4 w-4 text-gray-400" />
+                  </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Role Description */}
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                     {role.description}
                   </p>
 
-                  {/* Role Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {role.userCount}
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">Users</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {role.permissions.length}
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">Permissions</div>
-                    </div>
+            <div className="space-y-2">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Permissions ({role.permissions.length})
                   </div>
-
-                  {/* Permission Categories */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                      Permission Categories
-                    </h4>
                     <div className="flex flex-wrap gap-1">
-                      {permissionCategories.map(category => {
-                        const categoryPermissions = role.permissions.filter(
-                          p => p.category === category
-                        );
-                        if (categoryPermissions.length === 0) return null;
-                        return (
+                {role.permissions.slice(0, 3).map(permissionId => {
+                  const permission = permissions.find(p => p.id === permissionId);
+                  return permission ? (
                           <span
-                            key={category}
-                            className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                      key={permissionId}
+                      className={`px-2 py-1 text-xs rounded-full ${getPermissionCategory(permission.category)}`}
                           >
-                            {categoryPermissions.length} {category.split(' ')[0]}
+                      {permission.name}
                           </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
-                    <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium">
-                        View Details
-                      </button>
-                      <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 text-sm font-medium">
-                        Assign Users
-                      </button>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <Settings className="w-4 h-4" />
-                      </button>
-                    </div>
+                  ) : null;
+                })}
+                {role.permissions.length > 3 && (
+                  <span className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400">
+                    +{role.permissions.length - 3} more
+                  </span>
+                )}
                   </div>
                 </div>
               </motion.div>
-            );
-          })}
+        ))}
         </div>
 
         {/* Create Role Modal */}
         <AnimatePresence>
-          {showCreateModal && (
+        {showCreateRole && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-              >
-                <div className="p-6">
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto"
+            >
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Create New Role
-                    </h2>
+                </h3>
                     <button
-                      onClick={() => setShowCreateModal(false)}
-                      className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() => setShowCreateRole(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                     >
-                      <XCircle className="w-5 h-5 text-gray-500" />
+                  <X className="h-5 w-5" />
                     </button>
                   </div>
 
-                  <div className="space-y-4">
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Role Name
                       </label>
                       <input
                         type="text"
-                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700"
+                      value={newRole.name || ''}
+                      onChange={(e) => setNewRole({ ...newRole, name: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Enter role name"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Description
                       </label>
-                      <textarea
-                        rows={3}
-                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700"
+                    <input
+                      type="text"
+                      value={newRole.description || ''}
+                      onChange={(e) => setNewRole({ ...newRole, description: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Enter role description"
                       />
+                  </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                         Permissions
                       </label>
-                      <div className="space-y-2 max-h-60 overflow-y-auto">
-                        {permissionCategories.map(category => (
-                          <div
-                            key={category}
-                            className="border border-gray-200 dark:border-slate-700 rounded-lg p-3"
-                          >
-                            <h4 className="font-medium text-gray-900 dark:text-white mb-2">
+                  <div className="space-y-4">
+                    {Object.entries(groupedPermissions).map(([category, categoryPermissions]) => (
+                      <div key={category} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                        <h4 className="font-medium text-gray-900 dark:text-white mb-3">
                               {category}
                             </h4>
-                            <div className="space-y-1">
-                              {permissions
-                                .filter(p => p.category === category)
-                                .map(permission => (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {categoryPermissions.map(permission => (
                                   <label
                                     key={permission.id}
-                                    className="flex items-center space-x-2"
+                              className="flex items-center space-x-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer"
                                   >
                                     <input
                                       type="checkbox"
+                                checked={selectedPermissions.includes(permission.id)}
+                                onChange={() => handlePermissionToggle(permission.id)}
                                       className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
-                                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                              <div className="flex-1">
+                                <div className="font-medium text-gray-900 dark:text-white text-sm">
                                       {permission.name}
-                                    </span>
-                                    <span
-                                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getPermissionLevelColor(permission.level)}`}
-                                    >
-                                      {permission.level}
-                                    </span>
+                                </div>
+                                <div className="text-xs text-gray-600 dark:text-gray-400">
+                                  {permission.description}
+                                </div>
+                              </div>
                                   </label>
                                 ))}
                             </div>
@@ -675,23 +470,24 @@ export const UserRoles: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+              <div className="flex items-center justify-end space-x-3 mt-6">
                     <button
-                      onClick={() => setShowCreateModal(false)}
-                      className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                  onClick={() => setShowCreateRole(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                     >
                       Cancel
                     </button>
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button
+                  onClick={handleCreateRole}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
                       Create Role
                     </button>
-                  </div>
                 </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
     </div>
   );
 };

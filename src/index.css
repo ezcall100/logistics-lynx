@@ -34,6 +34,27 @@ html {
   --color-text-secondary: #525252;
   --color-text-tertiary: #737373;
   
+  /* UI Component Colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #0ea5e9;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0ea5e9;
+  
   /* Primary Colors - Deep Blue for trust and authority */
   --color-primary-50: #f0f9ff;
   --color-primary-100: #e0f2fe;
@@ -261,6 +282,27 @@ html {
   --color-surface-elevated: #334155;
   --color-border: #475569;
   --color-text-primary: #f8fafc;
+  
+  /* UI Component Colors - Dark Mode */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #0ea5e9;
+  --primary-foreground: #ffffff;
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #334155;
+  --accent-foreground: #f8fafc;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #475569;
+  --input: #475569;
+  --ring: #0ea5e9;
   --color-text-secondary: #cbd5e1;
   --color-text-tertiary: #94a3b8;
 }
