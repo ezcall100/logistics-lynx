@@ -276,12 +276,7 @@ const EnhancedSystemOverview: React.FC = () => {
     }, 30000); // Update every 30 seconds
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, [fetchData]);
 
   const handleCreateAlert = async () => {
@@ -780,3 +775,4 @@ const EnhancedSystemOverview: React.FC = () => {
 };
 
 export default EnhancedSystemOverview;
+}

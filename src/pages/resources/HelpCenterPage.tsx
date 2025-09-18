@@ -180,3 +180,4 @@ const HelpCenterPage: React.FC = () => {
 }
 
 export default HelpCenterPage
+}

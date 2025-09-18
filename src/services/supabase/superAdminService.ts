@@ -539,4 +539,4 @@ class SuperAdminService {
   }
 }
 
-export const superAdminService = new SuperAdminService();
+export const superAdminService = new SuperAdminService();

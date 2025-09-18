@@ -34,12 +34,7 @@ export function HeroSection() {
         }
       }, 50);
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
     }, 1000);
     return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>

@@ -26,12 +26,7 @@ export function SmartLandingPage() {
         }
       }, 50)
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval)
+    ) => clearInterval(interval)
     }, 1000)
 
     // Simulate live statistics
@@ -264,4 +259,4 @@ export function SmartLandingPage() {
       </section>
     </div>
   )
-}
+}

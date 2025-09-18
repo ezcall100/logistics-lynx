@@ -22,3 +22,4 @@ export const TestModal: React.FC<{
 };
 
 export default TestModal;
+}

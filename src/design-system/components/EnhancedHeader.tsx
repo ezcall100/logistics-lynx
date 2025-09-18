@@ -543,3 +543,4 @@ const EnhancedHeader: React.FC<EnhancedHeaderProps> = ({
 };
 
 export default EnhancedHeader;
+}

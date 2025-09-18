@@ -17,12 +17,6 @@ const Sidebar: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white/10 backdrop-blur-xl border-r border-white/20 overflow-y-auto responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
         <h3 className="text-white font-semibold mb-4 responsive-container sm:flex-col md:flex-row lg:grid">Portal Access</h3>
@@ -63,3 +57,4 @@ const Sidebar: React.FC = () => {
 }
 
 export default Sidebar
+}

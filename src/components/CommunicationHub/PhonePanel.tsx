@@ -73,4 +73,4 @@ export const PhonePanel: React.FC<PhonePanelProps> = ({
       </div>
     </div>
   );
-};
+};

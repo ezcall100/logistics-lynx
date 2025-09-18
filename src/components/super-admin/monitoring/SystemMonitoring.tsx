@@ -302,12 +302,7 @@ const SystemMonitoring: React.FC = () => {
       interval = setInterval(fetchMonitoringData, 30000); // Update every 30 seconds
     }
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => {
+    ) => {
       if (interval) clearInterval(interval);
     };
   }, [autoRefresh, fetchMonitoringData]);
@@ -917,3 +912,4 @@ const SystemMonitoring: React.FC = () => {
 };
 
 export default SystemMonitoring;
+}

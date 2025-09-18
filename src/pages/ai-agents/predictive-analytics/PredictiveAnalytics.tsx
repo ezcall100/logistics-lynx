@@ -334,4 +334,4 @@ const PredictiveAnalytics = React.memo(function PredictiveAnalytics() {
       </section>
     </div>
   )
-}
+}

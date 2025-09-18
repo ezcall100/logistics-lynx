@@ -334,3 +334,4 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
 };
 
 export default UnifiedPortalLayout;
+}

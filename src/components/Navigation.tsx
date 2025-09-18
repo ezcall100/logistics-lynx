@@ -8,12 +8,6 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg dark:bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-lg border-b border-slate-300/20 dark:border-slate-600/20 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="container-pro responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="flex items-center justify-between h-16 responsive-container sm:flex-col md:flex-row lg:grid">

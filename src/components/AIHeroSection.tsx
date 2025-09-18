@@ -21,12 +21,7 @@ export function AIHeroSection() {
         }
       }, 30)
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval)
+    ) => clearInterval(interval)
     }, 500)
 
     // Simulate active tasks
@@ -231,4 +226,4 @@ export function AIHeroSection() {
       </div>
     </section>
   )
-}
+}

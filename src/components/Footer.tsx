@@ -142,12 +142,6 @@ export function Footer() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden responsive-container">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 responsive-container">

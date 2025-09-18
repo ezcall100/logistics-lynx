@@ -119,3 +119,4 @@ const SimpleCustomerPortal: React.FC = () => {
 };
 
 export default SimpleCustomerPortal;
+}

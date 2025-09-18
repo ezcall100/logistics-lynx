@@ -255,4 +255,4 @@ const SmartWarehouse = React.memo(function SmartWarehouse() {
       </div>
     </div>
   )
-}
+}

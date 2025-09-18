@@ -120,4 +120,4 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
       )}
     </div>
   );
-};
+};

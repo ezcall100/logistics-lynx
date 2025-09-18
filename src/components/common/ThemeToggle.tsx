@@ -18,12 +18,6 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLa
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <button
       onClick={handleToggle}
       className={`

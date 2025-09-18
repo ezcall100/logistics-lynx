@@ -881,3 +881,4 @@ const MCPAgentsPortal: React.FC = () => {
 };
 
 export default MCPAgentsPortal;
+}

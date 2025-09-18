@@ -94,13 +94,7 @@ export const AgentItem: React.FC<AgentItemProps> = ({ agent, view, onAction }) =
 
   if (view === 'list') {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <motion.div
+    <motion.div
         whileHover={{ scale: 1.02 }}
         className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
       >

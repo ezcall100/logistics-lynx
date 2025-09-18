@@ -258,12 +258,7 @@ const SystemHealthMonitor: React.FC = () => {
     }, 3000);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, [autoRefresh]);
 
   const getStatusColor = (status: string) => {
@@ -844,3 +839,4 @@ const SystemHealthMonitor: React.FC = () => {
 };
 
 export default SystemHealthMonitor;
+}

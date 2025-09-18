@@ -140,4 +140,4 @@ export const CalendarPanel: React.FC<CalendarPanelProps> = ({
       )}
     </div>
   );
-};
+};

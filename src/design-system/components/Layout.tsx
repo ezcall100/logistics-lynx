@@ -506,3 +506,4 @@ export const defaultNavigationItems: NavigationItem[] = [
 ];
 
 export default MainLayout;
+}

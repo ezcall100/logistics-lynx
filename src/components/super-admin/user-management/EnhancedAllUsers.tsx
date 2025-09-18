@@ -59,12 +59,6 @@ const GlassButton: React.FC<{
     lg: 'px-6 py-3 text-base'
   };
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <button 
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
@@ -743,3 +737,4 @@ const EnhancedAllUsers: React.FC = () => {
 };
 
 export default EnhancedAllUsers;
+}

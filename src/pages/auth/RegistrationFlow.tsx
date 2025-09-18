@@ -577,13 +577,7 @@ function RegistrationFlow() {
             const isPrimary = registrationData.primaryServiceProviderService === service.id;
 
             return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-              <label
+    <label
                 key={service.id}
                 className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
                   isSelected

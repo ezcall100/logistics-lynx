@@ -51,3 +51,4 @@ export const TMSRoutes: React.FC = () => {
 };
 
 export default TMSRoutes;
+}

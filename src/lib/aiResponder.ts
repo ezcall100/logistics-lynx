@@ -109,4 +109,4 @@ export const getWelcomeMessage = () => {
       'Help with data insights'
     ]
   };
-};
+};

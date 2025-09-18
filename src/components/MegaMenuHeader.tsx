@@ -171,12 +171,6 @@ export function MegaMenuHeader() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-transbot-border shadow-transbot responsive-container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
         <div className="flex items-center justify-between h-16 responsive-container">
@@ -335,4 +329,4 @@ export function MegaMenuHeader() {
       </AnimatePresence>
     </header>
   )
-}
+}

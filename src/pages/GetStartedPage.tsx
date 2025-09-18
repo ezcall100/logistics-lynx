@@ -286,4 +286,4 @@ export function GetStartedPage() {
       </section>
     </div>
   )
-}
+}

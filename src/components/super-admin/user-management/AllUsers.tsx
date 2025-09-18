@@ -90,12 +90,7 @@ const AllUsers: React.FC = () => {
     });
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => {
+    ) => {
       superAdminService.unsubscribe('users');
     };
   }, []);
@@ -841,3 +836,4 @@ const AllUsers: React.FC = () => {
 };
 
 export default AllUsers;
+}

@@ -1505,3 +1505,4 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
 };
 
 export default MCPAgentOrchestrationCenter;
+}

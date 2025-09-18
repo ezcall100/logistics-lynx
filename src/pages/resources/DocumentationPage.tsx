@@ -48,12 +48,6 @@ const DocumentationPage: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <ResponsiveContainer>
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 responsive-container">
         <div className="container mx-auto px-4 py-16 responsive-container">
@@ -127,3 +121,4 @@ const DocumentationPage: React.FC = () => {
 }
 
 export default DocumentationPage
+}

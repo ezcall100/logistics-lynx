@@ -782,3 +782,4 @@ const GlobalSettings: React.FC = () => {
 };
 
 export default GlobalSettings;
+}

@@ -857,3 +857,4 @@ const DatabaseManagement: React.FC = () => {
 };
 
 export default DatabaseManagement;
+}

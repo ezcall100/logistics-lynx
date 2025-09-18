@@ -226,3 +226,4 @@ const FloatingActionButton: React.FC<{
 
 export { Button, ButtonGroup, FloatingActionButton };
 export default Button;
+}

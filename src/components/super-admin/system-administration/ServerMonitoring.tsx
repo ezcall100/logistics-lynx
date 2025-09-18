@@ -86,12 +86,7 @@ const ServerMonitoring: React.FC = () => {
     }, 5000);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, []);
 
   const getStatusColor = (status: string) => {
@@ -299,3 +294,4 @@ const ServerMonitoring: React.FC = () => {
 };
 
 export default ServerMonitoring;
+}

@@ -176,12 +176,7 @@ const SecurityWarRoom: React.FC = () => {
     }, 2000);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, [autoRefresh]);
 
   const getThreatColor = (type: string) => {
@@ -637,3 +632,4 @@ const SecurityWarRoom: React.FC = () => {
 };
 
 export default SecurityWarRoom;
+}

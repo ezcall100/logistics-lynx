@@ -782,3 +782,4 @@ const UserOnboarding: React.FC = () => {
 };
 
 export default UserOnboarding;
+}

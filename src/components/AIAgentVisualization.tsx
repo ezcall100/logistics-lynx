@@ -52,12 +52,7 @@ export function AIAgentVisualization() {
     }, 2000)
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval)
+    ) => clearInterval(interval)
   }, [])
 
   const agentTypes = [
@@ -290,4 +285,4 @@ export function AIAgentVisualization() {
       </div>
     </section>
   )
-}
+}

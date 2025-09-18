@@ -179,3 +179,4 @@ const YardManagementSolution: React.FC = () => {
 }
 
 export default YardManagementSolution
+}

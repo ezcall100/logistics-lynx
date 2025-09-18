@@ -248,4 +248,4 @@ export const portals: Portal[] = [
     color: 'from-green-500 to-emerald-500',
     features: ['System Logs', 'Audit Trails', 'Log Analysis', 'Compliance Reporting']
   }
-]
+]

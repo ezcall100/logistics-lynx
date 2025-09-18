@@ -22,3 +22,4 @@ export const ResponsiveTable: React.FC<{
 };
 
 export default ResponsiveTable;
+}

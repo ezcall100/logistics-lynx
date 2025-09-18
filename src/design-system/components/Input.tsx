@@ -301,3 +301,4 @@ Textarea.displayName = 'Textarea';
 
 export { Input, SearchInput, PasswordInput, Textarea };
 export default Input;
+}

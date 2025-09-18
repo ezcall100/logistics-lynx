@@ -152,3 +152,4 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
 };
 
 export default MobileSidebar;
+}

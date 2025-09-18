@@ -14,4 +14,4 @@ export { CalendarPanel } from './CalendarPanel';
 export { NotesPanel } from './NotesPanel';
 
 // Types
-export type * from './types';
+export type * from './types';

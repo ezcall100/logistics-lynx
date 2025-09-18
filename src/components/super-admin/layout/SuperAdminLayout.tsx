@@ -120,3 +120,4 @@ export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({
 };
 
 export default SuperAdminLayout;
+}

@@ -878,3 +878,4 @@ export const DevOpsAnalytics: React.FC = () => {
 };
 
 export default DevOpsAnalytics;
+}

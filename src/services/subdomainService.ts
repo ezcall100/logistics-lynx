@@ -235,4 +235,4 @@ class SubdomainService {
   }
 }
 
-export const subdomainService = new SubdomainService()
+export const subdomainService = new SubdomainService()

@@ -415,3 +415,4 @@ const EnhancedFAB: React.FC<EnhancedFABProps> = ({
 };
 
 export default EnhancedFAB;
+}

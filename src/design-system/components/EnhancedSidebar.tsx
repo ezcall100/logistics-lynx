@@ -326,3 +326,4 @@ const EnhancedSidebar: React.FC<EnhancedSidebarProps> = ({
 };
 
 export default EnhancedSidebar;
+}

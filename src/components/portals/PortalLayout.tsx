@@ -72,3 +72,4 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({
 }
 
 export default PortalLayout
+}

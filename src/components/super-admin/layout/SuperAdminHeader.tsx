@@ -40,12 +40,6 @@ export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
   setMobileMenuOpen
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <header className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-slate-700/50 sticky top-0 z-40 responsive-container">
       <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 responsive-container">
         <div className="flex items-center space-x-3 sm:space-x-4 responsive-container">
@@ -146,3 +140,4 @@ export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
 };
 
 export default SuperAdminHeader;
+}

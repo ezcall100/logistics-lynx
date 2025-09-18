@@ -43,12 +43,6 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
   handleMenuItemClick,
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <aside
       className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-r border-gray-200 dark:border-slate-700/50 transition-all duration-300 ${
         sidebarCollapsed ? 'w-16' : 'w-64'
@@ -184,3 +178,4 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
 };
 
 export default SuperAdminSidebar;
+}

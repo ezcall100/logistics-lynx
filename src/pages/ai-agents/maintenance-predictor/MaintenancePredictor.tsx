@@ -256,4 +256,4 @@ const MaintenancePredictor = React.memo(function MaintenancePredictor() {
       </div>
     </div>
   )
-}
+}

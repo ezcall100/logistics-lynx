@@ -782,4 +782,4 @@ export function MCPAgentAdmin() {
       )}
     </div>
   )
-}
+}

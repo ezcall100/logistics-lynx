@@ -571,4 +571,4 @@ export class AuthService {
   }
 }
 
-export default supabase;
+export default supabase;

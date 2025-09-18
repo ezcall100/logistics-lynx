@@ -49,12 +49,7 @@ export function IntelligentHeader() {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => window.removeEventListener('scroll', handleScroll)
+    ) => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
@@ -346,4 +341,4 @@ export function IntelligentHeader() {
       </AnimatePresence>
     </motion.header>
   )
-}
+}

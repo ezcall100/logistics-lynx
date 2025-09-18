@@ -561,3 +561,4 @@ const CommunicationHubCustomization: React.FC = () => {
 };
 
 export default CommunicationHubCustomization;
+}

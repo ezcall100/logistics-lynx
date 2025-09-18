@@ -1118,3 +1118,4 @@ const BillingManagement: React.FC = () => {
 };
 
 export default BillingManagement;
+}

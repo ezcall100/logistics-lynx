@@ -467,3 +467,4 @@ const MCPAgentIntegration: React.FC = () => {
 };
 
 export default MCPAgentIntegration;
+}

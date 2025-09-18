@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   GitBranch,
   CheckCircle,
@@ -164,3 +164,4 @@ const GitHubWebhookStatusWidget: React.FC = () => {
 };
 
 export default GitHubWebhookStatusWidget;
+}

@@ -255,4 +255,4 @@ const DemandForecaster = React.memo(function DemandForecaster() {
       </div>
     </div>
   )
-}
+}

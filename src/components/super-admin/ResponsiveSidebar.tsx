@@ -297,3 +297,4 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
 };
 
 export default ResponsiveSidebar;
+}

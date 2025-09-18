@@ -94,3 +94,4 @@ const PersonalSettings: React.FC = () => {
 };
 
 export default PersonalSettings;
+}

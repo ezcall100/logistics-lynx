@@ -66,12 +66,6 @@ export function CinematicDemo() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <section id="demo" className="py-20 px-4 sm:px-6 lg:px-8 responsive-container">
       <div className="max-w-7xl mx-auto responsive-container">
         {/* Header */}
@@ -270,4 +264,4 @@ export function CinematicDemo() {
       </div>
     </section>
   )
-}
+}

@@ -22,3 +22,4 @@ export const OptimizedMenu: React.FC<{
 };
 
 export default OptimizedMenu;
+}

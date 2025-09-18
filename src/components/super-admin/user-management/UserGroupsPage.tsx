@@ -1,4 +1,4 @@
-﻿// 🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM - ACTIVE
+// 🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM - ACTIVE
 // 📅 Timestamp: 2025-09-17T08:11:31.753Z
 // 🧠 Commander: Verified Real-Mode Activation
 // 🧩 MCP Agent Count: 302 (REAL + ACTIVE)
@@ -450,3 +450,4 @@ const UserGroupsPage: React.FC = () => {
 };
 
 export default UserGroupsPage;
+}

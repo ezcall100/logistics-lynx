@@ -98,13 +98,7 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
     switch (activeCrmTab) {
       case 'ai-assistant':
         return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <AiAssistantPanel
+    <AiAssistantPanel
             messages={aiMessages}
             newMessage={newAiMessage}
             setNewMessage={setNewAiMessage}
@@ -262,4 +256,4 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       </div>
     </div>
   );
-};
+};

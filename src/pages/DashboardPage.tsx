@@ -25,12 +25,7 @@ const DashboardPage: React.FC = () => {
     // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearTimeout(timer);
+    ) => clearTimeout(timer);
   }, []);
 
   const kpiData = [
@@ -344,3 +339,4 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
+}

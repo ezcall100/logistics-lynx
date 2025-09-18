@@ -392,3 +392,4 @@ const SecuritySettings: React.FC = () => {
 };
 
 export default SecuritySettings;
+}

@@ -749,3 +749,4 @@ const PortalsPage: React.FC = () => {
 }
 
 export default PortalsPage
+}

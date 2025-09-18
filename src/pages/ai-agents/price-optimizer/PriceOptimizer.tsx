@@ -256,4 +256,4 @@ const PriceOptimizer = React.memo(function PriceOptimizer() {
       </div>
     </div>
   )
-}
+}

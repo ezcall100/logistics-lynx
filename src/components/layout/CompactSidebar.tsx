@@ -121,12 +121,6 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
 
   return (
     <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <>
       {/* Mobile overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -319,3 +313,4 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
 };
 
 export default CompactSidebar;
+}

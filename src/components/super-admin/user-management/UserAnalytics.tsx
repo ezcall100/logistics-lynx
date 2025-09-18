@@ -494,3 +494,4 @@ const UserAnalytics: React.FC = () => {
 };
 
 export default UserAnalytics;
+}

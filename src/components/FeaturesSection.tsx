@@ -73,12 +73,6 @@ export function FeaturesSection() {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <section className="py-20 bg-white responsive-container">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
         {/* Section Header */}

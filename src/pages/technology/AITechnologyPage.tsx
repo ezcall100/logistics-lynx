@@ -222,3 +222,4 @@ const AITechnologyPage: React.FC = () => {
 };
 
 export default AITechnologyPage;
+}

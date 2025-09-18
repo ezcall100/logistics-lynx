@@ -46,3 +46,4 @@ const IoTSensorsPage: React.FC = () => {
 };
 
 export default IoTSensorsPage;
+}

@@ -22,3 +22,4 @@ export const TestForm: React.FC<{
 };
 
 export default TestForm;
+}

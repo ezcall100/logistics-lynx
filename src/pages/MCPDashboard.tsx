@@ -401,3 +401,4 @@ export const MCPDashboard: React.FC = () => {
 };
 
 export default MCPDashboard;
+}

@@ -128,13 +128,7 @@ export function SubdomainApplicationForm() {
 
   if (isSubmitted) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <motion.div
+    <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="max-w-2xl mx-auto p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/50 responsive-container sm:flex-col md:flex-row lg:grid"
@@ -406,4 +400,4 @@ export function SubdomainApplicationForm() {
       </form>
     </motion.div>
   )
-}
+}

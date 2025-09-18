@@ -51,12 +51,7 @@ const RealTimePortalStatus: React.FC<RealTimePortalStatusProps> = ({
     const activityInterval = setInterval(updateActivities, 3000);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => {
+    ) => {
       unsubscribe();
       clearInterval(activityInterval);
     };
@@ -308,3 +303,4 @@ const RealTimePortalStatus: React.FC<RealTimePortalStatusProps> = ({
 };
 
 export default RealTimePortalStatus;
+}

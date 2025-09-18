@@ -125,4 +125,4 @@ export const EmailPanel: React.FC<EmailPanelProps> = ({
       )}
     </div>
   );
-};
+};

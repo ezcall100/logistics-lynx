@@ -119,12 +119,6 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <header className={`${getVariantStyles()} sticky top-0 z-50`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
         <div className="flex items-center justify-between h-16 responsive-container">
@@ -344,3 +338,4 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
 };
 
 export default HorizontalMenu;
+}

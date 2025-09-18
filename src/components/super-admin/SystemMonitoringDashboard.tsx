@@ -164,12 +164,7 @@ const SystemMonitoringDashboard: React.FC = () => {
       }, 5000);
 
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
     }
   }, [isAutoRefresh]);
 
@@ -543,3 +538,4 @@ const SystemMonitoringDashboard: React.FC = () => {
 };
 
 export default SystemMonitoringDashboard;
+}

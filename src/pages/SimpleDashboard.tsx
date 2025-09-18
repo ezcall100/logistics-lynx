@@ -64,3 +64,4 @@ const SimpleDashboard: React.FC = () => {
 };
 
 export default SimpleDashboard;
+}

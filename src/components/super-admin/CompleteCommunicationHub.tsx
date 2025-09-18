@@ -249,13 +249,7 @@ export const CompleteCommunicationHub: React.FC = () => {
 
   if (isMinimized) {
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-      <motion.div
+    <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         className="fixed bottom-4 right-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
@@ -555,3 +549,4 @@ export const CompleteCommunicationHub: React.FC = () => {
 };
 
 export default CompleteCommunicationHub;
+}

@@ -520,3 +520,4 @@ export const SupportTicketsPage: React.FC = () => {
 };
 
 export default SupportTicketsPage;
+}

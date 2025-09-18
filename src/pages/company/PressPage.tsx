@@ -66,12 +66,6 @@ const PressPage: React.FC = () => {
   ]
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <ResponsiveContainer>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-16 responsive-container">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
@@ -167,3 +161,4 @@ const PressPage: React.FC = () => {
 }
 
 export default PressPage
+}

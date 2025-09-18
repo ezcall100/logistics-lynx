@@ -336,3 +336,4 @@ const RevenueMetrics: React.FC = () => {
 };
 
 export default RevenueMetrics;
+}

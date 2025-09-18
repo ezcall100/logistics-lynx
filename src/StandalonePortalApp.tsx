@@ -665,3 +665,4 @@ const StandalonePortalApp: React.FC = () => {
 };
 
 export default StandalonePortalApp;
+}

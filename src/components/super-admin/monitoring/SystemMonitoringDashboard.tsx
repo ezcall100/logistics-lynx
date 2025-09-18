@@ -322,12 +322,7 @@ const SystemMonitoringDashboard: React.FC = () => {
     }, 30000); // Refresh every 30 seconds
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, [autoRefresh, fetchData]);
 
   const getStatusColor = (status: string) => {
@@ -760,3 +755,4 @@ const SystemMonitoringDashboard: React.FC = () => {
 };
 
 export default SystemMonitoringDashboard;
+}

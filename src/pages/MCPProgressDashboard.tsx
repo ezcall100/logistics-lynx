@@ -469,12 +469,7 @@ function MCPProgressDashboard() {
     }, 3000); // Update every 3 seconds for more responsive updates
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, []); // Empty dependency array to prevent infinite loops
 
   const getStatusColor = (status: string) => {

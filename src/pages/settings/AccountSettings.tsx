@@ -152,12 +152,6 @@ const AccountSettings: React.FC = () => {
   ];
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <UnifiedPortalLayout>
       <div className="max-w-6xl mx-auto space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
         {/* Header */}
@@ -596,3 +590,4 @@ const AccountSettings: React.FC = () => {
 };
 
 export default AccountSettings;
+}

@@ -750,3 +750,4 @@ const EnhancedSecurityCenter: React.FC = () => {
 };
 
 export default EnhancedSecurityCenter;
+}

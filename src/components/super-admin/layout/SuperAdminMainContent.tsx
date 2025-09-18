@@ -19,12 +19,6 @@ export const SuperAdminMainContent: React.FC<SuperAdminMainContentProps> = ({
   children
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <main className="flex-1 p-3 sm:p-4 md:p-6 responsive-container">
       <AnimatePresence mode="wait">
         <motion.div
@@ -43,3 +37,4 @@ export const SuperAdminMainContent: React.FC<SuperAdminMainContentProps> = ({
 };
 
 export default SuperAdminMainContent;
+}

@@ -254,3 +254,4 @@ export const themeCSSVariables = `
 `;
 
 export default ThemeProvider;
+}

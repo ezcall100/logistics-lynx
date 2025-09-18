@@ -50,12 +50,7 @@ export function NeuralBackground() {
     // Regenerate network every 30 seconds
     const interval = setInterval(generateNodes, 30000);
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
   }, []);
 
   return (

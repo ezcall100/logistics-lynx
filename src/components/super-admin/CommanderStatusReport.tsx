@@ -340,3 +340,4 @@ const CommanderStatusReport: React.FC = () => {
 };
 
 export default CommanderStatusReport;
+}

@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageSquare,
@@ -230,3 +230,4 @@ const AlertIntegration: React.FC = () => {
 };
 
 export default AlertIntegration;
+}

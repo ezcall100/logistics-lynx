@@ -136,4 +136,4 @@ export const CommunicationTabs: React.FC<CommunicationTabsProps> = ({
             </button>
     );
   }
-};
+};

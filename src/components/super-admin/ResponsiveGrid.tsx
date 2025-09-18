@@ -22,3 +22,4 @@ export const ResponsiveGrid: React.FC<{
 };
 
 export default ResponsiveGrid;
+}

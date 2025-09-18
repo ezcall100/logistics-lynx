@@ -19,3 +19,4 @@ const PortalApp: React.FC = () => {
 };
 
 export default PortalApp;
+}

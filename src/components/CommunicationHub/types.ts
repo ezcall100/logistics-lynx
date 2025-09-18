@@ -207,4 +207,4 @@ export interface UseCommunicationHubReturn {
   addEvent: () => void;
   addNote: () => void;
   markAsRead: (type: string, id: number) => void;
-}
+}

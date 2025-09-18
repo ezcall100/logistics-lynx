@@ -30,3 +30,4 @@ const PortalEntry: React.FC = () => {
 };
 
 export default PortalEntry;
+}

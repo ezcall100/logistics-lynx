@@ -22,3 +22,4 @@ export const OptimizedSidebar: React.FC<{
 };
 
 export default OptimizedSidebar;
+}

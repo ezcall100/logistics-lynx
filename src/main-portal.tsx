@@ -17,4 +17,4 @@ ReactDOM.createRoot(document.getElementById('portal-root')!).render(
   <React.StrictMode>
     <StandalonePortalApp />
   </React.StrictMode>,
-)
+)

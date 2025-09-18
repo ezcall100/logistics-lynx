@@ -799,3 +799,4 @@ export const SupportTickets: React.FC = () => {
 };
 
 export default SupportTickets;
+}

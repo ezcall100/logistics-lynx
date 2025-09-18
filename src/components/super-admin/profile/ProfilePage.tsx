@@ -578,12 +578,7 @@ const ProfilePage: React.FC = () => {
       
       if (sortDirection === 'asc') {
         return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
+    aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
         return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
@@ -2816,3 +2811,4 @@ const ProfilePage: React.FC = () => {
 };
 
 export default ProfilePage;
+}

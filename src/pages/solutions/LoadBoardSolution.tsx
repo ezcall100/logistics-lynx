@@ -179,3 +179,4 @@ const LoadBoardSolution: React.FC = () => {
 }
 
 export default LoadBoardSolution
+}

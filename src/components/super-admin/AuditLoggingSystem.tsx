@@ -587,3 +587,4 @@ const AuditLoggingSystem: React.FC = () => {
 };
 
 export default AuditLoggingSystem;
+}

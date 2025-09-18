@@ -86,12 +86,6 @@ export const UserRegistrationForm: React.FC<{
   };
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -307,3 +301,4 @@ export const UserRegistrationForm: React.FC<{
 };
 
 export default UserRegistrationForm;
+}

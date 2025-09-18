@@ -22,3 +22,4 @@ export const GlassMorphismModal: React.FC<{
 };
 
 export default GlassMorphismModal;
+}

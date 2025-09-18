@@ -18,12 +18,6 @@ export function Header() {
   }
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-slate-200/50 responsive-container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 responsive-container">
         <div className="flex justify-between items-center h-16 responsive-container">

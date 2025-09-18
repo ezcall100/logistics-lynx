@@ -743,3 +743,4 @@ const EnhancedMCPOverview: React.FC = () => {
 };
 
 export default EnhancedMCPOverview;
+}

@@ -200,12 +200,6 @@ export function ComprehensiveSidebar() {
   const isActive = (path: string) => location.pathname === path
 
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <motion.aside
       initial={{ x: -300 }}
       animate={{ x: 0 }}

@@ -528,3 +528,4 @@ const EnhancedUserRoles: React.FC = () => {
 };
 
 export default EnhancedUserRoles;
+}

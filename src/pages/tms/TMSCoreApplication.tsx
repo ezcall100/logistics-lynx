@@ -391,3 +391,4 @@ const TMSCoreApplication: React.FC = () => {
 };
 
 export default TMSCoreApplication;
+}

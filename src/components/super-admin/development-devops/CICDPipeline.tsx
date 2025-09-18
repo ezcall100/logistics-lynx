@@ -786,3 +786,4 @@ export const CICDPipeline: React.FC = () => {
 };
 
 export default CICDPipeline;
+}

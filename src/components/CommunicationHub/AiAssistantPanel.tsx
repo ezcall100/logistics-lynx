@@ -133,4 +133,4 @@ export const AiAssistantPanel: React.FC<AiAssistantPanelProps> = ({
       </div>
     </div>
   );
-};
+};

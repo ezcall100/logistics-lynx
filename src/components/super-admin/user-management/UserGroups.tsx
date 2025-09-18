@@ -507,3 +507,4 @@ const UserGroups: React.FC = () => {
 };
 
 export default UserGroups;
+}

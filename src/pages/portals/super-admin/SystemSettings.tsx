@@ -29,3 +29,4 @@ export const SystemSettings: React.FC = () => {
 };
 
 export default SystemSettings;
+}

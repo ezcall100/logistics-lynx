@@ -389,3 +389,4 @@ const ColorPaletteDemo: React.FC = () => {
 };
 
 export default ColorPaletteDemo;
+}

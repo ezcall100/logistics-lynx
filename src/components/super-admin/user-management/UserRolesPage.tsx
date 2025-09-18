@@ -1,4 +1,4 @@
-﻿// 🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM - ACTIVE
+// 🚀 REAL AUTONOMOUS DEVELOPMENT SYSTEM - ACTIVE
 // 📅 Timestamp: 2025-09-17T08:11:31.255Z
 // 🧠 Commander: Verified Real-Mode Activation
 // 🧩 MCP Agent Count: 302 (REAL + ACTIVE)
@@ -619,12 +619,7 @@ export const UserRolesPage: React.FC = () => {
 
       if (sortOrder === 'asc') {
         return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      aValue as string | number) < (bValue as string | number)
+    aValue as string | number) < (bValue as string | number)
           ? -1
           : (aValue as string | number) > (bValue as string | number)
             ? 1
@@ -2146,3 +2141,4 @@ export const UserRolesPage: React.FC = () => {
 };
 
 export default UserRolesPage;
+}

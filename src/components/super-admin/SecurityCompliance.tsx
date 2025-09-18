@@ -676,13 +676,7 @@ const SecurityCompliance: React.FC = () => {
           const score = totalChecks > 0 ? (passedChecks / totalChecks) * 100 : 0;
 
           return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-            <Card key={category}>
+    <Card key={category}>
               <CardContent className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <div className="text-2xl font-bold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">{score.toFixed(0)}%</div>
@@ -833,3 +827,4 @@ const SecurityCompliance: React.FC = () => {
 };
 
 export default SecurityCompliance;
+}

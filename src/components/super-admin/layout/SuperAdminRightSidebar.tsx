@@ -21,12 +21,6 @@ export const SuperAdminRightSidebar: React.FC<SuperAdminRightSidebarProps> = ({
   setRightSidebarCollapsed
 }) => {
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <motion.aside
       initial={{ width: '20rem' }}
       animate={{ width: rightSidebarCollapsed ? '4rem' : '20rem' }}
@@ -109,3 +103,4 @@ export const SuperAdminRightSidebar: React.FC<SuperAdminRightSidebarProps> = ({
 };
 
 export default SuperAdminRightSidebar;
+}

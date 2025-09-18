@@ -471,12 +471,7 @@ export const AllUsersPage: React.FC = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => {
+    ) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showDropdown]);
@@ -2482,3 +2477,4 @@ export const AllUsersPage: React.FC = () => {
 };
 
 export default AllUsersPage;
+}

@@ -148,4 +148,4 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
       )}
     </div>
   );
-};
+};

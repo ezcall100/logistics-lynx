@@ -106,12 +106,6 @@ export function AdvancedFAB() {
 
   return (
     <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <>
       {/* FAB Actions */}
       <AnimatePresence>
         {isExpanded && (
@@ -495,4 +489,4 @@ export function AdvancedFAB() {
       </AnimatePresence>
     </>
   )
-}
+}

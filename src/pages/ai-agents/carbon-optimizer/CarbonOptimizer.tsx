@@ -254,4 +254,4 @@ const CarbonOptimizer = React.memo(function CarbonOptimizer() {
       </div>
     </div>
   )
-}
+}

@@ -233,4 +233,4 @@ export const trackUserInteraction = webhookService.trackUserInteraction.bind(web
 export const trackFormSubmission = webhookService.trackFormSubmission.bind(webhookService);
 export const trackPageNavigation = webhookService.trackPageNavigation.bind(webhookService);
 export const trackAIAgentActivity = webhookService.trackAIAgentActivity.bind(webhookService);
-export const trackError = webhookService.trackError.bind(webhookService);
+export const trackError = webhookService.trackError.bind(webhookService);

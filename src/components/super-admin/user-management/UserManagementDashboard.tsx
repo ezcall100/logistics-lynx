@@ -331,3 +331,4 @@ export const UserManagementDashboard: React.FC<UserManagementDashboardProps> = (
 };
 
 export default UserManagementDashboard;
+}

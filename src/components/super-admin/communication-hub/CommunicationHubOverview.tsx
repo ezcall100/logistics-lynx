@@ -104,12 +104,7 @@ const CommunicationHubOverview: React.FC = () => {
     }, 1000);
 
     return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearTimeout(timer);
+    ) => clearTimeout(timer);
   }, [refreshKey]);
 
   const handleRefresh = () => {
@@ -445,3 +440,4 @@ const CommunicationHubOverview: React.FC = () => {
 };
 
 export default CommunicationHubOverview;
+}

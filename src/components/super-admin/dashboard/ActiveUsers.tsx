@@ -163,12 +163,7 @@ const ActiveUsers: React.FC = () => {
     if (isRealTimeEnabled) {
       const interval = setInterval(updateUserData, 10000); // Update every 10 seconds
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
     }
   }, [isRealTimeEnabled, updateUserData]);
 
@@ -1427,3 +1422,4 @@ const ActiveUsers: React.FC = () => {
 };
 
 export default ActiveUsers;
+}

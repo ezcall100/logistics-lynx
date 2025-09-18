@@ -66,4 +66,4 @@ export const VideoPanel: React.FC<VideoPanelProps> = ({
       </div>
     </div>
   );
-};
+};

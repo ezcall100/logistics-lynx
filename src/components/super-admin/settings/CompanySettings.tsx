@@ -27,12 +27,6 @@ const Button: React.FC<{
   const variantClasses = 'bg-primary text-primary-foreground hover:bg-primary/90';
   const sizeClasses = 'h-10 px-4 py-2';
   return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
     <button 
       className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`}
       onClick={onClick}
@@ -353,3 +347,4 @@ const CompanySettings: React.FC = () => {
 };
 
 export default CompanySettings;
+}

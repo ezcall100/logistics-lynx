@@ -230,3 +230,4 @@ const DataAnalyticsPage: React.FC = () => {
 };
 
 export default DataAnalyticsPage;
+}

@@ -910,3 +910,4 @@ const PortalManagement: React.FC = () => {
 };
 
 export default PortalManagement;
+}

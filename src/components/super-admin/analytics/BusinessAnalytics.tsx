@@ -552,3 +552,4 @@ const BusinessAnalytics: React.FC = () => {
 };
 
 export default BusinessAnalytics;
+}

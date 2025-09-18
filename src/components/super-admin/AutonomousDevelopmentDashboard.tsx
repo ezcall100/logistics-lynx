@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Activity,
@@ -190,12 +190,7 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
       }, 5000);
 
       return (
-    <>
-      <script type="application/ld+json">
-        {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "TransBot AI"}
-      </script>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+    ) => clearInterval(interval);
     }
   }, [isAutoRefresh]);
 
@@ -668,3 +663,4 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
 };
 
 export default AutonomousDevelopmentDashboard;
+}

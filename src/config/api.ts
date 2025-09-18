@@ -88,4 +88,4 @@ export const getApiConfig = () => {
   };
 };
 
-export default API_CONFIG;
+export default API_CONFIG;
