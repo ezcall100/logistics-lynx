@@ -253,7 +253,8 @@ const EnhancedDashboard: React.FC = () => {
             {(['1h', '24h', '7d', '30d'] as const).map(range => (
               <button
                 key={range}
-                onClick={() = aria-label="Button"> setSelectedTimeRange(range)}
+                onClick={() => setSelectedTimeRange(range)}
+            aria-label="Button"
                 className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                   selectedTimeRange === range
                     ? 'bg-blue-100 text-blue-700'

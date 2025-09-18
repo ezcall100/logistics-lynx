@@ -465,7 +465,8 @@ export function MCPAgentAdmin() {
             <div className="flex space-x-2 mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button 
                 className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
-                onClick={() = aria-label="Button"> setSelectedAgent(agent)}
+                onClick={() => setSelectedAgent(agent)}
+            aria-label="Button"
               >
                 Manage
               </button>
@@ -641,7 +642,8 @@ export function MCPAgentAdmin() {
             className="flex space-x-1 bg-slate-100 p-1 rounded-lg mb-8 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <button
-              onClick={() = aria-label="Button"> setActiveTab('overview')}
+              onClick={() => setActiveTab('overview')}
+            aria-label="Button"
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'overview'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -651,7 +653,8 @@ export function MCPAgentAdmin() {
               Overview
             </button>
             <button
-              onClick={() = aria-label="Button"> setActiveTab('agents')}
+              onClick={() => setActiveTab('agents')}
+            aria-label="Button"
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'agents'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -661,7 +664,8 @@ export function MCPAgentAdmin() {
               Agent Management
             </button>
             <button
-              onClick={() = aria-label="Button"> setActiveTab('tasks')}
+              onClick={() => setActiveTab('tasks')}
+            aria-label="Button"
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'tasks'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -671,7 +675,8 @@ export function MCPAgentAdmin() {
               Task Management
             </button>
             <button
-              onClick={() = aria-label="Button"> setActiveTab('analytics')}
+              onClick={() => setActiveTab('analytics')}
+            aria-label="Button"
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'analytics'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -681,7 +686,8 @@ export function MCPAgentAdmin() {
               Analytics
             </button>
             <button
-              onClick={() = aria-label="Button"> setActiveTab('settings')}
+              onClick={() => setActiveTab('settings')}
+            aria-label="Button"
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'settings'
                   ? 'bg-white text-transbot-sky shadow-sm'
@@ -719,7 +725,8 @@ export function MCPAgentAdmin() {
                   {selectedAgent.name}
                 </h2>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedAgent(null)}
+                  onClick={() => setSelectedAgent(null)}
+            aria-label="Button"
                   className="text-transbot-text-secondary hover:text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

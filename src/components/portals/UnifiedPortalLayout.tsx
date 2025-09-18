@@ -154,7 +154,8 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
               </div>
             </div>
             <button
-              onClick={() = aria-label="Button"> setSidebarOpen(false)}
+              onClick={() => setSidebarOpen(false)}
+            aria-label="Button"
               className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <X className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -201,7 +202,8 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() = aria-label="Button"> setActiveCategory(category.id)}
+                  onClick={() => setActiveCategory(category.id)}
+            aria-label="Button"
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     activeCategory === category.id
                       ? 'bg-blue-100 text-blue-700'
@@ -287,7 +289,8 @@ const UnifiedPortalLayout: React.FC<UnifiedPortalLayoutProps> = ({ children }) =
           <div className="flex items-center justify-between px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
             <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setSidebarOpen(true)}
+                onClick={() => setSidebarOpen(true)}
+            aria-label="Button"
                 className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <Menu className="w-5 h-5 text-gray-500 responsive-container sm:flex-col md:flex-row lg:grid" />

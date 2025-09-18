@@ -206,7 +206,8 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                   {variant === 'expanded' ? (
                     <div>
                       <button
-                        onClick={() = aria-label="Button"> toggleSection(section.id)}
+                        onClick={() => toggleSection(section.id)}
+            aria-label="Button"
                         className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -230,7 +231,8 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                             {section.items.map((item) => (
                               <button
                                 key={item.path}
-                                onClick={() = aria-label="Button"> navigate(item.path)}
+                                onClick={() => navigate(item.path)}
+            aria-label="Button"
                                 className={`w-full flex items-center space-x-3 px-3 py-2 text-sm rounded-lg transition-colors ${
                                   isActive(item.path)
                                     ? 'bg-blue-100 text-blue-700'
@@ -253,7 +255,8 @@ const CompactSidebar: React.FC<CompactSidebarProps> = ({
                       {section.items.map((item) => (
                         <button
                           key={item.path}
-                          onClick={() = aria-label="Button"> navigate(item.path)}
+                          onClick={() => navigate(item.path)}
+            aria-label="Button"
                           className={`w-full flex items-center justify-center p-2 rounded-lg transition-colors ${
                             isActive(item.path)
                               ? 'bg-blue-100 text-blue-700'

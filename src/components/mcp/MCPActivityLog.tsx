@@ -125,7 +125,8 @@ export const MCPActivityLog: React.FC = () => {
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Activity Feed</h3>
         <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+            onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
             className={`p-2 rounded-lg transition-colors ${
               autoRefresh
                 ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -156,7 +157,8 @@ export const MCPActivityLog: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.value}
-            onClick={() = aria-label="Button"> setFilter(tab.value as 'all' | 'success' | 'warning' | 'error' | 'info')}
+            onClick={() => setFilter(tab.value as 'all' | 'success' | 'warning' | 'error' | 'info')}
+            aria-label="Button"
             className={`px-3 py-1 text-sm font-medium rounded-lg transition-colors ${
               filter === tab.value
                 ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'

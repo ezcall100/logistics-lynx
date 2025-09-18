@@ -385,7 +385,8 @@ const PerformanceReports: React.FC = () => {
       
               <button
                   key={category.id}
-                  onClick={() = aria-label="Button"> setSelectedCategory(category.id)}
+                  onClick={() => setSelectedCategory(category.id)}
+            aria-label="Button"
                   className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                     selectedCategory === category.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'

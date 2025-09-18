@@ -119,9 +119,9 @@ const ProfileSettings: React.FC = () => {
           {tabs.map(tab => (
             <button
               key={tab.id}
-              onClick={() = aria-label="Button">
-                setActiveTab(tab.id as 'profile' | 'security' | 'notifications' | 'preferences')
+              onClick={() => setActiveTab(tab.id as 'profile' | 'security' | 'notifications' | 'preferences')
               }
+            aria-label="Button"
               className={`
                 flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors
                 ${
@@ -275,7 +275,8 @@ const ProfileSettings: React.FC = () => {
                       rightIcon={
                         <button
                           type="button"
-                          onClick={() = aria-label="Button"> setShowPassword(!showPassword)}
+                          onClick={() => setShowPassword(!showPassword)}
+            aria-label="Button"
                           className="text-gray-400 hover:text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {showPassword ? (

@@ -762,7 +762,8 @@ function BrokerPortal() {
             <div className="flex items-center space-x-2 sm:space-x-4 responsive-container">
               {/* Mobile Menu Button */}
               <button
-                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                 className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
               >
                 <svg className="h-5 w-5 responsive-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -816,7 +817,8 @@ function BrokerPortal() {
               <div className="flex items-center space-x-1 responsive-container">
                 {/* Refresh Button */}
                 <button
-                  onClick={() = aria-label="Button"> window.location.reload()}
+                  onClick={() => window.location.reload()}
+            aria-label="Button"
                   className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title="Refresh"
                 >
@@ -865,7 +867,8 @@ function BrokerPortal() {
 
                 {/* Sound Toggle */}
                 <button
-                  onClick={() = aria-label="Button"> setSoundEnabled(!soundEnabled)}
+                  onClick={() => setSoundEnabled(!soundEnabled)}
+            aria-label="Button"
                   className={`p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors ${
                     soundEnabled ? 'text-gray-600 dark:text-gray-300' : 'text-gray-400'
                   }`}
@@ -876,7 +879,8 @@ function BrokerPortal() {
 
                 {/* Dark Mode Toggle */}
                 <button
-                  onClick={() = aria-label="Button"> setDarkMode(!darkMode)}
+                  onClick={() => setDarkMode(!darkMode)}
+            aria-label="Button"
                   className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title={darkMode ? 'Light Mode' : 'Dark Mode'}
                 >
@@ -885,7 +889,8 @@ function BrokerPortal() {
 
                 {/* Fullscreen Toggle */}
                 <button
-                  onClick={() = aria-label="Button"> setFullscreen(!fullscreen)}
+                  onClick={() => setFullscreen(!fullscreen)}
+            aria-label="Button"
                   className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                   title={fullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
                 >
@@ -918,7 +923,8 @@ function BrokerPortal() {
                   <ThemeToggle size="sm" />
 
                   <button
-                    onClick={() = aria-label="Button"> setShowSettingsMenu(!showSettingsMenu)}
+                    onClick={() => setShowSettingsMenu(!showSettingsMenu)}
+            aria-label="Button"
                     className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                     title="Settings"
                   >
@@ -964,7 +970,8 @@ function BrokerPortal() {
               <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-slate-700 responsive-container">
                 <div className="relative responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> setShowUserMenu(!showUserMenu)}
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+            aria-label="Button"
                     className="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-xl p-2 transition-colors responsive-container"
                   >
                     <img
@@ -1042,7 +1049,8 @@ function BrokerPortal() {
                   </div>
                 )}
                 <button
-                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                   className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
                 >
                   <ChevronRight
@@ -1066,10 +1074,11 @@ function BrokerPortal() {
                     {/* Main Menu Item */}
                     <div className="space-y-1 responsive-container">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           if (menuItem.subMenus && menuItem.subMenus.length > 0) {
                             handleMenuToggle(menuItem.id);
-                          } else {
+                          }
+            aria-label="Button" else {
                             handleMenuItemClick(menuItem.id, menuItem.path);
                           }
                         }}
@@ -1119,10 +1128,11 @@ function BrokerPortal() {
                             <div key={subMenu.id} className="space-y-1 responsive-container">
                               {/* Sub-Menu Item */}
                               <button
-                                onClick={() = aria-label="Button"> {
+                                onClick={() => {
                                   if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
                                     handleMenuToggle(subMenu.id);
-                                  } else {
+                                  }
+            aria-label="Button" else {
                                     handleMenuItemClick(subMenu.id, subMenu.path);
                                   }
                                 }}
@@ -1166,9 +1176,9 @@ function BrokerPortal() {
       
                                       <button
                                         key={subSubMenu.id}
-                                        onClick={() = aria-label="Button">
-                                          handleMenuItemClick(subSubMenu.id, subSubMenu.path)
+                                        onClick={() => handleMenuItemClick(subSubMenu.id, subSubMenu.path)
                                         }
+            aria-label="Button"
                                         className={`w-full flex items-center space-x-3 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                           isSubSubActive
                                             ? 'bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-200 shadow-sm'
@@ -1243,7 +1253,8 @@ function BrokerPortal() {
                       </div>
                     </div>
                     <button
-                      onClick={() = aria-label="Button"> setSidebarCollapsed(true)}
+                      onClick={() => setSidebarCollapsed(true)}
+            aria-label="Button"
                       className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
                     >
                       <svg
@@ -1276,7 +1287,8 @@ function BrokerPortal() {
                         {/* Main Menu Item */}
                         <div className="space-y-1 responsive-container">
                           <button
-                            onClick={() = aria-label="Button"> handleMenuToggle(menuItem.id)}
+                            onClick={() => handleMenuToggle(menuItem.id)}
+            aria-label="Button"
                             className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
                               isActive
                                 ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
@@ -1309,10 +1321,11 @@ function BrokerPortal() {
                                   <div key={subMenu.id} className="space-y-1 responsive-container">
                                     {/* Sub-Menu Item */}
                                     <button
-                                      onClick={() = aria-label="Button"> {
+                                      onClick={() => {
                                         if (subMenu.subSubMenus && subMenu.subSubMenus.length > 0) {
                                           handleMenuToggle(subMenu.id);
-                                        } else {
+                                        }
+            aria-label="Button" else {
                                           handleMenuItemClick(subMenu.id, subMenu.path);
                                         }
                                       }}
@@ -1346,9 +1359,9 @@ function BrokerPortal() {
       
                                             <button
                                               key={subSubMenu.id}
-                                              onClick={() = aria-label="Button">
-                                                handleMenuItemClick(subSubMenu.id, subSubMenu.path)
+                                              onClick={() => handleMenuItemClick(subSubMenu.id, subSubMenu.path)
                                               }
+            aria-label="Button"
                                               className={`w-full flex items-center space-x-2 px-3 py-1.5 rounded-md transition-all duration-200 group ${
                                                 isSubSubActive
                                                   ? 'bg-gradient-to-r from-blue-300 to-purple-400 text-white shadow-sm'
@@ -1447,7 +1460,8 @@ function BrokerPortal() {
               {menuItems.map(item => (
                 <button
                   key={item.id}
-                  onClick={() = aria-label="Button"> handleMenuItemClick(item.id, item.path)}
+                  onClick={() => handleMenuItemClick(item.id, item.path)}
+            aria-label="Button"
                   className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                     activeMenuItem === item.id
                       ? 'bg-white shadow-sm text-blue-600 font-semibold'
@@ -2132,7 +2146,8 @@ function BrokerPortal() {
                       </div>
                     </div>
                     <button
-                      onClick={() = aria-label="Button"> setRightSidebarCollapsed(true)}
+                      onClick={() => setRightSidebarCollapsed(true)}
+            aria-label="Button"
                       className="p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-gray-100 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
                     >
                       <ChevronRight className="h-4 w-4 transition-all duration-300 rotate-180 responsive-container" />

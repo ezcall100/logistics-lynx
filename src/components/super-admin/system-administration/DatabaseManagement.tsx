@@ -380,7 +380,8 @@ const DatabaseManagement: React.FC = () => {
       
               <button
                 key={tab.id}
-                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                  onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                   className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -404,7 +405,8 @@ const DatabaseManagement: React.FC = () => {
                   Database Connections
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateConnection(true)}
+                  onClick={() => setShowCreateConnection(true)}
+            aria-label="Button"
                   className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -440,7 +442,8 @@ const DatabaseManagement: React.FC = () => {
                           </div>
                         <div className="flex items-center space-x-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           <button
-                            onClick={() = aria-label="Button"> handleTestConnection(connection.id)}
+                            onClick={() => handleTestConnection(connection.id)}
+            aria-label="Button"
                             className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             title="Test Connection"
                           >
@@ -753,7 +756,8 @@ const DatabaseManagement: React.FC = () => {
                   Add Database Connection
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateConnection(false)}
+                  onClick={() => setShowCreateConnection(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -831,7 +835,8 @@ const DatabaseManagement: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateConnection(false)}
+                  onClick={() => setShowCreateConnection(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel

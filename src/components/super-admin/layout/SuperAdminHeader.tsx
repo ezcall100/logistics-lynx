@@ -50,7 +50,8 @@ export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
       <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 responsive-container">
         <div className="flex items-center space-x-3 sm:space-x-4 responsive-container">
           <button
-            onClick={() = aria-label="Button"> setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Button"
             className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden responsive-container"
           >
             <Menu className="h-5 w-5 responsive-container" />
@@ -115,7 +116,8 @@ export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
 
             {/* Settings */}
             <button
-              onClick={() = aria-label="Button"> setActiveTab('company-settings')}
+              onClick={() => setActiveTab('company-settings')}
+            aria-label="Button"
               className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
               title="Company Settings"
             >
@@ -125,7 +127,8 @@ export const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({
             {/* User Profile */}
             <div className="relative responsive-container">
               <button
-                onClick={() = aria-label="Button"> setActiveTab('profile')}
+                onClick={() => setActiveTab('profile')}
+            aria-label="Button"
                 className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container"
                 title="Profile & Account"
               >

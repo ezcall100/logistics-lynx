@@ -526,7 +526,8 @@ const SystemSettings: React.FC = () => {
       
               <button
                     key={category.id}
-                    onClick={() = aria-label="Button"> setSelectedCategory(category.id)}
+                    onClick={() => setSelectedCategory(category.id)}
+            aria-label="Button"
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                       selectedCategory === category.id
                         ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
@@ -627,7 +628,8 @@ const SystemSettings: React.FC = () => {
                         />
                         {setting.isSensitive && (
                           <button
-                            onClick={() = aria-label="Button"> toggleSensitiveVisibility(setting.key)}
+                            onClick={() => toggleSensitiveVisibility(setting.key)}
+            aria-label="Button"
                             className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             {showSensitive[setting.key] ? (

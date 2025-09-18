@@ -258,7 +258,8 @@ const UserRoles: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-            onClick={() = aria-label="Button"> setShowCreateRole(true)}
+            onClick={() => setShowCreateRole(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
             <Plus className="h-4 w-4 responsive-container" />
@@ -330,7 +331,8 @@ const UserRoles: React.FC = () => {
                       {!role.isSystem && (
                   <>
                         <button
-                          onClick={() = aria-label="Button"> handleDeleteRole(role.id)}
+                          onClick={() => handleDeleteRole(role.id)}
+            aria-label="Button"
                       className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                       title="Delete"
                         >
@@ -397,7 +399,8 @@ const UserRoles: React.FC = () => {
                       Create New Role
                 </h3>
                     <button
-                  onClick={() = aria-label="Button"> setShowCreateRole(false)}
+                  onClick={() => setShowCreateRole(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                     >
                   <X className="h-5 w-5 responsive-container" />
@@ -474,7 +477,8 @@ const UserRoles: React.FC = () => {
 
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                     <button
-                  onClick={() = aria-label="Button"> setShowCreateRole(false)}
+                  onClick={() => setShowCreateRole(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                     >
                       Cancel

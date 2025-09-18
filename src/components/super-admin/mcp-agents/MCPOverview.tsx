@@ -459,11 +459,11 @@ export const MCPOverview: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button">
-                  setSelectedTab(
+                onClick={() => setSelectedTab(
                     tab.id as 'overview' | 'agents' | 'tasks' | 'performance' | 'analytics'
                   )
                 }
+            aria-label="Button"
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'

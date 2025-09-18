@@ -218,7 +218,8 @@ export function HorizontalMegaMenu() {
               {mainMenuItems.map((item) => (
                 <div key={item.id} className="relative responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> item.href ? handleNavigation(item.href) : setActiveMenu(activeMenu === item.id ? null : item.id)}
+                    onClick={() => item.href ? handleNavigation(item.href) : setActiveMenu(activeMenu === item.id ? null : item.id)}
+            aria-label="Button"
                     className={`flex items-center space-x-1 px-2 xl:px-3 py-2 rounded-lg font-medium transition-all duration-200 ${
                       activeMenu === item.id
                         ? 'text-blue-600 bg-blue-50'
@@ -251,14 +252,16 @@ export function HorizontalMegaMenu() {
               {/* Auth Buttons */}
               <div className="flex items-center space-x-2 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> handleNavigation('/login')}
+                  onClick={() => handleNavigation('/login')}
+            aria-label="Button"
                   className="flex items-center space-x-1 px-3 lg:px-4 py-2 text-slate-700 hover:text-blue-600 transition-colors responsive-container"
                 >
                   <LogIn className="w-4 h-4 responsive-container" />
                   <span className="hidden sm:block responsive-container">Sign In</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleNavigation('/signup')}
+                  onClick={() => handleNavigation('/signup')}
+            aria-label="Button"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 lg:px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm lg:text-base responsive-container"
                 >
                   Get Started
@@ -267,7 +270,8 @@ export function HorizontalMegaMenu() {
 
               {/* Mobile Menu Button */}
               <button
-                onClick={() = aria-label="Button"> setIsMenuOpen(!isMenuOpen)}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Button"
                 className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors responsive-container"
               >
                 {isMenuOpen ? <X className="w-6 h-6 responsive-container" /> : <Menu className="w-6 h-6 responsive-container" />}
@@ -489,14 +493,16 @@ export function HorizontalMegaMenu() {
                     </div>
                     <div className="flex space-x-4 responsive-container">
                       <button
-                        onClick={() = aria-label="Button"> handleNavigation('/get-started')}
+                        onClick={() => handleNavigation('/get-started')}
+            aria-label="Button"
                         className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center space-x-2 responsive-container"
                       >
                         <span>Get Started</span>
                         <ArrowRight className="w-4 h-4 responsive-container" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> handleNavigation('/demo')}
+                        onClick={() => handleNavigation('/demo')}
+            aria-label="Button"
                         className="border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors responsive-container"
                       >
                         Watch Demo
@@ -543,7 +549,8 @@ export function HorizontalMegaMenu() {
                   {mainMenuItems.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() = aria-label="Button"> item.href ? handleNavigation(item.href) : null}
+                      onClick={() => item.href ? handleNavigation(item.href) : null}
+            aria-label="Button"
                       className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-colors responsive-container"
                     >
                       <item.icon className="w-5 h-5 text-slate-400 responsive-container" />
@@ -555,14 +562,16 @@ export function HorizontalMegaMenu() {
                 {/* Auth Buttons */}
                 <div className="pt-6 border-t border-slate-200 space-y-3 responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleNavigation('/login')}
+                    onClick={() => handleNavigation('/login')}
+            aria-label="Button"
                     className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-slate-300 rounded-lg font-medium text-slate-700 hover:bg-slate-50 transition-colors responsive-container"
                   >
                     <LogIn className="w-4 h-4 responsive-container" />
                     <span>Sign In</span>
                   </button>
                   <button
-                    onClick={() = aria-label="Button"> handleNavigation('/signup')}
+                    onClick={() => handleNavigation('/signup')}
+            aria-label="Button"
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 responsive-container"
                   >
                     Get Started

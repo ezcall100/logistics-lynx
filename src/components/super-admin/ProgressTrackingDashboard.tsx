@@ -246,7 +246,8 @@ const ProgressTrackingDashboard: React.FC = () => {
             <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Build Active</span>
           </div>
           <button
-            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}
           >
             {isAutoRefresh ? <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
@@ -451,7 +452,8 @@ const ProgressTrackingDashboard: React.FC = () => {
             <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <h3 className="text-xl font-semibold text-gray-900 responsive-container sm:flex-col md:flex-row lg:grid">Task Details</h3>
               <button
-                onClick={() = aria-label="Button"> setSelectedTask(null)}
+                onClick={() => setSelectedTask(null)}
+            aria-label="Button"
                 className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

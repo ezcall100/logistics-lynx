@@ -175,7 +175,8 @@ const LoginPage: React.FC = () => {
                   />
                   <button
                     type="button"
-                    onClick={() = aria-label="Button"> setShowPassword(!showPassword)}
+                    onClick={() => setShowPassword(!showPassword)}
+            aria-label="Button"
                     className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {showPassword ? (
@@ -276,7 +277,8 @@ const LoginPage: React.FC = () => {
               {demoAccounts.map((account, index) => (
                 <button
                   key={index}
-                  onClick={() = aria-label="Button"> fillDemoAccount(account.email)}
+                  onClick={() => fillDemoAccount(account.email)}
+            aria-label="Button"
                   className="w-full text-left p-2 rounded-lg hover:bg-white/50 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">

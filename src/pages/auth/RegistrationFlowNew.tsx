@@ -1201,14 +1201,16 @@ function RegistrationFlowNew() {
 
       <div className="flex justify-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <button
-          onClick={() = aria-label="Button"> setCurrentStep('welcome')}
+          onClick={() => setCurrentStep('welcome')}
+            aria-label="Button"
           className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           ← Back to Main Registration
         </button>
         <button
-          onClick={() = aria-label="Button"> {
-            setRegistrationData(prev => ({ ...prev, companyType: 'service_provider' }));
+          onClick={() => {
+            setRegistrationData(prev => ({ ...prev, companyType: 'service_provider' }
+            aria-label="Button"));
             setCurrentStep('company-info');
           }}
           disabled={registrationData.serviceProviderServices.length === 0}
@@ -1688,8 +1690,8 @@ function RegistrationFlowNew() {
             {getAvailableRoles(registrationData.companyType).map(role => (
               <button
                 key={role}
-                onClick={() = aria-label="Button">
-                  setRegistrationData(prev => ({ ...prev, primaryRole: role as CompanyType }))
+                onClick={() => setRegistrationData(prev => ({ ...prev, primaryRole: role as CompanyType }
+            aria-label="Button"))
                 }
                 className={`p-4 text-left border-2 rounded-lg transition-all ${
                   registrationData.primaryRole === role
@@ -2103,7 +2105,8 @@ function RegistrationFlowNew() {
           <button
             type="button"
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
-            onClick={() = aria-label="Button"> setRegistrationData(prev => ({ ...prev, subscriptionPlan: 'custom' }))}
+            onClick={() => setRegistrationData(prev => ({ ...prev, subscriptionPlan: 'custom' }
+            aria-label="Button"))}
           >
             Contact Sales
           </button>
@@ -2509,13 +2512,15 @@ function RegistrationFlowNew() {
 
         <div className="flex justify-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> (window.location.href = '/')}
+            onClick={() => (window.location.href = '/')}
+            aria-label="Button"
             className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Back to Website
           </button>
           <button
-            onClick={() = aria-label="Button"> (window.location.href = '/login')}
+            onClick={() => (window.location.href = '/login')}
+            aria-label="Button"
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Go to Login

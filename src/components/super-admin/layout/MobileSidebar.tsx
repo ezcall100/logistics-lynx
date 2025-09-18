@@ -54,7 +54,8 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
           <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
             <button
-              onClick={() = aria-label="Button"> setMobileMenuOpen(false)}
+              onClick={() => setMobileMenuOpen(false)}
+            aria-label="Button"
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -73,10 +74,11 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 <div key={item.id} className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   {/* Main Menu Item */}
                   <button
-                    onClick={() = aria-label="Button"> {
+                    onClick={() => {
                       if (item.subMenus && item.subMenus.length > 0) {
                         handleMenuToggle(item.id);
-                      } else {
+                      }
+            aria-label="Button" else {
                         setActiveTab(item.id);
                         setMobileMenuOpen(false);
                       }
@@ -121,10 +123,11 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
       
                           <button
                             key={subMenu.id}
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               setActiveTab(subMenu.id);
                               setMobileMenuOpen(false);
-                            }}
+                            }
+            aria-label="Button"}
                             className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
                               isSubActive
                                 ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'

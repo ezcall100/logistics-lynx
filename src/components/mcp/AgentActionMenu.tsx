@@ -205,7 +205,8 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
       
                   <button
                     key={action.id}
-                    onClick={() = aria-label="Button"> handleAction(action)}
+                    onClick={() => handleAction(action)}
+            aria-label="Button"
                     disabled={action.disabled}
                     className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors ${
                       action.disabled
@@ -269,7 +270,8 @@ export const AgentActionMenu: React.FC<AgentActionMenuProps> = ({ agent, onActio
                   Cancel
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> confirmAction(showConfirm)}
+                  onClick={() => confirmAction(showConfirm)}
+            aria-label="Button"
                   className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Confirm

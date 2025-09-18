@@ -261,7 +261,8 @@ const SecurityWarRoom: React.FC = () => {
               </span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setAlertSound(!alertSound)}
+              onClick={() => setAlertSound(!alertSound)}
+            aria-label="Button"
               className={`px-4 py-2 rounded-lg transition-colors ${
                 alertSound ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'
               } text-white`}
@@ -269,7 +270,8 @@ const SecurityWarRoom: React.FC = () => {
               {alertSound ? <Volume2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <VolumeX className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             </button>
             <button
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
@@ -288,7 +290,8 @@ const SecurityWarRoom: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() = aria-label="Button"> setViewMode(id as 'threats' | 'events' | 'metrics' | 'response')}
+              onClick={() => setViewMode(id as 'threats' | 'events' | 'metrics' | 'response')}
+            aria-label="Button"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id
                   ? 'bg-red-600 text-white'
@@ -560,7 +563,8 @@ const SecurityWarRoom: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedThreat(null)}
+                  onClick={() => setSelectedThreat(null)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

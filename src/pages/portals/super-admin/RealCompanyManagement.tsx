@@ -288,7 +288,8 @@ const RealCompanyManagement: React.FC = () => {
               <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live Data</span>
             </div>
             <button
-              onClick={() = aria-label="Button"> console.log('Add company clicked')}
+              onClick={() => console.log('Add company clicked')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -552,26 +553,29 @@ const RealCompanyManagement: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedCompany(company);
                           setShowViewModal(true);
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-blue-400 hover:text-blue-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedCompany(company);
                           // setShowEditModal(true);
                           console.log('Edit company:', company);
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-green-400 hover:text-green-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> setCompanies(prev => prev.filter(c => c.id !== company.id))}
+                        onClick={() => setCompanies(prev => prev.filter(c => c.id !== company.id))}
+            aria-label="Button"
                         className="text-red-400 hover:text-red-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Trash className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -605,7 +609,8 @@ const RealCompanyManagement: React.FC = () => {
               <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Company Details</h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowViewModal(false)}
+                  onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

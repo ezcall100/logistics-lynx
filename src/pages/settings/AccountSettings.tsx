@@ -196,7 +196,8 @@ const AccountSettings: React.FC = () => {
                 </>
               ) : (
                 <button
-                  onClick={() = aria-label="Button"> setIsEditing(true)}
+                  onClick={() => setIsEditing(true)}
+            aria-label="Button"
                   className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <span>Edit Settings</span>
@@ -217,7 +218,8 @@ const AccountSettings: React.FC = () => {
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                 className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'bg-white text-blue-700 shadow-sm'
@@ -326,7 +328,8 @@ const AccountSettings: React.FC = () => {
                       />
                       <button
                         type="button"
-                        onClick={() = aria-label="Button"> setShowCurrentPassword(!showCurrentPassword)}
+                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+            aria-label="Button"
                         className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showCurrentPassword ? (
@@ -350,7 +353,8 @@ const AccountSettings: React.FC = () => {
                       />
                       <button
                         type="button"
-                        onClick={() = aria-label="Button"> setShowNewPassword(!showNewPassword)}
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+            aria-label="Button"
                         className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showNewPassword ? (
@@ -374,7 +378,8 @@ const AccountSettings: React.FC = () => {
                       />
                       <button
                         type="button"
-                        onClick={() = aria-label="Button"> setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            aria-label="Button"
                         className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         {showConfirmPassword ? (
@@ -409,7 +414,8 @@ const AccountSettings: React.FC = () => {
                     <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Add an extra layer of security to your account</p>
                   </div>
                   <button
-                    onClick={() = aria-label="Button"> setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }))}
+                    onClick={() => setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }
+            aria-label="Button"))}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       securityData.twoFactorEnabled ? 'bg-blue-600' : 'bg-gray-200'
                     }`}
@@ -566,7 +572,8 @@ const AccountSettings: React.FC = () => {
                       </p>
                     </div>
                     <button
-                      onClick={() = aria-label="Button"> handleNotificationChange(key)}
+                      onClick={() => handleNotificationChange(key)}
+            aria-label="Button"
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                         value ? 'bg-blue-600' : 'bg-gray-200'
                       }`}

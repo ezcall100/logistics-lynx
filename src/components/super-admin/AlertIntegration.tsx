@@ -128,7 +128,8 @@ const AlertIntegration: React.FC = () => {
         </div>
         <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> _setShowAddChannel(true)}
+            onClick={() => _setShowAddChannel(true)}
+            aria-label="Button"
             className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -187,7 +188,8 @@ const AlertIntegration: React.FC = () => {
         <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <h3 className="text-sm font-medium text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">Alert Rules</h3>
           <button
-            onClick={() = aria-label="Button"> _setShowAddRule(true)}
+            onClick={() => _setShowAddRule(true)}
+            aria-label="Button"
             className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

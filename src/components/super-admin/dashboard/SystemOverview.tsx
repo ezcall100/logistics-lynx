@@ -120,7 +120,8 @@ class SystemOverviewErrorBoundary extends React.Component {
         <div className="p-8 text-center responsive-container sm:flex-col md:flex-row lg:grid">
           <h3 className="text-lg font-semibold text-red-600 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">System Overview Error</h3>
           <button 
-            onClick={() = aria-label="Button"> this.setState({ hasError: false })}
+            onClick={() => this.setState({ hasError: false }
+            aria-label="Button")}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Retry
@@ -317,7 +318,8 @@ const SystemOverview: React.FC = React.memo(() => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setIsFullscreen(!isFullscreen)}
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {isFullscreen ? <Minimize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Maximize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}

@@ -101,7 +101,8 @@ export const AgentFilter: React.FC<AgentFilterProps> = ({ filter, onFilterChange
         />
         {filter.search && (
           <button
-            onClick={() = aria-label="Button"> handleSearchChange('')}
+            onClick={() => handleSearchChange('')}
+            aria-label="Button"
             className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <X className="w-4 h-4 text-slate-400 responsive-container sm:flex-col md:flex-row lg:grid" />

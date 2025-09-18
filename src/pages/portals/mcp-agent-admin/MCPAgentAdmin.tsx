@@ -194,7 +194,8 @@ function MCPAgentAdmin() {
           <div className="flex justify-between items-center h-16 responsive-container">
             <div className="flex items-center responsive-container">
               <button
-                onClick={() = aria-label="Button"> setSidebarOpen(!sidebarOpen)}
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+            aria-label="Button"
                 className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 responsive-container"
               >
                 <Menu className="h-6 w-6 responsive-container" />
@@ -263,7 +264,8 @@ function MCPAgentAdmin() {
                     <span className="ml-3 text-lg font-semibold text-gray-900 responsive-container">TransBot AI</span>
                   </div>
                   <button
-                    onClick={() = aria-label="Button"> setSidebarOpen(false)}
+                    onClick={() => setSidebarOpen(false)}
+            aria-label="Button"
                     className="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 responsive-container"
                   >
                     <X className="h-5 w-5 responsive-container" />
@@ -274,7 +276,8 @@ function MCPAgentAdmin() {
                   {navigationItems.map(item => (
                     <button
                       key={item.id}
-                      onClick={() = aria-label="Button"> setActiveTab(item.id)}
+                      onClick={() => setActiveTab(item.id)}
+            aria-label="Button"
                       className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                         activeTab === item.id
                           ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
@@ -354,7 +357,8 @@ function MCPAgentAdmin() {
                           ? 'border-blue-500 text-blue-600'
                           : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                       }`}
-                      onClick={() = aria-label="Button"> setActiveTab(tab.toLowerCase())}
+                      onClick={() => setActiveTab(tab.toLowerCase())}
+            aria-label="Button"
                     >
                       {tab}
                     </button>

@@ -245,14 +245,16 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
             <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">System Active</span>
           </div>
           <button
-            onClick={() = aria-label="Button"> setShowAccountability(!showAccountability)}
+            onClick={() => setShowAccountability(!showAccountability)}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${showAccountability ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}
           >
             <Shield className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>{showAccountability ? 'Accountability ON' : 'Accountability OFF'}</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}
           >
             {isAutoRefresh ? <Pause className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}

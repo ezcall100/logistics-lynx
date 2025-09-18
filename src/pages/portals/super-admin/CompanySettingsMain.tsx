@@ -281,7 +281,8 @@ const CompanySettingsMain: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-400'

@@ -393,7 +393,8 @@ export const BillingManagement: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-                onClick={() = aria-label="Button"> console.log('Create modal clicked')}
+                onClick={() => console.log('Create modal clicked')}
+            aria-label="Button"
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 responsive-container"
               >
                 <Plus className="w-4 h-4 responsive-container" />
@@ -414,11 +415,11 @@ export const BillingManagement: React.FC = () => {
       
                   <button
                     key={tab.id}
-                    onClick={() = aria-label="Button">
-                      setSelectedTab(
+                    onClick={() => setSelectedTab(
                         tab.id as 'overview' | 'subscriptions' | 'invoices' | 'payments'
                       )
                     }
+            aria-label="Button"
                     className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                       selectedTab === tab.id
                         ? 'border-blue-500 text-blue-600 dark:text-blue-400'

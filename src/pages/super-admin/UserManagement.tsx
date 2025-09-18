@@ -415,7 +415,8 @@ function UserDataManagement() {
           <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">UserData Details</h2>
             <button
-              onClick={() = aria-label="Button"> setShowUserDataDetails(false)}
+              onClick={() => setShowUserDataDetails(false)}
+            aria-label="Button"
               className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -653,13 +654,15 @@ function UserDataManagement() {
             {selectedUserData.status === 'pending' && (
               <>
                 <button
-                  onClick={() = aria-label="Button"> handleApproveUserData(selectedUserData)}
+                  onClick={() => handleApproveUserData(selectedUserData)}
+            aria-label="Button"
                   className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Approve
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'reject')}
+                  onClick={() => handleUserDataAction(selectedUserData.id, 'reject')}
+            aria-label="Button"
                   className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Reject
@@ -668,7 +671,8 @@ function UserDataManagement() {
             )}
             {selectedUserData.status === 'active' && (
               <button
-                onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'suspend')}
+                onClick={() => handleUserDataAction(selectedUserData.id, 'suspend')}
+            aria-label="Button"
                 className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Suspend
@@ -676,14 +680,16 @@ function UserDataManagement() {
             )}
             {selectedUserData.status === 'suspended' && (
               <button
-                onClick={() = aria-label="Button"> handleUserDataAction(selectedUserData.id, 'activate')}
+                onClick={() => handleUserDataAction(selectedUserData.id, 'activate')}
+            aria-label="Button"
                 className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Activate
               </button>
             )}
             <button
-              onClick={() = aria-label="Button"> setShowUserDataDetails(false)}
+              onClick={() => setShowUserDataDetails(false)}
+            aria-label="Button"
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               Close
@@ -996,14 +1002,16 @@ function UserDataManagement() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                       <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <button
-                          onClick={() = aria-label="Button"> handleViewUserData(user)}
+                          onClick={() => handleViewUserData(user)}
+            aria-label="Button"
                           className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                         </button>
                         {user.status === 'pending' && (
                           <button
-                            onClick={() = aria-label="Button"> handleApproveUserData(user)}
+                            onClick={() => handleApproveUserData(user)}
+            aria-label="Button"
                             className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <CheckCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1011,7 +1019,8 @@ function UserDataManagement() {
                         )}
                         {user.status === 'pending' && (
                           <button
-                            onClick={() = aria-label="Button"> handleUserDataAction(user.id, 'reject')}
+                            onClick={() => handleUserDataAction(user.id, 'reject')}
+            aria-label="Button"
                             className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <XCircle className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

@@ -153,7 +153,8 @@ const RealTimePortalStatus: React.FC<RealTimePortalStatusProps> = ({
             <h3 className="text-lg font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">MCP Agent Status</h3>
           </div>
           <button
-            onClick={() = aria-label="Button"> setShowDetails(!showDetails)}
+            onClick={() => setShowDetails(!showDetails)}
+            aria-label="Button"
             className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Activity className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />

@@ -502,7 +502,8 @@ const GlobalSettings: React.FC = () => {
                 <div className="ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {setting.type === 'boolean' ? (
                     <button
-                      onClick={() = aria-label="Button"> handleUpdateSetting(setting.id, !setting.value)}
+                      onClick={() => handleUpdateSetting(setting.id, !setting.value)}
+            aria-label="Button"
                       className={cn(
                         'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
                         setting.value ? 'bg-primary-600' : 'bg-gray-200'
@@ -693,7 +694,8 @@ const GlobalSettings: React.FC = () => {
               {settingCategories.map(category => (
                 <button
                   key={category.id}
-                  onClick={() = aria-label="Button"> setActiveTab(category.id)}
+                  onClick={() => setActiveTab(category.id)}
+            aria-label="Button"
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === category.id
                       ? 'border-primary-500 text-primary-600'

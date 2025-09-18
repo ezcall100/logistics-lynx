@@ -350,7 +350,8 @@ const EnhancedBusinessAnalytics: React.FC = () => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowDetailedView(!showDetailedView)}
+            onClick={() => setShowDetailedView(!showDetailedView)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {showDetailedView ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}

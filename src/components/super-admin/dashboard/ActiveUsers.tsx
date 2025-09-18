@@ -476,7 +476,8 @@ const ActiveUsers: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2 responsive-container">
           <button
-            onClick={() = aria-label="Button"> setIsRealTimeEnabled(!isRealTimeEnabled)}
+            onClick={() => setIsRealTimeEnabled(!isRealTimeEnabled)}
+            aria-label="Button"
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
               isRealTimeEnabled
                 ? 'bg-green-600 text-white hover:bg-green-700'
@@ -650,21 +651,24 @@ const ActiveUsers: React.FC = () => {
               </span>
               <div className="flex items-center space-x-2 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                  onClick={() => handleBulkAction('activate')}
+            aria-label="Button"
                   className="flex items-center space-x-1 px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors responsive-container"
                 >
                   <UserCheck className="h-4 w-4 responsive-container" />
                   <span>Activate</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                  onClick={() => handleBulkAction('deactivate')}
+            aria-label="Button"
                   className="flex items-center space-x-1 px-3 py-1 text-sm bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400 rounded-lg hover:bg-yellow-200 dark:hover:bg-yellow-900/30 transition-colors responsive-container"
                 >
                   <UserX className="h-4 w-4 responsive-container" />
                   <span>Deactivate</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                  onClick={() => handleBulkAction('delete')}
+            aria-label="Button"
                   className="flex items-center space-x-1 px-3 py-1 text-sm bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors responsive-container"
                 >
                   <Trash2 className="h-4 w-4 responsive-container" />
@@ -817,21 +821,24 @@ const ActiveUsers: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium responsive-container">
                     <div className="flex items-center justify-end space-x-2 responsive-container">
                       <button 
-                        onClick={() = aria-label="Button"> handleViewUser(user)}
+                        onClick={() => handleViewUser(user)}
+            aria-label="Button"
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 responsive-container"
                         title="View Details"
                       >
                         <Eye className="h-4 w-4 responsive-container" />
                       </button>
                       <button 
-                        onClick={() = aria-label="Button"> handleEditUser(user)}
+                        onClick={() => handleEditUser(user)}
+            aria-label="Button"
                         className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-50 dark:hover:bg-green-900/20 responsive-container"
                         title="Edit User"
                       >
                         <Edit className="h-4 w-4 responsive-container" />
                       </button>
                       <button 
-                        onClick={() = aria-label="Button"> handleDeleteUser(user)}
+                        onClick={() => handleDeleteUser(user)}
+            aria-label="Button"
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 responsive-container"
                         title="Delete User"
                       >
@@ -839,7 +846,8 @@ const ActiveUsers: React.FC = () => {
                       </button>
                       <div className="relative responsive-container">
                         <button 
-                          onClick={() = aria-label="Button"> handleDropdownToggle(user.id)}
+                          onClick={() => handleDropdownToggle(user.id)}
+            aria-label="Button"
                           className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 p-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700/50 responsive-container"
                           title="More Options"
                         >
@@ -858,14 +866,16 @@ const ActiveUsers: React.FC = () => {
                             >
                               <div className="py-1 responsive-container">
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('view', user)}
+                                  onClick={() => handleDropdownAction('view', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Eye className="h-4 w-4 responsive-container" />
                                   <span>View Details</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('edit', user)}
+                                  onClick={() => handleDropdownAction('edit', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Edit className="h-4 w-4 responsive-container" />
@@ -875,21 +885,24 @@ const ActiveUsers: React.FC = () => {
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('activate', user)}
+                                  onClick={() => handleDropdownAction('activate', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center space-x-2 responsive-container"
                                 >
                                   <UserCheck className="h-4 w-4 responsive-container" />
                                   <span>Activate User</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('deactivate', user)}
+                                  onClick={() => handleDropdownAction('deactivate', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-yellow-700 dark:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 flex items-center space-x-2 responsive-container"
                                 >
                                   <UserX className="h-4 w-4 responsive-container" />
                                   <span>Deactivate User</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('suspend', user)}
+                                  onClick={() => handleDropdownAction('suspend', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-orange-700 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 flex items-center space-x-2 responsive-container"
                                 >
                                   <Pause className="h-4 w-4 responsive-container" />
@@ -899,21 +912,24 @@ const ActiveUsers: React.FC = () => {
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('send_email', user)}
+                                  onClick={() => handleDropdownAction('send_email', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Mail className="h-4 w-4 responsive-container" />
                                   <span>Send Email</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('reset_password', user)}
+                                  onClick={() => handleDropdownAction('reset_password', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Lock className="h-4 w-4 responsive-container" />
                                   <span>Reset Password</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('permissions', user)}
+                                  onClick={() => handleDropdownAction('permissions', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Shield className="h-4 w-4 responsive-container" />
@@ -923,14 +939,16 @@ const ActiveUsers: React.FC = () => {
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('export_user', user)}
+                                  onClick={() => handleDropdownAction('export_user', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <Download className="h-4 w-4 responsive-container" />
                                   <span>Export User Data</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('audit_log', user)}
+                                  onClick={() => handleDropdownAction('audit_log', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 responsive-container"
                                 >
                                   <FileText className="h-4 w-4 responsive-container" />
@@ -940,7 +958,8 @@ const ActiveUsers: React.FC = () => {
                                 <div className="border-t border-gray-200 dark:border-gray-700 my-1 responsive-container"></div>
                                 
                                 <button
-                                  onClick={() = aria-label="Button"> handleDropdownAction('delete', user)}
+                                  onClick={() => handleDropdownAction('delete', user)}
+            aria-label="Button"
                                   className="w-full px-4 py-2 text-left text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container"
                                 >
                                   <Trash2 className="h-4 w-4 responsive-container" />
@@ -963,14 +982,16 @@ const ActiveUsers: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6 responsive-container">
           <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
-              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+            aria-label="Button"
               disabled={currentPage === 1}
               className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 responsive-container"
             >
               Previous
             </button>
             <button
-              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+            aria-label="Button"
               disabled={currentPage === totalPages}
               className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 responsive-container"
             >
@@ -1003,7 +1024,8 @@ const ActiveUsers: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
-                    onClick={() = aria-label="Button"> setCurrentPage(page)}
+                    onClick={() => setCurrentPage(page)}
+            aria-label="Button"
                     className={`px-3 py-1 text-sm rounded ${
                       page === currentPage
                         ? 'bg-blue-600 text-white'
@@ -1045,11 +1067,12 @@ const ActiveUsers: React.FC = () => {
                   {editingUser ? 'Edit User' : 'Add New User'}
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowAddModal(false);
                     setShowEditModal(false);
                     setEditingUser(null);
-                  }}
+                  }
+            aria-label="Button"}
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -1176,11 +1199,12 @@ const ActiveUsers: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowAddModal(false);
                     setShowEditModal(false);
                     setEditingUser(null);
-                  }}
+                  }
+            aria-label="Button"}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Cancel
@@ -1222,10 +1246,11 @@ const ActiveUsers: React.FC = () => {
                   User Details
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowViewModal(false);
                     setViewingUser(null);
-                  }}
+                  }
+            aria-label="Button"}
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -1316,19 +1341,21 @@ const ActiveUsers: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowViewModal(false);
                     setViewingUser(null);
-                  }}
+                  }
+            aria-label="Button"}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Close
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowViewModal(false);
                     handleEditUser(viewingUser);
-                  }}
+                  }
+            aria-label="Button"}
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors responsive-container"
                 >
                   Edit User
@@ -1375,10 +1402,11 @@ const ActiveUsers: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     setShowDeleteModal(false);
                     setDeletingUser(null);
-                  }}
+                  }
+            aria-label="Button"}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
                 >
                   Cancel

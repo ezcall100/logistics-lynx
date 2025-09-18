@@ -274,7 +274,8 @@ const DriverMobileApp: React.FC = () => {
       
                 <li key={item.id}>
                   <button
-                    onClick={() = aria-label="Button"> setActiveTab(item.id)}
+                    onClick={() => setActiveTab(item.id)}
+            aria-label="Button"
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       activeTab === item.id
                         ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
@@ -323,7 +324,8 @@ const DriverMobileApp: React.FC = () => {
             <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
               <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {sidebarCollapsed ? (
@@ -339,7 +341,8 @@ const DriverMobileApp: React.FC = () => {
 
               <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setShowNotifications(!showNotifications)}
+                  onClick={() => setShowNotifications(!showNotifications)}
+            aria-label="Button"
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

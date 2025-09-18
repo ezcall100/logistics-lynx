@@ -30,7 +30,8 @@ const NotFoundPage: React.FC = () => {
             🏠 Go Home
           </Link>
           <button
-            onClick={() = aria-label="Button"> window.history.back()}
+            onClick={() => window.history.back()}
+            aria-label="Go back to previous page"
             className="px-8 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl responsive-container"
           >
             ← Go Back

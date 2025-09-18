@@ -957,7 +957,8 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
             </div>
             <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setIsPreviewMode(!isPreviewMode)}
+                onClick={() => setIsPreviewMode(!isPreviewMode)}
+            aria-label="Button"
                 className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
                   isPreviewMode
                     ? 'bg-green-600 text-white'
@@ -996,7 +997,8 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                 {portalThemes.map(portal => (
                   <button
                     key={portal.id}
-                    onClick={() = aria-label="Button"> setSelectedPortal(portal.id)}
+                    onClick={() => setSelectedPortal(portal.id)}
+            aria-label="Button"
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                       selectedPortal === portal.id
                         ? 'bg-blue-600 text-white'
@@ -1029,9 +1031,9 @@ export function PortalThemeManager({ onThemeUpdate, onDomainUpdate }: PortalThem
                   ].map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() = aria-label="Button">
-                        setActiveTab(tab.id as 'domain' | 'design' | 'access' | 'preview')
+                      onClick={() => setActiveTab(tab.id as 'domain' | 'design' | 'access' | 'preview')
                       }
+            aria-label="Button"
                       className={`flex items-center space-x-2 px-6 py-4 transition-colors ${
                         activeTab === tab.id
                           ? 'bg-blue-600 text-white'
@@ -1378,7 +1380,8 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: unknown; on
                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <CheckCircle className="w-5 h-5 text-green-400 responsive-container sm:flex-col md:flex-row lg:grid" />
                   <button
-                    onClick={() = aria-label="Button"> handleRemoveDomain(domain)}
+                    onClick={() => handleRemoveDomain(domain)}
+            aria-label="Button"
                     className="text-red-400 hover:text-red-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Remove
@@ -1421,7 +1424,8 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: unknown; on
               {domainConfig.sslEnabled ? 'SSL enabled' : 'SSL disabled'}
             </div>
             <button
-              onClick={() = aria-label="Button"> onDomainUpdate({ sslEnabled: !domainConfig.sslEnabled })}
+              onClick={() => onDomainUpdate({ sslEnabled: !domainConfig.sslEnabled }
+            aria-label="Button")}
               className="mt-2 text-blue-400 hover:text-blue-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {domainConfig.sslEnabled ? 'Disable' : 'Enable'} SSL
@@ -1439,7 +1443,8 @@ function DomainTab({ domainConfig, onDomainUpdate }: { domainConfig: unknown; on
               {domainConfig.cdnEnabled ? 'CDN enabled' : 'CDN disabled'}
             </div>
             <button
-              onClick={() = aria-label="Button"> onDomainUpdate({ cdnEnabled: !domainConfig.cdnEnabled })}
+              onClick={() => onDomainUpdate({ cdnEnabled: !domainConfig.cdnEnabled }
+            aria-label="Button")}
               className="mt-2 text-blue-400 hover:text-blue-300 text-sm responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {domainConfig.cdnEnabled ? 'Disable' : 'Enable'} CDN

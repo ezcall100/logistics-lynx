@@ -268,10 +268,11 @@ const UserGroupsPage: React.FC = () => {
 
             <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> {
+                onClick={() => {
                   setSelectedGroup(group);
                   setShowGroupDetails(true);
-                }}
+                }
+            aria-label="Button"}
                 className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <Eye className="w-4 h-4 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -348,7 +349,8 @@ const UserGroupsPage: React.FC = () => {
       
                 <button
                   key={item.id}
-                  onClick={() = aria-label="Button"> setActiveTab(item.id)}
+                  onClick={() => setActiveTab(item.id)}
+            aria-label="Button"
                   className={`flex items-center space-x-2 px-3 py-4 border-b-2 transition-colors ${
                     activeTab === item.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -388,7 +390,8 @@ const UserGroupsPage: React.FC = () => {
                 {selectedGroup.name} Details
               </h3>
               <button
-                onClick={() = aria-label="Button"> setShowGroupDetails(false)}
+                onClick={() => setShowGroupDetails(false)}
+            aria-label="Button"
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <XCircle className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

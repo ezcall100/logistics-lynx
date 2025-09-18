@@ -850,7 +850,8 @@ export const UserRolesPage: React.FC = () => {
 
             <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setShowFilters(!showFilters)}
+                onClick={() => setShowFilters(!showFilters)}
+            aria-label="Button"
                 className={`px-4 py-3 border rounded-xl transition-all duration-200 flex items-center space-x-2 ${
                   showFilters
                     ? 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/20 dark:border-blue-700 dark:text-blue-400'
@@ -879,14 +880,16 @@ export const UserRolesPage: React.FC = () => {
               </select>
 
               <button
-                onClick={() = aria-label="Button"> setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+            aria-label="Button"
                 className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {sortOrder === 'asc' ? 'â†‘' : 'â†“'}
               </button>
 
               <button
-                onClick={() = aria-label="Button"> setViewMode(viewMode === 'cards' ? 'table' : 'cards')}
+                onClick={() => setViewMode(viewMode === 'cards' ? 'table' : 'cards')}
+            aria-label="Button"
                 className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {viewMode === 'cards' ? (
@@ -897,7 +900,8 @@ export const UserRolesPage: React.FC = () => {
               </button>
 
               <button
-                onClick={() = aria-label="Button"> setShowCreateModal(true)}
+                onClick={() => setShowCreateModal(true)}
+            aria-label="Button"
                 className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -966,7 +970,8 @@ export const UserRolesPage: React.FC = () => {
                   {selectedRoles.length} role{selectedRoles.length > 1 ? 's' : ''} selected
                 </span>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedRoles([])}
+                  onClick={() => setSelectedRoles([])}
+            aria-label="Button"
                   className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -974,28 +979,32 @@ export const UserRolesPage: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                  onClick={() => handleBulkAction('activate')}
+            aria-label="Button"
                   className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <UserCheck className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Activate
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                  onClick={() => handleBulkAction('deactivate')}
+            aria-label="Button"
                   className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <UserX className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Deactivate
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('export')}
+                  onClick={() => handleBulkAction('export')}
+            aria-label="Button"
                   className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Download className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Export
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                  onClick={() => handleBulkAction('delete')}
+            aria-label="Button"
                   className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Trash2 className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1051,7 +1060,8 @@ export const UserRolesPage: React.FC = () => {
                   </div>
                   <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setShowDropdown(showDropdown === role.id ? null : role.id)}
+                      onClick={() => setShowDropdown(showDropdown === role.id ? null : role.id)}
+            aria-label="Button"
                       className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                       title="More Actions"
                     >
@@ -1062,48 +1072,53 @@ export const UserRolesPage: React.FC = () => {
                       <div className="absolute right-0 top-10 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div className="py-1 responsive-container sm:flex-col md:flex-row lg:grid">
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               openViewModal(role);
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>View Details</span>
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               openEditModal(role);
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Edit Role</span>
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               duplicateRole(role);
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Duplicate Role</span>
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                             <span>Export Role</span>
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1111,10 +1126,11 @@ export const UserRolesPage: React.FC = () => {
                           </button>
                           <div className="border-t border-slate-200 dark:border-slate-700 my-1 responsive-container sm:flex-col md:flex-row lg:grid"></div>
                           <button
-                            onClick={() = aria-label="Button"> {
+                            onClick={() => {
                               openDeleteModal(role);
                               setShowDropdown(null);
-                            }}
+                            }
+            aria-label="Button"}
                             className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1306,9 +1322,9 @@ export const UserRolesPage: React.FC = () => {
                       <td className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
                         <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                           <button
-                            onClick={() = aria-label="Button">
-                              setShowDropdown(showDropdown === role.id ? null : role.id)
+                            onClick={() => setShowDropdown(showDropdown === role.id ? null : role.id)
                             }
+            aria-label="Button"
                             className="p-1 text-slate-400 hover:text-slate-600 rounded transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             title="More Actions"
                           >
@@ -1319,48 +1335,53 @@ export const UserRolesPage: React.FC = () => {
                             <div className="absolute right-0 top-8 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10 responsive-container sm:flex-col md:flex-row lg:grid">
                               <div className="py-1 responsive-container sm:flex-col md:flex-row lg:grid">
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     openViewModal(role);
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>View Details</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     openEditModal(role);
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Edit Role</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     duplicateRole(role);
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Duplicate Role</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                                   <span>Export Role</span>
                                 </button>
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1368,10 +1389,11 @@ export const UserRolesPage: React.FC = () => {
                                 </button>
                                 <div className="border-t border-slate-200 dark:border-slate-700 my-1 responsive-container sm:flex-col md:flex-row lg:grid"></div>
                                 <button
-                                  onClick={() = aria-label="Button"> {
+                                  onClick={() => {
                                     openDeleteModal(role);
                                     setShowDropdown(null);
-                                  }}
+                                  }
+            aria-label="Button"}
                                   className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                                 >
                                   <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1410,7 +1432,8 @@ export const UserRolesPage: React.FC = () => {
                     Create New Role
                   </h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                    onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1594,7 +1617,8 @@ export const UserRolesPage: React.FC = () => {
                   <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                      onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
@@ -1632,7 +1656,8 @@ export const UserRolesPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Edit Role</h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowEditModal(false)}
+                    onClick={() => setShowEditModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1816,7 +1841,8 @@ export const UserRolesPage: React.FC = () => {
                   <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowEditModal(false)}
+                      onClick={() => setShowEditModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
@@ -1854,7 +1880,8 @@ export const UserRolesPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <h2 className="text-xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Delete Role</h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    onClick={() => setShowDeleteModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1883,7 +1910,8 @@ export const UserRolesPage: React.FC = () => {
 
                 <div className="flex justify-end space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    onClick={() => setShowDeleteModal(false)}
+            aria-label="Button"
                     className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Cancel
@@ -1921,7 +1949,8 @@ export const UserRolesPage: React.FC = () => {
                     Role Details
                   </h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowViewModal(false)}
+                    onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -2089,16 +2118,18 @@ export const UserRolesPage: React.FC = () => {
 
                   <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setShowViewModal(false)}
+                      onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Close
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> {
+                      onClick={() => {
                         setShowViewModal(false);
                         openEditModal(viewingRole);
-                      }}
+                      }
+            aria-label="Button"}
                       className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Edit Role

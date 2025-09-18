@@ -489,7 +489,8 @@ const PortalsPage: React.FC = () => {
           <div className="flex items-center gap-3 responsive-container">
             <div className="flex items-center bg-white rounded-xl p-1 shadow-sm border border-gray-200 responsive-container">
               <button
-                onClick={() = aria-label="Button"> setViewMode('grid')}
+                onClick={() => setViewMode('grid')}
+            aria-label="Button"
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === 'grid' ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700'
                 }`}
@@ -497,7 +498,8 @@ const PortalsPage: React.FC = () => {
                 <Grid className="w-4 h-4 responsive-container" />
               </button>
               <button
-                onClick={() = aria-label="Button"> setViewMode('list')}
+                onClick={() => setViewMode('list')}
+            aria-label="Button"
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === 'list' ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700'
                 }`}
@@ -513,7 +515,8 @@ const PortalsPage: React.FC = () => {
           {Object.entries(portalCategories).map(([key, category]) => (
             <button
               key={key}
-              onClick={() = aria-label="Button"> setActiveTab(key)}
+              onClick={() => setActiveTab(key)}
+            aria-label="Button"
               className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
                 activeTab === key
                   ? `bg-gradient-to-r ${category.color} text-white shadow-lg transform scale-105`

@@ -62,7 +62,8 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
               <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container">Navigation</h2>
             )}
             <button
-              onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors responsive-container"
             >
               {sidebarCollapsed ? (
@@ -88,10 +89,11 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
                 {/* Main Menu Item */}
                 <div className="space-y-1 responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> {
+                    onClick={() => {
                       if (item.subMenus && item.subMenus.length > 0) {
                         handleMenuToggle(item.id);
-                      } else {
+                      }
+            aria-label="Button" else {
                         handleMenuItemClick(item.id, '');
                       }
                     }}
@@ -157,7 +159,8 @@ export const SuperAdminSidebar: React.FC<SuperAdminSidebarProps> = ({
       
                         <button
                           key={subMenu.id}
-                          onClick={() = aria-label="Button"> handleMenuItemClick(subMenu.id, subMenu.path)}
+                          onClick={() => handleMenuItemClick(subMenu.id, subMenu.path)}
+            aria-label="Button"
                           className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
                             isSubActive
                               ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'

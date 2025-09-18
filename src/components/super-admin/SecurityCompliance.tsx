@@ -790,7 +790,8 @@ const SecurityCompliance: React.FC = () => {
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                  onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
                       ? 'border-primary-500 text-primary-600'

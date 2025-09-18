@@ -288,7 +288,8 @@ export function EnhancedHomePage() {
               {dashboardTabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                  onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                   className={`flex items-center space-x-2 px-6 py-4 font-medium transition-all duration-200 ${
                     activeTab === tab.id
                       ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50'

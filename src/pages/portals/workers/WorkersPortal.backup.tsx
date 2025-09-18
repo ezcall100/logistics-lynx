@@ -423,7 +423,8 @@ const WorkersPortal: React.FC = () => {
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                  onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                   className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'

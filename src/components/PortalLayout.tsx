@@ -187,7 +187,8 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
           {/* Left side */}
           <div className="flex items-center space-x-4 responsive-container">
             <button
-              onClick={() = aria-label="Button"> setIsSidebarOpen(!isSidebarOpen)}
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            aria-label="Button"
               className="p-2 rounded-lg hover:bg-slate-100 transition-colors lg:hidden responsive-container"
             >
               <Menu className="w-5 h-5 responsive-container" />

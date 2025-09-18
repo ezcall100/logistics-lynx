@@ -364,7 +364,8 @@ class SuperAdminErrorBoundary extends React.Component {
             <h2 className="text-2xl font-bold text-red-600 mb-4 responsive-container">Super Admin Portal Error</h2>
             <p className="text-gray-600 mb-4 responsive-container">Something went wrong in the Super Admin Portal</p>
             <button 
-              onClick={() = aria-label="Button"> this.setState({ hasError: false, error: null })}
+              onClick={() => this.setState({ hasError: false, error: null }
+            aria-label="Button")}
               className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors responsive-container"
             >
               Reload Portal
@@ -940,7 +941,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
         <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 responsive-container">
           <div className="flex items-center space-x-3 sm:space-x-4 responsive-container">
             <button
-              onClick={() = aria-label="Button"> setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Button"
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 lg:hidden responsive-container"
             >
               <Menu className="h-5 w-5 responsive-container" />
@@ -1005,7 +1007,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
               {/* Real-Time Development Monitor Toggle */}
               <button
-                onClick={() = aria-label="Button"> setShowRealTimeMonitor(!showRealTimeMonitor)}
+                onClick={() => setShowRealTimeMonitor(!showRealTimeMonitor)}
+            aria-label="Button"
                 className={`relative p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-colors ${
                   showRealTimeMonitor
                     ? 'text-green-500 hover:text-green-600 bg-green-50 dark:bg-green-900/20'
@@ -1025,7 +1028,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
 
               {/* Settings */}
               <button
-                onClick={() = aria-label="Button"> setActiveTab('company-settings')}
+                onClick={() => setActiveTab('company-settings')}
+            aria-label="Button"
                 className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
                 title="Company Settings"
               >
@@ -1035,7 +1039,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
               {/* User Profile */}
               <div className="relative responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setActiveTab('profile')}
+                  onClick={() => setActiveTab('profile')}
+            aria-label="Button"
                   className="flex items-center space-x-2 ml-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors responsive-container"
                   title="Profile & Account"
                 >
@@ -1069,7 +1074,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                   </h2>
                 )}
                 <button
-                  onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors responsive-container"
                 >
                   {sidebarCollapsed ? (
@@ -1093,10 +1099,11 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                     {/* Main Menu Item */}
                     <div className="space-y-1 responsive-container">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
-                          } else {
+                          }
+            aria-label="Button" else {
                             handleMenuItemClick(item.id, '');
                           }
                         }}
@@ -1160,7 +1167,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                           return (
                             <button
                               key={subMenu.id}
-                              onClick={() = aria-label="Button"> handleMenuItemClick(subMenu.id, subMenu.path || '')}
+                              onClick={() => handleMenuItemClick(subMenu.id, subMenu.path || '')}
+            aria-label="Button"
                               className={`w-full flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 group ${
                                 isSubActive
                                   ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'
@@ -1223,7 +1231,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                     </div>
                   </div>
                   <button
-                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+            aria-label="Button"
                     className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container"
                     title="Collapse Hub"
                   >
@@ -1238,7 +1247,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
               <div className="p-2 border-b border-gray-200 dark:border-gray-700 responsive-container">
                 <div className="flex justify-center responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                    onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+            aria-label="Button"
                     className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container"
                     title="Expand Hub"
                   >
@@ -1253,7 +1263,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
               {rightSidebarCollapsed ? (
                 <div className="flex flex-col items-center py-6 space-y-4 responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> setRightSidebarCollapsed(false)}
+                    onClick={() => setRightSidebarCollapsed(false)}
+            aria-label="Button"
                     className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105 responsive-container"
                     title="Expand Hub"
                   >
@@ -1299,7 +1310,8 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                   Navigation
                 </h2>
                 <button
-                  onClick={() = aria-label="Button"> setMobileMenuOpen(false)}
+                  onClick={() => setMobileMenuOpen(false)}
+            aria-label="Button"
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -1316,10 +1328,11 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                     <div key={item.id} className="space-y-1 responsive-container">
                       {/* Main Menu Item */}
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
-                          } else {
+                          }
+            aria-label="Button" else {
                             setActiveTab(item.id);
                             setMobileMenuOpen(false);
                           }
@@ -1364,10 +1377,11 @@ const SuperAdminPortal: React.FC = React.memo(() => {
                             return (
                               <button
                                 key={subMenu.id}
-                                onClick={() = aria-label="Button"> {
+                                onClick={() => {
                                   setActiveTab(subMenu.id);
                                   setMobileMenuOpen(false);
-                                }}
+                                }
+            aria-label="Button"}
                                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
                                   isSubActive
                                     ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'

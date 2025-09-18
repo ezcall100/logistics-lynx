@@ -478,7 +478,8 @@ function RegistrationFlow() {
               insurance, maintenance, etc.), we have a specialized registration process for you.
             </p>
             <button
-              onClick={() = aria-label="Button"> setCurrentStep('service-provider-welcome')}
+              onClick={() => setCurrentStep('service-provider-welcome')}
+            aria-label="Button"
               className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid"
             >
               Continue as Service Provider →
@@ -733,14 +734,16 @@ function RegistrationFlow() {
 
       <div className="flex justify-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
         <button
-          onClick={() = aria-label="Button"> setCurrentStep('welcome')}
+          onClick={() => setCurrentStep('welcome')}
+            aria-label="Button"
           className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           ← Back to Main Registration
         </button>
         <button
-          onClick={() = aria-label="Button"> {
-            setRegistrationData(prev => ({ ...prev, companyType: 'service_provider' }));
+          onClick={() => {
+            setRegistrationData(prev => ({ ...prev, companyType: 'service_provider' }
+            aria-label="Button"));
             setCurrentStep('company-info');
           }}
           disabled={registrationData.serviceProviderServices.length === 0}
@@ -1850,11 +1853,11 @@ function RegistrationFlow() {
         ].map(plan => (
           <button
             key={plan.id}
-            onClick={() = aria-label="Button">
-              setRegistrationData(prev => ({
+            onClick={() => setRegistrationData(prev => ({
                 ...prev,
                 subscriptionType: plan.id as SubscriptionType,
-              }))
+              }
+            aria-label="Button"))
             }
             className={`relative p-6 border rounded-lg text-left transition-all ${
               registrationData.subscriptionType === plan.id

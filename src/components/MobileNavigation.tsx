@@ -105,9 +105,10 @@ export function MobileNavigation() {
                     {menuItems.map((item) => (
                       <div key={item.label}>
                         <button
-                          onClick={() = aria-label="Button"> setActiveSubmenu(
+                          onClick={() => setActiveSubmenu(
                             activeSubmenu === item.label ? null : item.label
                           )}
+            aria-label="Button"
                           className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <span className="font-medium text-slate-700 dark:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid">

@@ -251,7 +251,8 @@ const AICommandCenter: React.FC = () => {
               </span>
             </div>
             <button 
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {autoRefresh ? 'Pause' : 'Resume'}
@@ -269,7 +270,8 @@ const AICommandCenter: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() = aria-label="Button"> setViewMode(id as 'overview' | 'agents' | 'performance' | 'alerts')}
+              onClick={() => setViewMode(id as 'overview' | 'agents' | 'performance' | 'alerts')}
+            aria-label="Button"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id 
                   ? 'bg-blue-600 text-white' 
@@ -563,7 +565,8 @@ const AICommandCenter: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedAgent(null)}
+                  onClick={() => setSelectedAgent(null)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

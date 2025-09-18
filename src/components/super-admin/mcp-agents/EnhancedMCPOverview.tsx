@@ -376,7 +376,8 @@ const EnhancedMCPOverview: React.FC = () => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowDetailedView(!showDetailedView)}
+            onClick={() => setShowDetailedView(!showDetailedView)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {showDetailedView ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
@@ -643,7 +644,8 @@ const EnhancedMCPOverview: React.FC = () => {
                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   {agent.status === 'active' ? (
                     <button
-                      onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'stop')}
+                      onClick={() => handleAgentAction(agent.id, 'stop')}
+            aria-label="Button"
                       className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Stop Agent"
                     >
@@ -651,7 +653,8 @@ const EnhancedMCPOverview: React.FC = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'start')}
+                      onClick={() => handleAgentAction(agent.id, 'start')}
+            aria-label="Button"
                       className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Start Agent"
                     >
@@ -659,7 +662,8 @@ const EnhancedMCPOverview: React.FC = () => {
                     </button>
                   )}
                   <button
-                    onClick={() = aria-label="Button"> handleAgentAction(agent.id, 'restart')}
+                    onClick={() => handleAgentAction(agent.id, 'restart')}
+            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-yellow-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     title="Restart Agent"
                   >

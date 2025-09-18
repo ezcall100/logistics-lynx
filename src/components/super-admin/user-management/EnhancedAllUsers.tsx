@@ -590,7 +590,8 @@ const EnhancedAllUsers: React.FC = () => {
                   </th>
                   <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() = aria-label="Button"> handleSort('firstName')}
+                      onClick={() => handleSort('firstName')}
+            aria-label="Button"
                       className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>User</span>
@@ -601,7 +602,8 @@ const EnhancedAllUsers: React.FC = () => {
                   </th>
                   <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() = aria-label="Button"> handleSort('role')}
+                      onClick={() => handleSort('role')}
+            aria-label="Button"
                       className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Role</span>
@@ -612,7 +614,8 @@ const EnhancedAllUsers: React.FC = () => {
                   </th>
                   <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() = aria-label="Button"> handleSort('status')}
+                      onClick={() => handleSort('status')}
+            aria-label="Button"
                       className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Status</span>
@@ -623,7 +626,8 @@ const EnhancedAllUsers: React.FC = () => {
                   </th>
                   <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() = aria-label="Button"> handleSort('company')}
+                      onClick={() => handleSort('company')}
+            aria-label="Button"
                       className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Company</span>
@@ -634,7 +638,8 @@ const EnhancedAllUsers: React.FC = () => {
                   </th>
                   <th className="text-left py-3 px-4 responsive-container">
                     <button
-                      onClick={() = aria-label="Button"> handleSort('lastLogin')}
+                      onClick={() => handleSort('lastLogin')}
+            aria-label="Button"
                       className="flex items-center space-x-1 font-medium text-gray-900 dark:text-gray-100 responsive-container"
                     >
                       <span>Last Login</span>

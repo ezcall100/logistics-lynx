@@ -631,7 +631,8 @@ const SystemMonitoringDashboard: React.FC = () => {
                     </div>
                     {!alert.acknowledged && (
                       <button
-                        onClick={() = aria-label="Button"> handleAcknowledgeAlert(alert.id)}
+                        onClick={() => handleAcknowledgeAlert(alert.id)}
+            aria-label="Button"
                         className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Acknowledge

@@ -474,7 +474,8 @@ const OutstandingHomePage: React.FC = () => {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() = aria-label="Button"> setCurrentTestimonial(index)}
+                  onClick={() => setCurrentTestimonial(index)}
+            aria-label="Button"
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentTestimonial ? 'bg-blue-600' : 'bg-slate-300'
                   }`}
@@ -563,7 +564,8 @@ const OutstandingHomePage: React.FC = () => {
               <div className="flex items-center justify-between mb-6 responsive-container">
                 <h3 className="text-2xl font-bold text-slate-900 responsive-container">Trans Bot AI Demo</h3>
                 <button
-                  onClick={() = aria-label="Button"> setIsVideoPlaying(false)}
+                  onClick={() => setIsVideoPlaying(false)}
+            aria-label="Button"
                   className="p-2 hover:bg-slate-100 rounded-lg transition-colors responsive-container"
                 >
                   <X className="w-6 h-6 text-slate-600 responsive-container" />

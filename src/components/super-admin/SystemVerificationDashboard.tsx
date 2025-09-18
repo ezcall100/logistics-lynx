@@ -235,7 +235,8 @@ const SystemVerificationDashboard: React.FC = () => {
             <span className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">All Systems Operational</span>
           </div>
           <button
-            onClick={() = aria-label="Button"> setIsAutoRefresh(!isAutoRefresh)}
+            onClick={() => setIsAutoRefresh(!isAutoRefresh)}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${isAutoRefresh ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}
           >
             <RefreshCw className={`w-4 h-4 ${isAutoRefresh ? 'animate-spin' : ''}`} />

@@ -455,14 +455,16 @@ const EnhancedSystemSettings: React.FC = () => {
             <span>Refresh</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowBackupModal(true)}
+            onClick={() => setShowBackupModal(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Backup</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowRestoreModal(true)}
+            onClick={() => setShowRestoreModal(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Upload className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -508,7 +510,8 @@ const EnhancedSystemSettings: React.FC = () => {
       
                   <button
                     key={category.id}
-                    onClick={() = aria-label="Button"> setActiveCategory(category.id)}
+                    onClick={() => setActiveCategory(category.id)}
+            aria-label="Button"
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       isActive
                         ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
@@ -667,7 +670,8 @@ const EnhancedSystemSettings: React.FC = () => {
 
                     {setting.sensitive && (
                       <button
-                        onClick={() = aria-label="Button"> toggleSensitiveValue(setting.id)}
+                        onClick={() => toggleSensitiveValue(setting.id)}
+            aria-label="Button"
                         className="p-2 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title={showSensitiveValues[setting.id] ? 'Hide value' : 'Show value'}
                       >
@@ -706,7 +710,8 @@ const EnhancedSystemSettings: React.FC = () => {
                   Backup Settings
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowBackupModal(false)}
+                  onClick={() => setShowBackupModal(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -730,7 +735,8 @@ const EnhancedSystemSettings: React.FC = () => {
 
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setShowBackupModal(false)}
+                  onClick={() => setShowBackupModal(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
@@ -767,7 +773,8 @@ const EnhancedSystemSettings: React.FC = () => {
                   Restore Settings
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowRestoreModal(false)}
+                  onClick={() => setShowRestoreModal(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -811,7 +818,8 @@ const EnhancedSystemSettings: React.FC = () => {
 
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setShowRestoreModal(false)}
+                  onClick={() => setShowRestoreModal(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel

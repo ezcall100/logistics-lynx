@@ -517,7 +517,8 @@ const CompanyManagement: React.FC = () => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowCreateCompany(true)}
+            onClick={() => setShowCreateCompany(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
           >
             <Plus className="h-4 w-4 responsive-container" />
@@ -666,25 +667,29 @@ const CompanyManagement: React.FC = () => {
             </div>
             <div className="flex items-center space-x-2 responsive-container">
               <button
-                onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                onClick={() => handleBulkAction('activate')}
+            aria-label="Button"
                 className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
                 Activate
               </button>
               <button
-                onClick={() = aria-label="Button"> handleBulkAction('suspend')}
+                onClick={() => handleBulkAction('suspend')}
+            aria-label="Button"
                 className="px-3 py-1 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors responsive-container"
               >
                 Suspend
               </button>
               <button
-                onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                onClick={() => handleBulkAction('delete')}
+            aria-label="Button"
                 className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors responsive-container"
               >
                 Delete
               </button>
               <button
-                onClick={() = aria-label="Button"> setSelectedCompanies([])}
+                onClick={() => setSelectedCompanies([])}
+            aria-label="Button"
                 className="px-3 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 transition-colors responsive-container"
               >
                 Clear
@@ -811,7 +816,8 @@ const CompanyManagement: React.FC = () => {
                     <td className="px-6 py-4 text-right responsive-container">
                       <div className="flex items-center justify-end space-x-2 responsive-container">
                         <button
-                          onClick={() = aria-label="Button"> handleDeleteCompany(company.id)}
+                          onClick={() => handleDeleteCompany(company.id)}
+            aria-label="Button"
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                           title="Delete"
                         >
@@ -847,7 +853,8 @@ const CompanyManagement: React.FC = () => {
                   Create New Company
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateCompany(false)}
+                  onClick={() => setShowCreateCompany(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -954,7 +961,8 @@ const CompanyManagement: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateCompany(false)}
+                  onClick={() => setShowCreateCompany(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                 >
                   Cancel

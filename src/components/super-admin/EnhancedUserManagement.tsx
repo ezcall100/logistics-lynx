@@ -214,13 +214,15 @@ const EnhancedUserManagement: React.FC = () => {
             </p>
             <div className="flex justify-end space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Cancel
               </button>
               <button
-                onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Create User
@@ -251,7 +253,8 @@ const EnhancedUserManagement: React.FC = () => {
             </div>
             <div className="flex justify-end mt-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setSelectedUser(null)}
+                onClick={() => setSelectedUser(null)}
+            aria-label="Button"
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Close
@@ -270,14 +273,16 @@ const EnhancedUserManagement: React.FC = () => {
         </div>
         <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setShowCreateModal(true)}
+            onClick={() => setShowCreateModal(true)}
+            aria-label="Button"
             className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center space-x-2 hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Add User</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowAuditModal(true)}
+            onClick={() => setShowAuditModal(true)}
+            aria-label="Button"
             className="px-4 py-2 bg-gray-600 text-white rounded-lg flex items-center space-x-2 hover:bg-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -458,7 +463,8 @@ const EnhancedUserManagement: React.FC = () => {
                   <td className="py-4 px-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() = aria-label="Button"> setSelectedUser(user)}
+                        onClick={() => setSelectedUser(user)}
+            aria-label="Button"
                         className="p-2 text-gray-500 hover:text-blue-600 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -503,7 +509,8 @@ const EnhancedUserManagement: React.FC = () => {
                   <span>Export CSV</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> setShowAuditModal(false)}
+                  onClick={() => setShowAuditModal(false)}
+            aria-label="Button"
                   className="p-2 text-gray-500 hover:text-gray-700 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

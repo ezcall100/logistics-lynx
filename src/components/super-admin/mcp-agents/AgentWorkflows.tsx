@@ -369,7 +369,8 @@ export const AgentWorkflows: React.FC = () => {
               <span>Refresh</span>
             </button>
             <button 
-              onClick={() = aria-label="Button"> console.log('Create modal')}
+              onClick={() => console.log('Create modal')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
               <Plus className="w-4 h-4 responsive-container" />
@@ -476,7 +477,8 @@ export const AgentWorkflows: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setSelectedTab(tab.id as any)}
+                onClick={() => setSelectedTab(tab.id as any)}
+            aria-label="Button"
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -539,21 +541,24 @@ export const AgentWorkflows: React.FC = () => {
                             </div>
                           </div>
                           <button
-                            onClick={() = aria-label="Button"> handleWorkflowAction(workflow.id, 'start')}
+                            onClick={() => handleWorkflowAction(workflow.id, 'start')}
+            aria-label="Button"
                             className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                             title="Start Workflow"
                           >
                             <Play className="w-4 h-4 text-green-600 responsive-container" />
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> handleWorkflowAction(workflow.id, 'pause')}
+                            onClick={() => handleWorkflowAction(workflow.id, 'pause')}
+            aria-label="Button"
                             className="p-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/20 rounded-lg transition-colors responsive-container"
                             title="Pause Workflow"
                           >
                             <Pause className="w-4 h-4 text-yellow-600 responsive-container" />
                           </button>
                           <button
-                            onClick={() = aria-label="Button"> console.log('Selected workflow:', workflow.id)}
+                            onClick={() => console.log('Selected workflow:', workflow.id)}
+            aria-label="Button"
                             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                             title="View Details"
                           >
@@ -685,7 +690,8 @@ export const AgentWorkflows: React.FC = () => {
                       Pre-built workflow templates for common automation tasks
                     </p>
                     <button 
-                      onClick={() = aria-label="Button"> console.log('Create modal')}
+                      onClick={() => console.log('Create modal')}
+            aria-label="Button"
                       className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
                     >
                       Browse Templates

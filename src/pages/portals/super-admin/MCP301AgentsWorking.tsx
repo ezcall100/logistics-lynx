@@ -266,7 +266,8 @@ const MCP301AgentsWorking: React.FC = () => {
               </span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setIsLiveUpdate(!isLiveUpdate)}
+              onClick={() => setIsLiveUpdate(!isLiveUpdate)}
+            aria-label="Button"
               className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                 isLiveUpdate
                   ? 'bg-red-600 hover:bg-red-700 text-white'

@@ -48,7 +48,8 @@ export const SuperAdminRightSidebar: React.FC<SuperAdminRightSidebarProps> = ({
                 </div>
               </div>
               <button
-                onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+            aria-label="Button"
                 className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                 title="Collapse Hub"
               >
@@ -63,7 +64,8 @@ export const SuperAdminRightSidebar: React.FC<SuperAdminRightSidebarProps> = ({
           <div className="p-2 border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
             <div className="flex justify-center responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setRightSidebarCollapsed(!rightSidebarCollapsed)}
+                onClick={() => setRightSidebarCollapsed(!rightSidebarCollapsed)}
+            aria-label="Button"
                 className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                 title="Expand Hub"
               >
@@ -78,7 +80,8 @@ export const SuperAdminRightSidebar: React.FC<SuperAdminRightSidebarProps> = ({
           {rightSidebarCollapsed ? (
             <div className="flex flex-col items-center py-6 space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setRightSidebarCollapsed(false)}
+                onClick={() => setRightSidebarCollapsed(false)}
+            aria-label="Button"
                 className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all duration-200 hover:scale-105 responsive-container sm:flex-col md:flex-row lg:grid"
                 title="Expand Hub"
               >

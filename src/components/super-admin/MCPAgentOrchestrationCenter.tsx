@@ -1084,7 +1084,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
               <span className="text-white font-medium responsive-container sm:flex-col md:flex-row lg:grid">Live</span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setRealTimeData(!realTimeData)}
+              onClick={() => setRealTimeData(!realTimeData)}
+            aria-label="Button"
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               {realTimeData ? 'Pause Updates' : 'Resume Updates'}
@@ -1184,7 +1185,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
 
         <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setViewMode('cluster')}
+            onClick={() => setViewMode('cluster')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'cluster'
                 ? 'bg-purple-600 text-white'
@@ -1194,7 +1196,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             <Network className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() = aria-label="Button"> setViewMode('grid')}
+            onClick={() => setViewMode('grid')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'grid'
                 ? 'bg-purple-600 text-white'
@@ -1204,7 +1207,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
             <BarChart3 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() = aria-label="Button"> setViewMode('list')}
+            onClick={() => setViewMode('list')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'list'
                 ? 'bg-purple-600 text-white'
@@ -1382,7 +1386,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedAgent(null)}
+                  onClick={() => setSelectedAgent(null)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

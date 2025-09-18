@@ -274,7 +274,8 @@ export function MegaMenuHeader() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() = aria-label="Button"> setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Button"
             className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light transition-colors duration-200 responsive-container"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6 responsive-container" /> : <Menu className="w-6 h-6 responsive-container" />}

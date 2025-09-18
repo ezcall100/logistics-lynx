@@ -320,7 +320,8 @@ const BusinessIntelligenceCenter: React.FC = () => {
               </span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
@@ -339,7 +340,8 @@ const BusinessIntelligenceCenter: React.FC = () => {
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() = aria-label="Button"> setViewMode(id as 'overview' | 'insights' | 'reports' | 'predictions')}
+              onClick={() => setViewMode(id as 'overview' | 'insights' | 'reports' | 'predictions')}
+            aria-label="Button"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 viewMode === id
                   ? 'bg-teal-600 text-white'
@@ -609,7 +611,8 @@ const BusinessIntelligenceCenter: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedInsight(null)}
+                  onClick={() => setSelectedInsight(null)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

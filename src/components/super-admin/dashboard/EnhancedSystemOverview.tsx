@@ -444,7 +444,8 @@ const EnhancedSystemOverview: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> toggleCardExpansion(metric.id)}
+                    onClick={() => toggleCardExpansion(metric.id)}
+            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {isExpanded ? <Minimize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Maximize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
@@ -569,7 +570,8 @@ const EnhancedSystemOverview: React.FC = () => {
               System Alerts
             </h2>
             <button
-              onClick={() = aria-label="Button"> setShowCreateAlert(true)}
+              onClick={() => setShowCreateAlert(true)}
+            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -642,7 +644,8 @@ const EnhancedSystemOverview: React.FC = () => {
                   <div className="flex items-center space-x-1 ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     {!alert.resolved && (
                       <button
-                        onClick={() = aria-label="Button"> handleResolveAlert(alert.id)}
+                        onClick={() => handleResolveAlert(alert.id)}
+            aria-label="Button"
                         className="p-1 text-green-600 hover:text-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title="Resolve Alert"
                       >
@@ -650,7 +653,8 @@ const EnhancedSystemOverview: React.FC = () => {
                       </button>
                     )}
                     <button
-                      onClick={() = aria-label="Button"> handleDeleteAlert(alert.id)}
+                      onClick={() => handleDeleteAlert(alert.id)}
+            aria-label="Button"
                       className="p-1 text-red-600 hover:text-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete Alert"
                     >
@@ -684,7 +688,8 @@ const EnhancedSystemOverview: React.FC = () => {
                   Create New Alert
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateAlert(false)}
+                  onClick={() => setShowCreateAlert(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -753,7 +758,8 @@ const EnhancedSystemOverview: React.FC = () => {
 
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateAlert(false)}
+                  onClick={() => setShowCreateAlert(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel

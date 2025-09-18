@@ -303,7 +303,8 @@ export function IntelligentHeader() {
               {navigationItems.map((item) => (
                 <div key={item.name}>
                   <button
-                    onClick={() = aria-label="Button"> toggleDropdown(item.name)}
+                    onClick={() => toggleDropdown(item.name)}
+            aria-label="Button"
                     className="w-full flex items-center justify-between py-3 text-transbot-text-primary font-medium responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -326,7 +327,8 @@ export function IntelligentHeader() {
                         {item.items.map((subItem) => (
                           <button
                             key={subItem.name}
-                            onClick={() = aria-label="Button"> handleNavigation(subItem.path)}
+                            onClick={() => handleNavigation(subItem.path)}
+            aria-label="Button"
                             className="w-full flex items-center gap-3 py-2 text-transbot-text-secondary hover:text-transbot-sky transition-colors duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                           >
                             <subItem.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

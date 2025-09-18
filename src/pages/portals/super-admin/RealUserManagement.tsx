@@ -242,7 +242,8 @@ const RealUserManagement: React.FC = () => {
               <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live Data</span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setShowAddModal(true)}
+              onClick={() => setShowAddModal(true)}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -466,26 +467,29 @@ const RealUserManagement: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid">
                     <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedUser(user);
                           setShowViewModal(true);
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-blue-400 hover:text-blue-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedUser(user);
                           // setShowEditModal(true);
                           console.log('Edit user:', user);
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-green-400 hover:text-green-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> handleDeleteUser(user.id)}
+                        onClick={() => handleDeleteUser(user.id)}
+            aria-label="Button"
                         className="text-red-400 hover:text-red-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Trash className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -590,7 +594,8 @@ const RealUserManagement: React.FC = () => {
                 <div className="flex justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
                     type="button"
-                    onClick={() = aria-label="Button"> setShowAddModal(false)}
+                    onClick={() => setShowAddModal(false)}
+            aria-label="Button"
                     className="px-4 py-2 text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Cancel
@@ -628,7 +633,8 @@ const RealUserManagement: React.FC = () => {
               <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <h3 className="text-lg font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">User Details</h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowViewModal(false)}
+                  onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

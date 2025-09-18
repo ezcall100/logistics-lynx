@@ -110,7 +110,8 @@ const ColorPaletteDemo: React.FC = () => {
             </div>
           </div>
           <button
-            onClick={() = aria-label="Button"> setIsDarkMode(!isDarkMode)}
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-super-admin-primary-500 hover:bg-super-admin-primary-600 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {isDarkMode ? <EyeOff className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />}

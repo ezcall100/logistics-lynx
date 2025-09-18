@@ -288,7 +288,8 @@ const CompanyAPISettings: React.FC = () => {
               <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live API Data</span>
             </div>
             <button
-              onClick={() = aria-label="Button"> console.log('Add API key clicked')}
+              onClick={() => console.log('Add API key clicked')}
+            aria-label="Button"
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -360,7 +361,8 @@ const CompanyAPISettings: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-purple-500 text-purple-400'
@@ -390,7 +392,8 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
                   <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">API Keys</h3>
                   <button
-                    onClick={() = aria-label="Button"> console.log('Add API key clicked')}
+                    onClick={() => console.log('Add API key clicked')}
+            aria-label="Button"
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -436,7 +439,8 @@ const CompanyAPISettings: React.FC = () => {
                               className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-mono text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                             />
                             <button
-                              onClick={() = aria-label="Button"> toggleKeyVisibility(key.id)}
+                              onClick={() => toggleKeyVisibility(key.id)}
+            aria-label="Button"
                               className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             >
                               {visibleKeys.has(key.id) ? (
@@ -446,7 +450,8 @@ const CompanyAPISettings: React.FC = () => {
                               )}
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> copyToClipboard(key.key)}
+                              onClick={() => copyToClipboard(key.key)}
+            aria-label="Button"
                               className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                             >
                               <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -522,7 +527,8 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
                   <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Integrations</h3>
                   <button
-                    onClick={() = aria-label="Button"> console.log('Add integration clicked')}
+                    onClick={() => console.log('Add integration clicked')}
+            aria-label="Button"
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -592,7 +598,8 @@ const CompanyAPISettings: React.FC = () => {
                 <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
                   <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Webhooks</h3>
                   <button
-                    onClick={() = aria-label="Button"> console.log('Add webhook clicked')}
+                    onClick={() => console.log('Add webhook clicked')}
+            aria-label="Button"
                     className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

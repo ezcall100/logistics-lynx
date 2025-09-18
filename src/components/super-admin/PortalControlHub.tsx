@@ -1277,7 +1277,8 @@ const PortalControlHub: React.FC = () => {
               </span>
             </div>
             <button 
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
@@ -1405,7 +1406,8 @@ const PortalControlHub: React.FC = () => {
 
         <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setViewMode('grid')}
+            onClick={() => setViewMode('grid')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'grid' 
                 ? 'bg-emerald-600 text-white' 
@@ -1415,7 +1417,8 @@ const PortalControlHub: React.FC = () => {
             <BarChart3 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() = aria-label="Button"> setViewMode('list')}
+            onClick={() => setViewMode('list')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'list' 
                 ? 'bg-emerald-600 text-white' 
@@ -1425,7 +1428,8 @@ const PortalControlHub: React.FC = () => {
             <PieChart className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
           </button>
           <button
-            onClick={() = aria-label="Button"> setViewMode('analytics')}
+            onClick={() => setViewMode('analytics')}
+            aria-label="Button"
             className={`px-4 py-2 rounded-lg transition-colors ${
               viewMode === 'analytics' 
                 ? 'bg-emerald-600 text-white' 
@@ -1641,7 +1645,8 @@ const PortalControlHub: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedPortal(null)}
+                  onClick={() => setSelectedPortal(null)}
+            aria-label="Button"
                   className="text-gray-400 hover:text-white transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />

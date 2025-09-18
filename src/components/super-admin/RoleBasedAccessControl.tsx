@@ -570,7 +570,8 @@ export function RoleBasedAccessControl() {
             </div>
             <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setIsEditing(!isEditing)}
+                onClick={() => setIsEditing(!isEditing)}
+            aria-label="Button"
                 className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
                   isEditing
                     ? 'bg-green-600 text-white'
@@ -616,7 +617,8 @@ export function RoleBasedAccessControl() {
                 ].map(tab => (
                   <button
                     key={tab.id}
-                    onClick={() = aria-label="Button"> setActiveTab(tab.id as 'roles' | 'users' | 'permissions')}
+                    onClick={() => setActiveTab(tab.id as 'roles' | 'users' | 'permissions')}
+            aria-label="Button"
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center justify-between ${
                       activeTab === tab.id
                         ? 'bg-blue-600 text-white'

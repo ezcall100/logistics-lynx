@@ -399,7 +399,8 @@ const EnterpriseDashboard: React.FC = () => {
               </span>
             </div>
             <button
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />

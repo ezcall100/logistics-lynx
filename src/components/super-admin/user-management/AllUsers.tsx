@@ -311,7 +311,8 @@ const AllUsers: React.FC = () => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowCreateUser(true)}
+            onClick={() => setShowCreateUser(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
           >
             <UserPlus className="h-4 w-4 responsive-container" />
@@ -459,25 +460,29 @@ const AllUsers: React.FC = () => {
             </div>
               <div className="flex items-center space-x-2 responsive-container">
               <button
-                onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                onClick={() => handleBulkAction('activate')}
+            aria-label="Button"
                 className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
                 Activate
               </button>
               <button
-                onClick={() = aria-label="Button"> handleBulkAction('deactivate')}
+                onClick={() => handleBulkAction('deactivate')}
+            aria-label="Button"
                 className="px-3 py-1 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors responsive-container"
               >
                 Deactivate
               </button>
                   <button
-                onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                onClick={() => handleBulkAction('delete')}
+            aria-label="Button"
                 className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors responsive-container"
                   >
                 Delete
                   </button>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedUsers([])}
+                  onClick={() => setSelectedUsers([])}
+            aria-label="Button"
                 className="px-3 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 transition-colors responsive-container"
                 >
                 Clear
@@ -509,7 +514,8 @@ const AllUsers: React.FC = () => {
                   </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('name')}
+                    onClick={() => handleSort('name')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Name</span>
@@ -520,7 +526,8 @@ const AllUsers: React.FC = () => {
                 </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('email')}
+                    onClick={() => handleSort('email')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Email</span>
@@ -531,7 +538,8 @@ const AllUsers: React.FC = () => {
                   </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('role')}
+                    onClick={() => handleSort('role')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Role</span>
@@ -542,7 +550,8 @@ const AllUsers: React.FC = () => {
                 </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('company')}
+                    onClick={() => handleSort('company')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                     <span>Company</span>
@@ -553,7 +562,8 @@ const AllUsers: React.FC = () => {
                   </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('status')}
+                    onClick={() => handleSort('status')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Status</span>
@@ -564,7 +574,8 @@ const AllUsers: React.FC = () => {
                   </th>
                 <th className="px-6 py-3 text-left responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> handleSort('lastLogin')}
+                    onClick={() => handleSort('lastLogin')}
+            aria-label="Button"
                     className="flex items-center space-x-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-300 responsive-container"
                   >
                       <span>Last Login</span>
@@ -653,7 +664,8 @@ const AllUsers: React.FC = () => {
                     <td className="px-6 py-4 text-right responsive-container">
                       <div className="flex items-center justify-end space-x-2 responsive-container">
                         <button
-                          onClick={() = aria-label="Button"> handleDeleteUser(user.id)}
+                          onClick={() => handleDeleteUser(user.id)}
+            aria-label="Button"
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                           title="Delete"
                         >
@@ -677,7 +689,8 @@ const AllUsers: React.FC = () => {
           </div>
           <div className="flex items-center space-x-2 responsive-container">
             <button
-                  onClick={() = aria-label="Button"> setCurrentPage(prev => Math.max(1, prev - 1))}
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+            aria-label="Button"
               disabled={currentPage === 1}
                   className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container"
             >
@@ -687,7 +700,8 @@ const AllUsers: React.FC = () => {
                   Page {currentPage} of {totalPages}
                 </span>
                 <button
-                  onClick={() = aria-label="Button"> setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+            aria-label="Button"
                   disabled={currentPage === totalPages}
                   className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container"
                 >
@@ -719,7 +733,8 @@ const AllUsers: React.FC = () => {
                   Create New User
                 </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateUser(false)}
+                  onClick={() => setShowCreateUser(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -804,7 +819,8 @@ const AllUsers: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateUser(false)}
+                  onClick={() => setShowCreateUser(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                 >
                   Cancel

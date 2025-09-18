@@ -419,7 +419,8 @@ const EnhancedSecurityCenter: React.FC = () => {
             <span>Export</span>
           </button>
           <button
-            onClick={() = aria-label="Button"> setShowSensitiveData(!showSensitiveData)}
+            onClick={() => setShowSensitiveData(!showSensitiveData)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {showSensitiveData ? <EyeOff className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
@@ -649,7 +650,8 @@ const EnhancedSecurityCenter: React.FC = () => {
                   
                   <div className="flex items-center space-x-2 ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> toggleEventExpansion(event.id)}
+                      onClick={() => toggleEventExpansion(event.id)}
+            aria-label="Button"
                       className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="View Details"
                     >
@@ -657,7 +659,8 @@ const EnhancedSecurityCenter: React.FC = () => {
                     </button>
                     {!event.resolved && (
                       <button
-                        onClick={() = aria-label="Button"> handleResolveEvent(event.id)}
+                        onClick={() => handleResolveEvent(event.id)}
+            aria-label="Button"
                         className="p-1 text-green-600 hover:text-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title="Resolve Event"
                       >
@@ -665,7 +668,8 @@ const EnhancedSecurityCenter: React.FC = () => {
                       </button>
                     )}
                     <button
-                      onClick={() = aria-label="Button"> handleDeleteEvent(event.id)}
+                      onClick={() => handleDeleteEvent(event.id)}
+            aria-label="Button"
                       className="p-1 text-red-600 hover:text-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete Event"
                     >

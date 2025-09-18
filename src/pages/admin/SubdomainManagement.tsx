@@ -122,7 +122,8 @@ export function SubdomainManagement() {
         {/* Tabs */}
         <div className="flex space-x-1 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setActiveTab('applications')}
+            onClick={() => setActiveTab('applications')}
+            aria-label="Button"
             className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
               activeTab === 'applications'
                 ? 'bg-transbot-sky text-white shadow-lg'
@@ -132,7 +133,8 @@ export function SubdomainManagement() {
             Applications ({applications.length})
           </button>
           <button
-            onClick={() = aria-label="Button"> setActiveTab('subdomains')}
+            onClick={() => setActiveTab('subdomains')}
+            aria-label="Button"
             className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
               activeTab === 'subdomains'
                 ? 'bg-transbot-sky text-white shadow-lg'
@@ -231,7 +233,8 @@ export function SubdomainManagement() {
 
                 <div className="flex space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> setSelectedApplication(application)}
+                    onClick={() => setSelectedApplication(application)}
+            aria-label="Button"
                     className="flex-1 bg-slate-100 text-slate-700 py-2 px-4 rounded-lg font-medium hover:bg-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     View Details
@@ -239,13 +242,15 @@ export function SubdomainManagement() {
                   {application.status === 'pending' && (
                     <>
                       <button
-                        onClick={() = aria-label="Button"> handleApproveApplication(application.id)}
+                        onClick={() => handleApproveApplication(application.id)}
+            aria-label="Button"
                         className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Approve
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> handleRejectApplication(application.id)}
+                        onClick={() => handleRejectApplication(application.id)}
+            aria-label="Button"
                         className="bg-red-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Reject
@@ -354,7 +359,8 @@ export function SubdomainManagement() {
                     Application Details
                   </h2>
                   <button
-                    onClick={() = aria-label="Button"> setSelectedApplication(null)}
+                    onClick={() => setSelectedApplication(null)}
+            aria-label="Button"
                     className="text-transbot-text-secondary hover:text-transbot-text-primary responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <XCircle className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -411,13 +417,15 @@ export function SubdomainManagement() {
                     {selectedApplication.status === 'pending' && (
                       <>
                         <button
-                          onClick={() = aria-label="Button"> handleApproveApplication(selectedApplication.id)}
+                          onClick={() => handleApproveApplication(selectedApplication.id)}
+            aria-label="Button"
                           className="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           Approve Application
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> handleRejectApplication(selectedApplication.id)}
+                          onClick={() => handleRejectApplication(selectedApplication.id)}
+            aria-label="Button"
                           className="flex-1 bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           Reject Application

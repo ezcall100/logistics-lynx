@@ -363,7 +363,8 @@ export function MCPAgentStatusDashboard() {
                 ].map(tab => (
                   <button
                     key={tab.id}
-                    onClick={() = aria-label="Button"> setActiveTab(tab.id as TabType)}
+                    onClick={() => setActiveTab(tab.id as TabType)}
+            aria-label="Button"
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center justify-between ${
                       activeTab === tab.id
                         ? 'bg-blue-600 text-white'
@@ -399,7 +400,8 @@ export function MCPAgentStatusDashboard() {
                   ].map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() = aria-label="Button"> setActiveTab(tab.id as TabType)}
+                      onClick={() => setActiveTab(tab.id as TabType)}
+            aria-label="Button"
                       className={`flex items-center space-x-2 px-6 py-4 transition-colors ${
                         activeTab === tab.id
                           ? 'bg-blue-600 text-white'

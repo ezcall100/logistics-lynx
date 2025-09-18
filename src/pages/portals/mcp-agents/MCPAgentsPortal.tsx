@@ -448,7 +448,8 @@ const MCPAgentsPortal: React.FC = () => {
             <div className="flex items-center space-x-2 sm:space-x-4 responsive-container">
               {/* Mobile Menu Button */}
               <button
-                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                 className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
               >
                 <svg className="h-5 w-5 responsive-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -542,7 +543,8 @@ const MCPAgentsPortal: React.FC = () => {
                 </div>
               )}
               <button
-                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                 className="hidden md:block p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
               >
                 {sidebarCollapsed ? (
@@ -564,10 +566,11 @@ const MCPAgentsPortal: React.FC = () => {
       
                   <div key={item.id}>
                     <button
-                      onClick={() = aria-label="Button"> {
+                      onClick={() => {
                         if (item.subMenus) {
                           handleMenuToggle(item.id);
-                        } else {
+                        }
+            aria-label="Button" else {
                           handleMenuItemClick(item.id, item.path);
                         }
                       }}
@@ -606,7 +609,8 @@ const MCPAgentsPortal: React.FC = () => {
       
                               <div key={subItem.id}>
                                 <button
-                                  onClick={() = aria-label="Button"> handleMenuItemClick(subItem.id, subItem.path)}
+                                  onClick={() => handleMenuItemClick(subItem.id, subItem.path)}
+            aria-label="Button"
                                   className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100 responsive-container"
                                 >
                                   <SubIcon className={`h-4 w-4 ${subItem.color}`} />
@@ -622,9 +626,9 @@ const MCPAgentsPortal: React.FC = () => {
                                     {subItem.subSubMenus.map(subSubItem => (
                                       <button
                                         key={subSubItem.id}
-                                        onClick={() = aria-label="Button">
-                                          handleMenuItemClick(subSubItem.id, subSubItem.path)
+                                        onClick={() => handleMenuItemClick(subSubItem.id, subSubItem.path)
                                         }
+            aria-label="Button"
                                         className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300 responsive-container"
                                       >
                                         <div className="h-2 w-2 bg-gray-300 rounded-full responsive-container"></div>

@@ -834,7 +834,8 @@ const PortalManagement: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap responsive-container sm:flex-col md:flex-row lg:grid">
                       <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                         <button
-                          onClick={() = aria-label="Button"> handleTogglePortal(portal.id)}
+                          onClick={() => handleTogglePortal(portal.id)}
+            aria-label="Button"
                           className={cn(
                             'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
                             portal.enabled ? 'bg-primary-600' : 'bg-gray-200'

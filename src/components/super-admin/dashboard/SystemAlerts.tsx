@@ -337,7 +337,8 @@ const SystemAlerts: React.FC = () => {
               <div className="flex items-center space-x-2 responsive-container">
                 {!alert.acknowledged && (
                   <button
-                    onClick={() = aria-label="Button"> handleAcknowledge(alert.id)}
+                    onClick={() => handleAcknowledge(alert.id)}
+            aria-label="Button"
                     className="px-3 py-1 text-sm bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/30 transition-colors responsive-container"
                   >
                     Acknowledge
@@ -345,7 +346,8 @@ const SystemAlerts: React.FC = () => {
                 )}
                 {!alert.resolved && (
                   <button
-                    onClick={() = aria-label="Button"> handleResolve(alert.id)}
+                    onClick={() => handleResolve(alert.id)}
+            aria-label="Button"
                     className="px-3 py-1 text-sm bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/30 transition-colors responsive-container"
                   >
                     Resolve

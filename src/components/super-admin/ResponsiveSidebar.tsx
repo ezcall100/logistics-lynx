@@ -75,7 +75,8 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
                 </h2>
               )}
               <button
-                onClick={() = aria-label="Button"> setSidebarCollapsed(!sidebarCollapsed)}
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            aria-label="Button"
                 className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {sidebarCollapsed ? (
@@ -99,10 +100,11 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
       
                 <div key={item.id} className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> {
+                    onClick={() => {
                       if (item.subMenus && item.subMenus.length > 0) {
                         handleMenuToggle(item.id);
-                      } else {
+                      }
+            aria-label="Button" else {
                         handleMenuItemClick(item.id);
                       }
                     }}
@@ -149,7 +151,8 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
       
                           <button
                             key={subMenu.id}
-                            onClick={() = aria-label="Button"> handleMenuItemClick(subMenu.id)}
+                            onClick={() => handleMenuItemClick(subMenu.id)}
+            aria-label="Button"
                             className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
                               isSubActive
                                 ? 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/30 dark:to-indigo-800/30 text-blue-700 dark:text-blue-300'
@@ -172,7 +175,8 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
 
       {/* Mobile Menu Button */}
       <button
-        onClick={() = aria-label="Button"> setMobileMenuOpen(true)}
+        onClick={() => setMobileMenuOpen(true)}
+            aria-label="Button"
         className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
       >
         <Menu className="h-5 w-5 text-gray-600 dark:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -192,7 +196,8 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
                   Navigation
                 </h2>
                 <button
-                  onClick={() = aria-label="Button"> setMobileMenuOpen(false)}
+                  onClick={() => setMobileMenuOpen(false)}
+            aria-label="Button"
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -210,10 +215,11 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
       
                     <div key={item.id} className="space-y-1 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           if (item.subMenus && item.subMenus.length > 0) {
                             handleMenuToggle(item.id);
-                          } else {
+                          }
+            aria-label="Button" else {
                             handleMenuItemClick(item.id);
                           }
                         }}
@@ -253,7 +259,8 @@ export const ResponsiveSidebar: React.FC<ResponsiveSidebarProps> = ({
       
                                 <button
                                   key={subMenu.id}
-                                  onClick={() = aria-label="Button"> handleMenuItemClick(subMenu.id)}
+                                  onClick={() => handleMenuItemClick(subMenu.id)}
+            aria-label="Button"
                                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
                                     isSubActive
                                       ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'

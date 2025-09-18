@@ -286,7 +286,8 @@ const CommunicationHubCustomization: React.FC = () => {
       
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                 className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-sm'
@@ -457,7 +458,8 @@ const CommunicationHubCustomization: React.FC = () => {
                     </div>
                     <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                       <button
-                        onClick={() = aria-label="Button"> handleChannelToggle(channel.id)}
+                        onClick={() => handleChannelToggle(channel.id)}
+            aria-label="Button"
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                           channel.enabled ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                         }`}
@@ -505,7 +507,8 @@ const CommunicationHubCustomization: React.FC = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() = aria-label="Button"> handleNotificationToggle(key)}
+                    onClick={() => handleNotificationToggle(key)}
+            aria-label="Button"
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       value ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
                     }`}

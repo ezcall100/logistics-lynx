@@ -239,7 +239,8 @@ export const RealTimeDevelopmentMonitor: React.FC<RealTimeDevelopmentMonitorProp
           </div>
           <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className={`p-1 rounded ${autoRefresh ? 'bg-green-600' : 'bg-gray-600'} text-white`}
             >
               <Zap className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

@@ -169,7 +169,8 @@ export function SubdomainApplicationForm() {
           </div>
           
           <button
-            onClick={() = aria-label="Button"> setIsSubmitted(false)}
+            onClick={() => setIsSubmitted(false)}
+            aria-label="Button"
             className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-transbot-lg transition-all duration-300 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Submit Another Application

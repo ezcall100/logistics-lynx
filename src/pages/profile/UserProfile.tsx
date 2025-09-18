@@ -149,7 +149,8 @@ const UserProfile: React.FC = () => {
                 </>
               ) : (
                 <button
-                  onClick={() = aria-label="Button"> setIsEditing(true)}
+                  onClick={() => setIsEditing(true)}
+            aria-label="Button"
                   className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -349,7 +350,8 @@ const UserProfile: React.FC = () => {
                       </p>
                     </div>
                     <button
-                      onClick={() = aria-label="Button"> handleNotificationChange(key)}
+                      onClick={() => handleNotificationChange(key)}
+            aria-label="Button"
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                         value ? 'bg-blue-600' : 'bg-gray-200'
                       }`}

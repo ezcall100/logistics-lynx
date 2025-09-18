@@ -413,7 +413,8 @@ export const CICDPipeline: React.FC = () => {
               <span>Refresh</span>
             </button>
             <button
-              onClick={() = aria-label="Button"> console.log('Create pipeline modal')}
+              onClick={() => console.log('Create pipeline modal')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
               <Plus className="w-4 h-4 responsive-container" />
@@ -529,9 +530,9 @@ export const CICDPipeline: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button">
-                  setSelectedTab(tab.id as 'pipelines' | 'stages' | 'artifacts' | 'analytics')
+                onClick={() => setSelectedTab(tab.id as 'pipelines' | 'stages' | 'artifacts' | 'analytics')
                 }
+            aria-label="Button"
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -606,21 +607,24 @@ export const CICDPipeline: React.FC = () => {
                             {getTriggerIcon(pipeline.trigger)}
                             {getStatusIcon(pipeline.status)}
                             <button
-                              onClick={() = aria-label="Button"> handlePipelineAction(pipeline.id, 'start')}
+                              onClick={() => handlePipelineAction(pipeline.id, 'start')}
+            aria-label="Button"
                               className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                               title="Start Pipeline"
                             >
                               <Play className="w-4 h-4 text-green-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> handlePipelineAction(pipeline.id, 'stop')}
+                              onClick={() => handlePipelineAction(pipeline.id, 'stop')}
+            aria-label="Button"
                               className="p-2 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors responsive-container"
                               title="Stop Pipeline"
                             >
                               <Pause className="w-4 h-4 text-red-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> console.log('View pipeline details', pipeline.id)}
+                              onClick={() => console.log('View pipeline details', pipeline.id)}
+            aria-label="Button"
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                               title="View Details"
                             >

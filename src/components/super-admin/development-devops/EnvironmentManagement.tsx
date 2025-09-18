@@ -439,7 +439,8 @@ export const EnvironmentManagement: React.FC = () => {
               <span>Refresh</span>
             </button>
             <button
-              onClick={() = aria-label="Button"> console.log('Create environment modal')}
+              onClick={() => console.log('Create environment modal')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
               <Plus className="w-4 h-4 responsive-container" />
@@ -558,11 +559,11 @@ export const EnvironmentManagement: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button">
-                  setSelectedTab(
+                onClick={() => setSelectedTab(
                     tab.id as 'overview' | 'environments' | 'configurations' | 'secrets'
                   )
                 }
+            aria-label="Button"
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -640,23 +641,25 @@ export const EnvironmentManagement: React.FC = () => {
                           </div>
                           <div className="flex items-center space-x-2 responsive-container">
                             <button
-                              onClick={() = aria-label="Button"> handleEnvironmentAction(environment.id, 'start')}
+                              onClick={() => handleEnvironmentAction(environment.id, 'start')}
+            aria-label="Button"
                               className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                               title="Start Environment"
                             >
                               <Play className="w-4 h-4 text-green-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> handleEnvironmentAction(environment.id, 'stop')}
+                              onClick={() => handleEnvironmentAction(environment.id, 'stop')}
+            aria-label="Button"
                               className="p-2 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors responsive-container"
                               title="Stop Environment"
                             >
                               <Pause className="w-4 h-4 text-red-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button">
-                                console.log('View environment details', environment.id)
+                              onClick={() => console.log('View environment details', environment.id)
                               }
+            aria-label="Button"
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                               title="View Details"
                             >

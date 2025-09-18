@@ -410,7 +410,8 @@ const UserOnboarding: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-            onClick={() = aria-label="Button"> setShowCreateInvite(true)}
+            onClick={() => setShowCreateInvite(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
             <UserPlus className="h-4 w-4 responsive-container" />
@@ -623,7 +624,8 @@ const UserOnboarding: React.FC = () => {
                       <div className="flex items-center justify-end space-x-2 responsive-container">
                         {invite.status === 'pending' && (
                             <button
-                            onClick={() = aria-label="Button"> handleSendInvite(invite.id)}
+                            onClick={() => handleSendInvite(invite.id)}
+            aria-label="Button"
                             className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container"
                             title="Send Invite"
                             >
@@ -632,7 +634,8 @@ const UserOnboarding: React.FC = () => {
                         )}
                         {(invite.status === 'sent' || invite.status === 'pending') && (
                             <button
-                            onClick={() = aria-label="Button"> handleSendReminder(invite.id)}
+                            onClick={() => handleSendReminder(invite.id)}
+            aria-label="Button"
                             className="p-1 text-gray-400 hover:text-yellow-600 transition-colors responsive-container"
                             title="Send Reminder"
                             >
@@ -640,14 +643,16 @@ const UserOnboarding: React.FC = () => {
                             </button>
                         )}
                             <button
-                          onClick={() = aria-label="Button"> handleCancelInvite(invite.id)}
+                          onClick={() => handleCancelInvite(invite.id)}
+            aria-label="Button"
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                           title="Cancel"
                         >
                           <X className="h-4 w-4 responsive-container" />
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> handleDeleteInvite(invite.id)}
+                          onClick={() => handleDeleteInvite(invite.id)}
+            aria-label="Button"
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                           title="Delete"
                         >
@@ -683,7 +688,8 @@ const UserOnboarding: React.FC = () => {
                   Invite New User
               </h3>
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateInvite(false)}
+                  onClick={() => setShowCreateInvite(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                 >
                   <X className="h-5 w-5 responsive-container" />
@@ -754,7 +760,8 @@ const UserOnboarding: React.FC = () => {
               
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setShowCreateInvite(false)}
+                  onClick={() => setShowCreateInvite(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                 >
                   Cancel

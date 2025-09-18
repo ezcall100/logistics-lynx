@@ -79,7 +79,8 @@ export const AiAssistantPanel: React.FC<AiAssistantPanelProps> = ({
                     {msg.suggestions.map((suggestion, index) => (
                       <button
                         key={index}
-                        onClick={() = aria-label="Button"> setNewMessage(suggestion)}
+                        onClick={() => setNewMessage(suggestion)}
+            aria-label="Button"
                         className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors responsive-container"
                       >
                         {suggestion}

@@ -240,7 +240,8 @@ const UserGroups: React.FC = () => {
                 <span>Export</span>
               </button>
               <button
-            onClick={() = aria-label="Button"> setShowCreateGroup(true)}
+            onClick={() => setShowCreateGroup(true)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
               >
             <Plus className="h-4 w-4 responsive-container" />
@@ -308,21 +309,24 @@ const UserGroups: React.FC = () => {
                       </div>
                       <div className="flex items-center space-x-1 responsive-container">
                         <button
-                    onClick={() = aria-label="Button"> console.log('View group:', group.id)}
+                    onClick={() => console.log('View group:', group.id)}
+            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-blue-600 transition-colors responsive-container"
                     title="View Details"
                   >
                     <Eye className="h-4 w-4 responsive-container" />
                   </button>
                   <button
-                    onClick={() = aria-label="Button"> console.log('Edit group:', group.id)}
+                    onClick={() => console.log('Edit group:', group.id)}
+            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-green-600 transition-colors responsive-container"
                     title="Edit"
                   >
                     <Edit className="h-4 w-4 responsive-container" />
                   </button>
                   <button
-                    onClick={() = aria-label="Button"> handleToggleGroupStatus(group.id)}
+                    onClick={() => handleToggleGroupStatus(group.id)}
+            aria-label="Button"
                     className={`p-1 transition-colors ${
                       group.isActive 
                         ? 'text-green-600 hover:text-red-600' 
@@ -333,7 +337,8 @@ const UserGroups: React.FC = () => {
                     {group.isActive ? <Unlock className="h-4 w-4 responsive-container" /> : <Lock className="h-4 w-4 responsive-container" />}
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> handleDeleteGroup(group.id)}
+                          onClick={() => handleDeleteGroup(group.id)}
+            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-red-600 transition-colors responsive-container"
                     title="Delete"
                         >
@@ -414,7 +419,8 @@ const UserGroups: React.FC = () => {
                       Create New Group
                 </h3>
                     <button
-                  onClick={() = aria-label="Button"> setShowCreateGroup(false)}
+                  onClick={() => setShowCreateGroup(false)}
+            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container"
                     >
                   <X className="h-5 w-5 responsive-container" />
@@ -479,7 +485,8 @@ const UserGroups: React.FC = () => {
 
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container">
                     <button
-                  onClick={() = aria-label="Button"> setShowCreateGroup(false)}
+                  onClick={() => setShowCreateGroup(false)}
+            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container"
                     >
                       Cancel

@@ -612,7 +612,8 @@ const SignupPage = React.memo(function SignupPage() {
                     />
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword(!showPassword)}
+            aria-label="Button"
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors responsive-container"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5 responsive-container" /> : <Eye className="w-5 h-5 responsive-container" />}
@@ -663,7 +664,8 @@ const SignupPage = React.memo(function SignupPage() {
                     />
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            aria-label="Button"
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors responsive-container"
                     >
                       {showConfirmPassword ? (

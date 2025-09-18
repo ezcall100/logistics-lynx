@@ -344,7 +344,8 @@ export const BillingManagementPage: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setSelectedTab(tab.id)}
+                onClick={() => setSelectedTab(tab.id)}
+            aria-label="Button"
                 className={`flex-1 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'

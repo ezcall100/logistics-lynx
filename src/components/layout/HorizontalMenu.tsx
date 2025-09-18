@@ -146,10 +146,11 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
             {menuItems.map((item) => (
               <div key={item.id} className="relative responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> {
+                  onClick={() => {
                     if (item.path) {
                       navigate(item.path);
-                    } else {
+                    }
+            aria-label="Button" else {
                       setActiveDropdown(activeDropdown === item.id ? null : item.id);
                     }
                   }}
@@ -176,10 +177,11 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                       {item.children.map((child) => (
                         <button
                           key={child.path}
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             navigate(child.path);
                             setActiveDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className={`w-full flex items-center space-x-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
                             isActive(child.path) ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
                           }`}
@@ -223,7 +225,8 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
             {/* User Menu */}
             <div className="relative responsive-container">
               <button
-                onClick={() = aria-label="Button"> setShowUserMenu(!showUserMenu)}
+                onClick={() => setShowUserMenu(!showUserMenu)}
+            aria-label="Button"
                 className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center responsive-container">
@@ -278,10 +281,11 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
                       {userMenuItems.map((item) => (
                         <button
                           key={item.path}
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             navigate(item.path);
                             setShowUserMenu(false);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full flex items-center space-x-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors responsive-container"
                         >
                           <item.icon className="w-4 h-4 text-gray-500 responsive-container" />
@@ -314,10 +318,11 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ variant = 'primary' }) 
           {menuItems.map((item) => (
             <button
               key={item.id}
-              onClick={() = aria-label="Button"> {
+              onClick={() => {
                 if (item.path) {
                   navigate(item.path);
-                } else {
+                }
+            aria-label="Button" else {
                   setActiveDropdown(activeDropdown === item.id ? null : item.id);
                 }
               }}

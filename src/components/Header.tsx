@@ -56,7 +56,8 @@ export function Header() {
             {user ? (
               <div className="relative responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setIsUserMenuOpen(!isUserMenuOpen)}
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+            aria-label="Button"
                   className="flex items-center space-x-2 glass px-3 py-2 rounded-lg hover:bg-white/20 transition-colors responsive-container"
                 >
                   <User className="w-4 h-4 responsive-container" />
@@ -107,7 +108,8 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() = aria-label="Button"> setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Button"
               className="md:hidden p-2 glass rounded-lg hover:bg-white/20 transition-colors responsive-container"
             >
               {isMenuOpen ? <X className="w-5 h-5 responsive-container" /> : <Menu className="w-5 h-5 responsive-container" />}

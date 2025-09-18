@@ -587,7 +587,8 @@ export const InfrastructureAsCode: React.FC = () => {
               <span>Refresh</span>
             </button>
             <button
-              onClick={() = aria-label="Button"> console.log('Create template modal')}
+              onClick={() => console.log('Create template modal')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
               <Plus className="w-4 h-4 responsive-container" />
@@ -715,9 +716,9 @@ export const InfrastructureAsCode: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button">
-                  setSelectedTab(tab.id as 'templates' | 'deployments' | 'resources' | 'validation')
+                onClick={() => setSelectedTab(tab.id as 'templates' | 'deployments' | 'resources' | 'validation')
                 }
+            aria-label="Button"
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -794,28 +795,32 @@ export const InfrastructureAsCode: React.FC = () => {
                           </div>
                           <div className="flex items-center space-x-2 responsive-container">
                             <button
-                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'plan')}
+                              onClick={() => handleTemplateAction(template.id, 'plan')}
+            aria-label="Button"
                               className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/20 rounded-lg transition-colors responsive-container"
                               title="Generate Plan"
                             >
                               <Eye className="w-4 h-4 text-blue-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'deploy')}
+                              onClick={() => handleTemplateAction(template.id, 'deploy')}
+            aria-label="Button"
                               className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                               title="Deploy Template"
                             >
                               <Play className="w-4 h-4 text-green-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> handleTemplateAction(template.id, 'validate')}
+                              onClick={() => handleTemplateAction(template.id, 'validate')}
+            aria-label="Button"
                               className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/20 rounded-lg transition-colors responsive-container"
                               title="Validate Template"
                             >
                               <CheckCircle className="w-4 h-4 text-purple-600 responsive-container" />
                             </button>
                             <button
-                              onClick={() = aria-label="Button"> console.log('View template details', template.id)}
+                              onClick={() => console.log('View template details', template.id)}
+            aria-label="Button"
                               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                               title="View Details"
                             >

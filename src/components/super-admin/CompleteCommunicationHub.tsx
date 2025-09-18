@@ -261,7 +261,8 @@ export const CompleteCommunicationHub: React.FC = () => {
         className="fixed bottom-4 right-4 z-50 responsive-container sm:flex-col md:flex-row lg:grid"
       >
         <button
-          onClick={() = aria-label="Button"> setIsMinimized(false)}
+          onClick={() => setIsMinimized(false)}
+            aria-label="Button"
           className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <MessageSquare className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -291,7 +292,8 @@ export const CompleteCommunicationHub: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
           <button
-            onClick={() = aria-label="Button"> setIsMinimized(true)}
+            onClick={() => setIsMinimized(true)}
+            aria-label="Button"
             className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             <Minimize2 className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -312,7 +314,8 @@ export const CompleteCommunicationHub: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() = aria-label="Button"> setActiveTab(tab.id as 'chat' | 'notifications' | 'alerts' | 'calls')}
+            onClick={() => setActiveTab(tab.id as 'chat' | 'notifications' | 'alerts' | 'calls')}
+            aria-label="Button"
             className={`flex-1 flex items-center justify-center space-x-2 py-3 text-sm font-medium transition-colors ${activeTab === tab.id ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-white'}`}
           >
             <tab.icon className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -392,7 +395,8 @@ export const CompleteCommunicationHub: React.FC = () => {
               <div className="p-4 border-t border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> fileInputRef.current?.click()}
+                    onClick={() => fileInputRef.current?.click()}
+            aria-label="Button"
                     className="p-2 hover:bg-white/10 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <Paperclip className="w-4 h-4 text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -494,13 +498,15 @@ export const CompleteCommunicationHub: React.FC = () => {
 
                   <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setIsMuted(!isMuted)}
+                      onClick={() => setIsMuted(!isMuted)}
+            aria-label="Button"
                       className={`p-3 rounded-full ${isMuted ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'} text-white transition-colors`}
                     >
                       {isMuted ? <MicOff className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Mic className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> setIsVideoEnabled(!isVideoEnabled)}
+                      onClick={() => setIsVideoEnabled(!isVideoEnabled)}
+            aria-label="Button"
                       className={`p-3 rounded-full ${isVideoEnabled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700'} text-white transition-colors`}
                     >
                       {isVideoEnabled ? (
@@ -510,7 +516,8 @@ export const CompleteCommunicationHub: React.FC = () => {
                       )}
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> setIsCallActive(false)}
+                      onClick={() => setIsCallActive(false)}
+            aria-label="Button"
                       className="p-3 bg-red-600 hover:bg-red-700 text-white rounded-full transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <Phone className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -527,7 +534,8 @@ export const CompleteCommunicationHub: React.FC = () => {
 
                   <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setIsCallActive(true)}
+                      onClick={() => setIsCallActive(true)}
+            aria-label="Button"
                       className="p-3 bg-green-600 hover:bg-green-700 text-white rounded-full transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       <Phone className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />

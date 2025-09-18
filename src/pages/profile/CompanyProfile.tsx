@@ -180,7 +180,8 @@ const CompanyProfile: React.FC = () => {
                 </>
               ) : (
                 <button
-                  onClick={() = aria-label="Button"> setIsEditing(true)}
+                  onClick={() => setIsEditing(true)}
+            aria-label="Button"
                   className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -405,7 +406,8 @@ const CompanyProfile: React.FC = () => {
                           className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container sm:flex-col md:flex-row lg:grid"
                         />
                         <button
-                          onClick={() = aria-label="Button"> removeService(index)}
+                          onClick={() => removeService(index)}
+            aria-label="Button"
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

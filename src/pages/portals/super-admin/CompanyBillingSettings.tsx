@@ -219,7 +219,8 @@ const CompanyBillingSettings: React.FC = () => {
               <span className="text-sm text-green-400 responsive-container sm:flex-col md:flex-row lg:grid">Live Billing Data</span>
             </div>
             <button
-              onClick={() = aria-label="Button"> console.log('Add payment method clicked')}
+              onClick={() => console.log('Add payment method clicked')}
+            aria-label="Button"
               className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -283,7 +284,8 @@ const CompanyBillingSettings: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-green-500 text-green-400'
@@ -436,7 +438,8 @@ const CompanyBillingSettings: React.FC = () => {
                 <div className="flex justify-between items-center responsive-container sm:flex-col md:flex-row lg:grid">
                   <h3 className="text-xl font-semibold text-white responsive-container sm:flex-col md:flex-row lg:grid">Payment Methods</h3>
                   <button
-                    onClick={() = aria-label="Button"> console.log('Add payment method clicked')}
+                    onClick={() => console.log('Add payment method clicked')}
+            aria-label="Button"
                     className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <Plus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />

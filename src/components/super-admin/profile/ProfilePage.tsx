@@ -731,7 +731,8 @@ const ProfilePage: React.FC = () => {
                       <span>Save</span>
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> setIsEditing(false)}
+                      onClick={() => setIsEditing(false)}
+            aria-label="Button"
                       className="flex items-center space-x-2 px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium backdrop-blur-sm responsive-container"
                     >
                       <X className="h-5 w-5 responsive-container" />
@@ -740,7 +741,8 @@ const ProfilePage: React.FC = () => {
                   </>
                 ) : (
                   <button
-                    onClick={() = aria-label="Button"> setIsEditing(true)}
+                    onClick={() => setIsEditing(true)}
+            aria-label="Button"
                     className="flex items-center space-x-2 px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium backdrop-blur-sm responsive-container"
                   >
                     <Edit className="h-5 w-5 responsive-container" />
@@ -828,7 +830,8 @@ const ProfilePage: React.FC = () => {
             Company Information
           </h3>
           <button
-            onClick={() = aria-label="Button"> setIsEditing(!isEditing)}
+            onClick={() => setIsEditing(!isEditing)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -936,7 +939,8 @@ const ProfilePage: React.FC = () => {
         {isEditing && (
           <div className="mt-6 flex items-center justify-end space-x-3 responsive-container">
             <button
-              onClick={() = aria-label="Button"> setIsEditing(false)}
+              onClick={() => setIsEditing(false)}
+            aria-label="Button"
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
             >
               Cancel
@@ -959,7 +963,8 @@ const ProfilePage: React.FC = () => {
             Recent Activity
           </h3>
           <button
-            onClick={() = aria-label="Button"> setActiveTab('activity')}
+            onClick={() => setActiveTab('activity')}
+            aria-label="Button"
             className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container"
           >
             View All
@@ -1191,7 +1196,8 @@ const ProfilePage: React.FC = () => {
               />
               <button
                 type="button"
-                onClick={() = aria-label="Button"> setShowPassword(!showPassword)}
+                onClick={() => setShowPassword(!showPassword)}
+            aria-label="Button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container"
               >
                 {showPassword ? (
@@ -1235,8 +1241,8 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center justify-end space-x-3 responsive-container">
             <button
               type="button"
-              onClick={() = aria-label="Button">
-                setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' })
+              onClick={() => setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' }
+            aria-label="Button")
               }
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
             >
@@ -1308,7 +1314,8 @@ const ProfilePage: React.FC = () => {
             Personal Information
           </h3>
           <button
-            onClick={() = aria-label="Button"> setIsEditing(!isEditing)}
+            onClick={() => setIsEditing(!isEditing)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-md responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -1395,7 +1402,8 @@ const ProfilePage: React.FC = () => {
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700 responsive-container">
               <button
                 type="button"
-                onClick={() = aria-label="Button"> setIsEditing(false)}
+                onClick={() => setIsEditing(false)}
+            aria-label="Button"
                 className="px-6 py-3 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors font-medium responsive-container"
               >
                 Cancel
@@ -1424,7 +1432,8 @@ const ProfilePage: React.FC = () => {
             Company Information
           </h3>
           <button
-            onClick={() = aria-label="Button"> setIsEditing(!isEditing)}
+            onClick={() => setIsEditing(!isEditing)}
+            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-md responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -1543,7 +1552,8 @@ const ProfilePage: React.FC = () => {
             <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700 responsive-container">
               <button
                 type="button"
-                onClick={() = aria-label="Button"> setIsEditing(false)}
+                onClick={() => setIsEditing(false)}
+            aria-label="Button"
                 className="px-6 py-3 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors font-medium responsive-container"
               >
                 Cancel
@@ -1584,7 +1594,8 @@ const ProfilePage: React.FC = () => {
           
           <div className="flex items-center space-x-3 responsive-container">
             <button
-              onClick={() = aria-label="Button"> setIsRealTime(!isRealTime)}
+              onClick={() => setIsRealTime(!isRealTime)}
+            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
             >
               {isRealTime ? <Pause className="h-4 w-4 responsive-container" /> : <Play className="h-4 w-4 responsive-container" />}
@@ -1611,7 +1622,8 @@ const ProfilePage: React.FC = () => {
             </button>
             
             <button
-              onClick={() = aria-label="Button"> console.log('Add setting modal')}
+              onClick={() => console.log('Add setting modal')}
+            aria-label="Button"
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium responsive-container"
             >
               <Plus className="h-4 w-4 responsive-container" />
@@ -1871,10 +1883,11 @@ const ProfilePage: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
                     <div className="flex items-center space-x-2 responsive-container">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedSetting(setting);
                           console.log('View setting modal');
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                         title="View Setting"
                       >
@@ -1882,10 +1895,11 @@ const ProfilePage: React.FC = () => {
                       </button>
                       {setting.isEditable && (
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             setSelectedSetting(setting);
                             console.log('Edit setting modal');
-                          }}
+                          }
+            aria-label="Button"}
                           className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 responsive-container"
                           title="Edit Setting"
                         >
@@ -1893,10 +1907,11 @@ const ProfilePage: React.FC = () => {
                         </button>
                       )}
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedSetting(setting);
                           console.log('Delete setting modal');
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                         title="Delete Setting"
                       >
@@ -1914,14 +1929,16 @@ const ProfilePage: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6 responsive-container">
           <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
-              onClick={() = aria-label="Button"> setSettingsCurrentPage(prev => Math.max(prev - 1, 1))}
+              onClick={() => setSettingsCurrentPage(prev => Math.max(prev - 1, 1))}
+            aria-label="Button"
               disabled={settingsCurrentPage === 1}
               className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
               Previous
             </button>
             <button
-              onClick={() = aria-label="Button"> setSettingsCurrentPage(prev => Math.min(prev + 1, settingsTotalPages))}
+              onClick={() => setSettingsCurrentPage(prev => Math.min(prev + 1, settingsTotalPages))}
+            aria-label="Button"
               disabled={settingsCurrentPage === settingsTotalPages}
               className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -1956,7 +1973,8 @@ const ProfilePage: React.FC = () => {
                 {Array.from({ length: settingsTotalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
-                    onClick={() = aria-label="Button"> setSettingsCurrentPage(page)}
+                    onClick={() => setSettingsCurrentPage(page)}
+            aria-label="Button"
                     className={`px-3 py-1 text-sm rounded ${
                       page === settingsCurrentPage
                         ? 'bg-blue-600 text-white'
@@ -2139,7 +2157,8 @@ const ProfilePage: React.FC = () => {
           
           <div className="flex items-center space-x-3 responsive-container">
             <button
-              onClick={() = aria-label="Button"> setIsRealTime(!isRealTime)}
+              onClick={() => setIsRealTime(!isRealTime)}
+            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
             >
               {isRealTime ? <Pause className="h-4 w-4 responsive-container" /> : <Play className="h-4 w-4 responsive-container" />}
@@ -2155,7 +2174,8 @@ const ProfilePage: React.FC = () => {
             </button>
             
             <button
-              onClick={() = aria-label="Button"> console.log('Add user modal')}
+              onClick={() => console.log('Add user modal')}
+            aria-label="Button"
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium responsive-container"
             >
               <Plus className="h-4 w-4 responsive-container" />
@@ -2414,30 +2434,33 @@ const ProfilePage: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium responsive-container">
                     <div className="flex items-center space-x-2 responsive-container">
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedUser(user);
                           console.log('View user modal');
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                         title="View User"
                       >
                         <Eye className="h-4 w-4 responsive-container" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedUser(user);
                           console.log('Edit user modal');
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 responsive-container"
                         title="Edit User"
                       >
                         <Edit className="h-4 w-4 responsive-container" />
                       </button>
                       <button
-                        onClick={() = aria-label="Button"> {
+                        onClick={() => {
                           setSelectedUser(user);
                           console.log('Delete user modal');
-                        }}
+                        }
+            aria-label="Button"}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                         title="Delete User"
                       >
@@ -2455,14 +2478,16 @@ const ProfilePage: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6 responsive-container">
           <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
-              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.max(prev - 1, 1))}
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            aria-label="Button"
               disabled={currentPage === 1}
               className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
               Previous
             </button>
             <button
-              onClick={() = aria-label="Button"> setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            aria-label="Button"
               disabled={currentPage === totalPages}
               className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -2495,7 +2520,8 @@ const ProfilePage: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
-                    onClick={() = aria-label="Button"> setCurrentPage(page)}
+                    onClick={() => setCurrentPage(page)}
+            aria-label="Button"
                     className={`px-3 py-1 text-sm rounded ${
                       page === currentPage
                         ? 'bg-blue-600 text-white'
@@ -2668,7 +2694,8 @@ const ProfilePage: React.FC = () => {
                 {profileTabs.map(tab => (
                   <button
                     key={tab.id}
-                    onClick={() = aria-label="Button"> setActiveTab(tab.id)}
+                    onClick={() => setActiveTab(tab.id)}
+            aria-label="Button"
                     className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                       activeTab === tab.id
                         ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
@@ -2696,21 +2723,24 @@ const ProfilePage: React.FC = () => {
               </h3>
               <div className="space-y-3 responsive-container">
                 <button
-                  onClick={() = aria-label="Button"> setShowSignOutModal(true)}
+                  onClick={() => setShowSignOutModal(true)}
+            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <LogOut className="h-5 w-5 responsive-container" />
                   <span>Sign Out</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> setActiveTab('security')}
+                  onClick={() => setActiveTab('security')}
+            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <Shield className="h-5 w-5 responsive-container" />
                   <span>Security Settings</span>
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> setActiveTab('preferences')}
+                  onClick={() => setActiveTab('preferences')}
+            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <Settings className="h-5 w-5 responsive-container" />
@@ -2763,7 +2793,8 @@ const ProfilePage: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-end space-x-3 responsive-container">
                   <button
-                    onClick={() = aria-label="Button"> setShowSignOutModal(false)}
+                    onClick={() => setShowSignOutModal(false)}
+            aria-label="Button"
                     className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
                   >
                     Cancel

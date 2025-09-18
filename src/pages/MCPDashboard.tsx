@@ -107,14 +107,16 @@ export const MCPDashboard: React.FC = () => {
           {/* Action Buttons */}
           <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
             <button
-              onClick={() = aria-label="Button"> setShowFilters(!showFilters)}
+              onClick={() => setShowFilters(!showFilters)}
+            aria-label="Button"
               className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Filter className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span>Filters</span>
             </button>
             <button
-              onClick={() = aria-label="Button"> setAutoRefresh(!autoRefresh)}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+            aria-label="Button"
               className={`px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg transition-all duration-200 flex items-center space-x-2 ${
                 autoRefresh
                   ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -125,7 +127,8 @@ export const MCPDashboard: React.FC = () => {
               <span>Auto Refresh</span>
             </button>
             <button
-              onClick={() = aria-label="Button"> handleBulkAction('restart')}
+              onClick={() => handleBulkAction('restart')}
+            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <RotateCcw className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -246,7 +249,8 @@ export const MCPDashboard: React.FC = () => {
                   </h2>
                   <div className="flex items-center gap-2 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setSelectedView('grid')}
+                      onClick={() => setSelectedView('grid')}
+            aria-label="Button"
                       className={`p-2 rounded-lg transition-colors ${
                         selectedView === 'grid'
                           ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -256,7 +260,8 @@ export const MCPDashboard: React.FC = () => {
                       <Grid className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> setSelectedView('list')}
+                      onClick={() => setSelectedView('list')}
+            aria-label="Button"
                       className={`p-2 rounded-lg transition-colors ${
                         selectedView === 'list'
                           ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'

@@ -293,7 +293,8 @@ export function ModernHeader() {
 
           {/* Mobile Menu Button - Compact */}
           <button
-            onClick={() = aria-label="Button"> setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Button"
             className="lg:hidden p-2 rounded-lg text-transbot-text-secondary hover:bg-transbot-neutral-light/50 transition-colors duration-200 responsive-container"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5 responsive-container" /> : <Menu className="w-5 h-5 responsive-container" />}

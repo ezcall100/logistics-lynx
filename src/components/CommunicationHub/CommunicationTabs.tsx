@@ -52,7 +52,8 @@ export const CommunicationTabs: React.FC<CommunicationTabsProps> = ({
       
       <button
         key={tab.id}
-        onClick={() = aria-label="Button"> onTabChange(tab.id)}
+        onClick={() => onTabChange(tab.id)}
+            aria-label="Button"
         className={`group relative flex flex-col items-center space-y-1 p-2 sm:p-2.5 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg min-h-[50px] ${
           isActive
             ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/40 dark:to-blue-800/40 border-2 border-blue-300 dark:border-blue-600 shadow-md ring-1 ring-blue-200 dark:ring-blue-800'

@@ -32,7 +32,8 @@ export const SmsPanel: React.FC<SmsPanelProps> = ({
           SMS
         </h3>
         <button 
-          onClick={() = aria-label="Button"> setShowComposeSms(!showComposeSms)}
+          onClick={() => setShowComposeSms(!showComposeSms)}
+            aria-label="Button"
           className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <Plus className="h-3 w-3 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -96,7 +97,8 @@ export const SmsPanel: React.FC<SmsPanelProps> = ({
                 Send SMS
               </button>
               <button
-                onClick={() = aria-label="Button"> setShowComposeSms(false)}
+                onClick={() => setShowComposeSms(false)}
+            aria-label="Button"
                 className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Cancel

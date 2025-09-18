@@ -1309,7 +1309,8 @@ export const AllUsersPage: React.FC = () => {
 
             <div className="flex gap-3 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> setShowFilters(!showFilters)}
+                onClick={() => setShowFilters(!showFilters)}
+            aria-label="Button"
                 className={`px-4 py-3 border rounded-xl transition-all duration-200 flex items-center space-x-2 ${
                   showFilters
                     ? 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/20 dark:border-blue-700 dark:text-blue-400'
@@ -1340,21 +1341,24 @@ export const AllUsersPage: React.FC = () => {
               </select>
 
               <button
-                onClick={() = aria-label="Button"> setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+            aria-label="Button"
                 className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {sortOrder === 'asc' ? '???' : '???'}
               </button>
 
               <button
-                onClick={() = aria-label="Button"> setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+            aria-label="Button"
                 className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 {viewMode === 'grid' ? 'List View' : 'Grid View'}
               </button>
 
               <button
-                onClick={() = aria-label="Button"> setShowCreateModal(true)}
+                onClick={() => setShowCreateModal(true)}
+            aria-label="Button"
                 className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <UserPlus className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1450,7 +1454,8 @@ export const AllUsersPage: React.FC = () => {
                   {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
                 </span>
                 <button
-                  onClick={() = aria-label="Button"> setSelectedUsers([])}
+                  onClick={() => setSelectedUsers([])}
+            aria-label="Button"
                   className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1458,28 +1463,32 @@ export const AllUsersPage: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('activate')}
+                  onClick={() => handleBulkAction('activate')}
+            aria-label="Button"
                   className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <UserCheck className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Activate
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('suspend')}
+                  onClick={() => handleBulkAction('suspend')}
+            aria-label="Button"
                   className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Ban className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Suspend
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('export')}
+                  onClick={() => handleBulkAction('export')}
+            aria-label="Button"
                   className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Download className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   Export
                 </button>
                 <button
-                  onClick={() = aria-label="Button"> handleBulkAction('delete')}
+                  onClick={() => handleBulkAction('delete')}
+            aria-label="Button"
                   className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Trash2 className="w-4 h-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1543,7 +1552,7 @@ export const AllUsersPage: React.FC = () => {
                 </div>
                 <div className="relative responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> {
+                    onClick={() => {
                       console.log(
                         '??????? Three-dot button clicked for user:',
                         user.name,
@@ -1553,7 +1562,8 @@ export const AllUsersPage: React.FC = () => {
                       const newState = showDropdown === user.id ? null : user.id;
                       console.log('Setting dropdown to:', newState);
                       setShowDropdown(newState);
-                    }}
+                    }
+            aria-label="Button"}
                     className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 responsive-container sm:flex-col md:flex-row lg:grid"
                     title="More Actions"
                   >
@@ -1564,72 +1574,79 @@ export const AllUsersPage: React.FC = () => {
                     <div className="absolute right-0 top-10 w-56 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-10 responsive-container sm:flex-col md:flex-row lg:grid">
                       <div className="py-1 responsive-container sm:flex-col md:flex-row lg:grid">
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             console.log('??????? View Details button clicked for:', user.name);
                             openViewModal(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>View Details</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             console.log('?????? Edit User button clicked for:', user.name);
                             openEditModal(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Edit User</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             duplicateUser(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Copy className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Duplicate User</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             exportUser(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Download className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Export User Data</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             sendEmailToUser(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Mail className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Send Email</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             resetUserPassword(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Key className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>Reset Password</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             toggleUserStatus(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           {user.status === 'active' ? (
@@ -1640,20 +1657,22 @@ export const AllUsersPage: React.FC = () => {
                           <span>{user.status === 'active' ? 'Suspend User' : 'Activate User'}</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             viewUserActivity(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Activity className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                           <span>View Activity</span>
                         </button>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             manageUserPermissions(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Settings className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1661,10 +1680,11 @@ export const AllUsersPage: React.FC = () => {
                         </button>
                         <div className="border-t border-slate-200 dark:border-slate-700 my-1 responsive-container sm:flex-col md:flex-row lg:grid"></div>
                         <button
-                          onClick={() = aria-label="Button"> {
+                          onClick={() => {
                             openDeleteModal(user);
                             setShowDropdown(null);
-                          }}
+                          }
+            aria-label="Button"}
                           className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid"
                         >
                           <Trash2 className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1780,7 +1800,8 @@ export const AllUsersPage: React.FC = () => {
                     Create New User
                   </h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                    onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -1957,7 +1978,8 @@ export const AllUsersPage: React.FC = () => {
                   <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowCreateModal(false)}
+                      onClick={() => setShowCreateModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
@@ -1994,7 +2016,8 @@ export const AllUsersPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
                   <h2 className="text-2xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Edit User</h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowEditModal(false)}
+                    onClick={() => setShowEditModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -2198,7 +2221,8 @@ export const AllUsersPage: React.FC = () => {
                   <div className="flex justify-end space-x-3 pt-4 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
                       type="button"
-                      onClick={() = aria-label="Button"> setShowEditModal(false)}
+                      onClick={() => setShowEditModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Cancel
@@ -2235,7 +2259,8 @@ export const AllUsersPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   <h2 className="text-xl font-bold text-slate-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Delete User</h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    onClick={() => setShowDeleteModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -2265,7 +2290,8 @@ export const AllUsersPage: React.FC = () => {
 
                 <div className="flex justify-end space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
-                    onClick={() = aria-label="Button"> setShowDeleteModal(false)}
+                    onClick={() => setShowDeleteModal(false)}
+            aria-label="Button"
                     className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     Cancel
@@ -2303,7 +2329,8 @@ export const AllUsersPage: React.FC = () => {
                     User Details
                   </h2>
                   <button
-                    onClick={() = aria-label="Button"> setShowViewModal(false)}
+                    onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                     className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     <X className="w-6 h-6 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -2427,16 +2454,18 @@ export const AllUsersPage: React.FC = () => {
 
                   <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
                     <button
-                      onClick={() = aria-label="Button"> setShowViewModal(false)}
+                      onClick={() => setShowViewModal(false)}
+            aria-label="Button"
                       className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Close
                     </button>
                     <button
-                      onClick={() = aria-label="Button"> {
+                      onClick={() => {
                         setShowViewModal(false);
                         openEditModal(viewingUser);
-                      }}
+                      }
+            aria-label="Button"}
                       className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                     >
                       Edit User

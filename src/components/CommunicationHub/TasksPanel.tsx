@@ -43,7 +43,8 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
           Tasks
         </h3>
         <button 
-          onClick={() = aria-label="Button"> setShowAddTask(!showAddTask)}
+          onClick={() => setShowAddTask(!showAddTask)}
+            aria-label="Button"
           className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
         >
           <Plus className="h-3 w-3 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -60,7 +61,8 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
           >
             <div className="flex items-center space-x-2 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">
               <button
-                onClick={() = aria-label="Button"> onToggleTaskCompletion(task.id)}
+                onClick={() => onToggleTaskCompletion(task.id)}
+            aria-label="Button"
                 className={`p-1 rounded transition-colors ${
                   task.completed 
                     ? 'text-green-600' 
@@ -134,7 +136,8 @@ export const TasksPanel: React.FC<TasksPanelProps> = ({
                 Add Task
               </button>
               <button
-                onClick={() = aria-label="Button"> setShowAddTask(false)}
+                onClick={() => setShowAddTask(false)}
+            aria-label="Button"
                 className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 Cancel
