@@ -438,4 +438,3 @@ const CompanyProfile: React.FC = () => {
 };
 
 export default CompanyProfile;
-}

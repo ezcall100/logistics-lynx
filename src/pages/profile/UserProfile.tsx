@@ -167,7 +167,7 @@ const UserProfile: React.FC = () => {
               <div className="relative inline-block responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                   {user?.avatar ? (
-                    <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" / alt="Image">
+                    <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full responsive-container sm:flex-col md:flex-row lg:grid" />
                   ) : (
                     <User className="w-12 h-12 text-white responsive-container sm:flex-col md:flex-row lg:grid" />
                   )}
@@ -389,4 +389,3 @@ const UserProfile: React.FC = () => {
 };
 
 export default UserProfile;
-}

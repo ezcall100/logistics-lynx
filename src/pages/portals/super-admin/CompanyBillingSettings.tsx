@@ -627,4 +627,3 @@ const CompanyBillingSettings: React.FC = () => {
 };
 
 export default CompanyBillingSettings;
-}

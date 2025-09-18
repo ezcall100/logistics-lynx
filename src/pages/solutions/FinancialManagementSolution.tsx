@@ -179,4 +179,3 @@ const FinancialManagementSolution: React.FC = () => {
 }
 
 export default FinancialManagementSolution
-}

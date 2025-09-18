@@ -379,8 +379,7 @@ const EnhancedSystemOverview: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
@@ -406,11 +405,11 @@ const EnhancedSystemOverview: React.FC = () => {
             onClick={fetchData}
             disabled={refreshing}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
-           aria-label="Button">
+>
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" >
             <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
@@ -440,12 +439,11 @@ const EnhancedSystemOverview: React.FC = () => {
                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                   <button
                     onClick={() => toggleCardExpansion(metric.id)}
-            aria-label="Button"
                     className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                   >
                     {isExpanded ? <Minimize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Maximize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
                   </button>
-                  <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                  <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" >
                     <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                   </button>
                 </div>
@@ -522,7 +520,7 @@ const EnhancedSystemOverview: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
               System Status
             </h2>
-            <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" >
               <Settings className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -566,7 +564,6 @@ const EnhancedSystemOverview: React.FC = () => {
             </h2>
             <button
               onClick={() => setShowCreateAlert(true)}
-            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <Plus className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -640,7 +637,6 @@ const EnhancedSystemOverview: React.FC = () => {
                     {!alert.resolved && (
                       <button
                         onClick={() => handleResolveAlert(alert.id)}
-            aria-label="Button"
                         className="p-1 text-green-600 hover:text-green-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                         title="Resolve Alert"
                       >
@@ -649,7 +645,6 @@ const EnhancedSystemOverview: React.FC = () => {
                     )}
                     <button
                       onClick={() => handleDeleteAlert(alert.id)}
-            aria-label="Button"
                       className="p-1 text-red-600 hover:text-red-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       title="Delete Alert"
                     >
@@ -684,7 +679,6 @@ const EnhancedSystemOverview: React.FC = () => {
                 </h3>
                 <button
                   onClick={() => setShowCreateAlert(false)}
-            aria-label="Button"
                   className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -754,7 +748,6 @@ const EnhancedSystemOverview: React.FC = () => {
               <div className="flex items-center justify-end space-x-3 mt-6 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
                   onClick={() => setShowCreateAlert(false)}
-            aria-label="Button"
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   Cancel
@@ -762,7 +755,7 @@ const EnhancedSystemOverview: React.FC = () => {
                 <button
                   onClick={handleCreateAlert}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
-                 aria-label="Button">
+>
                   Create Alert
                 </button>
               </div>

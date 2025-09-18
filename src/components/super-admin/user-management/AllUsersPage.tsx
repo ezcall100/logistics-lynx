@@ -1527,7 +1527,7 @@ export const AllUsersPage: React.FC = () => {
                       className="w-16 h-16 rounded-full ring-4 ring-white dark:ring-slate-700 shadow-lg responsive-container sm:flex-col md:flex-row lg:grid"
                       src={user.avatar}
                       alt={user.name}
-                    / alt="Image">
+                    />
                     {user.isVerified && (
                       <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center responsive-container sm:flex-col md:flex-row lg:grid">
                         <CheckCircle className="w-4 h-4 text-white responsive-container sm:flex-col md:flex-row lg:grid" />

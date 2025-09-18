@@ -284,5 +284,6 @@ export function AIAgentVisualization() {
         </motion.div>
       </div>
     </section>
+    </ErrorBoundary>
   )
-}
+}

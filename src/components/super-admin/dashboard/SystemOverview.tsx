@@ -120,8 +120,7 @@ class SystemOverviewErrorBoundary extends React.Component {
         <div className="p-8 text-center responsive-container sm:flex-col md:flex-row lg:grid">
           <h3 className="text-lg font-semibold text-red-600 mb-2 responsive-container sm:flex-col md:flex-row lg:grid">System Overview Error</h3>
           <button 
-            onClick={() => this.setState({ hasError: false }
-            aria-label="Button")}
+            onClick={() => this.setState({ hasError: false })}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 responsive-container sm:flex-col md:flex-row lg:grid"
           >
             Retry
@@ -298,7 +297,7 @@ const SystemOverview: React.FC = React.memo(() => {
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
-           aria-label="Button">
+>
             {isRealTimeEnabled ? <Pause className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Play className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
             <span>{isRealTimeEnabled ? 'Pause' : 'Resume'}</span>
           </button>
@@ -306,20 +305,19 @@ const SystemOverview: React.FC = React.memo(() => {
             onClick={handleRefresh}
             disabled={isLoading}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
-           aria-label="Button">
+>
             <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
           <button
             onClick={handleExport}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
-           aria-label="Button">
+>
             <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
           <button
             onClick={() => setIsFullscreen(!isFullscreen)}
-            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
           >
             {isFullscreen ? <Minimize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Maximize2 className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />}
@@ -353,7 +351,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+12.5%</span>
               <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
               <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -408,7 +406,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+8.3%</span>
               <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
               <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -463,7 +461,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">+15.2%</span>
               <span className="text-sm text-gray-500 ml-2 responsive-container sm:flex-col md:flex-row lg:grid">from last month</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
               <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -517,7 +515,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <CheckCircle className="h-4 w-4 text-green-500 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
               <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">All systems operational</span>
             </div>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
               <MoreVertical className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -574,7 +572,7 @@ const SystemOverview: React.FC = React.memo(() => {
                   <span className="text-sm text-gray-600 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">Disk</span>
                 </div>
               </div>
-              <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+              <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
                 <Settings className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
               </button>
             </div>
@@ -627,7 +625,7 @@ const SystemOverview: React.FC = React.memo(() => {
         >
           <div className="flex items-center justify-between mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">System Health</h3>
-            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+            <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
               <RefreshCw className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             </button>
           </div>
@@ -648,7 +646,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Healthy</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
                   <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
@@ -670,7 +668,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Healthy</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
                   <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
@@ -692,7 +690,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Active</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
                   <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
@@ -714,7 +712,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
                 <CheckCircle className="h-5 w-5 text-green-500 responsive-container sm:flex-col md:flex-row lg:grid" />
                 <span className="text-sm text-green-600 responsive-container sm:flex-col md:flex-row lg:grid">Secure</span>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container sm:flex-col md:flex-row lg:grid" >
                   <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>
@@ -754,7 +752,7 @@ const SystemOverview: React.FC = React.memo(() => {
               <option value="payment">Payment</option>
               <option value="error">Error</option>
             </select>
-            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">View All</button>
+            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container sm:flex-col md:flex-row lg:grid" >View All</button>
           </div>
         </div>
         <div className="space-y-4 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -787,7 +785,7 @@ const SystemOverview: React.FC = React.memo(() => {
                   <Clock className="h-4 w-4 inline mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
                   {new Date(activity.timestamp).toLocaleTimeString()}
                 </div>
-                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+                <button className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity responsive-container sm:flex-col md:flex-row lg:grid" >
                   <Eye className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
                 </button>
               </div>

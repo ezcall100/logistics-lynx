@@ -821,4 +821,6 @@ const SignupPage = React.memo(function SignupPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SignupPage;

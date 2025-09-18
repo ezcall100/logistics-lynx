@@ -236,8 +236,7 @@ const MCP301AgentsWorking: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <div className="mb-8 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
@@ -526,8 +525,8 @@ const MCP301AgentsWorking: React.FC = () => {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 
 export default MCP301AgentsWorking;
-}

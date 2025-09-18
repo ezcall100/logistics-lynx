@@ -417,8 +417,7 @@ const SystemMonitoringDashboard: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="p-6 space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 responsive-container sm:flex-col md:flex-row lg:grid">
         <div>
@@ -456,11 +455,11 @@ const SystemMonitoringDashboard: React.FC = () => {
             onClick={fetchData}
             disabled={refreshing}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 responsive-container sm:flex-col md:flex-row lg:grid"
-           aria-label="Button">
+>
             <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
             <span>Refresh</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" aria-label="Button">
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid" >
             <Download className="h-4 w-4 responsive-container sm:flex-col md:flex-row lg:grid" />
             <span>Export</span>
           </button>
@@ -627,7 +626,6 @@ const SystemMonitoringDashboard: React.FC = () => {
                     {!alert.acknowledged && (
                       <button
                         onClick={() => handleAcknowledgeAlert(alert.id)}
-            aria-label="Button"
                         className="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         Acknowledge

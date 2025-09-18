@@ -1,8 +1,16 @@
-import React from 'react';
 import { motion } from 'framer-motion'
 import { Brain, ArrowRight, Play, Activity } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { NeuralNetwork } from './NeuralNetwork'
+
+// ErrorBoundary component
+const ErrorBoundary = ({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }) => {
+  try {
+    return <>{children}</>
+  } catch (error) {
+    return <>{fallback}</>
+  }
+}
 
 export function AIHeroSection() {
   const [agentCount, setAgentCount] = useState(0)
@@ -49,9 +57,7 @@ export function AIHeroSection() {
       })
     }, 2000)
 
-    return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => {
+    return () => {
       clearTimeout(timer)
       clearInterval(taskInterval)
     }
@@ -225,5 +231,6 @@ export function AIHeroSection() {
         </div>
       </div>
     </section>
+    </ErrorBoundary>
   )
-}
+}

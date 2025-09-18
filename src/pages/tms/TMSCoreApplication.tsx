@@ -219,24 +219,18 @@ const TMSCoreApplication: React.FC = () => {
         );
       case 'carriers':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
           <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Carriers</h2>
           </div>
         );
       case 'analytics':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
           <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Analytics</h2>
           </div>
         );
       case 'settings':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
           <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Settings</h2>
           </div>
@@ -248,8 +242,7 @@ const TMSCoreApplication: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Sidebar */}
       <div
         className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white dark:bg-slate-800 shadow-sm transition-all duration-300 flex flex-col`}
@@ -272,12 +265,10 @@ const TMSCoreApplication: React.FC = () => {
             {navigationItems.map(item => {
               const Icon = item.icon;
               return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                 <li key={item.id}>
                   <button
                     onClick={() => setActiveTab(item.id)}
-            aria-label="Button"
+                    aria-label="Button"
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       activeTab === item.id
                         ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
@@ -327,7 +318,7 @@ const TMSCoreApplication: React.FC = () => {
               <div className="flex items-center space-x-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <button
                   onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            aria-label="Button"
+                    aria-label="Button"
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   {sidebarCollapsed ? (
@@ -345,13 +336,13 @@ const TMSCoreApplication: React.FC = () => {
                 <button
                   onClick={toggleTheme}
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
-                 aria-label="Button">
+                         aria-label="Button">
                   {theme === 'dark' ? <Sun className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" /> : <Moon className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />}
                 </button>
 
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-            aria-label="Button"
+                    aria-label="Button"
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 relative responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Bell className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -387,8 +378,8 @@ const TMSCoreApplication: React.FC = () => {
         </main>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 
 export default TMSCoreApplication;
-}

@@ -9,8 +9,7 @@ import {
   RefreshCw,
   ArrowUpRight,
   ArrowDownRight,
-  X,
-} from 'lucide-react';
+  X} from 'lucide-react';
 
 interface BusinessMetric {
   id: string;
@@ -68,8 +67,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Total monthly recurring revenue',
       target: 2500000,
-      unit: '$',
-    },
+      unit: '$'},
     {
       id: 'users',
       name: 'Active Users',
@@ -80,8 +78,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'users',
       description: 'Monthly active users across all portals',
       target: 15000,
-      unit: '',
-    },
+      unit: ''},
     {
       id: 'conversion',
       name: 'Conversion Rate',
@@ -92,8 +89,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'performance',
       description: 'Trial to paid conversion rate',
       target: 20,
-      unit: '%',
-    },
+      unit: '%'},
     {
       id: 'churn',
       name: 'Churn Rate',
@@ -104,8 +100,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'performance',
       description: 'Monthly customer churn rate',
       target: 2.5,
-      unit: '%',
-    },
+      unit: '%'},
     {
       id: 'ltv',
       name: 'Customer LTV',
@@ -116,8 +111,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Average customer lifetime value',
       target: 15000,
-      unit: '$',
-    },
+      unit: '$'},
     {
       id: 'cac',
       name: 'Customer CAC',
@@ -128,9 +122,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       category: 'revenue',
       description: 'Customer acquisition cost',
       target: 750,
-      unit: '$',
-    },
-  ]);
+      unit: '$'}]);
 
   const [insights] = useState<PredictiveInsight[]>([
     {
@@ -142,8 +134,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 3 months',
       recommendation: 'Increase marketing spend on broker segment by 30%',
       category: 'revenue',
-      status: 'active',
-    },
+      status: 'active'},
     {
       id: 'insight-2',
       title: 'User Engagement Decline',
@@ -153,8 +144,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 2 months',
       recommendation: 'Implement gamification features to boost engagement',
       category: 'users',
-      status: 'monitoring',
-    },
+      status: 'monitoring'},
     {
       id: 'insight-3',
       title: 'Operational Efficiency',
@@ -164,8 +154,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 6 months',
       recommendation: 'Deploy AI-powered automation for common queries',
       category: 'operations',
-      status: 'active',
-    },
+      status: 'active'},
     {
       id: 'insight-4',
       title: 'Market Expansion',
@@ -175,9 +164,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       timeframe: 'Next 12 months',
       recommendation: 'Prioritize EDI portal development for EU expansion',
       category: 'revenue',
-      status: 'monitoring',
-    },
-  ]);
+      status: 'monitoring'}]);
 
   const [reports] = useState<ReportData[]>([
     {
@@ -188,8 +175,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 1250,
       insights: 15,
       status: 'ready',
-      downloadUrl: '/reports/monthly-financial.pdf',
-    },
+      downloadUrl: '/reports/monthly-financial.pdf'},
     {
       id: 'report-2',
       name: 'User Behavior Analysis',
@@ -198,8 +184,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 8900,
       insights: 23,
       status: 'ready',
-      downloadUrl: '/reports/user-behavior.pdf',
-    },
+      downloadUrl: '/reports/user-behavior.pdf'},
     {
       id: 'report-3',
       name: 'Performance Metrics',
@@ -207,8 +192,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       generatedAt: '3 hours ago',
       dataPoints: 2100,
       insights: 8,
-      status: 'generating',
-    },
+      status: 'generating'},
     {
       id: 'report-4',
       name: 'Operational Efficiency',
@@ -217,9 +201,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
       dataPoints: 3400,
       insights: 12,
       status: 'ready',
-      downloadUrl: '/reports/operational.pdf',
-    },
-  ]);
+      downloadUrl: '/reports/operational.pdf'}]);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -233,9 +215,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
           trend: [
             ...metric.trend.slice(1),
             metric.trend[metric.trend.length - 1] +
-              (Math.random() - 0.5) * (metric.trend[metric.trend.length - 1] * 0.02),
-          ],
-        }))
+              (Math.random() - 0.5) * (metric.trend[metric.trend.length - 1] * 0.02)]}))
       );
     }, 5000);
 
@@ -331,8 +311,7 @@ const BusinessIntelligenceCenter: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'insights', label: 'Insights', icon: Brain },
             { id: 'reports', label: 'Reports', icon: Download },
-            { id: 'predictions', label: 'Predictions', icon: Target },
-          ].map(({ id, label, icon: Icon }) => (
+            { id: 'predictions', label: 'Predictions', icon: Target }].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'overview' | 'insights' | 'reports' | 'predictions')}
@@ -661,4 +640,3 @@ const BusinessIntelligenceCenter: React.FC = () => {
 };
 
 export default BusinessIntelligenceCenter;
-}

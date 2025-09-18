@@ -11,8 +11,7 @@ import {
   Trash2,
   UserPlus,
   Save,
-  RefreshCw,
-} from 'lucide-react';
+  RefreshCw} from 'lucide-react';
 
 interface UserRole {
   id: string;
@@ -84,33 +83,26 @@ export function RoleBasedAccessControl() {
           name: 'All Permissions',
           description: 'Access to all system features',
           category: 'system',
-          level: 'owner',
-        },
-      ],
+          level: 'owner'}],
       portalAccess: [
-        { portalId: '*', portalName: 'All Portals', accessLevel: 'owner', features: ['*'] },
-      ],
+        { portalId: '*', portalName: 'All Portals', accessLevel: 'owner', features: ['*'] }],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: '*.transbot.ai',
           allowedPortals: ['*'],
           customBranding: true,
-          sslRequired: true,
-        },
+          sslRequired: true},
         {
           domainType: 'custom',
           domainPattern: '*',
           allowedPortals: ['*'],
           customBranding: true,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 5,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T10:30:00Z',
-    },
+      updatedAt: '2024-01-15T10:30:00Z'},
     {
       id: 'enterprise-admin',
       name: 'Enterprise Administrator',
@@ -122,57 +114,46 @@ export function RoleBasedAccessControl() {
           name: 'User Management',
           description: 'Manage users and roles',
           category: 'user',
-          level: 'admin',
-        },
+          level: 'admin'},
         {
           id: 'portal_management',
           name: 'Portal Management',
           description: 'Configure portal settings',
           category: 'portal',
-          level: 'admin',
-        },
+          level: 'admin'},
         {
           id: 'billing_management',
           name: 'Billing Management',
           description: 'Manage billing and subscriptions',
           category: 'system',
-          level: 'admin',
-        },
-      ],
+          level: 'admin'}],
       portalAccess: [
         {
           portalId: 'admin',
           portalName: 'Admin Portal',
           accessLevel: 'admin',
-          features: ['user_management', 'system_config'],
-        },
+          features: ['user_management', 'system_config']},
         {
           portalId: 'analytics',
           portalName: 'Analytics Portal',
           accessLevel: 'admin',
-          features: ['advanced_analytics', 'reporting'],
-        },
+          features: ['advanced_analytics', 'reporting']},
         {
           portalId: 'financials',
           portalName: 'Financials Portal',
           accessLevel: 'admin',
-          features: ['billing', 'invoicing'],
-        },
-      ],
+          features: ['billing', 'invoicing']}],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: '*.transbot.ai',
           allowedPortals: ['admin', 'analytics', 'financials'],
           customBranding: true,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 12,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T09:15:00Z',
-    },
+      updatedAt: '2024-01-15T09:15:00Z'},
     {
       id: 'broker-manager',
       name: 'Broker Manager',
@@ -184,64 +165,52 @@ export function RoleBasedAccessControl() {
           name: 'Load Management',
           description: 'Manage loads and shipments',
           category: 'portal',
-          level: 'admin',
-        },
+          level: 'admin'},
         {
           id: 'carrier_management',
           name: 'Carrier Management',
           description: 'Manage carrier relationships',
           category: 'portal',
-          level: 'write',
-        },
+          level: 'write'},
         {
           id: 'rate_management',
           name: 'Rate Management',
           description: 'Set and manage rates',
           category: 'portal',
-          level: 'write',
-        },
-      ],
+          level: 'write'}],
       portalAccess: [
         {
           portalId: 'broker',
           portalName: 'Broker Portal',
           accessLevel: 'admin',
-          features: ['load_management', 'carrier_matching', 'rate_optimization'],
-        },
+          features: ['load_management', 'carrier_matching', 'rate_optimization']},
         {
           portalId: 'analytics',
           portalName: 'Analytics Portal',
           accessLevel: 'write',
-          features: ['broker_analytics', 'performance_reports'],
-        },
+          features: ['broker_analytics', 'performance_reports']},
         {
           portalId: 'marketplace',
           portalName: 'Marketplace Portal',
           accessLevel: 'write',
-          features: ['load_posting', 'bidding'],
-        },
-      ],
+          features: ['load_posting', 'bidding']}],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: 'broker-*.transbot.ai',
           allowedPortals: ['broker', 'analytics', 'marketplace'],
           customBranding: true,
-          sslRequired: true,
-        },
+          sslRequired: true},
         {
           domainType: 'custom',
           domainPattern: '*.logistics',
           allowedPortals: ['broker'],
           customBranding: true,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 45,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T08:45:00Z',
-    },
+      updatedAt: '2024-01-15T08:45:00Z'},
     {
       id: 'carrier-manager',
       name: 'Carrier Manager',
@@ -253,64 +222,52 @@ export function RoleBasedAccessControl() {
           name: 'Fleet Management',
           description: 'Manage fleet operations',
           category: 'portal',
-          level: 'admin',
-        },
+          level: 'admin'},
         {
           id: 'driver_management',
           name: 'Driver Management',
           description: 'Manage drivers and schedules',
           category: 'portal',
-          level: 'write',
-        },
+          level: 'write'},
         {
           id: 'route_optimization',
           name: 'Route Optimization',
           description: 'Optimize routes and schedules',
           category: 'portal',
-          level: 'write',
-        },
-      ],
+          level: 'write'}],
       portalAccess: [
         {
           portalId: 'carrier',
           portalName: 'Carrier Portal',
           accessLevel: 'admin',
-          features: ['fleet_management', 'driver_dispatch', 'route_planning'],
-        },
+          features: ['fleet_management', 'driver_dispatch', 'route_planning']},
         {
           portalId: 'driver',
           portalName: 'Driver Portal',
           accessLevel: 'write',
-          features: ['driver_management'],
-        },
+          features: ['driver_management']},
         {
           portalId: 'analytics',
           portalName: 'Analytics Portal',
           accessLevel: 'write',
-          features: ['fleet_analytics', 'performance_tracking'],
-        },
-      ],
+          features: ['fleet_analytics', 'performance_tracking']}],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: 'carrier-*.transbot.ai',
           allowedPortals: ['carrier', 'driver', 'analytics'],
           customBranding: true,
-          sslRequired: true,
-        },
+          sslRequired: true},
         {
           domainType: 'custom',
           domainPattern: '*.fleet',
           allowedPortals: ['carrier'],
           customBranding: true,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 38,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T07:30:00Z',
-    },
+      updatedAt: '2024-01-15T07:30:00Z'},
     {
       id: 'driver',
       name: 'Driver',
@@ -322,45 +279,36 @@ export function RoleBasedAccessControl() {
           name: 'Load Viewing',
           description: 'View assigned loads',
           category: 'portal',
-          level: 'read',
-        },
+          level: 'read'},
         {
           id: 'route_navigation',
           name: 'Route Navigation',
           description: 'Access route information',
           category: 'portal',
-          level: 'read',
-        },
+          level: 'read'},
         {
           id: 'document_upload',
           name: 'Document Upload',
           description: 'Upload delivery documents',
           category: 'portal',
-          level: 'write',
-        },
-      ],
+          level: 'write'}],
       portalAccess: [
         {
           portalId: 'driver',
           portalName: 'Driver Portal',
           accessLevel: 'write',
-          features: ['load_details', 'route_maps', 'documentation'],
-        },
-      ],
+          features: ['load_details', 'route_maps', 'documentation']}],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: 'driver-*.transbot.ai',
           allowedPortals: ['driver'],
           customBranding: false,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 1250,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T06:15:00Z',
-    },
+      updatedAt: '2024-01-15T06:15:00Z'},
     {
       id: 'shipper-user',
       name: 'Shipper User',
@@ -372,46 +320,36 @@ export function RoleBasedAccessControl() {
           name: 'Shipment Booking',
           description: 'Book shipments',
           category: 'portal',
-          level: 'write',
-        },
+          level: 'write'},
         {
           id: 'tracking',
           name: 'Tracking',
           description: 'Track shipments',
           category: 'portal',
-          level: 'read',
-        },
+          level: 'read'},
         {
           id: 'documentation',
           name: 'Documentation',
           description: 'Manage shipping documents',
           category: 'portal',
-          level: 'write',
-        },
-      ],
+          level: 'write'}],
       portalAccess: [
         {
           portalId: 'shipper',
           portalName: 'Shipper Portal',
           accessLevel: 'write',
-          features: ['shipment_booking', 'carrier_search', 'tracking'],
-        },
-      ],
+          features: ['shipment_booking', 'carrier_search', 'tracking']}],
       domainAccess: [
         {
           domainType: 'subdomain',
           domainPattern: 'shipper-*.transbot.ai',
           allowedPortals: ['shipper'],
           customBranding: false,
-          sslRequired: true,
-        },
-      ],
+          sslRequired: true}],
       userCount: 890,
       status: 'active',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-15T05:30:00Z',
-    },
-  ]);
+      updatedAt: '2024-01-15T05:30:00Z'}]);
 
   const [users] = useState<User[]>([
     {
@@ -422,8 +360,7 @@ export function RoleBasedAccessControl() {
       status: 'active',
       lastLogin: '2024-01-15T10:30:00Z',
       domain: 'acme.transbot.ai',
-      portalAccess: ['broker', 'analytics', 'marketplace'],
-    },
+      portalAccess: ['broker', 'analytics', 'marketplace']},
     {
       id: '2',
       name: 'Sarah Johnson',
@@ -432,8 +369,7 @@ export function RoleBasedAccessControl() {
       status: 'active',
       lastLogin: '2024-01-15T09:15:00Z',
       domain: 'fleetmasters.com',
-      portalAccess: ['carrier', 'driver', 'analytics'],
-    },
+      portalAccess: ['carrier', 'driver', 'analytics']},
     {
       id: '3',
       name: 'Mike Wilson',
@@ -442,9 +378,7 @@ export function RoleBasedAccessControl() {
       status: 'active',
       lastLogin: '2024-01-15T08:45:00Z',
       domain: 'driver-123.transbot.ai',
-      portalAccess: ['driver'],
-    },
-  ]);
+      portalAccess: ['driver']}]);
 
   const [permissions] = useState<Permission[]>([
     // System Permissions
@@ -453,22 +387,19 @@ export function RoleBasedAccessControl() {
       name: 'System Administration',
       description: 'Full system access',
       category: 'system',
-      level: 'owner',
-    },
+      level: 'owner'},
     {
       id: 'user_management',
       name: 'User Management',
       description: 'Manage users and roles',
       category: 'user',
-      level: 'admin',
-    },
+      level: 'admin'},
     {
       id: 'billing_management',
       name: 'Billing Management',
       description: 'Manage billing and subscriptions',
       category: 'system',
-      level: 'admin',
-    },
+      level: 'admin'},
 
     // Portal Permissions
     {
@@ -476,43 +407,37 @@ export function RoleBasedAccessControl() {
       name: 'Load Management',
       description: 'Manage loads and shipments',
       category: 'portal',
-      level: 'admin',
-    },
+      level: 'admin'},
     {
       id: 'carrier_management',
       name: 'Carrier Management',
       description: 'Manage carrier relationships',
       category: 'portal',
-      level: 'write',
-    },
+      level: 'write'},
     {
       id: 'fleet_management',
       name: 'Fleet Management',
       description: 'Manage fleet operations',
       category: 'portal',
-      level: 'admin',
-    },
+      level: 'admin'},
     {
       id: 'driver_management',
       name: 'Driver Management',
       description: 'Manage drivers and schedules',
       category: 'portal',
-      level: 'write',
-    },
+      level: 'write'},
     {
       id: 'shipment_booking',
       name: 'Shipment Booking',
       description: 'Book shipments',
       category: 'portal',
-      level: 'write',
-    },
+      level: 'write'},
     {
       id: 'tracking',
       name: 'Tracking',
       description: 'Track shipments',
       category: 'portal',
-      level: 'read',
-    },
+      level: 'read'},
 
     // Domain Permissions
     {
@@ -520,23 +445,19 @@ export function RoleBasedAccessControl() {
       name: 'Domain Management',
       description: 'Manage custom domains',
       category: 'domain',
-      level: 'admin',
-    },
+      level: 'admin'},
     {
       id: 'ssl_management',
       name: 'SSL Management',
       description: 'Manage SSL certificates',
       category: 'domain',
-      level: 'admin',
-    },
+      level: 'admin'},
     {
       id: 'branding_management',
       name: 'Branding Management',
       description: 'Manage custom branding',
       category: 'domain',
-      level: 'write',
-    },
-  ]);
+      level: 'write'}]);
 
   const handleSaveRole = async () => {
     setIsSaving(true);
@@ -613,8 +534,7 @@ export function RoleBasedAccessControl() {
                   { id: 'roles', label: 'Roles', icon: Shield, count: roles.length },
                   { id: 'users', label: 'Users', icon: Users, count: users.length },
                   { id: 'permissions', label: 'Permissions', icon: Key, count: permissions.length },
-                  { id: 'domains', label: 'Domains', icon: Globe, count: 0 },
-                ].map(tab => (
+                  { id: 'domains', label: 'Domains', icon: Globe, count: 0 }].map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as 'roles' | 'users' | 'permissions')}
@@ -708,8 +628,7 @@ export function RoleBasedAccessControl() {
 function RolesTab({
   roles,
   selectedRole,
-  onSelectRole,
-}: {
+  onSelectRole}: {
   roles: UserRole[];
   selectedRole: string | null;
   onSelectRole: (roleId: string) => void;
@@ -979,8 +898,7 @@ function DomainsTab({ roles }: { roles: UserRole[] }) {
     customDomains: 89,
     subdomains: 67,
     sslEnabled: 145,
-    cdnEnabled: 134,
-  };
+    cdnEnabled: 134};
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
@@ -1001,8 +919,7 @@ function DomainsTab({ roles }: { roles: UserRole[] }) {
           { label: 'Custom Domains', value: domainStats.customDomains, color: 'green' },
           { label: 'Subdomains', value: domainStats.subdomains, color: 'purple' },
           { label: 'SSL Enabled', value: domainStats.sslEnabled, color: 'orange' },
-          { label: 'CDN Enabled', value: domainStats.cdnEnabled, color: 'cyan' },
-        ].map((stat, index) => (
+          { label: 'CDN Enabled', value: domainStats.cdnEnabled, color: 'cyan' }].map((stat, index) => (
           <div key={index} className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid">
             <div className="text-2xl font-bold text-white mb-1 responsive-container sm:flex-col md:flex-row lg:grid">{stat.value}</div>
             <div className="text-gray-400 text-sm responsive-container sm:flex-col md:flex-row lg:grid">{stat.label}</div>

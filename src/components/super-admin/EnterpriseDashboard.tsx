@@ -15,8 +15,7 @@ import {
   Settings,
   Bell,
   Download,
-  Maximize2,
-} from 'lucide-react';
+  Maximize2} from 'lucide-react';
 
 /**
  * Interface representing a metric card for the dashboard
@@ -98,8 +97,7 @@ const EnterpriseDashboard: React.FC = () => {
       icon: Users,
       color: 'blue',
       trend: [12000, 12100, 12200, 12300, 12400, 12500, 12600, 12700, 12800, 12847],
-      description: 'Active users across all portals',
-    },
+      description: 'Active users across all portals'},
     {
       id: 'revenue',
       title: 'Monthly Revenue',
@@ -109,10 +107,8 @@ const EnterpriseDashboard: React.FC = () => {
       icon: DollarSign,
       color: 'green',
       trend: [
-        2000000, 2050000, 2100000, 2150000, 2200000, 2250000, 2300000, 2350000, 2400000, 2400000,
-      ],
-      description: 'Recurring monthly revenue',
-    },
+        2000000, 2050000, 2100000, 2150000, 2200000, 2250000, 2300000, 2350000, 2400000, 2400000],
+      description: 'Recurring monthly revenue'},
     {
       id: 'system-health',
       title: 'System Health',
@@ -122,8 +118,7 @@ const EnterpriseDashboard: React.FC = () => {
       icon: Shield,
       color: 'purple',
       trend: [99.5, 99.6, 99.7, 99.6, 99.7, 99.8, 99.7, 99.6, 99.7, 99.7],
-      description: 'Overall system uptime and performance',
-    },
+      description: 'Overall system uptime and performance'},
     {
       id: 'active-agents',
       title: 'Active Agents',
@@ -133,8 +128,7 @@ const EnterpriseDashboard: React.FC = () => {
       icon: Zap,
       color: 'orange',
       trend: [250, 250, 249, 250, 249, 248, 249, 248, 248, 248],
-      description: 'MCP agents currently operational',
-    },
+      description: 'MCP agents currently operational'},
     {
       id: 'api-requests',
       title: 'API Requests',
@@ -144,10 +138,8 @@ const EnterpriseDashboard: React.FC = () => {
       icon: Activity,
       color: 'cyan',
       trend: [
-        1000000, 1050000, 1100000, 1150000, 1200000, 1180000, 1200000, 1220000, 1200000, 1200000,
-      ],
-      description: 'Requests processed in last 24h',
-    },
+        1000000, 1050000, 1100000, 1150000, 1200000, 1180000, 1200000, 1220000, 1200000, 1200000],
+      description: 'Requests processed in last 24h'},
     {
       id: 'data-processed',
       title: 'Data Processed',
@@ -157,9 +149,7 @@ const EnterpriseDashboard: React.FC = () => {
       icon: Database,
       color: 'pink',
       trend: [700, 720, 750, 780, 800, 820, 840, 845, 847, 847],
-      description: 'Data processed across all systems',
-    },
-  ]);
+      description: 'Data processed across all systems'}]);
 
   const [alerts] = useState<SystemAlert[]>([
     {
@@ -169,8 +159,7 @@ const EnterpriseDashboard: React.FC = () => {
       message: 'Server cluster-3 experiencing 95% CPU utilization',
       timestamp: '2 minutes ago',
       source: 'System Monitor',
-      resolved: false,
-    },
+      resolved: false},
     {
       id: 'alert-2',
       type: 'warning',
@@ -178,8 +167,7 @@ const EnterpriseDashboard: React.FC = () => {
       message: 'Database server approaching memory limit',
       timestamp: '5 minutes ago',
       source: 'Database Monitor',
-      resolved: false,
-    },
+      resolved: false},
     {
       id: 'alert-3',
       type: 'success',
@@ -187,8 +175,7 @@ const EnterpriseDashboard: React.FC = () => {
       message: 'Daily backup completed successfully',
       timestamp: '1 hour ago',
       source: 'Backup Service',
-      resolved: true,
-    },
+      resolved: true},
     {
       id: 'alert-4',
       type: 'info',
@@ -196,9 +183,7 @@ const EnterpriseDashboard: React.FC = () => {
       message: 'Portal maintenance scheduled for tonight',
       timestamp: '3 hours ago',
       source: 'Maintenance Scheduler',
-      resolved: false,
-    },
-  ]);
+      resolved: false}]);
 
   const [portalStatuses] = useState<PortalStatus[]>([
     {
@@ -208,8 +193,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 3247,
       uptime: 99.9,
       responseTime: 145,
-      lastUpdate: '1 min ago',
-    },
+      lastUpdate: '1 min ago'},
     {
       id: 'carrier',
       name: 'Carrier Portal',
@@ -217,8 +201,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 2156,
       uptime: 99.8,
       responseTime: 167,
-      lastUpdate: '2 min ago',
-    },
+      lastUpdate: '2 min ago'},
     {
       id: 'shipper',
       name: 'Shipper Portal',
@@ -226,8 +209,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 1893,
       uptime: 99.7,
       responseTime: 123,
-      lastUpdate: '1 min ago',
-    },
+      lastUpdate: '1 min ago'},
     {
       id: 'driver',
       name: 'Driver Portal',
@@ -235,8 +217,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 4567,
       uptime: 99.6,
       responseTime: 189,
-      lastUpdate: '3 min ago',
-    },
+      lastUpdate: '3 min ago'},
     {
       id: 'financials',
       name: 'Financials Portal',
@@ -244,8 +225,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 892,
       uptime: 99.5,
       responseTime: 234,
-      lastUpdate: '5 min ago',
-    },
+      lastUpdate: '5 min ago'},
     {
       id: 'analytics',
       name: 'Analytics Portal',
@@ -253,8 +233,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 1567,
       uptime: 99.8,
       responseTime: 156,
-      lastUpdate: '2 min ago',
-    },
+      lastUpdate: '2 min ago'},
     {
       id: 'crm',
       name: 'CRM Portal',
@@ -262,8 +241,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 1234,
       uptime: 99.9,
       responseTime: 134,
-      lastUpdate: '1 min ago',
-    },
+      lastUpdate: '1 min ago'},
     {
       id: 'marketplace',
       name: 'Marketplace Portal',
@@ -271,9 +249,7 @@ const EnterpriseDashboard: React.FC = () => {
       users: 3456,
       uptime: 99.7,
       responseTime: 178,
-      lastUpdate: '4 min ago',
-    },
-  ]);
+      lastUpdate: '4 min ago'}]);
 
   const [performanceData, setPerformanceData] = useState<PerformanceData[]>(
     Array.from({ length: 24 }, (_, i) => ({
@@ -281,8 +257,7 @@ const EnterpriseDashboard: React.FC = () => {
       cpu: Math.floor(Math.random() * 100),
       memory: Math.floor(Math.random() * 100),
       network: Math.floor(Math.random() * 100),
-      responseTime: Math.floor(Math.random() * 500) + 100,
-    }))
+      responseTime: Math.floor(Math.random() * 500) + 100}))
   );
 
   // Simulate real-time updates
@@ -299,9 +274,7 @@ const EnterpriseDashboard: React.FC = () => {
               : metric.value,
           trend: [
             ...metric.trend.slice(1),
-            metric.trend[metric.trend.length - 1] + (Math.random() - 0.5) * 100,
-          ],
-        }))
+            metric.trend[metric.trend.length - 1] + (Math.random() - 0.5) * 100]}))
       );
 
       setPerformanceData(prevData =>
@@ -310,8 +283,7 @@ const EnterpriseDashboard: React.FC = () => {
           cpu: Math.max(0, Math.min(100, point.cpu + (Math.random() - 0.5) * 10)),
           memory: Math.max(0, Math.min(100, point.memory + (Math.random() - 0.5) * 10)),
           network: Math.max(0, Math.min(100, point.network + (Math.random() - 0.5) * 10)),
-          responseTime: Math.max(50, point.responseTime + (Math.random() - 0.5) * 50),
-        }))
+          responseTime: Math.max(50, point.responseTime + (Math.random() - 0.5) * 50)}))
       );
     }, 3000);
 
@@ -326,8 +298,7 @@ const EnterpriseDashboard: React.FC = () => {
       purple: 'from-purple-500/20 to-purple-600/20 border-purple-500/30',
       orange: 'from-orange-500/20 to-orange-600/20 border-orange-500/30',
       cyan: 'from-cyan-500/20 to-cyan-600/20 border-cyan-500/30',
-      pink: 'from-pink-500/20 to-pink-600/20 border-pink-500/30',
-    };
+      pink: 'from-pink-500/20 to-pink-600/20 border-pink-500/30'};
     return colors[color as keyof typeof colors] || colors.blue;
   };
 
@@ -743,4 +714,3 @@ const EnterpriseDashboard: React.FC = () => {
 };
 
 export default EnterpriseDashboard;
-}

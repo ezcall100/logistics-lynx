@@ -230,4 +230,3 @@ const AutomationPage: React.FC = () => {
 };
 
 export default AutomationPage;
-}

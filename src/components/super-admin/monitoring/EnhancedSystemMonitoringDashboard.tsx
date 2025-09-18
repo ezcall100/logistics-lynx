@@ -62,7 +62,7 @@ const GlassButton: React.FC<{
     <button 
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
-     aria-label="Button">
+>
       {children}
     </button>
   );
@@ -214,9 +214,7 @@ const EnhancedSystemMonitoringDashboard: React.FC = () => {
   useEffect(() => {
     if (isRealTimeEnabled) {
       const interval = setInterval(updateSystemData, 3000);
-      return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      ) => clearInterval(interval);
+      return () => clearInterval(interval);
     }
   }, [isRealTimeEnabled, updateSystemData]);
 

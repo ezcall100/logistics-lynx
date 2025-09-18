@@ -16,8 +16,7 @@ import {
   RefreshCw,
   Settings,
   RotateCcw,
-  X,
-} from 'lucide-react';
+  X} from 'lucide-react';
 
 interface SystemComponent {
   id: string;
@@ -86,8 +85,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.4.1',
       alerts: 0,
       autoHealing: true,
-      dependencies: ['load-balancer', 'database-cluster'],
-    },
+      dependencies: ['load-balancer', 'database-cluster']},
     {
       id: 'database-cluster',
       name: 'Database Cluster',
@@ -104,8 +102,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v3.2.0',
       alerts: 2,
       autoHealing: true,
-      dependencies: ['backup-service', 'monitoring-service'],
-    },
+      dependencies: ['backup-service', 'monitoring-service']},
     {
       id: 'load-balancer',
       name: 'Load Balancer',
@@ -122,8 +119,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v1.8.2',
       alerts: 0,
       autoHealing: true,
-      dependencies: ['dns-service'],
-    },
+      dependencies: ['dns-service']},
     {
       id: 'broker-portal',
       name: 'Broker Portal',
@@ -140,8 +136,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.4.1',
       alerts: 1,
       autoHealing: false,
-      dependencies: ['web-server-1', 'database-cluster'],
-    },
+      dependencies: ['web-server-1', 'database-cluster']},
     {
       id: 'api-gateway',
       name: 'API Gateway',
@@ -158,9 +153,7 @@ const SystemHealthMonitor: React.FC = () => {
       version: 'v2.1.5',
       alerts: 5,
       autoHealing: true,
-      dependencies: ['auth-service', 'rate-limiter'],
-    },
-  ]);
+      dependencies: ['auth-service', 'rate-limiter']}]);
 
   const [metrics, setMetrics] = useState<HealthMetric[]>([
     {
@@ -171,8 +164,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'stable',
       unit: 'ms',
-      description: 'Average API response time',
-    },
+      description: 'Average API response time'},
     {
       id: 'error-rate',
       name: 'Error Rate',
@@ -181,8 +173,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'down',
       unit: '%',
-      description: 'Percentage of failed requests',
-    },
+      description: 'Percentage of failed requests'},
     {
       id: 'throughput',
       name: 'Throughput',
@@ -191,8 +182,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'up',
       unit: 'req/s',
-      description: 'Requests per second',
-    },
+      description: 'Requests per second'},
     {
       id: 'availability',
       name: 'Availability',
@@ -201,9 +191,7 @@ const SystemHealthMonitor: React.FC = () => {
       status: 'good',
       trend: 'stable',
       unit: '%',
-      description: 'System uptime percentage',
-    },
-  ]);
+      description: 'System uptime percentage'}]);
 
   const [healingActions] = useState<HealingAction[]>([
     {
@@ -214,25 +202,21 @@ const SystemHealthMonitor: React.FC = () => {
       startedAt: '5 minutes ago',
       completedAt: '3 minutes ago',
       result: 'Database service restarted successfully',
-      automated: true,
-    },
+      automated: true},
     {
       id: 'heal-2',
       component: 'api-gateway',
       action: 'Scale Up Resources',
       status: 'running',
       startedAt: '2 minutes ago',
-      automated: true,
-    },
+      automated: true},
     {
       id: 'heal-3',
       component: 'web-server-1',
       action: 'Clear Cache',
       status: 'pending',
       startedAt: '1 minute ago',
-      automated: false,
-    },
-  ]);
+      automated: false}]);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -245,15 +229,13 @@ const SystemHealthMonitor: React.FC = () => {
           health: Math.max(0, Math.min(100, component.health + (Math.random() - 0.5) * 5)),
           cpu: Math.max(0, Math.min(100, component.cpu + (Math.random() - 0.5) * 10)),
           memory: Math.max(0, Math.min(100, component.memory + (Math.random() - 0.5) * 8)),
-          lastCheck: 'Just now',
-        }))
+          lastCheck: 'Just now'}))
       );
 
       setMetrics(prevMetrics =>
         prevMetrics.map(metric => ({
           ...metric,
-          value: Math.max(0, metric.value + (Math.random() - 0.5) * (metric.value * 0.1)),
-        }))
+          value: Math.max(0, metric.value + (Math.random() - 0.5) * (metric.value * 0.1))}))
       );
     }, 3000);
 
@@ -382,8 +364,7 @@ const SystemHealthMonitor: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'components', label: 'Components', icon: Server },
             { id: 'healing', label: 'Healing', icon: Heart },
-            { id: 'metrics', label: 'Metrics', icon: Activity },
-          ].map(({ id, label, icon: Icon }) => (
+            { id: 'metrics', label: 'Metrics', icon: Activity }].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'overview' | 'components' | 'healing' | 'metrics')}

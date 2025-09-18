@@ -473,4 +473,3 @@ const WorkersPortal: React.FC = () => {
 };
 
 export default WorkersPortal;
-}

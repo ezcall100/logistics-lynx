@@ -334,5 +334,7 @@ const PricingPage = React.memo(function PricingPage() {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
+
+export default PricingPage;

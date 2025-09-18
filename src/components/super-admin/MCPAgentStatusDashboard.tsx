@@ -13,8 +13,7 @@ import {
   Play,
   RotateCcw,
   Target,
-  Monitor,
-} from 'lucide-react';
+  Monitor} from 'lucide-react';
 
 type TabType = 'agents' | 'portals' | 'performance' | 'alerts';
 
@@ -65,8 +64,7 @@ export function MCPAgentStatusDashboard() {
       location: 'US-East-1',
       lastUpdate: '2 minutes ago',
       capabilities: ['React', 'TypeScript', 'TailwindCSS', 'Framer Motion'],
-      currentTask: 'Building Broker Portal UI components',
-    },
+      currentTask: 'Building Broker Portal UI components'},
     {
       id: 'agent-002',
       name: 'Backend Engineer Beta',
@@ -79,8 +77,7 @@ export function MCPAgentStatusDashboard() {
       location: 'EU-Central-1',
       lastUpdate: '1 minute ago',
       capabilities: ['Node.js', 'NestJS', 'PostgreSQL', 'Supabase'],
-      currentTask: 'Implementing carrier API integrations',
-    },
+      currentTask: 'Implementing carrier API integrations'},
     {
       id: 'agent-003',
       name: 'UI/UX Designer Gamma',
@@ -93,8 +90,7 @@ export function MCPAgentStatusDashboard() {
       location: 'AP-Southeast-1',
       lastUpdate: '3 minutes ago',
       capabilities: ['Figma', 'Design Systems', 'Accessibility', 'Responsive Design'],
-      currentTask: 'Creating driver portal mobile interface',
-    },
+      currentTask: 'Creating driver portal mobile interface'},
     {
       id: 'agent-004',
       name: 'DevOps Engineer Delta',
@@ -107,8 +103,7 @@ export function MCPAgentStatusDashboard() {
       location: 'US-West-2',
       lastUpdate: '30 seconds ago',
       capabilities: ['Docker', 'Kubernetes', 'CI/CD', 'AWS'],
-      currentTask: 'Setting up production deployment pipeline',
-    },
+      currentTask: 'Setting up production deployment pipeline'},
     {
       id: 'agent-005',
       name: 'QA Automation Epsilon',
@@ -121,8 +116,7 @@ export function MCPAgentStatusDashboard() {
       location: 'EU-West-1',
       lastUpdate: '4 minutes ago',
       capabilities: ['Jest', 'Cypress', 'Playwright', 'Security Testing'],
-      currentTask: 'Running end-to-end tests for shipper portal',
-    },
+      currentTask: 'Running end-to-end tests for shipper portal'},
     {
       id: 'agent-006',
       name: 'Integration Specialist Zeta',
@@ -135,8 +129,7 @@ export function MCPAgentStatusDashboard() {
       location: 'US-Central-1',
       lastUpdate: '1 minute ago',
       capabilities: ['n8n', 'API Integration', 'Webhooks', 'Data Sync'],
-      currentTask: 'Configuring n8n workflow automation',
-    },
+      currentTask: 'Configuring n8n workflow automation'},
     {
       id: 'agent-007',
       name: 'AI Optimization Agent Eta',
@@ -149,9 +142,7 @@ export function MCPAgentStatusDashboard() {
       location: 'Global',
       lastUpdate: '2 minutes ago',
       capabilities: ['Machine Learning', 'Optimization', 'Predictive Analytics', 'Auto-healing'],
-      currentTask: 'Optimizing portal performance algorithms',
-    },
-  ]);
+      currentTask: 'Optimizing portal performance algorithms'}]);
 
   // Mock Portal Progress data
   const [portalProgress] = useState<PortalProgress[]>([
@@ -163,8 +154,7 @@ export function MCPAgentStatusDashboard() {
       status: 'development',
       agentsAssigned: 12,
       estimatedCompletion: '2 days',
-      blockers: [],
-    },
+      blockers: []},
     {
       id: 'carrier-portal',
       name: 'Carrier Portal',
@@ -173,8 +163,7 @@ export function MCPAgentStatusDashboard() {
       status: 'development',
       agentsAssigned: 15,
       estimatedCompletion: '3 days',
-      blockers: ['API rate limiting'],
-    },
+      blockers: ['API rate limiting']},
     {
       id: 'driver-portal',
       name: 'Driver Portal',
@@ -183,8 +172,7 @@ export function MCPAgentStatusDashboard() {
       status: 'testing',
       agentsAssigned: 8,
       estimatedCompletion: '1 day',
-      blockers: [],
-    },
+      blockers: []},
     {
       id: 'financial-portal',
       name: 'Financial Portal',
@@ -193,8 +181,7 @@ export function MCPAgentStatusDashboard() {
       status: 'development',
       agentsAssigned: 10,
       estimatedCompletion: '5 days',
-      blockers: ['Payment integration pending'],
-    },
+      blockers: ['Payment integration pending']},
     {
       id: 'warehouse-portal',
       name: 'Warehouse Portal',
@@ -203,8 +190,7 @@ export function MCPAgentStatusDashboard() {
       status: 'development',
       agentsAssigned: 9,
       estimatedCompletion: '4 days',
-      blockers: [],
-    },
+      blockers: []},
     {
       id: 'super-admin-portal',
       name: 'Super Admin Portal',
@@ -213,9 +199,7 @@ export function MCPAgentStatusDashboard() {
       status: 'complete',
       agentsAssigned: 5,
       estimatedCompletion: 'Complete',
-      blockers: [],
-    },
-  ]);
+      blockers: []}]);
 
   const [systemMetrics] = useState({
     totalAgents: 250,
@@ -226,8 +210,7 @@ export function MCPAgentStatusDashboard() {
     activeTasks: 194,
     systemEfficiency: 94.5,
     averageResponseTime: 1.2,
-    errorRate: 0.3,
-  });
+    errorRate: 0.3});
 
   const handleDeployAgents = async () => {
     setIsDeploying(true);
@@ -333,8 +316,7 @@ export function MCPAgentStatusDashboard() {
             { label: 'Completed', value: systemMetrics.completedTasks, color: 'green' },
             { label: 'Active Tasks', value: systemMetrics.activeTasks, color: 'yellow' },
             { label: 'Efficiency', value: `${systemMetrics.systemEfficiency}%`, color: 'cyan' },
-            { label: 'Error Rate', value: `${systemMetrics.errorRate}%`, color: 'red' },
-          ].map((metric, index) => (
+            { label: 'Error Rate', value: `${systemMetrics.errorRate}%`, color: 'red' }].map((metric, index) => (
             <div
               key={index}
               className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 responsive-container sm:flex-col md:flex-row lg:grid"
@@ -359,8 +341,7 @@ export function MCPAgentStatusDashboard() {
                   { id: 'agents', label: 'Agents', icon: Users, count: agents.length },
                   { id: 'portals', label: 'Portals', icon: Globe, count: portalProgress.length },
                   { id: 'performance', label: 'Performance', icon: BarChart3, count: 0 },
-                  { id: 'alerts', label: 'Alerts', icon: AlertTriangle, count: 3 },
-                ].map(tab => (
+                  { id: 'alerts', label: 'Alerts', icon: AlertTriangle, count: 3 }].map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as TabType)}
@@ -396,8 +377,7 @@ export function MCPAgentStatusDashboard() {
                     { id: 'agents', label: 'Agents', icon: Users },
                     { id: 'portals', label: 'Portals', icon: Globe },
                     { id: 'performance', label: 'Performance', icon: BarChart3 },
-                    { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
-                  ].map(tab => (
+                    { id: 'alerts', label: 'Alerts', icon: AlertTriangle }].map(tab => (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id as TabType)}
@@ -632,8 +612,7 @@ export function MCPAgentStatusDashboard() {
                               { range: '90-100%', count: 198, color: 'bg-green-500' },
                               { range: '80-89%', count: 42, color: 'bg-blue-500' },
                               { range: '70-79%', count: 8, color: 'bg-yellow-500' },
-                              { range: '60-69%', count: 2, color: 'bg-red-500' },
-                            ].map((item, index) => (
+                              { range: '60-69%', count: 2, color: 'bg-red-500' }].map((item, index) => (
                               <div key={index} className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
                                 <span className="text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">{item.range}</span>
                                 <div className="flex items-center space-x-2 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -687,25 +666,21 @@ export function MCPAgentStatusDashboard() {
                             title: 'Agent Performance Degradation',
                             message: 'Agent Delta showing 15% performance drop',
                             timestamp: '5 minutes ago',
-                            status: 'active',
-                          },
+                            status: 'active'},
                           {
                             id: 'alert-002',
                             type: 'info',
                             title: 'Portal Deployment Scheduled',
                             message: 'Broker Portal deployment scheduled for 2:00 PM',
                             timestamp: '1 hour ago',
-                            status: 'scheduled',
-                          },
+                            status: 'scheduled'},
                           {
                             id: 'alert-003',
                             type: 'error',
                             title: 'Integration Failure',
                             message: 'Carrier API integration failed - retrying',
                             timestamp: '3 hours ago',
-                            status: 'resolved',
-                          },
-                        ].map(alert => (
+                            status: 'resolved'}].map(alert => (
                           <div
                             key={alert.id}
                             className="bg-white/5 rounded-lg p-4 border border-white/10 responsive-container sm:flex-col md:flex-row lg:grid"

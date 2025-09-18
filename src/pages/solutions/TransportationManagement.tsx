@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Truck, Route, Clock, Shield, BarChart3, Users } from 'lucide-react'
 
@@ -143,5 +144,7 @@ const TransportationManagement = React.memo(function TransportationManagement() 
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+});
+
+export default TransportationManagement;

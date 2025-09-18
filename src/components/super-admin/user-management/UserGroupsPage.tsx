@@ -272,7 +272,6 @@ const UserGroupsPage: React.FC = () => {
                   setSelectedGroup(group);
                   setShowGroupDetails(true);
                 }
-            aria-label="Button"}
                 className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <Eye className="w-4 h-4 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />

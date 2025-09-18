@@ -581,8 +581,7 @@ const ProfilePage: React.FC = () => {
     aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      aValue || '') > (bValue || '') ? -1 : (aValue || '') < (bValue || '') ? 1 : 0;
+(aValue || '') > (bValue || '') ? -1 : (aValue || '') < (bValue || '') ? 1 : 0;
       }
     });
 
@@ -614,8 +613,7 @@ const ProfilePage: React.FC = () => {
       aValue || '') < (bValue || '') ? -1 : (aValue || '') > (bValue || '') ? 1 : 0;
       } else {
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      aValue || '') > (bValue || '') ? -1 : (aValue || '') < (bValue || '') ? 1 : 0;
+(aValue || '') > (bValue || '') ? -1 : (aValue || '') < (bValue || '') ? 1 : 0;
       }
     });
 
@@ -721,13 +719,12 @@ const ProfilePage: React.FC = () => {
                     <button
                       onClick={handleProfileUpdate}
                       className="flex items-center space-x-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium responsive-container"
-                     aria-label="Button">
+>
                       <Save className="h-5 w-5 responsive-container" />
                       <span>Save</span>
                     </button>
                     <button
                       onClick={() => setIsEditing(false)}
-            aria-label="Button"
                       className="flex items-center space-x-2 px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium backdrop-blur-sm responsive-container"
                     >
                       <X className="h-5 w-5 responsive-container" />
@@ -737,7 +734,6 @@ const ProfilePage: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => setIsEditing(true)}
-            aria-label="Button"
                     className="flex items-center space-x-2 px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium backdrop-blur-sm responsive-container"
                   >
                     <Edit className="h-5 w-5 responsive-container" />
@@ -826,7 +822,6 @@ const ProfilePage: React.FC = () => {
           </h3>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            aria-label="Button"
             className="flex items-center space-x-2 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -935,7 +930,6 @@ const ProfilePage: React.FC = () => {
           <div className="mt-6 flex items-center justify-end space-x-3 responsive-container">
             <button
               onClick={() => setIsEditing(false)}
-            aria-label="Button"
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
             >
               Cancel
@@ -943,7 +937,7 @@ const ProfilePage: React.FC = () => {
             <button
               onClick={handleProfileUpdate}
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
-             aria-label="Button">
+>
               <Save className="h-4 w-4 responsive-container" />
               <span>Save Changes</span>
             </button>
@@ -959,7 +953,6 @@ const ProfilePage: React.FC = () => {
           </h3>
           <button
             onClick={() => setActiveTab('activity')}
-            aria-label="Button"
             className="text-blue-600 hover:text-blue-700 text-sm font-medium responsive-container"
           >
             View All
@@ -1008,7 +1001,7 @@ const ProfilePage: React.FC = () => {
                 className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent responsive-container"
               />
             </div>
-            <button className="flex items-center space-x-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+            <button className="flex items-center space-x-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" >
               <Filter className="h-4 w-4 responsive-container" />
               <span>Filter</span>
             </button>
@@ -1019,7 +1012,7 @@ const ProfilePage: React.FC = () => {
             <button
               key={filter}
               className="px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container"
-             aria-label="Button">
+>
               {filter}
             </button>
           ))}
@@ -1054,7 +1047,7 @@ const ProfilePage: React.FC = () => {
                     <p className="text-xs text-gray-500 dark:text-gray-400 responsive-container">{activity.device}</p>
                   </div>
                 </div>
-                <button className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded responsive-container" aria-label="Button">
+                <button className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded responsive-container" >
                   <MoreVertical className="h-4 w-4 text-gray-400 responsive-container" />
                 </button>
               </div>
@@ -1073,7 +1066,7 @@ const ProfilePage: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 responsive-container">
             Active Sessions
           </h3>
-          <button className="text-red-600 hover:text-red-700 text-sm font-medium responsive-container" aria-label="Button">
+          <button className="text-red-600 hover:text-red-700 text-sm font-medium responsive-container" >
             Sign Out All Other Sessions
           </button>
         </div>
@@ -1124,7 +1117,7 @@ const ProfilePage: React.FC = () => {
                 </div>
               </div>
               {!session.current && (
-                <button className="text-red-600 hover:text-red-700 text-sm font-medium responsive-container" aria-label="Button">
+                <button className="text-red-600 hover:text-red-700 text-sm font-medium responsive-container" >
                   Revoke
                 </button>
               )}
@@ -1192,7 +1185,6 @@ const ProfilePage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-            aria-label="Button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center responsive-container"
               >
                 {showPassword ? (
@@ -1237,7 +1229,7 @@ const ProfilePage: React.FC = () => {
             <button
               type="button"
               onClick={() => setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' }
-            aria-label="Button")
+)
               }
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
             >
@@ -1246,7 +1238,7 @@ const ProfilePage: React.FC = () => {
             <button
               type="submit"
               className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
-             aria-label="Button">
+>
               <Key className="h-4 w-4 responsive-container" />
               <span>Change Password</span>
             </button>
@@ -1260,7 +1252,7 @@ const ProfilePage: React.FC = () => {
           Security Actions
         </h3>
         <div className="space-y-4 responsive-container">
-          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" >
             <div className="flex items-center space-x-3 responsive-container">
               <Shield className="h-5 w-5 text-green-600 responsive-container" />
               <div className="text-left responsive-container">
@@ -1272,7 +1264,7 @@ const ProfilePage: React.FC = () => {
             </div>
             <ChevronRight className="h-4 w-4 text-gray-400 responsive-container" />
           </button>
-          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" >
             <div className="flex items-center space-x-3 responsive-container">
               <Key className="h-5 w-5 text-purple-600 responsive-container" />
               <div className="text-left responsive-container">
@@ -1282,7 +1274,7 @@ const ProfilePage: React.FC = () => {
             </div>
             <ChevronRight className="h-4 w-4 text-gray-400 responsive-container" />
           </button>
-          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" aria-label="Button">
+          <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors responsive-container" >
             <div className="flex items-center space-x-3 responsive-container">
               <Download className="h-5 w-5 text-orange-600 responsive-container" />
               <div className="text-left responsive-container">
@@ -1310,7 +1302,6 @@ const ProfilePage: React.FC = () => {
           </h3>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-md responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -1398,7 +1389,6 @@ const ProfilePage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-            aria-label="Button"
                 className="px-6 py-3 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors font-medium responsive-container"
               >
                 Cancel
@@ -1406,7 +1396,7 @@ const ProfilePage: React.FC = () => {
               <button
                 type="submit"
                 className="flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors shadow-md font-medium responsive-container"
-               aria-label="Button">
+>
                 <Save className="h-4 w-4 responsive-container" />
                 <span>Save Changes</span>
               </button>
@@ -1428,7 +1418,6 @@ const ProfilePage: React.FC = () => {
           </h3>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            aria-label="Button"
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-md responsive-container"
           >
             <Edit className="h-4 w-4 responsive-container" />
@@ -1548,7 +1537,6 @@ const ProfilePage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-            aria-label="Button"
                 className="px-6 py-3 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors font-medium responsive-container"
               >
                 Cancel
@@ -1556,7 +1544,7 @@ const ProfilePage: React.FC = () => {
               <button
                 type="submit"
                 className="flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors shadow-md font-medium responsive-container"
-               aria-label="Button">
+>
                 <Save className="h-4 w-4 responsive-container" />
                 <span>Save Changes</span>
               </button>
@@ -1590,7 +1578,6 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center space-x-3 responsive-container">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
-            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
             >
               {isRealTime ? <Pause className="h-4 w-4 responsive-container" /> : <Play className="h-4 w-4 responsive-container" />}
@@ -1611,14 +1598,13 @@ const ProfilePage: React.FC = () => {
             <button
               onClick={handleExportSettings}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
-             aria-label="Button">
+>
               <Download className="h-4 w-4 responsive-container" />
               <span>Export</span>
             </button>
             
             <button
               onClick={() => console.log('Add setting modal')}
-            aria-label="Button"
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium responsive-container"
             >
               <Plus className="h-4 w-4 responsive-container" />
@@ -1716,13 +1702,13 @@ const ProfilePage: React.FC = () => {
               <button
                 onClick={handleBulkResetSettings}
                 className="px-3 py-1 text-sm bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors responsive-container"
-               aria-label="Button">
+>
                 Reset to Default
               </button>
               <button
                 onClick={handleBulkDeleteSettings}
                 className="px-3 py-1 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container"
-               aria-label="Button">
+>
                 Delete
               </button>
             </div>
@@ -1882,7 +1868,7 @@ const ProfilePage: React.FC = () => {
                           setSelectedSetting(setting);
                           console.log('View setting modal');
                         }
-            aria-label="Button"}
+}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                         title="View Setting"
                       >
@@ -1894,7 +1880,7 @@ const ProfilePage: React.FC = () => {
                             setSelectedSetting(setting);
                             console.log('Edit setting modal');
                           }
-            aria-label="Button"}
+}
                           className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 responsive-container"
                           title="Edit Setting"
                         >
@@ -1906,7 +1892,7 @@ const ProfilePage: React.FC = () => {
                           setSelectedSetting(setting);
                           console.log('Delete setting modal');
                         }
-            aria-label="Button"}
+}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                         title="Delete Setting"
                       >
@@ -1925,7 +1911,6 @@ const ProfilePage: React.FC = () => {
           <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
               onClick={() => setSettingsCurrentPage(prev => Math.max(prev - 1, 1))}
-            aria-label="Button"
               disabled={settingsCurrentPage === 1}
               className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -1933,7 +1918,6 @@ const ProfilePage: React.FC = () => {
             </button>
             <button
               onClick={() => setSettingsCurrentPage(prev => Math.min(prev + 1, settingsTotalPages))}
-            aria-label="Button"
               disabled={settingsCurrentPage === settingsTotalPages}
               className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -1969,7 +1953,6 @@ const ProfilePage: React.FC = () => {
                   <button
                     key={page}
                     onClick={() => setSettingsCurrentPage(page)}
-            aria-label="Button"
                     className={`px-3 py-1 text-sm rounded ${
                       page === settingsCurrentPage
                         ? 'bg-blue-600 text-white'
@@ -2017,7 +2000,7 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
         
-        <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium responsive-container" aria-label="Button">
+        <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium responsive-container" >
           Manage Subscription
         </button>
       </div>
@@ -2029,7 +2012,7 @@ const ProfilePage: React.FC = () => {
             <CreditCard className="h-6 w-6 mr-3 text-blue-600 responsive-container" />
             Payment Methods
           </h3>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
+          <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors responsive-container" >
             <Plus className="h-4 w-4 responsive-container" />
             <span>Add Payment Method</span>
           </button>
@@ -2052,7 +2035,7 @@ const ProfilePage: React.FC = () => {
               <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full responsive-container">
                 Default
               </span>
-              <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container" aria-label="Button">
+              <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 responsive-container" >
                 <MoreVertical className="h-4 w-4 responsive-container" />
               </button>
             </div>
@@ -2101,7 +2084,7 @@ const ProfilePage: React.FC = () => {
                   </span>
                 </td>
                 <td className="py-3 px-4 responsive-container">
-                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium responsive-container" aria-label="Button">
+                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium responsive-container" >
                     Download
                   </button>
                 </td>
@@ -2118,7 +2101,7 @@ const ProfilePage: React.FC = () => {
                   </span>
                 </td>
                 <td className="py-3 px-4 responsive-container">
-                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium responsive-container" aria-label="Button">
+                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium responsive-container" >
                     Download
                   </button>
                 </td>
@@ -2153,7 +2136,6 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center space-x-3 responsive-container">
             <button
               onClick={() => setIsRealTime(!isRealTime)}
-            aria-label="Button"
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors responsive-container"
             >
               {isRealTime ? <Pause className="h-4 w-4 responsive-container" /> : <Play className="h-4 w-4 responsive-container" />}
@@ -2163,14 +2145,13 @@ const ProfilePage: React.FC = () => {
             <button
               onClick={handleExport}
               className="flex items-center space-x-2 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
-             aria-label="Button">
+>
               <Download className="h-4 w-4 responsive-container" />
               <span>Export</span>
             </button>
             
             <button
               onClick={() => console.log('Add user modal')}
-            aria-label="Button"
               className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium responsive-container"
             >
               <Plus className="h-4 w-4 responsive-container" />
@@ -2267,19 +2248,19 @@ const ProfilePage: React.FC = () => {
               <button
                 onClick={handleBulkActivate}
                 className="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors responsive-container"
-               aria-label="Button">
+>
                 Activate
               </button>
               <button
                 onClick={handleBulkDeactivate}
                 className="px-3 py-1 text-sm bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors responsive-container"
-               aria-label="Button">
+>
                 Deactivate
               </button>
               <button
                 onClick={handleBulkDelete}
                 className="px-3 py-1 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container"
-               aria-label="Button">
+>
                 Delete
               </button>
             </div>
@@ -2433,7 +2414,7 @@ const ProfilePage: React.FC = () => {
                           setSelectedUser(user);
                           console.log('View user modal');
                         }
-            aria-label="Button"}
+}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 responsive-container"
                         title="View User"
                       >
@@ -2444,7 +2425,7 @@ const ProfilePage: React.FC = () => {
                           setSelectedUser(user);
                           console.log('Edit user modal');
                         }
-            aria-label="Button"}
+}
                         className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 responsive-container"
                         title="Edit User"
                       >
@@ -2455,7 +2436,7 @@ const ProfilePage: React.FC = () => {
                           setSelectedUser(user);
                           console.log('Delete user modal');
                         }
-            aria-label="Button"}
+}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 responsive-container"
                         title="Delete User"
                       >
@@ -2474,7 +2455,6 @@ const ProfilePage: React.FC = () => {
           <div className="flex-1 flex justify-between sm:hidden responsive-container">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-            aria-label="Button"
               disabled={currentPage === 1}
               className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -2482,7 +2462,6 @@ const ProfilePage: React.FC = () => {
             </button>
             <button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-            aria-label="Button"
               disabled={currentPage === totalPages}
               className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed responsive-container"
             >
@@ -2516,7 +2495,6 @@ const ProfilePage: React.FC = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-            aria-label="Button"
                     className={`px-3 py-1 text-sm rounded ${
                       page === currentPage
                         ? 'bg-blue-600 text-white'
@@ -2552,7 +2530,7 @@ const ProfilePage: React.FC = () => {
               Download a copy of all your personal data including profile information, activity
               logs, and preferences.
             </p>
-            <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" aria-label="Button">
+            <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container" >
               <Download className="h-4 w-4 responsive-container" />
               <span>Request Data Export</span>
             </button>
@@ -2627,7 +2605,7 @@ const ProfilePage: React.FC = () => {
               Permanently delete your activity logs and session history. This action cannot be
               undone.
             </p>
-            <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container" aria-label="Button">
+            <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container" >
               Clear Activity Data
             </button>
           </div>
@@ -2690,7 +2668,6 @@ const ProfilePage: React.FC = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-            aria-label="Button"
                     className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                       activeTab === tab.id
                         ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
@@ -2719,7 +2696,6 @@ const ProfilePage: React.FC = () => {
               <div className="space-y-3 responsive-container">
                 <button
                   onClick={() => setShowSignOutModal(true)}
-            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <LogOut className="h-5 w-5 responsive-container" />
@@ -2727,7 +2703,6 @@ const ProfilePage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setActiveTab('security')}
-            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <Shield className="h-5 w-5 responsive-container" />
@@ -2735,7 +2710,6 @@ const ProfilePage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setActiveTab('preferences')}
-            aria-label="Button"
                   className="w-full flex items-center space-x-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 responsive-container"
                 >
                   <Settings className="h-5 w-5 responsive-container" />
@@ -2789,7 +2763,6 @@ const ProfilePage: React.FC = () => {
                 <div className="flex items-center justify-end space-x-3 responsive-container">
                   <button
                     onClick={() => setShowSignOutModal(false)}
-            aria-label="Button"
                     className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors responsive-container"
                   >
                     Cancel
@@ -2797,7 +2770,7 @@ const ProfilePage: React.FC = () => {
                   <button
                     onClick={handleSignOut}
                     className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors responsive-container"
-                   aria-label="Button">
+>
                     Sign Out
                   </button>
                 </div>

@@ -53,8 +53,7 @@ import {
   VolumeX,
   Minimize2,
   Maximize2,
-  CreditCard,
-} from 'lucide-react';
+  CreditCard} from 'lucide-react';
 
 import RealTimePortalStatus from '../../../components/RealTimePortalStatus';
 
@@ -66,8 +65,7 @@ function BrokerPortal() {
     role: 'admin',
     permissions: ['read', 'write', 'admin'],
     avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-  });
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'});
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
 
@@ -87,22 +85,19 @@ function BrokerPortal() {
       title: 'New broker registered',
       message: 'Acme Corporation has been added',
       time: '5 minutes ago',
-      type: 'info',
-    },
+      type: 'info'},
     {
       id: 2,
       title: 'Broker status updated',
       message: 'Mark Johnson is now active',
       time: '1 hour ago',
-      type: 'success',
-    },
+      type: 'success'},
     {
       id: 3,
       title: 'Payment overdue',
       message: 'Invoice #INV-2023-001 is 3 days overdue',
       time: '3 days ago',
-      type: 'warning',
-    },
+      type: 'warning'},
   ];
 
   const metrics = [
@@ -115,8 +110,7 @@ function BrokerPortal() {
       icon: Activity,
       color: 'text-emerald-600',
       bgColor: 'bg-emerald-50',
-      borderColor: 'border-emerald-200',
-    },
+      borderColor: 'border-emerald-200'},
     {
       id: 'revenue',
       title: 'Monthly Revenue',
@@ -126,8 +120,7 @@ function BrokerPortal() {
       icon: DollarSign,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-      borderColor: 'border-blue-200',
-    },
+      borderColor: 'border-blue-200'},
     {
       id: 'efficiency',
       title: 'Satisfaction Rate',
@@ -137,8 +130,7 @@ function BrokerPortal() {
       icon: TrendingUp,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-      borderColor: 'border-purple-200',
-    },
+      borderColor: 'border-purple-200'},
     {
       id: 'alerts',
       title: 'Active Alerts',
@@ -148,23 +140,20 @@ function BrokerPortal() {
       icon: AlertTriangle,
       color: 'text-amber-600',
       bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-200',
-    },
+      borderColor: 'border-amber-200'},
   ];
 
   const performanceData = [
     {
       label: 'Broker Satisfaction',
       value: 92,
-      color: 'bg-gradient-to-r from-emerald-400 to-emerald-600',
-    },
+      color: 'bg-gradient-to-r from-emerald-400 to-emerald-600'},
     { label: 'Response Time', value: 99.8, color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
     { label: 'Retention Rate', value: 95, color: 'bg-gradient-to-r from-purple-400 to-purple-600' },
     {
       label: 'Support Efficiency',
       value: 83,
-      color: 'bg-gradient-to-r from-amber-400 to-amber-600',
-    },
+      color: 'bg-gradient-to-r from-amber-400 to-amber-600'},
   ];
 
   const recentActivity = [
@@ -174,40 +163,35 @@ function BrokerPortal() {
       details: 'Acme Corporation has been added to your network',
       time: '5 minutes ago',
       type: 'info',
-      icon: Plus,
-    },
+      icon: Plus},
     {
       id: 2,
       action: 'Status updated',
       details: 'Mark Johnson is now active with broker #5678',
       time: '1 hour ago',
       type: 'success',
-      icon: CheckCircle,
-    },
+      icon: CheckCircle},
     {
       id: 3,
       action: 'Payment overdue',
       details: 'Invoice #INV-2023-001 is 3 days overdue',
       time: '3 days ago',
       type: 'warning',
-      icon: AlertTriangle,
-    },
+      icon: AlertTriangle},
     {
       id: 4,
       action: 'New user registered',
       details: 'Beta Corp has been added to your network',
       time: 'Yesterday',
       type: 'info',
-      icon: Users,
-    },
+      icon: Users},
     {
       id: 5,
       action: 'System maintenance',
       details: 'Scheduled maintenance in 2 days',
       time: '2 days ago',
       type: 'warning',
-      icon: Settings,
-    },
+      icon: Settings},
   ];
 
   // Comprehensive multi-level menu structure
@@ -229,15 +213,12 @@ function BrokerPortal() {
             {
               id: 'analytics-dashboard',
               label: 'Analytics Dashboard',
-              path: '/overview/dashboard/analytics',
-            },
+              path: '/overview/dashboard/analytics'},
             {
               id: 'performance-dashboard',
               label: 'Performance Dashboard',
-              path: '/overview/dashboard/performance',
-            },
-          ],
-        },
+              path: '/overview/dashboard/performance'},
+          ]},
         {
           id: 'reports',
           label: 'Reports',
@@ -248,13 +229,10 @@ function BrokerPortal() {
             {
               id: 'quarterly-reports',
               label: 'Quarterly Reports',
-              path: '/overview/reports/quarterly',
-            },
+              path: '/overview/reports/quarterly'},
             { id: 'annual-reports', label: 'Annual Reports', path: '/overview/reports/annual' },
-          ],
-        },
-      ],
-    },
+          ]},
+      ]},
     {
       id: 'broker-management',
       label: 'Broker Management',
@@ -271,8 +249,7 @@ function BrokerPortal() {
             { id: 'active-brokers', label: 'Active Brokers', path: '/brokers/list/active' },
             { id: 'inactive-brokers', label: 'Inactive Brokers', path: '/brokers/list/inactive' },
             { id: 'pending-brokers', label: 'Pending Brokers', path: '/brokers/list/pending' },
-          ],
-        },
+          ]},
         {
           id: 'broker-actions',
           label: 'Broker Actions',
@@ -282,8 +259,7 @@ function BrokerPortal() {
             { id: 'add-broker', label: 'Add New Broker', path: '/brokers/actions/add' },
             { id: 'import-brokers', label: 'Import Brokers', path: '/brokers/actions/import' },
             { id: 'export-brokers', label: 'Export Brokers', path: '/brokers/actions/export' },
-          ],
-        },
+          ]},
         {
           id: 'broker-verification',
           label: 'Verification',
@@ -293,22 +269,17 @@ function BrokerPortal() {
             {
               id: 'verify-identity',
               label: 'Verify Identity',
-              path: '/brokers/verification/identity',
-            },
+              path: '/brokers/verification/identity'},
             {
               id: 'verify-documents',
               label: 'Verify Documents',
-              path: '/brokers/verification/documents',
-            },
+              path: '/brokers/verification/documents'},
             {
               id: 'verify-address',
               label: 'Verify Address',
-              path: '/brokers/verification/address',
-            },
-          ],
-        },
-      ],
-    },
+              path: '/brokers/verification/address'},
+          ]},
+      ]},
     {
       id: 'communication',
       label: 'Communication',
@@ -326,15 +297,12 @@ function BrokerPortal() {
             {
               id: 'message-history',
               label: 'Message History',
-              path: '/communication/messaging/history',
-            },
+              path: '/communication/messaging/history'},
             {
               id: 'message-templates',
               label: 'Message Templates',
-              path: '/communication/messaging/templates',
-            },
-          ],
-        },
+              path: '/communication/messaging/templates'},
+          ]},
         {
           id: 'notifications',
           label: 'Notifications',
@@ -344,20 +312,16 @@ function BrokerPortal() {
             {
               id: 'push-notifications',
               label: 'Push Notifications',
-              path: '/communication/notifications/push',
-            },
+              path: '/communication/notifications/push'},
             {
               id: 'email-notifications',
               label: 'Email Notifications',
-              path: '/communication/notifications/email',
-            },
+              path: '/communication/notifications/email'},
             {
               id: 'sms-notifications',
               label: 'SMS Notifications',
-              path: '/communication/notifications/sms',
-            },
-          ],
-        },
+              path: '/communication/notifications/sms'},
+          ]},
         {
           id: 'support',
           label: 'Support',
@@ -369,12 +333,9 @@ function BrokerPortal() {
             {
               id: 'knowledge-base',
               label: 'Knowledge Base',
-              path: '/communication/support/knowledge',
-            },
-          ],
-        },
-      ],
-    },
+              path: '/communication/support/knowledge'},
+          ]},
+      ]},
     {
       id: 'billing',
       label: 'Billing & Payments',
@@ -393,10 +354,8 @@ function BrokerPortal() {
             {
               id: 'pending-invoices',
               label: 'Pending Invoices',
-              path: '/billing/invoices/pending',
-            },
-          ],
-        },
+              path: '/billing/invoices/pending'},
+          ]},
         {
           id: 'payments',
           label: 'Payments',
@@ -406,8 +365,7 @@ function BrokerPortal() {
             { id: 'payment-methods', label: 'Payment Methods', path: '/billing/payments/methods' },
             { id: 'payment-history', label: 'Payment History', path: '/billing/payments/history' },
             { id: 'failed-payments', label: 'Failed Payments', path: '/billing/payments/failed' },
-          ],
-        },
+          ]},
         {
           id: 'subscriptions',
           label: 'Subscriptions',
@@ -417,22 +375,17 @@ function BrokerPortal() {
             {
               id: 'active-subscriptions',
               label: 'Active Subscriptions',
-              path: '/billing/subscriptions/active',
-            },
+              path: '/billing/subscriptions/active'},
             {
               id: 'subscription-plans',
               label: 'Subscription Plans',
-              path: '/billing/subscriptions/plans',
-            },
+              path: '/billing/subscriptions/plans'},
             {
               id: 'billing-cycles',
               label: 'Billing Cycles',
-              path: '/billing/subscriptions/cycles',
-            },
-          ],
-        },
-      ],
-    },
+              path: '/billing/subscriptions/cycles'},
+          ]},
+      ]},
     {
       id: 'analytics',
       label: 'Analytics',
@@ -449,20 +402,16 @@ function BrokerPortal() {
             {
               id: 'broker-behavior',
               label: 'Broker Behavior',
-              path: '/analytics/brokers/behavior',
-            },
+              path: '/analytics/brokers/behavior'},
             {
               id: 'broker-segments',
               label: 'Broker Segments',
-              path: '/analytics/brokers/segments',
-            },
+              path: '/analytics/brokers/segments'},
             {
               id: 'broker-lifetime',
               label: 'Broker Lifetime Value',
-              path: '/analytics/brokers/lifetime',
-            },
-          ],
-        },
+              path: '/analytics/brokers/lifetime'},
+          ]},
         {
           id: 'business-analytics',
           label: 'Business Analytics',
@@ -472,22 +421,17 @@ function BrokerPortal() {
             {
               id: 'revenue-analytics',
               label: 'Revenue Analytics',
-              path: '/analytics/business/revenue',
-            },
+              path: '/analytics/business/revenue'},
             {
               id: 'growth-analytics',
               label: 'Growth Analytics',
-              path: '/analytics/business/growth',
-            },
+              path: '/analytics/business/growth'},
             {
               id: 'performance-analytics',
               label: 'Performance Analytics',
-              path: '/analytics/business/performance',
-            },
-          ],
-        },
-      ],
-    },
+              path: '/analytics/business/performance'},
+          ]},
+      ]},
     {
       id: 'settings',
       label: 'Settings',
@@ -504,16 +448,13 @@ function BrokerPortal() {
             {
               id: 'profile-settings',
               label: 'Profile Settings',
-              path: '/settings/account/profile',
-            },
+              path: '/settings/account/profile'},
             {
               id: 'security-settings',
               label: 'Security Settings',
-              path: '/settings/account/security',
-            },
+              path: '/settings/account/security'},
             { id: 'preferences', label: 'Preferences', path: '/settings/account/preferences' },
-          ],
-        },
+          ]},
         {
           id: 'system-settings',
           label: 'System Settings',
@@ -524,13 +465,10 @@ function BrokerPortal() {
             {
               id: 'integration-settings',
               label: 'Integration Settings',
-              path: '/settings/system/integrations',
-            },
+              path: '/settings/system/integrations'},
             { id: 'backup-settings', label: 'Backup Settings', path: '/settings/system/backup' },
-          ],
-        },
-      ],
-    },
+          ]},
+      ]},
   ];
 
   const handleMenuToggle = (menuId: string) => {
@@ -555,64 +493,56 @@ function BrokerPortal() {
       icon: MessageCircle,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-      borderColor: 'border-blue-200',
-    },
+      borderColor: 'border-blue-200'},
     {
       id: 'email',
       label: 'Email',
       icon: Mail,
       color: 'text-emerald-600',
       bgColor: 'bg-emerald-50',
-      borderColor: 'border-emerald-200',
-    },
+      borderColor: 'border-emerald-200'},
     {
       id: 'tasks',
       label: 'Tasks',
       icon: CheckSquare,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-      borderColor: 'border-purple-200',
-    },
+      borderColor: 'border-purple-200'},
     {
       id: 'phone',
       label: 'Phone',
       icon: Phone,
       color: 'text-amber-600',
       bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-200',
-    },
+      borderColor: 'border-amber-200'},
     {
       id: 'text',
       label: 'SMS',
       icon: MessageSquare,
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-50',
-      borderColor: 'border-indigo-200',
-    },
+      borderColor: 'border-indigo-200'},
     {
       id: 'video',
       label: 'Video',
       icon: Video,
       color: 'text-red-600',
       bgColor: 'bg-red-50 dark:bg-red-900/20',
-      borderColor: 'border-red-200',
-    },
+      borderColor: 'border-red-200'},
     {
       id: 'calendar',
       label: 'Calendar',
       icon: Calendar,
       color: 'text-teal-600',
       bgColor: 'bg-teal-50',
-      borderColor: 'border-teal-200',
-    },
+      borderColor: 'border-teal-200'},
     {
       id: 'notes',
       label: 'Notes',
       icon: FileText,
       color: 'text-gray-600 dark:text-gray-300',
       bgColor: 'bg-gray-50 dark:bg-slate-700/50',
-      borderColor: 'border-gray-200 dark:border-slate-700',
-    },
+      borderColor: 'border-gray-200 dark:border-slate-700'},
   ];
 
   const chatMessages = [
@@ -621,22 +551,19 @@ function BrokerPortal() {
       sender: 'John Doe',
       message: 'Hi, I need help with my order',
       time: '2 min ago',
-      unread: true,
-    },
+      unread: true},
     {
       id: 2,
       sender: 'Sarah Wilson',
       message: 'Thank you for the quick response!',
       time: '5 min ago',
-      unread: false,
-    },
+      unread: false},
     {
       id: 3,
       sender: 'Mike Johnson',
       message: 'Can you check the status?',
       time: '10 min ago',
-      unread: true,
-    },
+      unread: true},
   ];
 
   const emailList = [
@@ -645,22 +572,19 @@ function BrokerPortal() {
       from: 'broker@example.com',
       subject: 'Order Inquiry',
       time: '1 hour ago',
-      unread: true,
-    },
+      unread: true},
     {
       id: 2,
       from: 'support@company.com',
       subject: 'Your order has shipped',
       time: '2 hours ago',
-      unread: false,
-    },
+      unread: false},
     {
       id: 3,
       from: 'billing@company.com',
       subject: 'Invoice #12345',
       time: '3 hours ago',
-      unread: true,
-    },
+      unread: true},
   ];
 
   const tasks = [
@@ -670,8 +594,7 @@ function BrokerPortal() {
       title: 'Review broker feedback',
       priority: 'medium',
       due: 'Tomorrow',
-      completed: false,
-    },
+      completed: false},
     { id: 3, title: 'Update broker records', priority: 'low', due: 'Next week', completed: true },
   ];
 
@@ -682,24 +605,21 @@ function BrokerPortal() {
       type: 'incoming',
       duration: '5:32',
       time: '10 min ago',
-      status: 'completed',
-    },
+      status: 'completed'},
     {
       id: 2,
       contact: 'Sarah Wilson',
       type: 'outgoing',
       duration: '2:15',
       time: '1 hour ago',
-      status: 'completed',
-    },
+      status: 'completed'},
     {
       id: 3,
       contact: 'Mike Johnson',
       type: 'missed',
       duration: '0:00',
       time: '2 hours ago',
-      status: 'missed',
-    },
+      status: 'missed'},
   ];
 
   const smsMessages = [
@@ -708,15 +628,13 @@ function BrokerPortal() {
       contact: 'John Doe',
       message: 'Thanks for the update!',
       time: '5 min ago',
-      unread: false,
-    },
+      unread: false},
     {
       id: 2,
       contact: 'Sarah Wilson',
       message: 'When will my order arrive?',
       time: '1 hour ago',
-      unread: true,
-    },
+      unread: true},
   ];
 
   const calendarEvents = [
@@ -730,14 +648,12 @@ function BrokerPortal() {
       id: 1,
       title: 'Broker Meeting Notes',
       content: 'Discussed new features...',
-      updated: '2 hours ago',
-    },
+      updated: '2 hours ago'},
     {
       id: 2,
       title: 'Project Ideas',
       content: 'Brainstorming session notes...',
-      updated: '1 day ago',
-    },
+      updated: '1 day ago'},
   ];
 
   const getStatusColor = (type: string) => {

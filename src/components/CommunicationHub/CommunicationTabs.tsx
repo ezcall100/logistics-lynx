@@ -115,10 +115,11 @@ export const CommunicationTabs: React.FC<CommunicationTabsProps> = ({
                 <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 responsive-container">
                   <button 
                     className="w-4 h-4 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white dark:hover:bg-gray-700 transition-colors responsive-container"
-                    onClick={(e) = aria-label="Button"> {
+                    onClick={(e) => {
                       e.stopPropagation();
                       // Quick action logic here
                     }}
+                    aria-label="Button"
                   >
                     <div className="w-1.5 h-1.5 bg-gray-600 dark:bg-gray-300 rounded-full responsive-container"></div>
                   </button>
@@ -136,4 +137,4 @@ export const CommunicationTabs: React.FC<CommunicationTabsProps> = ({
             </button>
     );
   }
-};
+};

@@ -347,7 +347,7 @@ export const CompleteCommunicationHub: React.FC = () => {
                           }
                           alt={user.name}
                           className="w-8 h-8 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
-                        / alt="Image">
+                        />
                         <div
                           className={`absolute -bottom-1 -right-1 w-3 h-3 ${getStatusColor(user.status)} rounded-full border-2 border-gray-900`}
                         ></div>

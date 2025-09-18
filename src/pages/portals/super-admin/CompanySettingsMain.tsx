@@ -542,4 +542,3 @@ const CompanyAnalyticsSettings: React.FC<{ company: CompanyData | null }> = () =
 );
 
 export default CompanySettingsMain;
-}

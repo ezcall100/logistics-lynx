@@ -58,4 +58,3 @@ const PortalHeader: React.FC<PortalHeaderProps> = ({
 }
 
 export default PortalHeader
-}

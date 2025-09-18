@@ -444,5 +444,7 @@ const ResourcesPage = React.memo(function ResourcesPage() {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
+
+export default ResourcesPage;

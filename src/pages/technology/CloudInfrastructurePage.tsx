@@ -231,4 +231,3 @@ const CloudInfrastructurePage: React.FC = () => {
 };
 
 export default CloudInfrastructurePage;
-}

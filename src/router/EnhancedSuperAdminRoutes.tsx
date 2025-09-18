@@ -648,4 +648,3 @@ const EnhancedSuperAdminRoutes: React.FC = () => {
 };
 
 export default EnhancedSuperAdminRoutes;
-}

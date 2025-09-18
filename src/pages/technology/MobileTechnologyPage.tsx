@@ -229,4 +229,3 @@ const MobileTechnologyPage: React.FC = () => {
 };
 
 export default MobileTechnologyPage;
-}

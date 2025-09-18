@@ -187,4 +187,3 @@ const InvestorsPage: React.FC = () => {
 }
 
 export default InvestorsPage
-}

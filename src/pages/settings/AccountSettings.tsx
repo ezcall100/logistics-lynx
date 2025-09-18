@@ -408,8 +408,8 @@ const AccountSettings: React.FC = () => {
                     <p className="text-sm text-gray-600 responsive-container sm:flex-col md:flex-row lg:grid">Add an extra layer of security to your account</p>
                   </div>
                   <button
-                    onClick={() => setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }
-            aria-label="Button"))}
+                    onClick={() => setSecurityData(prev => ({ ...prev, twoFactorEnabled: !prev.twoFactorEnabled }))}
+                    aria-label="Button"
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       securityData.twoFactorEnabled ? 'bg-blue-600' : 'bg-gray-200'
                     }`}
@@ -590,4 +590,3 @@ const AccountSettings: React.FC = () => {
 };
 
 export default AccountSettings;
-}

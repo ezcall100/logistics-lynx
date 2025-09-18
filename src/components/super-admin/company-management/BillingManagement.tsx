@@ -40,7 +40,7 @@ const Button: React.FC<{
     : 'bg-primary text-primary-foreground hover:bg-primary/90';
   const sizeClasses = size === 'sm' ? 'h-9 px-3 text-sm' : 'h-10 px-4 py-2';
   return (
-    <button className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`} aria-label="Button">
+    <button className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`} >
       {children}
     </button>
   );
@@ -345,4 +345,3 @@ const BillingManagement: React.FC = () => {
 };
 
 export default BillingManagement;
-}

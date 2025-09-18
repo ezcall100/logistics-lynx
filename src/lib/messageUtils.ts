@@ -111,7 +111,7 @@ export const generateAvatar = (name: string): string => {
 };
 
 // Message search
-export const searchMessages = (messages: any[], query: string, fields: string[]): any[] => {
+export const searchMessages = (messages: unknown[], query: string, fields: string[]): unknown[] => {
   if (!query.trim()) return messages;
   
   const lowercaseQuery = query.toLowerCase();
@@ -124,7 +124,7 @@ export const searchMessages = (messages: any[], query: string, fields: string[])
 };
 
 // Message sorting
-export const sortMessagesByTime = (messages: any[], ascending: boolean = false): any[] => {
+export const sortMessagesByTime = (messages: unknown[], ascending: boolean = false): unknown[] => {
   return [...messages].sort((a, b) => {
     const timeA = new Date(a.time).getTime();
     const timeB = new Date(b.time).getTime();
@@ -133,7 +133,7 @@ export const sortMessagesByTime = (messages: any[], ascending: boolean = false):
 };
 
 // Badge count calculation
-export const calculateBadgeCount = (items: any[], unreadField: string = 'unread'): number => {
+export const calculateBadgeCount = (items: unknown[], unreadField: string = 'unread'): number => {
   return items.filter(item => item[unreadField]).length;
 };
 
@@ -149,7 +149,7 @@ export const generateId = (): number => {
 };
 
 // Debounce utility for search
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): ((...args: Parameters<T>) => void) => {
@@ -158,4 +158,4 @@ export const debounce = <T extends (...args: any[]) => any>(
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
-};
+};

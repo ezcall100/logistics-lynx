@@ -94,4 +94,3 @@ const IndustriesPage: React.FC = () => {
 }
 
 export default IndustriesPage
-}

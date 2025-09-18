@@ -1,6 +1,15 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
+// ErrorBoundary component
+const ErrorBoundary = ({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }) => {
+  try {
+    return <>{children}</>
+  } catch (error) {
+    return <>{fallback}</>
+  }
+}
+
 const SimpleDashboard: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
 
@@ -17,8 +26,7 @@ const SimpleDashboard: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="min-h-screen bg-gray-100 p-8 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="min-h-screen bg-gray-100 p-8 responsive-container sm:flex-col md:flex-row lg:grid">
       <div className="max-w-6xl mx-auto responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="bg-white rounded-lg shadow-sm p-8 responsive-container sm:flex-col md:flex-row lg:grid">
           <h1 className="text-3xl font-bold text-gray-900 mb-6 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -60,8 +68,8 @@ const SimpleDashboard: React.FC = () => {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 
 export default SimpleDashboard;
-}

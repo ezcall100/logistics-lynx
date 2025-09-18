@@ -23,8 +23,7 @@ import {
   Mail,
   MessageCircle,
   Video,
-  CheckSquare,
-} from 'lucide-react';
+  CheckSquare} from 'lucide-react';
 
 function CRMPortal() {
   const [user] = useState({
@@ -34,8 +33,7 @@ function CRMPortal() {
     role: 'crm',
     permissions: ['read', 'write', 'admin'],
     avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-  });
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'});
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -52,22 +50,19 @@ function CRMPortal() {
       title: 'New crm registered',
       message: 'Acme Corporation has been added',
       time: '5 minutes ago',
-      type: 'info',
-    },
+      type: 'info'},
     {
       id: 2,
       title: 'CRM status updated',
       message: 'Mark Johnson is now active',
       time: '1 hour ago',
-      type: 'success',
-    },
+      type: 'success'},
     {
       id: 3,
       title: 'Payment overdue',
       message: 'Invoice #INV-2023-001 is 3 days overdue',
       time: '3 days ago',
-      type: 'warning',
-    },
+      type: 'warning'},
   ];
 
   const metrics = [
@@ -77,32 +72,28 @@ function CRMPortal() {
       change: { value: '+12%', type: 'increase' as const },
       icon: Users,
       iconColor: 'text-blue-600',
-      bgColor: 'bg-blue-100 dark:bg-blue-900/30',
-    },
+      bgColor: 'bg-blue-100 dark:bg-blue-900/30'},
     {
       title: 'Revenue',
       value: '$45,678',
       change: { value: '+8%', type: 'increase' as const },
       icon: DollarSign,
       iconColor: 'text-green-600',
-      bgColor: 'bg-green-100 dark:bg-green-900/30',
-    },
+      bgColor: 'bg-green-100 dark:bg-green-900/30'},
     {
       title: 'Growth Rate',
       value: '15%',
       change: { value: '+3%', type: 'increase' as const },
       icon: TrendingUp,
       iconColor: 'text-purple-600',
-      bgColor: 'bg-purple-100 dark:bg-purple-900/30',
-    },
+      bgColor: 'bg-purple-100 dark:bg-purple-900/30'},
     {
       title: 'Alerts',
       value: '3',
       change: { value: '-1', type: 'decrease' as const },
       icon: AlertTriangle,
       iconColor: 'text-yellow-600',
-      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30',
-    },
+      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30'},
   ];
 
   const menuItems = [
@@ -114,15 +105,12 @@ function CRMPortal() {
         {
           id: 'dashboard',
           label: 'Dashboard',
-          icon: 'BarChart3',
-        },
+          icon: 'BarChart3'},
         {
           id: 'analytics',
           label: 'Analytics',
-          icon: 'TrendingUp',
-        },
-      ],
-    },
+          icon: 'TrendingUp'},
+      ]},
     {
       id: 'customers',
       label: 'Customers',
@@ -131,20 +119,16 @@ function CRMPortal() {
         {
           id: 'customer-list',
           label: 'Customer List',
-          icon: 'Users',
-        },
+          icon: 'Users'},
         {
           id: 'customer-profiles',
           label: 'Profiles',
-          icon: 'User',
-        },
+          icon: 'User'},
         {
           id: 'customer-history',
           label: 'History',
-          icon: 'History',
-        },
-      ],
-    },
+          icon: 'History'},
+      ]},
     {
       id: 'sales',
       label: 'Sales',
@@ -153,20 +137,16 @@ function CRMPortal() {
         {
           id: 'leads',
           label: 'Leads',
-          icon: 'UserPlus',
-        },
+          icon: 'UserPlus'},
         {
           id: 'opportunities',
           label: 'Opportunities',
-          icon: 'TrendingUp',
-        },
+          icon: 'TrendingUp'},
         {
           id: 'deals',
           label: 'Deals',
-          icon: 'CheckCircle',
-        },
-      ],
-    },
+          icon: 'CheckCircle'},
+      ]},
     {
       id: 'marketing',
       label: 'Marketing',
@@ -175,20 +155,16 @@ function CRMPortal() {
         {
           id: 'campaigns',
           label: 'Campaigns',
-          icon: 'Zap',
-        },
+          icon: 'Zap'},
         {
           id: 'email-marketing',
           label: 'Email Marketing',
-          icon: 'Mail',
-        },
+          icon: 'Mail'},
         {
           id: 'analytics',
           label: 'Marketing Analytics',
-          icon: 'BarChart3',
-        },
-      ],
-    },
+          icon: 'BarChart3'},
+      ]},
   ];
 
   const crmTabs = [

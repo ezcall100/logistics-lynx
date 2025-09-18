@@ -470,8 +470,8 @@ const RealUserManagement: React.FC = () => {
                         onClick={() => {
                           setSelectedUser(user);
                           setShowViewModal(true);
-                        }
-            aria-label="Button"}
+                        }}
+                        aria-label="Button"
                         className="text-blue-400 hover:text-blue-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Eye className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -481,8 +481,8 @@ const RealUserManagement: React.FC = () => {
                           setSelectedUser(user);
                           // setShowEditModal(true);
                           console.log('Edit user:', user);
-                        }
-            aria-label="Button"}
+                        }}
+                        aria-label="Button"
                         className="text-green-400 hover:text-green-300 p-1 responsive-container sm:flex-col md:flex-row lg:grid"
                       >
                         <Edit className="w-4 h-4 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -716,4 +716,3 @@ const RealUserManagement: React.FC = () => {
 };
 
 export default RealUserManagement;
-}

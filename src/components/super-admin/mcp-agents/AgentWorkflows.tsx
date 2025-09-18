@@ -360,17 +360,16 @@ export const AgentWorkflows: React.FC = () => {
                 className="pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl responsive-container"
               />
             </div>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" >
               <Filter className="w-4 h-4 responsive-container" />
               <span>Filter</span>
             </button>
-            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" aria-label="Button">
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-200 flex items-center space-x-2 responsive-container" >
               <RefreshCw className="w-4 h-4 responsive-container" />
               <span>Refresh</span>
             </button>
             <button 
               onClick={() => console.log('Create modal')}
-            aria-label="Button"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center space-x-2 responsive-container"
             >
               <Plus className="w-4 h-4 responsive-container" />
@@ -477,8 +476,7 @@ export const AgentWorkflows: React.FC = () => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as any)}
-            aria-label="Button"
+                onClick={() => setSelectedTab(tab.id as string)}
                 className={`flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 ${
                   selectedTab === tab.id
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
@@ -542,7 +540,6 @@ export const AgentWorkflows: React.FC = () => {
                           </div>
                           <button
                             onClick={() => handleWorkflowAction(workflow.id, 'start')}
-            aria-label="Button"
                             className="p-2 hover:bg-green-100 dark:hover:bg-green-900/20 rounded-lg transition-colors responsive-container"
                             title="Start Workflow"
                           >
@@ -550,7 +547,6 @@ export const AgentWorkflows: React.FC = () => {
                           </button>
                           <button
                             onClick={() => handleWorkflowAction(workflow.id, 'pause')}
-            aria-label="Button"
                             className="p-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/20 rounded-lg transition-colors responsive-container"
                             title="Pause Workflow"
                           >
@@ -558,7 +554,6 @@ export const AgentWorkflows: React.FC = () => {
                           </button>
                           <button
                             onClick={() => console.log('Selected workflow:', workflow.id)}
-            aria-label="Button"
                             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900/20 rounded-lg transition-colors responsive-container"
                             title="View Details"
                           >
@@ -691,7 +686,6 @@ export const AgentWorkflows: React.FC = () => {
                     </p>
                     <button 
                       onClick={() => console.log('Create modal')}
-            aria-label="Button"
                       className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors responsive-container"
                     >
                       Browse Templates

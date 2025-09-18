@@ -12,8 +12,7 @@ import {
   Volume2,
   VolumeX,
   RefreshCw,
-  X,
-} from 'lucide-react';
+  X} from 'lucide-react';
 
 interface SecurityThreat {
   id: string;
@@ -80,8 +79,7 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Potential unauthorized access',
       affectedSystems: ['Admin Portal', 'Database Server'],
       recommendedActions: ['Block IP address', 'Enable 2FA', 'Review access logs'],
-      autoResponse: true,
-    },
+      autoResponse: true},
     {
       id: 'threat-2',
       type: 'high',
@@ -95,8 +93,7 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Data breach risk',
       affectedSystems: ['Customer Database', 'API Gateway'],
       recommendedActions: ['Suspend user account', 'Audit data access', 'Notify compliance team'],
-      autoResponse: false,
-    },
+      autoResponse: false},
     {
       id: 'threat-3',
       type: 'medium',
@@ -110,9 +107,7 @@ const SecurityWarRoom: React.FC = () => {
       impact: 'Service disruption risk',
       affectedSystems: ['Load Balancer', 'Web Servers'],
       recommendedActions: ['Monitor traffic', 'Update firewall rules', 'Review network config'],
-      autoResponse: true,
-    },
-  ]);
+      autoResponse: true}]);
 
   const [metrics] = useState<SecurityMetrics>({
     totalThreats: 127,
@@ -122,8 +117,7 @@ const SecurityWarRoom: React.FC = () => {
     averageResponseTime: 4.2,
     systemSecurityScore: 94,
     complianceScore: 98,
-    lastScanTime: '5 minutes ago',
-  });
+    lastScanTime: '5 minutes ago'});
 
   const [events] = useState<SecurityEvent[]>([
     {
@@ -135,8 +129,7 @@ const SecurityWarRoom: React.FC = () => {
       location: 'New York, US',
       timestamp: '2 minutes ago',
       status: 'failed',
-      details: 'Invalid password attempt',
-    },
+      details: 'Invalid password attempt'},
     {
       id: 'event-2',
       type: 'access',
@@ -146,8 +139,7 @@ const SecurityWarRoom: React.FC = () => {
       location: 'California, US',
       timestamp: '5 minutes ago',
       status: 'success',
-      details: 'Accessed customer records',
-    },
+      details: 'Accessed customer records'},
     {
       id: 'event-3',
       type: 'network',
@@ -157,9 +149,7 @@ const SecurityWarRoom: React.FC = () => {
       location: 'Unknown',
       timestamp: '10 minutes ago',
       status: 'blocked',
-      details: 'Blocked by firewall',
-    },
-  ]);
+      details: 'Blocked by firewall'}]);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -170,8 +160,7 @@ const SecurityWarRoom: React.FC = () => {
         prevThreats.map(threat => ({
           ...threat,
           severity: Math.max(0, Math.min(100, threat.severity + (Math.random() - 0.5) * 10)),
-          timestamp: 'Just now',
-        }))
+          timestamp: 'Just now'}))
       );
     }, 2000);
 
@@ -281,8 +270,7 @@ const SecurityWarRoom: React.FC = () => {
             { id: 'threats', label: 'Threats', icon: AlertTriangle },
             { id: 'events', label: 'Events', icon: Activity },
             { id: 'metrics', label: 'Metrics', icon: TrendingUp },
-            { id: 'response', label: 'Response', icon: Shield },
-          ].map(({ id, label, icon: Icon }) => (
+            { id: 'response', label: 'Response', icon: Shield }].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setViewMode(id as 'threats' | 'events' | 'metrics' | 'response')}

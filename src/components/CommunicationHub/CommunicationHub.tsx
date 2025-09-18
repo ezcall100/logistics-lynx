@@ -8,6 +8,7 @@ import { EmailPanel } from './EmailPanel';
 import { TasksPanel } from './TasksPanel';
 import { PhonePanel } from './PhonePanel';
 import { SmsPanel } from './SmsPanel';
+import ErrorBoundary from '../ErrorBoundary';
 import { VideoPanel } from './VideoPanel';
 import { CalendarPanel } from './CalendarPanel';
 import { NotesPanel } from './NotesPanel';
@@ -109,127 +110,126 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
       
       case 'chat':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <ChatPanel
-            messages={chatMessages}
-            newMessage={newChatMessage}
-            setNewMessage={setNewChatMessage}
-            onSendMessage={sendChatMessage}
-            onMarkAsRead={(id) => markAsRead('chat', id)}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <ChatPanel
+              messages={chatMessages}
+              newMessage={newChatMessage}
+              setNewMessage={setNewChatMessage}
+              onSendMessage={sendChatMessage}
+              onMarkAsRead={(id) => markAsRead('chat', id)}
+            />
+          </ErrorBoundary>
         );
       
       case 'email':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <EmailPanel
-            emails={emailList}
-            newEmail={newEmail}
-            setNewEmail={setNewEmail}
-            showComposeEmail={showComposeEmail}
-            setShowComposeEmail={setShowComposeEmail}
-            onSendEmail={sendEmail}
-            onMarkAsRead={(id) => markAsRead('email', id)}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <EmailPanel
+              emails={emailList}
+              newEmail={newEmail}
+              setNewEmail={setNewEmail}
+              showComposeEmail={showComposeEmail}
+              setShowComposeEmail={setShowComposeEmail}
+              onSendEmail={sendEmail}
+              onMarkAsRead={(id) => markAsRead('email', id)}
+            />
+          </ErrorBoundary>
         );
       
       case 'tasks':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <TasksPanel
-            tasks={tasks}
-            newTask={newTask}
-            setNewTask={setNewTask}
-            showAddTask={showAddTask}
-            setShowAddTask={setShowAddTask}
-            onAddTask={addTask}
-            onToggleTaskCompletion={toggleTaskCompletion}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <TasksPanel
+              tasks={tasks}
+              newTask={newTask}
+              setNewTask={setNewTask}
+              showAddTask={showAddTask}
+              setShowAddTask={setShowAddTask}
+              onAddTask={addTask}
+              onToggleTaskCompletion={toggleTaskCompletion}
+            />
+          </ErrorBoundary>
         );
       
       case 'phone':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <PhonePanel
-            calls={recentCalls}
-            onStartCall={startVideoCall}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <PhonePanel
+              calls={recentCalls}
+              onStartCall={startVideoCall}
+            />
+          </ErrorBoundary>
         );
       
       case 'text':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <SmsPanel
-            messages={smsMessages}
-            newSms={newSms}
-            setNewSms={setNewSms}
-            showComposeSms={showComposeSms}
-            setShowComposeSms={setShowComposeSms}
-            onSendSms={sendSms}
-            onMarkAsRead={(id) => markAsRead('sms', id)}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <SmsPanel
+              messages={smsMessages}
+              newSms={newSms}
+              setNewSms={setNewSms}
+              showComposeSms={showComposeSms}
+              setShowComposeSms={setShowComposeSms}
+              onSendSms={sendSms}
+              onMarkAsRead={(id) => markAsRead('sms', id)}
+            />
+          </ErrorBoundary>
         );
       
       case 'video':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <VideoPanel
-            meetings={videoMeetings}
-            onStartVideoCall={startVideoCall}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <VideoPanel
+              meetings={videoMeetings}
+              onStartVideoCall={startVideoCall}
+            />
+          </ErrorBoundary>
         );
       
       case 'calendar':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <CalendarPanel
-            events={calendarEvents}
-            newEvent={newEvent}
-            setNewEvent={setNewEvent}
-            showAddEvent={showAddEvent}
-            setShowAddEvent={setShowAddEvent}
-            onAddEvent={addEvent}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <CalendarPanel
+              events={calendarEvents}
+              newEvent={newEvent}
+              setNewEvent={setNewEvent}
+              showAddEvent={showAddEvent}
+              setShowAddEvent={setShowAddEvent}
+              onAddEvent={addEvent}
+            />
+          </ErrorBoundary>
         );
       
       case 'notes':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <NotesPanel
-            notes={notes}
-            newNote={newNote}
-            setNewNote={setNewNote}
-            showAddNote={showAddNote}
-            setShowAddNote={setShowAddNote}
-            onAddNote={addNote}
-          />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <NotesPanel
+              notes={notes}
+              newNote={newNote}
+              setNewNote={setNewNote}
+              showAddNote={showAddNote}
+              setShowAddNote={setShowAddNote}
+              onAddNote={addNote}
+            />
+          </ErrorBoundary>
         );
       
       default:
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-          <div className="flex items-center justify-center h-64 responsive-container sm:flex-col md:flex-row lg:grid">
-            <p className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
-              Select a communication channel to get started
-            </p>
-          </div>
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <div className="flex items-center justify-center h-64 responsive-container sm:flex-col md:flex-row lg:grid">
+              <p className="text-gray-500 dark:text-gray-400 responsive-container sm:flex-col md:flex-row lg:grid">
+                Select a communication channel to get started
+              </p>
+            </div>
+          </ErrorBoundary>
         );
     }
   };
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="flex flex-col h-full bg-white dark:bg-gray-800 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="flex flex-col h-full bg-white dark:bg-gray-800 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Communication Tabs */}
       <div className="border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
         <CommunicationTabs
@@ -255,5 +255,6 @@ export const CommunicationHub: React.FC<CommunicationHubProps> = ({
         </AnimatePresence>
       </div>
     </div>
+    </ErrorBoundary>
   );
-};
+};

@@ -107,4 +107,3 @@ const ManufacturingPage: React.FC = () => {
 }
 
 export default ManufacturingPage
-}

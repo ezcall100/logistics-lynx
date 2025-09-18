@@ -226,4 +226,3 @@ const CarrierSolutions: React.FC = () => {
 }
 
 export default CarrierSolutions
-}

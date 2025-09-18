@@ -37,7 +37,7 @@ interface AccountabilityEntry {
     verified: boolean;
   } catch (error) {
     console.error('Error:', error);
-  };
+  }
 }
 
 interface SystemVerification {
@@ -487,4 +487,3 @@ const AccountabilityDashboard: React.FC = () => {
 };
 
 export default AccountabilityDashboard;
-}

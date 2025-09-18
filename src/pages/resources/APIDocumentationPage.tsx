@@ -168,4 +168,3 @@ const APIDocumentationPage: React.FC = () => {
 }
 
 export default APIDocumentationPage
-}

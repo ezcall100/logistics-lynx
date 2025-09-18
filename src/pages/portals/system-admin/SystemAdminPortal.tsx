@@ -215,7 +215,7 @@ function SystemAdminPortal() {
 
               <button
                 onClick={() => setShowSettingsMenu(!showSettingsMenu)}
-            aria-label="Button"
+                              aria-label="Button"
                 className="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors responsive-container"
               >
                 <Settings className="w-5 h-5 responsive-container" />
@@ -225,10 +225,10 @@ function SystemAdminPortal() {
               <div className="relative responsive-container">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-            aria-label="Button"
+                              aria-label="Button"
                   className="flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors responsive-container"
                 >
-                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container" / alt="Image">
+                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container" />
                   <div className="hidden sm:block text-left responsive-container">
                     <p className="text-sm font-medium text-slate-900 dark:text-slate-100 responsive-container">
                       {user.name}
@@ -277,7 +277,7 @@ function SystemAdminPortal() {
           <div className="p-4 responsive-container">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            aria-label="Button"
+                              aria-label="Button"
               className="w-full flex items-center justify-center p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors mb-4 responsive-container"
             >
               {sidebarCollapsed ? (
@@ -294,18 +294,16 @@ function SystemAdminPortal() {
                 const isActive = activeMenuItem === item.id;
 
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                   <div key={item.id}>
                     <button
                       onClick={() => {
                         if (item.subMenus && item.subMenus.length > 0) {
                           toggleMenu(item.id);
-                        }
-            aria-label="Button" else {
+                        } else {
                           setActiveMenuItem(item.id);
                         }
                       }}
+                                        aria-label="Button"
                       className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} p-3 text-left rounded-lg transition-colors ${isActive ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
                     >
                       <div className="flex items-center space-x-3 responsive-container">
@@ -324,12 +322,10 @@ function SystemAdminPortal() {
                         {item.subMenus.map(subItem => {
                           const SubIcon = eval(subItem.icon);
                           return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                             <button
                               key={subItem.id}
                               onClick={() => setActiveMenuItem(subItem.id)}
-            aria-label="Button"
+                              aria-label="Button"
                               className="w-full flex items-center space-x-3 p-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
                             >
                               <SubIcon className="w-4 h-4 flex-shrink-0 responsive-container" />
@@ -375,8 +371,6 @@ function SystemAdminPortal() {
               {metrics.map((metric, index) => {
                 const Icon = metric.icon;
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -481,7 +475,7 @@ function SystemAdminPortal() {
               <button
                 onClick={toggleRightSidebar}
                 className="w-full p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
-               aria-label="Button">
+                                 aria-label="Button">
                 <ChevronLeft className="w-5 h-5 responsive-container" />
               </button>
             </div>
@@ -494,7 +488,7 @@ function SystemAdminPortal() {
                 <button
                   onClick={toggleRightSidebar}
                   className="p-1 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
-                 aria-label="Button">
+                                   aria-label="Button">
                   <ChevronRight className="w-4 h-4 responsive-container" />
                 </button>
               </div>
@@ -504,12 +498,10 @@ function SystemAdminPortal() {
                 {crmTabs.map(tab => {
                   const Icon = tab.icon;
                   return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                     <button
                       key={tab.id}
                       onClick={() => handleCrmTabClick(tab.id)}
-            aria-label="Button"
+                              aria-label="Button"
                       className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${activeCrmTab === tab.id ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
                     >
                       <Icon className="w-4 h-4 responsive-container" />

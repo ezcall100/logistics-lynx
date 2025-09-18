@@ -55,7 +55,6 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 responsive-container sm:flex-col md:flex-row lg:grid">Navigation</h2>
             <button
               onClick={() => setMobileMenuOpen(false)}
-            aria-label="Button"
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 responsive-container sm:flex-col md:flex-row lg:grid"
             >
               <X className="h-5 w-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -77,8 +76,7 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     onClick={() => {
                       if (item.subMenus && item.subMenus.length > 0) {
                         handleMenuToggle(item.id);
-                      }
-            aria-label="Button" else {
+                      } else {
                         setActiveTab(item.id);
                         setMobileMenuOpen(false);
                       }
@@ -127,7 +125,7 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({
                               setActiveTab(subMenu.id);
                               setMobileMenuOpen(false);
                             }
-            aria-label="Button"}
+}
                             className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
                               isSubActive
                                 ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-md'

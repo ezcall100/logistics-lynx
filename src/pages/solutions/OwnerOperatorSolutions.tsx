@@ -226,4 +226,3 @@ const OwnerOperatorSolutions: React.FC = () => {
 }
 
 export default OwnerOperatorSolutions
-}

@@ -84,4 +84,3 @@ const WarehouseManagement: React.FC = () => {
   )
 }
 export default WarehouseManagement
-}

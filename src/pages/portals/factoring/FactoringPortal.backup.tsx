@@ -502,4 +502,3 @@ const FactoringPortal: React.FC = () => {
 };
 
 export default FactoringPortal;
-}

@@ -229,4 +229,3 @@ const APIPlatformPage: React.FC = () => {
 };
 
 export default APIPlatformPage;
-}

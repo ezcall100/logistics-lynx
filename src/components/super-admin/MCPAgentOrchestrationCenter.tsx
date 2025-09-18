@@ -12,8 +12,7 @@ import {
   AlertTriangle,
   Terminal,
   BarChart3,
-  X,
-} from 'lucide-react';
+  X} from 'lucide-react';
 
 interface MCPAgent {
   id: string;
@@ -76,9 +75,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'US-East-1',
         capabilities: ['System Management', 'Database Operations', 'API Management'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'portal-management',
       name: 'Portal Management',
@@ -106,9 +103,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'US-West-2',
         capabilities: ['Portal Control', 'User Management', 'Feature Toggles'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'security-monitoring',
       name: 'Security & Monitoring',
@@ -136,9 +131,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'EU-Central-1',
         capabilities: ['Threat Detection', 'Access Control', 'Audit Logging'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'analytics-intelligence',
       name: 'Analytics & Intelligence',
@@ -166,9 +159,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'AP-Southeast-1',
         capabilities: ['Data Processing', 'ML Models', 'Predictive Analytics'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'automation-workflows',
       name: 'Automation & Workflows',
@@ -196,9 +187,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'US-Central-1',
         capabilities: ['Workflow Automation', 'Task Scheduling', 'Process Optimization'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'integration-services',
       name: 'Integration Services',
@@ -226,9 +215,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           | 'low',
         location: 'Global',
         capabilities: ['API Integration', 'Data Sync', 'Third-party Services'],
-        health: Math.floor(Math.random() * 100),
-      })),
-    },
+        health: Math.floor(Math.random() * 100)}))},
     {
       id: 'testing-framework',
       name: 'A-Z Testing Framework',
@@ -250,8 +237,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Strategy Planning', 'Test Coverage Mapping', 'Resource Allocation'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'casebot',
           name: 'CaseBot',
@@ -265,8 +251,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Test Case Generation', 'Form Testing', 'Table Testing'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'databot',
           name: 'DataBot',
@@ -280,8 +265,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Mock Data Generation', 'API Test Data', 'Table Population'],
-          health: 96,
-        },
+          health: 96},
 
         // Core UI Testing Agents (Group B)
         {
@@ -297,8 +281,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Form Validation', 'Error Handling', 'Submission Testing'],
-          health: 99,
-        },
+          health: 99},
         {
           id: 'tablebot',
           name: 'TableBot',
@@ -312,8 +295,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Table Operations', 'Sorting', 'Filtering', 'Pagination'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'buttonbot',
           name: 'ButtonBot',
@@ -327,8 +309,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['CRUD Operations', 'State Validation', 'Action Testing'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'menubot',
           name: 'MenuBot',
@@ -342,8 +323,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Menu Navigation', 'State Management', 'Accessibility'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'searchbot',
           name: 'SearchBot',
@@ -357,8 +337,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Search Functionality', 'Filter Validation', 'Result Accuracy'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'threedotbot',
           name: 'ThreeDotBot',
@@ -372,8 +351,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Action Menu Testing', 'Modal Testing'],
-          health: 95,
-        },
+          health: 95},
         {
           id: 'modalbot',
           name: 'ModalBot',
@@ -387,8 +365,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Modal Workflow', 'Form Modals', 'State Management'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'filterbot',
           name: 'FilterBot',
@@ -402,8 +379,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Advanced Filters', 'Filter Logic', 'Performance'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'sortbot',
           name: 'SortBot',
@@ -417,8 +393,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Sorting Validation', 'Multi-column', 'Performance'],
-          health: 97,
-        },
+          health: 97},
 
         // Header & Hub Validation Agents (Group C)
         {
@@ -434,8 +409,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Header Functionality', 'Profile Testing', 'Settings Validation'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'hubbot',
           name: 'HubBot',
@@ -449,8 +423,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Communication Hub', 'Real-time Chat', 'Alert System'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'toastbot',
           name: 'ToastBot',
@@ -464,8 +437,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Notifications', 'Toast Messages', 'Alert Testing'],
-          health: 95,
-        },
+          health: 95},
         {
           id: 'alertbot',
           name: 'AlertBot',
@@ -479,8 +451,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['System Alerts', 'Warning Detection', 'Message Validation'],
-          health: 97,
-        },
+          health: 97},
 
         // Workflow & API Agents (Group D)
         {
@@ -496,8 +467,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['API Testing', 'Endpoint Validation', 'Error Handling'],
-          health: 99,
-        },
+          health: 99},
         {
           id: 'flowbot',
           name: 'FlowBot',
@@ -511,8 +481,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Workflow Testing', 'Process Validation', 'Integration'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'exportbot',
           name: 'ExportBot',
@@ -526,8 +495,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Data Export', 'File Format Validation', 'Download Testing'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'importbot',
           name: 'ImportBot',
@@ -541,8 +509,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Data Import', 'Bulk Operations', 'Upload Validation'],
-          health: 96,
-        },
+          health: 96},
 
         // Performance & Scale Agents (Group E)
         {
@@ -558,8 +525,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Load Testing', 'Stress Testing', 'Performance Benchmarking'],
-          health: 99,
-        },
+          health: 99},
         {
           id: 'scalebot',
           name: 'ScaleBot',
@@ -573,8 +539,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Scalability Analysis', 'Growth Testing', 'Capacity Planning'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'speedbot',
           name: 'SpeedBot',
@@ -588,8 +553,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Performance Monitoring', 'Latency Detection', 'Optimization'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'cleanbot',
           name: 'CleanBot',
@@ -603,8 +567,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Performance Optimization', 'Code Cleanup', 'Resource Management'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'statebot',
           name: 'StateBot',
@@ -618,8 +581,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['State Management', 'Consistency Validation', 'Error Detection'],
-          health: 97,
-        },
+          health: 97},
 
         // Security & Compliance Agents (Group F)
         {
@@ -635,8 +597,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Vulnerability Scanning', 'Security Testing', 'Threat Detection'],
-          health: 99,
-        },
+          health: 99},
         {
           id: 'penbot',
           name: 'PenBot',
@@ -650,8 +611,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Penetration Testing', 'Attack Simulation', 'Defense Validation'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'securebot',
           name: 'SecureBot',
@@ -665,8 +625,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Compliance Checking', 'Standard Validation', 'Regulatory Testing'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'dataguard',
           name: 'DataGuard',
@@ -680,8 +639,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Data Leak Detection', 'Privacy Validation', 'Exposure Prevention'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'rolebot',
           name: 'RoleBot',
@@ -695,8 +653,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Access Control Testing', 'Permission Validation', 'Security Policy'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'historybot',
           name: 'HistoryBot',
@@ -710,8 +667,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Audit Trail Testing', 'Change Tracking', 'Log Integrity'],
-          health: 96,
-        },
+          health: 96},
 
         // UI/UX & Visuals Agents (Group G)
         {
@@ -727,8 +683,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Visual Regression', 'Layout Comparison', 'UI Consistency'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'themebot',
           name: 'ThemeBot',
@@ -742,8 +697,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Theme Validation', 'Mode Testing', 'Effect Validation'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'responbot',
           name: 'ResponBot',
@@ -757,8 +711,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Responsive Testing', 'Device Validation', 'Layout Adaptation'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'a11ybot',
           name: 'A11yBot',
@@ -772,8 +725,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Accessibility Testing', 'WCAG Compliance', 'Screen Reader'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'stylebot',
           name: 'StyleBot',
@@ -787,8 +739,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['CSS Validation', 'Token Enforcement', 'Consistency Checking'],
-          health: 95,
-        },
+          health: 95},
         {
           id: 'tokenbot',
           name: 'TokenBot',
@@ -802,8 +753,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Design Token Validation', 'Brand Consistency', 'Identity Enforcement'],
-          health: 94,
-        },
+          health: 94},
 
         // CI/CD Automation Agents (Group H)
         {
@@ -819,8 +769,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['CI Validation', 'Build Testing', 'Deployment Readiness'],
-          health: 99,
-        },
+          health: 99},
         {
           id: 'deploybot',
           name: 'DeployBot',
@@ -834,8 +783,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Deployment Validation', 'Environment Testing', 'Staging Verification'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'rollbot',
           name: 'RollBot',
@@ -849,8 +797,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Rollback Testing', 'Recovery Validation', 'Version Management'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'watchbot',
           name: 'WatchBot',
@@ -864,8 +811,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'critical' as const,
           location: 'US-East-1',
           capabilities: ['Real-time Monitoring', 'Crash Detection', 'Error Tracking'],
-          health: 98,
-        },
+          health: 98},
 
         // Analytics, Insights & AI Agents (Group I)
         {
@@ -881,8 +827,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Exploratory Testing', 'Random Testing', 'Edge Case Discovery'],
-          health: 96,
-        },
+          health: 96},
         {
           id: 'bugbot',
           name: 'BugBot',
@@ -896,8 +841,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Bug Detection', 'Priority Assignment', 'Issue Tracking'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'simbot',
           name: 'SimBot',
@@ -911,8 +855,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['User Behavior Simulation', 'Workflow Testing', 'User Journey'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'metricbot',
           name: 'MetricBot',
@@ -926,8 +869,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['QA Metrics Collection', 'Dashboard Generation', 'Performance Tracking'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'trendbot',
           name: 'TrendBot',
@@ -941,8 +883,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'medium' as const,
           location: 'US-East-1',
           capabilities: ['Trend Analysis', 'Pattern Recognition', 'Predictive Analytics'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'predictbot',
           name: 'PredictBot',
@@ -956,8 +897,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Risk Prediction', 'Failure Forecasting', 'Health Assessment'],
-          health: 98,
-        },
+          health: 98},
         {
           id: 'realbot',
           name: 'RealBot',
@@ -971,8 +911,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['Real-time Sync Testing', 'Supabase Validation', 'Live Updates'],
-          health: 97,
-        },
+          health: 97},
         {
           id: 'reportbot',
           name: 'ReportBot',
@@ -988,10 +927,8 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           capabilities: [
             'Test Report Generation',
             'Documentation Creation',
-            'Compliance Reporting',
-          ],
-          health: 96,
-        },
+            'Compliance Reporting'],
+          health: 96},
         {
           id: 'searchaibot',
           name: 'SearchAIBot',
@@ -1005,11 +942,7 @@ const MCPAgentOrchestrationCenter: React.FC = () => {
           priority: 'high' as const,
           location: 'US-East-1',
           capabilities: ['AI Search Testing', 'Prediction Validation', 'ML Integration'],
-          health: 98,
-        },
-      ],
-    },
-  ];
+          health: 98}]}];
 
   const getStatusColor = (status: string) => {
     switch (status) {

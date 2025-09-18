@@ -199,8 +199,7 @@ const CommunicationHubOverview: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="space-y-6 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <div className="flex items-center justify-between responsive-container sm:flex-col md:flex-row lg:grid">
         <div>

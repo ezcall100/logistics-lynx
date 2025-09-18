@@ -160,4 +160,3 @@ const PredictiveAnalytics: React.FC = () => {
 }
 
 export default PredictiveAnalytics
-}

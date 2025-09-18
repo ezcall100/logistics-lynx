@@ -29,4 +29,3 @@ export const Security: React.FC = () => {
 };
 
 export default Security;
-}

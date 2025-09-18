@@ -230,4 +230,3 @@ const IntegrationPage: React.FC = () => {
 };
 
 export default IntegrationPage;
-}

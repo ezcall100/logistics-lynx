@@ -663,4 +663,3 @@ const AutonomousDevelopmentDashboard: React.FC = () => {
 };
 
 export default AutonomousDevelopmentDashboard;
-}

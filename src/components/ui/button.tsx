@@ -44,10 +44,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      / aria-label="Button">
+      />
     );
   }
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+export { Button, buttonVariants };

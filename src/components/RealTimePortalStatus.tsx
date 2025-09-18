@@ -10,8 +10,7 @@ import {
   Code,
   TestTube,
   Rocket,
-  Bug,
-} from 'lucide-react';
+  Bug} from 'lucide-react';
 import PortalUpdateSystem, { PortalUpdate, AgentActivity } from '../utils/PortalUpdateSystem';
 
 interface RealTimePortalStatusProps {
@@ -21,8 +20,7 @@ interface RealTimePortalStatusProps {
 
 const RealTimePortalStatus: React.FC<RealTimePortalStatusProps> = ({
   portalId,
-  className = '',
-}) => {
+  className = ''}) => {
   const [portalUpdate, setPortalUpdate] = useState<PortalUpdate | null>(null);
   const [agentActivities, setAgentActivities] = useState<AgentActivity[]>([]);
   const [showDetails, setShowDetails] = useState(false);

@@ -23,8 +23,7 @@ import {
   CheckSquare,
   User,
   Mail,
-  LogOut,
-} from 'lucide-react';
+  LogOut} from 'lucide-react';
 
 function FuelPortal() {
   const [user] = useState({
@@ -34,8 +33,7 @@ function FuelPortal() {
     role: 'fuel',
     permissions: ['read', 'write', 'admin'],
     avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-  });
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'});
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -52,22 +50,19 @@ function FuelPortal() {
       title: 'New fuel registered',
       message: 'Acme Corporation has been added',
       time: '5 minutes ago',
-      type: 'info',
-    },
+      type: 'info'},
     {
       id: 2,
       title: 'Fuel status updated',
       message: 'Mark Johnson is now active',
       time: '1 hour ago',
-      type: 'success',
-    },
+      type: 'success'},
     {
       id: 3,
       title: 'Payment overdue',
       message: 'Invoice #INV-2023-001 is 3 days overdue',
       time: '3 days ago',
-      type: 'warning',
-    },
+      type: 'warning'},
   ];
 
   const metrics = [
@@ -77,32 +72,28 @@ function FuelPortal() {
       change: { value: '+12%', type: 'increase' as const },
       icon: Users,
       iconColor: 'text-blue-600',
-      bgColor: 'bg-blue-100 dark:bg-blue-900/30',
-    },
+      bgColor: 'bg-blue-100 dark:bg-blue-900/30'},
     {
       title: 'Revenue',
       value: '$45,678',
       change: { value: '+8%', type: 'increase' as const },
       icon: DollarSign,
       iconColor: 'text-green-600',
-      bgColor: 'bg-green-100 dark:bg-green-900/30',
-    },
+      bgColor: 'bg-green-100 dark:bg-green-900/30'},
     {
       title: 'Growth Rate',
       value: '15%',
       change: { value: '+3%', type: 'increase' as const },
       icon: TrendingUp,
       iconColor: 'text-purple-600',
-      bgColor: 'bg-purple-100 dark:bg-purple-900/30',
-    },
+      bgColor: 'bg-purple-100 dark:bg-purple-900/30'},
     {
       title: 'Alerts',
       value: '3',
       change: { value: '-1', type: 'decrease' as const },
       icon: AlertTriangle,
       iconColor: 'text-yellow-600',
-      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30',
-    },
+      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30'},
   ];
 
   const menuItems = [
@@ -114,15 +105,12 @@ function FuelPortal() {
         {
           id: 'dashboard',
           label: 'Dashboard',
-          icon: 'BarChart3',
-        },
+          icon: 'BarChart3'},
         {
           id: 'analytics',
           label: 'Analytics',
-          icon: 'TrendingUp',
-        },
-      ],
-    },
+          icon: 'TrendingUp'},
+      ]},
     {
       id: 'fuel-management',
       label: 'Fuel Management',
@@ -131,25 +119,20 @@ function FuelPortal() {
         {
           id: 'fuel-cards',
           label: 'Fuel Cards',
-          icon: 'CreditCard',
-        },
+          icon: 'CreditCard'},
         {
           id: 'fuel-prices',
           label: 'Fuel Prices',
-          icon: 'DollarSign',
-        },
+          icon: 'DollarSign'},
         {
           id: 'fuel-stations',
           label: 'Fuel Stations',
-          icon: 'MapPin',
-        },
+          icon: 'MapPin'},
         {
           id: 'fuel-reports',
           label: 'Fuel Reports',
-          icon: 'FileText',
-        },
-      ],
-    },
+          icon: 'FileText'},
+      ]},
     {
       id: 'vehicles',
       label: 'Vehicles',
@@ -158,20 +141,16 @@ function FuelPortal() {
         {
           id: 'fleet',
           label: 'Fleet Management',
-          icon: 'Users',
-        },
+          icon: 'Users'},
         {
           id: 'maintenance',
           label: 'Maintenance',
-          icon: 'Settings',
-        },
+          icon: 'Settings'},
         {
           id: 'fuel-efficiency',
           label: 'Fuel Efficiency',
-          icon: 'Activity',
-        },
-      ],
-    },
+          icon: 'Activity'},
+      ]},
     {
       id: 'accounting',
       label: 'Accounting',
@@ -180,20 +159,16 @@ function FuelPortal() {
         {
           id: 'expenses',
           label: 'Fuel Expenses',
-          icon: 'CreditCard',
-        },
+          icon: 'CreditCard'},
         {
           id: 'invoicing',
           label: 'Invoicing',
-          icon: 'FileText',
-        },
+          icon: 'FileText'},
         {
           id: 'reports',
           label: 'Financial Reports',
-          icon: 'BarChart3',
-        },
-      ],
-    },
+          icon: 'BarChart3'},
+      ]},
   ];
 
   const crmTabs = [

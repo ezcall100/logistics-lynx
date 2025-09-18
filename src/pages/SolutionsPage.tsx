@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { motion } from 'framer-motion'
 import { 
   Truck, 
@@ -287,5 +288,7 @@ const SolutionsPage = React.memo(function SolutionsPage() {
         </div>
       </section>
     </div>
-  )
-}
+  );
+});
+
+export default SolutionsPage;

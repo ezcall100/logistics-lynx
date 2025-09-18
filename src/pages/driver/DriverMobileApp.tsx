@@ -382,4 +382,3 @@ const DriverMobileApp: React.FC = () => {
 };
 
 export default DriverMobileApp;
-}

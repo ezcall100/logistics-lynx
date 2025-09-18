@@ -325,5 +325,7 @@ const TransportationManagement = React.memo(function TransportationManagement() 
         </div>
       </section>
     </div>
-  )
-}
+  );
+});
+
+export default TransportationManagement;

@@ -103,4 +103,3 @@ const EcommercePage: React.FC = () => {
 }
 
 export default EcommercePage
-}

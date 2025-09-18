@@ -35,7 +35,17 @@
     "deploy:production:upload": "echo 'Deploying to production...'",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "error:detect": "node scripts/autonomous-error-detector.js",
+    "error:fix": "node scripts/autonomous-error-fixer.js",
+    "error:system": "node scripts/autonomous-error-system.js",
+    "error:setup": "node scripts/setup-autonomous-system.js",
+    "error:watch": "node scripts/autonomous-error-system.js watch",
+    "error:clear": "node scripts/autonomous-error-system.js clear",
+    "error:test": "node scripts/test-autonomous-system.js",
+    "error:manage": "node scripts/autonomous-system-manager.js",
+    "error:fix-portals": "node scripts/comprehensive-portal-fix.js",
+    "dev:autonomous": "concurrently \"npm run dev\" \"npm run error:watch\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",

@@ -420,4 +420,3 @@ const StandaloneDashboard: React.FC = () => {
 };
 
 export default StandaloneDashboard;
-}

@@ -23,8 +23,7 @@ import {
   Mail,
   MessageCircle,
   Video,
-  CheckSquare,
-} from 'lucide-react';
+  CheckSquare} from 'lucide-react';
 
 function WorkersPortal() {
   const [user] = useState({
@@ -34,8 +33,7 @@ function WorkersPortal() {
     role: 'workers',
     permissions: ['read', 'write', 'admin'],
     avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-  });
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'});
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -52,22 +50,19 @@ function WorkersPortal() {
       title: 'New workers registered',
       message: 'Acme Corporation has been added',
       time: '5 minutes ago',
-      type: 'info',
-    },
+      type: 'info'},
     {
       id: 2,
       title: 'Workers status updated',
       message: 'Mark Johnson is now active',
       time: '1 hour ago',
-      type: 'success',
-    },
+      type: 'success'},
     {
       id: 3,
       title: 'Payment overdue',
       message: 'Invoice #INV-2023-001 is 3 days overdue',
       time: '3 days ago',
-      type: 'warning',
-    },
+      type: 'warning'},
   ];
 
   const metrics = [
@@ -77,32 +72,28 @@ function WorkersPortal() {
       change: { value: '+12%', type: 'increase' as const },
       icon: Users,
       iconColor: 'text-blue-600',
-      bgColor: 'bg-blue-100 dark:bg-blue-900/30',
-    },
+      bgColor: 'bg-blue-100 dark:bg-blue-900/30'},
     {
       title: 'Revenue',
       value: '$45,678',
       change: { value: '+8%', type: 'increase' as const },
       icon: DollarSign,
       iconColor: 'text-green-600',
-      bgColor: 'bg-green-100 dark:bg-green-900/30',
-    },
+      bgColor: 'bg-green-100 dark:bg-green-900/30'},
     {
       title: 'Growth Rate',
       value: '15%',
       change: { value: '+3%', type: 'increase' as const },
       icon: TrendingUp,
       iconColor: 'text-purple-600',
-      bgColor: 'bg-purple-100 dark:bg-purple-900/30',
-    },
+      bgColor: 'bg-purple-100 dark:bg-purple-900/30'},
     {
       title: 'Alerts',
       value: '3',
       change: { value: '-1', type: 'decrease' as const },
       icon: AlertTriangle,
       iconColor: 'text-yellow-600',
-      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30',
-    },
+      bgColor: 'bg-yellow-100 dark:bg-yellow-900/30'},
   ];
 
   const menuItems = [
@@ -114,15 +105,12 @@ function WorkersPortal() {
         {
           id: 'dashboard',
           label: 'Dashboard',
-          icon: 'BarChart3',
-        },
+          icon: 'BarChart3'},
         {
           id: 'analytics',
           label: 'Analytics',
-          icon: 'TrendingUp',
-        },
-      ],
-    },
+          icon: 'TrendingUp'},
+      ]},
     {
       id: 'workers',
       label: 'Workers',
@@ -131,20 +119,16 @@ function WorkersPortal() {
         {
           id: 'worker-list',
           label: 'Worker List',
-          icon: 'Users',
-        },
+          icon: 'Users'},
         {
           id: 'worker-profiles',
           label: 'Profiles',
-          icon: 'User',
-        },
+          icon: 'User'},
         {
           id: 'schedules',
           label: 'Schedules',
-          icon: 'Calendar',
-        },
-      ],
-    },
+          icon: 'Calendar'},
+      ]},
     {
       id: 'payroll',
       label: 'Payroll',
@@ -153,20 +137,16 @@ function WorkersPortal() {
         {
           id: 'timesheets',
           label: 'Timesheets',
-          icon: 'Clock',
-        },
+          icon: 'Clock'},
         {
           id: 'payments',
           label: 'Payments',
-          icon: 'CreditCard',
-        },
+          icon: 'CreditCard'},
         {
           id: 'reports',
           label: 'Payroll Reports',
-          icon: 'FileText',
-        },
-      ],
-    },
+          icon: 'FileText'},
+      ]},
     {
       id: 'hr',
       label: 'Human Resources',
@@ -175,20 +155,16 @@ function WorkersPortal() {
         {
           id: 'recruitment',
           label: 'Recruitment',
-          icon: 'UserPlus',
-        },
+          icon: 'UserPlus'},
         {
           id: 'training',
           label: 'Training',
-          icon: 'BookOpen',
-        },
+          icon: 'BookOpen'},
         {
           id: 'performance',
           label: 'Performance',
-          icon: 'TrendingUp',
-        },
-      ],
-    },
+          icon: 'TrendingUp'},
+      ]},
   ];
 
   const crmTabs = [
@@ -262,7 +238,7 @@ function WorkersPortal() {
 
               <button
                 onClick={() => setShowSettingsMenu(!showSettingsMenu)}
-            aria-label="Button"
+                              aria-label="Button"
                 className="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors responsive-container"
               >
                 <Settings className="w-5 h-5 responsive-container" />
@@ -272,10 +248,10 @@ function WorkersPortal() {
               <div className="relative responsive-container">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-            aria-label="Button"
+                              aria-label="Button"
                   className="flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors responsive-container"
                 >
-                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container" / alt="Image">
+                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full responsive-container" />
                   <div className="hidden sm:block text-left responsive-container">
                     <p className="text-sm font-medium text-slate-900 dark:text-slate-100 responsive-container">
                       {user.name}
@@ -324,7 +300,7 @@ function WorkersPortal() {
           <div className="p-4 responsive-container">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            aria-label="Button"
+                              aria-label="Button"
               className="w-full flex items-center justify-center p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors mb-4 responsive-container"
             >
               {sidebarCollapsed ? (
@@ -341,18 +317,16 @@ function WorkersPortal() {
                 const isActive = activeMenuItem === item.id;
 
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                   <div key={item.id}>
                     <button
                       onClick={() => {
                         if (item.subMenus && item.subMenus.length > 0) {
                           toggleMenu(item.id);
-                        }
-            aria-label="Button" else {
+                        } else {
                           setActiveMenuItem(item.id);
                         }
                       }}
+                                        aria-label="Button"
                       className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} p-3 text-left rounded-lg transition-colors ${isActive ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
                     >
                       <div className="flex items-center space-x-3 responsive-container">
@@ -371,12 +345,10 @@ function WorkersPortal() {
                         {item.subMenus.map(subItem => {
                           const SubIcon = eval(subItem.icon);
                           return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                             <button
                               key={subItem.id}
                               onClick={() => setActiveMenuItem(subItem.id)}
-            aria-label="Button"
+                              aria-label="Button"
                               className="w-full flex items-center space-x-3 p-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
                             >
                               <SubIcon className="w-4 h-4 flex-shrink-0 responsive-container" />
@@ -421,8 +393,6 @@ function WorkersPortal() {
               {metrics.map((metric, index) => {
                 const Icon = metric.icon;
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -527,7 +497,7 @@ function WorkersPortal() {
               <button
                 onClick={toggleRightSidebar}
                 className="w-full p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
-               aria-label="Button">
+                                 aria-label="Button">
                 <ChevronLeft className="w-5 h-5 responsive-container" />
               </button>
             </div>
@@ -540,7 +510,7 @@ function WorkersPortal() {
                 <button
                   onClick={toggleRightSidebar}
                   className="p-1 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors responsive-container"
-                 aria-label="Button">
+                                   aria-label="Button">
                   <ChevronRight className="w-4 h-4 responsive-container" />
                 </button>
               </div>
@@ -550,12 +520,10 @@ function WorkersPortal() {
                 {crmTabs.map(tab => {
                   const Icon = tab.icon;
                   return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                     <button
                       key={tab.id}
                       onClick={() => handleCrmTabClick(tab.id)}
-            aria-label="Button"
+                              aria-label="Button"
                       className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${activeCrmTab === tab.id ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
                     >
                       <Icon className="w-4 h-4 responsive-container" />

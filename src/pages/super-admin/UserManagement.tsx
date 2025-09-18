@@ -702,8 +702,7 @@ function UserDataManagement() {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -939,7 +938,7 @@ function UserDataManagement() {
                           src={user.avatar}
                           alt={`${user.firstName} ${user.lastName}`}
                           className="w-10 h-10 rounded-full responsive-container sm:flex-col md:flex-row lg:grid"
-                        / alt="Image">
+                        />
                         <div className="ml-4 responsive-container sm:flex-col md:flex-row lg:grid">
                           <div className="text-sm font-medium text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">
                             {user.firstName} {user.lastName}
@@ -1039,6 +1038,7 @@ function UserDataManagement() {
       {/* Modals */}
       <AnimatePresence>{showUserDataDetails && renderUserDataDetailsModal()}</AnimatePresence>
     </div>
+    </ErrorBoundary>
   );
 }
 

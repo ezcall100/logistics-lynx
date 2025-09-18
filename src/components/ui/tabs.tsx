@@ -44,7 +44,7 @@ const TabsTrigger = React.forwardRef<
       className
     )}
     {...props}
-  / aria-label="Button">
+  />
 ));
 TabsTrigger.displayName = 'TabsTrigger';
 
@@ -67,4 +67,4 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
 );
 TabsContent.displayName = 'TabsContent';
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+export { Tabs, TabsList, TabsTrigger, TabsContent };

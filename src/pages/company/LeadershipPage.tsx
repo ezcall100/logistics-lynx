@@ -125,4 +125,3 @@ const LeadershipPage: React.FC = () => {
 }
 
 export default LeadershipPage
-}

@@ -1,0 +1,2641 @@
+{
+  "timestamp": "2025-09-18T00:15:33.427Z",
+  "executionTime": 33050,
+  "totalFixes": 438,
+  "fixes": [
+    {
+      "type": "github-actions-context",
+      "file": "super-admin-deploy.yml",
+      "fixes": 12,
+      "timestamp": 1758154500396
+    },
+    {
+      "type": "import-cleanup",
+      "file": "App.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522052
+    },
+    {
+      "type": "import-cleanup",
+      "file": "EnhancedSystemMonitoringDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522460
+    },
+    {
+      "type": "import-cleanup",
+      "file": "SystemMonitoring.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522464
+    },
+    {
+      "type": "import-cleanup",
+      "file": "SecuritySettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522521
+    },
+    {
+      "type": "import-cleanup",
+      "file": "EnhancedAllUsers.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522548
+    },
+    {
+      "type": "import-cleanup",
+      "file": "badge.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522704
+    },
+    {
+      "type": "import-cleanup",
+      "file": "button.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522707
+    },
+    {
+      "type": "import-cleanup",
+      "file": "Button.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522897
+    },
+    {
+      "type": "import-cleanup",
+      "file": "Card.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522906
+    },
+    {
+      "type": "import-cleanup",
+      "file": "Form.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522924
+    },
+    {
+      "type": "import-cleanup",
+      "file": "Input.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522928
+    },
+    {
+      "type": "import-cleanup",
+      "file": "Table.tsx",
+      "fixes": 1,
+      "timestamp": 1758154522937
+    },
+    {
+      "type": "import-cleanup",
+      "file": "utils.ts",
+      "fixes": 1,
+      "timestamp": 1758154522957
+    },
+    {
+      "type": "import-cleanup",
+      "file": "MCPDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154523026
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "App-minimal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527460
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "App.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527462
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AdvancedFAB.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527464
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AIAgentVisualization.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527474
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AIHeroSection.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527477
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ProtectedRoute.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527479
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CinematicDemo.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527485
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeToggle.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527493
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AiAssistantPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527497
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CalendarPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527502
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ChatPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527505
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommunicationHub.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527511
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommunicationTabs.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527513
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EmailPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527520
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "index.ts",
+      "fixes": 1,
+      "timestamp": 1758154527522
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "NotesPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527525
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PhonePanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527528
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SmsPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527530
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TasksPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527540
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "types.ts",
+      "fixes": 1,
+      "timestamp": 1758154527544
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "VideoPanel.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527546
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ComprehensiveSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527552
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DemoForm.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527554
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EcosystemGrid.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527557
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedHomePage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527560
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FeaturesSection.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527562
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FloatingActionButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527565
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Footer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527571
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Header.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527574
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HeroSection.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527577
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HorizontalMegaMenu.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527581
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IntelligentHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527591
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IntelligentSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527594
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompactSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527595
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FloatingActionButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527598
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HorizontalMenu.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527607
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentActionMenu.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527609
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentFilter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527612
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentGrid.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527613
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentHealthBadge.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527615
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentItem.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527625
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentStatusCard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527627
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPActivityLog.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527629
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPProgressChart.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527631
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MegaMenuHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527637
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MobileNavigation.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527642
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ModernHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527644
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ModernLandingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527653
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Navigation.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527656
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "NeuralBackground.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527658
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "NeuralNetwork.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527661
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OutstandingHomePage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527669
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalLayout.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527672
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527674
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalLayout.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527677
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UnifiedPortalLayout.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527681
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RealTimePortalStatus.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527686
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResponsiveContainer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527689
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResponsiveGrid.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527692
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Sidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527694
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SimpleCustomerPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527696
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SimplifiedHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527703
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SmartLandingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527707
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SmartNavigation.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527711
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SmartSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527719
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SubdomainApplicationForm.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527722
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SubdomainRouter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527725
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AccountabilityDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527729
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AICommandCenter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527741
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AlertIntegration.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527744
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BusinessAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527747
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedBusinessAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527753
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FinancialReports.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527758
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PerformanceReports.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527762
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AuditLoggingSystem.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527771
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AutonomousDevelopmentDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527777
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BillingManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527787
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BusinessIntelligenceCenter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527814
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ColorPaletteDemo.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527827
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommanderStatusReport.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527838
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommunicationHubCustomization.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527845
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommunicationHubOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527858
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BillingManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527863
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527874
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527893
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompleteCommunicationHub.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527897
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ActiveUsers.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527912
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSystemOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527914
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RevenueMetrics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527926
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemAlerts.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527930
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527939
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Dashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527942
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CICDPipeline.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527947
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DeploymentMonitoring.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527961
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DevOpsAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527970
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnvironmentManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527976
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "InfrastructureAsCode.tsx",
+      "fixes": 1,
+      "timestamp": 1758154527981
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528025
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedUserManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528028
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnterpriseDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528040
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserRegistrationForm.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528043
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GitHubWebhookStatusWidget.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528105
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GlassMorphismButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528121
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GlassMorphismCard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528126
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GlassMorphismModal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528179
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GlobalSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528316
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MobileSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528325
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528328
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminLayout.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528334
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminMainContent.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528337
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminRightSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528347
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528353
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentWorkflows.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528360
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528443
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AgentWorkflows.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528457
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedMCPOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528461
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPOverview.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528468
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentOrchestrationCenter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528475
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentStatusDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528479
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSystemMonitoringDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528487
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemMonitoring.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528490
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemMonitoringDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528492
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OptimizedHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528494
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OptimizedMenu.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528496
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OptimizedSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528498
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalControlHub.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528559
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528590
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalThemeManager.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528609
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ProfilePage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528631
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ProfileSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528667
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ProgressTrackingDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528671
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RealTimeDevelopmentMonitor.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528679
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResponsiveGrid.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528688
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResponsiveSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528703
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResponsiveTable.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528713
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RoleBasedAccessControl.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528719
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSecurityCenter.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528726
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityCompliance.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528729
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityWarRoom.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528744
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanySettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528755
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PersonalSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528763
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SettingsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528772
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "APIManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528813
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DatabaseManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528822
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSystemSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528831
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecuritySettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528837
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ServerMonitoring.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528840
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528853
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemHealthMonitor.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528865
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemMonitoringDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528877
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemVerificationDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528882
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528887
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestForm.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528893
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestModal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528897
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AccessControl.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528909
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AccessControlPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528912
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AllUsers.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528921
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AllUsersPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528945
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BillingManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528953
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BillingManagementPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528962
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedAllUsers.tsx",
+      "fixes": 1,
+      "timestamp": 1758154528964
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedUserRoles.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529009
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SupportTickets.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529015
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SupportTicketsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529018
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529022
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserAnalyticsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529030
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserGroups.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529036
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserGroupsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529039
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserManagementDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529044
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserOnboarding.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529046
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserOnboardingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529050
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserRoles.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529054
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserRolesPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529070
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529081
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestCustomerPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529162
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestDesign.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529164
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeToggle.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529170
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TrustedBy.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529176
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "badge.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529180
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "button.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529183
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "card.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529188
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "input.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529194
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "label.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529196
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "progress.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529199
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "separator.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529202
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "switch.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529205
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "tabs.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529209
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "api.ts",
+      "fixes": 1,
+      "timestamp": 1758154529377
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AuthContext.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529380
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SidebarContext.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529384
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeContext.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529387
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "agents.ts",
+      "fixes": 1,
+      "timestamp": 1758154529391
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "portals.ts",
+      "fixes": 1,
+      "timestamp": 1758154529399
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "color-palette.ts",
+      "fixes": 1,
+      "timestamp": 1758154529404
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Button.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529408
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Card.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529411
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedFAB.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529414
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529421
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529426
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FloatingActionButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529428
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Form.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529432
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Header.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529435
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Input.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529437
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Layout.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529438
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Sidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529444
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Table.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529447
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "theme.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529452
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeProvider.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529454
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "designTokens.ts",
+      "fixes": 1,
+      "timestamp": 1758154529461
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "tokens.ts",
+      "fixes": 1,
+      "timestamp": 1758154529463
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "fabActions.ts",
+      "fixes": 1,
+      "timestamp": 1758154529465
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "useAgentStats.ts",
+      "fixes": 1,
+      "timestamp": 1758154529484
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "useColorPalette.ts",
+      "fixes": 1,
+      "timestamp": 1758154529486
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "useCommunicationHub.ts",
+      "fixes": 1,
+      "timestamp": 1758154529489
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "useSettings.ts",
+      "fixes": 1,
+      "timestamp": 1758154529494
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "useSettingsBackup.ts",
+      "fixes": 1,
+      "timestamp": 1758154529496
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "aiResponder.ts",
+      "fixes": 1,
+      "timestamp": 1758154529498
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "messageUtils.ts",
+      "fixes": 1,
+      "timestamp": 1758154529503
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "utils.ts",
+      "fixes": 1,
+      "timestamp": 1758154529504
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "main-portal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529510
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "main.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529512
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AboutPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529514
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SubdomainManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529519
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CarbonOptimizer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529521
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CustomerExperience.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529525
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DemandForecaster.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529529
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FleetManager.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529531
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FuelOptimizer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529538
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoadMatcher.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529542
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MaintenancePredictor.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529545
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PredictiveAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529547
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PriceOptimizer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529549
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RiskAssessment.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529553
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RouteOptimizer.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529559
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SmartWarehouse.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529561
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AIAgentsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529570
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoginPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529572
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RegistrationFlow.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529581
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RegistrationFlowNew.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529589
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AboutPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529595
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CareersPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529597
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ContactPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529602
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "InvestorsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529605
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LeadershipPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529610
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PartnersPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529613
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PressPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529617
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529620
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529624
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ContactPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529628
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Dashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529630
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DashboardPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529634
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DriverMobileApp.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529638
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "GetStartedPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529644
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EcommercePage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529646
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ManufacturingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529648
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IndustriesPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529653
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoginPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529655
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529659
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPProgressDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529662
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MinimalDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529664
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "NotFoundPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529669
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalApp.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529671
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalEntry.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529674
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529678
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HumanDeveloperAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529680
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529682
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AnalyticsPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529686
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AutonomousPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529691
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BillingPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529694
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BrokerPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529697
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CarrierPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529701
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CommunicationPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529704
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompliancePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529709
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CRMPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529712
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CustomerPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529719
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DeveloperPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529724
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DirectoryPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529728
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DispatchPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529730
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DocumentPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529735
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DriverPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529739
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "test-violation.js",
+      "fixes": 1,
+      "timestamp": 1758154529742
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EDIPortal.backup.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529746
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EDIPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529748
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FactoringPortal.backup.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529751
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FactoringPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529753
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FinancialPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529756
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FinancialsPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529760
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FleetPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529762
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FuelPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529763
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HumanDeveloperAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529767
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "InsurancePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529776
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IntegrationPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529778
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IntegrationAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529781
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoadBoardPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529786
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoadBoardPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529792
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MaintenancePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529797
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MarketplacePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529806
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529810
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentsPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529813
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MonitoringAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529817
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OwnerOperatorPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529821
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PartnerPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529828
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RatesPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529831
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ReportingPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529835
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RoutePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529838
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529843
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529846
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ShipperPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529853
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Analytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529860
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyAPISettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529863
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyBillingSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529869
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanySettingsMain.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529874
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCP301AgentsWorking.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529879
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RealCompanyManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529885
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RealUserManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529897
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Security.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529902
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529911
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529913
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529921
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529931
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Track&TracePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529948
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TrackPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529964
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "WarehousePortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529976
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "WorkersPortal.backup.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529987
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "WorkersPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154529995
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "YMSPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530009
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530164
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PricingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530179
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyProfile.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530230
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserProfile.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530237
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "APIDocumentationPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530253
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BlogPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530262
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CaseStudiesPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530269
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DocumentationPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530280
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "HelpCenterPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530286
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "WebinarsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530292
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ResourcesPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530296
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AccountSettings.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530307
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SignupPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530313
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SimpleDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530315
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BrokerSolutions.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530319
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CarrierSolutions.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530329
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CRMSolution.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530333
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DriverSolutions.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530339
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FinancialManagementSolution.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530346
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FleetManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530351
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LastMileDelivery.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530364
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoadBoardSolution.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530375
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "LoadMatching.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530386
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "OwnerOperatorSolutions.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530393
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PredictiveAnalytics.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530396
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RouteOptimization.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530399
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ShipperSolutions.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530403
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TransportationManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530410
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TransportationManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530414
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "WarehouseManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530420
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "YardManagementSolution.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530426
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SolutionsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530429
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MCPAgentIntegration.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530431
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "UserManagement.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530438
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AITechnologyPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530444
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "APIPlatformPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530449
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AutomationPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530452
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "BlockchainPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530455
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CloudInfrastructurePage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530459
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DataAnalyticsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530462
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EdgeComputingPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530465
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IntegrationPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530468
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "IoTSensorsPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530470
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MicroservicesPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530475
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "MobileTechnologyPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530477
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SecurityPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530479
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TechnologyPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530482
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestAuth.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530486
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TestDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530488
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TMSCoreApplication.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530494
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalLogin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530670
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSuperAdminRoutes.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530677
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminRoutes.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530686
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TMSRoutes.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530689
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "authService.ts",
+      "fixes": 1,
+      "timestamp": 1758154530702
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "domainManager.ts",
+      "fixes": 1,
+      "timestamp": 1758154530707
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "settingsApi.ts",
+      "fixes": 1,
+      "timestamp": 1758154530711
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "subdomainService.ts",
+      "fixes": 1,
+      "timestamp": 1758154530720
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "superAdminService.ts",
+      "fixes": 1,
+      "timestamp": 1758154530724
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "supabase.ts",
+      "fixes": 1,
+      "timestamp": 1758154530728
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "webhookService.ts",
+      "fixes": 1,
+      "timestamp": 1758154530734
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "StandaloneDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530740
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "StandalonePortalApp.tsx",
+      "fixes": 1,
+      "timestamp": 1758154530744
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "mcp.ts",
+      "fixes": 1,
+      "timestamp": 1758154530754
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "settings.ts",
+      "fixes": 1,
+      "timestamp": 1758154530757
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalUpdateSystem.ts",
+      "fixes": 1,
+      "timestamp": 1758154530760
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AdminDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532680
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "App.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532696
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "PortalUsageChart.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532708
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "RevenueChart.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532724
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemHealthChart.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532737
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "CompanyTable.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532742
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "KPICard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532745
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "AutonomousHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532754
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedHeader.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532760
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSearch.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532763
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532771
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnterpriseFAB.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532776
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "FloatingActionButton.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532781
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Header.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532805
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "Sidebar.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532812
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SystemStatusModal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532814
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeDebugger.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532819
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeToggle.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532821
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ThemeContext.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532878
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "mockData.ts",
+      "fixes": 1,
+      "timestamp": 1758154532881
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnhancedSuperAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532888
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "EnterpriseSuperAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532895
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "supabase.ts",
+      "fixes": 1,
+      "timestamp": 1758154532898
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "main.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532905
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "ModernSuperAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532910
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "DashboardPage.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532912
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SimpleSuperAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532921
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SoftwareCompanyAdminDashboard.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532924
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "SuperAdminPortal.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532927
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "TransBotAISuperAdmin.tsx",
+      "fixes": 1,
+      "timestamp": 1758154532930
+    },
+    {
+      "type": "syntax-cleanup",
+      "file": "index.ts",
+      "fixes": 1,
+      "timestamp": 1758154532938
+    }
+  ],
+  "summary": {
+    "githubActionsFixes": 1,
+    "importFixes": 14,
+    "syntaxFixes": 423,
+    "eslintFixes": 0
+  }
+}

@@ -339,4 +339,3 @@ const TechnologyPage: React.FC = () => {
 };
 
 export default TechnologyPage;
-}

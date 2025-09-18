@@ -6,8 +6,7 @@ function App() {
         backgroundColor: '#1e293b',
         padding: '20px',
         color: 'white',
-        fontFamily: 'Arial, sans-serif',
-      }}
+        fontFamily: 'Arial, sans-serif'}}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <h1
@@ -15,8 +14,7 @@ function App() {
             fontSize: '2.5rem',
             fontWeight: 'bold',
             marginBottom: '1rem',
-            textAlign: 'center',
-          }}
+            textAlign: 'center'}}
         >
           🚀 TransBot AI - Server Working!
         </h1>
@@ -25,8 +23,7 @@ function App() {
             color: '#94a3b8',
             marginBottom: '2rem',
             textAlign: 'center',
-            fontSize: '1.2rem',
-          }}
+            fontSize: '1.2rem'}}
         >
           The server is running on port 3000. React app is loading...
         </p>
@@ -36,16 +33,14 @@ function App() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '20px',
-            marginBottom: '2rem',
-          }}
+            marginBottom: '2rem'}}
         >
           <div
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: '12px',
               padding: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-            }}
+              border: '1px solid rgba(255, 255, 255, 0.2)'}}
           >
             <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>
               🌐 Main Website
@@ -61,8 +56,7 @@ function App() {
                 padding: '10px 20px',
                 backgroundColor: 'rgba(59, 130, 246, 0.5)',
                 borderRadius: '8px',
-                display: 'inline-block',
-              }}
+                display: 'inline-block'}}
             >
               Go to Main Site
             </a>
@@ -73,8 +67,7 @@ function App() {
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: '12px',
               padding: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-            }}
+              border: '1px solid rgba(255, 255, 255, 0.2)'}}
           >
             <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>
               📊 MCP Dashboard
@@ -90,8 +83,7 @@ function App() {
                 padding: '10px 20px',
                 backgroundColor: 'rgba(16, 185, 129, 0.5)',
                 borderRadius: '8px',
-                display: 'inline-block',
-              }}
+                display: 'inline-block'}}
             >
               Open MCP Dashboard
             </a>
@@ -102,8 +94,7 @@ function App() {
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: '12px',
               padding: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-            }}
+              border: '1px solid rgba(255, 255, 255, 0.2)'}}
           >
             <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>
               📈 MCP Progress
@@ -119,8 +110,7 @@ function App() {
                 padding: '10px 20px',
                 backgroundColor: 'rgba(245, 158, 11, 0.5)',
                 borderRadius: '8px',
-                display: 'inline-block',
-              }}
+                display: 'inline-block'}}
             >
               View Progress
             </a>
@@ -131,8 +121,7 @@ function App() {
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: '12px',
               padding: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-            }}
+              border: '1px solid rgba(255, 255, 255, 0.2)'}}
           >
             <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>
               🌐 All Portals
@@ -148,8 +137,7 @@ function App() {
                 padding: '10px 20px',
                 backgroundColor: 'rgba(139, 92, 246, 0.5)',
                 borderRadius: '8px',
-                display: 'inline-block',
-              }}
+                display: 'inline-block'}}
             >
               Browse Portals
             </a>
@@ -162,8 +150,7 @@ function App() {
             backgroundColor: 'rgba(0, 255, 0, 0.1)',
             padding: '20px',
             borderRadius: '12px',
-            border: '1px solid rgba(0, 255, 0, 0.3)',
-          }}
+            border: '1px solid rgba(0, 255, 0, 0.3)'}}
         >
           <h3 style={{ marginBottom: '1rem' }}>✅ Server Status</h3>
           <p style={{ marginBottom: '0.5rem' }}>🌐 Port 3000: Active</p>

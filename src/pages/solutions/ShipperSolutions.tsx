@@ -226,4 +226,3 @@ const ShipperSolutions: React.FC = () => {
 }
 
 export default ShipperSolutions
-}

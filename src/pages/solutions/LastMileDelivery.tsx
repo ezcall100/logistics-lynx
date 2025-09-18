@@ -158,4 +158,3 @@ const LastMileDelivery: React.FC = () => {
 }
 
 export default LastMileDelivery
-}

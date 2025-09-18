@@ -121,4 +121,3 @@ const DocumentationPage: React.FC = () => {
 }
 
 export default DocumentationPage
-}

@@ -283,4 +283,3 @@ const SuperAdminRoutes: React.FC = () => {
 };
 
 export default SuperAdminRoutes;
-}

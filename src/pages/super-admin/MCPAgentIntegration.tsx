@@ -243,8 +243,6 @@ const MCPAgentIntegration: React.FC = () => {
         {mcpAgents.map(agent => {
           const TypeIcon = getTypeIcon(agent.type);
           return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
             <div key={agent.id} className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm responsive-container sm:flex-col md:flex-row lg:grid">
               <div className="flex items-center justify-between mb-4 responsive-container sm:flex-col md:flex-row lg:grid">
                 <div className="flex items-center space-x-3 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -283,8 +281,8 @@ const MCPAgentIntegration: React.FC = () => {
                   onClick={() => {
                     setSelectedAgent(agent);
                     setShowAgentDetails(true);
-                  }
-            aria-label="Button"}
+                  }}
+                        aria-label="Button"
                   className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors responsive-container sm:flex-col md:flex-row lg:grid"
                 >
                   <Eye className="w-4 h-4 mr-1 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -310,16 +308,12 @@ const MCPAgentIntegration: React.FC = () => {
         return renderAgents();
       case 'analytics':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
           <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Analytics</h2>
           </div>
         );
       case 'settings':
         return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
           <div className="p-6 responsive-container sm:flex-col md:flex-row lg:grid">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white responsive-container sm:flex-col md:flex-row lg:grid">Settings</h2>
           </div>
@@ -331,8 +325,7 @@ const MCPAgentIntegration: React.FC = () => {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 responsive-container sm:flex-col md:flex-row lg:grid">
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-gray-700 responsive-container sm:flex-col md:flex-row lg:grid">
         <div className="px-6 py-4 responsive-container sm:flex-col md:flex-row lg:grid">
@@ -362,12 +355,10 @@ const MCPAgentIntegration: React.FC = () => {
             {navigationItems.map(item => {
               const Icon = item.icon;
               return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-            aria-label="Button"
+                  aria-label="Button"
                   className={`flex items-center space-x-2 px-3 py-4 border-b-2 transition-colors ${
                     activeTab === item.id
                       ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -408,7 +399,7 @@ const MCPAgentIntegration: React.FC = () => {
               </h3>
               <button
                 onClick={() => setShowAgentDetails(false)}
-            aria-label="Button"
+                  aria-label="Button"
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 responsive-container sm:flex-col md:flex-row lg:grid"
               >
                 <XCircle className="w-5 h-5 responsive-container sm:flex-col md:flex-row lg:grid" />
@@ -463,8 +454,8 @@ const MCPAgentIntegration: React.FC = () => {
         </div>
       )}
     </div>
+    </ErrorBoundary>
   );
 };
 
 export default MCPAgentIntegration;
-}

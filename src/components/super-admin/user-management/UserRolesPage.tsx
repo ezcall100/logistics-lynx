@@ -625,9 +625,7 @@ export const UserRolesPage: React.FC = () => {
             ? 1
             : 0;
       } else {
-        return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      aValue as string | number) > (bValue as string | number)
+        return (aValue as string | number) > (bValue as string | number)
           ? -1
           : (aValue as string | number) < (bValue as string | number)
             ? 1
