@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ErrorBoundary from '../../../components/ErrorBoundary';
 import {
   Bot,
   Menu,
@@ -195,7 +196,7 @@ function MCPAgentAdmin() {
             <div className="flex items-center responsive-container">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-            aria-label="Button"
+                aria-label="Button"
                 className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 responsive-container"
               >
                 <Menu className="h-6 w-6 responsive-container" />
@@ -206,7 +207,9 @@ function MCPAgentAdmin() {
                     <Bot className="h-5 w-5 text-white responsive-container" />
                   </div>
                   <div className="ml-3 responsive-container">
-                    <h1 className="text-xl font-semibold text-gray-900 responsive-container">TransBot AI</h1>
+                    <h1 className="text-xl font-semibold text-gray-900 responsive-container">
+                      TransBot AI
+                    </h1>
                     <p className="text-sm text-gray-500 responsive-container">MCP Agent Admin</p>
                   </div>
                 </div>
@@ -225,7 +228,10 @@ function MCPAgentAdmin() {
                 />
               </div>
 
-              <button className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg responsive-container" aria-label="Button">
+              <button
+                className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg responsive-container"
+                aria-label="Button"
+              >
                 <Bell className="h-6 w-6 responsive-container" />
                 {notifications.length > 0 && (
                   <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full responsive-container"></span>
@@ -233,9 +239,15 @@ function MCPAgentAdmin() {
               </button>
 
               <div className="flex items-center space-x-3 responsive-container">
-                <img className="h-8 w-8 rounded-full responsive-container" src={user.avatar} alt={user.name} / alt="Image">
+                <img
+                  className="h-8 w-8 rounded-full responsive-container"
+                  src={user.avatar}
+                  alt={user.name}
+                />
                 <div className="hidden md:block responsive-container">
-                  <p className="text-sm font-medium text-gray-900 responsive-container">{user.name}</p>
+                  <p className="text-sm font-medium text-gray-900 responsive-container">
+                    {user.name}
+                  </p>
                   <p className="text-xs text-gray-500 responsive-container">{user.role}</p>
                 </div>
               </div>
@@ -261,11 +273,13 @@ function MCPAgentAdmin() {
                     <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center responsive-container">
                       <Bot className="h-5 w-5 text-white responsive-container" />
                     </div>
-                    <span className="ml-3 text-lg font-semibold text-gray-900 responsive-container">TransBot AI</span>
+                    <span className="ml-3 text-lg font-semibold text-gray-900 responsive-container">
+                      TransBot AI
+                    </span>
                   </div>
                   <button
                     onClick={() => setSidebarOpen(false)}
-            aria-label="Button"
+                    aria-label="Button"
                     className="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 responsive-container"
                   >
                     <X className="h-5 w-5 responsive-container" />
@@ -277,7 +291,7 @@ function MCPAgentAdmin() {
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
-            aria-label="Button"
+                      aria-label="Button"
                       className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                         activeTab === item.id
                           ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
@@ -291,7 +305,10 @@ function MCPAgentAdmin() {
                 </nav>
 
                 <div className="p-4 border-t border-gray-200 responsive-container">
-                  <button className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors responsive-container" aria-label="Button">
+                  <button
+                    className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors responsive-container"
+                    aria-label="Button"
+                  >
                     <LogOut className="mr-3 h-5 w-5 responsive-container" />
                     Sign out
                   </button>
@@ -324,8 +341,12 @@ function MCPAgentAdmin() {
                 >
                   <div className="flex items-center justify-between responsive-container">
                     <div>
-                      <p className="text-sm font-medium text-gray-600 responsive-container">{metric.title}</p>
-                      <p className="text-2xl font-bold text-gray-900 mt-1 responsive-container">{metric.value}</p>
+                      <p className="text-sm font-medium text-gray-600 responsive-container">
+                        {metric.title}
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900 mt-1 responsive-container">
+                        {metric.value}
+                      </p>
                       <div className="flex items-center mt-2 responsive-container">
                         <span
                           className={`text-sm font-medium ${
@@ -334,7 +355,9 @@ function MCPAgentAdmin() {
                         >
                           {metric.change}
                         </span>
-                        <span className="text-sm text-gray-500 ml-1 responsive-container">from last month</span>
+                        <span className="text-sm text-gray-500 ml-1 responsive-container">
+                          from last month
+                        </span>
                       </div>
                     </div>
                     <div className={`p-3 rounded-lg ${metric.bgColor}`}>
@@ -358,7 +381,7 @@ function MCPAgentAdmin() {
                           : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                       }`}
                       onClick={() => setActiveTab(tab.toLowerCase())}
-            aria-label="Button"
+                      aria-label="Button"
                     >
                       {tab}
                     </button>
@@ -381,8 +404,12 @@ function MCPAgentAdmin() {
                         {performanceData.map((item, index) => (
                           <div key={index}>
                             <div className="flex justify-between text-sm mb-1 responsive-container">
-                              <span className="text-gray-600 responsive-container">{item.label}</span>
-                              <span className="font-medium text-gray-900 responsive-container">{item.value}%</span>
+                              <span className="text-gray-600 responsive-container">
+                                {item.label}
+                              </span>
+                              <span className="font-medium text-gray-900 responsive-container">
+                                {item.value}%
+                              </span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2 responsive-container">
                               <div
@@ -397,25 +424,34 @@ function MCPAgentAdmin() {
 
                     {/* Recent Activity */}
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">Recent Activity</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4 responsive-container">
+                        Recent Activity
+                      </h3>
                       <div className="space-y-4 responsive-container">
                         {recentActivity.map(activity => {
                           const StatusIcon = getStatusIcon(activity.type);
                           return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                            <div key={activity.id} className="flex items-start space-x-3 responsive-container">
-                              <div className={`p-2 rounded-lg ${getStatusColor(activity.type)}`}>
-                                <StatusIcon className="h-4 w-4 responsive-container" />
+                            <ErrorBoundary
+                              key={activity.id}
+                              fallback={<div>Something went wrong</div>}
+                            >
+                              <div className="flex items-start space-x-3 responsive-container">
+                                <div className={`p-2 rounded-lg ${getStatusColor(activity.type)}`}>
+                                  <StatusIcon className="h-4 w-4 responsive-container" />
+                                </div>
+                                <div className="flex-1 min-w-0 responsive-container">
+                                  <p className="text-sm font-medium text-gray-900 responsive-container">
+                                    {activity.action}
+                                  </p>
+                                  <p className="text-sm text-gray-600 responsive-container">
+                                    {activity.details}
+                                  </p>
+                                  <p className="text-xs text-gray-500 mt-1 responsive-container">
+                                    {activity.time}
+                                  </p>
+                                </div>
                               </div>
-                              <div className="flex-1 min-w-0 responsive-container">
-                                <p className="text-sm font-medium text-gray-900 responsive-container">
-                                  {activity.action}
-                                </p>
-                                <p className="text-sm text-gray-600 responsive-container">{activity.details}</p>
-                                <p className="text-xs text-gray-500 mt-1 responsive-container">{activity.time}</p>
-                              </div>
-                            </div>
+                            </ErrorBoundary>
                           );
                         })}
                       </div>
@@ -426,7 +462,9 @@ function MCPAgentAdmin() {
                 {activeTab === 'analytics' && (
                   <div className="text-center py-12 responsive-container">
                     <BarChart3 className="mx-auto h-12 w-12 text-gray-400 responsive-container" />
-                    <h3 className="mt-2 text-sm font-medium text-gray-900 responsive-container">Analytics Dashboard</h3>
+                    <h3 className="mt-2 text-sm font-medium text-gray-900 responsive-container">
+                      Analytics Dashboard
+                    </h3>
                     <p className="mt-1 text-sm text-gray-500 responsive-container">
                       Advanced analytics and reporting features coming soon.
                     </p>

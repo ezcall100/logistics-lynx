@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ErrorBoundary from '../../../components/ErrorBoundary';
 import {
   Bot,
   Settings,
@@ -27,7 +28,8 @@ import {
   Server,
   Monitor,
   Calendar,
-  User} from 'lucide-react';
+  User,
+} from 'lucide-react';
 
 interface MCPAgent {
   id: string;
@@ -73,7 +75,8 @@ const MCPAgentsPortal: React.FC = () => {
       uptime: `${Math.floor(Math.random() * 30) + 1} days`,
       cpu: Math.floor(Math.random() * 100),
       memory: Math.floor(Math.random() * 100),
-      network: Math.floor(Math.random() * 100)}));
+      network: Math.floor(Math.random() * 100),
+    }));
     setAgents(mockAgents);
   }, []);
 
@@ -81,7 +84,8 @@ const MCPAgentsPortal: React.FC = () => {
     name: 'MCP Administrator',
     role: 'Super Admin',
     avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'};
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+  };
 
   // Comprehensive MCP Agents Menu Structure - 88+ Pages
   const menuItems = [
@@ -97,20 +101,24 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'Overview',
           icon: BarChart3,
           color: 'text-blue-400',
-          path: '/mcp-agents/dashboard/overview'},
+          path: '/mcp-agents/dashboard/overview',
+        },
         {
           id: 'real-time-status',
           label: 'Real-time Status',
           icon: Activity,
           color: 'text-green-400',
-          path: '/mcp-agents/dashboard/real-time'},
+          path: '/mcp-agents/dashboard/real-time',
+        },
         {
           id: 'performance-metrics',
           label: 'Performance Metrics',
           icon: TrendingUp,
           color: 'text-purple-400',
-          path: '/mcp-agents/dashboard/performance'},
-      ]},
+          path: '/mcp-agents/dashboard/performance',
+        },
+      ],
+    },
     {
       id: 'agent-management',
       label: 'Agent Management',
@@ -128,17 +136,21 @@ const MCPAgentsPortal: React.FC = () => {
             {
               id: 'active-agents',
               label: 'Active Agents',
-              path: '/mcp-agents/management/all/active'},
+              path: '/mcp-agents/management/all/active',
+            },
             {
               id: 'inactive-agents',
               label: 'Inactive Agents',
-              path: '/mcp-agents/management/all/inactive'},
+              path: '/mcp-agents/management/all/inactive',
+            },
             {
               id: 'maintenance-agents',
               label: 'Maintenance Mode',
-              path: '/mcp-agents/management/all/maintenance'},
+              path: '/mcp-agents/management/all/maintenance',
+            },
             { id: 'error-agents', label: 'Error Status', path: '/mcp-agents/management/all/error' },
-          ]},
+          ],
+        },
         {
           id: 'agent-types',
           label: 'Agent Types',
@@ -149,41 +161,51 @@ const MCPAgentsPortal: React.FC = () => {
             {
               id: 'development-agents',
               label: 'Development Agents',
-              path: '/mcp-agents/management/types/development'},
+              path: '/mcp-agents/management/types/development',
+            },
             {
               id: 'testing-agents',
               label: 'Testing Agents',
-              path: '/mcp-agents/management/types/testing'},
+              path: '/mcp-agents/management/types/testing',
+            },
             {
               id: 'deployment-agents',
               label: 'Deployment Agents',
-              path: '/mcp-agents/management/types/deployment'},
+              path: '/mcp-agents/management/types/deployment',
+            },
             {
               id: 'monitoring-agents',
               label: 'Monitoring Agents',
-              path: '/mcp-agents/management/types/monitoring'},
+              path: '/mcp-agents/management/types/monitoring',
+            },
             {
               id: 'security-agents',
               label: 'Security Agents',
-              path: '/mcp-agents/management/types/security'},
+              path: '/mcp-agents/management/types/security',
+            },
             {
               id: 'analytics-agents',
               label: 'Analytics Agents',
-              path: '/mcp-agents/management/types/analytics'},
-          ]},
+              path: '/mcp-agents/management/types/analytics',
+            },
+          ],
+        },
         {
           id: 'agent-creation',
           label: 'Create New Agent',
           icon: Plus,
           color: 'text-green-400',
-          path: '/mcp-agents/management/create'},
+          path: '/mcp-agents/management/create',
+        },
         {
           id: 'agent-configuration',
           label: 'Agent Configuration',
           icon: Settings,
           color: 'text-orange-400',
-          path: '/mcp-agents/management/configuration'},
-      ]},
+          path: '/mcp-agents/management/configuration',
+        },
+      ],
+    },
     {
       id: 'monitoring',
       label: 'Monitoring & Analytics',
@@ -196,32 +218,38 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'Performance Metrics',
           icon: TrendingUp,
           color: 'text-green-400',
-          path: '/mcp-agents/monitoring/performance'},
+          path: '/mcp-agents/monitoring/performance',
+        },
         {
           id: 'system-health',
           label: 'System Health',
           icon: Activity,
           color: 'text-emerald-400',
-          path: '/mcp-agents/monitoring/health'},
+          path: '/mcp-agents/monitoring/health',
+        },
         {
           id: 'resource-usage',
           label: 'Resource Usage',
           icon: Database,
           color: 'text-teal-400',
-          path: '/mcp-agents/monitoring/resources'},
+          path: '/mcp-agents/monitoring/resources',
+        },
         {
           id: 'network-monitoring',
           label: 'Network Monitoring',
           icon: Network,
           color: 'text-cyan-400',
-          path: '/mcp-agents/monitoring/network'},
+          path: '/mcp-agents/monitoring/network',
+        },
         {
           id: 'alerts-notifications',
           label: 'Alerts & Notifications',
           icon: Bell,
           color: 'text-yellow-400',
-          path: '/mcp-agents/monitoring/alerts'},
-      ]},
+          path: '/mcp-agents/monitoring/alerts',
+        },
+      ],
+    },
     {
       id: 'configuration',
       label: 'Configuration',
@@ -234,32 +262,38 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'Agent Settings',
           icon: Bot,
           color: 'text-orange-400',
-          path: '/mcp-agents/configuration/agents'},
+          path: '/mcp-agents/configuration/agents',
+        },
         {
           id: 'system-config',
           label: 'System Configuration',
           icon: Server,
           color: 'text-amber-400',
-          path: '/mcp-agents/configuration/system'},
+          path: '/mcp-agents/configuration/system',
+        },
         {
           id: 'security-settings',
           label: 'Security Settings',
           icon: Shield,
           color: 'text-red-400',
-          path: '/mcp-agents/configuration/security'},
+          path: '/mcp-agents/configuration/security',
+        },
         {
           id: 'backup-restore',
           label: 'Backup & Restore',
           icon: Database,
           color: 'text-purple-400',
-          path: '/mcp-agents/configuration/backup'},
+          path: '/mcp-agents/configuration/backup',
+        },
         {
           id: 'api-settings',
           label: 'API Settings',
           icon: Settings,
           color: 'text-blue-400',
-          path: '/mcp-agents/configuration/api'},
-      ]},
+          path: '/mcp-agents/configuration/api',
+        },
+      ],
+    },
     {
       id: 'tasks',
       label: 'Task Management',
@@ -272,32 +306,38 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'Active Tasks',
           icon: Activity,
           color: 'text-yellow-400',
-          path: '/mcp-agents/tasks/active'},
+          path: '/mcp-agents/tasks/active',
+        },
         {
           id: 'task-queue',
           label: 'Task Queue',
           icon: Clock,
           color: 'text-amber-400',
-          path: '/mcp-agents/tasks/queue'},
+          path: '/mcp-agents/tasks/queue',
+        },
         {
           id: 'task-history',
           label: 'Task History',
           icon: BarChart3,
           color: 'text-orange-400',
-          path: '/mcp-agents/tasks/history'},
+          path: '/mcp-agents/tasks/history',
+        },
         {
           id: 'task-scheduling',
           label: 'Task Scheduling',
           icon: Calendar,
           color: 'text-red-400',
-          path: '/mcp-agents/tasks/scheduling'},
+          path: '/mcp-agents/tasks/scheduling',
+        },
         {
           id: 'task-templates',
           label: 'Task Templates',
           icon: FileText,
           color: 'text-purple-400',
-          path: '/mcp-agents/tasks/templates'},
-      ]},
+          path: '/mcp-agents/tasks/templates',
+        },
+      ],
+    },
     {
       id: 'security',
       label: 'Security & Compliance',
@@ -310,26 +350,31 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'Access Control',
           icon: Shield,
           color: 'text-red-400',
-          path: '/mcp-agents/security/access'},
+          path: '/mcp-agents/security/access',
+        },
         {
           id: 'audit-logs',
           label: 'Audit Logs',
           icon: FileText,
           color: 'text-pink-400',
-          path: '/mcp-agents/security/audit'},
+          path: '/mcp-agents/security/audit',
+        },
         {
           id: 'threat-detection',
           label: 'Threat Detection',
           icon: AlertTriangle,
           color: 'text-orange-400',
-          path: '/mcp-agents/security/threats'},
+          path: '/mcp-agents/security/threats',
+        },
         {
           id: 'compliance-reports',
           label: 'Compliance Reports',
           icon: Shield,
           color: 'text-blue-400',
-          path: '/mcp-agents/security/compliance'},
-      ]},
+          path: '/mcp-agents/security/compliance',
+        },
+      ],
+    },
     {
       id: 'profile-settings',
       label: 'Profile & Settings',
@@ -342,26 +387,31 @@ const MCPAgentsPortal: React.FC = () => {
           label: 'User Profile',
           icon: User,
           color: 'text-indigo-400',
-          path: '/mcp-agents/profile/user'},
+          path: '/mcp-agents/profile/user',
+        },
         {
           id: 'account-settings',
           label: 'Account Settings',
           icon: Settings,
           color: 'text-blue-400',
-          path: '/mcp-agents/profile/account'},
+          path: '/mcp-agents/profile/account',
+        },
         {
           id: 'notifications',
           label: 'Notifications',
           icon: Bell,
           color: 'text-yellow-400',
-          path: '/mcp-agents/profile/notifications'},
+          path: '/mcp-agents/profile/notifications',
+        },
         {
           id: 'preferences',
           label: 'Preferences',
           icon: Star,
           color: 'text-purple-400',
-          path: '/mcp-agents/profile/preferences'},
-      ]},
+          path: '/mcp-agents/profile/preferences',
+        },
+      ],
+    },
   ];
 
   const handleMenuToggle = (menuId: string) => {
@@ -400,10 +450,15 @@ const MCPAgentsPortal: React.FC = () => {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            aria-label="Button"
+                aria-label="Button"
                 className="md:hidden p-2 rounded-xl bg-white/70 dark:bg-slate-700/70 hover:bg-white/90 dark:hover:bg-slate-600/90 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:text-gray-200 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm responsive-container"
               >
-                <svg className="h-5 w-5 responsive-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="h-5 w-5 responsive-container"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -448,13 +503,22 @@ const MCPAgentsPortal: React.FC = () => {
 
               {/* Action Icons */}
               <div className="flex items-center space-x-1 responsive-container">
-                <button className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                <button
+                  className="p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
+                  aria-label="Button"
+                >
                   <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5 responsive-container" />
                 </button>
-                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                <button
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
+                  aria-label="Button"
+                >
                   <Bell className="h-5 w-5 responsive-container" />
                 </button>
-                <button className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container" aria-label="Button">
+                <button
+                  className="p-2.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl hover:bg-gray-100 transition-colors responsive-container"
+                  aria-label="Button"
+                >
                   <Settings className="h-5 w-5 responsive-container" />
                 </button>
               </div>
@@ -465,7 +529,7 @@ const MCPAgentsPortal: React.FC = () => {
                   src={user.avatar}
                   alt={user.name}
                   className="h-8 w-8 rounded-full border-2 border-white shadow-sm responsive-container"
-                / alt="Image">
+                />
                 <div className="hidden sm:block responsive-container">
                   <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 responsive-container">
                     {user.name}
@@ -490,12 +554,14 @@ const MCPAgentsPortal: React.FC = () => {
                   <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center responsive-container">
                     <Menu className="h-4 w-4 text-white responsive-container" />
                   </div>
-                  <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 responsive-container">Navigation</h2>
+                  <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 responsive-container">
+                    Navigation
+                  </h2>
                 </div>
               )}
               <button
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            aria-label="Button"
+                aria-label="Button"
                 className="hidden md:block p-2 rounded-lg hover:bg-gray-100 transition-colors responsive-container"
               >
                 {sidebarCollapsed ? (
@@ -513,88 +579,92 @@ const MCPAgentsPortal: React.FC = () => {
                 const isExpanded = expandedMenus.includes(item.id);
 
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                  <div key={item.id}>
-                    <button
-                      onClick={() => {
-                        if (item.subMenus) {
-                          handleMenuToggle(item.id);
-                        }
-            aria-label="Button" else {
-                          handleMenuItemClick(item.id, item.path);
-                        }
-                      }}
-                      className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${
-                        isActive
-                          ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100'
-                      }`}
-                    >
-                      <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`} />
-                      {!sidebarCollapsed && (
-                        <>
-                          <span className="font-medium responsive-container">{item.label}</span>
-                          {item.subMenus && (
-                            <ChevronRight
-                              className={`h-4 w-4 ml-auto transition-transform ${isExpanded ? 'rotate-90' : ''}`}
-                            />
-                          )}
-                        </>
-                      )}
-                    </button>
+                  <ErrorBoundary key={item.id} fallback={<div>Something went wrong</div>}>
+                    <div>
+                      <button
+                        onClick={() => {
+                          if (item.subMenus) {
+                            handleMenuToggle(item.id);
+                          } else {
+                            handleMenuItemClick(item.id, item.path);
+                          }
+                        }}
+                        aria-label="Button"
+                        className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${
+                          isActive
+                            ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100'
+                        }`}
+                      >
+                        <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.color}`} />
+                        {!sidebarCollapsed && (
+                          <>
+                            <span className="font-medium responsive-container">{item.label}</span>
+                            {item.subMenus && (
+                              <ChevronRight
+                                className={`h-4 w-4 ml-auto transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                              />
+                            )}
+                          </>
+                        )}
+                      </button>
 
-                    {/* Sub-menus */}
-                    <AnimatePresence>
-                      {item.subMenus && isExpanded && !sidebarCollapsed && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="ml-6 mt-2 space-y-1 responsive-container"
-                        >
-                          {item.subMenus.map(subItem => {
-                            const SubIcon = subItem.icon;
-                            return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                              <div key={subItem.id}>
-                                <button
-                                  onClick={() => handleMenuItemClick(subItem.id, subItem.path)}
-            aria-label="Button"
-                                  className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100 responsive-container"
+                      {/* Sub-menus */}
+                      <AnimatePresence>
+                        {item.subMenus && isExpanded && !sidebarCollapsed && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="ml-6 mt-2 space-y-1 responsive-container"
+                          >
+                            {item.subMenus.map(subItem => {
+                              const SubIcon = subItem.icon;
+                              return (
+                                <ErrorBoundary
+                                  key={subItem.id}
+                                  fallback={<div>Something went wrong</div>}
                                 >
-                                  <SubIcon className={`h-4 w-4 ${subItem.color}`} />
-                                  <span>{subItem.label}</span>
-                                  {subItem.subSubMenus && (
-                                    <ChevronRight className="h-3 w-3 ml-auto responsive-container" />
-                                  )}
-                                </button>
+                                  <div>
+                                    <button
+                                      onClick={() => handleMenuItemClick(subItem.id, subItem.path)}
+                                      aria-label="Button"
+                                      className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:text-gray-100 responsive-container"
+                                    >
+                                      <SubIcon className={`h-4 w-4 ${subItem.color}`} />
+                                      <span>{subItem.label}</span>
+                                      {subItem.subSubMenus && (
+                                        <ChevronRight className="h-3 w-3 ml-auto responsive-container" />
+                                      )}
+                                    </button>
 
-                                {/* Sub-sub-menus */}
-                                {subItem.subSubMenus && (
-                                  <div className="ml-6 mt-1 space-y-1 responsive-container">
-                                    {subItem.subSubMenus.map(subSubItem => (
-                                      <button
-                                        key={subSubItem.id}
-                                        onClick={() => handleMenuItemClick(subSubItem.id, subSubItem.path)
-                                        }
-            aria-label="Button"
-                                        className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300 responsive-container"
-                                      >
-                                        <div className="h-2 w-2 bg-gray-300 rounded-full responsive-container"></div>
-                                        <span>{subSubItem.label}</span>
-                                      </button>
-                                    ))}
+                                    {/* Sub-sub-menus */}
+                                    {subItem.subSubMenus && (
+                                      <div className="ml-6 mt-1 space-y-1 responsive-container">
+                                        {subItem.subSubMenus.map(subSubItem => (
+                                          <button
+                                            key={subSubItem.id}
+                                            onClick={() =>
+                                              handleMenuItemClick(subSubItem.id, subSubItem.path)
+                                            }
+                                            aria-label="Button"
+                                            className="w-full flex items-center space-x-3 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-700 dark:text-gray-300 responsive-container"
+                                          >
+                                            <div className="h-2 w-2 bg-gray-300 rounded-full responsive-container"></div>
+                                            <span>{subSubItem.label}</span>
+                                          </button>
+                                        ))}
+                                      </div>
+                                    )}
                                   </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                                </ErrorBoundary>
+                              );
+                            })}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </ErrorBoundary>
                 );
               })}
             </nav>
@@ -633,7 +703,9 @@ const MCPAgentsPortal: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2 responsive-container">
                 <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse responsive-container"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">Live</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium responsive-container">
+                  Live
+                </span>
               </div>
             </div>
           </div>
@@ -667,79 +739,82 @@ const MCPAgentsPortal: React.FC = () => {
                 value: '248',
                 change: '+12',
                 color: 'green',
-                icon: CheckCircle},
+                icon: CheckCircle,
+              },
               {
                 label: 'Tasks Running',
                 value: '1,247',
                 change: '+8%',
                 color: 'blue',
-                icon: Activity},
+                icon: Activity,
+              },
               {
                 label: 'System Health',
                 value: '99.9%',
                 change: '+0.1%',
                 color: 'purple',
-                icon: CheckCircle},
+                icon: CheckCircle,
+              },
               { label: 'Alerts', value: '3', change: '-2', color: 'yellow', icon: AlertTriangle },
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50hover:shadow-xl transition-all duration-300`}
-                >
-                  <div className="flex items-center justify-between responsive-container">
-                    <div>
-                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300 responsive-container">
-                        {stat.label}
-                      </p>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1 responsive-container">
-                        {stat.value}
-                      </p>
-                      <p
-                        className={`text-xs font-medium mt-1 ${
+                <ErrorBoundary key={stat.label} fallback={<div>Something went wrong</div>}>
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700/50hover:shadow-xl transition-all duration-300`}
+                  >
+                    <div className="flex items-center justify-between responsive-container">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 responsive-container">
+                          {stat.label}
+                        </p>
+                        <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1 responsive-container">
+                          {stat.value}
+                        </p>
+                        <p
+                          className={`text-xs font-medium mt-1 ${
+                            stat.color === 'green'
+                              ? 'text-green-600'
+                              : stat.color === 'blue'
+                                ? 'text-blue-600'
+                                : stat.color === 'purple'
+                                  ? 'text-purple-600'
+                                  : 'text-yellow-600'
+                          }`}
+                        >
+                          {stat.change}
+                        </p>
+                      </div>
+                      <div
+                        className={`h-12 w-12 rounded-xl flex items-center justify-center ${
                           stat.color === 'green'
-                            ? 'text-green-600'
+                            ? 'bg-green-100'
                             : stat.color === 'blue'
-                              ? 'text-blue-600'
+                              ? 'bg-blue-100'
                               : stat.color === 'purple'
-                                ? 'text-purple-600'
-                                : 'text-yellow-600'
+                                ? 'bg-purple-100'
+                                : 'bg-yellow-100'
                         }`}
                       >
-                        {stat.change}
-                      </p>
+                        <Icon
+                          className={`h-6 w-6 ${
+                            stat.color === 'green'
+                              ? 'text-green-600'
+                              : stat.color === 'blue'
+                                ? 'text-blue-600'
+                                : stat.color === 'purple'
+                                  ? 'text-purple-600'
+                                  : 'text-yellow-600'
+                          }`}
+                        />
+                      </div>
                     </div>
-                    <div
-                      className={`h-12 w-12 rounded-xl flex items-center justify-center ${
-                        stat.color === 'green'
-                          ? 'bg-green-100'
-                          : stat.color === 'blue'
-                            ? 'bg-blue-100'
-                            : stat.color === 'purple'
-                              ? 'bg-purple-100'
-                              : 'bg-yellow-100'
-                      }`}
-                    >
-                      <Icon
-                        className={`h-6 w-6 ${
-                          stat.color === 'green'
-                            ? 'text-green-600'
-                            : stat.color === 'blue'
-                              ? 'text-blue-600'
-                              : stat.color === 'purple'
-                                ? 'text-purple-600'
-                                : 'text-yellow-600'
-                        }`}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </ErrorBoundary>
               );
             })}
           </div>
@@ -756,7 +831,10 @@ const MCPAgentsPortal: React.FC = () => {
                 </p>
               </div>
               <div className="flex items-center space-x-2 responsive-container">
-                <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors responsive-container" aria-label="Button">
+                <button
+                  className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors responsive-container"
+                  aria-label="Button"
+                >
                   <Plus className="h-4 w-4 mr-2 inline responsive-container" />
                   Add Agent
                 </button>
@@ -766,58 +844,69 @@ const MCPAgentsPortal: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 responsive-container">
               {agents.slice(0, 12).map((agent, index) => {
                 return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      
-                  <motion.div
-                    key={agent.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md cursor-pointer ${getStatusColor(agent.status)}`}
-                    onClick={() => console.log('Agent clicked:', agent.id)}
-                  >
-                    <div className="flex items-center justify-between mb-3 responsive-container">
-                      <div className="flex items-center space-x-2 responsive-container">
-                        <Bot className="h-5 w-5 responsive-container" />
-                        <span className="font-semibold text-sm responsive-container">{agent.name}</span>
+                  <ErrorBoundary key={agent.id} fallback={<div>Something went wrong</div>}>
+                    <motion.div
+                      key={agent.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
+                      className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md cursor-pointer ${getStatusColor(agent.status)}`}
+                      onClick={() => console.log('Agent clicked:', agent.id)}
+                    >
+                      <div className="flex items-center justify-between mb-3 responsive-container">
+                        <div className="flex items-center space-x-2 responsive-container">
+                          <Bot className="h-5 w-5 responsive-container" />
+                          <span className="font-semibold text-sm responsive-container">
+                            {agent.name}
+                          </span>
+                        </div>
+                        <CheckCircle className="h-4 w-4 responsive-container" />
                       </div>
-                      <CheckCircle className="h-4 w-4 responsive-container" />
-                    </div>
 
-                    <div className="space-y-2 responsive-container">
-                      <div className="flex justify-between text-xs responsive-container">
-                        <span>Type:</span>
-                        <span className="font-medium responsive-container">{agent.type}</span>
+                      <div className="space-y-2 responsive-container">
+                        <div className="flex justify-between text-xs responsive-container">
+                          <span>Type:</span>
+                          <span className="font-medium responsive-container">{agent.type}</span>
+                        </div>
+                        <div className="flex justify-between text-xs responsive-container">
+                          <span>Performance:</span>
+                          <span className="font-medium responsive-container">
+                            {agent.performance}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-xs responsive-container">
+                          <span>Tasks:</span>
+                          <span className="font-medium responsive-container">
+                            {agent.tasksCompleted}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-xs responsive-container">
+                          <span>Location:</span>
+                          <span className="font-medium responsive-container">{agent.location}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between text-xs responsive-container">
-                        <span>Performance:</span>
-                        <span className="font-medium responsive-container">{agent.performance}%</span>
-                      </div>
-                      <div className="flex justify-between text-xs responsive-container">
-                        <span>Tasks:</span>
-                        <span className="font-medium responsive-container">{agent.tasksCompleted}</span>
-                      </div>
-                      <div className="flex justify-between text-xs responsive-container">
-                        <span>Location:</span>
-                        <span className="font-medium responsive-container">{agent.location}</span>
-                      </div>
-                    </div>
 
-                    {agent.currentTask && (
-                      <div className="mt-3 p-2 bg-white/50 rounded-lg responsive-container">
-                        <p className="text-xs text-gray-600 dark:text-gray-300 responsive-container">Current Task:</p>
-                        <p className="text-xs font-medium text-gray-800 dark:text-gray-200 responsive-container">
-                          {agent.currentTask}
-                        </p>
-                      </div>
-                    )}
-                  </motion.div>
+                      {agent.currentTask && (
+                        <div className="mt-3 p-2 bg-white/50 rounded-lg responsive-container">
+                          <p className="text-xs text-gray-600 dark:text-gray-300 responsive-container">
+                            Current Task:
+                          </p>
+                          <p className="text-xs font-medium text-gray-800 dark:text-gray-200 responsive-container">
+                            {agent.currentTask}
+                          </p>
+                        </div>
+                      )}
+                    </motion.div>
+                  </ErrorBoundary>
                 );
               })}
             </div>
 
             <div className="mt-6 text-center responsive-container">
-              <button className="px-6 py-2 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 transition-colors responsive-container" aria-label="Button">
+              <button
+                className="px-6 py-2 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 transition-colors responsive-container"
+                aria-label="Button"
+              >
                 View All 251 Agents
               </button>
             </div>
@@ -829,4 +918,3 @@ const MCPAgentsPortal: React.FC = () => {
 };
 
 export default MCPAgentsPortal;
-}
