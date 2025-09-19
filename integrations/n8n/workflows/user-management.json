@@ -1,0 +1,99 @@
+{
+  "name": "User Management Workflows",
+  "description": "Workflows for user registration, login, and management",
+  "workflows": [
+    {
+      "name": "User Registration",
+      "nodes": [
+        {
+          "name": "Webhook",
+          "type": "n8n-nodes-base.webhook",
+          "parameters": {
+            "path": "user-registration",
+            "httpMethod": "POST"
+          }
+        },
+        {
+          "name": "Validate Data",
+          "type": "n8n-nodes-base.function",
+          "parameters": {
+            "functionCode": "// Validate user registration data\nconst { email, full_name, role } = $input.first().json;\n\nif (!email || !full_name) {\n  throw new Error('Email and full name are required');\n}\n\nreturn {\n  email: email.toLowerCase().trim(),\n  full_name: full_name.trim(),\n  role: role || 'user',\n  created_at: new Date().toISOString()\n};"
+          }
+        },
+        {
+          "name": "Create User in Supabase",
+          "type": "n8n-nodes-base.supabase",
+          "parameters": {
+            "operation": "insert",
+            "table": "users",
+            "columns": "email,full_name,role,created_at"
+          }
+        },
+        {
+          "name": "Send Welcome Email",
+          "type": "n8n-nodes-base.emailSend",
+          "parameters": {
+            "toEmail": "={{ $json.email }}",
+            "subject": "Welcome to Trans Bot AI",
+            "message": "Welcome to Trans Bot AI! Your account has been created successfully."
+          }
+        },
+        {
+          "name": "Log Activity",
+          "type": "n8n-nodes-base.supabase",
+          "parameters": {
+            "operation": "insert",
+            "table": "activity_logs",
+            "columns": "action,description,metadata"
+          }
+        }
+      ],
+      "connections": {
+        "Webhook": {
+          "main": [
+            [
+              {
+                "node": "Validate Data",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Validate Data": {
+          "main": [
+            [
+              {
+                "node": "Create User in Supabase",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Create User in Supabase": {
+          "main": [
+            [
+              {
+                "node": "Send Welcome Email",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Send Welcome Email": {
+          "main": [
+            [
+              {
+                "node": "Log Activity",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

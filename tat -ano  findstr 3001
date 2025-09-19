@@ -1,0 +1,28 @@
+[1mdiff --git a/package.json b/package.json[m
+[1mindex ebd7545a..055aab0c 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -15,9 +15,10 @@[m
+     "port:start": "node scripts/port-setup.mjs start",[m
+     "start:all": "concurrently \"npm run dev\" \"npm run dev:mcp\" \"npm run dev:dashboard\" \"npm run dev:super-admin\" \"npm run dev:portal\"",[m
+     "build": "tsc && vite build",[m
+[32m+[m[32m    "build:dev": "vite build --mode development",[m
+     "preview": "vite preview",[m
+[31m-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",[m
+[31m-    "lint:fix": "eslint . --ext ts,tsx --fix",[m
+[32m+[m[32m    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",[m
+[32m+[m[32m    "lint:fix": "eslint . --fix",[m
+     "type-check": "tsc --noEmit",[m
+     "test": "vitest",[m
+     "test:ui": "vitest --ui",[m
+[36m@@ -45,7 +46,9 @@[m
+     "error:test": "node scripts/test-autonomous-system.js",[m
+     "error:manage": "node scripts/autonomous-system-manager.js",[m
+     "error:fix-portals": "node scripts/comprehensive-portal-fix.js",[m
+[31m-    "dev:autonomous": "concurrently \"npm run dev\" \"npm run error:watch\""[m
+[32m+[m[32m    "dev:autonomous": "concurrently \"npm run dev\" \"npm run error:watch\"",[m
+[32m+[m[32m    "check:portals": "node scripts/check-portals.mjs",[m
+[32m+[m[32m    "health:check": "node scripts/health-check.mjs"[m
+   },[m
+   "dependencies": {[m
+     "@supabase/supabase-js": "^2.38.4",[m
