@@ -5,98 +5,19 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import {
-  Users,
   Search,
-  Filter,
   CheckCircle,
   XCircle,
   Clock,
   Eye,
-  Edit,
-  Trash2,
-  UserPlus,
-  UserCheck,
-  UserX,
-  Mail,
-  Phone,
-  Building,
-  MapPin,
-  Calendar,
-  DollarSign,
-  Shield,
-  AlertTriangle,
-  Info,
   Download,
-  Upload,
-  RefreshCw,
-  MoreHorizontal,
-  ChevronDown,
-  ChevronRight,
-  Star,
-  Flag,
-  Bookmark,
-  Archive,
-  Send,
-  Copy,
-  ExternalLink,
-  Lock,
-  Unlock,
-  Key,
-  Settings,
-  Bell,
-  MessageSquare,
-  FileText,
-  CreditCard,
-  Truck,
-  Package,
-  Car,
-  User,
-  Globe,
-  Server,
-  Database,
-  BarChart3,
-  PieChart,
-  LineChart,
-  TrendingUp,
-  TrendingDown,
-  Activity,
-  Zap,
-  Target,
-  Award,
-  Gift,
-  Coffee,
-  Camera,
-  Mic,
-  MicOff,
-  Headphones,
-  Volume1,
-  Volume2,
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  Repeat,
-  Shuffle,
-  Heart,
-  ThumbsUp,
-  ThumbsDown,
-  Smile,
-  Frown,
-  Meh,
-  Angry,
-  Laugh,
-  Hot,
-  Cold,
-  Happy,
-  Sad,
-  Excited,
-  Bored,
-  Tired,
-  Hungry,
-  Thirsty,
+  Plus,
+  UserCheck,
+  Users,
+  Shield
 } from 'lucide-react';
 
 // UserData Status Types
@@ -116,7 +37,7 @@ type UserDataRole = 'shipper' | 'broker' | 'carrier' | 'owner_operator' | 'drive
 type SubscriptionType = 'free' | 'professional' | 'enterprise' | 'custom';
 
 // UserData Interface
-interface UserDataData {
+interface UserData {
   id: string;
   // Company Information
   companyName: string;
@@ -194,11 +115,10 @@ interface FilterOptions {
 
 function UserDataManagement() {
   // State Management
-  const [users, setUserDatas] = useState<UserData[]>([]);
-  const [filteredUserDatas, setFilteredUserDatas] = useState<UserData[]>([]);
-  const [selectedUserData, setSelectedUserData] = useState<UserData | null>(null);
-  const [showUserDataDetails, setShowUserDataDetails] = useState(false);
-  const [showApprovalModal, setShowApprovalModal] = useState(false);
+  const [users, setUsers] = useState<UserData[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<UserData[]>([]);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
+  const [showUserDetails, setShowUserDetails] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [filters, setFilters] = useState<FilterOptions>({
@@ -212,7 +132,7 @@ function UserDataManagement() {
 
   // Mock Data
   useEffect(() => {
-    const mockUserDatas: UserData[] = [
+    const mockUsers: UserData[] = [
       {
         id: '1',
         companyName: 'ABC Logistics',
@@ -368,8 +288,8 @@ function UserDataManagement() {
       },
     ];
 
-    setUserDatas(mockUserDatas);
-    setFilteredUserDatas(mockUserDatas);
+    setUsers(mockUsers);
+    setFilteredUsers(mockUsers);
   }, []);
 
   // Filter UserDatas
@@ -403,7 +323,7 @@ function UserDataManagement() {
       );
     }
 
-    setFilteredUserDatas(filtered);
+    setFilteredUsers(filtered);
   }, [users, filters]);
 
   // Event Handlers
@@ -420,7 +340,7 @@ function UserDataManagement() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      setUserDatas(prev =>
+      setUsers(prev =>
         prev.map(user => {
           if (user.id === userId) {
             switch (action) {
@@ -451,14 +371,14 @@ function UserDataManagement() {
     }
   };
 
-  const handleViewUserData = (user: UserData) => {
-    setSelectedUserData(user);
-    setShowUserDataDetails(true);
+  const handleViewUser = (user: UserData) => {
+    setSelectedUser(user);
+    setShowUserDetails(true);
   };
 
-  const handleApproveUserData = (user: UserData) => {
-    setSelectedUserData(user);
-    setShowApprovalModal(true);
+  const handleApproveUser = (user: UserData) => {
+    setSelectedUser(user);
+    // Handle approval logic here
   };
 
   // Status color helper
@@ -485,7 +405,7 @@ function UserDataManagement() {
 
   // Render UserData Details Modal
   const renderUserDataDetailsModal = () => {
-    if (!selectedUserData) return null;
+    if (!selectedUser) return null;
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -493,7 +413,7 @@ function UserDataManagement() {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">UserData Details</h2>
             <button
-              onClick={() => setShowUserDataDetails(false)}
+              onClick={() => setShowUserDetails(false)}
               className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg"
             >
               <XCircle className="w-6 h-6" />
@@ -511,43 +431,43 @@ function UserDataManagement() {
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Company Name
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.companyName}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.companyName}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Company Type
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.companyType}
+                    {selectedUser.companyType}
                   </p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Industry
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.industry}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.industry}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Company Size
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    {selectedUserData.companySize} employees
+                    {selectedUser.companySize} employees
                   </p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Website
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.website}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.website}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Address
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    {selectedUserData.address}, {selectedUserData.city}, {selectedUserData.state}{' '}
-                    {selectedUserData.zipCode}
+                    {selectedUser.address}, {selectedUser.city}, {selectedUser.state}{' '}
+                    {selectedUser.zipCode}
                   </p>
                 </div>
               </div>
@@ -564,39 +484,39 @@ function UserDataManagement() {
                     Name
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    {selectedUserData.firstName} {selectedUserData.lastName}
+                    {selectedUser.firstName} {selectedUser.lastName}
                   </p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Email
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.email}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.email}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Phone
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.phone}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.phone}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Job Title
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.jobTitle}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.jobTitle}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Department
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.department}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.department}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Primary Role
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.primaryRole.replace('_', ' ')}
+                    {selectedUser.primaryRole.replace('_', ' ')}
                   </p>
                 </div>
               </div>
@@ -611,7 +531,7 @@ function UserDataManagement() {
                     Plan
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.subscriptionType}
+                    {selectedUser.subscriptionType}
                   </p>
                 </div>
                 <div>
@@ -619,7 +539,7 @@ function UserDataManagement() {
                     Billing Cycle
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.billingCycle}
+                    {selectedUser.billingCycle}
                   </p>
                 </div>
                 <div>
@@ -627,7 +547,7 @@ function UserDataManagement() {
                     Payment Method
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.paymentMethod.replace('_', ' ')}
+                    {selectedUser.paymentMethod.replace('_', ' ')}
                   </p>
                 </div>
                 <div>
@@ -635,7 +555,7 @@ function UserDataManagement() {
                     Status
                   </label>
                   <p className="text-gray-900 dark:text-white capitalize">
-                    {selectedUserData.subscriptionStatus}
+                    {selectedUser.subscriptionStatus}
                   </p>
                 </div>
               </div>
@@ -651,14 +571,14 @@ function UserDataManagement() {
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Total Logins
                   </label>
-                  <p className="text-gray-900 dark:text-white">{selectedUserData.totalLogins}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedUser.totalLogins}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     Loads Created
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    {selectedUserData.usageStats.loadsCreated}
+                    {selectedUser.usageStats.loadsCreated}
                   </p>
                 </div>
                 <div>
@@ -666,7 +586,7 @@ function UserDataManagement() {
                     Loads Completed
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    {selectedUserData.usageStats.loadsCompleted}
+                    {selectedUser.usageStats.loadsCompleted}
                   </p>
                 </div>
                 <div>
@@ -674,7 +594,7 @@ function UserDataManagement() {
                     Revenue
                   </label>
                   <p className="text-gray-900 dark:text-white">
-                    ${selectedUserData.usageStats.revenue.toLocaleString()}
+                    ${selectedUser.usageStats.revenue.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -687,7 +607,7 @@ function UserDataManagement() {
               Active Functions
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-              {selectedUserData.activeFunctions.map(func => (
+              {selectedUser.activeFunctions.map((func: string) => (
                 <span
                   key={func}
                   className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 rounded-full text-sm"
@@ -699,7 +619,7 @@ function UserDataManagement() {
           </div>
 
           {/* MCP Agent Information */}
-          {selectedUserData.mcpAgentAssigned && (
+          {selectedUser.mcpAgentAssigned && (
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 MCP Agent
@@ -708,15 +628,15 @@ function UserDataManagement() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium text-blue-900 dark:text-blue-100">
-                      Agent ID: {selectedUserData.mcpAgentId}
+                      Agent ID: {selectedUser.mcpAgentId}
                     </p>
                     <p className="text-sm text-blue-700 dark:text-blue-300">
-                      Status: <span className="capitalize">{selectedUserData.mcpAgentStatus}</span>
+                      Status: <span className="capitalize">{selectedUser.mcpAgentStatus}</span>
                     </p>
                   </div>
                   <div
                     className={`w-3 h-3 rounded-full ${
-                      selectedUserData.mcpAgentStatus === 'active'
+                      selectedUser.mcpAgentStatus === 'active'
                         ? 'bg-green-500'
                         : 'bg-yellow-500'
                     }`}
@@ -728,40 +648,40 @@ function UserDataManagement() {
 
           {/* Action Buttons */}
           <div className="flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
-            {selectedUserData.status === 'pending' && (
+            {selectedUser.status === 'pending' && (
               <>
                 <button
-                  onClick={() => handleApproveUserData(selectedUserData)}
+                  onClick={() => handleApproveUser(selectedUser!)}
                   className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   Approve
                 </button>
                 <button
-                  onClick={() => handleUserDataAction(selectedUserData.id, 'reject')}
+                  onClick={() => handleUserDataAction(selectedUser.id, 'reject')}
                   className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                 >
                   Reject
                 </button>
               </>
             )}
-            {selectedUserData.status === 'active' && (
+            {selectedUser.status === 'active' && (
               <button
-                onClick={() => handleUserDataAction(selectedUserData.id, 'suspend')}
+                onClick={() => handleUserDataAction(selectedUser.id, 'suspend')}
                 className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
               >
                 Suspend
               </button>
             )}
-            {selectedUserData.status === 'suspended' && (
+            {selectedUser.status === 'suspended' && (
               <button
-                onClick={() => handleUserDataAction(selectedUserData.id, 'activate')}
+                onClick={() => handleUserDataAction(selectedUser.id, 'activate')}
                 className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
                 Activate
               </button>
             )}
             <button
-              onClick={() => setShowUserDataDetails(false)}
+              onClick={() => setShowUserDetails(false)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
             >
               Close
@@ -788,7 +708,7 @@ function UserDataManagement() {
             </div>
             <div className="flex items-center space-x-3">
               <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <UserDataPlus className="w-4 h-4 mr-2" />
+                <Plus className="w-4 h-4 mr-2" />
                 Add UserData
               </button>
               <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
@@ -924,7 +844,7 @@ function UserDataManagement() {
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{users.length}</p>
               </div>
-              <UserDatas className="w-8 h-8 text-blue-500" />
+              <Users className="w-8 h-8 text-blue-500" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
@@ -950,7 +870,7 @@ function UserDataManagement() {
                   {users.filter(u => u.status === 'active').length}
                 </p>
               </div>
-              <UserDataCheck className="w-8 h-8 text-green-500" />
+              <UserCheck className="w-8 h-8 text-green-500" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm">
@@ -970,6 +890,12 @@ function UserDataManagement() {
       {/* UserDatas Table */}
       <div className="px-6 py-4">
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm overflow-hidden">
+          {isLoading && (
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              <span className="ml-2 text-gray-600 dark:text-gray-400">Loading...</span>
+            </div>
+          )}
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
               <thead className="bg-gray-50 dark:bg-slate-700">
@@ -1001,7 +927,7 @@ function UserDataManagement() {
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
-                {filteredUserDatas.map(user => (
+                {filteredUsers.map(user => (
                   <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-slate-700">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -1072,14 +998,14 @@ function UserDataManagement() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center space-x-2">
                         <button
-                          onClick={() => handleViewUserData(user)}
+                          onClick={() => handleViewUser(user)}
                           className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         {user.status === 'pending' && (
                           <button
-                            onClick={() => handleApproveUserData(user)}
+                            onClick={() => handleApproveUser(user)}
                             className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
                           >
                             <CheckCircle className="w-4 h-4" />
@@ -1104,7 +1030,7 @@ function UserDataManagement() {
       </div>
 
       {/* Modals */}
-      <AnimatePresence>{showUserDataDetails && renderUserDataDetailsModal()}</AnimatePresence>
+      <AnimatePresence>{showUserDetails && renderUserDataDetailsModal()}</AnimatePresence>
     </div>
   );
 }

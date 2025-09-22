@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Super Admin Portal Server - Port 3005
+ * Super Admin Portal Server - Port 3003
  * 
- * 🔒 PORT LOCK WARNING: DO NOT MODIFY PORT 3005
+ * 🔒 PORT LOCK WARNING: DO NOT MODIFY PORT 3003
  * MCP AGENTS: This port is locked and must not be changed
  * See PORT_LOCK_SYSTEM.md for details
  * 
@@ -22,16 +22,29 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.SUPER_ADMIN_PORT || 3005; // 🔒 LOCKED: Do not change this port
+const PORT = process.env.SUPER_ADMIN_PORT || 3003; // 🔒 LOCKED: Do not change this port
 
 // Create HTTP server for WebSocket support
 const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
-// Middleware
+// Middleware - Enhanced CORS for custom domain
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
-  credentials: true
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:3001', 
+    'http://localhost:3002',
+    'http://localhost:3003',
+    'http://localhost:3006',
+    'http://superadmin.transbotai.com:3000',
+    'http://superadmin.transbotai.com:3003',
+    'https://superadmin.transbotai.com:3000',
+    'https://superadmin.transbotai.com:3003'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());

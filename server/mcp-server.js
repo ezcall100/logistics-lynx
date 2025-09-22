@@ -34,11 +34,35 @@ const PORT = process.env.MCP_PORT || 3001; // 🔒 LOCKED: MCP API server port
 const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
-// Middleware
+// Middleware - Enhanced CORS for Chrome compatibility
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:8084'],
-  credentials: true
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:3001', 
+    'http://localhost:3002', 
+    'http://localhost:3003', 
+    'http://localhost:3006', 
+    'http://localhost:8084',
+    'http://superadmin.transbotai.com:3000',
+    'http://superadmin.transbotai.com:3003',
+    'https://superadmin.transbotai.com:3000',
+    'https://superadmin.transbotai.com:3003'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
+
+// Additional CORS headers for Chrome
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400'); // 24 hours
+  next();
+});
 
 // UTF-8 encoding middleware
 app.use((req, res, next) => {

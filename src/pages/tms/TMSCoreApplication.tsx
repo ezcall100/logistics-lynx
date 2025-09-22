@@ -5,7 +5,7 @@
  * Timestamp: 2025-01-15T10:00:00.000Z
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
@@ -112,27 +112,7 @@ import {
   Meh,
   Angry,
   Laugh,
-  Hot,
-  Cold,
-  Happy,
-  Sad,
-  Excited,
-  Bored,
-  Tired,
-  Hungry,
-  Thirsty,
-  Sleepy as SleepyIcon,
-  Dizzy as DizzyIcon,
-  Sick as SickIcon,
-  Hot as HotIcon,
-  Cold as ColdIcon,
-  Happy as HappyIcon,
-  Sad as SadIcon,
-  Excited as ExcitedIcon,
-  Bored as BoredIcon,
-  Tired as TiredIcon,
-  Hungry as HungryIcon,
-  Thirsty as ThirstyIcon,
+  Menu,
 } from 'lucide-react';
 
 // TMS Role Types

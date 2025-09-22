@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Zap, Shield, Users, BarChart3, CheckCircle, Star } from 'lucide-react';
-import Navigation from '../../components/Navigation';
+import { Navigation } from '../../components/Navigation';
 
 const HomePage: React.FC = () => {
   return (

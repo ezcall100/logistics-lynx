@@ -97,6 +97,7 @@ jobs:
     environment: 
       name: production
       url: https://www.transbotai.com
+    # Deployment secrets (optional - deployment will be skipped if not available)
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}

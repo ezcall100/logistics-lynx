@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Package, Bot } from 'lucide-react';
+import { ArrowRight, Bot } from 'lucide-react';
 
 const ShipperPage: React.FC = () => {
   return (

@@ -6,7 +6,7 @@
  * Port 3000: Main website
  * Port 3001: MCP API server
  * Port 3002: MCP Dashboard
- * Port 3005: Super Admin Portal
+ * Port 3003: Super Admin Portal
  * Port 3006: Portal App (Login)
  */
 
@@ -18,7 +18,7 @@ const PORTS = {
   MAIN_WEBSITE: 3000,
   MCP_API: 3001,
   MCP_DASHBOARD: 3002,
-  SUPER_ADMIN: 3005,
+  SUPER_ADMIN: 3003,
   PORTAL_LOGIN: 3006
 };
 
@@ -102,7 +102,7 @@ async function startServices() {
       name: 'Super Admin Portal',
       port: PORTS.SUPER_ADMIN,
       command: 'npm run dev:super-admin',
-      description: 'Super Admin Portal on port 3005'
+      description: 'Super Admin Portal on port 3003'
     },
     {
       name: 'Portal Login',
@@ -132,14 +132,14 @@ async function verifyConfiguration() {
   console.log('   ✅ Main website configured for port 3000');
   console.log('   ✅ Proxy configured for MCP API (port 3001)');
   console.log('   ✅ Proxy configured for MCP Dashboard (port 3002)');
-  console.log('   ✅ Proxy configured for Super Admin (port 3005)\n');
+  console.log('   ✅ Proxy configured for Super Admin (port 3003)\n');
   
   // Check package.json scripts
   console.log('📄 Checking package.json scripts...');
   console.log('   ✅ dev: Main website (port 3000)');
   console.log('   ✅ dev:mcp: MCP API server (port 3001)');
   console.log('   ✅ dev:dashboard: MCP Dashboard (port 3002)');
-  console.log('   ✅ dev:super-admin: Super Admin Portal (port 3005)');
+  console.log('   ✅ dev:super-admin: Super Admin Portal (port 3003)');
   console.log('   ✅ dev:portal: Portal App (port 3006)');
   console.log('   ✅ start:all: All services concurrently\n');
   

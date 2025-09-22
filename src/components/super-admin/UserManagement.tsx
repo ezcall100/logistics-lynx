@@ -1,1078 +1,421 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Users,
-  UserPlus,
-  Search,
-  Filter,
-  Edit,
-  Trash2,
-  Eye,
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Users, 
+  Search, 
+  Filter, 
+  Plus, 
+  Edit, 
+  Trash2, 
   MoreVertical,
-  Download,
-  Upload,
-  AlertTriangle,
-  Shield,
-  Key,
   UserCheck,
   UserX,
-  X,
-  Save,
-  Crown,
-  UserCog,
-  Clock,
+  Mail,
+  Phone,
+  Calendar,
+  Shield,
+  Building2,
+  MapPin
 } from 'lucide-react';
 
-import { Button } from '../../design-system/components/Button';
-import { Card, CardContent } from '../../design-system/components/Card';
-import { Input } from '../../design-system/components/Input';
-import { formatNumber, formatRelativeTime, getStatusColor, getStatusIcon } from '../../lib/utils';
-
-/**
- * Interface representing user data structure
- * @interface UserData
- */
-interface UserData {
-  /** Unique identifier for the user */
-  id: number;
-  /** Full name of the user */
-  name: string;
-  /** Email address of the user */
-  email: string;
-  /** Role assigned to the user */
-  role: 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer';
-  /** Company name the user belongs to */
-  company: string;
-  /** Company ID reference */
-  companyId: number;
-  /** Current status of the user account */
-  status: 'Active' | 'Inactive' | 'Suspended' | 'Pending';
-  /** Last login timestamp */
-  lastLogin: string;
-  /** Account creation timestamp */
-  createdAt: string;
-  /** Array of permission strings */
-  permissions: string[];
-  /** User profile information */
-  profile: {
-    /** Optional avatar URL */
-    avatar?: string;
-    /** Optional phone number */
-    phone?: string;
-    /** Optional department */
-    department?: string;
-    /** Optional job title */
-    title?: string;
-  };
-  /** Security-related information */
-  security: {
-    /** Whether two-factor authentication is enabled */
-    twoFactorEnabled: boolean;
-    /** Last login attempt timestamp */
-    lastLoginAttempt: string;
-    /** Number of failed login attempts */
-    loginAttempts: number;
-    /** Current account security status */
-    accountStatus: 'secure' | 'warning' | 'critical';
-  };
-}
-
-/**
- * Interface representing user role structure
- * @interface Role
- */
-interface Role {
-  /** Unique identifier for the role */
+interface User {
   id: string;
-  /** Display name of the role */
   name: string;
-  /** Description of the role's purpose */
-  description: string;
-  /** Array of permission strings for this role */
-  permissions: string[];
-  /** Hierarchical level of the role (higher = more permissions) */
-  level: number;
-  /** CSS color classes for role display */
-  color: string;
-}
-
-/**
- * Interface representing form data for user creation/editing
- * @interface UserFormData
- */
-interface UserFormData {
-  /** User's full name */
-  name: string;
-  /** User's email address */
   email: string;
-  /** Selected role for the user */
   role: string;
-  /** Selected company ID */
-  companyId: number;
-  /** User's phone number */
-  phone: string;
-  /** User's department */
   department: string;
-  /** User's job title */
-  title: string;
-  /** Array of selected permissions */
-  permissions: string[];
+  status: 'active' | 'inactive' | 'pending';
+  lastLogin: string;
+  avatar?: string;
+  phone?: string;
+  location?: string;
+  joinDate: string;
 }
 
-/**
- * UserManagement Component
- * 
- * A comprehensive user management interface for the super admin portal.
- * Provides functionality for creating, reading, updating, and deleting users
- * with role-based access control and security monitoring.
- * 
- * @component
- * @returns {JSX.Element} The UserManagement component
- */
 const UserManagement: React.FC = () => {
-  const [users, setUsers] = useState<UserData[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [roleFilter, setRoleFilter] = useState<string>('all');
-  const [companyFilter, setCompanyFilter] = useState<string>('all');
-  const [showUserModal, setShowUserModal] = useState(false);
-  const [editingUserData, setEditingUserData] = useState<UserData | null>(null);
-  const [formData, setFormData] = useState<UserFormData>({
-    name: '',
-    email: '',
-    role: 'User',
-    companyId: 1,
-    phone: '',
-    department: '',
-    title: '',
-    permissions: [],
-  });
-  const [loading, setLoading] = useState(false);
-  const [bulkSelected, setBulkSelected] = useState<number[]>([]);
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [users, setUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRole, setSelectedRole] = useState('all');
+  const [selectedStatus, setSelectedStatus] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
-  const roles: Role[] = [
-    {
-      id: 'super-admin',
-      name: 'Super Admin',
-      description: 'Full system access and control',
-      permissions: ['*'],
-      level: 5,
-      color: 'text-red-600 bg-red-50',
-    },
-    {
-      id: 'admin',
-      name: 'Admin',
-      description: 'Company administration and management',
-      permissions: ['user_management', 'company_settings', 'billing', 'analytics'],
-      level: 4,
-      color: 'text-purple-600 bg-purple-50',
-    },
-    {
-      id: 'manager',
-      name: 'Manager',
-      description: 'Team and project management',
-      permissions: ['user_management', 'project_management', 'reports'],
-      level: 3,
-      color: 'text-blue-600 bg-blue-50',
-    },
-    {
-      id: 'user',
-      name: 'User',
-      description: 'Standard user access',
-      permissions: ['basic_access', 'view_reports'],
-      level: 2,
-      color: 'text-green-600 bg-green-50',
-    },
-    {
-      id: 'viewer',
-      name: 'Viewer',
-      description: 'Read-only access',
-      permissions: ['view_only'],
-      level: 1,
-      color: 'text-gray-600 bg-gray-50',
-    },
-  ];
-
-  const companies = useMemo(() => [
-    { id: 1, name: 'Global Logistics Corp' },
-    { id: 2, name: 'Swift Transport Ltd' },
-    { id: 3, name: 'Metro Freight Inc' },
-    { id: 4, name: 'Coastal Shipping Co' },
-  ], []);
-
-  const availablePermissions = [
-    'user_management',
-    'company_settings',
-    'billing',
-    'analytics',
-    'project_management',
-    'reports',
-    'basic_access',
-    'view_reports',
-    'view_only',
-    'api_access',
-    'data_export',
-    'system_settings',
-  ];
-
-  // Mock data initialization
   useEffect(() => {
-    const mockUsers: UserData[] = [
-      {
-        id: 1,
-        name: 'John Smith',
-        email: 'john.smith@globallogistics.com',
-        role: 'Admin',
-        company: 'Global Logistics Corp',
-        companyId: 1,
-        status: 'Active',
-        lastLogin: '2024-01-15T10:30:00Z',
-        createdAt: '2023-06-15T09:00:00Z',
-        permissions: ['user_management', 'company_settings', 'billing', 'analytics'],
-        profile: {
-          phone: '+1-555-0123',
-          department: 'Operations',
-          title: 'Operations Manager',
-        },
-        security: {
-          twoFactorEnabled: true,
-          lastLoginAttempt: '2024-01-15T10:30:00Z',
-          loginAttempts: 0,
-          accountStatus: 'secure',
-        },
-      },
-      {
-        id: 2,
-        name: 'Sarah Johnson',
-        email: 'sarah.johnson@swifttransport.com',
-        role: 'Manager',
-        company: 'Swift Transport Ltd',
-        companyId: 2,
-        status: 'Active',
-        lastLogin: '2024-01-15T09:15:00Z',
-        createdAt: '2023-08-20T14:30:00Z',
-        permissions: ['user_management', 'project_management', 'reports'],
-        profile: {
-          phone: '+1-555-0456',
-          department: 'Logistics',
-          title: 'Logistics Coordinator',
-        },
-        security: {
-          twoFactorEnabled: false,
-          lastLoginAttempt: '2024-01-15T09:15:00Z',
-          loginAttempts: 1,
-          accountStatus: 'warning',
-        },
-      },
-      {
-        id: 3,
-        name: 'Mike Davis',
-        email: 'mike.davis@metrofreight.com',
-        role: 'User',
-        company: 'Metro Freight Inc',
-        companyId: 3,
-        status: 'Active',
-        lastLogin: '2024-01-15T08:45:00Z',
-        createdAt: '2023-10-10T11:20:00Z',
-        permissions: ['basic_access', 'view_reports'],
-        profile: {
-          phone: '+1-555-0789',
-          department: 'Fleet',
-          title: 'Fleet Coordinator',
-        },
-        security: {
-          twoFactorEnabled: true,
-          lastLoginAttempt: '2024-01-15T08:45:00Z',
-          loginAttempts: 0,
-          accountStatus: 'secure',
-        },
-      },
-      {
-        id: 4,
-        name: 'Emily Wilson',
-        email: 'emily.wilson@coastalshipping.com',
-        role: 'Viewer',
-        company: 'Coastal Shipping Co',
-        companyId: 4,
-        status: 'Pending',
-        lastLogin: '2024-01-14T16:20:00Z',
-        createdAt: '2024-01-14T16:00:00Z',
-        permissions: ['view_only'],
-        profile: {
-          phone: '+1-555-0321',
-          department: 'Finance',
-          title: 'Financial Analyst',
-        },
-        security: {
-          twoFactorEnabled: false,
-          lastLoginAttempt: '2024-01-14T16:20:00Z',
-          loginAttempts: 0,
-          accountStatus: 'secure',
-        },
-      },
-    ];
+    const fetchUsers = async () => {
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const mockUsers: User[] = [
+          {
+            id: '1',
+            name: 'John Doe',
+            email: 'john.doe@company.com',
+            role: 'Admin',
+            department: 'Engineering',
+            status: 'active',
+            lastLogin: '2024-01-15 10:30',
+            phone: '+1 (555) 123-4567',
+            location: 'New York, NY',
+            joinDate: '2023-06-15'
+          },
+          {
+            id: '2',
+            name: 'Jane Smith',
+            email: 'jane.smith@company.com',
+            role: 'Manager',
+            department: 'Marketing',
+            status: 'active',
+            lastLogin: '2024-01-15 09:15',
+            phone: '+1 (555) 234-5678',
+            location: 'Los Angeles, CA',
+            joinDate: '2023-08-20'
+          },
+          {
+            id: '3',
+            name: 'Mike Johnson',
+            email: 'mike.johnson@company.com',
+            role: 'Developer',
+            department: 'Engineering',
+            status: 'active',
+            lastLogin: '2024-01-14 16:45',
+            phone: '+1 (555) 345-6789',
+            location: 'Chicago, IL',
+            joinDate: '2023-09-10'
+          },
+          {
+            id: '4',
+            name: 'Sarah Wilson',
+            email: 'sarah.wilson@company.com',
+            role: 'Designer',
+            department: 'Design',
+            status: 'inactive',
+            lastLogin: '2024-01-10 14:20',
+            phone: '+1 (555) 456-7890',
+            location: 'Seattle, WA',
+            joinDate: '2023-07-05'
+          },
+          {
+            id: '5',
+            name: 'David Brown',
+            email: 'david.brown@company.com',
+            role: 'Analyst',
+            department: 'Finance',
+            status: 'pending',
+            lastLogin: 'Never',
+            phone: '+1 (555) 567-8901',
+            location: 'Boston, MA',
+            joinDate: '2024-01-12'
+          }
+        ];
 
-    setUsers(mockUsers);
+        setUsers(mockUsers);
+        setFilteredUsers(mockUsers);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
-  // Memoized filtered users for better performance
-  const filteredUsers = useMemo(() => {
+  useEffect(() => {
     let filtered = users;
 
     // Search filter
-    if (searchQuery) {
-      filtered = filtered.filter(
-        user =>
-          user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.company.toLowerCase().includes(searchQuery.toLowerCase())
+    if (searchTerm) {
+      filtered = filtered.filter(user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.department.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Status filter
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter(user => user.status === statusFilter);
-    }
-
     // Role filter
-    if (roleFilter !== 'all') {
-      filtered = filtered.filter(user => user.role === roleFilter);
+    if (selectedRole !== 'all') {
+      filtered = filtered.filter(user => user.role === selectedRole);
     }
 
-    // Company filter
-    if (companyFilter !== 'all') {
-      filtered = filtered.filter(user => user.companyId === parseInt(companyFilter));
+    // Status filter
+    if (selectedStatus !== 'all') {
+      filtered = filtered.filter(user => user.status === selectedStatus);
     }
 
-    // Sort by name
-    return filtered.sort((a, b) => {
-      return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-    });
-  }, [users, searchQuery, statusFilter, roleFilter, companyFilter]);
+    setFilteredUsers(filtered);
+  }, [users, searchTerm, selectedRole, selectedStatus]);
 
-  const handleCreateUser = useCallback(async () => {
-    if (!validateForm()) {
-      return;
-    }
-    
-    setLoading(true);
-    try {
-      const newUserData: UserData = {
-        id: Math.max(...users.map(u => u.id)) + 1,
-        name: formData.name,
-        email: formData.email,
-        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer',
-        company: companies.find(c => c.id === formData.companyId)?.name || '',
-        companyId: formData.companyId,
-        status: 'Pending',
-        lastLogin: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        permissions: formData.permissions,
-        profile: {
-          phone: formData.phone,
-          department: formData.department,
-          title: formData.title,
-        },
-        security: {
-          twoFactorEnabled: false,
-          lastLoginAttempt: new Date().toISOString(),
-          loginAttempts: 0,
-          accountStatus: 'secure',
-        },
-      };
+  const handleSelectUser = (userId: string) => {
+    setSelectedUsers(prev =>
+      prev.includes(userId)
+        ? prev.filter(id => id !== userId)
+        : [...prev, userId]
+    );
+  };
 
-      setUsers(prev => [...prev, newUserData]);
-      setShowUserModal(false);
-      resetForm();
-    } catch (error) {
-      console.error('Error creating user:', error);
-      alert('Failed to create user. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  }, [users, formData, companies]);
-
-  const handleUpdateUser = useCallback(async () => {
-    if (!editingUserData) return;
-    
-    if (!validateForm()) {
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const updatedUserData: UserData = {
-        ...editingUserData,
-        name: formData.name,
-        email: formData.email,
-        role: formData.role as 'Super Admin' | 'Admin' | 'Manager' | 'User' | 'Viewer',
-        company: companies.find(c => c.id === formData.companyId)?.name || '',
-        companyId: formData.companyId,
-        permissions: formData.permissions,
-        profile: {
-          ...editingUserData.profile,
-          phone: formData.phone,
-          department: formData.department,
-          title: formData.title,
-        },
-      };
-
-      setUsers(prev => prev.map(u => (u.id === editingUserData.id ? updatedUserData : u)));
-      setEditingUserData(null);
-      setShowUserModal(false);
-      resetForm();
-    } catch (error) {
-      console.error('Error updating user:', error);
-      alert('Failed to update user. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  }, [editingUserData, formData, companies]);
-
-  const handleDeleteUser = useCallback(async (id: number) => {
-    try {
-      if (window.confirm('Are you sure you want to delete this user?')) {
-        setUsers(prev => prev.filter(u => u.id !== id));
-        alert('User deleted successfully.');
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      alert('Failed to delete user. Please try again.');
-    }
-  }, []);
-
-  const handleBulkAction = (action: string) => {
-    switch (action) {
-      case 'delete':
-        if (window.confirm(`Are you sure you want to delete ${bulkSelected.length} users?`)) {
-          setUsers(prev => prev.filter(u => !bulkSelected.includes(u.id)));
-          setBulkSelected([]);
-        }
-        break;
-      case 'suspend':
-        setUsers(prev =>
-          prev.map(u =>
-            bulkSelected.includes(u.id)
-              ? { ...u, status: 'Suspended' as 'Active' | 'Suspended' | 'Pending' }
-              : u
-          )
-        );
-        setBulkSelected([]);
-        break;
-      case 'activate':
-        setUsers(prev =>
-          prev.map(u =>
-            bulkSelected.includes(u.id)
-              ? { ...u, status: 'Active' as 'Active' | 'Suspended' | 'Pending' }
-              : u
-          )
-        );
-        setBulkSelected([]);
-        break;
-      case 'reset-password':
-        // Handle password reset
-        setBulkSelected([]);
-        break;
+  const handleSelectAll = () => {
+    if (selectedUsers.length === filteredUsers.length) {
+      setSelectedUsers([]);
+    } else {
+      setSelectedUsers(filteredUsers.map(user => user.id));
     }
   };
 
-  /**
-   * Validates the user form data
-   * @returns {boolean} True if form is valid, false otherwise
-   */
-  const validateForm = useCallback((): boolean => {
-    const errors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) {
-      errors.name = 'Name is required';
-    }
-    
-    if (!formData.email.trim()) {
-      errors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
-    }
-    
-    if (!formData.role) {
-      errors.role = 'Role is required';
-    }
-    
-    if (!formData.companyId) {
-      errors.companyId = 'Company is required';
-    }
-    
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  }, [formData]);
-
-  /**
-   * Resets the form data and validation errors to initial state
-   */
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      email: '',
-      role: 'User',
-      companyId: 1,
-      phone: '',
-      department: '',
-      title: '',
-      permissions: [],
-    });
-    setFormErrors({});
-  };
-
-  /**
-   * Opens the edit modal with the selected user's data
-   * @param {UserData} user - The user to edit
-   */
-  const openEditModal = (user: UserData) => {
-    setEditingUserData(user);
-    setFormData({
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      companyId: user.companyId,
-      phone: user.profile.phone || '',
-      department: user.profile.department || '',
-      title: user.profile.title || '',
-      permissions: user.permissions,
-    });
-    setShowUserModal(true);
-  };
-
-  /**
-   * Returns the appropriate icon for a given role
-   * @param {string} role - The role name
-   * @returns {JSX.Element} The icon component
-   */
-  const getRoleIcon = (role: string) => {
-    switch (role) {
-      case 'Super Admin':
-        return <Crown className="w-4 h-4" />;
-      case 'Admin':
-        return <Shield className="w-4 h-4" />;
-      case 'Manager':
-        return <UserCog className="w-4 h-4" />;
-      case 'User':
-        return <Users className="w-4 h-4" />;
-      case 'Viewer':
-        return <Eye className="w-4 h-4" />;
-      default:
-        return <Users className="w-4 h-4" />;
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'inactive': return 'bg-gray-100 text-gray-800';
+      case 'pending': return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
-  /**
-   * Returns the appropriate color classes for a given role
-   * @param {string} role - The role name
-   * @returns {string} CSS color classes
-   */
   const getRoleColor = (role: string) => {
-    const roleData = roles.find(r => r.name === role);
-    return roleData?.color || 'text-gray-600 bg-gray-50';
+    switch (role) {
+      case 'Admin': return 'bg-red-100 text-red-800';
+      case 'Manager': return 'bg-blue-100 text-blue-800';
+      case 'Developer': return 'bg-purple-100 text-purple-800';
+      case 'Designer': return 'bg-pink-100 text-pink-800';
+      case 'Analyst': return 'bg-indigo-100 text-indigo-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
   };
 
-  const UserModal = () => (
-    <AnimatePresence>
-      {showUserModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-          >
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">
-                  {editingUserData ? 'Edit User' : 'Add New User'}
-                </h2>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    setShowUserModal(false);
-                    setEditingUserData(null);
-                    resetForm();
-                  }}
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Input
-                    label="Full Name"
-                    value={formData.name}
-                    onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="Enter full name"
-                    errorText={formErrors.name}
-                  />
-                </div>
-                <div>
-                  <Input
-                    label="Email"
-                    type="email"
-                    value={formData.email}
-                    onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    placeholder="user@company.com"
-                    errorText={formErrors.email}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                  <select
-                    value={formData.role}
-                    onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
-                      formErrors.role ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  >
-                    {roles.map(role => (
-                      <option key={role.id} value={role.name}>
-                        {role.name}
-                      </option>
-                    ))}
-                  </select>
-                  {formErrors.role && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.role}</p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
-                  <select
-                    value={formData.companyId}
-                    onChange={e =>
-                      setFormData(prev => ({ ...prev, companyId: parseInt(e.target.value) }))
-                    }
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
-                      formErrors.companyId ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  >
-                    {companies.map(company => (
-                      <option key={company.id} value={company.id}>
-                        {company.name}
-                      </option>
-                    ))}
-                  </select>
-                  {formErrors.companyId && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.companyId}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Input
-                  label="Phone"
-                  value={formData.phone}
-                  onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                  placeholder="+1-555-0123"
-                />
-                <Input
-                  label="Department"
-                  value={formData.department}
-                  onChange={e => setFormData(prev => ({ ...prev, department: e.target.value }))}
-                  placeholder="Operations"
-                />
-                <Input
-                  label="Title"
-                  value={formData.title}
-                  onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="Manager"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Permissions</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {availablePermissions.map(permission => (
-                    <label key={permission} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={formData.permissions.includes(permission)}
-                        onChange={e => {
-                          if (e.target.checked) {
-                            setFormData(prev => ({
-                              ...prev,
-                              permissions: [...prev.permissions, permission],
-                            }));
-                          } else {
-                            setFormData(prev => ({
-                              ...prev,
-                              permissions: prev.permissions.filter(p => p !== permission),
-                            }));
-                          }
-                        }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                      />
-                      <span className="text-sm text-gray-700 capitalize">
-                        {permission.replace('_', ' ')}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setShowUserModal(false);
-                  setEditingUserData(null);
-                  resetForm();
-                }}
-              >
-                <X className="w-4 h-4 mr-2" />
-                Cancel
-              </Button>
-              <Button
-                onClick={editingUserData ? handleUpdateUser : handleCreateUser}
-                loading={loading}
-              >
-                <Save className="w-4 h-4 mr-2" />
-                {editingUserData ? 'Update User' : 'Create User'}
-              </Button>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          <span className="text-gray-600">Loading users...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
-          <p className="text-gray-600">Manage user accounts, roles, and permissions</p>
+          <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+          <p className="text-gray-600">Manage your organization's users and permissions</p>
         </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
-            <Button variant="outline" size="sm">
-              <Upload className="w-4 h-4 mr-2" />
-              Import
-            </Button>
-          </div>
-          <Button onClick={() => setShowUserModal(true)} className="w-full sm:w-auto">
-            <UserPlus className="w-4 h-4 mr-2" />
-            Add User
-          </Button>
-        </div>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {[
-          {
-            title: 'Total Users',
-            count: formatNumber(users.length),
-            icon: Users,
-            color: 'text-blue-500',
-          },
-          {
-            title: 'Active Users',
-            count: formatNumber(users.filter(u => u.status === 'Active').length),
-            icon: UserCheck,
-            color: 'text-green-500',
-          },
-          {
-            title: 'Pending Users',
-            count: formatNumber(users.filter(u => u.status === 'Pending').length),
-            icon: Clock,
-            color: 'text-yellow-500',
-          },
-          {
-            title: 'Suspended Users',
-            count: formatNumber(users.filter(u => u.status === 'Suspended').length),
-            icon: UserX,
-            color: 'text-red-500',
-          },
-        ].map(stat => (
-          <Card key={stat.title}>
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className={`p-3 rounded-xl bg-gray-50`}>
-                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-gray-900">{stat.count}</div>
-                  <div className="text-gray-600 text-sm">{stat.title}</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+          <Plus className="w-4 h-4" />
+          <span>Add User</span>
+        </button>
       </div>
 
       {/* Filters and Search */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
-              <Input
-                placeholder="Search users..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-4 h-4" />}
-              />
-            </div>
-            <div className="flex gap-3">
-              <select
-                value={statusFilter}
-                onChange={e => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              >
-                <option value="all">All Status</option>
-                <option value="Active">Active</option>
-                <option value="Pending">Pending</option>
-                <option value="Suspended">Suspended</option>
-                <option value="Inactive">Inactive</option>
-              </select>
-              <select
-                value={roleFilter}
-                onChange={e => setRoleFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              >
-                <option value="all">All Roles</option>
-                {roles.map(role => (
-                  <option key={role.id} value={role.name}>
-                    {role.name}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={companyFilter}
-                onChange={e => setCompanyFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              >
-                <option value="all">All Companies</option>
-                {companies.map(company => (
-                  <option key={company.id} value={company.id}>
-                    {company.name}
-                  </option>
-                ))}
-              </select>
-              <Button variant="outline">
-                <Filter className="w-4 h-4 mr-2" />
-                More Filters
-              </Button>
-            </div>
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* Search */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Search users..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
           </div>
-        </CardContent>
-      </Card>
+
+          {/* Role Filter */}
+          <select
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="all">All Roles</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Developer">Developer</option>
+            <option value="Designer">Designer</option>
+            <option value="Analyst">Analyst</option>
+          </select>
+
+          {/* Status Filter */}
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
+          </select>
+
+          {/* Actions */}
+          <div className="flex space-x-2">
+            <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center space-x-2">
+              <Filter className="w-4 h-4" />
+              <span>More Filters</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* Bulk Actions */}
-      {bulkSelected.length > 0 && (
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">{bulkSelected.length} users selected</span>
-              <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => handleBulkAction('activate')}>
-                  <UserCheck className="w-4 h-4 mr-2" />
-                  Activate
-                </Button>
-                <Button size="sm" variant="outline" onClick={() => handleBulkAction('suspend')}>
-                  <UserX className="w-4 h-4 mr-2" />
-                  Suspend
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => handleBulkAction('reset-password')}
-                >
-                  <Key className="w-4 h-4 mr-2" />
-                  Reset Password
-                </Button>
-                <Button size="sm" variant="destructive" onClick={() => handleBulkAction('delete')}>
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Delete
-                </Button>
-              </div>
+      {selectedUsers.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-blue-50 border border-blue-200 rounded-lg p-4"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-blue-800 font-medium">
+              {selectedUsers.length} user{selectedUsers.length > 1 ? 's' : ''} selected
+            </span>
+            <div className="flex space-x-2">
+              <button className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors flex items-center space-x-1">
+                <UserCheck className="w-4 h-4" />
+                <span>Activate</span>
+              </button>
+              <button className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors flex items-center space-x-1">
+                <UserX className="w-4 h-4" />
+                <span>Deactivate</span>
+              </button>
+              <button className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors flex items-center space-x-1">
+                <Trash2 className="w-4 h-4" />
+                <span>Delete</span>
+              </button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </motion.div>
       )}
 
       {/* Users Table */}
-      <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px]">
-              <thead className="bg-gray-50 border-b">
-                <tr>
-                  <th className="px-6 py-4 text-left">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-3 text-left">
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers.length === filteredUsers.length && filteredUsers.length > 0}
+                    onChange={handleSelectAll}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  User
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Role
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Department
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Last Login
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredUsers.map((user) => (
+                <motion.tr
+                  key={user.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="hover:bg-gray-50 transition-colors"
+                >
+                  <td className="px-6 py-4">
                     <input
                       type="checkbox"
-                      checked={
-                        bulkSelected.length === filteredUsers.length && filteredUsers.length > 0
-                      }
-                      onChange={e => {
-                        if (e.target.checked) {
-                          setBulkSelected(filteredUsers.map(u => u.id));
-                        } else {
-                          setBulkSelected([]);
-                        }
-                      }}
-                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      checked={selectedUsers.includes(user.id)}
+                      onChange={() => handleSelectUser(user.id)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    User
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Company
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Role
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Last Login
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Security
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {filteredUsers.map(user => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <input
-                        type="checkbox"
-                        checked={bulkSelected.includes(user.id)}
-                        onChange={e => {
-                          if (e.target.checked) {
-                            setBulkSelected(prev => [...prev, user.id]);
-                          } else {
-                            setBulkSelected(prev => prev.filter(id => id !== user.id));
-                          }
-                        }}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                      />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
-                          <span className="text-white font-medium text-sm">
-                            {user.name
-                              .split(' ')
-                              .map(n => n[0])
-                              .join('')}
-                          </span>
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                          <div className="text-sm text-gray-500">{user.email}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span className="text-blue-600 font-semibold">
+                          {user.name.split(' ').map(n => n[0]).join('')}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="font-medium text-gray-900">{user.name}</div>
+                        <div className="text-sm text-gray-500 flex items-center space-x-1">
+                          <Mail className="w-3 h-3" />
+                          <span>{user.email}</span>
                         </div>
                       </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {user.company}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}
-                      >
-                        {getRoleIcon(user.role)}
-                        {user.role}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(user.status)}`}
-                      >
-                        {getStatusIcon(user.status)}
-                        {user.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {formatRelativeTime(user.lastLogin)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2">
-                        {user.security.twoFactorEnabled ? (
-                          <span className="text-green-600" title="2FA Enabled">
-                            <Shield className="w-4 h-4" />
-                          </span>
-                        ) : (
-                          <span className="text-gray-400" title="2FA Disabled">
-                            <Shield className="w-4 h-4" />
-                          </span>
-                        )}
-                        {user.security.accountStatus === 'warning' && (
-                          <span
-                            className="text-yellow-600"
-                            title="Account security warning"
-                          >
-                            <AlertTriangle className="w-4 h-4" />
-                          </span>
-                        )}
-                        {user.security.accountStatus === 'critical' && (
-                          <span
-                            className="text-red-600"
-                            title="Critical security issue"
-                          >
-                            <AlertTriangle className="w-4 h-4" />
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
-                        <Button size="sm" variant="ghost">
-                          <Eye className="w-4 h-4" />
-                        </Button>
-                        <Button size="sm" variant="ghost" onClick={() => openEditModal(user)}>
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => handleDeleteUser(user.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                        <Button size="sm" variant="ghost">
-                          <MoreVertical className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}>
+                      {user.role}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-1">
+                      <Building2 className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-900">{user.department}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}>
+                      {user.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-900">{user.lastLogin}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-2">
+                      <button className="p-1 text-gray-400 hover:text-blue-600 transition-colors">
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button className="p-1 text-gray-400 hover:text-red-600 transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                      <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
+                        <MoreVertical className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-      {/* Modals */}
-      <UserModal />
+      {/* Pagination */}
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-gray-700">
+          Showing {filteredUsers.length} of {users.length} users
+        </div>
+        <div className="flex space-x-2">
+          <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+            Previous
+          </button>
+          <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+            1
+          </button>
+          <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+            2
+          </button>
+          <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

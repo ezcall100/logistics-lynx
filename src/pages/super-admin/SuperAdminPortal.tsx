@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -15,7 +15,6 @@ import {
   Home,
   Activity,
   Globe,
-  Key,
   FileText,
   Zap,
   Phone,
@@ -23,7 +22,6 @@ import {
   Mail,
   MessageCircle,
   UserPlus,
-  ChevronDown,
   ChevronRight,
   Plus,
   Filter,
@@ -35,7 +33,7 @@ import {
 interface SidebarItem {
   id: string;
   label: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   link?: string;
   submenu?: SidebarItem[];
   badge?: number;
@@ -54,20 +52,20 @@ interface CommunicationItem {
 interface SystemStat {
   label: string;
   value: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
 }
 
 interface CommunicationStat {
   label: string;
   value: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
 }
 
 interface ActivityLogItem {
   id: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   message: string;
   timestamp: string;
@@ -78,6 +76,22 @@ const SuperAdminPortal: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>('dashboard');
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [activeCommunicationTab, setActiveCommunicationTab] = useState<'all' | 'phone' | 'chat' | 'email' | 'sms' | 'crm'>('all');
+  const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
+  const settingsRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
+        setShowSettingsDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const sidebarItems: SidebarItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, link: '/super-admin' },
@@ -108,7 +122,6 @@ const SuperAdminPortal: React.FC = () => {
       label: 'System',
       icon: Settings,
       submenu: [
-        { id: 'settings', label: 'Settings', icon: Settings, link: '/super-admin/system/settings' },
         { id: 'database', label: 'Database', icon: Database, link: '/super-admin/system/database' },
         { id: 'security', label: 'Security', icon: Shield, link: '/super-admin/system/security' },
         { id: 'domains', label: 'Domains', icon: Globe, link: '/super-admin/system/domains' },
@@ -289,6 +302,73 @@ const SuperAdminPortal: React.FC = () => {
                 3
               </span>
             </div>
+            <div className="relative" ref={settingsRef}>
+              <button 
+                onClick={() => setShowSettingsDropdown(!showSettingsDropdown)}
+                className={`p-2 rounded-full transition-all duration-200 border ${
+                  showSettingsDropdown 
+                    ? 'bg-purple-600 text-white border-purple-500' 
+                    : 'hover:bg-gray-700 text-gray-300 hover:text-white border-gray-600 hover:border-gray-500'
+                }`}
+                title="Company Settings"
+              >
+                <Settings className="w-6 h-6" />
+              </button>
+              <AnimatePresence>
+                {showSettingsDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    className="absolute right-0 top-full mt-2 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-700 py-2 z-50"
+                  >
+                    <div className="px-4 py-2 border-b border-gray-700">
+                      <h3 className="text-sm font-semibold text-white">Company Settings</h3>
+                    </div>
+                    <div className="py-1">
+                      <button className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <Settings className="w-4 h-4" />
+                          <span>General Settings</span>
+                        </div>
+                      </button>
+                      <button className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <Database className="w-4 h-4" />
+                          <span>Database Management</span>
+                        </div>
+                      </button>
+                      <button className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <Shield className="w-4 h-4" />
+                          <span>Security Settings</span>
+                        </div>
+                      </button>
+                      <button className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <Globe className="w-4 h-4" />
+                          <span>Domain Configuration</span>
+                        </div>
+                      </button>
+                      <button className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <Server className="w-4 h-4" />
+                          <span>System Monitoring</span>
+                        </div>
+                      </button>
+                    </div>
+                    <div className="px-4 py-2 border-t border-gray-700">
+                      <button className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-gray-700 hover:text-red-300 transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <LogOut className="w-4 h-4" />
+                          <span>Advanced Settings</span>
+                        </div>
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
               JS
             </div>
@@ -362,7 +442,7 @@ const SuperAdminPortal: React.FC = () => {
             {['all', 'phone', 'chat', 'email', 'sms', 'crm'].map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveCommunicationTab(tab as any)}
+                onClick={() => setActiveCommunicationTab(tab as 'all' | 'phone' | 'chat' | 'email' | 'sms' | 'crm')}
                 className={`flex-1 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                   activeCommunicationTab === tab
                     ? 'bg-purple-600 text-white'

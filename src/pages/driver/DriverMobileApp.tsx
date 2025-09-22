@@ -140,8 +140,6 @@ import {
   Excited as ExcitedIcon,
   Bored as BoredIcon,
   Tired as TiredIcon,
-  Hungry as HungryIcon,
-  Thirsty as ThirstyIcon,
 } from 'lucide-react';
 
 // Driver Role Types

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Truck, Package, BarChart3, Shield, Zap, Bot } from 'lucide-react';
-import Navigation from '../../components/Navigation';
+import { ArrowRight, Users, Truck, Package, BarChart3, Shield, Zap } from 'lucide-react';
+import { Navigation } from '../../components/Navigation';
 
 const BrokerPage: React.FC = () => {
   return (

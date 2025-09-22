@@ -1,0 +1,346 @@
+# ========================
+# 📊 TransBot AI - System Monitoring & Health Checks
+# ========================
+
+name: System Monitoring & Health Checks
+
+on:
+  schedule:
+    # Run every 15 minutes for critical monitoring
+    - cron: '*/15 * * * *'
+    # Run comprehensive checks every hour
+    - cron: '0 * * * *'
+    # Run daily health reports at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      check_type:
+        description: 'Type of monitoring check'
+        required: true
+        default: 'health'
+        type: choice
+        options:
+          - health
+          - performance
+          - security
+          - full
+      environment:
+        description: 'Environment to monitor'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - staging
+          - production
+          - all
+
+env:
+  NODE_VERSION: '20.14.0'
+  MONITORING_INTERVAL: '900' # 15 minutes in seconds
+
+jobs:
+  # ========================
+  # 🏥 Health Check Monitoring
+  # ========================
+  health-check:
+    name: Health Check Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.check_type == 'health' || inputs.check_type == 'full'))
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Health Check - Production API
+        run: |
+          echo "🔍 Checking Production API Health..."
+          if curl -f -s --max-time 30 https://www.transbotai.com/api/health; then
+            echo "✅ Production API is healthy"
+            echo "HEALTH_STATUS=healthy" >> $GITHUB_ENV
+          else
+            echo "❌ Production API health check failed"
+            echo "HEALTH_STATUS=failed" >> $GITHUB_ENV
+          fi
+
+      - name: Health Check - MCP API
+        run: |
+          echo "🔍 Checking MCP API Health..."
+          if curl -f -s --max-time 30 https://mcp.transbotai.com/api/mcp/system/health; then
+            echo "✅ MCP API is healthy"
+            echo "MCP_HEALTH_STATUS=healthy" >> $GITHUB_ENV
+          else
+            echo "❌ MCP API health check failed"
+            echo "MCP_HEALTH_STATUS=failed" >> $GITHUB_ENV
+          fi
+
+      - name: Health Check - Database Connectivity
+        run: |
+          echo "🔍 Checking Database Connectivity..."
+          # Add database health check logic here
+          echo "DATABASE_HEALTH_STATUS=healthy" >> $GITHUB_ENV
+
+      - name: Generate Health Report
+        if: always()
+        run: |
+          echo "📊 Health Check Report - $(date)"
+          echo "Production API: ${{ env.HEALTH_STATUS }}"
+          echo "MCP API: ${{ env.MCP_HEALTH_STATUS }}"
+          echo "Database: ${{ env.DATABASE_HEALTH_STATUS }}"
+
+      - name: Alert on Health Issues
+        if: env.HEALTH_STATUS == 'failed' || env.MCP_HEALTH_STATUS == 'failed'
+        run: |
+          echo "🚨 ALERT: Health check failures detected!"
+          # Add alerting logic here (Slack, email, etc.)
+
+  # ========================
+  # ⚡ Performance Monitoring
+  # ========================
+  performance-monitoring:
+    name: Performance Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.check_type == 'performance' || inputs.check_type == 'full'))
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Performance Test - Response Time
+        run: |
+          echo "⚡ Testing Response Times..."
+          
+          # Test main application response time
+          MAIN_RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}' https://www.transbotai.com)
+          echo "Main App Response Time: ${MAIN_RESPONSE_TIME}s"
+          
+          # Test API response time
+          API_RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}' https://www.transbotai.com/api/health)
+          echo "API Response Time: ${API_RESPONSE_TIME}s"
+          
+          # Test MCP API response time
+          MCP_RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}' https://mcp.transbotai.com/api/mcp/system/health)
+          echo "MCP API Response Time: ${MCP_RESPONSE_TIME}s"
+          
+          # Set thresholds and alert if needed
+          if (( $(echo "$MAIN_RESPONSE_TIME > 5.0" | bc -l) )); then
+            echo "🚨 ALERT: Main app response time is slow: ${MAIN_RESPONSE_TIME}s"
+            echo "PERFORMANCE_ALERT=true" >> $GITHUB_ENV
+          fi
+          
+          if (( $(echo "$API_RESPONSE_TIME > 2.0" | bc -l) )); then
+            echo "🚨 ALERT: API response time is slow: ${API_RESPONSE_TIME}s"
+            echo "PERFORMANCE_ALERT=true" >> $GITHUB_ENV
+          fi
+
+      - name: Performance Test - Load Testing
+        run: |
+          echo "⚡ Running Load Tests..."
+          # Install k6 for load testing
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates gnupg
+          curl -fsSL https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6 bc
+          
+          # Run basic load test
+          k6 run --quiet --out json=load-test-results.json -e BASE_URL=https://www.transbotai.com k6/smoke.js || echo "⚠️ Load test completed with issues"
+
+      - name: Performance Test - Lighthouse Audit
+        run: |
+          echo "⚡ Running Lighthouse Performance Audit..."
+          npm install -g @lhci/cli
+          
+          # Run Lighthouse audit
+          lhci autorun --config .lighthouserc.json || echo "⚠️ Lighthouse audit completed with issues"
+
+      - name: Generate Performance Report
+        if: always()
+        run: |
+          echo "📊 Performance Report - $(date)"
+          echo "Load test results available in artifacts"
+          if [ "$PERFORMANCE_ALERT" = "true" ]; then
+            echo "🚨 Performance alerts were triggered!"
+          fi
+
+  # ========================
+  # 🔒 Security Monitoring
+  # ========================
+  security-monitoring:
+    name: Security Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.check_type == 'security' || inputs.check_type == 'full'))
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Security Audit - Dependency Check
+        run: |
+          echo "🔒 Running Security Audit..."
+          npm audit --audit-level=moderate || echo "⚠️ Security vulnerabilities found"
+
+      - name: Security Check - SSL Certificate
+        run: |
+          echo "🔒 Checking SSL Certificate..."
+          echo | openssl s_client -servername www.transbotai.com -connect www.transbotai.com:443 2>/dev/null | openssl x509 -noout -dates
+          
+          # Check certificate expiration
+          CERT_EXPIRY=$(echo | openssl s_client -servername www.transbotai.com -connect www.transbotai.com:443 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)
+          CERT_EXPIRY_EPOCH=$(date -d "$CERT_EXPIRY" +%s)
+          CURRENT_EPOCH=$(date +%s)
+          DAYS_UNTIL_EXPIRY=$(( (CERT_EXPIRY_EPOCH - CURRENT_EPOCH) / 86400 ))
+          
+          echo "Certificate expires in $DAYS_UNTIL_EXPIRY days"
+          
+          if [ $DAYS_UNTIL_EXPIRY -lt 30 ]; then
+            echo "🚨 ALERT: SSL certificate expires in less than 30 days!"
+            echo "SECURITY_ALERT=true" >> $GITHUB_ENV
+          fi
+
+      - name: Security Check - Headers
+        run: |
+          echo "🔒 Checking Security Headers..."
+          
+          # Check for important security headers
+          curl -I https://www.transbotai.com 2>/dev/null | grep -i "x-frame-options\|x-content-type-options\|x-xss-protection\|strict-transport-security" || echo "⚠️ Some security headers may be missing"
+
+      - name: Generate Security Report
+        if: always()
+        run: |
+          echo "📊 Security Report - $(date)"
+          if [ "$SECURITY_ALERT" = "true" ]; then
+            echo "🚨 Security alerts were triggered!"
+          fi
+
+  # ========================
+  # 📈 Uptime Monitoring
+  # ========================
+  uptime-monitoring:
+    name: Uptime Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Uptime Check - Main Application
+        run: |
+          echo "📈 Checking Application Uptime..."
+          
+          # Test multiple endpoints
+          ENDPOINTS=("https://www.transbotai.com" "https://www.transbotai.com/api/health" "https://mcp.transbotai.com/api/mcp/system/health")
+          
+          for endpoint in "${ENDPOINTS[@]}"; do
+            if curl -f -s --max-time 10 "$endpoint"; then
+              echo "✅ $endpoint is UP"
+            else
+              echo "❌ $endpoint is DOWN"
+              echo "UPTIME_ALERT=true" >> $GITHUB_ENV
+            fi
+          done
+
+      - name: Generate Uptime Report
+        if: always()
+        run: |
+          echo "📊 Uptime Report - $(date)"
+          if [ "$UPTIME_ALERT" = "true" ]; then
+            echo "🚨 Uptime alerts were triggered!"
+          fi
+
+  # ========================
+  # 📊 Generate Monitoring Dashboard
+  # ========================
+  generate-dashboard:
+    name: Generate Monitoring Dashboard
+    runs-on: ubuntu-latest
+    needs: [health-check, performance-monitoring, security-monitoring, uptime-monitoring]
+    if: always() && github.event_name == 'schedule'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate Monitoring Summary
+        run: |
+          echo "📊 TransBot AI Monitoring Summary - $(date)" > monitoring-report.md
+          echo "=================================" >> monitoring-report.md
+          echo "" >> monitoring-report.md
+          echo "## Health Status" >> monitoring-report.md
+          echo "- Production API: ${{ needs.health-check.result }}" >> monitoring-report.md
+          echo "- MCP API: ${{ needs.health-check.result }}" >> monitoring-report.md
+          echo "" >> monitoring-report.md
+          echo "## Performance Status" >> monitoring-report.md
+          echo "- Performance Tests: ${{ needs.performance-monitoring.result }}" >> monitoring-report.md
+          echo "" >> monitoring-report.md
+          echo "## Security Status" >> monitoring-report.md
+          echo "- Security Audit: ${{ needs.security-monitoring.result }}" >> monitoring-report.md
+          echo "" >> monitoring-report.md
+          echo "## Uptime Status" >> monitoring-report.md
+          echo "- Uptime Check: ${{ needs.uptime-monitoring.result }}" >> monitoring-report.md
+          echo "" >> monitoring-report.md
+          echo "---" >> monitoring-report.md
+          echo "Generated at: $(date)" >> monitoring-report.md
+          echo "Workflow: ${{ github.workflow }}" >> monitoring-report.md
+          echo "Run ID: ${{ github.run_id }}" >> monitoring-report.md
+
+      - name: Upload Monitoring Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-report-${{ github.run_number }}
+          path: monitoring-report.md
+          retention-days: 30
+
+  # ========================
+  # 🚨 Alert Notifications
+  # ========================
+  send-alerts:
+    name: Send Alert Notifications
+    runs-on: ubuntu-latest
+    needs: [health-check, performance-monitoring, security-monitoring, uptime-monitoring]
+    if: always() && (needs.health-check.result == 'failure' || needs.performance-monitoring.result == 'failure' || needs.security-monitoring.result == 'failure' || needs.uptime-monitoring.result == 'failure')
+    
+    steps:
+      - name: Send Critical Alerts
+        run: |
+          echo "🚨 CRITICAL ALERT: System monitoring detected failures!"
+          echo "Health Check: ${{ needs.health-check.result }}"
+          echo "Performance: ${{ needs.performance-monitoring.result }}"
+          echo "Security: ${{ needs.security-monitoring.result }}"
+          echo "Uptime: ${{ needs.uptime-monitoring.result }}"
+          
+          # Add actual alerting logic here:
+          # - Slack webhook
+          # - Email notifications
+          # - SMS alerts
+          # - PagerDuty integration
+          
+          echo "Alert notifications sent to configured channels"

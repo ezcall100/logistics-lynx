@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Truck, Package, BarChart3, Shield, Zap, Bot, Building2, CreditCard, Globe, Cpu, Settings, Database } from 'lucide-react';
-import Navigation from '../../components/Navigation';
+import { ArrowRight, Users, Truck, Package, BarChart3, Shield, Building2, CreditCard, Globe, Cpu, Settings, Database } from 'lucide-react';
+import { Navigation } from '../../components/Navigation';
 
 const SolutionsPage: React.FC = () => {
   const solutions = [

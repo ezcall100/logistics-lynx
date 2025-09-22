@@ -78,152 +78,7 @@ import {
   Pause,
   SkipBack,
   SkipForward,
-  Repeat,
-  Shuffle,
-  Heart,
-  ThumbsUp,
-  ThumbsDown,
-  Smile,
-  Frown,
-  Meh,
-  Angry,
-  Laugh,
-  Cry,
-  Surprised,
-  Confused,
-  Wink,
-  Kiss,
-  Tongue,
-  Disgusted,
-  Sleepy,
-  Dizzy,
-  Sick,
-  Hot,
-  Cold,
-  Happy,
-  Sad,
-  Excited,
-  Bored,
-  Tired,
-  Hungry,
-  Thirsty,
   Bot,
-  Cpu,
-  HardDrive,
-  Wifi,
-  WifiOff,
-  Signal,
-  SignalZero,
-  SignalLow,
-  SignalMedium,
-  SignalHigh,
-  Battery,
-  BatteryLow,
-  BatteryMedium,
-  BatteryHigh,
-  BatteryFull,
-  Power,
-  PowerOff,
-  Monitor,
-  MonitorOff,
-  Smartphone,
-  Tablet,
-  Laptop,
-  Desktop,
-  Server as ServerIcon,
-  Database as DatabaseIcon,
-  Cloud,
-  CloudOff,
-  CloudRain,
-  CloudSnow,
-  CloudLightning,
-  CloudDrizzle,
-  CloudFog,
-  CloudHail,
-  CloudSleet,
-  CloudWind,
-  CloudSun,
-  CloudMoon,
-  Sun,
-  Moon,
-  Sunrise,
-  Sunset,
-  Wind,
-  Droplets,
-  Thermometer,
-  ThermometerSun,
-  ThermometerSnow,
-  Gauge,
-  Timer,
-  TimerOff,
-  TimerReset,
-  Stopwatch,
-  Clock as ClockIcon,
-  Calendar as CalendarIcon,
-  CalendarDays,
-  CalendarCheck,
-  CalendarX,
-  CalendarPlus,
-  CalendarMinus,
-  CalendarRange,
-  CalendarSearch,
-  CalendarHeart,
-  CalendarStar,
-  CalendarUser,
-  CalendarClock,
-  CalendarEvent,
-  CalendarImport,
-  CalendarExport,
-  CalendarEdit,
-  CalendarTrash,
-  CalendarSettings,
-  CalendarLock,
-  CalendarUnlock,
-  CalendarKey,
-  CalendarShield,
-  CalendarAlert,
-  CalendarInfo,
-  CalendarQuestion,
-  CalendarHelp,
-  CalendarWarning,
-  CalendarError,
-  CalendarSuccess,
-  CalendarPending,
-  CalendarApproved,
-  CalendarRejected,
-  CalendarCancelled,
-  CalendarCompleted,
-  CalendarInProgress,
-  CalendarScheduled,
-  CalendarOverdue,
-  CalendarToday,
-  CalendarTomorrow,
-  CalendarYesterday,
-  CalendarWeek,
-  CalendarMonth,
-  CalendarYear,
-  CalendarQuarter,
-  CalendarHalf,
-  CalendarFull,
-  CalendarEmpty,
-  CalendarFull2,
-  CalendarEmpty2,
-  CalendarFull3,
-  CalendarEmpty3,
-  CalendarFull4,
-  CalendarEmpty4,
-  CalendarFull5,
-  CalendarEmpty5,
-  CalendarFull6,
-  CalendarEmpty6,
-  CalendarFull7,
-  CalendarEmpty7,
-  CalendarFull8,
-  CalendarEmpty8,
-  CalendarFull9,
-  CalendarEmpty9,
-  CalendarFull10,
-  CalendarEmpty10,
 } from 'lucide-react';
 
 // MCP Agent Status Types
@@ -310,14 +165,6 @@ function MCPAgentIntegration() {
   const [userAssignments, setUserAssignments] = useState<UserAssignment[]>([]);
   const [selectedAgent, setSelectedAgent] = useState<MCPAgent | null>(null);
   const [showAgentDetails, setShowAgentDetails] = useState(false);
-  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [filters, setFilters] = useState({
-    status: 'all' as MCPAgentStatus | 'all',
-    role: 'all' as MCPAgentRole | 'all',
-    search: '',
-  });
 
   // Mock Data
   useEffect(() => {
@@ -532,7 +379,6 @@ function MCPAgentIntegration() {
     agentId: string,
     action: 'start' | 'stop' | 'restart' | 'maintenance'
   ) => {
-    setIsLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -559,7 +405,7 @@ function MCPAgentIntegration() {
     } catch (error) {
       console.error('Error updating agent:', error);
     } finally {
-      setIsLoading(false);
+      // Cleanup or additional logic can go here
     }
   };
 
@@ -570,7 +416,6 @@ function MCPAgentIntegration() {
 
   const handleAssignUser = (agent: MCPAgent) => {
     setSelectedAgent(agent);
-    setShowAssignmentModal(true);
   };
 
   // Status color helper

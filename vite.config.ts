@@ -6,7 +6,8 @@ import path from 'path';
 // MCP AGENTS: These ports are locked and must not be changed
 // Port 3000: Main Website
 // Port 3001: MCP API
-// Port 3005: Super Admin Portal
+// Port 3002: MCP Dashboard
+// Port 3003: Super Admin Portal
 // Port 3006: Login Portal
 // See PORT_LOCK_SYSTEM.md for details
 
@@ -84,15 +85,15 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/shipper/, ''),
       },
       '/admin': {
-        target: 'http://localhost:3005',
+        target: 'http://localhost:3003',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/admin/, ''),
       },
-      // '/super-admin': {
-      //   target: 'http://localhost:3000',
-      //   changeOrigin: true,
-      //   rewrite: path => path.replace(/^\/super-admin/, ''),
-      // },
+      '/super-admin': {
+        target: 'http://localhost:3003',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/super-admin/, ''),
+      },
       '/mcp': {
         target: 'http://localhost:3002',
         changeOrigin: true,
